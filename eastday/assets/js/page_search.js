@@ -4,19 +4,24 @@
  * @date 2016-01-05
  */
 $(function(){
-	// 结果容器
-    var $resultWrap = $('#J_result_wrap'),
-    	$searchTotalNum = $('#J_search_total_num'),
-    	imgHostName = 'http://imgmini.dfshurufa.com/';
+    var $resultWrap = $('#J_result_wrap'),				// 结果容器
+    	$top10List = $('#J_top10_list'),				// 今日top10
+    	$todayHotNews = $('#J_today_hot_news'),			// 今日热点
+    	$searchTotalNum = $('#J_search_total_num'),		// 搜索结果总数
+    	imgHostName = 'http://imgmini.dfshurufa.com/',	// 图片hostname
+    	global_share_title  = '',	// 分享标题
+    	global_share_url  = '',		// 分享链接
+    	global_share_img  = '',		// 分享图片
+    	bdshareStr = '<div id="bdsharebuttonbox_wrap"><div class="J-bdsharebuttonbox bdsharebuttonbox clearfix"><span class="fl">分享</span><a class="J-bdshare bds-tsina fl" data-cmd="tsina" href="javascript:;"></a><a class="J-bdshare bds-qzone fl" data-cmd="qzone" href="javascript:;"></a><a class="J-bdshare bds-tqq fl" data-cmd="tqq" href="javascript:;"></a><a class="J-bdshare bds-weixin fl" data-cmd="weixin" href="javascript:;"></a></div></div>';
     // 获取搜索结果数据
     $.getJSON('assets/search_result.json', function(data, status){
     	if(!(data || data.data)){
     		return;
     	}
-    	// if(data.data.length > 0){
-    	// 	// 有搜索结果
-	    // 	generateSearchResult(data.data);
-    	// } else {
+    	if(data.data.length > 0){
+    		// 有搜索结果
+	    	generateSearchResult(data.data);
+    	} else {
     		// 无搜索结果
     		generateNoResult();
     		// 获取推荐新闻数据
@@ -26,9 +31,10 @@ $(function(){
 		    	}
     			generateRecommendNews(data.data);
     		});
-    	// }
+    	}
     });
 
+    // 加载今日热点数据
     $.getJSON('assets/today_hot_news.json', function(data, status){
 		if(!(data || data.data)){
     		return;
@@ -36,14 +42,64 @@ $(function(){
 		generateTodayHotNews(data.data);
 	});
 
+    // 加载今日top10数据
+	$.getJSON('assets/today_top10.json', function(data, status){
+		if(!(data || data.data)){
+    		return;
+    	}
+		generateTodayTop10(data.data);
+	});
+
     /**
      * 百度分享的
      * @param  {[type]} ){                 } [description]
      * @return {[type]}     [description]
      */
-    $('body').on('mouseover', function(){
-    	
+    $('body').on('mouseover', '.J-bdshare', function(){
+    	var $this = $(this),
+    		$parent = $this.parents('.has-share').eq(0),
+    		$shareA = $parent.find('.share-a').eq(0);
+    	// 给全局变量 分享链接、图片、文字赋值
+		global_share_url = window.location.protocol + '//' + window.location.host + $shareA.attr('href');
+		global_share_title = $shareA.text();
+		global_share_img = $parent.find('img').eq(0).attr('src');
     });
+
+    (function(){
+    	// 百度分享配置
+	    window._bd_share_config = {
+	        common: {
+	            //bdText: "东方头条 - 你想看的新闻都在这。",	// 分享标题
+	            //bdDesc: "东方头条 - 你想看的新闻都在这。",	// 分享描述
+	            //bdUrl: "http://mini.eastday.com", 			// 分享url
+	            //bdPic: '', 									// 分享图片
+	            bdMiniList: ['tsina', 'qzone', 'sqq', 'weixin'],
+	            onBeforeClick: setShareConfig
+	        },
+	        share: {
+	            bdSize: 16
+	        }
+	    };
+	    // 分享js
+	    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+	    /**
+	     * 设置分享参数
+	     * @param {[type]} cmd    [description]
+	     * @param {[type]} config [description]
+	     */
+		function setShareConfig(cmd, config) {
+	        if (global_share_title) {
+	            config.bdText = global_share_title + '（来自：东方头条）';
+	        }
+	        if (global_share_url) {
+	            config.bdUrl = global_share_url;
+	        }
+	        if (global_share_img) {
+	            config.bdPic = global_share_img;
+	        }
+	        return config;
+	    }
+    })();
 
     /**
      * 有搜索结果(生成搜索结果列表)
@@ -52,8 +108,7 @@ $(function(){
      */
 	function generateSearchResult(d){
 		var dLength = d.length,
-			$resultList = $('<ul class="result-list"></ul>'),
-			bdshareStr = '<div class="J-bdsharebuttonbox bdsharebuttonbox clearfix"><span class="fl">分享</span><a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a><a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a><a class="bds-tqq fl" data-cmd="tqq" href="javascript:;"></a><a class="bds-weixin fl" data-cmd="weixin" href="javascript:;"></a></div>';
+			$resultList = $('<ul class="result-list"></ul>');
     	try{
     		for (var i = 0; i < dLength; i++) {
     			var url = d[i].url,					// url
@@ -69,10 +124,10 @@ $(function(){
 		    		var imgSrc1 = imgArr[0].src,
 		    			imgSrc2 = imgArr[1].src,
 		    			imgSrc3 = imgArr[2].src;
-		    		$resultList.append('<li class="result-item-s2 pr clearfix"><h3><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
+		    		$resultList.append('<li class="has-share result-item-s2 pr clearfix"><h3><a class="share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
 		    	} else {	// 单图样式
 		    		var imgSrc = imgArr[0].src;
-		    		$resultList.append('<li class="result-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="145" height="105"></a></div><div class="info pr"><h3><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
+		    		$resultList.append('<li class="has-share result-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="145" height="105"></a></div><div class="info pr"><h3><a class="share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
 		    	}
     		};
     		$resultWrap.append($resultList);
@@ -101,7 +156,6 @@ $(function(){
 			$recNewsWrap = $('<div class="rec-news-wrap mt10"><div class="rec-news-title pr"><h3>推荐新闻</h3><span class="bt-line"></span></div></div>'),
 			// 推荐新闻列表
 			$recNewsList = $('<ul class="rec-news-list"></ul>');
-			bdshareStr = '<div class="J-bdsharebuttonbox bdsharebuttonbox clearfix"><span class="fl">分享</span><a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a><a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a><a class="bds-tqq fl" data-cmd="tqq" href="javascript:;"></a><a class="bds-weixin fl" data-cmd="weixin" href="javascript:;"></a></div>';
     	try{
     		for (var i = 0; i < dLength; i++) {
     			var url = d[i].url,					// url
@@ -111,21 +165,20 @@ $(function(){
 		    		imgSrc = imgHostName + $.trim(d[i].img), // 图片地址
 		    		time = d[i].time;				// 时间
 		    	// 单图样式
-	    		$recNewsList.append('<li class="rec-news-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="180" height="135"></a></div><div class="info pr"><h3><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="desc">' + desc + '</p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
+	    		$recNewsList.append('<li class="has-share rec-news-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="180" height="135"></a></div><div class="info pr"><h3><a class="share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="desc">' + desc + '</p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
     		};
     		$resultWrap.append($recNewsWrap.append($recNewsList));
     	} catch(e){
     		console.error(e);
     	}
 	}
-
+	// old
 	function generateRecommendNews_old(d){
 		var dLength = d.length,
 			// 推荐新闻
 			$recNewsWrap = $('<div class="rec-news-wrap mt10"><div class="rec-news-title pr"><h3>推荐新闻</h3><span class="bt-line"></span></div></div>'),
 			// 推荐新闻列表
 			$recNewsList = $('<ul class="rec-news-list"></ul>');
-			bdshareStr = '<div class="J-bdsharebuttonbox bdsharebuttonbox clearfix"><span class="fl">分享</span><a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a><a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a><a class="bds-tqq fl" data-cmd="tqq" href="javascript:;"></a><a class="bds-weixin fl" data-cmd="weixin" href="javascript:;"></a></div>';
     	try{
     		for (var i = 0; i < dLength; i++) {
     			var url = d[i].url,					// url
@@ -142,7 +195,7 @@ $(function(){
 		    		var imgSrc1 = imgArr[0].src,
 		    			imgSrc2 = imgArr[1].src,
 		    			imgSrc3 = imgArr[2].src;
-		    		$recNewsList.append('<li class="rec-news-item-s2 pr clearfix"><h3 class="pr"><i class="hot">热</i><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
+		    		$recNewsList.append('<li class="has-share rec-news-item-s2 pr clearfix"><h3 class="pr"><i class="hot">热</i><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
 		    	} else {	// 单图样式
 		    		var imgSrc = imgArr[0].src;
 		    		$recNewsList.append('<li class="rec-news-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="180" height="135"></a></div><div class="info pr"><h3><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="desc">' + desc + '</p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div><i class="hot">热</i></li>');
@@ -154,15 +207,37 @@ $(function(){
     	}
 	}
 
-
+	/**
+	 * 生成今日热点数据
+	 * @param  {[type]} d 今日热点数据
+	 * @return {[type]}   [description]
+	 */
 	function generateTodayHotNews(d){
-		var $todayHotNews = $('#J_today_hot_news'),
-			dLength = d.length;
+		var dLength = d.length;
 		for (var i = 0; i < dLength; i++) {
 			var imgSrc = imgHostName + $.trim(d[i].img),
 				title = $.trim(d[i].topic),
 				url = d[i].url;
 			$todayHotNews.append('<div class="block fl"><a href="' + url +'" target="_blank" class="img"><img src="' + imgSrc + '" alt="" width="145" height="105"></a><a href="' + url +'" target="_blank" class="txt">' + title +'</a></div>');
+		}
+	}
+
+	/**
+	 * 生成今日top10数据
+	 * @param  {[type]} d 今日top10数据
+	 * @return {[type]}   [description]
+	 */
+	function generateTodayTop10(d){
+		var dLength = d.length;
+		for (var i = 0; i < dLength; i++) {
+			var imgSrc = imgHostName + $.trim(d[i].img),
+				title = $.trim(d[i].topic),
+				url = d[i].url;
+			if(i < 3){
+				$top10List.append('<li class="top10-item"><span class="hot">' + (i + 1) + '</span><a href="' + url +'" target="_blank" title="' + title +'">' + title +'</a></li>');
+			} else {
+				$top10List.append('<li class="top10-item"><span>' + (i + 1) + '</span><a href="' + url +'" target="_blank" title="' + title +'">' + title +'</a></li>');
+			}
 		}
 	}
 
@@ -186,41 +261,6 @@ $(function(){
     		success: callback,
     		error: error
     	});
-    }
-
-    /**
-     * [setBdShare description]
-     */
-    function setBdShare() {
-	    // 分享配置
-	    window._bd_share_config = {
-	        common: {
-	            //bdText: "东方头条 - 你想看的新闻都在这。",	// 分享标题
-	            //bdDesc: "东方头条 - 你想看的新闻都在这。",	// 分享描述
-	            //bdUrl: "http://mini.eastday.com", 			// 分享url
-	            //bdPic: '', 									// 分享图片
-	            bdMiniList: ['tsina', 'qzone', 'sqq', 'weixin'],
-	            onBeforeClick: setShareConfig
-	        },
-	        share: {
-	            bdSize: 16
-	        }
-	    };
-	    // 分享js
-	    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
-	}
-
-	function setShareConfig(cmd, config) {
-        if (global_share_title) {
-            config.bdText = global_share_title + '（来自：东方头条）';
-        }
-        if (global_share_url) {
-            config.bdUrl = global_share_url;
-        }
-        if (global_share_img) {
-            config.bdPic = global_share_img;
-        }
-        return config;
     }
 
     /**
