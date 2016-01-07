@@ -9,7 +9,7 @@ html {overflow-y: scroll}
 html,body {background-image: url(about:blank); background-attachment: fixed;}
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td {margin: 0; padding: 0; outline: 0;} /* 清除内外边距 */
 :focus{outline: 0 none; font-weight: normal;}
-body{min-width: 1000px; min-height: 100%;}
+body{min-width: 1002px; min-height: 100%; color: #333;}
 body, button, input, select, textarea {font: 14px/1.5 \5FAE\8F6F\96C5\9ED1,"Microsoft YaHei",arial,sans-serif;} /* 设置默认字体 */
 /*body, button, input, select, textarea {font: 14px/100% \5b8b\4f53,"宋体","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft Yahei",arial,sans-serif;} !* 设置默认字体 *!*/
 h1,h2,h3,h4,h5,h6 {font-size: 1em;}

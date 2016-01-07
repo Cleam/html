@@ -1,0 +1,136 @@
+{
+    "splitwordsarr": "", //搜索内容的分词组合
+    "splitword": ["", ""], //搜索内容的一阶分词数组（新闻的标题中如果包含其中任何一个，请将标题中的这个词标红）
+    "stkey": "", //目前搜索到哪一个分词组合
+    "lastcol": "", //目前搜索到的分词下那一条数据的唯一识别符
+    //搜索到的新闻
+    "data": [{
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }, {
+            "idx": 2,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }, {
+            "idx": 3,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }, {
+        "url": "/a/160107065901594.html?btype=index&subtype=shehui&idx=14&ishot=0", //链接
+        "title": "公交车起火：前后门最危险 逃生时间最多两分钟", //标题
+        "ts": 1448333196696, //时间戳
+        "source": "中国青年网", //来源
+        "imgstr": [{
+            "idx": 1,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }, {
+            "idx": 2,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }, {
+            "idx": 3,
+            "src": "http://imgmini.dfshurufa.com/mobile/20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgname": "20160107065901_6623f51796ab8ec7376c84ced2b0a629_1_mwpm_03200403.jpeg",
+            "imgwidth": 320,
+            "imgheight": 240
+        }], //缩略图
+        "date": "2015年11月24日" //新闻日期
+    }]
+}

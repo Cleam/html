@@ -7,7 +7,29 @@
     <title>头条搜索_东方头条</title>
     <meta name="keywords" content="头条搜索,头条新闻,东方头条" />
     <meta name="description" content="东方头条网 东方网 旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!" />
+    <!-- <script language="javascript" type="text/javascript">
+        function request(paras) {
+            var url = location.href;
+            var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+            var paraObj = {}
+            for (i = 0; j = paraString[i]; i++) {
+                paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
+            }
+            var returnValue = paraObj[paras.toLowerCase()];
+            if (typeof(returnValue) == "undefined") {
+                return "";
+            } else {
+                return returnValue;
+            }
+        }
+        var theurl
+        theurl = request("url");
+        if (theurl != '') {
+            location = theurl
+        }
+    </script> -->
     <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/common_new.css" />
     <link rel="stylesheet" href="assets/css/page_search.css" />
 </head>
 <body>
@@ -69,8 +91,8 @@
                             <span class="bt-line"></span>
                         </div>
                         <div class="today-hot clearfix">
-                            <div class="today-hot-wrap">
-                                <div class="block fl">
+                            <div id="J_today_hot_news" class="today-hot-wrap">
+                                <!-- <div class="block fl">
                                     <a href="javascript:;" target="_blank" class="img">
                                         <img src="assets/images/img5.png" alt="" width="145" height="105">
                                     </a>
@@ -105,7 +127,7 @@
                                         <img src="assets/images/img6.png" alt="" width="145" height="105">
                                     </a>
                                     <a href="javascript:;" target="_blank" class="txt">印度地震的地方居然“六星红旗”号称“小中国”</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>  <!-- /今日热点 -->
@@ -115,19 +137,19 @@
                 <div class="body-left fl">
                     <div class="hd pr">
                         <p>搜索结果：</p>
-                        <span class="tips">您共搜索出<em>979792</em>条信息</span>
+                        <span id="J_search_total_num" class="tips">您共搜索出<em>979792</em>条信息</span>
                     </div>
                     <div class="bd">
-                        <!-- 有结果 -->
-                        <!-- -->
-                        <div class="result">
+                        <div id="J_result_wrap" class="result">
+                            <!-- 有结果 -->
+                            <!-- 
                             <ul class="result-list">
-                                <li class="result-item-s1 clearfix">
+                                 <li class="result-item-s1 clearfix">
                                     <div class="img fl"><a href="javascript:;" target="_blank"><img src="assets/images/img.png" alt="开国总理周恩来万隆会议视频，我们是来求同而不是来立异！" width="145" height="105"></a></div>
                                     <div class="info pr">
                                         <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                         <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                        <div class="bdsharebuttonbox clearfix">
+                                        <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                             <span class="fl">分享</span>
                                             <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                             <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -141,7 +163,7 @@
                                     <div class="info pr">
                                         <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                         <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                        <div class="bdsharebuttonbox clearfix">
+                                        <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                             <span class="fl">分享</span>
                                             <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                             <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -158,7 +180,7 @@
                                         <a class="fl" href="javascript:;" title="" target="_blank"><img src="assets/images/img4.png" alt="" width="200" height="150"></a>
                                     </p>
                                     <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                    <div class="bdsharebuttonbox clearfix">
+                                    <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                         <span class="fl">分享</span>
                                         <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                         <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -171,7 +193,7 @@
                                     <div class="info pr">
                                         <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                         <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                        <div class="bdsharebuttonbox clearfix">
+                                        <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                             <span class="fl">分享</span>
                                             <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                             <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -185,7 +207,7 @@
                                     <div class="info pr">
                                         <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                         <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                        <div class="bdsharebuttonbox clearfix">
+                                        <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                             <span class="fl">分享</span>
                                             <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                             <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -194,16 +216,15 @@
                                         </div>
                                     </div>
                                 </li>
-                            </ul>
-                        </div>
-                        
+                            </ul> 
+                            -->
 
-                        <!-- 无结果 -->
-                        <!-- <div class="no-result">
+                            <!-- 无结果 -->
+                            <!-- 
                             <p class="tc mt10"><img src="assets/images/no_result.png" alt="" width="581" height="282"></p>
                             推荐新闻
-                            <div class="section mt10">
-                                <div class="title pr">
+                            <div class="rec-news-wrap mt10">
+                                <div class="rec-news-title pr">
                                     <h3>推荐新闻</h3>
                                     <span class="bt-line"></span>
                                 </div>
@@ -214,7 +235,7 @@
                                             <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                             <p class="desc">库克将2015年称为“苹果支付之年”，但一年过后，没有多少人在用 Apple Pay。市场调研机构Kantar在美国的调查显。</p>
                                             <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                            <div class="bdsharebuttonbox clearfix">
+                                            <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                                 <span class="fl">分享</span>
                                                 <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                                 <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -232,7 +253,7 @@
                                             <a class="fl" href="javascript:;" title="" target="_blank"><img src="assets/images/img4.png" alt="" width="200" height="150"></a>
                                         </p>
                                         <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                        <div class="bdsharebuttonbox clearfix">
+                                        <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                             <span class="fl">分享</span>
                                             <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                             <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -246,7 +267,7 @@
                                             <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                             <p class="desc">库克将2015年称为“苹果支付之年”，但一年过后，没有多少人在用 Apple Pay。市场调研机构Kantar在美国的调查显。</p>
                                             <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                            <div class="bdsharebuttonbox clearfix">
+                                            <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                                 <span class="fl">分享</span>
                                                 <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                                 <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -262,7 +283,7 @@
                                             <h3><a href="javascript:;" target="_blank">开国总理周恩来万隆会议视频，我们是来求同而不是来立异！</a></h3>
                                             <p class="desc">库克将2015年称为“苹果支付之年”，但一年过后，没有多少人在用 Apple Pay。市场调研机构Kantar在美国的调查显。</p>
                                             <p class="from">2015-12-25 10:02 来源：参考消息</p>
-                                            <div class="bdsharebuttonbox clearfix">
+                                            <div class="J-bdsharebuttonbox bdsharebuttonbox clearfix">
                                                 <span class="fl">分享</span>
                                                 <a class="bds-tsina fl" data-cmd="tsina" href="javascript:;"></a>
                                                 <a class="bds-qzone fl" data-cmd="qzone" href="javascript:;"></a>
@@ -273,11 +294,13 @@
                                         <i class="hot">热</i>
                                     </li>
                                 </ul>
-                            </div>
-                        </div> -->
-                        
+                            </div> 
+                            -->
+                        </div>  <!-- /result -->
+
                     </div>
                 </div>  <!-- /body right -->
+
             </div>
         </div>
     </div>
@@ -285,7 +308,7 @@
 
     <!-- footer start -->
     <div class="footer clearfix">
-        <div class="footer-wrap container">
+        <div class="footer-wrap container"> 
             <p class=""><a target="_blank" href="http://shurufa.eastday.com">东方输入法</a> - <a target="_blank" href="/contactus.html">联系我们</a> - <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2476675226&amp;site=qq&amp;menu=yes">广告洽谈</a> - <a href="javascript:;" class="go_to_fankui">意见反馈</a></p>
             <p>eastday.com All Right Reserve 版权所有 版权问题反馈：<a href="mailto:toutiao@em.eastday.com">toutiao@em.eastday.com</a></p>
         </div>
@@ -293,6 +316,6 @@
     <!-- footer end -->
 
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/page_search.js"></script>
+    <script type="text/javascript" src="assets/js/page_search.js"></script>  <!-- -->
 </body>
 </html>

@@ -2,11 +2,6 @@
 /*====================
  搜索页样式
  ====================*/
- /* 设置默认颜色 */
- body{color: #333;}
- /* 可视内容宽度 */
-.container{width: 1002px; margin: 0 auto;}
-
 /*==========  header start ==========*/
 .header{border-bottom: 2px solid #ee4b4b;}
 .header-wrap{height: 60px; padding: 20px 0; position: relative;}
@@ -32,8 +27,6 @@
 
 .result-list .result-item-s1{height: 105px; padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid #e9e9e9;}
 .result-list .result-item-s1 .img a{display: block; width: 145px; height: 105px; overflow: hidden;}
-.result-list .result-item-s1 .img a img{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
-.result-list .result-item-s1 .img a:hover img{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
 .result-list .result-item-s1 .info{margin-left: 165px; height: 105px;}
 .result-list .result-item-s1 .info h3{font-size: 22px; line-height: 28px;}
 .result-list .result-item-s1 .info .from{position: absolute; left: 0; bottom: 0; font-size: 12px; color: #999;}
@@ -42,8 +35,6 @@
 .result-list .result-item-s2 h3{font-size: 22px; line-height: 28px;}
 .result-list .result-item-s2 .img-wrap{width: 710px; height: 150px; overflow: hidden; margin-top: 20px;}
 .result-list .result-item-s2 .img-wrap a{width: 200px; height: 150px; margin-right: 35px; overflow: hidden;}
-.result-list .result-item-s2 .img-wrap a img{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
-.result-list .result-item-s2 .img-wrap a:hover img{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
 .result-list .result-item-s2 .from{position: absolute; left: 0; bottom: 20px; font-size: 12px; color: #999;}
 .result-list .result-item-s2 .bdsharebuttonbox{bottom: 20px;}
 /*  baidu share start */
@@ -60,16 +51,18 @@
 .bdsharebuttonbox a.bds-weixin:hover{background-position: -76px -3px;}
 /*  baidu share end */
 
+/* 未找到搜索结果 start */
+.no-result img:hover{-webkit-transform: scale(1); -moz-transform: scale(1); -o-transform: scale(1); -ms-transform: scale(1); transform: scale(1);}
+/* 未找到搜索结果 end */
+
 /* 推荐新闻 start */
-.body-left .no-result .title{border-bottom: 2px solid #666; font-size: 20px; height: 30px; line-height: 30px; padding-bottom: 7px;}
-.body-left .no-result .title h3{font-weight: normal; color: #ec4b4b;}
-.body-left .no-result .title .bt-line{position: absolute; bottom: -2px; _bottom: -3px; left: 0; height: 2px; line-height: 2px; display: block; background-color: #ec4b4b; width: 110px; font-size: 0; font-family: Arial; overflow: hidden;}
+.rec-news-title{border-bottom: 2px solid #666; font-size: 20px; height: 30px; line-height: 30px; padding-bottom: 7px;}
+.rec-news-title h3{font-weight: normal; color: #ec4b4b;}
+.rec-news-title .bt-line{position: absolute; bottom: -2px; _bottom: -3px; left: 0; height: 2px; line-height: 2px; display: block; background-color: #ec4b4b; width: 110px; font-size: 0; font-family: Arial; overflow: hidden;}
 
 .rec-news-list .rec-news-item-s1{height: 135px; padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid #e9e9e9; position: relative;}
 .rec-news-list .rec-news-item-s1 i.hot{position: absolute; left: 0; top: 20px; background-color: #ec4b4b; width: 30px; height: 30px; text-align: center; line-height: 30px; color: #fff; font-size: 16px;}
 .rec-news-list .rec-news-item-s1 .img a{display: block; width: 180px; height: 135px; overflow: hidden;}
-.rec-news-list .rec-news-item-s1 .img a img{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
-.rec-news-list .rec-news-item-s1 .img a:hover img{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
 .rec-news-list .rec-news-item-s1 .info{margin-left: 200px; height: 135px;}
 .rec-news-list .rec-news-item-s1 .info h3{font-size: 20px; line-height: 24px;}
 .rec-news-list .rec-news-item-s1 .info .desc{font-size: 16px; margin-top: 10px;}
@@ -80,8 +73,6 @@
 .rec-news-list .rec-news-item-s2 h3 i{position: absolute; left: 0; background-color: #ec4b4b; width: 30px; height: 30px; text-align: center; line-height: 30px; color: #fff; font-size: 16px;}
 .rec-news-list .rec-news-item-s2 .img-wrap{width: 710px; height: 150px; overflow: hidden; margin-top: 20px;}
 .rec-news-list .rec-news-item-s2 .img-wrap a{width: 200px; height: 150px; margin-right: 35px; overflow: hidden;}
-.rec-news-list .rec-news-item-s2 .img-wrap a img{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
-.rec-news-list .rec-news-item-s2 .img-wrap a:hover img{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
 .rec-news-list .rec-news-item-s2 .from{position: absolute; left: 0; bottom: 20px; font-size: 12px; color: #999;}
 .rec-news-list .rec-news-item-s2 .bdsharebuttonbox{bottom: 20px;}
 
@@ -105,8 +96,6 @@
 .body-right .today-hot .today-hot-wrap .block{width: 145px; display: block; margin-right: 10px; margin-top: 10px; overflow: hidden;}
 .today-hot-wrap .block a{display: block; width: 100%;}
 .today-hot-wrap .block a.img{height: 105px; overflow: hidden;}
-.today-hot-wrap .block a.img img{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
-.today-hot-wrap .block a.img:hover img{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
 
 .today-hot-wrap .block a.txt{width: 100%; font-size: 12px; line-height: 1.5em;}
 /* body right end */
