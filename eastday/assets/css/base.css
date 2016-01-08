@@ -41,6 +41,8 @@ hr {border: none; height: 1px; background-color: #eee;}
 *html a {outline: none;}
 *html a:active {star:expression(this.onFocus=this.blur());}
 button{cursor: pointer;}
+.clear-fix:after,.clear-fix:before,.cf:after,.cf:before{content:''; display:table }
+.clear-fix:after,.cf:after{clear:both }
 
 /*====================== font =======================*/
 .f12{font-size: 12px;}
@@ -70,14 +72,14 @@ button{cursor: pointer;}
 .tc{text-align:center;}
 .tr{text-align:right;}
 .bc{margin-left:auto; margin-right: auto;}/* blockCenter 配合宽度使用 可以使块级元素居中 */
-.fl{float:left; display:inline;}
-.fr{float:right; display:inline;}
 .cb{clear:both;}
 .cl{clear:left;}
 .cr{clear:right;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 *html .clearfix{height:1%; zoom: 1;}
 .clearfix{display:block; zoom: 1;}
+.fl{float:left; display:inline;}
+.fr{float:right; display:inline;}
 .vt{vertical-align:top;}
 .vm{vertical-align:middle;}
 .vb{vertical-align:bottom;}

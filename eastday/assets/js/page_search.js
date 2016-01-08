@@ -29,6 +29,7 @@ $(function(){
 				if(!(data || data.data)){
 		    		return;
 		    	}
+		    	// 生成推荐新闻
     			generateRecommendNews(data.data);
     		});
     	}
@@ -51,14 +52,12 @@ $(function(){
 	});
 
     /**
-     * 百度分享的
-     * @param  {[type]} ){                 } [description]
-     * @return {[type]}     [description]
+     * 百度分享按钮的事件委托绑定
      */
     $('body').on('mouseover', '.J-bdshare', function(){
     	var $this = $(this),
-    		$parent = $this.parents('.has-share').eq(0),
-    		$shareA = $parent.find('.share-a').eq(0);
+    		$parent = $this.parents('.J-has-share').eq(0),
+    		$shareA = $parent.find('.J-share-a').eq(0);
     	// 给全局变量 分享链接、图片、文字赋值
 		global_share_url = window.location.protocol + '//' + window.location.host + $shareA.attr('href');
 		global_share_title = $shareA.text();
@@ -73,7 +72,7 @@ $(function(){
 	            //bdDesc: "东方头条 - 你想看的新闻都在这。",	// 分享描述
 	            //bdUrl: "http://mini.eastday.com", 			// 分享url
 	            //bdPic: '', 									// 分享图片
-	            bdMiniList: ['tsina', 'qzone', 'sqq', 'weixin'],
+	            bdMiniList: ['tsina', 'qzone', 'tqq', 'weixin'],
 	            onBeforeClick: setShareConfig
 	        },
 	        share: {
@@ -124,10 +123,10 @@ $(function(){
 		    		var imgSrc1 = imgArr[0].src,
 		    			imgSrc2 = imgArr[1].src,
 		    			imgSrc3 = imgArr[2].src;
-		    		$resultList.append('<li class="has-share result-item-s2 pr clearfix"><h3><a class="share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
+		    		$resultList.append('<li class="J-has-share result-item-s2 pr clearfix"><h3><a class="J-share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
 		    	} else {	// 单图样式
 		    		var imgSrc = imgArr[0].src;
-		    		$resultList.append('<li class="has-share result-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="145" height="105"></a></div><div class="info pr"><h3><a class="share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
+		    		$resultList.append('<li class="J-has-share result-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="145" height="105"></a></div><div class="info pr"><h3><a class="J-share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
 		    	}
     		};
     		$resultWrap.append($resultList);
@@ -165,7 +164,7 @@ $(function(){
 		    		imgSrc = imgHostName + $.trim(d[i].img), // 图片地址
 		    		time = d[i].time;				// 时间
 		    	// 单图样式
-	    		$recNewsList.append('<li class="has-share rec-news-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="180" height="135"></a></div><div class="info pr"><h3><a class="share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="desc">' + desc + '</p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
+	    		$recNewsList.append('<li class="J-has-share rec-news-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="180" height="135"></a></div><div class="info pr"><h3><a class="J-share-a" href="' + url +'" target="_blank">' + title + '</a></h3><p class="desc">' + desc + '</p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div></li>');
     		};
     		$resultWrap.append($recNewsWrap.append($recNewsList));
     	} catch(e){
@@ -195,7 +194,7 @@ $(function(){
 		    		var imgSrc1 = imgArr[0].src,
 		    			imgSrc2 = imgArr[1].src,
 		    			imgSrc3 = imgArr[2].src;
-		    		$recNewsList.append('<li class="has-share rec-news-item-s2 pr clearfix"><h3 class="pr"><i class="hot">热</i><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
+		    		$recNewsList.append('<li class="J-has-share rec-news-item-s2 pr clearfix"><h3 class="pr"><i class="hot">热</i><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="img-wrap clearfix"><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc1 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc2 + '" alt="" width="200" height="150"></a><a class="fl" href="' + url +'" title="' + title + '" target="_blank"><img src="' + imgSrc3 + '" alt="" width="200" height="150"></a></p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</li>');
 		    	} else {	// 单图样式
 		    		var imgSrc = imgArr[0].src;
 		    		$recNewsList.append('<li class="rec-news-item-s1 clearfix"><div class="img fl"><a href="' + url +'" target="_blank"><img src="' + imgSrc + '" width="180" height="135"></a></div><div class="info pr"><h3><a href="' + url +'" target="_blank">' + title + '</a></h3><p class="desc">' + desc + '</p><p class="from">' + time + ' 来源：' + source + '</p>' + bdshareStr + '</div><i class="hot">热</i></li>');

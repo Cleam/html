@@ -6,5 +6,5 @@
 .container {width: 1002px; margin: 0 auto; }
 
 /* 公共图片hover效果 注意图片容器一定要定宽高，然后加overflow: hidden;样式 */
-img{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
-img:hover{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
+img.animation{-webkit-transition: all 400ms; -moz-transition: all 400ms; -ms-transition: all 400ms; -o-transition: all 400ms; transition: all 400ms;}
+img.animation:hover{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
