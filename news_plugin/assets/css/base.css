@@ -10,7 +10,7 @@ html,body {background-image: url(about:blank); background-attachment: fixed;}
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td {margin: 0; padding: 0; outline: 0;} /* 清除内外边距 */
 :focus{outline: 0 none; font-weight: normal;}
 body{min-width: 1000px; min-height: 100%; color: #333;}
-body, button, input, select, textarea {font: 14px/1.5 \5B8B\4F53,"SimSun",\5FAE\8F6F\96C5\9ED1,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei",arial,sans-serif;} /* 设置默认字体 */
+body, button, input, select, textarea {font: 14px/1.5 \5B8B\4F53,"SimSun","Hiragino Sans GB","Hiragino Sans GB W3",\5FAE\8F6F\96C5\9ED1,"Microsoft YaHei",arial,sans-serif;} /* 设置默认字,\5FAE\8F6F\96C5\9ED1体 */
 /*body, button, input, select, textarea {font: 14px/100% \5b8b\4f53,"SimSun","宋体","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft Yahei",arial,sans-serif;} !* 设置默认字体 *!*/
 h1,h2,h3,h4,h5,h6 {font-size: 1em;}
 iframe,img {border: 0 none;}
@@ -22,8 +22,8 @@ ul, li, ol { list-style: none; } /* 重置列表元素 */
 /* 重置表格元素 */
 table {border-collapse: collapse; border-spacing: 0;}
 /* 重置文本格式元素 */
-a {text-decoration: none; outline: none; color: #333; -webkit-transition:all 0.15s linear;-moz-transition:all 0.15s linear;-ms-transition:all 0.15s linear;-o-transition:all 0.15s linear; cursor: pointer;}
-a:hover {color: #ee4b4b;}
+a {text-decoration: none; outline: none; color: #333; cursor: pointer;}
+a:hover {color: #f00;}
 abbr[title], acronym[title] { border-bottom: 1px dotted; cursor: help;} /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
 q:before, q:after { content: ''; }
 /* 重置表单元素 */

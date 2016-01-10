@@ -1,0 +1,61 @@
+@charset "utf-8";
+/**
+ * 基本样式
+ * @author lizhigao(lizhigao@021.com)
+ */
+/* 公共的样式 */
+.panel-header{font-family: \5FAE\8F6F\96C5\9ED1,"Microsoft YaHei",sans-serif; font-size: 16px; line-height: 1.5; background-color: #f19149; padding: 5px 0 5px 10px; _height: 24px;}
+.panel-header .title{color: #fff; font-weight: normal;}
+.panel-header .more{position: absolute; top: 50%; right: 10px; height: 24px; line-height: 24px; margin-top: -12px; color: #fff; font-size: 12px;}
+.panel-body{background-color: #fff;}
+.panel-body .logo{position: absolute; bottom: 0; right: 0; width: 59px; height: 16px; background-image: url(../img/logo.png); background-repeat: no-repeat; background-position: center;}
+
+/*====================== panel - 1 start =======================*/
+.panel{width: 272px;}
+.panel-body{padding-bottom: 16px; width: 270px; border: 1px solid #f19149; border-top: 0 none;}
+.panel-body .news-list{padding-bottom: 10px; width: 270px;}
+.panel-body .news-list a{margin-left: 10px; margin-top: 10px; width: 120px;}
+.panel-body .news-list a img{display: block; width: 120px; height: 90px;}
+.panel-body .news-list a span{display: block; margin-top: 3px; font-size: 12px; line-height: 1.4; height: 32px; overflow: hidden;} 
+/*====================== panel - 1 end =======================*/
+
+/*====================== panel - 2 start =======================*/
+/*.panel{width: 272px;}
+.panel-body{padding-bottom: 16px; width: 270px; border: 1px solid #f19149; border-top: 0 none;}
+.panel-body .news-list{padding-bottom: 10px; width: 270px;}
+.panel-body .news-list a{display: block; margin-left: 10px; padding-top: 10px;}
+.panel-body .news-list a img{display: block; width: 80px; height: 60px;}
+.panel-body .news-list a p{margin-left: 90px; padding-right: 10px; height: 60px; overflow: hidden; font-size: 12px; line-height: 1.5;}*/
+/*====================== panel - 2 end =======================*/
+
+/*====================== panel - 3 start =======================*/
+/* .panel{width: 272px;}
+.panel-body{padding-bottom: 16px; width: 270px; border: 1px solid #f19149; border-top: 0 none;}
+.panel-body .news-list{padding-top: 10px; padding-bottom: 10px; width: 270px; overflow: hidden;}
+.panel-body .news-list a{display: block; margin-left: 10px; font-size: 14px; height: 24px; line-height: 24px; overflow: hidden; margin-top: 5px;}
+.panel-body .news-list a i{margin-right: 3px;} */
+/*====================== panel - 3 end =======================*/
+
+/*====================== panel - 4 start =======================*/
+/* .panel{width: 662px;}
+.panel-body{padding-bottom: 16px; width: 660px; border: 1px solid #f19149; border-top: 0 none;}
+.panel-body .news-list-wrap{padding-top: 10px; padding-bottom: 10px; width: 660px; overflow: hidden;}
+.panel-body .news-list{width: 320px; margin-left: 10px;}
+.panel-body .news-list a{display: block; font-size: 14px; height: 24px; line-height: 24px; overflow: hidden; margin-top: 5px;}
+.panel-body .news-list a i{margin-right: 3px;} */
+/*====================== panel - 4 end =======================*/
+
+/*====================== panel - 5 start =======================*/
+/*.panel{width: 272px;}
+.panel-body{padding-bottom: 16px; width: 270px; border: 1px solid #f19149; border-top: 0 none;}
+.panel-body .news-list{padding-top: 10px; padding-bottom: 10px; width: 270px; overflow: hidden;}
+.panel-body .news-list .bottom a{display: block; margin-left: 10px; font-size: 14px; height: 24px; line-height: 24px; overflow: hidden; margin-top: 5px;}
+.panel-body .news-list .bottom a i{margin-right: 3px;} 
+.panel-body .news-list .top .img{display: block; width: 80px; height: 60px; margin-top: 0; margin-left: 10px;}
+.panel-body .news-list .top .img img{display: block; width: 80px; height: 60px;}
+.panel-body .news-list .top .topic,
+.panel-body .news-list .top .desc{margin-left: 100px; padding-right: 10px;}
+.panel-body .news-list .top .topic{font-weight: normal; font-size: 14px; height: 24px; overflow: hidden;}
+.panel-body .news-list .top .desc{font-size: 12px; line-height: 1.5; margin-top: 2px; height: 36px; overflow: hidden; color: #999;}*/
+/*====================== panel - 5 end =======================*/
+
