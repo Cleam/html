@@ -14,7 +14,7 @@ $(function(){
     	global_share_img  = '',		// 分享图片
     	bdshareStr = '<div id="bdsharebuttonbox_wrap"><div class="J-bdsharebuttonbox bdsharebuttonbox clearfix"><span class="fl">分享</span><a class="J-bdshare bds-tsina fl" data-cmd="tsina" href="javascript:;"></a><a class="J-bdshare bds-qzone fl" data-cmd="qzone" href="javascript:;"></a><a class="J-bdshare bds-tqq fl" data-cmd="tqq" href="javascript:;"></a><a class="J-bdshare bds-weixin fl" data-cmd="weixin" href="javascript:;"></a></div></div>';
     // 获取搜索结果数据
-    $.getJSON('assets/search_result.json', function(data, status){
+    $.getJSON('json/search_result.json', function(data, status){
     	if(!(data || data.data)){
     		return;
     	}
@@ -25,7 +25,7 @@ $(function(){
     		// 无搜索结果
     		generateNoResult();
     		// 获取推荐新闻数据
-    		$.getJSON('assets/rec_news.json', function(data, status){
+    		$.getJSON('json/rec_news.json', function(data, status){
 				if(!(data || data.data)){
 		    		return;
 		    	}
@@ -36,7 +36,7 @@ $(function(){
     });
 
     // 加载今日热点数据
-    $.getJSON('assets/today_hot_news.json', function(data, status){
+    $.getJSON('json/today_hot_news.json', function(data, status){
 		if(!(data || data.data)){
     		return;
     	}
@@ -44,7 +44,7 @@ $(function(){
 	});
 
     // 加载今日top10数据
-	$.getJSON('assets/today_top10.json', function(data, status){
+	$.getJSON('json/today_top10.json', function(data, status){
 		if(!(data || data.data)){
     		return;
     	}
