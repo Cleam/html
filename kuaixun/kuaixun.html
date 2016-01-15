@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>快讯新闻</title>
+	<style>
+		iframe,img {border: 0 none;}
+		a {text-decoration: none; outline: none; color: #333; cursor: pointer;}
+		a:hover {color: #ee4b4b; text-decoration: underline; }
+		a:focus{font-weight: inherit;}
+		/* 快讯-start */
+		.fixed-kuaixun{position: fixed; bottom: -70px; left: 50%; width: 445px; height: 48px; margin-left: -222px; background-color: #fff; z-index: 99999; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 2px #aaa;}
+		/* IE6兼容 - 在 IE6 中实现 position:fixed; 的办法，解决“被固定定位的元素在滚动滚动条的时候会闪动”问题 */
+		*html{background-image: url(about:blank); background-attachment: fixed;}
+		*html .fixed-kuaixun{position:absolute; top:expression(eval(document.documentElement.scrollTop +document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)-70)); bottom: auto;}
+		.fixed-kuaixun img{position: absolute; left: 0; top: 0;}
+		.fixed-kuaixun .txt{position: absolute; top: 50%; height: 32px; line-height: 32px; margin-top: -16px; left: 86px; color: #333; font-size: 16px; width: 320px; text-align: center; overflow: hidden;}
+		.fixed-kuaixun .txt:hover{color: #f83a22; text-decoration: underline;}
+		.fixed-kuaixun .close{position: absolute; right: 5px; top: 50%; margin-top: -9px; width: 30px; height: 18px; background-image: url("http://mini.eastday.com/assets/images/close_sp.png"); background-repeat: no-repeat; background-position: 0 0; text-indent: -99em; overflow: hidden;}
+		.fixed-kuaixun .close:hover{height: 32px; background-position: 0 -18px; margin-top: -16px;}
+		/* 快讯-end */
+	</style>
+	<script src="http://mini.eastday.com/assets/js/jquery.min.js"></script>
+	<script src="http://mini.eastday.com/assets/js/jquery.cookie.js"></script>
+	<script>
+		/* 添加快讯 */
+		/*
+		 <div class="fixed-kuaixun">
+		 <img src="<?php echo __WWW_IMG ?>kuaixun.png" alt="快讯" width="86" height="48">
+		 <a class="txt" href="javascript:;">国防部证实我国正在研制第二航母舰队</a>
+		 <a class="close" href="javascript:;" title="点击关闭">关闭</a>
+		 </div>
+		 */
+		setTimeout(function(){
+			var COOKIE_NAME = 'kuaixun',    // 快讯cookie name
+				cookieVal = $.cookie(COOKIE_NAME),  // 快讯cookie value
+				ymd = getDateStr(),   // 年月日字符串
+				// url = '/json/kuaixun/kuaixun_' + ymd + '.json';
+				url = 'kuaixun.json';
+			$.getJSON(url, function(data, status){
+				if(status != 'success' || !data){
+					return false;
+				}
+				if(!cookieVal && cookieVal != data.id){
+					var startTime = new Date(data.start_time.replace(/-/g, '/')),
+						endTime = new Date(data.end_time.replace(/-/g, '/')),
+						curTime = new Date();
+					if(curTime.getTime() > startTime.getTime() && curTime.getTime() < endTime.getTime()){
+						var $kuaixun = $('<div class="fixed-kuaixun"><img src="http://mini.eastday.com/assets/images/kuaixun.png" alt="快讯" width="86" height="48"></div>'),
+							$kxLink = $('<a class="txt" href="javascript:;" target="_blank"></a>'),
+							$kxClose = $('<a class="close" href="javascript:;" title="点击关闭">关闭</a>');
+						$kxLink.attr('href', data.url);
+						$kxLink.html(data.topic);
+						$('body').append($kuaixun.append($kxLink).append($kxClose));
+						$kxClose.on('click', function(){
+							$.cookie(COOKIE_NAME, data.id, {expires: 30, path: '/'});
+							$kuaixun.remove();
+						});
+						$kxLink.on('click', function(){
+							$.cookie(COOKIE_NAME, data.id, {expires: 30, path: '/'});
+							$kuaixun.remove();
+						});
+
+						if(!($.browser.version.toString().substring(0,1) == '6' || $.browser.version.toString().substring(0,1) == '7')){
+							$kuaixun.animate({
+								bottom: '70px'
+							});
+						}
+					}
+				}
+			});
+
+			function getDateStr(){
+				var now = new Date(),
+					year = now.getFullYear().toString().slice(2),
+					month = (now.getMonth() + 1).toString(),
+					day = now.getDate().toString();
+				month = (month.length === 1) ? (month = '0' + month) : month;
+				day = (day.length === 1) ? (day = '0' + day) : day;
+				return year + month + day;   // 年月日字符串
+			}
+		}, 3000);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
