@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>预计收入</title>
+    <link rel="stylesheet" href="public/plugin/mobiscroll/css/mobiscroll.custom-2.5.0.min.css"/>
+    <link rel="stylesheet" href="public/css/base.css"/>
+    <link rel="stylesheet" href="public/css/common.css"/>
+    <style>
+        /*========== 预计收入 - start ==========*/
+        .predict-income{padding-bottom: 8rem; padding-top: 4.5rem;}
+        .predict-income h2{height: 4.5rem; line-height: 4.5rem; padding-left: 1.5rem; padding-right: 1.5rem;}
+        .predict-income h2 span{font-size: 2.2rem;}
+        .predict-income section{background-color: #ffffff;}
+        .predict-income section .predict-income-list .predict-income-item{border-bottom: 1px solid #d8d8d8; padding: 1.5rem;}
+        .predict-income section .predict-income-list .predict-income-item .pro{font-size: 1.8rem;}
+        .predict-income section .predict-income-list .predict-income-item .desc{font-size: 1.3rem; color: #888888;}
+        /*========== 预计收入 - end ==========*/
+    </style>
+</head>
+<body>
+<!-- header - start -->
+ <header>
+    <div class="date-picker-wrap">
+        <div class="date-picker"><input class="J-date-picker" type="text" value="2015-12-12" readonly/></div>
+        <a class="J-prev prev" href="javascript:;"><img src="public/img/prev.png" alt=""/></a>
+        <a class="J-next next" href="javascript:;"><img src="public/img/next.png" alt=""/></a>
+    </div>
+</header>
+<!-- header - end -->
+
+<!-- content - start -->
+<div class="main-content">
+    <!-- 预计收入 start -->
+    <div class="predict-income">
+        <h2>预计总收入：<span class="clr">2400</span>积分</h2>
+        <section>
+            <ul class="predict-income-list">
+                <li class="predict-income-item">
+                    <p class="pro clearfix"><span class="fl">东方输入法</span><span class="fr">+1000</span></p>
+                    <p class="desc mt20 clearfix"><span class="fl">有效量：10</span><span class="fr">已结清</span></p>
+                </li>
+                <li class="predict-income-item">
+                    <p class="pro clearfix"><span class="fl">百度浏览器</span><span class="fr">+1000</span></p>
+                    <p class="desc mt20 clearfix"><span class="fl">有效量：10</span><span class="fr clr">未结清</span></p>
+                </li>
+                <li class="predict-income-item">
+                    <p class="pro clearfix"><span class="fl">快压静默包</span><span class="fr">+1000</span></p>
+                    <p class="desc mt20 clearfix"><span class="fl">有效量：10</span><span class="fr">已结清</span></p>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <!-- 预计收入 end -->
+</div>
+<!-- content - end -->
+
+<!-- footer - start -->
+<footer>
+    <nav>
+        <ul class="nav-list clearfix">
+            <li class="nav-item fl">
+                <a class="item item1 active" href="myaccount.html">
+                    <span class="img"></span>
+                    <span class="txt">账户</span>
+                </a>
+            </li>
+            <li class="nav-item fl">
+                <a class="item item2" href="effective.html">
+                    <span class="img"></span>
+                    <span class="txt">产品有效量</span>
+                </a>
+            </li>
+            <li class="nav-item fl">
+                <a class="item item3" href="cash.html">
+                    <span class="img"></span>
+                    <span class="txt">兑现</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</footer>
+<!-- footer - end -->
+
+<!-- zepto需要在jquery之前引入 -->
+<script src="public/lib/zepto/zepto.min.js"></script>
+<script src="public/lib/jquery/jquery-1.11.3.min.js"></script>
+<script src="public/plugin/mobiscroll/js/mobiscroll.custom-2.5.0.min.js"></script>
+<script src="public/js/common.js"></script>
+<script>
+    Zepto(function(){
+        
+    });
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>绑定账号</title>
+    <link rel="stylesheet" href="public/css/base.css"/>
+    <link rel="stylesheet" href="public/css/common.css"/>
+    <style>
+        /*========== 绑定账号 - start ==========*/
+        .bind-account{padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 1rem; padding-bottom: 1rem;}
+        .bind-account form .tips{font-size: 1.3rem;}
+        .bind-account form .account,
+        .bind-account form .password{font-size: 1.5rem; height: 4.3rem; border: 1px solid #D8D8D8; padding: 1.2rem 1rem; background-color: #ffffff; border-radius: 0.3rem;}
+        .bind-account form .account.error,
+        .bind-account form .password.error{border: 1px solid #F35C53;}
+        .bind-account form .account input,
+        .bind-account form .password input{width: 100%; height: 100%;}
+        .bind-account form .icon{position: absolute; top: 1.2rem; right: 1rem; background-repeat: no-repeat; background-position: center; background-size: contain; width: 1.8rem; height: 1.8rem;}
+        .bind-account form .icon.icon-right{background-image: url("public/img/icon_right.png");}
+        .bind-account form .icon.icon-close{background-image: url("public/img/icon_error.png");}
+        .bind-account form .error-info{color: #f35c53; font-size: 1.3rem;}
+        .bind-account form .submit{margin-top: 3.5rem; width: 100%;}
+        .bind-account form .reg{margin-top: 2rem; width: 100%;}
+        .bind-account form .submit-btn,
+        .bind-account form .reg-btn{width: 100%; height: 5rem; font-size: 1.8rem; border-radius: 0.3rem;}
+        .bind-account form .submit-btn{background-color: #F35C53; color: #ffffff;}
+        .bind-account form .submit-btn:active{background-color: #C44F48;}
+        .bind-account form .reg-btn{background-color: #ffffff; border: 1px solid #D8D8D8; color: #666666;}
+        .bind-account form .reg-btn:active{background-color: #e5e5e5;}
+        /*========== 绑定账号 - end ==========*/
+    </style>
+</head>
+<body>
+    <!-- content - start -->
+    <div class="main-content">
+        <div class="bind-account">
+            <form action="">
+                <p class="tips">只需首次登录，即可随时随地享受7654服务</p>
+                <div class="account error mt20 pr">
+                    <input id="J_account" type="text" placeholder="7654账号"/>
+                    <span class="icon icon-close"></span>
+                </div>
+                <p class="error-info mt20">账号输入错误</p>
+                <div class="password mt20 pr">
+                    <input id="J_password" type="password" placeholder="密码"/>
+                    <span class="icon icon-right"></span>
+                </div>
+                <p class="error-info mt20 hidden">密码输入错误</p>
+                <div class="submit">
+                    <input id="J_submit" class="submit-btn" type="submit" value="立即登录"/>
+                </div>
+                <!-- <div class="reg">
+                    <input id="J_reg" class="reg-btn" type="button" value="注册7654账号"/>
+                </div> -->
+            </form>
+        </div>
+    </div>
+    <!-- content - end -->
+
+    <script src="public/lib/zepto/zepto.min.js"></script>
+    <script>
+        Zepto(function(){
+            // TODO...
+            
+        });
+    </script>
+</body>
+</html>

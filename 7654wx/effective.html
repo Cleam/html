@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>产品有效量</title>
+    <link rel="stylesheet" href="public/plugin/mobiscroll/css/mobiscroll.custom-2.5.0.min.css"/>
+    <link rel="stylesheet" href="public/css/base.css"/>
+    <link rel="stylesheet" href="public/css/common.css"/>
+    <style>
+        /*========== 产品有效量 - start ==========*/
+        .product_effective{padding-bottom: 8rem;}
+        .product_effective form{background-color: #ffffff; padding: 1.5rem;}
+        .product_effective form label{float: left; text-align: right; font-size: 1.3rem; line-height: 4rem; width: 5.4rem;}
+        .product_effective form .start-date,
+        .product_effective form .end-date{position: relative; margin-left: 6.3rem; border: 1px solid #D8D8D8; height: 4rem; padding: 1rem 1.3rem; border-radius: 0.3rem;}
+        .product_effective form .start-date input,
+        .product_effective form .end-date input{font-size: 1.3rem; width: 23.5rem; height: 100%;}
+        .product_effective form .icon_date{position: absolute; top: 0.9rem; right: 1.3rem; width: 2rem; height: 2rem; background-image: url("public/img/icon_datetime.png"); background-repeat: no-repeat; background-position: center; background-size: contain;}
+        .product_effective form .search-btn{width: 100%; height: 5rem; background-color: #F35C53; color: #ffffff; font-size: 1.8rem; border-radius: 0.3rem;}
+        .product_effective form .search-btn:active{background-color: #C44F48;}
+        .product_effective .list-title{line-height: 3.5rem; font-size: 1.3rem; padding: 0 1.5rem; border-top: 1px solid #D8D8D8; border-bottom: 1px solid #D8D8D8;}
+        .product_effective .products .product-list .product-item .item{display: block; width: 100%; height: 7.8rem; padding: 1.3rem 1.5rem; background-color: #ffffff; border-bottom: 1px solid #D8D8D8;}
+        .product_effective .products .product-list .product-item .item .icon{width: 5rem; height: 5rem;}
+        .product_effective .products .product-list .product-item .item .icon img{max-width: 100%; max-height: 100%;}
+        .product_effective .products .product-list .product-item .item .txt{font-size: 1.8rem; line-height: 5rem; margin-left: 1rem;}
+        .product_effective .products .product-list .product-item .item .chev{background-image: url("public/img/chev_b.png"); background-repeat: no-repeat; background-position: center; background-size: contain; height: 100%; width: 2.2rem;}
+        .product_effective .products .product-list .product-item .item.active .chev{background-image: url("public/img/chev_t.png");}
+        .product_effective .products .product-list .product-item .echarts-wrap{width: 100%; height: 31rem; border-bottom: 1px solid #D8D8D8; position: relative;}
+        .product_effective .products .product-list .product-item .echarts-wrap .spinner{position: absolute; top: 50%; left: 50%; margin-left: -1.5rem; margin-top: -1.5rem;}
+        /*========== 产品有效量 - end ==========*/
+    </style>
+</head>
+<body>
+
+    <!-- content - start -->
+    <div class="main-content">
+        <!-- 产品有效量 -->
+        <div class="product_effective">
+            <form class="clearfix" action="">
+                <div>
+                    <label for="start_date">装机日期</label>
+                    <div class="start-date">
+                        <input class="J-date-picker" type="text" placeholder="开始日期"/>
+                        <span class="icon_date"></span>
+                    </div>
+                </div>
+                <div class="mt20">
+                    <label for="end_date">至</label>
+                    <div class="end-date">
+                        <input class="J-date-picker" type="text" placeholder="结束日期"/>
+                        <span class="icon_date"></span>
+                    </div>
+                </div>
+                <div class="search mt20">
+                    <input id="J_search_submit" class="search-btn" type="submit" value="查询"/>
+                </div>
+            </form>
+            <h3 class="list-title">这段期间推广了以下产品：</h3>
+            <div class="products">
+                <ul id="J_product_list" class="product-list">
+                    <li class="product-item">
+                        <a class="item clearfix" href="javascript:;">
+                            <div class="icon fl"><img src="public/img/product_bd.png" alt=""/></div>
+                            <div class="txt fl">百度浏览器</div>
+                            <div class="chev fr"></div>
+                        </a>
+                        <div class="J-echarts echarts-wrap none"></div>
+                    </li>
+                    <li class="product-item">
+                        <a class="item clearfix" href="javascript:;">
+                            <div class="icon fl"><img src="public/img/product_360.png" alt=""/></div>
+                            <div class="txt fl">360安全卫士</div>
+                            <div class="chev fr"></div>
+                        </a>
+                        <div class="J-echarts echarts-wrap none"></div>
+                    </li>
+                    <li class="product-item">
+                        <a class="item clearfix" href="javascript:;">
+                            <div class="icon fl"><img src="public/img/product_bd.png" alt=""/></div>
+                            <div class="txt fl">百度浏览器</div>
+                            <div class="chev fr"></div>
+                        </a>
+                        <div class="J-echarts echarts-wrap none"></div>
+                    </li>
+                    <li class="product-item">
+                        <a class="item clearfix" href="javascript:;">
+                            <div class="icon fl"><img src="public/img/product_360.png" alt=""/></div>
+                            <div class="txt fl">360安全卫士</div>
+                            <div class="chev fr"></div>
+                        </a>
+                        <div class="J-echarts echarts-wrap none"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- content - end -->
+
+    <!-- footer - start -->
+    <footer>
+        <nav>
+            <ul class="nav-list clearfix">
+                <li class="nav-item fl">
+                    <a class="item item1" href="myaccount.html">
+                        <span class="img"></span>
+                        <span class="txt">账户</span>
+                    </a>
+                </li>
+                <li class="nav-item fl">
+                    <a class="item item2 active" href="effective.html">
+                        <span class="img"></span>
+                        <span class="txt">产品有效量</span>
+                    </a>
+                </li>
+                <li class="nav-item fl">
+                    <a class="item item3" href="cash.html">
+                        <span class="img"></span>
+                        <span class="txt">兑现</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <!-- footer - end -->
+
+    <!-- zepto需要在jquery之前引入 -->
+    <script src="public/lib/zepto/zepto.min.js"></script>
+    <script src="public/lib/jquery/jquery-1.11.3.min.js"></script>
+    <script src="public/plugin/mobiscroll/js/mobiscroll.custom-2.5.0.min.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script src="public/lib/echarts/dist/echarts.js"></script>
+    <script src="public/js/page_effective.js"></script>
+</body>
+</html>

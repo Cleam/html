@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>账户</title>
+    <link rel="stylesheet" href="public/css/base.css"/>
+    <link rel="stylesheet" href="public/css/common.css"/>
+    <style>
+        /*========== 账户 - start ==========*/
+        .account{padding-bottom: 8rem;}
+        .account h2{height: 3.5rem; line-height: 3.5rem; padding-left: 1.5rem; padding-right: 1.5rem; font-size: 1.3rem;}
+        .account h2.details img{vertical-align: middle; margin-left: 1rem; margin-bottom: 0.15rem; margin-right: 0.2rem; width: 1.2rem; height: 1.2rem;}
+        .account section{background-color: #ffffff;}
+        .account section .row1{border-bottom: 1px solid #d8d8d8;}
+        .account section .row a{display: block; width: 50%; height: 8.1rem;}
+        .account section .row a.fl{padding: 1.5rem 0 1.5rem 1.5rem; border-right: 1px solid #d8d8d8;}
+        .account section .row a.fr{padding: 1.5rem;}
+        .account section .row a .img{width: 4rem; text-align: center; height: 100%; line-height: 5.1rem;}
+        .account section .row a .img img{vertical-align: middle; max-width: 100%;}
+        .account section .row a .txt{margin-left: 5rem;}
+        .account section .row a .txt .amounts{font-size: 2.4rem;}
+        .account section .row a .txt .info{font-size: 1.1rem; color: #888888;}
+        .account section .details-list .details-item{border-bottom: 1px solid #d8d8d8; padding: 1.5rem;}
+        .account section .details-list .details-item .pro{font-size: 1.8rem;}
+        .account section .details-list .details-item .desc{font-size: 1.3rem; color: #888888;}
+        /*========== 账户 - end ==========*/
+    </style>
+</head>
+<body>
+
+    <!-- content - start -->
+    <div class="main-content">
+        <!-- 账户 start -->
+        <div class="account">
+            <h2>我的收入</h2>
+            <section>
+                <div class="row row1 clearfix">
+                    <a class="fl clearfix" href="javascript:;">
+                        <div class="img fl"><img src="public/img/icon_income_1.png" alt=""/></div>
+                        <div class="txt">
+                            <p class="amounts">8000</p>
+                            <p class="info mt20">昨日预计总收入</p>
+                        </div>
+                    </a>
+                    <a class="fr clearfix" href="predictIncome.html">
+                        <div class="img fl"><img src="public/img/icon_income_2.png" alt=""/></div>
+                        <div class="txt">
+                            <p class="amounts">2510000</p>
+                            <p class="info mt20">本月预计总收入</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="row row2 clearfix">
+                    <a class="fl clearfix" href="incomeExp.html">
+                        <div class="img fl"><img src="public/img/icon_income_3.png" alt=""/></div>
+                        <div class="txt">
+                            <p class="amounts">21000</p>
+                            <p class="info mt20">累计已发总收入</p>
+                        </div>
+                    </a>
+                    <a class="fr clearfix" href="noincome.html">
+                        <div class="img fl"><img src="public/img/icon_income_4.png" alt=""/></div>
+                        <div class="txt">
+                            <p class="amounts">10000</p>
+                            <p class="info mt20">累计未发总收入</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            <h2 class="details">昨日预计收入明细<img src="public/img/icon_info.png" alt=""/><span class="clr">数据将于今天17:00更新</span></h2>
+            <section>
+                <ul class="details-list">
+                    <li class="details-item">
+                        <p class="pro clearfix"><span class="fl">东方输入法</span><span class="fr">+1000</span></p>
+                        <p class="desc mt20 clearfix"><span class="fl">有效量：10</span><span class="fr">已结清</span></p>
+                    </li>
+                    <li class="details-item">
+                        <p class="pro clearfix"><span class="fl">东方输入法</span><span class="fr">+1000</span></p>
+                        <p class="desc mt20 clearfix"><span class="fl">有效量：10</span><span class="fr clr">未结清</span></p>
+                    </li>
+                    <li class="details-item">
+                        <p class="pro clearfix"><span class="fl">东方输入法</span><span class="fr">+1000</span></p>
+                        <p class="desc mt20 clearfix"><span class="fl">有效量：10</span><span class="fr">已结清</span></p>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <!-- 账户 end -->
+    </div>
+    <!-- content - end -->
+
+    <!-- footer - start -->
+    <footer>
+        <nav>
+            <ul class="nav-list clearfix">
+                <li class="nav-item fl">
+                    <a class="item item1 active" href="myaccount.html">
+                        <span class="img"></span>
+                        <span class="txt">账户</span>
+                    </a>
+                </li>
+                <li class="nav-item fl">
+                    <a class="item item2" href="effective.html">
+                        <span class="img"></span>
+                        <span class="txt">产品有效量</span>
+                    </a>
+                </li>
+                <li class="nav-item fl">
+                    <a class="item item3" href="cash.html">
+                        <span class="img"></span>
+                        <span class="txt">兑现</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <!-- footer - end -->
+
+<script src="public/lib/zepto/zepto.min.js"></script>
+<script src="public/js/page_account.js"></script>
+</body>
+</html>

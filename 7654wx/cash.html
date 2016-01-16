@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>兑现记录</title>
+    <link rel="stylesheet" href="public/css/base.css"/>
+    <link rel="stylesheet" href="public/css/common.css"/>
+    <style>
+        .cash-record{padding-bottom: 8rem;}
+        .cash-record h2{background-image: url("public/img/title_bg.png"); background-repeat: no-repeat; background-position: left; background-size: contain; font-size: 2rem; color: #ffffff; height: 3.5rem; line-height: 3.5rem; margin-top: 1.5rem;}
+        .cash-record section{margin-top: 0.9rem; padding: 1.5rem 1rem; background-color: #ffffff; border-top: 1px solid #D8D8D8; border-bottom: 1px solid #D8D8D8;}
+        .cash-record section h3{position: relative; height: 2rem; line-height: 2rem; font-size: 1.8rem;}
+        .cash-record section h3.has-img{padding-left: 3rem;}
+        .cash-record section h3 img{position: absolute; left: 0; width: 2rem; height: 2rem;}
+        .cash-record section h3 em{position: absolute; right: 0; line-height: 2rem; font-size: 1.2rem; color: #888888;}
+        .cash-record section p{font-size: 1.3rem; line-height: 1.5em;}
+    </style>
+</head>
+<body>
+
+    <!-- content - start -->
+    <div class="main-content">
+        <!-- 兑现记录 -->
+        <div class="cash-record">
+            <h2>本月</h2>
+            <section>
+                <h3 class="has-img"><img src="public/img/icon_succ.png" alt="">打款成功<em>2015-07-09</em></h3>
+                <p class="mt30">提现金额：<span>100元</span></p>
+                <p>银行账号：<span>6228481234567898765</span></p>
+                <p>提交时间：<span>2015-07-08</span></p>
+            </section>
+            <h2>09月</h2>
+            <section>
+                <h3 class="has-img"><img src="public/img/icon_failed.png" alt="">打款失败<em>2015-07-09</em></h3>
+                <p class="mt30">提现金额：<span>100元</span></p>
+                <p>银行账号：<span>6228481234567898765</span></p>
+                <p>提交时间：<span>2015-07-08</span></p>
+            </section>
+            <section>
+                <h3>已打款<em>2015-07-09</em></h3>
+                <p class="mt30">提现金额：<span>100元</span></p>
+                <p>银行账号：<span>6228481234567898765</span></p>
+                <p>提交时间：<span>2015-07-08</span></p>
+            </section>
+            <section>
+                <h3>已提交<em>2015-07-09</em></h3>
+                <p class="mt30">提现金额：<span>100元</span></p>
+                <p>银行账号：<span>6228481234567898765</span></p>
+                <p>提交时间：<span>2015-07-08</span></p>
+            </section>
+        </div>
+    </div>
+    <!-- content - end -->
+
+    <!-- footer - start -->
+    <footer>
+        <nav>
+            <ul class="nav-list clearfix">
+                <li class="nav-item fl">
+                    <a class="item item1" href="myaccount.html">
+                        <span class="img"></span>
+                        <span class="txt">账户</span>
+                    </a>
+                </li>
+                <li class="nav-item fl">
+                    <a class="item item2" href="effective.html">
+                        <span class="img"></span>
+                        <span class="txt">产品有效量</span>
+                    </a>
+                </li>
+                <li class="nav-item fl">
+                    <a class="item item3 active" href="cash.html">
+                        <span class="img"></span>
+                        <span class="txt">兑现</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <!-- footer - end -->
+
+    <script src="public/lib/zepto/zepto.min.js"></script>
+    <script>
+        Zepto(function(){
+            // TODO...
+            
+        });
+    </script>
+</body>
+</html>
