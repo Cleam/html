@@ -4,29 +4,26 @@
 	<meta charset="UTF-8">
 	<title>快讯新闻</title>
 	<style>
-		iframe,img {border: 0 none;}
-		a {text-decoration: none; outline: none; color: #333; cursor: pointer;}
-		a:hover {color: #ee4b4b; text-decoration: underline; }
-		a:focus{font-weight: inherit;}
 		/* 快讯-start */
-		.fixed-kuaixun{position: fixed; bottom: -70px; left: 50%; width: 445px; height: 48px; margin-left: -222px; background-color: #fff; z-index: 99999; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 2px #aaa;}
+		.DFTOUTTIAO-fixed-kuaixun{position: fixed; bottom: -70px; left: 50%; width: 445px; height: 48px; margin-left: -222px; background-color: #fff; z-index: 99999; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 2px #aaa;}
 		/* IE6兼容 - 在 IE6 中实现 position:fixed; 的办法，解决“被固定定位的元素在滚动滚动条的时候会闪动”问题 */
 		*html{background-image: url(about:blank); background-attachment: fixed;}
-		*html .fixed-kuaixun{position:absolute; top:expression(eval(document.documentElement.scrollTop +document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)-70)); bottom: auto;}
-		.fixed-kuaixun img{position: absolute; left: 0; top: 0;}
-		.fixed-kuaixun .txt{position: absolute; top: 50%; height: 32px; line-height: 32px; margin-top: -16px; left: 86px; color: #333; font-size: 16px; width: 320px; text-align: center; overflow: hidden;}
-		.fixed-kuaixun .txt:hover{color: #f83a22; text-decoration: underline;}
-		.fixed-kuaixun .close{position: absolute; right: 5px; top: 50%; margin-top: -9px; width: 30px; height: 18px; background-image: url("http://mini.eastday.com/assets/images/close_sp.png"); background-repeat: no-repeat; background-position: 0 0; text-indent: -99em; overflow: hidden;}
-		.fixed-kuaixun .close:hover{height: 32px; background-position: 0 -18px; margin-top: -16px;}
+		*html .DFTOUTTIAO-fixed-kuaixun{position:absolute; top:expression(eval(document.documentElement.scrollTop +document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0) + 70)); bottom: auto;}
+		.DFTOUTTIAO-fixed-kuaixun img{position: absolute; left: 0; top: 0;}
+		.DFTOUTTIAO-fixed-kuaixun .txt{position: absolute; top: 50%; height: 32px; line-height: 32px; margin-top: -16px; left: 86px; color: #333; font-size: 16px; width: 320px; text-align: center; overflow: hidden; text-decoration: none; outline: none; color: #333; cursor: pointer;}
+		.DFTOUTTIAO-fixed-kuaixun .txt:hover{color: #f83a22; text-decoration: underline;}
+		.DFTOUTTIAO-fixed-kuaixun .close{position: absolute; right: 5px; top: 50%; margin-top: -9px; width: 30px; height: 18px; background-image: url("http://mini.eastday.com/assets/images/close_sp.png"); background-repeat: no-repeat; background-position: 0 0; text-indent: -99em; overflow: hidden;}
+		.DFTOUTTIAO-fixed-kuaixun .close:hover{height: 32px; background-position: 0 -18px; margin-top: -16px;}
 		/* 快讯-end */
 	</style>
 	<script src="http://mini.eastday.com/assets/js/jquery.min.js"></script>
 	<script src="http://mini.eastday.com/assets/js/jquery.cookie.js"></script>
+	
 	<script>
 		/* 添加快讯 */
 		/*
-		 <div class="fixed-kuaixun">
-		 <img src="<?php echo __WWW_IMG ?>kuaixun.png" alt="快讯" width="86" height="48">
+		 <div class="DFTOUTTIAO-fixed-kuaixun">
+		 <img src="kuaixun.png" alt="快讯" width="86" height="48">
 		 <a class="txt" href="javascript:;">国防部证实我国正在研制第二航母舰队</a>
 		 <a class="close" href="javascript:;" title="点击关闭">关闭</a>
 		 </div>
@@ -46,9 +43,9 @@
 						endTime = new Date(data.end_time.replace(/-/g, '/')),
 						curTime = new Date();
 					if(curTime.getTime() > startTime.getTime() && curTime.getTime() < endTime.getTime()){
-						var $kuaixun = $('<div class="fixed-kuaixun"><img src="http://mini.eastday.com/assets/images/kuaixun.png" alt="快讯" width="86" height="48"></div>'),
+						var $kuaixun = $('<div class="DFTOUTTIAO-fixed-kuaixun"><img class="png24" src="http://mini.eastday.com/assets/images/kuaixun.png" alt="快讯" width="86" height="48"></div>'),
 							$kxLink = $('<a class="txt" href="javascript:;" target="_blank"></a>'),
-							$kxClose = $('<a class="close" href="javascript:;" title="点击关闭">关闭</a>');
+							$kxClose = $('<a class="close png24" href="javascript:;" title="点击关闭">关闭</a>');
 						$kxLink.attr('href', data.url);
 						$kxLink.html(data.topic);
 						$('body').append($kuaixun.append($kxLink).append($kxClose));
@@ -60,8 +57,11 @@
 							$.cookie(COOKIE_NAME, data.id, {expires: 30, path: '/'});
 							$kuaixun.remove();
 						});
-
-						if(!($.browser.version.toString().substring(0,1) == '6' || $.browser.version.toString().substring(0,1) == '7')){
+						if(navigator.userAgent.indexOf('MSIE') >= 0 && $.browser.version.toString().substring(0,1) == '6'){
+							$kuaixun.animate({
+								top: '-=140px'
+							});
+						} else {
 							$kuaixun.animate({
 								bottom: '70px'
 							});
@@ -81,6 +81,12 @@
 			}
 		}, 3000);
 	</script>
+	<!--[if IE 6]>
+	<script src="http://mini.eastday.com/assets/js/DDPngMin.js"></script>
+	<script>
+	    DD_belatedPNG.fix('.png24');
+	</script>
+	<![endif]-->
 </head>
 <body>
 	
