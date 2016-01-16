@@ -8,7 +8,7 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
 	<title>春节活动好礼相送</title>
-	<!-- <script src="js/base.js"></script>-->
+	 <script src="js/base.js"></script>
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/page_index.css">
 </head>
@@ -23,10 +23,21 @@
 		</div>
 
 		<div class="turntable-wrap">
-			<p class="clearfix"><span class="fl">当前积分：100</span><span class="fr">每次参与消耗100积分</span></p>
+			<p class="txt clearfix"><span class="fl">当前积分：100</span><span class="fr">每次参与消耗100积分</span></p>
 			<div class="turntable">
+				<div class="aw-wrap">
+					<div class="aw aw-1 active fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-2 fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-3 fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-8 fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-btn fl"><a id="J_aw_btn" href="javascript:;"><img src="img/aw_btn.png" alt=""></a></div>
+					<div class="aw aw-4 fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-7 fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-6 fl"><img src="img/aw.png" alt=""><p></p></div>
+					<div class="aw aw-5 fl"><img src="img/aw.png" alt=""><p></p></div>
+				</div>
 				<p class="bg"></p>
-				<p class="dot"></p>
+				<p class="J-dot dot"></p>
 			</div>
 		</div>
 
@@ -39,6 +50,20 @@
 
 	</div>
 
-
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/page_index.js"></script>
+	<script>
+		$(function(){
+			var clickFlag = true;
+			$('#J_aw_btn').on('click', function(){
+				if(clickFlag){
+					clickFlag = false;
+					lottery.reset(function(){
+						clickFlag = true;
+					});
+				}
+			});
+		});
+	</script>
 </body>
 </html>

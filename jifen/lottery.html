@@ -1,0 +1,136 @@
+<html lang="zh-cn">
+
+<head>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+    /**
+     *@author 大灰狼 
+     *@email 116311316@qq.com
+     *@version 1.1
+     */
+    var lottery = {
+        index: 1, //起点
+        speed: 400, //初始速度
+        roll: 0, //定时器id
+        cycle: 1, //已跑的圈速
+        times: 4, //至少跑几圈
+        prize: -1, //中奖索引
+        btn: 0,
+        run: function() {
+            var before = lottery.index == 1 ? 10 : lottery.index - 1;
+            $(".roll-" + lottery.index).addClass("active");
+            $(".roll-" + before).removeClass("active");
+
+            //初步加快的过程
+            lottery.upSpeed();
+            lottery.downSpeed();
+            lottery.index += 1;
+            lottery.index = lottery.index == 11 ? 1 : lottery.index;
+        },
+        //提速
+        upSpeed: function() {
+            if (lottery.cycle < 2 && lottery.speed > 100) {
+                lottery.speed -= lottery.index * 8;
+                lottery.stop();
+                lottery.start();
+            }
+        },
+        //降速
+        downSpeed: function() {
+            if (lottery.index == 10) {
+                lottery.cycle += 1;
+            }
+            if (lottery.cycle > lottery.times - 1 && lottery.speed < 400) {
+                lottery.speed += 20;
+                lottery.stop();
+                lottery.start();
+            }
+
+            if (lottery.cycle > lottery.times && lottery.index == lottery.prize) {
+                lottery.stop();
+                lottery.showPrize();
+            }
+
+        },
+        //先停止再显示结果 按钮显示出来
+        showPrize: function() {
+            setTimeout(function() {
+                alert("price is " + lottery.prize);
+                lottery.btn.show();
+
+            }, 700);
+        },
+
+        //重新开始
+        reset: function() {
+            lottery.btn = $(this);
+            lottery.btn.hide();
+            lottery.speed = 400;
+            lottery.cycle = 0;
+            lottery.prize = Math.round(Math.random() * 9) + 1;
+            lottery.run();
+        },
+        start: function() {
+            lottery.roll = setInterval(lottery.run, lottery.speed);
+        },
+
+        stop: function() {
+            clearInterval(lottery.roll);
+        }
+    }
+    </script>
+    <style>
+    .roll {
+        width: 50px;
+        border: 1px #ccc solid;
+        text-align: center;
+    }
+    
+    .active {
+        border-color: red;
+    }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td class="roll roll-1 active">1
+            </td>
+            <td class="roll roll-2">2
+            </td>
+            <td class="roll roll-3">3
+            </td>
+            <td class="roll roll-4">4
+            </td>
+        </tr>
+        <tr>
+            <td class="roll roll-10">10
+            </td>
+            <td class="roll">
+            </td>
+            <td class="roll">
+            </td>
+            <td class="roll roll-5">5
+            </td>
+        </tr>
+        <tr>
+            <td class="roll roll-9">9
+            </td>
+            <td class="roll roll-8">8
+            </td>
+            <td class="roll roll-7">7
+            </td>
+            <td class="roll roll-6">6
+            </td>
+        </tr>
+    </table>
+    <button id="start">start</button>
+    <script>
+    $(document).ready(function() {
+        $("#start").bind('click', lottery.reset);
+    })
+    </script>
+</body>
+
+</html>
