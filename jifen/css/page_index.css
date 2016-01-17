@@ -28,12 +28,18 @@
 .act-rule p.info{font-size: 1rem; color: #fff; text-align: center; padding-left: 0; margin: 1rem auto 0.8rem; background-color: #4f3848; border-radius: 1rem; width: 20rem; height: 2rem; line-height: 2rem;}
 
 /* 弹窗 */
+.pop-win-bg{background-color: rgba(0,0,0,.6); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 98; }
 .pop-win{position: fixed; left: 50%; top: 50%; width: 30rem; height: 22.25rem; margin-top: -11.125rem; margin-left: -15rem; background-color: #fef2d9; border-radius: 0.5rem; z-index: 99;}
-.pop-win .line{position: absolute; left: 0.4rem; top: 0.4rem; width: 29.2rem; height: 21.45rem; border: 1px dashed #da9b40;}
-
-.pop-win .top{position: absolute; left: 0; top: 0; width: 100%; text-align: center; }
+.pop-win .line{position: absolute; left: 0.4rem; top: 0.4rem; width: 29.2rem; height: 21.45rem; border: 1px dashed #da9b40; border-radius: 0.5rem;}
+.pop-win .content{font-size: 2rem; color: #e41349; text-align: center; padding-top: 3rem;}
+.pop-win .content .img img{width: 17.5rem; height: 11.5rem;}
+.pop-win .content .txt{width: 90%; margin: 0.5rem auto 0;}
+.pop-win .content .txt span{display: block; text-align: center;}
+.pop-win .top{position: absolute; z-index: 100; left: 0; top: -11.2rem; width: 100%; text-align: center; }
 .pop-win .top img{width: 24.9rem; height: 13.35rem;}
-.pop-win .btn1{}
-.pop-win .btn2{}
+.pop-win .btn1,
+.pop-win .btn2{position: absolute; z-index: 109; bottom: -5.8rem; width: 12.4rem; height: 4rem; line-height: 4rem; text-align: center; background-color: #FFD800; color: #E50A42; border-radius: 2rem; font-size: 2rem;}
+.pop-win .btn1{left: 0.4rem;}
+.pop-win .btn2{right: 0.4rem;}
 
 
