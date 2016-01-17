@@ -2,14 +2,13 @@ var lottery = {
     index: 1, //起点
     speed: 400, //初始速度
     roll: 0, //定时器id
-    cycle: 1, //已跑的圈速
+    cycle: 0, //已跑的圈速
     times: 4, //至少跑几圈
     prize: -1, //中奖索引
     btn: 0,
     dot: null,
     run: function() {
         var before = lottery.index == 1 ? 8 : lottery.index - 1;
-        console.log(lottery.index);
         $(".aw-" + lottery.index).addClass("active");
         $(".aw-" + before).removeClass("active");
         if(lottery.dot.hasClass('active')){
@@ -41,32 +40,30 @@ var lottery = {
             lottery.stop();
             lottery.start();
         }
-
         if (lottery.cycle > lottery.times && lottery.index == lottery.prize) {
             lottery.stop();
             lottery.showPrize();
         }
-
     },
     //先停止再显示结果 按钮显示出来
     showPrize: function() {
         setTimeout(function() {
-            alert("中奖索引：" + lottery.prize);
-            lottery.callback();
+            lottery.callback(lottery.prize);
             // lottery.btn.show();
-
         }, 700);
     },
 
     //重新开始
-    reset: function(cb) {
-        lottery.callback = cb;
+    reset: function(options) {
+        // lottery.btn.hide();
+        lottery.callback = options.callback;
         lottery.dot = $('.J-dot');
         lottery.btn = $(this);
-        // lottery.btn.hide();
-        lottery.speed = 400;
-        lottery.cycle = 0;
-        lottery.prize = Math.round(Math.random() * 7) + 1;
+        lottery.speed = options.speed ? options.speed : 400;
+        lottery.index = options.index;
+        lottery.times = options.times ? options.times : 4;
+        lottery.prize = options.prize;
+        // lottery.prize = Math.round(Math.random() * 7) + 1;
         lottery.run();
     },
     start: function() {

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax请求</title>
+</head>
+<body>
+	<input id="J_tm" type="text" value="0">
+	<button id="J_btn">获取</button>
+
+	<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyCoSf-ewQdabXoMGfOc0iJMVE8Tl9Z_eBk"></script>
+	<script type="text/javascript">     
+		var options = {
+			startLat: 31.202523,
+			startLng: 121.557884,
+			endLat: 31.152882,
+			endLng: 121.647148,
+			// endLat: 35.460669,
+			// endLng: 137.61474,
+			travelMode: 0
+		}
+
+		document.getElementById('J_btn').onclick = function(){
+			// options.travelMode = document.getElementById('J_tm').value;
+			options.travelMode = 0;
+			distance(options);
+			options.travelMode = 1;
+			distance(options);
+			options.travelMode = 2;
+			distance(options);
+		};
+
+		/**
+		 * 主方法
+		 * @param  {[type]} options [description]
+		 * @return {[type]}         [description]
+		 */
+		function distance(options){
+			var start = new google.maps.LatLng(options.startLat, options.startLng);
+			var end = new google.maps.LatLng(options.endLat, options.endLng);
+
+			var tm = 0;
+			switch(parseInt(options.travelMode)){
+				case 0: tm = google.maps.TravelMode.DRIVING; break;
+				case 1: tm = google.maps.TravelMode.TRANSIT; break;
+				case 2: tm = google.maps.TravelMode.WALKING; break;
+				case 3: tm = google.maps.TravelMode.BICYCLING; break;
+				default: tm = google.maps.TravelMode.DRIVING;
+			}
+
+			var distanceMatrix  = new google.maps.DistanceMatrixService();
+			var distanceRequest = { 
+				origins: [start],
+				destinations: [end],
+				travelMode: tm, 	// TRANSIT	WALKING
+				unitSystem: google.maps.UnitSystem.METRIC, 
+				avoidHighways: false, 
+				avoidTolls: false 
+			};
+			distanceMatrix.getDistanceMatrix(distanceRequest, function(response, status) {
+			    if (status != google.maps.DistanceMatrixStatus.OK) {
+			        error('Error was: ' + status);
+			    }
+			    else {
+			        // var origins      = response.originAddresses;
+			        // var destinations = response.destinationAddresses;
+			        success(response.rows[0].elements[0]);
+			    }
+			});
+		}
+
+		/**
+		 * 获取成功调用该方法
+		 * @param  {[type]} res [description]
+		 * @return {[type]}     [description]
+		 */
+		function success(res){
+			if(res.status == 'ZERO_RESULTS'){	// 查询无结果
+				error(res.status);
+			} else {	// 查询有结果
+				alert('时间：' + res.distance.text + '\n距离：' + res.duration.text);
+			}
+		}
+
+		/**
+		 * 服务器访问出错或者获取无数据调用该方法
+		 * @param  {[type]} info [description]
+		 */
+		function error(info){
+			console.error(info);
+		}
+	</script>
+</body>
+</html>
