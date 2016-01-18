@@ -10,7 +10,7 @@
 	<title>春节活动好礼相送</title>
 	 <script src="js/base.js"></script>
 	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/page_index.css">
+	<link rel="stylesheet" href="css/page.css">
 </head>
 <body>
 	<div class="container clearfix">
@@ -19,7 +19,7 @@
 			<p>头部</p>
 		</header>	<!-- /header end -->
 		<div class="banner">
-			<img src="img/banner_2.png" alt="猴年大吉，红包翻不停">
+			<img src="img/banner.png" alt="猴年大吉，红包翻不停">
 		</div>
 
 		<div class="turntable-wrap">
@@ -48,16 +48,16 @@
 			<p class="info">所有活动和奖品均和Apple公司无关</p>
 		</div>
 		
-		<div class="pop-win-bg"></div>
-		<div class="pop-win">
+		<div id="J_pop_win_bg" class="pop-win-bg"></div>
+		<div id="J_pop_win" class="pop-win">
 			<div class="line"></div>
 			<div class="top"><img src="img/win.png" alt=""></div>
 			<div class="content">
-				<p class="img"><img src="img/aw_7.png" alt=""></p>
-				<p class="txt">
-					<span>恭喜您</span>
-					<span>获得AppleWatch一台</span>
-				</p>
+				<p class="img"><img src="img/aw_prize.png" alt=""></p>
+				<div class="txt">
+					<p>恭喜您</p>
+					<p>获得<span id="J_award">Apple Watch</span></p>
+				</div>
 			</div>
 			<a class="btn1" href="javascript:;">去领奖</a>
 			<a class="btn2" href="javascript:;">继续抽奖</a>
@@ -70,16 +70,23 @@
 	<script>
 		var lottery={index:1,speed:400,roll:0,cycle:0,times:4,prize:-1,btn:0,dot:null,run:function(){var a=1==lottery.index?8:lottery.index-1;$(".aw-"+lottery.index).addClass("active"),$(".aw-"+a).removeClass("active"),lottery.dot.hasClass("active")?lottery.dot.removeClass("active"):lottery.dot.addClass("active"),lottery.upSpeed(),lottery.downSpeed(),lottery.index+=1,lottery.index=9==lottery.index?1:lottery.index},upSpeed:function(){lottery.cycle<2&&lottery.speed>100&&(lottery.speed-=8*lottery.index,lottery.stop(),lottery.start())},downSpeed:function(){8==lottery.index&&(lottery.cycle+=1),lottery.cycle>lottery.times-1&&lottery.speed<400&&(lottery.speed+=20,lottery.stop(),lottery.start()),lottery.cycle>lottery.times&&lottery.index==lottery.prize&&(lottery.stop(),lottery.showPrize())},showPrize:function(){setTimeout(function(){lottery.callback(lottery.prize)},700)},reset:function(a){lottery.callback=a.callback,lottery.dot=$(".J-dot"),lottery.btn=$(this),lottery.speed=a.speed?a.speed:400,lottery.index=a.index,lottery.times=a.times?a.times:4,lottery.prize=a.prize,lottery.run()},start:function(){lottery.roll=setInterval(lottery.run,lottery.speed)},stop:function(){clearInterval(lottery.roll)}};
 		$(function(){
-			var clickFlag = true;
+			var clickFlag = true,
+				popWinBg = $('#J_pop_win_bg'),
+				$popWin = $('#J_pop_win'),
+				awards = ['红包XX元', '话费XX元', '乐视智能耳机一副', '谢谢参与', 'Apple Watch一台', '再抽一次机会', '小米充电宝一个', '流量包XXM'];
 			$('#J_aw_btn').on('click', function(){
 				if(clickFlag){
 					clickFlag = false;
 					lottery.reset({
-						prize: 6,	// 中奖索引
+						prize: Math.floor(Math.random() * 8 + 1),	// 中奖索引
 						index: 1,	// 开始索引
 						callback: function(i){
 							clickFlag = true;
-							alert('中奖索引：' + i);
+							// todo....
+							console.log('中奖索引：' + i);
+							$('#J_award').html(awards[i-1]);
+							$('#J_pop_win_bg').show();
+							$('#J_pop_win').show();
 						}
 					});
 				}
