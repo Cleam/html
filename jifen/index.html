@@ -72,7 +72,7 @@
 	<!-- <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
 	<script src="js/jquery.min.js"></script>
 	<script>
-		var lottery={index:1,speed:400,roll:0,cycle:0,times:4,prize:-1,btn:0,dot:null,run:function(){var a=1==lottery.index?8:lottery.index-1;$(".aw-"+lottery.index).addClass("active"),$(".aw-"+a).removeClass("active"),lottery.dot.hasClass("active")?lottery.dot.removeClass("active"):lottery.dot.addClass("active"),lottery.upSpeed(),lottery.downSpeed(),lottery.index+=1,lottery.index=9==lottery.index?1:lottery.index},upSpeed:function(){lottery.cycle<2&&lottery.speed>100&&(lottery.speed-=8*lottery.index,lottery.stop(),lottery.start())},downSpeed:function(){8==lottery.index&&(lottery.cycle+=1),lottery.cycle>lottery.times-1&&lottery.speed<400&&(lottery.speed+=20,lottery.stop(),lottery.start()),lottery.cycle>lottery.times&&lottery.index==lottery.prize&&(lottery.stop(),lottery.showPrize())},showPrize:function(){setTimeout(function(){lottery.callback(lottery.prize)},700)},reset:function(a){lottery.callback=a.callback,lottery.dot=$(".J-dot"),lottery.btn=$(this),lottery.speed=a.speed?a.speed:400,lottery.index=a.index,lottery.times=a.times?a.times:4,lottery.prize=a.prize,lottery.run()},start:function(){lottery.roll=setInterval(lottery.run,lottery.speed)},stop:function(){clearInterval(lottery.roll)}};
+		var lottery={index:1,speed:400,roll:0,cycle:0,times:4,prize:-1,btn:0,dot:null,run:function(){var a=1==lottery.index?8:lottery.index-1;$(".aw-"+lottery.index).addClass("active"),$(".aw-"+a).removeClass("active"),lottery.dot.hasClass("active")?lottery.dot.removeClass("active"):lottery.dot.addClass("active"),lottery.upSpeed(),lottery.downSpeed(),lottery.index+=1,lottery.index=9==lottery.index?1:lottery.index},upSpeed:function(){lottery.cycle<2&&lottery.speed>100&&(lottery.speed-=8*lottery.index,lottery.stop(),lottery.start())},downSpeed:function(){8==lottery.index&&(lottery.cycle+=1),lottery.cycle>lottery.times-1&&lottery.speed<400&&(lottery.speed+=20,lottery.stop(),lottery.start()),lottery.cycle>lottery.times&&lottery.index==lottery.prize&&(lottery.stop(),lottery.showPrize())},showPrize:function(){setTimeout(function(){lottery.callback(lottery.prize)},700)},reset:function(a){lottery.callback=a.callback,lottery.dot=$(".J-dot"),lottery.cycle = 0;lottery.btn=$(this),lottery.speed=a.speed?a.speed:400,lottery.index=a.index,lottery.times=a.times?a.times:4,lottery.prize=a.prize,lottery.run()},start:function(){lottery.roll=setInterval(lottery.run,lottery.speed)},stop:function(){clearInterval(lottery.roll)}};
 		$(function(){
 			var clickFlag = true,
 				$popWinBg = $('#J_pop_win_bg'),
@@ -81,6 +81,7 @@
 				awardImgs = [],
 				$awBtn = $('#J_aw_btn');
 			$awBtn.on('click', function(){
+				$('.aw').removeClass('active');
 				if(clickFlag){
 					clickFlag = false;
 					// ajax请求...
@@ -102,8 +103,8 @@
 										txt2: '别灰心，再来一次吧！',
 										btnTxt1: '返回',
 										btnTxt2: '关闭',
-										btn1Click: function(){ alert('返回'); hideWin();},
-										btn2Click: function(){ alert('关闭'); hideWin();}
+										btn1Click: function(){ /*alert('返回');*/ hideWin();},
+										btn2Click: function(){ /*alert('关闭');*/ hideWin();}
 									});
 									break;
 								// 再抽一次机会
@@ -114,8 +115,8 @@
 										txt2: '离大奖只差一步啦！',
 										btnTxt1: '返回',
 										btnTxt2: '继续抽奖',
-										btn1Click: function(){ alert('返回'); hideWin();},
-										btn2Click: function(){ alert('继续抽奖'); hideWin();}
+										btn1Click: function(){ /*alert('返回');*/ hideWin();},
+										btn2Click: function(){ /*alert('继续抽奖');*/ hideWin();}
 									});
 									break;
 								// 中奖啦
@@ -124,10 +125,10 @@
 										txt: awards[i-1],
 										img: 'img/prize_' + i + '.png',
 										btn1Click: function(){
-											alert('去领奖'); hideWin();
+											/*alert('去领奖');*/ hideWin();
 										},
 										btn2Click: function(){
-											alert('继续抽奖'); hideWin();
+											/*alert('继续抽奖');*/ hideWin();
 										}
 									}); 
 									break;
@@ -184,7 +185,7 @@
 			function hideWin(){
 				$popWinBg.hide();
 				$popWin.hide();
-				location.reload();
+				// location.reload();
 			}
 		});
 	</script>
