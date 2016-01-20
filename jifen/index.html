@@ -27,15 +27,16 @@
 			<p class="txt clearfix"><span class="fl">当前积分：100</span><span class="fr">每次参与消耗100积分</span></p>
 			<div class="turntable">
 				<div class="aw-wrap">
-					<div class="aw aw-1 fl"><img src="img/aw_1.png" alt=""><p></p></div>
-					<div class="aw aw-2 fl"><img src="img/aw_2.png" alt=""><p></p></div>
-					<div class="aw aw-3 fl"><img src="img/aw_3.png" alt=""><p></p></div>
-					<div class="aw aw-8 fl"><img src="img/aw_8.png" alt=""><p></p></div>
+					<div class="aw aw-1 fl"><img src="img/aw_1.png" alt=""><p><span>支付宝红包</span></p></div>
+					<div class="aw aw-2 fl"><img src="img/aw_2.png" alt=""><p><span>手机话费</span></p></div>
+					<div class="aw aw-3 fl"><img src="img/aw_3.png" alt=""><p><span>乐视智能耳机</span></p></div>
+					<div class="aw aw-8 fl"><img src="img/aw_8.png" alt=""><p><span>流量包</span></p></div>
 					<div class="aw aw-btn fl"><a id="J_aw_btn" href="javascript:;"><img src="img/aw_btn.png" alt=""></a></div>
+					<!-- <div class="aw aw-btn fl"><a href="javascript:;"><img src="img/aw_btn_disable.png" alt=""></a></div> -->
 					<div class="aw aw-4 fl"><img src="img/aw_4.png" alt=""><p></p></div>
-					<div class="aw aw-7 fl"><img src="img/aw_7.png" alt=""><p></p></div>
-					<div class="aw aw-6 fl"><img src="img/aw_6.png" alt=""><p></p></div>
-					<div class="aw aw-5 fl"><img src="img/aw_5.png" alt=""><p></p></div>
+					<div class="aw aw-7 fl"><img src="img/aw_7.png" alt=""><p><span>小米充电宝</span></p></div>
+					<div class="aw aw-6 fl"><img src="img/aw_6.png" alt=""><p><span>再抽一次</span></p></div>
+					<div class="aw aw-5 fl"><img src="img/aw_5.png" alt=""><p><span>Apple Watch</span></p></div>
 				</div>
 				<p class="bg"></p>
 				<p class="J-dot dot"></p>
@@ -73,7 +74,6 @@
 	<script>
 		var lottery={index:1,speed:400,roll:0,cycle:0,times:4,prize:-1,btn:0,dot:null,run:function(){var a=1==lottery.index?8:lottery.index-1;$(".aw-"+lottery.index).addClass("active"),$(".aw-"+a).removeClass("active"),lottery.dot.hasClass("active")?lottery.dot.removeClass("active"):lottery.dot.addClass("active"),lottery.upSpeed(),lottery.downSpeed(),lottery.index+=1,lottery.index=9==lottery.index?1:lottery.index},upSpeed:function(){lottery.cycle<2&&lottery.speed>100&&(lottery.speed-=8*lottery.index,lottery.stop(),lottery.start())},downSpeed:function(){8==lottery.index&&(lottery.cycle+=1),lottery.cycle>lottery.times-1&&lottery.speed<400&&(lottery.speed+=20,lottery.stop(),lottery.start()),lottery.cycle>lottery.times&&lottery.index==lottery.prize&&(lottery.stop(),lottery.showPrize())},showPrize:function(){setTimeout(function(){lottery.callback(lottery.prize)},700)},reset:function(a){lottery.callback=a.callback,lottery.dot=$(".J-dot"),lottery.btn=$(this),lottery.speed=a.speed?a.speed:400,lottery.index=a.index,lottery.times=a.times?a.times:4,lottery.prize=a.prize,lottery.run()},start:function(){lottery.roll=setInterval(lottery.run,lottery.speed)},stop:function(){clearInterval(lottery.roll)}};
 		$(function(){
-			disableBtn();
 			var clickFlag = true,
 				$popWinBg = $('#J_pop_win_bg'),
 				$popWin = $('#J_pop_win'),
@@ -185,14 +185,6 @@
 				$popWinBg.hide();
 				$popWin.hide();
 				location.reload();
-			}
-			
-			function disableBtn(){
-				$awBtn.attr('src', 'img/aw_btn_disable.png');
-			}
-			
-			function activeBtn(){
-				$awBtn.attr('src', 'img/aw_btn.png');
 			}
 		});
 	</script>
