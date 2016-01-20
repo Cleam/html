@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <title>头条新闻</title>
+    <link rel="stylesheet" href="css/response.css"/>
+    <link rel="stylesheet" href="css/page.css"/>
+    <script>var _hmt = _hmt || [];</script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="top"><img src="img/top.png" alt="头条新闻"/></h1>
+        <div class="btn-wrap">
+            <a href="http://down.dfshurufa.com/toutiao/android/gf/eastnews.apk" class="download download-btn" id="J_download" onclick="javascript:_hmt.push(['_trackEvent', '下载点击量2', '下载2', 'download_btn_2', 2])
+;">立即下载<span class="size">(仅2.9M)</span></a>
+        </div>
+        <h2 class="title"><img src="img/txt_title.png" alt="实时 资讯 内容 新闻"/></h2>
+        <div class="content">
+            <ul class="content-list">
+                <li class="content-item clearfix">
+                    <div class="img"><img src="img/icon_1.png" alt=""/></div>
+                    <div class="txt">
+                        <h3>丰富的新闻资讯内容</h3>
+                        <p>包括头条、实事、社会、娱乐等十几个栏目，里面的资讯实时更新</p>
+                    </div>
+                </li>
+                <li class="content-item clearfix">
+                    <div class="img"><img src="img/icon_2.png" alt=""/></div>
+                    <div class="txt">
+                        <h3>个性化的内容推送</h3>
+                        <p>基于机器学习的推荐引擎，使用微信，微博，QQ账号或其他账号注册东方头条的用户</p>
+                    </div>
+                </li>
+                <li class="content-item clearfix">
+                    <div class="img"><img src="img/icon_3.png" alt=""/></div>
+                    <div class="txt">
+                        <h3>能赚钱、能换商品的新闻APP</h3>
+                        <p>阅读并分享新闻，赚取积分兑换现金或积分商城里面的各类商品</p>
+                    </div>
+                </li>
+                <li class="content-item clearfix">
+                    <div class="img"><img src="img/icon_4.png" alt=""/></div>
+                    <div class="txt">
+                        <h3>实时海量数据处理构架</h3>
+                        <p>运用大数据技术，实时完成文章提取、挖掘、去重、分类，5秒计算出新用户兴趣进行分配</p>
+                    </div>
+                </li>
+                <li class="content-item clearfix">
+                    <div class="img"><img src="img/icon_5.png" alt=""/></div>
+                    <div class="txt">
+                        <h3>自然语言处理和图像识别技术</h3>
+                        <p>提取每条信息的高维特征，对其进行降维、相似计算、并对信息进行机器分类</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="J_popwin_bg" class="popwin-bg none"></div>
+    <div id="J_popwin" class="popwin none">
+        <p class="tips">在“App Store”中打开链接吗？</p>
+        <div class="btn-wrap">
+            <a id="J_cancel" class="btn" href="javascript:;">取消</a>
+            <a id="J_install" class="btn download-btn" href="https://itunes.apple.com/cn/app/dong-fang-tou-tiao-xin-wen/id1030220577?l=en&mt=8" onclick="javascript:_hmt.push(['_trackEvent', '下载点击量1', '下载1', 'download_btn_1', 1])
+;">打开</a>
+            <span></span>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        var $download = $('#J_download');
+        var $cancel = $('#J_cancel');
+        var $install = $('#J_install');
+        var $popwin = $('#J_popwin');
+        var $popwinBg = $('#J_popwin_bg');
+        /*var iosApp = 'https://itunes.apple.com/cn/app/dong-fang-tou-tiao-xin-wen/id1030220577?l=en&mt=8';*/
+        var iosApp = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yicen.ttkb';
+        var androidApp = 'http://down.dfshurufa.com/toutiao/android/gf/eastnews.apk';
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if(isAndroid){
+            $download.attr('href', androidApp);
+            location.href = androidApp;
+        } else if(isiOS){
+            $download.attr('href', iosApp);
+            $popwin.show();
+            $popwinBg.show();
+            $cancel.on('click', function(){
+                $popwin.fadeOut();
+                $popwinBg.fadeOut();
+            });
+            $install.on('click', function(){
+                $popwin.fadeOut();
+                $popwinBg.fadeOut();
+            });
+        }
+    </script>
+
+    <div style="display: none">
+        <script>(function () { var hm = document.createElement("script"); hm.src = "//hm.baidu.com/hm.js?c3b7cbdf0e4e7c3b84faf94c15984116"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })();</script>
+
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1256804793'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1256804793' type='text/javascript'%3E%3C/script%3E"));</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>安卓APP</title>
+    <link rel="stylesheet" href="public/css/base.css" />
+    <link rel="stylesheet" href="public/css/common.css" />
+    <link rel="stylesheet" href="public/css/page_share.css">
+</head>
+
+<body>
+    <!--二维码-->
+    <div class="fenxiang" style="margin:0;">
+        <ul>
+            <li>
+                <p>魔兽争霸</p>
+                <p class="fenxiang_img"><img src="public/img/pic_ewm.png"></p>
+                <p><a href="javascript:;" class="J-share fenxiang_button01">分享</a><a href="javascript:;" class="fenxiang_button02">下载</a></p>
+            </li>
+            <li>
+                <p>魔兽争霸</p>
+                <p class="fenxiang_img"><img src="public/img/pic_ewm.png"></p>
+                <p><a href="javascript:;" class="J-share fenxiang_button01">分享</a><a href="javascript:;" class="fenxiang_button02">下载</a></p>
+            </li>
+        </ul>
+    </div>
+    <div class="fenxiang">
+        <ul>
+            <li>
+                <p>魔兽争霸</p>
+                <p class="fenxiang_img"><img src="public/img/pic_ewm.png"></p>
+                <p><a href="javascript:;" class="J-share fenxiang_button01">分享</a><a href="javascript:;" class="fenxiang_button02">下载</a></p>
+            </li>
+            <li>
+                <p>魔兽争霸</p>
+                <p class="fenxiang_img"><img src="public/img/pic_ewm.png"></p>
+                <p><a href="javascript:;" class="J-share fenxiang_button01">分享</a><a href="javascript:;" class="fenxiang_button02">下载</a></p>
+            </li>
+        </ul>
+    </div>
+    <!-- footer - start -->
+    <footer>
+        <nav>
+            <ul class="nav-list clearfix">
+                <li class="nav-item fl nav-tab" style=" border-right:1px solid #d8d8d8;">
+                    <a class="item item4" href="app.html">
+                        <span class="img"></span>
+                        <span class="txt">申请</span>
+                    </a>
+                </li>
+                <li class="nav-item fl nav-tab">
+                    <a class="item item5 active" href="share.html">
+                        <span class="img"></span>
+                        <span class="txt">推广分享</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <!-- footer - end -->
+    <!--申请成功弹框-->
+    <div id="J_share_win" class="tankuang_mian none">
+        <div class="tankuang_fenxiang">
+            <ul>
+                <li class="img-item clearfix">
+                    <a href="javascript:;"><img src="public/img/icon_fenxiang01.png"><span>朋友圈</span></a>
+                    <a href="javascript:;"><img src="public/img/icon_fenxiang02.png"><span>微信好友</span></a>
+                    <a href="javascript:;"><img src="public/img/icon_fenxiang03.png"><span>QQ好友</span></a>
+                </li>
+                <li class="btn-item">
+                    <a id="J_cancel_share" class="tankuang_fenxiang_button" href="javascript:;">取消</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="public/lib/zepto/zepto.min.js"></script>
+    <script>
+        Zepto(function(){
+            var $shareWin = $('#J_share_win'),
+                $cancelShare =  $('#J_cancel_share'),
+                $share = $('.J-share');
+                
+            // 申请按钮点击事件
+            $share.on('click', function(){
+                $shareWin.show();
+            });
+            // 关闭弹窗
+            $cancelShare.on('click', function(){
+                $shareWin.hide();
+            });
+        });
+    </script>
+</body>
+
+</html>

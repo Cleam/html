@@ -1,0 +1,16 @@
+@charset "utf-8";
+/**
+ * app详情页样式
+ */
+/*========== 推广软件详情 - start ==========*/
+.promote-soft-details{height: 100%; background-color: #ffffff;}
+.promote-soft-details h2{background-color: #F85657; width: 100%; height: 4.5rem; line-height: 4.5rem; text-align: center; color: #ffffff; font-size: 1.8rem;}
+.promote-soft-details .info,
+.promote-soft-details .rule{padding: 1.5rem;}
+.promote-soft-details .info{font-size: 1.5rem; border-bottom: 1px solid #d8d8d8; line-height: 1.5em;}
+.promote-soft-details .info span{color: #F85657;}
+.promote-soft-details .rule h3{font-size: 1.8rem; line-height: 1.5em;}
+.promote-soft-details .rule p{font-size: 1.4rem; line-height: 1.5em; }
+.rule_img{width:12.5rem; height:12.5rem; overflow:hidden; border:1px solid #d8d8d8; padding:1rem; margin:1.2rem 0; border-radius:10px;}
+.rule_img img{width:100%; height:100%;}
+/*========== 推广软件详情 - end ==========*/

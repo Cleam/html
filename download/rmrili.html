@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <title>人民万年历</title>
+    <link rel="stylesheet" href="css/base.min.css" />
+    <style>
+        /* 750px - 20px */
+        body{position: relative; width: 37.5rem; height: 66.7rem; background-image: url("img/bg.jpg"); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: #050624;}
+        .logo{width: 9.4rem; height: 12.7rem; margin: 15rem auto 0;}
+        .logo img{width: 100%; height: 100%;}
+        .download{display: block; width: 16rem; height: 5rem; margin: 18.5rem auto 0;}
+        .download img{width: 100%; height: 100%;}
+        .txt{font-size: 1.3rem; margin-top: 10rem; text-align: center; color: #fff;}
+        .pop-win{position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 99; background-image: url("img/pop_ios.jpg"); background-repeat: no-repeat; background-position: center; background-size: cover; display: none;}
+        .pop-win.pop-android{background-image: url("img/pop_android.jpg");}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo"><img src="img/wnl_logo.png" alt="人民万年历"></div>
+        <a id="J_download" class="download" href="javascript:;"><img src="img/download_btn.png" alt=""></a>
+        <p class="txt">www.rmrili.com</p>
+    </div>
+    <div id="J_pop_win" class="pop-win"></div>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            var androidLink = 'http://down.rmrili.com/gf/android/calendar.apk',
+                iosLink = 'https://itunes.apple.com/cn/app/ren-min-wan-nian-li-zui-tie/id1071342586?mt=8',
+                $downloadBtn = $('#J_download'),
+                $popWin = $('#J_pop_win');
+
+            var u = navigator.userAgent,
+                app = navigator.appVersion;
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {  // 微信
+                if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {   // ios
+                    $downloadBtn.on('click', function(){
+                        $popWin.removeClass('pop-android');
+                        $popWin.show();
+                    });
+                } else {    // android
+                    $downloadBtn.on('click', function(){
+                        $popWin.addClass('pop-android');
+                        $popWin.show();
+                    });
+                }
+            } else {
+                if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {   // ios
+                    $downloadBtn.attr('href', iosLink);
+                    window.location.href = iosLink;
+                } else {    // android
+                    $downloadBtn.attr('href', androidLink);
+                    window.location.href = androidLink;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

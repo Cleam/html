@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>快讯新闻</title>
+	<style>
+		body{margin: 0; padding: 0;}
+		.DFTOUTTIAO-fixed-kuaixun{width: 445px; height: 48px; background-color: #fff; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 2px #aaa; position: relative; margin: 2px;}
+		.DFTOUTTIAO-fixed-kuaixun img{position: absolute; left: 0; top: 0;}
+		.DFTOUTTIAO-fixed-kuaixun .txt{position: absolute; top: 50%; height: 32px; line-height: 32px; margin-top: -16px; left: 86px; color: #333; font-size: 16px; width: 320px; text-align: center; overflow: hidden; text-decoration: none; outline: none; color: #333; cursor: pointer;}
+		.DFTOUTTIAO-fixed-kuaixun .txt:hover{color: #f83a22; text-decoration: underline;}
+		.DFTOUTTIAO-fixed-kuaixun .close{position: absolute; right: 5px; top: 50%; margin-top: -9px; width: 30px; height: 18px; background-image: url("http://mini.eastday.com/assets/images/close_sp.png"); background-repeat: no-repeat; background-position: 0 0; text-indent: -99em; overflow: hidden;}
+		.DFTOUTTIAO-fixed-kuaixun .close:hover{height: 32px; background-position: 0 -18px; margin-top: -16px;}
+	</style>
+</head>
+<body>
+	<script src="http://mini.eastday.com/assets/js/jquery.min.js"></script>
+	<script src="http://mini.eastday.com/assets/js/jquery.cookie.js"></script>
+	<script>
+		var COOKIE_NAME = 'kuaixun',
+			cookieVal = $.cookie(COOKIE_NAME),  
+			// url = 'http://mini.eastday.com/json/kuaixun/qd_kuaixun.json';
+			url = 'http://dev.static.com/kuaixun/kuaixun.json';
+		$.getJSON(url, function(data, status){
+			if(status != 'success' || !data){
+				return false;
+			}
+			if(!cookieVal && cookieVal != data.uk){
+				var startTime = new Date(data.start_time.replace(/-/g, '/')),
+					endTime = new Date(data.end_time.replace(/-/g, '/')),
+					curTime = new Date();
+				if(curTime.getTime() > startTime.getTime() && curTime.getTime() < endTime.getTime()){
+					var $kuaixun = $('<div class="DFTOUTTIAO-fixed-kuaixun"><img class="png24" src="http://mini.eastday.com/assets/images/kuaixun.png" alt="快讯" width="86" height="48"></div>'),
+						$kxLink = $('<a class="txt" href="javascript:;" target="_blank"></a>'),
+						$kxClose = $('<a class="close png24" href="javascript:;" title="点击关闭">关闭</a>');
+					$kxLink.attr('href', data.url + '?qid=' + GetQueryString('qid')).attr('title', data.topic).html(data.topic);
+					$('body').append($kuaixun.append($kxLink).append($kxClose));
+					$kxClose.on('click', function(){
+						$.cookie(COOKIE_NAME, data.uk, {expires: 30, path: '/'});
+						$kuaixun.remove();
+						window.parent.CLOSE_DFTOUTIAO_KUAIXUN();
+					});
+					$kxLink.on('click', function(){
+						$.cookie(COOKIE_NAME, data.uk, {expires: 30, path: '/'});
+						$kuaixun.remove();
+					});
+				}
+			}
+		});
+		function GetQueryString(name) {
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if(r!=null)return  unescape(r[2]); return null;
+		}
+	</script>
+	<!--[if IE 6]>
+	<script src="http://mini.eastday.com/assets/js/DDPngMin.js"></script>
+	<script>
+	    DD_belatedPNG.fix('.png24');
+	</script>
+	<![endif]-->
+</body>
+</html>

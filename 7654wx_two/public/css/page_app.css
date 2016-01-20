@@ -1,0 +1,36 @@
+@charset "utf-8";
+/*安卓APP页面样式*/
+.no-content{padding: 1rem 0; text-align: center; color: #999; font-size: 1.4rem;}
+/*========== 安卓APP- start ==========*/
+.promote-soft{padding-bottom: 5rem;}
+.promote-soft .promote-soft-list .promote-soft-item .item{display: block; width: 100%; height: 10rem; padding: 1.3rem 1.5rem; background-color: #ffffff; border-bottom: 1px solid #D8D8D8;}
+.promote-soft .promote-soft-list .promote-soft-item .item .icon{width: 5rem; height: 5rem;}
+.promote-soft .promote-soft-list .promote-soft-item .item .icon img{max-width: 100%; max-height: 100%;}
+.promote-soft .promote-soft-list .promote-soft-item .item .txt{margin-left: 1rem;}
+.promote-soft .promote-soft-list .promote-soft-item .item .txt h3{font-size: 1.8rem;}
+.promote-soft .promote-soft-list .promote-soft-item .item .txt h3 .tag{font-size: 1rem; color: #ffffff; display: inline-block; width: 3rem; height: 1.5rem; line-height: 1.8rem; background-color: #2BC101; border-radius: 1rem; text-align: center; /* padding: 0.18rem 0; */ margin-left: 0.5rem; margin-top: 0.2rem;}
+.promote-soft .promote-soft-list .promote-soft-item .item .txt h3 .tag-act{background-color: #2BC101;}
+.promote-soft .promote-soft-list .promote-soft-item .item .txt h3 .tag-new{background-color: #F20000;}
+.promote-soft .promote-soft-list .promote-soft-item .item .txt p{font-size: 1.3rem; color: #888888; line-height: 1.5em;}
+.promote-soft .promote-soft-list .promote-soft-item .item .chev{background-image: url("../img/chev_r.png"); background-repeat: no-repeat; background-position: center; background-size: contain; height: 100%; width: 0.9rem;}
+
+/*APP推广申请*/
+.promote-soft-item{ position:relative;}
+.promote-soft-item .app_tuiguang{width:8rem; height:3rem; font-size:1.2rem; position:absolute; top:3.5rem; right:4rem;}
+.promote-soft-item .app_tuiguang a{display: block; width: 100%; height: 100%; line-height: 3rem; color:#ffffff; background-color: #f85657; border-radius:0.5rem; text-align:center; cursor:pointer; font-size: 1.2rem;}
+.promote-soft-item .app_time{width:8rem; height:3rem; font-size:1.2rem; position:absolute; top:3.5rem; right:4rem;}
+.promote-soft-item .app_time a{display: block; width: 100%; height: 100%; line-height: 3rem; color:#ffffff; background-color: #cccccc; border-radius:0.5rem; text-align:center; cursor:pointer; font-size: 1.2rem;}
+.promote-soft-item .app_time a, .app_tuiguang a, .tankuang_queding a, .fenxiang_button01 a, .fenxiang_button02 a{color:#ffffff;}
+
+/*申请弹框*/
+.tankuang_mian{width:100%; height:100%;position: fixed; top:0; left:0; z-index:999; background: url(../img/bg_tankuang.png); background-size: cover;}
+.tankuang{width:30rem; height:21rem; background:#ffffff; border-radius:1rem; position: absolute; top: 50%; left:50%; margin-top: -10.5rem; margin-left: -15rem;}
+.tankuang .tankuang_list{width:80%; margin:auto;font-size:1.3rem; color:#333; line-height:1.8rem; }
+.tankuang_title{height:4.6rem; margin:auto; font-size:1.8rem; color:#333; line-height:4.6rem; text-align:center; border-bottom:1px solid #f85657;margin-bottom:1.4rem;}
+.tankuang_content p{font-size: 1.2rem; line-height: 1.8rem; width: 90%; margin: 0 auto;}
+.tankuang_queding a{display: block; height:4.4rem; width: 23rem; margin:1.6rem auto 0 auto; background:#f85657; border-radius:5px; font-size:1.9rem; line-height:4.4rem; color:#ffffff; text-align:center; cursor:pointer;}
+.tankuang_guanbi{width:1.8rem; height:1.8rem; position:absolute; top:0.5rem; right:0.5rem; margin:auto;}
+.tankuang_guanbi img{max-width: 100%; max-height: 100%;}
+
+/*========== 安卓APP - end ==========*/
+

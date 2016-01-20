@@ -4,12 +4,12 @@
  * @author lizhigao(lizhigao@021.com)
  */
 /* 首页 start */
-.container{background:#362c51;background:-moz-linear-gradient(top, #362c51, #6b505a); background:-webkit-gradient(linear, 0 0, 0 bottom, from(#362c51), to(#6b505a)); color: #fff;} 
+ .container{background-repeat: repeat;} 
 .banner{width: 100%; height: 18rem; text-align: center;}
-.banner img{width: 33.7rem; max-width: 100%; height: 100%;}
+.banner img{width: 100%; height: 100%;}
 
 /* 抽奖转盘 */
-.turntable-wrap{width: 100%; padding-left: 1rem; padding-right: 1rem;}
+.turntable-wrap{width: 100%; padding-left: 1rem; padding-right: 1rem; margin-top: 0.5rem;}
 .turntable-wrap .txt{font-size: 1.6rem; color: #fff;}
 .turntable-wrap .turntable{position: relative; margin-top: 0.5rem; height: 29.8rem; width: 100%;}
 .turntable-wrap .turntable .aw-wrap{position: absolute; top: 1.95rem; left: 2.1rem; /* width: 31.35rem; height: 25.1rem; background-color: rgba(0,0,0,.5); */ z-index: 3;}
@@ -33,7 +33,7 @@
 .pop-win{position: fixed; left: 50%; top: 50%; width: 30rem; height: 22.25rem; margin-top: -11.125rem; margin-left: -15rem; background-color: #fef2d9; border-radius: 0.5rem; z-index: 99; display: none;}
 .pop-win .line{position: absolute; left: 0.4rem; top: 0.4rem; width: 29.2rem; height: 21.45rem; border: 1px dashed #da9b40; border-radius: 0.5rem;}
 .pop-win .content{font-size: 2rem; color: #e41349; text-align: center; padding-top: 3rem;}
-.pop-win .content .img img{width: 17.5rem; height: 11.5rem;}
+.pop-win .content .img img{width: 16.2rem; height: 12.5rem;}
 .pop-win .content .txt{width: 90%; margin: 0.5rem auto 0;}
 .pop-win .content .txt p{text-align: center;}
 .pop-win .top{position: absolute; z-index: 100; left: 0; top: -11.2rem; width: 100%; text-align: center; }
