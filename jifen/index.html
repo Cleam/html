@@ -81,9 +81,9 @@
 				awardImgs = [],
 				$awBtn = $('#J_aw_btn');
 			$awBtn.on('click', function(){
-				$('.aw').removeClass('active');
 				if(clickFlag){
 					clickFlag = false;
+					$('.aw').removeClass('active');
 					// ajax请求...
 
 					lottery.reset({
