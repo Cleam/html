@@ -1,0 +1,29 @@
+@charset "utf-8";
+/**
+ * 图片新闻榜单页面
+ * @author lizhigao(lizhigao@021.com)
+ * @date 2016-01-24
+ */
+
+/* 可视内容宽度 */
+.container {width: 1002px; margin: 0 auto; }
+
+/*.header-wrap{border-bottom: 2px solid #ee4b4b;}*/
+.header{width: 100%; height: 100px; line-height: 100px;}
+.header img{width: 313px; height: 60px; vertical-align: middle;}
+
+.panel{border: 1px solid #d0d0d0;}
+.panel-hd h3{border-bottom: 1px solid #ddd; line-height: 40px; height: 40px; font-size: 18px; padding-left: 20px; background: #f6f6f6; font-weight: normal;}
+
+/* 今日热点 and 相关推荐 */
+.news-list{padding-bottom: 20px;}
+.news-list .news-item{margin-left: 33px; margin-top: 20px;}
+.news-list .news-item a{display: block; width: 160px;  height: 144px;  overflow: hidden;}
+.news-list .news-item a .img{display: block; width: 160px; height: 120px; overflow: hidden;}
+.news-list .news-item a .img img{display: block; width: 160px; height: 120px;}
+.news-list .news-item a .txt{display: block; width: 100%; height: 24px; line-height: 24px; overflow: hidden; font-size: 14px; color: #666; text-align: center;}
+.news-list .news-item a:hover .txt{color: #ee4b4b;}
+
+
+
+
