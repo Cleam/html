@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>快讯新闻</title>
+	<style>
+		body,ul,li{margin: 0; padding: 0;}
+		.DFTOUTTIAO-fixed-kuaixun{width: 445px; height: 48px; background-color: #fff; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 2px #aaa; position: relative; margin: 2px;}
+		.DFTOUTTIAO-fixed-kuaixun img{position: absolute; left: 0; top: 0;}
+		.DFTOUTTIAO-fixed-kuaixun .txt:hover{color: #f83a22; text-decoration: underline;}
+		.DFTOUTTIAO-fixed-kuaixun .close{position: absolute; right: 5px; top: 50%; margin-top: -9px; width: 30px; height: 18px; background-image: url("http://mini.eastday.com/assets/images/close_sp.png"); background-repeat: no-repeat; background-position: 0 0; text-indent: -99em; overflow: hidden;}
+		.DFTOUTTIAO-fixed-kuaixun .close:hover{height: 32px; background-position: 0 -18px; margin-top: -16px;}
+		.DFTOUTTIAO-fixed-kuaixun .kuaixun-link-list-wrap{position: absolute; top: 50%; height: 32px; line-height: 32px; margin-top: -16px; left: 86px; width: 320px; overflow: hidden;}
+		.DFTOUTTIAO-fixed-kuaixun .kuaixun-link-list{width: 100%; height: auto;}
+		.DFTOUTTIAO-fixed-kuaixun .kuaixun-link-item{width: 100%; height: 32px; overflow: hidden;}
+		.DFTOUTTIAO-fixed-kuaixun .kuaixun-link-item .txt{display: block; width: 100%; height: 32px; line-height: 32px; color: #333; font-size: 16px; text-align: center; text-decoration: none; outline: none; cursor: pointer;}
+		.DFTOUTTIAO-fixed-kuaixun .kuaixun-link-item .txt:hover{color: #ee4b4b;}
+	</style>
+</head>
+<body>
+	<!-- <div id="J_DFTOUTTIAO_fixed_kuaixun" class="DFTOUTTIAO-fixed-kuaixun">
+		<img class="png24" src="http://mini.eastday.com/assets/images/kuaixun.png" alt="快讯" width="86" height="48">
+		<div class="kuaixun-link-list-wrap">
+			<ul id="J_kuaixun_link_list" class="kuaixun-link-list">
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我1国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我2国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我3国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我4国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我5国正在研制第二航母舰队</a></li>
+	
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我6国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我7国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我8国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我9国正在研制第二航母舰队</a></li>
+				<li class="kuaixun-link-item"><a class="txt" href="javascript:;">国防部证实我10国正在研制第二航母舰队</a></li>
+			</ul>
+		</div>
+		<a class="close" href="javascript:;" title="点击关闭">关闭</a>
+	</div> -->
+
+	<script src="http://mini.eastday.com/assets/js/jquery.min.js"></script>
+	<script src="http://mini.eastday.com/assets/js/jquery.cookie.js"></script>
+	<script>
+		var COOKIE_NAME = 'TOUTIAOKX',
+			cookieUkNum = 0,
+			cookieUkLength = 10,
+			cookieVal = $.cookie(COOKIE_NAME) ? JSON.parse($.cookie(COOKIE_NAME)) : null,
+			url = 'http://dev.static.com/kuaixun/t2/kuaixun.json';
+		// 获取json数据
+		$.getJSON(url, callback);
+		/**
+		 * 获取数据回调方法
+		 * @param  {[type]}   data   获取到的json数据
+		 * @param  {[type]}   status 
+		 */
+		function callback(data, status){
+			if(status != 'success' || !data || !data.root){
+				return;
+			}
+			var root = data.root,
+				$kuaixunWrap = $('<div class="DFTOUTTIAO-fixed-kuaixun"></div>'),
+				$linkList = $('<ul id="J_kuaixun_link_list" class="kuaixun-link-list"></ul>'),
+				hoverFlag = true;
+			for (var i = 0; i < root.length; i++) {
+				if(!cookieVal){	// 未存入过cookie中
+					$linkList.append('<li class="kuaixun-link-item"><a class="J-link txt" href="' + root[i].url + '" target="_blank" data-uk="' + $.trim(root[i].uk) + '" title="' + $.trim(root[i].topic) + '">' + $.trim(root[i].topic) + '</a></li>');
+				} else {	// 已经存入过cookie中
+					if(!exist(cookieVal.uk, $.trim(root[i].uk))){
+						$linkList.append('<li class="kuaixun-link-item"><a class="J-link txt" href="' + root[i].url + '" target="_blank" data-uk="' + $.trim(root[i].uk) + '" title="' + $.trim(root[i].topic) + '">' + $.trim(root[i].topic) + '</a></li>');
+					} else {
+						cookieUkNum++;
+					}
+				}
+			}
+			if(cookieUkNum >= cookieUkLength){
+				return;
+			}
+			$kuaixunWrap.append('<img class="png24" src="http://mini.eastday.com/assets/images/kuaixun.png" alt="快讯" width="86" height="48">').append($('<div class="kuaixun-link-list-wrap"></div>').append($linkList)).append('<a class="J-close close" href="javascript:;" title="点击关闭">关闭</a>').appendTo('body');
+
+			$kuaixunWrap.on('click', '.J-link', function(e){
+				// e.preventDefault();
+				var $this = $(this),
+					uk = $this.attr('data-uk'),	// 点击的链接的uk
+					now = new Date(),
+					y = now.getFullYear(),
+					m = now.getMonth() + 1,
+					d = now.getDate(),
+					expiresDate = new Date(y+'/'+m+'/'+d+' ' + '23:59:59');
+				// 获取cookie中存储的uk值
+				cookieVal = $.cookie(COOKIE_NAME) ? JSON.parse($.cookie(COOKIE_NAME)) : null;
+				if(!cookieVal){	// 未存入过cookie中
+					$.cookie(COOKIE_NAME, JSON.stringify({"uk":[uk]}), {expires: expiresDate, path: '/'});
+				} else {	// 已经存入过cookie中
+					if(!exist(cookieVal.uk, uk)){
+						cookieVal.uk.push(uk);
+						$.cookie(COOKIE_NAME, JSON.stringify(cookieVal), {expires: expiresDate, path: '/'});
+					}
+				}
+				$this.parent().remove();
+				cookieUkNum++;
+				if(cookieUkNum >= cookieUkLength){
+					$kuaixunWrap.remove();
+				} else if(cookieUkNum >= cookieUkLength - 1){
+					clearInterval(interval);
+				}
+			});
+
+			/**
+			 * 关闭按钮点击事件
+			 */
+			$kuaixunWrap.on('click', '.J-close', function(){
+				$kuaixunWrap.remove();
+			});
+
+			/**
+			 * 判断数组中是否存在指定值
+			 * @param  {Array} arr 数组
+			 * @param  {String|Number} val 指定值
+			 * @return {Boolean}     true：存在；false：不存在
+			 */
+			function exist(arr, val){
+				for (var i = 0; i < arr.length; i++) {
+					if(arr[i] == val){
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/**
+			 * 文字轮播
+			 */
+			var interval = setInterval(function(){
+				if(hoverFlag){
+					$linkList.animate({
+						'margin-top': '-32px'
+					}, 400, function(){
+						var $lis = $linkList.children('li');
+						if($lis.length >= 2){
+							$lis.first().insertAfter($lis.last());
+						} else {
+							clearInterval(interval);
+						}
+						$linkList.css('margin-top', 0);
+					});
+				}
+			}, 4000);
+
+			/**
+			 * 快讯插件hover事件
+			 */
+			$kuaixunWrap.hover(function(){
+				hoverFlag = false;
+			}, function(){
+				hoverFlag = true;
+			});
+		}
+
+	</script>
+	<!--[if IE 6]>
+	<script src="http://mini.eastday.com/assets/js/DDPngMin.js"></script>
+	<script>
+	    DD_belatedPNG.fix('.png24');
+	</script>
+	<![endif]-->
+</body>
+</html>
