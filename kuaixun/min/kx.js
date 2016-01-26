@@ -8,8 +8,8 @@
         div.className = 'DFTOUTTIAO-fixed-kuaixun';
         div.id = 'DFTOUTTIAO_KUAIXUN_IFRAME_WRAP';
         var iframe = document.createElement('iframe');
-        iframe.setAttribute('src', 'http://dev.static.com/kuaixun/t2/src_kx.html?qid=' + DFTOUTTIAO_KUAIXUN_QID);
-        // iframe.setAttribute('src', 'http://mini.eastday.com/kuaixun/src_kx.html?qid=' + DFTOUTTIAO_KUAIXUN_QID);
+        // iframe.setAttribute('src', 'http://dev.static.com/kuaixun/t2/src_kx.html?qid=' + DFTOUTTIAO_KUAIXUN_QID);
+        iframe.setAttribute('src', 'http://mini.eastday.com/kuaixun/src_kx.html?qid=' + DFTOUTTIAO_KUAIXUN_QID);
         iframe.setAttribute('style', 'height: 54px; width: 451px; background-color: transparent;');
         iframe.setAttribute('width', '100%');
         iframe.setAttribute('height', '100%');

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>安卓APP</title>
+    <link rel="stylesheet" href="public/css/base.css" />
+    <link rel="stylesheet" href="public/css/common.css" />
+    <link rel="stylesheet" href="public/css/page_promote.css">
+</head>
+
+<body>
+    <div class="ewm"><img src="public/img/pic_ewm.png" alt=""></div>
+    <div class="sd-wrap clearfix">
+        <a id="J_share" class="share fl" href="javascript:;">分享</a>
+        <a id="J_download" class="download fr" href="javascript:;">下载</a>
+    </div>
+
+    <div id="J_mask" class="mask none" onclick="this.style.display='none'">
+        <img src="public/img/pic_ewm.png" alt="">
+    </div>
+
+    <script src="public/lib/zepto/zepto.min.js"></script>
+    <script>
+        Zepto(function(){
+            var $share = $('#J_share'),
+                $download = $('#J_download'),
+                $mask = $('#J_mask');
+            $share.on('click', function(){
+                // $mask.children('img').attr('src', '');
+                $mask.show();
+            });
+            $download.on('click', function(){
+                // $mask.children('img').attr('src', '');
+                $mask.show();
+            });
+        });
+    </script>
+</body>
+</html>

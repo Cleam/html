@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+.ewm{width: 20rem; height: 20rem; padding: 1.5rem; margin-top: 30%; margin-left: auto; margin-right: auto; border: 1px solid #d8d8d8; border-radius: 0.5rem;}
+.ewm img{width: 17rem; height: 17rem;}
+
+.sd-wrap{width: 21.6rem; height: 3rem; margin: 2rem auto 0;}
+.sd-wrap a{width: 10.2rem; height: 3rem; border-radius: 0.5rem; color: #fff; line-height: 3rem; text-align: center; font-size: 1.3rem;}
+.sd-wrap a.share{background-color: #F85657;}
+.sd-wrap a.download{background-color: #F87F2F;}
+
+.mask{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 9;}
+.mask img{position: absolute; top: 0; right: 0;}
+

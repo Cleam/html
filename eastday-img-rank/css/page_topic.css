@@ -1,0 +1,34 @@
+@charset "utf-8";
+/**
+ * 图片新闻榜单页面
+ * @author lizhigao(lizhigao@021.com)
+ * @date 2016-01-24
+ */
+
+/* 可视内容宽度 */
+.container {width: 1002px; margin: 0 auto; }
+
+/*.header-wrap{border-bottom: 2px solid #ee4b4b;}*/
+.header{width: 100%; height: 100px; line-height: 100px;}
+.header img{width: 313px; height: 60px; vertical-align: middle;}
+
+.panel{border: 1px solid #d0d0d0; height: 1257px;}
+.panel-hd h3{border-bottom: 1px solid #ddd; line-height: 40px; height: 40px; font-size: 18px; padding-left: 20px; background: #f6f6f6; font-weight: normal;}
+
+.panel-hd .change{position: absolute; right: 10px; top: 50%; margin-top: -15px; height: 30px; line-height: 30px; font-size: 14px; color: #ee4b4b;}
+.panel-hd .change:hover{color: #f00; text-decoration: underline;}
+
+.news-block-wrap{width: 100%; height: 154px; overflow: hidden;}
+.news-block{width: 100%; overflow: hidden;}
+.news-block .news-link,
+.news-block .news-link .img,
+.news-block .news-link .img img,
+.news-block .news-link .txt{display: block;}
+.news-block .news-link{width: 160px; height: 144px; overflow: hidden; margin-left: 33px; margin-top: 10px;} 
+.news-block .news-link .img{width: 160px; height: 120px; overflow: hidden;}
+.news-block .news-link .txt{width: 100%; height: 24px; line-height: 24px; overflow: hidden; font-size: 14px; color: #666; text-align: center;}
+
+
+/* 广告样式 */
+.sy-1,.sy-2,.sy-3,.sy-4{height: 150px; width: 100%;}
+
