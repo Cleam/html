@@ -8,7 +8,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>安卓APP</title>
+    <title>立即推广</title>
     <link rel="stylesheet" href="public/css/base.css" />
     <link rel="stylesheet" href="public/css/common.css" />
     <link rel="stylesheet" href="public/css/page_promote.css">
@@ -21,8 +21,12 @@
         <a id="J_download" class="download fr" href="javascript:;">下载</a>
     </div>
 
-    <div id="J_mask" class="mask none" onclick="this.style.display='none'">
-        <img src="public/img/pic_ewm.png" alt="">
+    <div id="J_mask_share" class="mask mask-share none" onclick="this.style.display='none'">
+        <img src="public/img/fx.png" alt="">
+    </div>
+
+    <div id="J_mask_download" class="mask mask-download none" onclick="this.style.display='none'">
+        <img src="public/img/xz.png" alt="">
     </div>
 
     <script src="public/lib/zepto/zepto.min.js"></script>
@@ -30,14 +34,13 @@
         Zepto(function(){
             var $share = $('#J_share'),
                 $download = $('#J_download'),
-                $mask = $('#J_mask');
+                $maskSahre = $('#J_mask_share'),
+                $maskDownload = $('#J_mask_download');
             $share.on('click', function(){
-                // $mask.children('img').attr('src', '');
-                $mask.show();
+                $maskSahre.show();
             });
             $download.on('click', function(){
-                // $mask.children('img').attr('src', '');
-                $mask.show();
+                $maskDownload.show();
             });
         });
     </script>
