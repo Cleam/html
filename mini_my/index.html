@@ -1,0 +1,1200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<META name="filetype" content="1">
+<META name="publishedtype" content="1">
+<META name="pagetype" content="2">
+<META name="catalogs" content="toutiao_PC">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>新闻站</title>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+<style>
+body, h1, h2, h3, h4, h5, h6, hr, p,
+ul, ol, li,
+input,
+th, td{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    overflow: hidden;
+}
+body{
+    position: relative;
+    width: 757px;
+    height: 478px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    font-family: '\5FAE\8F6F\96C5\9ED1', '\5B8B\4F53';
+}
+#nav{
+    position: relative;
+    width: 757px;
+    height: 41px;
+    border-right: 0px solid #F8F8F8;
+    border-bottom: 2px solid #EE4B4B;
+    border-left: 0px solid #F8F8F8;
+    overflow: hidden;
+}
+#frame{
+    position: relative;
+    width: 757px;
+    height: 435px;
+    border-right: 0px solid #FFFFFF;
+    border-bottom: 0px solid #FFFFFF;
+    border-left: 0px solid #FFFFFF;
+    overflow: hidden;
+}
+.nav_ul{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 757px;
+    height: 84px;
+    background-color: #F8F8F8;
+}
+.nav_li{
+    float: left;
+    width: 58px;
+    height: 42px;
+    line-height: 41px;
+    font-size: 14px;
+    color: #444444;
+    text-align: center;
+    cursor: pointer;
+}
+.nav_li.now{
+    color: #EE4B4B;
+}
+
+.nav_li_more, 
+.nav_li_back{
+    float: left;
+    width: 58px;
+    height: 42px;
+    line-height: 41px;
+    font-size: 14px;
+    color: #444444;
+    text-align: center;
+    cursor: pointer;
+}
+.nav_li_more{background-image: url(resources/down.png); background-repeat: no-repeat; background-position: 96% center;}
+.nav_li_back{background-image: url(resources/up.png); background-repeat: no-repeat; background-position: 96% center;}
+.nav_li_more:hover, 
+.nav_li_back:hover{color: #EE4B4B;}
+/*.nav_li_more i{background-image: url(resources/d.png);}*/
+/*.nav_li_back i{background-image: url(resources/u.png);}*/
+
+.more_btn{
+    position: relative;
+    background-color: #F8F8F8;
+    position: absolute;
+    right: 1px;
+    top: 0;
+    width: 77px;
+    height: 41px;
+    line-height: 41px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 555;
+}
+.more_btn span{
+    font-size: 0;
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    width: 9px;
+    height: 5px;
+    background: url(resources/sources_v4.png) no-repeat -192px 0;
+}
+.more_btn.st2 span{
+    background: url(resources/sources_v4.png) no-repeat -192px -5px;
+}
+.over_now{
+    width: 58px;
+    height: 7px;
+    font-size: 0;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 36px;
+    z-index: 99999;
+    background: url(resources/sources_v4.png) no-repeat 0 -116px;
+}
+.frame_ul{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 9815px;
+    height: 872px;
+}
+.frame_ul .iframe{
+    padding: 15px 15px 15px 17px;
+    float: left;
+    width: 723px;
+    height: 436px;
+}
+/*原iframe内样式*/
+.w170{
+    float: left;
+    width: 170px;
+    height: 406px;
+}
+.w170.gg{
+    float: left;
+    width: 160px;
+    height: 406px;
+}
+.w355{
+    position: relative;
+    float: left;
+    width: 355px;
+    height: 406px;
+}
+.w15{
+    float: left;
+    width: 17px;
+    height: 406px;
+}
+.w170 .img{
+    position: relative;
+    width: 170px;
+    height: 125px;
+}
+.w170 .h15{
+    font-size: 0;
+    width: 170px;
+    height: 15px;
+}
+.gg{
+    position: relative;
+}
+.gg div{
+    position: absolute;
+    left: -2px;
+    top: -6px;
+}
+.gg1{
+    position: relative;
+    width: 160px;
+    height: 265px;
+}
+.gg2{
+    position: relative;
+    width: 160px;
+    height: 125px;
+}
+.img .pic{
+    border: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 170px;
+    height: 125px;
+}
+.img .txt{
+    padding: 0 8px;
+    position: absolute;
+    left: 0;
+    top: 105px;
+    width: 154px;
+    height: 20px;
+    opacity: 0.6;
+    filter: alpha(opacity="60");
+    background: #000000;
+    overflow: hidden;
+    text-align: center;
+}
+.img .txt_a{
+    position: absolute;
+    left: 10px;
+    top: 105px;
+    width: 150px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    color: #ffffff;
+    text-decoration: none;
+    overflow: hidden;
+    font-family: '\5B8B\4F53';
+}
+.img .txt_a:hover{
+    color: #ff2200;
+    text-decoration: underline;
+}
+.big_img{
+    position: relative;
+    width: 355px;
+    height: 125px;
+}
+.big_img .pic{
+    border: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 355px;
+    height: 125px;
+    z-index: 100;
+}
+.big_img .opa{
+    position: absolute;
+    left: 0;
+    top: 105px;
+    _top: 106px;
+    width: 355px;
+    height: 20px;
+    opacity: 0.6;
+    filter: alpha(opacity="60");
+    background: #000000;
+    z-index: 200;
+}
+.big_img .opa_txt{
+    padding: 0 8px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 105px;
+    _top: 106px;
+    width: 339px;
+    height: 20px;
+    line-height: 20px;
+    z-index: 400;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+    text-align: center;
+    font-family: '\5B8B\4F53';
+}
+.big_img .opa_txt:hover{
+    color: #ff2200;
+    text-decoration: underline;
+}
+.title_h1{
+    height: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 16px;
+}
+.title_h1 a{
+    color: #EE4B4B;
+    font-size: 16px;
+    text-decoration: none;
+}
+.title_h1 a:hover{
+    color: #ff2200;
+    text-decoration: underline;
+}
+.title_h2{
+    position: relative;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    text-align: left;
+    text-indent: 28px;
+}
+.title_h2 a{
+    color: #535353;
+    font-size: 14px;
+    text-decoration: none;
+}
+.title_h2 a:hover{
+    color: #ff2200;
+    text-decoration: underline;
+}
+.title_h2 .point_gray{
+    font-size: 0;
+    width: 3px;
+    height: 3px;
+    display: block;
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    background-color: #6D6D6D;
+}
+.title_h2 .point_video{
+    font-size: 0;
+    width: 14px;
+    height: 14px;
+    display: block;
+    position: absolute;
+    left: 6px;
+    top: 7px;
+    background: url(resources/sources_v2.png) no-repeat 0 -98px;
+}
+.h3{
+    height: 3px;
+    font-size: 0;
+}
+.h4{
+    height: 4px;
+    font-size: 0;
+}
+.h6{
+    height: 6px;
+    font-size: 0;
+}
+.h7{
+    height: 7px;
+    font-size: 0;
+}
+.h8{
+    height: 8px;
+    font-size: 0;
+}
+.h10{
+    height: 10px;
+    font-size: 0;
+}
+.simg1{
+    position: absolute;
+    left: 0;
+    top: 280px;
+    width: 170px;
+    height: 125px;
+}
+.simg2{
+    position: absolute;
+    left: 185px;
+    top: 280px;
+    width: 170px;
+    height: 125px;
+}
+.simg1 .img,
+.simg2 .img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 170px;
+    height: 125px;
+}
+.simg1 .img .pic,
+.simg2 .img .pic{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 170px;
+    height: 85px;
+}
+.simg1 .img .txt,
+.simg2 .img .txt{
+    padding: 0 8px;
+    position: absolute;
+    left: 0;
+    top: 85px;
+    width: 154px;
+    height: 40px;
+    line-height: 20px;
+    background-color: #F6F6F6;
+    overflow: hidden;
+    text-align: center;
+}
+.simg1 .img .txt a,
+.simg2 .img .txt a{
+    display: block;
+    font-size: 12px;
+    color: #545454;
+    text-decoration: none;
+}
+.simg1 .img .txt a:hover,
+.simg2 .img .txt a:hover{
+    color: #ff2200;
+    text-decoration: underline;
+}
+.short_a{
+    text-align: justify;
+}
+
+/*图片栏样式*/
+.w12{
+    float: left;
+    width: 11px;
+    height: 406px;
+}
+.w170 .img_p10{
+    position: relative;
+    width: 170px;
+    height: 130px;
+    padding-bottom:10px;
+}
+.img_p10 .pic{
+    border: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 170px;
+    height: 125px;
+}
+.img_p10 .opa{
+    position: absolute;
+    left: 0;
+    top: 105px;
+    _top: 106px;
+    width: 170px;
+    height: 20px;
+    opacity: 0.6;
+    filter: alpha(opacity="60");
+    background: #000000;
+    z-index: 200;
+}
+.img_p10 .opa_txt{
+    padding: 0 8px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 105px;
+    _top: 106px;
+    width: 155px;
+    height: 20px;
+    line-height: 20px;
+    z-index: 400;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+    text-align: center;
+    font-family: '\5B8B\4F53';
+}
+.img_p10 .opa_txt:hover{
+    color: #ff2200;
+    text-decoration: underline;
+}
+</style>
+<script type="text/javascript" src="resources/jquery.js"></script>
+</head>
+<body onselectstart="return false" oncontextmenu="return false">
+<div id="nav">
+    <div class="nav_ul">
+    <!-- 头条、 购物、 图片、 娱乐、 社会、体育、财经、科技、军事、笑话 、游戏、养生 -->
+    <!-- 国内、国际、人文、星座、家居、汽车、时尚 -->
+        <div class="nav_li now">头条</div>
+        <div class="nav_li">购物</div>
+        <div class="nav_li">图片</div>
+        <div class="nav_li">娱乐</div>
+        <div class="nav_li">社会</div>
+        <div class="nav_li">体育</div>
+        <div class="nav_li">财经</div>
+        <div class="nav_li">科技</div>
+        <div class="nav_li">军事</div>
+        <div class="nav_li">笑话</div>
+        <div class="nav_li">游戏</div>
+        <div class="nav_li">养生</div>
+
+        <div class="nav_li">国内</div>
+        <div class="nav_li">国际</div>
+        <div class="nav_li">人文</div>
+        <div class="nav_li">星座</div>
+        <div class="nav_li">家居</div>
+        <div class="nav_li">汽车</div>
+        <div class="nav_li">时尚</div>
+    </div>
+    <div class="more_btn st1">更多&nbsp;&nbsp;<span></span></div>
+</div>
+<div class="over_now"></div>
+<div id="frame">
+    <div class="frame_ul">
+        <div class="iframe">
+            <!-- 头条 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$data_toutiao[0]['url']}?qid=dfmini&amp;_{$data_toutiao[0]['position']}_{$data_toutiao[0]['type']}" target="_blank" title="{$data_toutiao[0]['title']}"><img src="{$data_toutiao[0]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_toutiao[0]['url']}?qid=dfmini&amp;_{$data_toutiao[0]['position']}_{$data_toutiao[0]['type']}" target="_blank" title="{$data_toutiao[0]['title']}">{$data_toutiao[0]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_toutiao[1]['url']}?qid=dfmini&amp;_{$data_toutiao[1]['position']}_{$data_toutiao[1]['type']}" target="_blank" title="{$data_toutiao[1]['title']}"><img src="{$data_toutiao[1]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_toutiao[1]['url']}?qid=dfmini&amp;_{$data_toutiao[1]['position']}_{$data_toutiao[1]['type']}" target="_blank" title="{$data_toutiao[1]['title']}">{$data_toutiao[1]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_toutiao[2]['url']}?qid=dfmini&amp;_{$data_toutiao[2]['position']}_{$data_toutiao[2]['type']}" target="_blank" title="{$data_toutiao[2]['title']}"><img src="{$data_toutiao[2]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_toutiao[2]['url']}?qid=dfmini&amp;_{$data_toutiao[2]['position']}_{$data_toutiao[2]['type']}" target="_blank" title="{$data_toutiao[2]['title']}">{$data_toutiao[2]['title']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="{$data_toutiao[3]['url']}?qid=dfmini&amp;_{$data_toutiao[3]['position']}_{$data_toutiao[3]['type']}" target="_blank" title="{$data_toutiao[3]['title']}"><img src="{$data_toutiao[3]['src']}" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="{$data_toutiao[3]['url']}?qid=dfmini&amp;_{$data_toutiao[3]['position']}_{$data_toutiao[3]['type']}" target="_blank" title="{$data_toutiao[3]['title']}">{$data_toutiao[3]['title']}</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$data_toutiao[10]['url']}?qid=dfmini&amp;_{$data_toutiao[10]['position']}_{$data_toutiao[10]['type']}" target="_blank" title="{$data_toutiao[10]['title']}">{$data_toutiao[10]['title']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[20]['url']}?qid=dfmini&amp;_10_新闻" target="_blank" title="{$data_toutiao[20]['title']}">{$data_toutiao[20]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[21]['url']}?qid=dfmini&amp;_11_新闻" target="_blank" title="{$data_toutiao[21]['title']}">{$data_toutiao[21]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[22]['url']}?qid=dfmini&amp;_12_新闻" target="_blank" title="{$data_toutiao[22]['title']}">{$data_toutiao[22]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[23]['url']}?qid=dfmini&amp;_13_新闻" target="_blank" title="{$data_toutiao[23]['title']}">{$data_toutiao[23]['title']}</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$data_toutiao[11]['url']}?qid=dfmini&amp;_{$data_toutiao[11]['position']}_{$data_toutiao[11]['type']}" target="_blank" title="{$data_toutiao[11]['title']}">{$data_toutiao[11]['title']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[24]['url']}?qid=dfmini&amp;_14_新闻" target="_blank" title="{$data_toutiao[24]['title']}">{$data_toutiao[24]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[25]['url']}?qid=dfmini&amp;_15_新闻" target="_blank" title="{$data_toutiao[25]['title']}">{$data_toutiao[25]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[26]['url']}?qid=dfmini&amp;_16_新闻" target="_blank" title="{$data_toutiao[26]['title']}">{$data_toutiao[26]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_toutiao[27]['url']}?qid=dfmini&amp;_17_新闻" target="_blank" title="{$data_toutiao[27]['title']}">{$data_toutiao[27]['title']}</a></p>
+            </div><!-- end 头条 -->
+        </div>
+        <!--购物 Start-->
+        <!--<div class="iframe">
+            <script type="text/javascript">
+                document.write('<a style="display:none!important" id="tanx-a-mm_108636149_8862290_41172430"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_108636149_8862290_41172430";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_108636149_8862290_41172430";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+            </script>
+        </div>-->
+        <!--购物 End-->
+        <div class="iframe">
+            <!-- 国内 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_guonei[0]['url']}?qid=dfmini&amp;_100_{$auto_data_guonei[0]['type']}" target="_blank" title="{$auto_data_guonei[0]['topic']}"><img src="{$auto_data_guonei[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_guonei[0]['url']}?qid=dfmini&amp;_100_{$auto_data_guonei[0]['type']}" target="_blank" title="{$auto_data_guonei[0]['topic']}">{$auto_data_guonei[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_guonei[1]['url']}?qid=dfmini&amp;_101_{$auto_data_guonei[1]['type']}" target="_blank" title="{$auto_data_guonei[1]['topic']}"><img src="{$auto_data_guonei[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_guonei[1]['url']}?qid=dfmini&amp;_101_{$auto_data_guonei[1]['type']}" target="_blank" title="{$auto_data_guonei[1]['topic']}">{$auto_data_guonei[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_guonei[2]['url']}?qid=dfmini&amp;_102_{$auto_data_guonei[2]['type']}" target="_blank" title="{$auto_data_guonei[2]['topic']}"><img src="{$auto_data_guonei[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_guonei[2]['url']}?qid=dfmini&amp;_102_{$auto_data_guonei[2]['type']}" target="_blank" title="{$auto_data_guonei[2]['topic']}">{$auto_data_guonei[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="{$auto_data_guonei[3]['url']}?qid=dfmini&amp;_0_{$auto_data_guonei[3]['type']}" target="_blank" title="{$auto_data_guonei[3]['topic']}">{$auto_data_guonei[3]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[6]['url']}?qid=dfmini&amp;_10_{$auto_data_guonei[6]['type']}" target="_blank" title="{$auto_data_guonei[6]['topic']}">{$auto_data_guonei[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[7]['url']}?qid=dfmini&amp;_11_{$auto_data_guonei[7]['type']}" target="_blank" title="{$auto_data_guonei[7]['topic']}">{$auto_data_guonei[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[8]['url']}?qid=dfmini&amp;_12_{$auto_data_guonei[8]['type']}" target="_blank" title="{$auto_data_guonei[8]['topic']}">{$auto_data_guonei[8]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[9]['url']}?qid=dfmini&amp;_13_{$auto_data_guonei[9]['type']}" target="_blank" title="{$auto_data_guonei[9]['topic']}">{$auto_data_guonei[9]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_guonei[4]['url']}?qid=dfmini&amp;_1_{$auto_data_guonei[4]['type']}" target="_blank" title="{$auto_data_guonei[4]['topic']}">{$auto_data_guonei[4]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[10]['url']}?qid=dfmini&amp;_14_{$auto_data_guonei[10]['type']}" target="_blank" title="{$auto_data_guonei[10]['topic']}">{$auto_data_guonei[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[11]['url']}?qid=dfmini&amp;_15_{$auto_data_guonei[11]['type']}" target="_blank" title="{$auto_data_guonei[11]['topic']}">{$auto_data_guonei[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[12]['url']}?qid=dfmini&amp;_16_{$auto_data_guonei[12]['type']}" target="_blank" title="{$auto_data_guonei[12]['topic']}">{$auto_data_guonei[12]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[13]['url']}?qid=dfmini&amp;_17_{$auto_data_guonei[13]['type']}" target="_blank" title="{$auto_data_guonei[13]['topic']}">{$auto_data_guonei[13]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_guonei[5]['url']}?qid=dfmini&amp;_2_{$auto_data_guonei[5]['type']}" target="_blank" title="{$auto_data_guonei[5]['topic']}">{$auto_data_guonei[5]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[14]['url']}?qid=dfmini&amp;_18_{$auto_data_guonei[14]['type']}" target="_blank" title="{$auto_data_guonei[14]['topic']}">{$auto_data_guonei[14]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[15]['url']}?qid=dfmini&amp;_19_{$auto_data_guonei[15]['type']}" target="_blank" title="{$auto_data_guonei[15]['topic']}">{$auto_data_guonei[15]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[16]['url']}?qid=dfmini&amp;_20_{$auto_data_guonei[16]['type']}" target="_blank" title="{$auto_data_guonei[16]['topic']}">{$auto_data_guonei[16]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_guonei[17]['url']}?qid=dfmini&amp;_21_{$auto_data_guonei[17]['type']}" target="_blank" title="{$auto_data_guonei[17]['topic']}">{$auto_data_guonei[17]['topic']}</a></p>
+            </div><!-- end 国内 -->
+        </div>
+        <div class="iframe">
+            <!-- 图片 -->
+            <div style="width: 544px; height: 406px; float: left;">
+                <div class="w170">
+                    <div class="img_p10">
+                        <a href="{$data_tupian[0]['url']}?qid=dfmini&amp;_{$data_tupian[0]['position']}_{$data_tupian[0]['type']}" target="_blank" title="{$data_tupian[0]['title']}"><img src="{$data_tupian[0]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[0]['url']}?qid=dfmini&amp;_{$data_tupian[0]['position']}_{$data_tupian[0]['type']}" target="_blank" title="">{$data_tupian[0]['title']}</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="{$data_tupian[1]['url']}?qid=dfmini&amp;_{$data_tupian[1]['position']}_{$data_tupian[1]['type']}" target="_blank" title="{$data_tupian[1]['title']}"><img src="{$data_tupian[1]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[1]['url']}?qid=dfmini&amp;_{$data_tupian[1]['position']}_{$data_tupian[1]['type']}" target="_blank" title="">{$data_tupian[1]['title']}</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="{$data_tupian[2]['url']}?qid=dfmini&amp;_{$data_tupian[2]['position']}_{$data_tupian[2]['type']}" target="_blank" title="{$data_tupian[2]['title']}"><img src="{$data_tupian[2]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[2]['url']}?qid=dfmini&amp;_{$data_tupian[2]['position']}_{$data_tupian[2]['type']}" target="_blank" title="">{$data_tupian[2]['title']}</a>
+                    </div>
+                </div>
+                <div class="w15"></div>
+                <div class="w170">
+                    <div class="img_p10">
+                        <a href="{$data_tupian[3]['url']}?qid=dfmini&amp;_{$data_tupian[3]['position']}_{$data_tupian[3]['type']}" target="_blank" title="{$data_tupian[3]['title']}"><img src="{$data_tupian[3]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[3]['url']}?qid=dfmini&amp;_{$data_tupian[3]['position']}_{$data_tupian[3]['type']}" target="_blank" title="">{$data_tupian[3]['title']}</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="{$data_tupian[4]['url']}?qid=dfmini&amp;_{$data_tupian[4]['position']}_{$data_tupian[4]['type']}" target="_blank" title="{$data_tupian[4]['title']}"><img src="{$data_tupian[4]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[4]['url']}?qid=dfmini&amp;_{$data_tupian[4]['position']}_{$data_tupian[4]['type']}" target="_blank" title="">{$data_tupian[4]['title']}</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="{$data_tupian[5]['url']}?qid=dfmini&amp;_{$data_tupian[5]['position']}_{$data_tupian[5]['type']}" target="_blank" title="{$data_tupian[5]['title']}"><img src="{$data_tupian[5]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[5]['url']}?qid=dfmini&amp;_{$data_tupian[5]['position']}_{$data_tupian[5]['type']}" target="_blank" title="">{$data_tupian[5]['title']}</a>
+                    </div>
+                </div>
+                <div class="w15"></div>
+                <div class="w170">
+                    <div class="img_p10">
+                        <a href="{$data_tupian[6]['url']}?qid=dfmini&amp;_{$data_tupian[6]['position']}_{$data_tupian[6]['type']}" target="_blank" title="{$data_tupian[6]['title']}"><img src="{$data_tupian[6]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[6]['url']}?qid=dfmini&amp;_{$data_tupian[6]['position']}_{$data_tupian[6]['type']}" target="_blank" title="">{$data_tupian[6]['title']}</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="{$data_tupian[7]['url']}?qid=dfmini&amp;_{$data_tupian[7]['position']}_{$data_tupian[7]['type']}" target="_blank" title="{$data_tupian[7]['title']}"><img src="{$data_tupian[7]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[7]['url']}?qid=dfmini&amp;_{$data_tupian[7]['position']}_{$data_tupian[7]['type']}" target="_blank" title="">{$data_tupian[7]['title']}</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="{$data_tupian[8]['url']}?qid=dfmini&amp;_{$data_tupian[8]['position']}_{$data_tupian[8]['type']}" target="_blank" title="{$data_tupian[8]['title']}"><img src="{$data_tupian[8]['src']}" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="{$data_tupian[8]['url']}?qid=dfmini&amp;_{$data_tupian[8]['position']}_{$data_tupian[8]['type']}" target="_blank" title="">{$data_tupian[8]['title']}</a>
+                    </div>
+                </div>
+            </div><!-- end 图片 -->
+        </div>
+        <div class="iframe">
+            <!-- 娱乐 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$data_yule[0]['url']}?qid=dfmini&amp;_100_{$data_yule[0]['type']}" target="_blank" title="{$data_yule[0]['title']}"><img src="{$data_yule[0]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_yule[0]['url']}?qid=dfmini&amp;_100_{$data_yule[0]['type']}" target="_blank" title="{$data_yule[0]['title']}">{$data_yule[0]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_yule[1]['url']}?qid=dfmini&amp;_101_{$data_yule[1]['type']}" target="_blank" title="{$data_yule[1]['title']}"><img src="{$data_yule[1]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_yule[1]['url']}?qid=dfmini&amp;_101_{$data_yule[1]['type']}" target="_blank" title="{$data_yule[1]['title']}">{$data_yule[1]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_yule[2]['url']}?qid=dfmini&amp;_102_{$data_yule[2]['type']}" target="_blank" title="{$data_yule[2]['title']}"><img src="{$data_yule[2]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_yule[2]['url']}?qid=dfmini&amp;_102_{$data_yule[2]['type']}" target="_blank" title="{$data_yule[2]['title']}">{$data_yule[2]['title']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="{$data_yule[3]['url']}?qid=dfmini&amp;_103_{$data_yule[3]['type']}" target="_blank" title="{$data_yule[3]['title']}"><img src="{$data_yule[3]['src']}" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="{$data_yule[3]['url']}?qid=dfmini&amp;_103_{$data_yule[3]['type']}" target="_blank" title="{$data_yule[3]['title']}">{$data_yule[3]['title']}</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$data_yule[10]['url']}?qid=dfmini&amp;_0_{$data_yule[10]['type']}" target="_blank" title="{$data_yule[10]['title']}">{$data_yule[10]['title']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[20]['url']}?qid=dfmini&amp;_10_{$data_yule[20]['type']}" target="_blank" title="{$data_yule[20]['title']}">{$data_yule[20]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[21]['url']}?qid=dfmini&amp;_11_{$data_yule[21]['type']}" target="_blank" title="{$data_yule[21]['title']}">{$data_yule[21]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[22]['url']}?qid=dfmini&amp;_12_{$data_yule[22]['type']}" target="_blank" title="{$data_yule[22]['title']}">{$data_yule[22]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[23]['url']}?qid=dfmini&amp;_13_{$data_yule[23]['type']}" target="_blank" title="{$data_yule[23]['title']}">{$data_yule[23]['title']}</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$data_yule[1]['url']}?qid=dfmini&amp;_1_{$data_yule[11]['type']}" target="_blank" title="{$data_yule[11]['title']}">{$data_yule[11]['title']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[24]['url']}?qid=dfmini&amp;_14_{$data_yule[24]['type']}" target="_blank" title="{$data_yule[24]['title']}">{$data_yule[24]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[25]['url']}?qid=dfmini&amp;_15_{$data_yule[25]['type']}" target="_blank" title="{$data_yule[25]['title']}">{$data_yule[25]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[26]['url']}?qid=dfmini&amp;_16_{$data_yule[26]['type']}" target="_blank" title="{$data_yule[26]['title']}">{$data_yule[26]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_yule[27]['url']}?qid=dfmini&amp;_17_{$data_yule[27]['type']}" target="_blank" title="{$data_yule[27]['title']}">{$data_yule[27]['title']}</a></p>
+            </div><!-- end 娱乐 -->
+        </div>
+        <div class="iframe">
+            <!-- 社会 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$data_shehui[0]['url']}?qid=dfmini&amp;_100_{$data_shehui[0]['type']}" target="_blank" title="{$data_shehui[0]['title']}"><img src="{$data_shehui[0]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_shehui[0]['url']}?qid=dfmini&amp;_100_{$data_shehui[0]['type']}" target="_blank" title="{$data_shehui[0]['title']}">{$data_shehui[0]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_shehui[1]['url']}?qid=dfmini&amp;_101_{$data_shehui[1]['type']}" target="_blank" title="{$data_shehui[1]['title']}"><img src="{$data_shehui[1]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_shehui[1]['url']}?qid=dfmini&amp;_101_{$data_shehui[1]['type']}" target="_blank" title="{$data_shehui[1]['title']}">{$data_shehui[1]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_shehui[2]['url']}?qid=dfmini&amp;_102_{$data_shehui[2]['type']}" target="_blank" title="{$data_shehui[2]['title']}"><img src="{$data_shehui[2]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_shehui[2]['url']}?qid=dfmini&amp;_102_{$data_shehui[2]['type']}" target="_blank" title="{$data_shehui[2]['title']}">{$data_shehui[2]['title']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="{$data_shehui[3]['url']}?qid=dfmini&amp;_103_{$data_shehui[3]['type']}" target="_blank" title="{$data_shehui[3]['title']}"><img src="{$data_shehui[3]['src']}" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="{$data_shehui[3]['url']}?qid=dfmini&amp;_103_{$data_shehui[3]['type']}" target="_blank" title="{$data_shehui[3]['title']}">{$data_shehui[3]['title']}</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$data_shehui[10]['url']}?qid=dfmini&amp;_0_{$data_shehui[10]['type']}" target="_blank" title="{$data_shehui[10]['title']}">{$data_shehui[10]['title']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[20]['url']}?qid=dfmini&amp;_10_{$data_shehui[20]['type']}" target="_blank" title="{$data_shehui[20]['title']}">{$data_shehui[20]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[21]['url']}?qid=dfmini&amp;_11_{$data_shehui[21]['type']}" target="_blank" title="{$data_shehui[21]['title']}">{$data_shehui[21]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[22]['url']}?qid=dfmini&amp;_12_{$data_shehui[22]['type']}" target="_blank" title="{$data_shehui[22]['title']}">{$data_shehui[22]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[23]['url']}?qid=dfmini&amp;_13_{$data_shehui[23]['type']}" target="_blank" title="{$data_shehui[23]['title']}">{$data_shehui[23]['title']}</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$data_shehui[11]['url']}?qid=dfmini&amp;_1_{$data_shehui[11]['type']}" target="_blank" title="{$data_shehui[11]['title']}">{$data_shehui[11]['title']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[24]['url']}?qid=dfmini&amp;_14_{$data_shehui[24]['type']}" target="_blank" title="{$data_shehui[24]['title']}">{$data_shehui[24]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[25]['url']}?qid=dfmini&amp;_15_{$data_shehui[25]['type']}" target="_blank" title="{$data_shehui[25]['title']}">{$data_shehui[25]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[26]['url']}?qid=dfmini&amp;_16{$data_shehui[26]['type']}" target="_blank" title="{$data_shehui[26]['title']}">{$data_shehui[26]['title']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$data_shehui[27]['url']}?qid=dfmini&amp;_17_{$data_shehui[27]['type']}" target="_blank" title="{$data_shehui[27]['title']}">{$data_shehui[27]['title']}</a></p>
+            </div><!-- end 社会 -->
+        </div>
+        <div class="iframe">
+            <!-- 体育 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_tiyu[0]['url']}?qid=dfmini&amp;_100_{$auto_data_tiyu[0]['type']}" target="_blank" title="{$auto_data_tiyu[0]['topic']}"><img src="{$auto_data_tiyu[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_tiyu[0]['url']}?qid=dfmini&amp;_100_{$auto_data_tiyu[0]['type']}" target="_blank" title="{$auto_data_tiyu[0]['topic']}">{$auto_data_tiyu[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_tiyu[1]['url']}?qid=dfmini&amp;_101_{$auto_data_tiyu[1]['type']}" target="_blank" title="{$auto_data_tiyu[1]['topic']}"><img src="{$auto_data_tiyu[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_tiyu[1]['url']}?qid=dfmini&amp;_101_{$auto_data_tiyu[1]['type']}" target="_blank" title="{$auto_data_tiyu[1]['topic']}">{$auto_data_tiyu[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_tiyu[2]['url']}?qid=dfmini&amp;_102_{$auto_data_tiyu[2]['type']}" target="_blank" title="{$auto_data_tiyu[2]['topic']}"><img src="{$auto_data_tiyu[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_tiyu[2]['url']}?qid=dfmini&amp;_102_{$auto_data_tiyu[2]['type']}" target="_blank" title="{$auto_data_tiyu[2]['topic']}">{$auto_data_tiyu[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="{$data_tiyu[0]['url']}?qid=dfmini&amp;_103_{$data_tiyu[0]['type']}" target="_blank" title="{$data_tiyu[0]['title']}"><img src="{$data_tiyu[0]['src']}" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="{$data_tiyu[0]['url']}?qid=dfmini&amp;_103_{$data_tiyu[0]['type']}" target="_blank" title="{$data_tiyu[0]['title']}">{$data_tiyu[0]['title']}</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$auto_data_tiyu[3]['url']}?qid=dfmini&amp;_0_{$auto_data_tiyu[3]['type']}" target="_blank" title="{$auto_data_tiyu[3]['topic']}">{$auto_data_tiyu[3]['topic']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[5]['url']}?qid=dfmini&amp;_10_{$auto_data_tiyu[5]['type']}" target="_blank" title="{$auto_data_tiyu[5]['topic']}">{$auto_data_tiyu[5]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[6]['url']}?qid=dfmini&amp;_11_{$auto_data_tiyu[6]['type']}" target="_blank" title="{$auto_data_tiyu[6]['topic']}">{$auto_data_tiyu[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[7]['url']}?qid=dfmini&amp;_12_{$auto_data_tiyu[7]['type']}" target="_blank" title="{$auto_data_tiyu[7]['topic']}">{$auto_data_tiyu[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[8]['url']}?qid=dfmini&amp;_13_{$auto_data_tiyu[8]['type']}" target="_blank" title="{$auto_data_tiyu[8]['topic']}">{$auto_data_tiyu[8]['topic']}</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$auto_data_tiyu[4]['url']}?qid=dfmini&amp;_1_{$auto_data_tiyu[4]['type']}" target="_blank" title="{$auto_data_tiyu[4]['topic']}">{$auto_data_tiyu[4]['topic']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[9]['url']}?qid=dfmini&amp;_14_{$auto_data_tiyu[9]['type']}" target="_blank" title="{$auto_data_tiyu[9]['topic']}">{$auto_data_tiyu[9]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[10]['url']}?qid=dfmini&amp;_15_{$auto_data_tiyu[10]['type']}" target="_blank" title="{$auto_data_tiyu[10]['topic']}">{$auto_data_tiyu[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[11]['url']}?qid=dfmini&amp;_16_{$auto_data_tiyu[11]['type']}" target="_blank" title="{$auto_data_tiyu[11]['topic']}">{$auto_data_tiyu[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_tiyu[12]['url']}?qid=dfmini&amp;_17_{$auto_data_tiyu[12]['type']}" target="_blank" title="{$auto_data_tiyu[12]['topic']}">{$auto_data_tiyu[12]['topic']}</a></p>
+            </div><!-- end 体育 -->
+        </div>
+        <div class="iframe">
+            <!-- 财经 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_caijing[0]['url']}?qid=dfmini&amp;_100_{$auto_data_caijing[0]['type']}" target="_blank" title="{$auto_data_caijing[0]['topic']}"><img src="{$auto_data_caijing[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_caijing[0]['url']}?qid=dfmini&amp;_100_{$auto_data_caijing[0]['type']}" target="_blank" title="{$auto_data_caijing[0]['topic']}">{$auto_data_caijing[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_caijing[1]['url']}?qid=dfmini&amp;_101_{$auto_data_caijing[1]['type']}" target="_blank" title="{$auto_data_caijing[1]['topic']}"><img src="{$auto_data_caijing[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_caijing[1]['url']}?qid=dfmini&amp;_101_{$auto_data_caijing[1]['type']}" target="_blank" title="{$auto_data_caijing[1]['topic']}">{$auto_data_caijing[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_caijing[2]['url']}?qid=dfmini&amp;_102_{$auto_data_caijing[2]['type']}" target="_blank" title="{$auto_data_caijing[2]['topic']}"><img src="{$auto_data_caijing[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_caijing[2]['url']}?qid=dfmini&amp;_102_{$auto_data_caijing[2]['type']}" target="_blank" title="{$auto_data_caijing[2]['topic']}">{$auto_data_caijing[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="{$auto_data_caijing[3]['url']}?qid=dfmini&amp;_0_{$auto_data_caijing[3]['type']}" target="_blank" title="{$auto_data_caijing[3]['topic']}">{$auto_data_caijing[3]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[6]['url']}?qid=dfmini&amp;_10_{$auto_data_caijing[6]['type']}" target="_blank" title="{$auto_data_caijing[6]['topic']}">{$auto_data_caijing[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[7]['url']}?qid=dfmini&amp;_11_{$auto_data_caijing[7]['type']}" target="_blank" title="{$auto_data_caijing[7]['topic']}">{$auto_data_caijing[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[8]['url']}?qid=dfmini&amp;_12_{$auto_data_caijing[8]['type']}" target="_blank" title="{$auto_data_caijing[8]['topic']}">{$auto_data_caijing[8]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[9]['url']}?qid=dfmini&amp;_13_{$auto_data_caijing[9]['type']}" target="_blank" title="{$auto_data_caijing[9]['topic']}">{$auto_data_caijing[9]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_caijing[4]['url']}?qid=dfmini&amp;_1_{$auto_data_caijing[4]['type']}" target="_blank" title="{$auto_data_caijing[4]['topic']}">{$auto_data_caijing[4]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[10]['url']}?qid=dfmini&amp;_14_{$auto_data_caijing[10]['type']}" target="_blank" title="{$auto_data_caijing[10]['topic']}">{$auto_data_caijing[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[11]['url']}?qid=dfmini&amp;_15_{$auto_data_caijing[11]['type']}" target="_blank" title="{$auto_data_caijing[11]['topic']}">{$auto_data_caijing[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[12]['url']}?qid=dfmini&amp;_16_{$auto_data_caijing[12]['type']}" target="_blank" title="{$auto_data_caijing[12]['topic']}">{$auto_data_caijing[12]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[13]['url']}?qid=dfmini&amp;_17_{$auto_data_caijing[13]['type']}" target="_blank" title="{$auto_data_caijing[13]['topic']}">{$auto_data_caijing[13]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_caijing[5]['url']}?qid=dfmini&amp;_2_{$auto_data_caijing[5]['type']}" target="_blank" title="{$auto_data_caijing[5]['topic']}">{$auto_data_caijing[5]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[14]['url']}?qid=dfmini&amp;_18_{$auto_data_caijing[14]['type']}" target="_blank" title="{$auto_data_caijing[14]['topic']}">{$auto_data_caijing[14]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[15]['url']}?qid=dfmini&amp;_19_{$auto_data_caijing[15]['type']}" target="_blank" title="{$auto_data_caijing[15]['topic']}">{$auto_data_caijing[15]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[16]['url']}?qid=dfmini&amp;_20_{$auto_data_caijing[16]['type']}" target="_blank" title="{$auto_data_caijing[16]['topic']}">{$auto_data_caijing[16]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_caijing[17]['url']}?qid=dfmini&amp;_21_{$auto_data_caijing[17]['type']}" target="_blank" title="{$auto_data_caijing[17]['topic']}">{$auto_data_caijing[17]['topic']}</a></p>
+            </div><!-- end 财经 -->
+        </div>
+        <div class="iframe">
+            <!-- 科技 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_keji[0]['url']}?qid=dfmini&amp;_100_{$auto_data_keji[0]['type']}" target="_blank" title="{$auto_data_keji[0]['topic']}"><img src="{$auto_data_keji[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_keji[0]['url']}?qid=dfmini&amp;_100_{$auto_data_keji[0]['type']}" target="_blank" title="{$auto_data_keji[0]['topic']}">{$auto_data_keji[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_keji[1]['url']}?qid=dfmini&amp;_101_{$auto_data_keji[1]['type']}" target="_blank" title="{$auto_data_keji[1]['topic']}"><img src="{$auto_data_keji[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_keji[1]['url']}?qid=dfmini&amp;_101_{$auto_data_keji[1]['type']}" target="_blank" title="{$auto_data_keji[1]['topic']}">{$auto_data_keji[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_keji[2]['url']}?qid=dfmini&amp;_102_{$auto_data_keji[2]['type']}" target="_blank" title="{$auto_data_keji[2]['topic']}"><img src="{$auto_data_keji[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_keji[2]['url']}?qid=dfmini&amp;_102_{$auto_data_keji[2]['type']}" target="_blank" title="{$auto_data_keji[2]['topic']}">{$auto_data_keji[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="{$data_keji[0]['url']}?qid=dfmini&amp;_103_{$data_keji[0]['type']}" target="_blank" title="{$data_keji[0]['title']}"><img src="{$data_keji[0]['src']}" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="{$data_keji[0]['url']}?qid=dfmini&amp;_103_{$data_keji[0]['type']}" target="_blank" title="{$data_keji[0]['title']}">{$data_keji[0]['title']}</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$auto_data_keji[3]['url']}?qid=dfmini&amp;_0_{$auto_data_keji[3]['type']}" target="_blank" title="{$auto_data_keji[3]['topic']}">{$auto_data_keji[3]['topic']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[5]['url']}?qid=dfmini&amp;_10_{$auto_data_keji[5]['type']}" target="_blank" title="{$auto_data_keji[5]['topic']}">{$auto_data_keji[5]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[6]['url']}?qid=dfmini&amp;_11_{$auto_data_keji[6]['type']}" target="_blank" title="{$auto_data_keji[6]['topic']}">{$auto_data_keji[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[7]['url']}?qid=dfmini&amp;_12_{$auto_data_keji[7]['type']}" target="_blank" title="{$auto_data_keji[7]['topic']}">{$auto_data_keji[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[8]['url']}?qid=dfmini&amp;_13_{$auto_data_keji[8]['type']}" target="_blank" title="{$auto_data_keji[8]['topic']}">{$auto_data_keji[8]['topic']}</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$auto_data_keji[4]['url']}?qid=dfmini&amp;_1_{$auto_data_keji[4]['type']}" target="_blank" title="{$auto_data_keji[4]['topic']}">{$auto_data_keji[4]['topic']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[9]['url']}?qid=dfmini&amp;_14_{$auto_data_keji[9]['type']}" target="_blank" title="{$auto_data_keji[9]['topic']}">{$auto_data_keji[9]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[10]['url']}?qid=dfmini&amp;_15_{$auto_data_keji[10]['type']}" target="_blank" title="{$auto_data_keji[10]['topic']}">{$auto_data_keji[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[11]['url']}?qid=dfmini&amp;_16_{$auto_data_keji[11]['type']}" target="_blank" title="{$auto_data_keji[11]['topic']}">{$auto_data_keji[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_keji[12]['url']}?qid=dfmini&amp;_17_{$auto_data_keji[12]['type']}" target="_blank" title="{$auto_data_keji[12]['topic']}">{$auto_data_keji[12]['topic']}</a></p>
+            </div><!-- end 科技 -->
+        </div>
+        <div class="iframe">
+            <!-- 军事 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_junshi[0]['url']}?qid=dfmini&amp;_100_{$auto_data_junshi[0]['type']}" target="_blank" title="{$auto_data_junshi[0]['topic']}"><img src="{$auto_data_junshi[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_junshi[0]['url']}?qid=dfmini&amp;_100_{$auto_data_junshi[0]['type']}" target="_blank" title="{$auto_data_junshi[0]['topic']}">{$auto_data_junshi[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_junshi[1]['url']}?qid=dfmini&amp;_101_{$auto_data_junshi[1]['type']}" target="_blank" title="{$auto_data_junshi[1]['topic']}"><img src="{$auto_data_junshi[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_junshi[1]['url']}?qid=dfmini&amp;_101_{$auto_data_junshi[1]['type']}" target="_blank" title="{$auto_data_junshi[1]['topic']}">{$auto_data_junshi[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_junshi[2]['url']}?qid=dfmini&amp;_102_{$auto_data_junshi[2]['type']}" target="_blank" title="{$auto_data_junshi[2]['topic']}"><img src="{$auto_data_junshi[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_junshi[2]['url']}?qid=dfmini&amp;_102_{$auto_data_junshi[2]['type']}" target="_blank" title="{$auto_data_junshi[2]['topic']}">{$auto_data_junshi[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="{$auto_data_junshi[3]['url']}?qid=dfmini&amp;_0_{$auto_data_junshi[3]['type']}" target="_blank" title="{$auto_data_junshi[3]['topic']}">{$auto_data_junshi[3]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[6]['url']}?qid=dfmini&amp;_10_{$auto_data_junshi[6]['type']}" target="_blank" title="{$auto_data_junshi[6]['topic']}">{$auto_data_junshi[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[7]['url']}?qid=dfmini&amp;_11_{$auto_data_junshi[7]['type']}" target="_blank" title="{$auto_data_junshi[7]['topic']}">{$auto_data_junshi[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[8]['url']}?qid=dfmini&amp;_12_{$auto_data_junshi[8]['type']}" target="_blank" title="{$auto_data_junshi[8]['topic']}">{$auto_data_junshi[8]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[9]['url']}?qid=dfmini&amp;_13_{$auto_data_junshi[9]['type']}" target="_blank" title="{$auto_data_junshi[9]['topic']}">{$auto_data_junshi[9]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_junshi[4]['url']}?qid=dfmini&amp;_1_{$auto_data_junshi[4]['type']}" target="_blank" title="{$auto_data_junshi[4]['topic']}">{$auto_data_junshi[4]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[10]['url']}?qid=dfmini&amp;_14_{$auto_data_junshi[10]['type']}" target="_blank" title="{$auto_data_junshi[10]['topic']}">{$auto_data_junshi[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[11]['url']}?qid=dfmini&amp;_15_{$auto_data_junshi[11]['type']}" target="_blank" title="{$auto_data_junshi[11]['topic']}">{$auto_data_junshi[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[12]['url']}?qid=dfmini&amp;_16_{$auto_data_junshi[12]['type']}" target="_blank" title="{$auto_data_junshi[12]['topic']}">{$auto_data_junshi[12]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[13]['url']}?qid=dfmini&amp;_17_{$auto_data_junshi[13]['type']}" target="_blank" title="{$auto_data_junshi[13]['topic']}">{$auto_data_junshi[13]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_junshi[5]['url']}?qid=dfmini&amp;_2_{$auto_data_junshi[5]['type']}" target="_blank" title="{$auto_data_junshi[5]['topic']}">{$auto_data_junshi[5]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[14]['url']}?qid=dfmini&amp;_18_{$auto_data_junshi[14]['type']}" target="_blank" title="{$auto_data_junshi[14]['topic']}">{$auto_data_junshi[14]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[15]['url']}?qid=dfmini&amp;_19_{$auto_data_junshi[15]['type']}" target="_blank" title="{$auto_data_junshi[15]['topic']}">{$auto_data_junshi[15]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[16]['url']}?qid=dfmini&amp;_20_{$auto_data_junshi[16]['type']}" target="_blank" title="{$auto_data_junshi[16]['topic']}">{$auto_data_junshi[16]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_junshi[17]['url']}?qid=dfmini&amp;_21_{$auto_data_junshi[17]['type']}" target="_blank" title="{$auto_data_junshi[17]['topic']}">{$auto_data_junshi[17]['topic']}</a></p>
+            </div><!-- end 军事 -->
+        </div>
+        <div class="iframe">
+            <!-- 时尚 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_shishang[0]['url']}?qid=dfmini&amp;_100_{$auto_data_shishang[0]['type']}" target="_blank" title="{$auto_data_shishang[0]['topic']}"><img src="{$auto_data_shishang[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_shishang[0]['url']}?qid=dfmini&amp;_100_{$auto_data_shishang[0]['type']}" target="_blank" title="{$auto_data_shishang[0]['topic']}">{$auto_data_shishang[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_shishang[1]['url']}?qid=dfmini&amp;_101_{$auto_data_shishang[1]['type']}" target="_blank" title="{$auto_data_shishang[1]['topic']}"><img src="{$auto_data_shishang[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_shishang[1]['url']}?qid=dfmini&amp;_101_{$auto_data_shishang[1]['type']}" target="_blank" title="{$auto_data_shishang[1]['topic']}">{$auto_data_shishang[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_shishang[2]['url']}?qid=dfmini&amp;_102_{$auto_data_shishang[2]['type']}" target="_blank" title="{$auto_data_shishang[2]['topic']}"><img src="{$auto_data_shishang[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_shishang[2]['url']}?qid=dfmini&amp;_102_{$auto_data_shishang[2]['type']}" target="_blank" title="{$auto_data_shishang[2]['topic']}">{$auto_data_shishang[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="{$auto_data_shishang[3]['url']}?qid=dfmini&amp;_0_{$auto_data_shishang[3]['type']}" target="_blank" title="{$auto_data_shishang[3]['topic']}">{$auto_data_shishang[3]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[6]['url']}?qid=dfmini&amp;_10_{$auto_data_shishang[6]['type']}" target="_blank" title="{$auto_data_shishang[6]['topic']}">{$auto_data_shishang[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[7]['url']}?qid=dfmini&amp;_11_{$auto_data_shishang[7]['type']}" target="_blank" title="{$auto_data_shishang[7]['topic']}">{$auto_data_shishang[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[8]['url']}?qid=dfmini&amp;_12_{$auto_data_shishang[8]['type']}" target="_blank" title="{$auto_data_shishang[8]['topic']}">{$auto_data_shishang[8]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[9]['url']}?qid=dfmini&amp;_13_{$auto_data_shishang[9]['type']}" target="_blank" title="{$auto_data_shishang[9]['topic']}">{$auto_data_shishang[9]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_shishang[4]['url']}?qid=dfmini&amp;_1_{$auto_data_shishang[4]['type']}" target="_blank" title="{$auto_data_shishang[4]['topic']}">{$auto_data_shishang[4]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[10]['url']}?qid=dfmini&amp;_14_{$auto_data_shishang[10]['type']}" target="_blank" title="{$auto_data_shishang[10]['topic']}">{$auto_data_shishang[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[11]['url']}?qid=dfmini&amp;_15_{$auto_data_shishang[11]['type']}" target="_blank" title="{$auto_data_shishang[11]['topic']}">{$auto_data_shishang[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[12]['url']}?qid=dfmini&amp;_16_{$auto_data_shishang[12]['type']}" target="_blank" title="{$auto_data_shishang[12]['topic']}">{$auto_data_shishang[12]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[13]['url']}?qid=dfmini&amp;_17_{$auto_data_shishang[13]['type']}" target="_blank" title="{$auto_data_shishang[13]['topic']}">{$auto_data_shishang[13]['topic']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$auto_data_shishang[5]['url']}?qid=dfmini&amp;_2_{$auto_data_shishang[5]['type']}" target="_blank" title="{$auto_data_shishang[5]['topic']}">{$auto_data_shishang[5]['topic']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[14]['url']}?qid=dfmini&amp;_18_{$auto_data_shishang[14]['type']}" target="_blank" title="{$auto_data_shishang[14]['topic']}">{$auto_data_shishang[14]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[15]['url']}?qid=dfmini&amp;_19_{$auto_data_shishang[15]['type']}" target="_blank" title="{$auto_data_shishang[15]['topic']}">{$auto_data_shishang[15]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[16]['url']}?qid=dfmini&amp;_20_{$auto_data_shishang[16]['type']}" target="_blank" title="{$auto_data_shishang[16]['topic']}">{$auto_data_shishang[16]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_shishang[17]['url']}?qid=dfmini&amp;_21_{$auto_data_shishang[17]['type']}" target="_blank" title="{$auto_data_shishang[17]['topic']}">{$auto_data_shishang[17]['topic']}</a></p>
+            </div><!-- end 时尚 -->
+        </div>
+        <div class="iframe">
+            <!-- 汽车 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$auto_data_qiche[0]['url']}?qid=dfmini&amp;_100_{$auto_data_qiche[0]['type']}" target="_blank" title="{$auto_data_qiche[0]['topic']}"><img src="{$auto_data_qiche[0]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_qiche[0]['url']}?qid=dfmini&amp;_100_{$auto_data_qiche[0]['type']}" target="_blank" title="{$auto_data_qiche[0]['topic']}">{$auto_data_qiche[0]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_qiche[1]['url']}?qid=dfmini&amp;_101_{$auto_data_qiche[1]['type']}" target="_blank" title="{$auto_data_qiche[1]['topic']}"><img src="{$auto_data_qiche[1]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_qiche[1]['url']}?qid=dfmini&amp;_101_{$auto_data_qiche[1]['type']}" target="_blank" title="{$auto_data_qiche[1]['topic']}">{$auto_data_qiche[1]['topic']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$auto_data_qiche[2]['url']}?qid=dfmini&amp;_102_{$auto_data_qiche[2]['type']}" target="_blank" title="{$auto_data_qiche[2]['topic']}"><img src="{$auto_data_qiche[2]['img43']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$auto_data_qiche[2]['url']}?qid=dfmini&amp;_102_{$auto_data_qiche[2]['type']}" target="_blank" title="{$auto_data_qiche[2]['topic']}">{$auto_data_qiche[2]['topic']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="{$data_qiche[0]['url']}?qid=dfmini&amp;_103_{$data_qiche[0]['type']}" target="_blank" title="{$data_qiche[0]['title']}"><img src="{$data_qiche[0]['src']}" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="{$data_qiche[0]['url']}?qid=dfmini&amp;_103_{$data_qiche[0]['type']}" target="_blank" title="{$data_qiche[0]['title']}">{$data_qiche[0]['title']}</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$auto_data_qiche[3]['url']}?qid=dfmini&amp;_0_{$auto_data_qiche[3]['type']}" target="_blank" title="{$auto_data_qiche[3]['topic']}">{$auto_data_qiche[3]['topic']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[5]['url']}?qid=dfmini&amp;_10_{$auto_data_qiche[5]['type']}" target="_blank" title="{$auto_data_qiche[5]['topic']}">{$auto_data_qiche[5]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[6]['url']}?qid=dfmini&amp;_11_{$auto_data_qiche[6]['type']}" target="_blank" title="{$auto_data_qiche[6]['topic']}">{$auto_data_qiche[6]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[7]['url']}?qid=dfmini&amp;_12_{$auto_data_qiche[7]['type']}" target="_blank" title="{$auto_data_qiche[7]['topic']}">{$auto_data_qiche[7]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[8]['url']}?qid=dfmini&amp;_13_{$auto_data_qiche[8]['type']}" target="_blank" title="{$auto_data_qiche[8]['topic']}">{$auto_data_qiche[8]['topic']}</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="{$auto_data_qiche[4]['url']}?qid=dfmini&amp;_1_{$auto_data_qiche[4]['type']}" target="_blank" title="{$auto_data_qiche[4]['topic']}">{$auto_data_qiche[4]['topic']}</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[9]['url']}?qid=dfmini&amp;_14_{$auto_data_qiche[9]['type']}" target="_blank" title="{$auto_data_qiche[9]['topic']}">{$auto_data_qiche[9]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[10]['url']}?qid=dfmini&amp;_15_{$auto_data_qiche[10]['type']}" target="_blank" title="{$auto_data_qiche[10]['topic']}">{$auto_data_qiche[10]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[11]['url']}?qid=dfmini&amp;_16_{$auto_data_qiche[11]['type']}" target="_blank" title="{$auto_data_qiche[11]['topic']}">{$auto_data_qiche[11]['topic']}</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="{$auto_data_qiche[12]['url']}?qid=dfmini&amp;_17_{$auto_data_qiche[12]['type']}" target="_blank" title="{$auto_data_qiche[12]['topic']}">{$auto_data_qiche[12]['topic']}</a></p>
+            </div><!-- end 汽车 -->
+        </div>
+        <div class="iframe">
+            <div style="width: 542px; height: 406px; float: left;">
+                <iframe frameborder="0" scrolling="no" src="http://www.9k9k.com/mini13/" width="542" height="406"></iframe>
+            </div>
+        </div>
+        <div class="iframe">
+            <div style="width: 542px; height: 406px; float: left;">
+                <iframe frameborder="0" scrolling="no" src="http://www.leha.com/export/leha_533.html" width="542" height="406"></iframe>
+            </div>
+        </div>
+        <div class="iframe">
+            <!-- 视频 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="{$data_shipin[0]['url']}?{$data_shipin[0]['position']}_{$data_shipin[0]['type']}" target="_blank" title="{$data_shipin[0]['title']}"><img src="{$data_shipin[0]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_shipin[0]['url']}?{$data_shipin[0]['position']}_{$data_shipin[0]['type']}" target="_blank" title="{$data_shipin[0]['title']}">{$data_shipin[0]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_shipin[1]['url']}?{$data_shipin[1]['position']}_{$data_shipin[1]['type']}" target="_blank" title="{$data_shipin[1]['title']}"><img src="{$data_shipin[1]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_shipin[1]['url']}?{$data_shipin[1]['position']}_{$data_shipin[1]['type']}" target="_blank" title="{$data_shipin[1]['title']}">{$data_shipin[1]['title']}</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="{$data_shipin[2]['url']}?{$data_shipin[2]['position']}_{$data_shipin[2]['type']}" target="_blank" title="{$data_shipin[2]['title']}"><img src="{$data_shipin[2]['src']}" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="{$data_shipin[2]['url']}?{$data_shipin[2]['position']}_{$data_shipin[2]['type']}" target="_blank" title="{$data_shipin[2]['title']}">{$data_shipin[2]['title']}</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="{$data_shipin[5]['url']}?{$data_shipin[5]['position']}_{$data_shipin[5]['type']}" target="_blank" title="{$data_shipin[5]['title']}">{$data_shipin[5]['title']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[8]['url']}?{$data_shipin[8]['position']}_{$data_shipin[8]['type']}" target="_blank" title="{$data_shipin[8]['title']}">{$data_shipin[8]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[9]['url']}?{$data_shipin[9]['position']}_{$data_shipin[9]['type']}" target="_blank" title="{$data_shipin[9]['title']}">{$data_shipin[9]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[10]['url']}?{$data_shipin[10]['position']}_{$data_shipin[10]['type']}" target="_blank" title="{$data_shipin[10]['title']}">{$data_shipin[10]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[11]['url']}?{$data_shipin[11]['position']}_{$data_shipin[11]['type']}" target="_blank" title="{$data_shipin[11]['title']}">{$data_shipin[11]['title']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$data_shipin[6]['url']}?{$data_shipin[6]['position']}_{$data_shipin[6]['type']}" target="_blank" title="{$data_shipin[6]['title']}">{$data_shipin[6]['title']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[12]['url']}?{$data_shipin[12]['position']}_{$data_shipin[12]['type']}" target="_blank" title="{$data_shipin[12]['title']}">{$data_shipin[12]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[13]['url']}?{$data_shipin[13]['position']}_{$data_shipin[13]['type']}" target="_blank" title="{$data_shipin[13]['title']}">{$data_shipin[13]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[14]['url']}?{$data_shipin[14]['position']}_{$data_shipin[14]['type']}" target="_blank" title="{$data_shipin[14]['title']}">{$data_shipin[14]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[15]['url']}?{$data_shipin[15]['position']}_{$data_shipin[15]['type']}" target="_blank" title="{$data_shipin[15]['title']}">{$data_shipin[15]['title']}</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="{$data_shipin[7]['url']}?{$data_shipin[7]['position']}_{$data_shipin[7]['type']}" target="_blank" title="{$data_shipin[7]['title']}">{$data_shipin[7]['title']}</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[16]['url']}?{$data_shipin[16]['position']}_{$data_shipin[16]['type']}" target="_blank" title="{$data_shipin[16]['title']}">{$data_shipin[16]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[17]['url']}?{$data_shipin[17]['position']}_{$data_shipin[17]['type']}" target="_blank" title="{$data_shipin[17]['title']}">{$data_shipin[17]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[18]['url']}?{$data_shipin[18]['position']}_{$data_shipin[18]['type']}" target="_blank" title="{$data_shipin[18]['title']}">{$data_shipin[18]['title']}</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="{$data_shipin[19]['url']}?{$data_shipin[19]['position']}_{$data_shipin[19]['type']}" target="_blank" title="{$data_shipin[19]['title']}">{$data_shipin[19]['title']}</a></p>
+            </div><!-- end 视频 -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var menu_delay = null;
+var auto_change_time = null;
+var can_auto = true;
+var $navUl = $('.nav_ul');
+var $navLi = $('.nav_li');
+var liLenght = $navLi.length;
+function auto_change(){
+    if(can_auto){
+        auto_change_time = setInterval(function(){
+            if($('.nav_li.now').index() < liLenght - 1){
+                $('.nav_li:eq(' + ($('.nav_li.now').index() + 1) + ')').trigger('click');
+            }else{
+                $('.nav_li:eq(0)').trigger('click');
+                stop_auto();
+            }
+        }, 2700);
+    }
+}
+function stop_auto(){
+    can_auto = false;
+    clearInterval(auto_change_time);
+}
+$(function(){
+    setTimeout(function(){
+        auto_change();
+        external.WebFinished();//c++ 加载完毕
+        external.DragArea("0_0_670_42:375_11_184_22");//c++ 拖拽区域
+        external.UnDoUpToTop();//c++ 不置顶
+    }, 10000);
+    //关闭自动轮播
+    $('body, #iframe').on('mouseover', function(){
+        stop_auto();
+    });
+    var $overNow = $('.over_now'),
+        $moreBtn = $('.more_btn'),
+        hoverFlag = false,
+        chevIndex = 0;
+
+    function more_fun(){
+        if($moreBtn.hasClass('st1')){
+            $navLi.trigger('mouseout');
+            $navLi.eq(12).trigger('mouseover');
+            $moreBtn.removeClass('st1').addClass('st2');
+            
+        }else{
+            $navLi.trigger('mouseout');
+            $navLi.eq(0).trigger('mouseover');
+            $moreBtn.removeClass('st2').addClass('st1');
+        }
+    }
+
+    $moreBtn.on('click', more_fun).on('mouseover', more_fun);
+
+    // 导航hover\click事件
+    $navLi.on('mouseover',navLiHover).on('click',navLiHover);
+
+    function navLiHover(){
+        var $this = $(this);
+        if($this.hasClass('now') && hoverFlag){
+            return false;
+        }
+        hoverFlag = true;
+        menu_delay = setTimeout(function(){
+            $('.nav_li.now').removeClass('now');
+            $this.addClass('now');
+            var ti = $this.index();
+            if(ti < 12){    // 第一行菜单
+                chevIndex = ti;
+                ulScroll();
+            } else {    // 第二行菜单
+                chevIndex = ti - 12;
+                ulScroll(2);
+            }
+            // chev
+            $overNow.stop().animate({
+                left: chevIndex * 58
+            });
+            // content
+            $('.frame_ul').css({
+                left: chevIndex * -755,
+                top: (ti < 12) ? 0 : -436
+            });
+            if(liIndex == 0 || liIndex == 5 || liIndex == 9){
+                parent.showgg(1);
+            }else if(liIndex == 2 || liIndex == 6 || liIndex == 10){
+                parent.showgg(2);
+            }else if(liIndex == 3 || liIndex == 7 || liIndex == 11){
+                parent.showgg(3);
+            }else if(liIndex == 1){
+                parent.showgg(4);
+            }else{
+                parent.showgg(4);
+            }
+            hoverFlag = false;
+        }, 100);
+    }
+
+    /**
+     * 导航栏滚动
+     * @param  {[type]} index 2：滚到第二行；否则滚到第一行
+     */
+    function ulScroll(index){
+        if(index === 2){
+            $navUl.stop().animate({
+                top: -42
+            }, 200);
+            $moreBtn.html('返回&nbsp;&nbsp;<span></span>');
+        } else {
+            $navUl.stop().animate({
+                top: 0
+            }, 200);
+            $moreBtn.html('更多&nbsp;&nbsp;<span></span>');
+        }
+    }
+
+    $navLi.on('mouseout', function(){
+        clearTimeout(menu_delay);
+    });
+});
+</script>
+</body>
+</html>

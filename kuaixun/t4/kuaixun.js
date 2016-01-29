@@ -3,20 +3,21 @@
     	if(typeof DFTOUTTIAO_KUAIXUN_QID == 'undefined' || DFTOUTTIAO_KUAIXUN_QID == null || DFTOUTTIAO_KUAIXUN_QID.length == 0){
     		return;
     	}
-        var style = createStyleNode('.DFTOUTTIAO-fixed-kuaixun{position: fixed; bottom: -70px; left: 50%; width: 451px; height: 54px; margin-left: -224.5px; background-color: transparent; z-index: 99999999;}*html{background-image: url(about:blank); background-attachment: fixed;}*html .DFTOUTTIAO-fixed-kuaixun{position:absolute; top:expression(eval(document.documentElement.scrollTop +document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0) - 70)); bottom: auto;}');
+        var style = createStyleNode('.DFTOUTTIAO-fixed-kuaixun{position: fixed; bottom: -70px; left: 50%; width: 457px; height: 60px; overflow: hidden; margin-left: -228.5px; *margin-left: -223.5px; background-color: transparent; z-index: 99999999;}*html .DFTOUTTIAO-fixed-kuaixun{width: 447px; height: 50px;}*html{background-image: url(about:blank); background-attachment: fixed;}*html .DFTOUTTIAO-fixed-kuaixun{position:absolute; top:expression(eval(document.documentElement.scrollTop +document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0) - 70)); bottom: auto;}');
         var div = document.createElement('div');
         div.className = 'DFTOUTTIAO-fixed-kuaixun';
         div.id = 'DFTOUTTIAO_KUAIXUN_IFRAME_WRAP';
         var iframe = document.createElement('iframe');
         // iframe.setAttribute('src', 'http://dev.static.com/kuaixun/t4/src_kx.html?qid=' + DFTOUTTIAO_KUAIXUN_QID);
         iframe.setAttribute('src', 'http://mini.eastday.com/kuaixun/src_kx.html?qid=' + DFTOUTTIAO_KUAIXUN_QID);
-        iframe.setAttribute('style', 'height: 54px; width: 451px; background-color: transparent;');
+        iframe.setAttribute('style', 'width: 457px; height: 60px; *width: 447px; *height: 50px; background-color: transparent; border: 0; margin: 0; padding: 0;');
         iframe.setAttribute('width', '100%');
         iframe.setAttribute('height', '100%');
         iframe.setAttribute('marginwidth', '0');
         iframe.setAttribute('marginheight', '0');
         iframe.setAttribute('scrolling', 'no');
-        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('frameborder', '0', 0);
+        iframe.setAttribute('border', '0');
         iframe.setAttribute('allowtransparency', 'true');
         div.appendChild(iframe);
         document.body.appendChild(style);

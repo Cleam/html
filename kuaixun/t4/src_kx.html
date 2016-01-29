@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<!--[if IE 6]><html class="ie6 lte9 lte8 lte7" lang="zh-cn"><![endif]-->
+<!--[if IE 8]><html class="ie8 lte9 lte8" lang="zh-cn"><![endif]-->
+<!--[if IE 9]><html class="ie9 lte9" lang="zh-cn"><![endif]-->
+<!--[if IE 7]><html class="ie7 lte9 lte8 lte7" lang="zh-cn"><![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8) | !(IE 9) ]><!--><html lang="zh-cn"><!--<![endif]-->
 <head>
 	<meta charset="UTF-8">
 	<title>快讯新闻</title>
 	<style>
 		body,ul,li{margin: 0; padding: 0;}
 		ul{list-style: none;}
-		.DFTOUTTIAO-fixed-kuaixun{width: 445px; height: 48px; background-color: #fff; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 5px #aaa; border: 1px solid #ee4b4b; position: relative; margin: 2px;}
+		html,body{width: 100%; height: 100%;}
+		.DFTOUTTIAO-fixed-kuaixun{width: 445px; height: 48px; background-color: #fff; font-size: 16px; font-family: "microsoft yahei",Arial, Helvetica, sans-serif; box-shadow: 0 0 5px #aaa; border: 1px solid #ee4b4b; position: relative; margin: 5px;}
+		.lte7 .DFTOUTTIAO-fixed-kuaixun{margin: 0;}
 		.DFTOUTTIAO-fixed-kuaixun img{position: absolute; left: 0; top: 0;}
 		.DFTOUTTIAO-fixed-kuaixun .txt:hover{color: #f83a22; text-decoration: underline;}
 		.DFTOUTTIAO-fixed-kuaixun .close{position: absolute; right: 5px; top: 50%; margin-top: -9px; width: 30px; height: 18px; background-image: url("http://mini.eastday.com/assets/images/close_sp.png"); background-repeat: no-repeat; background-position: 0 0; text-indent: -99em; overflow: hidden;}
@@ -27,8 +33,8 @@
 			cookieUkNum = 0,
 			cookieUkLength = 10,
 			cookieVal = $.cookie(COOKIE_NAME) ? JSON.parse($.cookie(COOKIE_NAME)) : null,
-			url = 'http://mini.eastday.com/json/kuaixun/qd_kuaixun.json';
-			// url = 'qd_kuaixun.json';
+			// url = 'http://mini.eastday.com/json/kuaixun/qd_kuaixun.json';
+			url = 'qd_kuaixun.json';
 		// 获取json数据
 		$.ajax({type: "GET",url: url,dataType: "json",cache: false,success: callback});
 
@@ -38,7 +44,7 @@
 		 * @param  {[type]}   status 
 		 */
 		function callback(data, status){
-			if(status != 'success' || !data || !data.root){
+			if(status != 'success' || !data || !data.root || data.root.length === 0){
 				return;
 			}
 			var root = data.root,
@@ -48,10 +54,10 @@
 			cookieUkLength = root.length;
 			for (var i = 0; i < cookieUkLength; i++) {
 				if(!cookieVal){	// 未存入过cookie中
-					$linkList.append('<li class="kuaixun-link-item"><a class="J-link txt" href="' + root[i].url + '" target="_blank" data-uk="' + $.trim(root[i].uk) + '" title="' + $.trim(root[i].topic) + '">' + $.trim(root[i].topic) + '</a></li>');
+					$linkList.append('<li class="kuaixun-link-item"><a class="J-link txt" href="' + root[i].url + '?qid=' + getQueryString('qid') + '" target="_blank" data-uk="' + $.trim(root[i].uk) + '" title="' + $.trim(root[i].topic) + '">' + $.trim(root[i].topic) + '</a></li>');
 				} else {	// 已经存入过cookie中
 					if(!exist(cookieVal.uk, $.trim(root[i].uk))){
-						$linkList.append('<li class="kuaixun-link-item"><a class="J-link txt" href="' + root[i].url + '" target="_blank" data-uk="' + $.trim(root[i].uk) + '" title="' + $.trim(root[i].topic) + '">' + $.trim(root[i].topic) + '</a></li>');
+						$linkList.append('<li class="kuaixun-link-item"><a class="J-link txt" href="' + root[i].url + '?qid=' + getQueryString('qid') + '" target="_blank" data-uk="' + $.trim(root[i].uk) + '" title="' + $.trim(root[i].topic) + '">' + $.trim(root[i].topic) + '</a></li>');
 					} else {
 						cookieUkNum++;
 					}
@@ -72,7 +78,6 @@
 					expiresDate = new Date(y+'/'+m+'/'+d+' ' + '23:59:59');
 				// 获取cookie中存储的uk值
 				cookieVal = $.cookie(COOKIE_NAME) ? JSON.parse($.cookie(COOKIE_NAME)) : null;
-				console.dir(cookieVal);
 				if(!cookieVal){	// 未存入过cookie中
 					$.cookie(COOKIE_NAME, JSON.stringify({"uk":[uk]}), {expires: expiresDate, path: '/'});
 				} else {	// 已经存入过cookie中
@@ -140,12 +145,17 @@
 			}
 			return false;
 		}
+		/**
+		 * 获取url参数值
+		 * @param  {[type]} name [description]
+		 * @return {[type]}      [description]
+		 */
+		function getQueryString(name) {
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if(r!=null)return  decodeURI(r[2]); return null;
+		}
 	</script>
-	<!--[if IE 6]>
-	<script src="http://mini.eastday.com/assets/js/DDPngMin.js"></script>
-	<script>
-	    DD_belatedPNG.fix('.png24');
-	</script>
-	<![endif]-->
+	<!--[if IE 6]><script src="http://mini.eastday.com/assets/js/DDPngMin.js"></script><script>DD_belatedPNG.fix('.png24');</script><![endif]-->
 </body>
 </html>
