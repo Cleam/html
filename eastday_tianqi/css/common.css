@@ -13,6 +13,7 @@ i,em{font-style: normal;}
 .mt20{margin-top: 20px;}
 .mb20{margin-bottom: 20px;}
 .none{display: none;}
+.container{max-width: 1000px;}
 /* header */
 .navbar-brand img{height: 100%;}
 @media all and (min-width: 768px){
