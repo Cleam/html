@@ -36,9 +36,9 @@
 .log-content-1 .android-wrap .hd,
 .log-content-1 .ios-wrap .hd{position: relative; border-bottom: 1px solid #eee; padding-bottom: 10px;}
 .log-content-1 .android-wrap .hd h3,
-.log-content-1 .ios-wrap .hd h3{padding-left: 64px; background-repeat: no-repeat; background-position: left center; height: 52px; line-height: 52px; font-size: 24px;}
-.log-content-1 .android-wrap .hd h3{background-image: url("../img/icon_android.png");}
-.log-content-1 .ios-wrap .hd h3{background-image: url("../img/icon_ios.png");}
+.log-content-1 .ios-wrap .hd h3{background-repeat: no-repeat; background-position: left center; height: 52px; line-height: 52px; font-size: 24px;}
+.log-content-1 .android-wrap .hd h3 img,
+.log-content-1 .ios-wrap .hd h3 img{width: 54px; margin-right: 10px;}
 
 .log-content-1 .android-wrap .hd a,
 .log-content-1 .ios-wrap .hd a{position: absolute; right: 0; top: 40%; color: #808080; width: 28px; height: 20px; margin-top: -10px;}
@@ -52,3 +52,25 @@
 .log-content-1 .ios-wrap .bd .block h4 em{position: absolute; right: 0; top: 50%; font-size: 16px; color: #666; height: 18px; line-height: 18px; margin-top: -9px;} 
 
 .more{margin-top: 30px;}
+
+@media all and (max-width: 420px){
+	.log-content-1 .android-wrap .hd h3,
+	.log-content-1 .ios-wrap .hd h3{font-size: 20px; height: 42px; line-height: 42px;}
+	.log-content-1 .android-wrap .hd h3 img,
+	.log-content-1 .ios-wrap .hd h3 img{width: 44px;}
+	.log-content-1 .android-wrap .hd a,
+	.log-content-1 .ios-wrap .hd a{margin-top: -13px;}
+}
+@media all and (max-width: 320px){
+	.log-content-1 .android-wrap .hd h3,
+	.log-content-1 .ios-wrap .hd h3{font-size: 16px; height: 32px; line-height: 32px; margin-bottom: 5px;}
+	.log-content-1 .android-wrap .hd h3 img,
+	.log-content-1 .ios-wrap .hd h3 img{width: 34px;}
+	.log-content-1 .android-wrap .bd .block,
+	.log-content-1 .ios-wrap .bd .block{margin-top: 20px;}
+	.log-content-1 .android-wrap .bd .block h4,
+	.log-content-1 .ios-wrap .bd .block h4{font-size: 16px;}
+	.log-content-1 .android-wrap .bd .block h4 em,
+	.log-content-1 .ios-wrap .bd .block h4 em{font-size: 12px;}
+	.more{margin-top: 20px;}
+}

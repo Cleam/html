@@ -18,7 +18,7 @@
   .banner .txt .txt2{font-size: 30px; margin-left: 30px;}
   .banner .txt .download{margin-top: 50px;}
 }
-@media all and (max-width: 768px){
+@media all and (max-width: 767px){
   .banner{height: 1150px; background-image: url("../img/banner_bg_2.png");}
   .banner .container{padding-top: 50px;}
   .banner .txt .txt1{font-size: 48px;}
