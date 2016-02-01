@@ -1,0 +1,54 @@
+@charset "utf-8";
+/**
+ * 天气网日志页面样式
+ */
+.banner{height: 800px; background-image: url("../img/banner_log.png"); background-position: center top; text-align: center;}
+.banner .container{padding-top: 100px;}
+
+.banner .download-btn{margin-top: 80px;}
+
+@media all and (max-width: 768px){
+	.banner .container{padding-top: 50px;}
+	.banner .row1{display: none}
+	.banner .row2{display: block;}
+	.banner .row2 .row{line-height: 339px; margin-top: 20px;}
+	.banner .row2 .android-img-1 img,
+	.banner .row2 .ios-img-1 img{width: 260px;}
+}
+@media all and (max-width: 520px){
+	.banner{height: 600px}
+	.banner .container{padding-top: 20px;}
+	.banner .row2 .row{line-height: 239px;}
+}
+@media all and (max-width: 420px){
+	.banner{height: 500px}
+	.banner .container{padding-top: 15px;}
+	.banner .row2 .row{line-height: 200px;}
+}
+@media all and (max-width: 320px){
+	.banner{height: 360px}
+	.banner .container{padding-top: 10px;}
+	.banner .row2 .row{line-height: 140px;}
+}
+.section .container{padding-top: 20px; padding-bottom: 50px;}
+
+.log-content-1{background-color: #f4f9ff; padding: 0 20px;}
+.log-content-1 .android-wrap .hd,
+.log-content-1 .ios-wrap .hd{position: relative; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+.log-content-1 .android-wrap .hd h3,
+.log-content-1 .ios-wrap .hd h3{padding-left: 64px; background-repeat: no-repeat; background-position: left center; height: 52px; line-height: 52px; font-size: 24px;}
+.log-content-1 .android-wrap .hd h3{background-image: url("../img/icon_android.png");}
+.log-content-1 .ios-wrap .hd h3{background-image: url("../img/icon_ios.png");}
+
+.log-content-1 .android-wrap .hd a,
+.log-content-1 .ios-wrap .hd a{position: absolute; right: 0; top: 40%; color: #808080; width: 28px; height: 20px; margin-top: -10px;}
+
+.log-content-1 .android-wrap .bd .block,
+.log-content-1 .ios-wrap .bd .block{margin-top: 30px; position: relative;}
+.log-content-1 .android-wrap .bd .block h4,
+.log-content-1 .ios-wrap .bd .block h4{position: relative; font-size: 18px; color: #2cd11b;}
+.log-content-1 .ios-wrap .bd .block h4{color: #eac911;}
+.log-content-1 .android-wrap .bd .block h4 em,
+.log-content-1 .ios-wrap .bd .block h4 em{position: absolute; right: 0; top: 50%; font-size: 16px; color: #666; height: 18px; line-height: 18px; margin-top: -9px;} 
+
+.more{margin-top: 30px;}

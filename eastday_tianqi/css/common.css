@@ -1,0 +1,47 @@
+@charset "utf-8";
+/**
+ * 天气网公用样式
+ */
+body{font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif; min-width: 300px;}
+img{max-width: 100%;}
+i,em{font-style: normal;}
+.tl{text-align: left;}
+.tr{text-align: right;}
+.tc{text-align: center;}
+.mt15{margin-top: 15px;}
+.mb15{margin-bottom: 15px;}
+.none{display: none;}
+/* header */
+.navbar-brand img{height: 100%;}
+@media all and (min-width: 768px){
+  .navbar-brand{height: 70px; padding: 14px;}
+  .navbar-nav>li>a {position: relative; padding: 25px; }
+  .navbar-nav>li>a .line{position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background-color: transparent;}
+  .navbar-custom .navbar-nav>.active>a .line{background-color: #4ca4ff; }
+  .banner{margin-top: 70px;}
+}
+.navbar-custom{background-color: #fff; box-shadow: 0 0 10px #666;}
+.navbar-custom .navbar-nav>li>a {color: #333; font-size: 20px;}
+.navbar-custom .navbar-nav>li>a:focus,
+.navbar-custom .navbar-nav>li>a:hover,
+.navbar-custom .navbar-nav>.active>a {color: #4ca4ff; background-color: #fff;}
+
+@media all and (max-width: 768px){
+  .navbar-brand{height: 50px; padding: 8px;}
+  .navbar-nav>li>a {position: relative; padding: 15px; }
+  .navbar-toggle .icon-bar {width: 26px; height: 3px; background-color: #4ca4ff; }
+  .banner{margin-top: 50px;}
+}
+
+/* footer */
+.footer{text-align: center; padding: 40px 0; background-color: #333; color: #ddd;}
+.footer .txt1{font-size: 16px; height: 40px; line-height: 40px;}
+.footer .txt2{height: 40px; line-height: 40px; margin: 0;}
+.footer a{color: #ddd;}
+.footer a:hover{color: #4ca4ff;}
+
+
+
+
+
+
