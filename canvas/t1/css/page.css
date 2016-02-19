@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* reset */
+.img-wrap{position: relative; width: 800px; height: 600px; margin: 0 auto;}
+
+#img{position: absolute; left: 0; top: 0; width: 800px; height: 600px; display: block; -webkit-filter: blur(20px); -moz-filter: blur(20px); -ms-filter: blur(20px); -o-filter: blur(20px); filter: blur(20px); z-index: 1;}
+
+#canvas{position: absolute; left: 0; top: 0; z-index: 2;}
+
+.img-wrap .reset,
+.img-wrap .show{position: absolute; display: block; bottom: -50px; width: 100px; height: 30px; line-height: 30px; color: #fff; border-radius: 4px; text-align: center; z-index: 3; text-decoration: none; font-size: 16px;}
+.img-wrap .reset{left: 100px; background-color: #5bc0de;}
+.img-wrap .show{right: 100px; background-color: #449d44;}
+
+
+
+

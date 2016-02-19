@@ -26,6 +26,10 @@
   .banner .txt .download{margin-top: 50px;}
   .banner .txt .title{margin-top: 50px;}
 }
+@media all and (max-width: 520px){
+  .banner .txt .txt1,
+  .banner .txt .txt2{display: block;}
+}
 @media all and (max-width: 400px){
   .banner{height: 1050px;}
 }
