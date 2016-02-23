@@ -4,6 +4,7 @@
 /*  responsive end  */
 @media only screen and (min-width: 750px) {body{width: 750px; margin: 0 auto;}}
 html,body{height: 100%;}
+.mt15{margin-top: 0.75rem;}
 .mt20{margin-top: 1rem;}
 .mt30{margin-top: 1.5rem;}
 .mt40{margin-top: 2rem;}

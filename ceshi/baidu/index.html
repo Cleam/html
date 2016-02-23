@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+	<title>百度搜索框智能提示</title>
+	<link rel="stylesheet" href="base.css">
+	<script src="base.js"></script>
+	<style>
+		form{width: 80%; margin: 0 auto; padding-top: 10%;}
+		.form-wrap{position: relative; width: 100%; height: 2rem;}
+		.form-wrap .input-wrap{width: 100%; height: 100%;}
+		.form-wrap .input-wrap .search-logo{position: absolute; width: 0.75rem; height: 0.75rem; top: 0.6rem; left: 0.5rem; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAVlQTFRFzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMAAAAzMzM0k11xwAAAHJ0Uk5TxMhrA7i5GdTkc6cbJCWipltVIJ335pjK/EGlFqR7TueXSy6DnzBDTOPiDb49dq0drx4RP+sQDL1sR2mLSGqUm2aKnGNkH3JvsN0a9vP0FcxxMgo0qU3sBUL12hO0iUD+Auqq7dX4k3UvAXT5/QaEFM8A/dzpZgAAAVxJREFUOMt901WTwjAUBeCuu7u7u7sv7u7u0AI5//9hdychWyBwXjrN+aaZtjcSYTHq9AZLzGtbX/URdSR6GR6UUcuaXWkEhVwGpuT4ZJw4XStVIL1TD5RFyFNDfGkjjcCeGhSWkVpQb+vLouRXgSISm6Q+ZaTOOBiZnveTxrgR5mAM2aaehBI4ZsAom6zNgJzglAEdRgU9CZVKhxToMSEC5AgPFBigEYIIihRYEBeCezxRIMvCnjzilYIUnEKQQ5kCGxxC8IkvCmZhF4Ig8hR4MCfqXdgvUKDMICoASWzV/oUWVaWpj8bM1hpQ0thu7DUJaP/nIR9gb8TT24eeLtXIeUpIXqqf3w9UK+qh3fXiOnfDVhzuGLqrXNCxvwgDmbvIy3vxLQiYB+IVLti5IFfnGXYsDspLv/dcSHzn2+fiR7b8naffhwuJtAoTrQETbQAV7cCf6GgLSEXq/AFI/qY6g3wTXAAAAABJRU5ErkJggg==') center no-repeat; background-size: 100%;}
+		.form-wrap .input-wrap .search-input{width: 100%; height: 100%; padding-left: 1.75rem; padding-right: 6rem; font-size: 0.8rem; border: 1px #3385ff solid;}
+		.search-btn{position: absolute; top: 0; right: 0; width: 6rem; height: 2rem; background-color: #3385ff; color: #fff; font-size: 1rem;}
+	</style>
+</head>
+<body>
+	<form action="https://m.baidu.com/s">
+        <div class="form-wrap">
+            <div class="input-wrap">
+                <span class="search-logo"></span>
+                <input class="search-input" id="J_search_input" type="text" name="word" placeholder="全国人民在这儿搜" baiduSug="2"/>
+                <input type="hidden" value="utf-8" name="ie"/>
+                <input type="hidden" value="1012551r" name="from"/>
+            </div>
+            <input class="search-btn" type="submit" value="百度一下"/>
+        </div>
+    </form>
+	<input id="J_input_value" type="text">
+    <button id="J_click_btn">点我</button>
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
+	<script>
+		var btn = document.getElementById('J_click_btn');
+		btn.addEventListener('click', click);
+		function click(){
+			alert(1111);
+			var val = document.getElementById('J_input_value').value;
+			console.log(val);
+			/*baidu&taobao callback*/
+			function dachie(d) {
+			    if (d.s) return d.s
+			    else {
+			        return d.result.map(function(item) {
+			            return item[0]
+			        });
+			    }
+			};
+			// $.ajax({
+			// 	url: "http://suggestion.baidu.com/su?wd=" + val + "&json=1&p=3",
+			// 	type: 'jsonp',
+				
+			// });
+
+			$.get("http://suggestion.baidu.com/su?wd=" + val + "&json=1&p=3&cb=dachie",function(data) {
+			　　　　var list = eval(data);//eval必须
+			　　　　console.info(list);
+			　　　　console.table(list);
+			　　　　//这里根据自己的展示形式render list
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,1418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<META name="filetype" content="1">
+<META name="publishedtype" content="1">
+<META name="pagetype" content="2">
+<META name="catalogs" content="toutiao_PC">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>新闻站</title>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+<style>
+    body, h1, h2, h3, h4, h5, h6, hr, p,
+    ul, ol, li,
+    input,
+    th, td{
+        margin: 0;
+        padding: 0;
+    }
+    html, body{
+        overflow: hidden;
+    }
+    body{
+        position: relative;
+        width: 757px;
+        height: 478px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        font-family: '\5FAE\8F6F\96C5\9ED1', '\5B8B\4F53';
+    }
+    #nav{
+        position: relative;
+        width: 757px;
+        height: 41px;
+        border-right: 0px solid #F8F8F8;
+        border-bottom: 2px solid #EE4B4B;
+        border-left: 0px solid #F8F8F8;
+        overflow: hidden;
+    }
+    #frame{
+        position: relative;
+        width: 757px;
+        height: 435px;
+        border-right: 0px solid #FFFFFF;
+        border-bottom: 0px solid #FFFFFF;
+        border-left: 0px solid #FFFFFF;
+        overflow: hidden;
+    }
+    .nav_ul{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 700px;
+        height: 84px;
+        background-color: #F8F8F8;
+    }
+    .nav_li{
+        float: left;
+        width: 58px;
+        height: 42px;
+        line-height: 41px;
+        font-size: 14px;
+        color: #444444;
+        text-align: center;
+        cursor: pointer;
+    }
+    .nav_li.now{
+        color: #EE4B4B;
+    }
+    .hot-wrap{position: relative;}
+    .hot-wrap .hot{position: absolute; right: 0; top: 2px;}
+
+    .more_btn{
+        position: relative;
+        background-color: #F8F8F8;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 57px;
+        height: 41px;
+        line-height: 41px;
+        font-size: 14px;
+        color: #444;
+        /*text-align: center;*/
+        cursor: pointer;
+        z-index: 555;
+    }
+    .more_btn span{
+        font-size: 0;
+        display: block;
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        width: 9px;
+        height: 5px;
+        background: url(resources/sources_v4.png) no-repeat -192px 0;
+    }
+    .more_btn.st2 span{
+        background: url(resources/sources_v4.png) no-repeat -192px -5px;
+    }
+    .over_now{
+        width: 58px;
+        height: 7px;
+        font-size: 0;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 36px;
+        z-index: 99999;
+        background: url(resources/sources_v4.png) no-repeat 0 -116px;
+    }
+    .frame_ul{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 9815px;
+        height: 872px;
+    }
+    .frame_ul .iframe{
+        padding: 15px 15px 15px 17px;
+        float: left;
+        width: 723px;
+        height: 436px;
+    }
+    /*原iframe内样式*/
+    .w170{
+        float: left;
+        width: 170px;
+        height: 406px;
+    }
+    .w170.gg{
+        float: left;
+        width: 160px;
+        height: 406px;
+    }
+    .w355{
+        position: relative;
+        float: left;
+        width: 355px;
+        height: 406px;
+    }
+    .w15{
+        float: left;
+        width: 17px;
+        height: 406px;
+    }
+    .w170 .img{
+        position: relative;
+        width: 170px;
+        height: 125px;
+    }
+    .w170 .h15{
+        font-size: 0;
+        width: 170px;
+        height: 15px;
+    }
+    .gg{
+        position: relative;
+    }
+    .gg div{
+        position: absolute;
+        left: -2px;
+        top: -6px;
+    }
+    .gg1{
+        position: relative;
+        width: 160px;
+        height: 265px;
+    }
+    .gg2{
+        position: relative;
+        width: 160px;
+        height: 125px;
+    }
+    .img .pic{
+        border: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 170px;
+        height: 125px;
+    }
+    .img .txt{
+        padding: 0 8px;
+        position: absolute;
+        left: 0;
+        top: 105px;
+        width: 154px;
+        height: 20px;
+        opacity: 0.6;
+        filter: alpha(opacity="60");
+        background: #000000;
+        overflow: hidden;
+        text-align: center;
+    }
+    .img .txt_a{
+        position: absolute;
+        left: 10px;
+        top: 105px;
+        width: 150px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        display: block;
+        font-size: 12px;
+        color: #ffffff;
+        text-decoration: none;
+        overflow: hidden;
+        font-family: '\5B8B\4F53';
+    }
+    .img .txt_a:hover{
+        color: #ff2200;
+        text-decoration: underline;
+    }
+    .big_img{
+        position: relative;
+        width: 355px;
+        height: 125px;
+    }
+    .big_img .pic{
+        border: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 355px;
+        height: 125px;
+        z-index: 100;
+    }
+    .big_img .opa{
+        position: absolute;
+        left: 0;
+        top: 105px;
+        _top: 106px;
+        width: 355px;
+        height: 20px;
+        opacity: 0.6;
+        filter: alpha(opacity="60");
+        background: #000000;
+        z-index: 200;
+    }
+    .big_img .opa_txt{
+        padding: 0 8px;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 105px;
+        _top: 106px;
+        width: 339px;
+        height: 20px;
+        line-height: 20px;
+        z-index: 400;
+        overflow: hidden;
+        color: #ffffff;
+        font-size: 12px;
+        text-decoration: none;
+        text-align: center;
+        font-family: '\5B8B\4F53';
+    }
+    .big_img .opa_txt:hover{
+        color: #ff2200;
+        text-decoration: underline;
+    }
+    .title_h1{
+        height: 18px;
+        line-height: 18px;
+        overflow: hidden;
+        text-align: center;
+        font-size: 16px;
+    }
+    .title_h1 a{
+        color: #EE4B4B;
+        font-size: 16px;
+        text-decoration: none;
+    }
+    .title_h1 a:hover{
+        color: #ff2200;
+        text-decoration: underline;
+    }
+    .title_h2{
+        position: relative;
+        height: 28px;
+        line-height: 28px;
+        overflow: hidden;
+        text-align: left;
+        text-indent: 28px;
+    }
+    .title_h2 a{
+        color: #535353;
+        font-size: 14px;
+        text-decoration: none;
+    }
+    .title_h2 a:hover{
+        color: #ff2200;
+        text-decoration: underline;
+    }
+    .title_h2 .point_gray{
+        font-size: 0;
+        width: 3px;
+        height: 3px;
+        display: block;
+        position: absolute;
+        left: 13px;
+        top: 13px;
+        background-color: #6D6D6D;
+    }
+    .title_h2 .point_video{
+        font-size: 0;
+        width: 14px;
+        height: 14px;
+        display: block;
+        position: absolute;
+        left: 6px;
+        top: 7px;
+        background: url(resources/sources_v2.png) no-repeat 0 -98px;
+    }
+    .h3{
+        height: 3px;
+        font-size: 0;
+    }
+    .h4{
+        height: 4px;
+        font-size: 0;
+    }
+    .h6{
+        height: 6px;
+        font-size: 0;
+    }
+    .h7{
+        height: 7px;
+        font-size: 0;
+    }
+    .h8{
+        height: 8px;
+        font-size: 0;
+    }
+    .h10{
+        height: 10px;
+        font-size: 0;
+    }
+    .simg1{
+        position: absolute;
+        left: 0;
+        top: 280px;
+        width: 170px;
+        height: 125px;
+    }
+    .simg2{
+        position: absolute;
+        left: 185px;
+        top: 280px;
+        width: 170px;
+        height: 125px;
+    }
+    .simg1 .img,
+    .simg2 .img{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 170px;
+        height: 125px;
+    }
+    .simg1 .img .pic,
+    .simg2 .img .pic{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 170px;
+        height: 85px;
+    }
+    .simg1 .img .txt,
+    .simg2 .img .txt{
+        padding: 0 8px;
+        position: absolute;
+        left: 0;
+        top: 85px;
+        width: 154px;
+        height: 40px;
+        line-height: 20px;
+        background-color: #F6F6F6;
+        overflow: hidden;
+        text-align: center;
+    }
+    .simg1 .img .txt a,
+    .simg2 .img .txt a{
+        display: block;
+        font-size: 12px;
+        color: #545454;
+        text-decoration: none;
+    }
+    .simg1 .img .txt a:hover,
+    .simg2 .img .txt a:hover{
+        color: #ff2200;
+        text-decoration: underline;
+    }
+    .short_a{
+        text-align: justify;
+    }
+
+    /*图片栏样式*/
+    .w12{
+        float: left;
+        width: 11px;
+        height: 406px;
+    }
+    .w170 .img_p10{
+        position: relative;
+        width: 170px;
+        height: 130px;
+        padding-bottom:10px;
+    }
+    .img_p10 .pic{
+        border: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 170px;
+        height: 125px;
+    }
+    .img_p10 .opa{
+        position: absolute;
+        left: 0;
+        top: 105px;
+        _top: 106px;
+        width: 170px;
+        height: 20px;
+        opacity: 0.6;
+        filter: alpha(opacity="60");
+        background: #000000;
+        z-index: 200;
+    }
+    .img_p10 .opa_txt{
+        padding: 0 8px;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 105px;
+        _top: 106px;
+        width: 155px;
+        height: 20px;
+        line-height: 20px;
+        z-index: 400;
+        overflow: hidden;
+        color: #ffffff;
+        font-size: 12px;
+        text-decoration: none;
+        text-align: center;
+        font-family: '\5B8B\4F53';
+    }
+    .img_p10 .opa_txt:hover{
+        color: #ff2200;
+        text-decoration: underline;
+    }
+</style>
+<script type="text/javascript" src="resources/jquery.js"></script>
+</head>
+<body onselectstart="return false" oncontextmenu="return false">
+<div id="nav">
+    <div class="nav_ul">
+    <!-- 头条、 购物、 图片、 娱乐、 社会、体育、财经、科技、军事、笑话 、游戏、养生 -->
+    <!-- 国内、国际、人文、星座、家居、汽车、时尚 -->
+        <div class="nav_li now">头条</div>
+        <div class="nav_li">购物</div>
+        <div class="nav_li hot-wrap">图片<img class="hot" src="resources/hot_2.gif" alt="HOT" width="21" height="13"/></div>
+        <div class="nav_li">娱乐</div>
+        <div class="nav_li">社会</div>
+        <div class="nav_li">体育</div>
+        <div class="nav_li">财经</div>
+        <div class="nav_li">科技</div>
+        <div class="nav_li">军事</div>
+        <div class="nav_li">笑话</div>
+        <div class="nav_li">游戏</div>
+        <div class="nav_li">养生</div>
+
+        <div class="nav_li">国内</div>
+        <div class="nav_li">国际</div>
+        <div class="nav_li">人文</div>
+        <div class="nav_li">星座</div>
+        <div class="nav_li">家居</div>
+        <div class="nav_li">汽车</div>
+        <div class="nav_li">时尚</div>
+    </div>
+    <div class="more_btn st1">更多&nbsp;&nbsp;<span></span></div>
+</div>
+<div class="over_now"></div>
+<div id="frame">
+    <div class="frame_ul">
+        <div class="iframe">
+            <!-- 头条 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160114124615304.html?qid=dfmini&amp;_100_新闻" target="_blank" title="aaaaaaaaaaaaaaaaaaaaa"><img src="images/0/56a9eeb91ffe4.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160114124615304.html?qid=dfmini&amp;_100_新闻" target="_blank" title="aaaaaaaaaaaaaaaaaaaaa">aaaaaaaaaaaaaaaaaaaaa</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/night/guonei/20151027/6019-1.html?qid=dfmini&amp;_101_新闻" target="_blank" title="曝城管局长与女下属开房"><img src="images/0/5725a7d581786.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/night/guonei/20151027/6019-1.html?qid=dfmini&amp;_101_新闻" target="_blank" title="曝城管局长与女下属开房">曝城管局长与女下属开房</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/shehui/151027/103054021.html?qid=dfmini&amp;_102_新闻" target="_blank" title="男婴被遗弃脸上爬满蚂蚁"><img src="images/0/562f151b02c57.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/shehui/151027/103054021.html?qid=dfmini&amp;_102_新闻" target="_blank" title="男婴被遗弃脸上爬满蚂蚁">男婴被遗弃脸上爬满蚂蚁</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="http://mini.eastday.com/night/shehui/20151027/6028-1.html?qid=dfmini&amp;_103_新闻" target="_blank" title="人民文化证实：剧作家、词作家阎肃去世为假消息"><img src="images/0/562f15b8f0619.jpg" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://mini.eastday.com/night/shehui/20151027/6028-1.html?qid=dfmini&amp;_103_新闻" target="_blank" title="人民文化证实：剧作家、词作家阎肃去世为假消息">人民文化证实：剧作家、词作家阎肃去世为假消息</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/night/shehui/20151027/6027-1.html?qid=dfmini&amp;_0_新闻" target="_blank" title="河南一公路所所长酒驾撞死孩子 官方:系临时工">河南一公路所所长酒驾撞死孩子 官方:系临时工</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150811/065909970.html?qid=dfmini&amp;_10_新闻" target="_blank" title="男子戴头巾淡定砸窗 仔细挑选盗走百万珠宝">男子戴头巾淡定砸窗 仔细挑选盗走百万珠宝</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/night/shehui/20150811/2706-1.html?qid=dfmini&amp;_11_新闻" target="_blank" title="三胞胎早产需巨额治疗费 父忍痛写“送养”字据">三胞胎早产需巨额治疗费 父忍痛写“送养”字据</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/night/shehui/20150811/2704-1.html?qid=dfmini&amp;_12_新闻" target="_blank" title="叔叔去世男子归咎其赌友 为泄愤毒杀8万斤鱼">叔叔去世男子归咎其赌友 为泄愤毒杀8万斤鱼</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/night/guoji/20150811/2705-1.html?qid=dfmini&amp;_13_新闻" target="_blank" title="韩小学生不化妆遭歧视 缺管教13岁少女遭侵害">韩小学生不化妆遭歧视 缺管教13岁少女遭侵害</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/night/guonei/20151027/6021-1.html?qid=dfmini&amp;_1_新闻" target="_blank" title="网传计生政策将废止 人民日报发文:你想多了">网传计生政策将废止 人民日报发文:你想多了</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/night/shehui/20150811/2699-1.html?qid=dfmini&amp;_14_新闻" target="_blank" title="广州医生做手术 全球3万医生“围观”">广州医生做手术 全球3万医生“围观”</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150811/064531287.html?qid=dfmini&amp;_15_新闻" target="_blank" title="小伙为捡手机半夜结绳溜进邻居家：怕打扰人家">小伙为捡手机半夜结绳溜进邻居家：怕打扰人家</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150811/024352477.html?qid=dfmini&amp;_16_新闻" target="_blank" title="浙江28名男女遭公司拖欠薪水 站楼顶欲集体跳楼">浙江28名男女遭公司拖欠薪水 站楼顶欲集体跳楼</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150811/062918002.html?qid=dfmini&amp;_17_新闻" target="_blank" title="西南最大单体立交桥“空中转体”旋转76度">西南最大单体立交桥“空中转体”旋转76度</a></p>
+            </div><!-- end 头条 -->
+        </div>
+        <!--购物 Start-->
+        <div class="iframe">
+            <script type="text/javascript">
+                document.write('<a style="display:none!important" id="tanx-a-mm_108636149_8862290_41172430"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_108636149_8862290_41172430";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_108636149_8862290_41172430";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+            </script>
+        </div>
+        <!--购物 End-->
+
+        <div class="iframe">
+            <!-- 图片 -->
+            <div style="width: 544px; height: 406px; float: left;">
+            <div class="w170">
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_801546148ad1b72c8825fa8cb33053d2.html?qid=dfmini&amp;_1_图片" target="_blank" title="金钱豹保护幼崽与猎豹激战"><img src="images/17/562ed2b92d15b.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_801546148ad1b72c8825fa8cb33053d2.html?qid=dfmini&amp;_1_图片" target="_blank" title="">金钱豹保护幼崽与猎豹激战</a>
+                </div>
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_7fd4f683cbced50f707acd728298a4e2.html?qid=dfmini&amp;_2_图片" target="_blank" title="俄罗斯举行婴儿爬行比赛"><img src="images/17/562ed30f0e8eb.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_7fd4f683cbced50f707acd728298a4e2.html?qid=dfmini&amp;_2_图片" target="_blank" title="">俄罗斯举行婴儿爬行比赛</a>
+                </div>
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_4689a42f15d04963aba0788e402986f0.html?qid=dfmini&amp;_3_图片" target="_blank" title="万圣节现僵尸小黄人"><img src="images/17/562ed3a447980.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_4689a42f15d04963aba0788e402986f0.html?qid=dfmini&amp;_3_图片" target="_blank" title="">万圣节现僵尸小黄人</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w170">
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_23a54305a8a743526d662a1d5151e40d.html?qid=dfmini&amp;_4_图片" target="_blank" title="伦敦办流浪狗慈善化装舞会"><img src="images/17/562ed41a4fe65.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_23a54305a8a743526d662a1d5151e40d.html?qid=dfmini&amp;_4_图片" target="_blank" title="">伦敦办流浪狗慈善化装舞会</a>
+                </div>
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_eff4e360ae0af5f306e5045a6af43170.html?qid=dfmini&amp;_5_图片" target="_blank" title="英50余人裸体玩过山车筹款"><img src="images/17/562ed4de1c30b.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_eff4e360ae0af5f306e5045a6af43170.html?qid=dfmini&amp;_5_图片" target="_blank" title="">英50余人裸体玩过山车筹款</a>
+                </div>
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_9a988e574d8bd9fc3ed30a9b1ab62105.html?qid=dfmini&amp;_6_图片" target="_blank" title="动物界的小品大赛"><img src="images/17/562ed535926dc.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_9a988e574d8bd9fc3ed30a9b1ab62105.html?qid=dfmini&amp;_6_图片" target="_blank" title="">动物界的小品大赛</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w170">
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_517136c190695a593b953e93129508f3.html?qid=dfmini&amp;_7_图片" target="_blank" title="乌龟水中玩南瓜灯迎万圣节"><img src="images/17/562ed5b196641.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_517136c190695a593b953e93129508f3.html?qid=dfmini&amp;_7_图片" target="_blank" title="">乌龟水中玩南瓜灯迎万圣节</a>
+                </div>
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827661499_050000_00_c1b80e432020d390513e21c942d6025f.html?qid=dfmini&amp;_8_图片" target="_blank" title="摄影师翻拍文艺复兴画作"><img src="images/17/562f18bd1b032.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827661499_050000_00_c1b80e432020d390513e21c942d6025f.html?qid=dfmini&amp;_8_图片" target="_blank" title="">摄影师翻拍文艺复兴画作</a>
+                </div>
+                <div class="img_p10">
+                    <a href="http://miniimg.eastday.com/detail/9223351885827674668_050000_00_a91e6ac15326323b5472809c7981446d.html?qid=dfmini&amp;_9_图片" target="_blank" title="旧金山云雾缭绕如仙境"><img src="images/17/562f1913eb489.jpg" class="pic"></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827674668_050000_00_a91e6ac15326323b5472809c7981446d.html?qid=dfmini&amp;_9_图片" target="_blank" title="">旧金山云雾缭绕如仙境</a>
+                </div>
+            </div>
+        </div><!-- end 图片 -->
+        </div>
+        <div class="iframe">
+            <!-- 娱乐 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/yule/151027/134822154.html?qid=dfmini&amp;_100_娱乐" target="_blank" title="范冰冰不上康熙？陈汉典搞笑回复：怕让小S难看"><img src="images/3/562f167a073ac.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/yule/151027/134822154.html?qid=dfmini&amp;_100_娱乐" target="_blank" title="范冰冰不上康熙？陈汉典搞笑回复：怕让小S难看">范冰冰不上康熙？陈汉典搞笑回复：怕让小S难看</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/yule/150831/072116056.html?qid=dfmini&amp;_101_娱乐" target="_blank" title="葛天发文称保持真我很重要"><img src="images/3/55e39acfd7962.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/yule/150831/072116056.html?qid=dfmini&amp;_101_娱乐" target="_blank" title="葛天发文称保持真我很重要">葛天发文称保持真我很重要</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/yule/150831/025133238.html?qid=dfmini&amp;_102_娱乐" target="_blank" title="苏有朋晒健身照遭“嫌弃”"><img src="images/3/55e39bb10835e.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/yule/150831/025133238.html?qid=dfmini&amp;_102_娱乐" target="_blank" title="苏有朋晒健身照遭“嫌弃”">苏有朋晒健身照遭“嫌弃”</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="http://mini.eastday.com/yule/150831/005051648.html?qid=dfmini&amp;_103_娱乐" target="_blank" title="人妻谢欣妤被开价60万陪玩"><img src="images/3/55e39d01a5bec.jpg" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://mini.eastday.com/yule/150831/005051648.html?qid=dfmini&amp;_103_娱乐" target="_blank" title="人妻谢欣妤被开价60万陪玩">人妻谢欣妤被开价60万陪玩</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/night/yule/20150806/2477-1.html?qid=dfmini&amp;_0_娱乐" target="_blank" title="王思聪骂芒果台黔驴尽穷被嘲多读点书">王思聪骂芒果台黔驴尽穷被嘲多读点书</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/yule/150806/144836957.html?qid=dfmini&amp;_10_娱乐" target="_blank" title="韩雪首次披露“红三代”背景：爷爷是大校韩曙">韩雪首次披露“红三代”背景：爷爷是大校韩曙</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/yule/150806/004343157.html?qid=dfmini&amp;_11_娱乐" target="_blank" title="痴心男回应为刘亦菲讲笑话668天：好玩变成习惯">痴心男回应为刘亦菲讲笑话668天：好玩变成习惯</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/yule/150806/000257335.html?qid=dfmini&amp;_12_娱乐" target="_blank" title="孕妇不易！徐若瑄输完液流血1小时 浸透2层裤子">孕妇不易！徐若瑄输完液流血1小时 浸透2层裤子</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://ent.qq.com/a/20150806/010468.htm?qid=dfmini&amp;_13_娱乐" target="_blank" title="黄海波升级当爸凌晨报喜：高兴，感恩老婆">黄海波升级当爸凌晨报喜：高兴，感恩老婆</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/yule/150831/072116056.html?qid=dfmini&amp;_1_娱乐" target="_blank" title="邓紫棋高调携绯闻男友冯允谦看演出">邓紫棋高调携绯闻男友冯允谦看演出</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://ent.qq.com/a/20150805/066830.htm?qid=dfmini&amp;_14_娱乐" target="_blank" title="《肿瘤君》首映 白百何回应：王珞丹是我前辈">《肿瘤君》首映 白百何回应：王珞丹是我前辈</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://ent.qq.com/a/20150806/002654.htm?qid=dfmini&amp;_15_娱乐" target="_blank" title="唐嫣“包裹严实”现身 慌忙上错车遭“驱赶” ">唐嫣“包裹严实”现身 慌忙上错车遭“驱赶” </a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://ent.qq.com/a/20150805/064199.htm?qid=dfmini&amp;_16_娱乐" target="_blank" title="【存照】飘扬过海爱上你，中国女神远嫁记">【存照】飘扬过海爱上你，中国女神远嫁记</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://ent.qq.com/a/20150806/035106.htm?qid=dfmini&amp;_17_娱乐" target="_blank" title="王思聪带“网红”小餐馆吃饭 绯闻女友长相可爱">王思聪带“网红”小餐馆吃饭 绯闻女友长相可爱</a></p>
+            </div><!-- end 娱乐 -->
+        </div>
+        <div class="iframe">
+            <!-- 社会 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/night/shehui/20151027/6026-1.html?qid=dfmini&amp;_100_社会" target="_blank" title="河南情侣强迫5名少女到KTV坐台 称&quot;谁跑打死谁&quot;"><img src="images/5/562f16d477839.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/night/shehui/20151027/6026-1.html?qid=dfmini&amp;_100_社会" target="_blank" title="河南情侣强迫5名少女到KTV坐台 称&quot;谁跑打死谁&quot;">河南情侣强迫5名少女到KTV坐台 称&quot;谁跑打死谁&quot;</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/shehui/150806/081542214.html?qid=dfmini&amp;_101_社会" target="_blank" title="村干部被抓称是市人大代表"><img src="images/5/55c2fbfd06c9b.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/shehui/150806/081542214.html?qid=dfmini&amp;_101_社会" target="_blank" title="村干部被抓称是市人大代表">村干部被抓称是市人大代表</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/shehui/150806/075703054.html?qid=dfmini&amp;_102_社会" target="_blank" title="路虎女司机拒检骂交警是狗"><img src="images/5/55c2fc540c5d7.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/shehui/150806/075703054.html?qid=dfmini&amp;_102_社会" target="_blank" title="路虎女司机拒检骂交警是狗">路虎女司机拒检骂交警是狗</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="http://mini.eastday.com/night/shehui/20150807/2526-3.html?qid=dfmini&amp;_103_社会" target="_blank" title="东莞女业主被当众扒裤子"><img src="images/5/55d2a1dabb807.jpg" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://mini.eastday.com/night/shehui/20150807/2526-3.html?qid=dfmini&amp;_103_社会" target="_blank" title="东莞女业主被当众扒裤子">东莞女业主被当众扒裤子</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/night/shehui/20150806/2465-1.html?qid=dfmini&amp;_0_社会" target="_blank" title="福建女子为摆脱男友纠缠报假警求坐牢">福建女子为摆脱男友纠缠报假警求坐牢</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/163259301.html?qid=dfmini&amp;_10_社会" target="_blank" title="河南5岁男童被弃幼儿园1个月 爸爸被抓亲戚不管">河南5岁男童被弃幼儿园1个月 爸爸被抓亲戚不管</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/163259110.html?qid=dfmini&amp;_11_社会" target="_blank" title="男子出租屋自杀多日被发现 母亲：儿子大了不好管">男子出租屋自杀多日被发现 母亲：儿子大了不好管</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/162800091.html?qid=dfmini&amp;_12_社会" target="_blank" title="公交司机给抱小孩乘客让驾驶座 因车上无人让座">公交司机给抱小孩乘客让驾驶座 因车上无人让座</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/162644886.html?qid=dfmini&amp;_13_社会" target="_blank" title="男子弃百万年薪进山修行 经一年考验如愿出家">男子弃百万年薪进山修行 经一年考验如愿出家</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/night/shehui/20150806/2466-1.html?qid=dfmini&amp;_1_社会" target="_blank" title="曝派出所批开证明：有前科就不可买房">曝派出所批开证明：有前科就不可买房</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/160931736.html?qid=dfmini&amp;_14_社会" target="_blank" title="云南：眼镜蛇闯入居民家中捕食老鼠(图)">云南：眼镜蛇闯入居民家中捕食老鼠(图)</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/155823885.html?qid=dfmini&amp;_15_社会" target="_blank" title="人大毕业生“回炉”新闻遭疑 校方回应查无此人">人大毕业生“回炉”新闻遭疑 校方回应查无此人</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/154450845.html?qid=dfmini&amp;_16社会" target="_blank" title="因养老院医生工作失误 一老人双脚被严重烫伤">因养老院医生工作失误 一老人双脚被严重烫伤</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/shehui/150806/153629636.html?qid=dfmini&amp;_17_社会" target="_blank" title="男子入室行窃刺死2人后扮女装逃脱(图)">男子入室行窃刺死2人后扮女装逃脱(图)</a></p>
+            </div><!-- end 社会 -->
+        </div>
+        <div class="iframe">
+            <!-- 体育 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128134127461.html?qid=dfmini&amp;_100_体育" target="_blank" title="性侵、扯胸罩、用禁药、追杀弟子 这些指证让他从英雄变成魔鬼"><img src="http://imgmini.eastday.com/mobile/20160128134127_c7e1b36f99af503994f56e0dd3d2bbd8_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128134127461.html?qid=dfmini&amp;_100_体育" target="_blank" title="性侵、扯胸罩、用禁药、追杀弟子 这些指证让他从英雄变成魔鬼">性侵、扯胸罩、用禁药、追杀弟子 这些指证让他从英雄变成魔鬼</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128172041504.html?qid=dfmini&amp;_101_体育" target="_blank" title="曝恒大新援超3000万欧31日前官宣 准备AB2计划"><img src="http://imgmini.eastday.com/mobile/20160128172041_5f483c1784a4647dc3072e410cd89d25_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128172041504.html?qid=dfmini&amp;_101_体育" target="_blank" title="曝恒大新援超3000万欧31日前官宣 准备AB2计划">曝恒大新援超3000万欧31日前官宣 准备AB2计划</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128150306133.html?qid=dfmini&amp;_102_体育" target="_blank" title="勇士已赢遍联盟28队，剩下的雷霆 你颤抖了吗！"><img src="http://imgmini.eastday.com/mobile/20160128150306_195910aec5b8cbe3948a27f9a5e83575_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128150306133.html?qid=dfmini&amp;_102_体育" target="_blank" title="勇士已赢遍联盟28队，剩下的雷霆 你颤抖了吗！">勇士已赢遍联盟28队，剩下的雷霆 你颤抖了吗！</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="http://mini.eastday.com/tiyu/151027/114724608.html?qid=dfmini&amp;_103_体育" target="_blank" title="法羽赛李宗伟夺冠 王适娴被横扫国羽仅获一金"><img src="images/7/562f17932d324.jpg" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://mini.eastday.com/tiyu/151027/114724608.html?qid=dfmini&amp;_103_体育" target="_blank" title="法羽赛李宗伟夺冠 王适娴被横扫国羽仅获一金">法羽赛李宗伟夺冠 王适娴被横扫国羽仅获一金</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128172905602.html?qid=dfmini&amp;_0_体育" target="_blank" title="宏远正式用卡特替换拜纳姆 新援披10号下场登场">宏远正式用卡特替换拜纳姆 新援披10号下场登场</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128162635412.html?qid=dfmini&amp;_10_体育" target="_blank" title="他促使詹姆斯抛弃韦德回骑士 却沉迷女色状态下滑从大腿变黑洞">他促使詹姆斯抛弃韦德回骑士 却沉迷女色状态下滑从大腿变黑洞</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128142649734.html?qid=dfmini&amp;_11_体育" target="_blank" title="帕托新女友又是白富美 身材有料完爆米兰女老板">帕托新女友又是白富美 身材有料完爆米兰女老板</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153108892.html?qid=dfmini&amp;_12_体育" target="_blank" title="冷雨夜，广东双雄遭遇“寒流” 新世纪5个赛季首次无缘季后赛">冷雨夜，广东双雄遭遇“寒流” 新世纪5个赛季首次无缘季后赛</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128123440032.html?qid=dfmini&amp;_13_体育" target="_blank" title="“约什泡沫”破裂！这场后火箭一档 马刺勇士一档">“约什泡沫”破裂！这场后火箭一档 马刺勇士一档</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128163147930.html?qid=dfmini&amp;_1_体育" target="_blank" title="已婚熟女主持示爱鲨鱼：你最宏伟 雄风不倒！">已婚熟女主持示爱鲨鱼：你最宏伟 雄风不倒！</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128145036479.html?qid=dfmini&amp;_14_体育" target="_blank" title="45分！汤神成30年第七人 他暴走库里都得让贤">45分！汤神成30年第七人 他暴走库里都得让贤</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128152752897.html?qid=dfmini&amp;_15_体育" target="_blank" title="曝林书豪伤情尚不明朗 主帅怨赛程过紧拖垮黄蜂">曝林书豪伤情尚不明朗 主帅怨赛程过紧拖垮黄蜂</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165630527.html?qid=dfmini&amp;_16_体育" target="_blank" title="快!吉尔开训进亚冠名单 惊!巴西人违纪有前科">快!吉尔开训进亚冠名单 惊!巴西人违纪有前科</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171320369.html?qid=dfmini&amp;_17_体育" target="_blank" title="撞枪口!足协叫停权健赞助中乙球队 500万收回">撞枪口!足协叫停权健赞助中乙球队 500万收回</a></p>
+            </div><!-- end 体育 -->
+        </div>
+        <div class="iframe">
+            <!-- 财经 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128155421211.html?qid=dfmini&amp;_100_财经" target="_blank" title="高层终于放出狠话：再跌就是灭亡，中国股市到了必须放阳的时刻！"><img src="http://imgmini.eastday.com/mobile/20160128155421_3b786c7cb07b8b09abdeaad6eff9dc05_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128155421211.html?qid=dfmini&amp;_100_财经" target="_blank" title="高层终于放出狠话：再跌就是灭亡，中国股市到了必须放阳的时刻！">高层终于放出狠话：再跌就是灭亡，中国股市到了必须放阳的时刻！</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128125102987.html?qid=dfmini&amp;_101_财经" target="_blank" title="民进党第一道荒谬的“法案”"><img src="http://imgmini.eastday.com/mobile/20160128125102_3459588011772a6513554bc73565c166_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128125102987.html?qid=dfmini&amp;_101_财经" target="_blank" title="民进党第一道荒谬的“法案”">民进党第一道荒谬的“法案”</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128163515962.html?qid=dfmini&amp;_102_财经" target="_blank" title="就在今天上午，驻马店火遍全中国"><img src="http://imgmini.eastday.com/mobile/20160128163515_f2dd88de800409c346560c5dcedbd03d_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128163515962.html?qid=dfmini&amp;_102_财经" target="_blank" title="就在今天上午，驻马店火遍全中国">就在今天上午，驻马店火遍全中国</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128161334653.html?qid=dfmini&amp;_0_财经" target="_blank" title="警惕！明日A股或将重演6年前的历史">警惕！明日A股或将重演6年前的历史</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151128004.html?qid=dfmini&amp;_10_财经" target="_blank" title="面对惨淡的中国股市！普通老百姓我们又该怎么办？">面对惨淡的中国股市！普通老百姓我们又该怎么办？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128160416400.html?qid=dfmini&amp;_11_财经" target="_blank" title="杨百万：明天多头应再次反击">杨百万：明天多头应再次反击</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128140038874.html?qid=dfmini&amp;_12_财经" target="_blank" title="国家队再曝重磅消息，午后大盘走势就一个字，看此信号再入场">国家队再曝重磅消息，午后大盘走势就一个字，看此信号再入场</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128154100856.html?qid=dfmini&amp;_13_财经" target="_blank" title="金猴舞动天下春 国家再救万股民">金猴舞动天下春 国家再救万股民</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128164422554.html?qid=dfmini&amp;_1_财经" target="_blank" title="证监会为何不救市？看完此文你一目了然">证监会为何不救市？看完此文你一目了然</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128154409829.html?qid=dfmini&amp;_14_财经" target="_blank" title="他是马云最佩服的人，25岁成总裁，低调但充满传奇">他是马云最佩服的人，25岁成总裁，低调但充满传奇</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128172434828.html?qid=dfmini&amp;_15_财经" target="_blank" title="恒发洋参股东被斩仓暴跌91% 代码911被吐槽">恒发洋参股东被斩仓暴跌91% 代码911被吐槽</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128155418338.html?qid=dfmini&amp;_16_财经" target="_blank" title="月入3千目标存款1000万！节约到用洗衣粉洗头，看完哽咽了">月入3千目标存款1000万！节约到用洗衣粉洗头，看完哽咽了</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171732575.html?qid=dfmini&amp;_17_财经" target="_blank" title="明日敲山震虎，小幅度高开或将直击3000点！">明日敲山震虎，小幅度高开或将直击3000点！</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128143119338.html?qid=dfmini&amp;_2_财经" target="_blank" title="突现10年罕见信号！本周只是预演 ，下周正式开始">突现10年罕见信号！本周只是预演 ，下周正式开始</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128164516542.html?qid=dfmini&amp;_18_财经" target="_blank" title="Flash视频仅剩下6%份额 两年内将彻底消亡">Flash视频仅剩下6%份额 两年内将彻底消亡</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128145554996.html?qid=dfmini&amp;_19_财经" target="_blank" title="李大霄：相约CCTV2，谈谈婴儿底2锚定2638">李大霄：相约CCTV2，谈谈婴儿底2锚定2638</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171457904.html?qid=dfmini&amp;_20_财经" target="_blank" title="股市第一大妖股已出现，不惧暴跌继续涨停">股市第一大妖股已出现，不惧暴跌继续涨停</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170127317.html?qid=dfmini&amp;_21_财经" target="_blank" title="预测：沪指尾盘跳水已查明！散户不必惊慌！">预测：沪指尾盘跳水已查明！散户不必惊慌！</a></p>
+            </div><!-- end 财经 -->
+        </div>
+        <div class="iframe">
+            <!-- 科技 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128113510187.html?qid=dfmini&amp;_100_科技" target="_blank" title="当性爱机器人来到中国，我们该如何看待？"><img src="http://imgmini.eastday.com/mobile/20160128113510_ce00efb9cf89363e80a45c82cdbdea3e_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128113510187.html?qid=dfmini&amp;_100_科技" target="_blank" title="当性爱机器人来到中国，我们该如何看待？">当性爱机器人来到中国，我们该如何看待？</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128172516968.html?qid=dfmini&amp;_101_科技" target="_blank" title="中国手机厂商崛起 三星销量依旧排第一"><img src="http://imgmini.eastday.com/mobile/20160128172516_b0b4b1d584b00ab2edd6699d779fbdc1_1_mwpm_03200403.png" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128172516968.html?qid=dfmini&amp;_101_科技" target="_blank" title="中国手机厂商崛起 三星销量依旧排第一">中国手机厂商崛起 三星销量依旧排第一</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128130542354.html?qid=dfmini&amp;_102_科技" target="_blank" title="马云终于辞职了，却留下句句触动心灵的话！"><img src="http://imgmini.eastday.com/mobile/20160128130542_5bceeea9d0b175b655018be8d6c3c11d_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128130542354.html?qid=dfmini&amp;_102_科技" target="_blank" title="马云终于辞职了，却留下句句触动心灵的话！">马云终于辞职了，却留下句句触动心灵的话！</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="http://mini.eastday.com/keji/151027/120729602.html?qid=dfmini&amp;_103_科技" target="_blank" title="意大利机械商柯马推双臂拟人概念机器人Amico"><img src="images/6/562f172914229.jpg" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://mini.eastday.com/keji/151027/120729602.html?qid=dfmini&amp;_103_科技" target="_blank" title="意大利机械商柯马推双臂拟人概念机器人Amico">意大利机械商柯马推双臂拟人概念机器人Amico</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128170159424.html?qid=dfmini&amp;_0_科技" target="_blank" title="阿里发大招 联合韩国最大化妆品集团共同打假">阿里发大招 联合韩国最大化妆品集团共同打假</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161326003.html?qid=dfmini&amp;_10_科技" target="_blank" title="广州首家苹果店开业 果粉雨中排长龙">广州首家苹果店开业 果粉雨中排长龙</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153730143.html?qid=dfmini&amp;_11_科技" target="_blank" title="Alphabet苹果市值差距缩至305亿美元 最多差2940亿美元">Alphabet苹果市值差距缩至305亿美元 最多差2940亿美元</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128132921020.html?qid=dfmini&amp;_12_科技" target="_blank" title="一道小学数学题，有人做哭了，难道有机关！这样做对么？">一道小学数学题，有人做哭了，难道有机关！这样做对么？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128150333346.html?qid=dfmini&amp;_13_科技" target="_blank" title="韩“五元店”红米3卖545元 320部一小时内售罄">韩“五元店”红米3卖545元 320部一小时内售罄</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128171338342.html?qid=dfmini&amp;_1_科技" target="_blank" title="TFBOYS联手星影联盟 官方回应：字体已上线">TFBOYS联手星影联盟 官方回应：字体已上线</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153235516.html?qid=dfmini&amp;_14_科技" target="_blank" title="把三星S6泡在可乐里2分钟会发生什么？">把三星S6泡在可乐里2分钟会发生什么？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128122446237.html?qid=dfmini&amp;_15_科技" target="_blank" title="10个去情趣用品店前应知道的事">10个去情趣用品店前应知道的事</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128152806155.html?qid=dfmini&amp;_16_科技" target="_blank" title="从国际象棋到中国围棋，人类有多久没赢过了？">从国际象棋到中国围棋，人类有多久没赢过了？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128163241689.html?qid=dfmini&amp;_17_科技" target="_blank" title="可植入人体的手机，欲提前到2023年实现！">可植入人体的手机，欲提前到2023年实现！</a></p>
+            </div><!-- end 科技 -->
+        </div>
+        <div class="iframe">
+            <!-- 军事 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128121447327.html?qid=dfmini&amp;_100_军事" target="_blank" title="美轰炸中国使馆留下一枚未爆导弹，十年后中国以牙还牙让美国难受"><img src="http://imgmini.eastday.com/mobile/20160128121447_4b63f1ab1af35d9390e1cb1caed8ccf7_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128121447327.html?qid=dfmini&amp;_100_军事" target="_blank" title="美轰炸中国使馆留下一枚未爆导弹，十年后中国以牙还牙让美国难受">美轰炸中国使馆留下一枚未爆导弹，十年后中国以牙还牙让美国难受</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128154740539.html?qid=dfmini&amp;_101_军事" target="_blank" title="性感巨乳大洋马和一堆帅到掉渣的枪，如果让你选择一个你要哪个？"><img src="http://imgmini.eastday.com/mobile/20160128154740_5c86ae272a93e01ad738bc0c208067d3_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128154740539.html?qid=dfmini&amp;_101_军事" target="_blank" title="性感巨乳大洋马和一堆帅到掉渣的枪，如果让你选择一个你要哪个？">性感巨乳大洋马和一堆帅到掉渣的枪，如果让你选择一个你要哪个？</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128154740437.html?qid=dfmini&amp;_102_军事" target="_blank" title="中国究竟曝光了哪种杀手锏武器？让俄罗斯大呼后悔不已"><img src="http://imgmini.eastday.com/mobile/20160128154740_2fd158076831eaadd9974331c8ca9766_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128154740437.html?qid=dfmini&amp;_102_军事" target="_blank" title="中国究竟曝光了哪种杀手锏武器？让俄罗斯大呼后悔不已">中国究竟曝光了哪种杀手锏武器？让俄罗斯大呼后悔不已</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128141929567.html?qid=dfmini&amp;_0_军事" target="_blank" title="马英九登上南沙太平岛 回击国际质疑">马英九登上南沙太平岛 回击国际质疑</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153429657.html?qid=dfmini&amp;_10_军事" target="_blank" title="东南战区某部已进驻浙江德清洛舍镇搞国防建设">东南战区某部已进驻浙江德清洛舍镇搞国防建设</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170952186.html?qid=dfmini&amp;_11_军事" target="_blank" title="谁还敢对中国动手？中国空军透露大建新轰炸机让周边国家胆战心惊">谁还敢对中国动手？中国空军透露大建新轰炸机让周边国家胆战心惊</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160127203824301.html?qid=dfmini&amp;_12_军事" target="_blank" title="美国10艘航母要集体和中国开打？没想到中国出狠招 将拒之门外">美国10艘航母要集体和中国开打？没想到中国出狠招 将拒之门外</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160127152825925.html?qid=dfmini&amp;_13_军事" target="_blank" title="毛主席晚年决策和指挥的最后一战，全世界为之色变">毛主席晚年决策和指挥的最后一战，全世界为之色变</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128144713657.html?qid=dfmini&amp;_1_军事" target="_blank" title="捷报！中国又研制成功世界顶尖技术 俄罗斯追悔莫及而又无可奈何">捷报！中国又研制成功世界顶尖技术 俄罗斯追悔莫及而又无可奈何</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128154116323.html?qid=dfmini&amp;_14_军事" target="_blank" title="土耳其出尔反尔不买中国导弹：不怕，中国最铁杆兄弟一口气购整营">土耳其出尔反尔不买中国导弹：不怕，中国最铁杆兄弟一口气购整营</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128164422750.html?qid=dfmini&amp;_15_军事" target="_blank" title="为什么荣成舰下水日本急哭了 因为水雷困死中国的计划落空了">为什么荣成舰下水日本急哭了 因为水雷困死中国的计划落空了</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128082505316.html?qid=dfmini&amp;_16_军事" target="_blank" title="传美军2月底突袭朝鲜 中方警告不要搞乱半岛">传美军2月底突袭朝鲜 中方警告不要搞乱半岛</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128112247544.html?qid=dfmini&amp;_17_军事" target="_blank" title="美军司令：钓鱼岛若受中国攻击 美军将军事干预">美军司令：钓鱼岛若受中国攻击 美军将军事干预</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128135911222.html?qid=dfmini&amp;_2_军事" target="_blank" title="南亚一国弃购F16转购中国歼10?真相令人意外">南亚一国弃购F16转购中国歼10?真相令人意外</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128144713319.html?qid=dfmini&amp;_18_军事" target="_blank" title="美国万万没想到事情发生了：美忠实盟友投向中国 全因一件杀手锏">美国万万没想到事情发生了：美忠实盟友投向中国 全因一件杀手锏</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128162555731.html?qid=dfmini&amp;_19_军事" target="_blank" title="一番台独争议后，中国3D军事模拟迎敌出战！超级震撼！">一番台独争议后，中国3D军事模拟迎敌出战！超级震撼！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160127063320418.html?qid=dfmini&amp;_20_军事" target="_blank" title="近日美国谈钓鱼岛归属，让日本举国哑口无言">近日美国谈钓鱼岛归属，让日本举国哑口无言</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128131433050.html?qid=dfmini&amp;_21_军事" target="_blank" title="韩国因朝核问题记恨：朴槿惠这次真把北京给卖了">韩国因朝核问题记恨：朴槿惠这次真把北京给卖了</a></p>
+            </div><!-- end 军事 -->
+        </div>
+        <!-- 笑话 -->
+        <div class="iframe">
+            <div style="width: 542px; height: 406px; float: left;">
+                <iframe frameborder="0" scrolling="no" src="http://www.9k9k.com/mini13/" width="542" height="406"></iframe>
+            </div>
+        </div>
+        <!--end 笑话-->
+
+        <div class="iframe">
+            <!-- 游戏 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128073523831.html?qid=dfmini&amp;_100_游戏" target="_blank" title="洋葱新闻：让人扭曲的事业线"><img src="http://imgmini.eastday.com/mobile/20160128073523_f11d88b56cfb8ca09d7ea5d121dc33f1_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128073523831.html?qid=dfmini&amp;_100_游戏" target="_blank" title="洋葱新闻：让人扭曲的事业线">洋葱新闻：让人扭曲的事业线</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128152035984.html?qid=dfmini&amp;_101_游戏" target="_blank" title="陈赫靠游戏减压：既然活着 那就开心一点！"><img src="http://imgmini.eastday.com/mobile/20160128152035_cd235d79b2e8bfd13b1be426bbb03203_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128152035984.html?qid=dfmini&amp;_101_游戏" target="_blank" title="陈赫靠游戏减压：既然活着 那就开心一点！">陈赫靠游戏减压：既然活着 那就开心一点！</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128094311521.html?qid=dfmini&amp;_102_游戏" target="_blank" title="营养不够了！用VR体验和巨乳女优共度情人节"><img src="http://imgmini.eastday.com/mobile/20160128094311_eada904196890400c0f107431df92778_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128094311521.html?qid=dfmini&amp;_102_游戏" target="_blank" title="营养不够了！用VR体验和巨乳女优共度情人节">营养不够了！用VR体验和巨乳女优共度情人节</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128125834878.html?qid=dfmini&amp;_0_游戏" target="_blank" title="iG潜规则、VG、OMG女队猛料频出，电竞女队是梦想还是名利场？">iG潜规则、VG、OMG女队猛料频出，电竞女队是梦想还是名利场？</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128152036248.html?qid=dfmini&amp;_10_游戏" target="_blank" title="设计师：熬兴仍在设计中 我们确实想做条中国龙">设计师：熬兴仍在设计中 我们确实想做条中国龙</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128131545978.html?qid=dfmini&amp;_11_游戏" target="_blank" title="最污最黑：英雄联盟职业选手黑历史">最污最黑：英雄联盟职业选手黑历史</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128142453850.html?qid=dfmini&amp;_12_游戏" target="_blank" title="练好他们冲分就稳了！ 6.1版本最强打野TOP5">练好他们冲分就稳了！ 6.1版本最强打野TOP5</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128105900850.html?qid=dfmini&amp;_13_游戏" target="_blank" title="LOL最常见猝死原因排行TOP10：第一名中枪的人最多！">LOL最常见猝死原因排行TOP10：第一名中枪的人最多！</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128124841398.html?qid=dfmini&amp;_1_游戏" target="_blank" title="LOL这几个英雄能把亚索虐成狗！">LOL这几个英雄能把亚索虐成狗！</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171457583.html?qid=dfmini&amp;_14_游戏" target="_blank" title="天天酷跑暴风雪女和芙洛拉哪个好 神宠PK">天天酷跑暴风雪女和芙洛拉哪个好 神宠PK</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128101946906.html?qid=dfmini&amp;_15_游戏" target="_blank" title="基本靠手！没有电脑特效的年代 《奥特曼》是如何拍摄的">基本靠手！没有电脑特效的年代 《奥特曼》是如何拍摄的</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160127192149379.html?qid=dfmini&amp;_16_游戏" target="_blank" title="《诛仙》碧瑶花落丽颖，这样美腻的碧瑶符合你心中的女主吗？">《诛仙》碧瑶花落丽颖，这样美腻的碧瑶符合你心中的女主吗？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171732903.html?qid=dfmini&amp;_17_游戏" target="_blank" title="口袋妖怪图鉴第24期——钢铁超梦">口袋妖怪图鉴第24期——钢铁超梦</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128140645948.html?qid=dfmini&amp;_2_游戏" target="_blank" title="LOL四保一狗头是什么体验？真正的地狱犬！">LOL四保一狗头是什么体验？真正的地狱犬！</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171457740.html?qid=dfmini&amp;_18_游戏" target="_blank" title="伙培养伴新玩法 功夫熊猫3伙伴总战斗力培养详解">伙培养伴新玩法 功夫熊猫3伙伴总战斗力培养详解</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128131212556.html?qid=dfmini&amp;_19_游戏" target="_blank" title="王者荣耀gank游走技巧 教你5分钟游炸对面">王者荣耀gank游走技巧 教你5分钟游炸对面</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128111219070.html?qid=dfmini&amp;_20_游戏" target="_blank" title="电脑玩英雄联盟很卡？完成这个设置后速度飙升">电脑玩英雄联盟很卡？完成这个设置后速度飙升</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165006771.html?qid=dfmini&amp;_21_游戏" target="_blank" title="美女coser帅气来袭！《英雄联盟》·皮城执法官">美女coser帅气来袭！《英雄联盟》·皮城执法官</a></p>
+            </div><!--end 游戏 -->
+        </div>
+        <!--养生-->
+        <div class="iframe">
+            <div style="width: 542px; height: 406px; float: left;">
+                <iframe frameborder="0" scrolling="no" src="http://www.leha.com/export/leha_533.html" width="542" height="406"></iframe>
+            </div>
+        </div>
+        <!--end 养生 -->
+        <div class="iframe">
+            <!-- 视频 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://tv.sohu.com/20151024/n424060205.shtml?lcode=AAAASXXBuZeG8ePqi190Q98l4wrq6Blr_F09YAtUBA999VoJlUak16GUVoce_rhMH5Jt68MuB3CiRlIOu2UWQ6WEC68EFqn0udDrLN7qahu8qYPHxdl&amp;lqd=11816?100_视频" target="_blank" title="监拍男子网吧用铁钩偷手机"><img src="images/1/562c81ce0b38f.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://tv.sohu.com/20151024/n424060205.shtml?lcode=AAAASXXBuZeG8ePqi190Q98l4wrq6Blr_F09YAtUBA999VoJlUak16GUVoce_rhMH5Jt68MuB3CiRlIOu2UWQ6WEC68EFqn0udDrLN7qahu8qYPHxdl&amp;lqd=11816?100_视频" target="_blank" title="监拍男子网吧用铁钩偷手机">监拍男子网吧用铁钩偷手机</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://tv.sohu.com/20151024/n424052518.shtml?lcode=AAAASZNHFpkxjsKo7vM06mKU-H-ufrd6-IyD425WXXanrEx6SI8IpohQ317EQWiuNnMtz7LQp4TD7EAKkP2N6yVsT-Fb7HjmkN7SBUoTUMZSPUrlcf6&amp;lqd=11816?101_视频" target="_blank" title="女子监禁并强暴丈夫被捕"><img src="images/1/562c826c932dd.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://tv.sohu.com/20151024/n424052518.shtml?lcode=AAAASZNHFpkxjsKo7vM06mKU-H-ufrd6-IyD425WXXanrEx6SI8IpohQ317EQWiuNnMtz7LQp4TD7EAKkP2N6yVsT-Fb7HjmkN7SBUoTUMZSPUrlcf6&amp;lqd=11816?101_视频" target="_blank" title="女子监禁并强暴丈夫被捕">女子监禁并强暴丈夫被捕</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://tv.sohu.com/20151024/n424055309.shtml?lcode=AAAASTlnsDr0hhRHafgv56LtCzojYTWkAvGrIQEkrL0gstR_hLDlVmPtCBaLohkkf6x8dDar-BHZfvKtzOd6wGzwZ23JWO5YlMvDSVWmd4mYlkysnea&amp;lqd=11816?102_视频" target="_blank" title="老师制止学生上网被刺死"><img src="images/1/562c82e4760aa.jpg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://tv.sohu.com/20151024/n424055309.shtml?lcode=AAAASTlnsDr0hhRHafgv56LtCzojYTWkAvGrIQEkrL0gstR_hLDlVmPtCBaLohkkf6x8dDar-BHZfvKtzOd6wGzwZ23JWO5YlMvDSVWmd4mYlkysnea&amp;lqd=11816?102_视频" target="_blank" title="老师制止学生上网被刺死">老师制止学生上网被刺死</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://tv.sohu.com/20151023/n423973482.shtml?lcode=AAAASXXBuZeG8ePqi190Q98l4wrq6Blr_F09YAtUBA999VoJ4n699EuSPkIbfAmQUcf0gjDJVeMeOgVYvgVHJ5JFL-4EFqn0udDrLMgUrSjYN0Faxdl&amp;lqd=11816?105_视频" target="_blank" title="临沂某中学门口4名女生围殴男生扇其耳光">临沂某中学门口4名女生围殴男生扇其耳光</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/s2015/newslist/?vid=2647547&amp;lcode=AAAAMTlnsDr0hhRHafgv56LtCzojYTWkAvGrIXKz7nrHum7WnZc8F7eRMIf8wlzfJqS3V3tLsBzTGQoVnea&amp;lqd=11816?108_视频" target="_blank" title="江苏镇江女子撞车遇交警后现场撒百元大钞">江苏镇江女子撞车遇交警后现场撒百元大钞</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/20151021/n423764510.shtml?lcode=AAAASTlnsDr0hhRHafgv56LtCzojYTWkAvGrIQEkrL0gstR_ii3xvP6cIxOyYfDBGpTU1kPjj2Md5u0iTdByUBLw6SFJWO5YlMvDS3tLsBzTGQoVnea&amp;lqd=11816?109_视频" target="_blank" title="实拍澳大利亚客机与闪电“擦肩而过”瞬间">实拍澳大利亚客机与闪电“擦肩而过”瞬间</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://my.tv.sohu.com/pl/6520041/81814435.shtml?lcode=AAAARXXBuZeG8ePqaNdDxH7er8mcPUsyJoo-ZN7aAg-yUGWQAGe6egxpTu_138OyUUdRqIN6AZZjdpF6k0wFLEgF4-_mXoRtU685P6..xdl&amp;lqd=11816?110_视频" target="_blank" title="男生开房后竟企图逃单 约会怎样不买单">男生开房后竟企图逃单 约会怎样不买单</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/20151018/n423527018.shtml?fid=792pvid=4d4db6d26aa0a4ec&amp;lcode=AAAAOnlnsDr0hhRHafgv56LtCzojYTWkAvGrIZqs89WhMtvqj1_uwJ8BvJiPjrRn-QFS8D2QL7WNm-zOQ1HQ541-PLM.nea&amp;lqd=11816?111_视频" target="_blank" title="监拍大妈闯红灯被撞飞 翻身爬起淡定捡菜">监拍大妈闯红灯被撞飞 翻身爬起淡定捡菜</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://tv.sohu.com/20151024/n424043490.shtml?lcode=AAAAS09x9jTnOoqsDBIe-FsGcC2PLi3Z7gpoN67vT4ZtC7RE3oLzBIDKvfJyIwRn2BL8JscSTg-itAFtj_LdcSMph7NKxNAJ-Fj6XG-7mQpdK5V-d4y&amp;lqd=11816?106_视频" target="_blank" title="女子劈腿开房被抓现行 极力维护情夫">女子劈腿开房被抓现行 极力维护情夫</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/20151020/n423689034.shtml?lcode=AAAAS09x9jTnOoqsDBIe-FsGcC2PLi3Z7gpoN67vT4ZtC7REnd_qvSH_Lu06o9eCa8WeQ_KqgaUzASa09p91iRu2sZZKxNAJ-Fj6XDyQTFdTFn19d4y&amp;lqd=11816?112_视频" target="_blank" title="实拍女子地铁狂吻男友 响声遍及车厢">实拍女子地铁狂吻男友 响声遍及车厢</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://my.tv.sohu.com/us/196262702/81823368.shtml?lcode=AAAARpiobhBIXc3DBzPF1QVpj9oPBhVtk9R3UwsR-TnJ1K96-OcQ-f4YRbk932i_uW2lNP1EPzBrbTEnT5ZxK8KYOd34Qe1L3jcrsA..sk5&amp;lqd=11816?113_视频" target="_blank" title="狗血！日本美女推出踢臀服务">狗血！日本美女推出踢臀服务</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/20151020/n423706284.shtml?lcode=AAAAS09x9jTnOoqsDBIe-FsGcC2PLi3Z7gpoN67vT4ZtC7RE8lvZw_B7Qsccc5LBU0fbhCteTkFtGPmqp69XHOXoxR3KxNAJ-Fj6XGJ7SDeoUC-Rd4y&amp;lqd=11816?114_视频" target="_blank" title="女子“被抓胸”视频疯传 被家人说行为不检点">女子“被抓胸”视频疯传 被家人说行为不检点</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/20151020/n423659441.shtml?lcode=AAAASViobhBIXc3D8izsN5WNN68rTFA6JHt8IY_-TDjodlII6Z47GuZ4hluw4ZtSDrFDESk4R5eOBsUGv8iGg6K-Wb01fZSKIp2ARazj7k46Iolhsk5&amp;lqd=11816?115_视频" target="_blank" title="夜总会女子堵奔驰索要小费 司机开车将其撞倒">夜总会女子堵奔驰索要小费 司机开车将其撞倒</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://tv.sohu.com/20151023/n423995979.shtml?lcode=AAAASViobhBIXc3D8izsN5WNN68rTFA6JHt8IY_-TDjodlIISHumy0VJ-HdODO8Ertns37keK1DKowKgEmLJELgcVSm1fZSKIp2AR6GMTIGeSZGlsk5&amp;lqd=11816?107_视频" target="_blank" title="酒驾致妻子死亡 找来邻居冒名顶替">酒驾致妻子死亡 找来邻居冒名顶替</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://my.tv.sohu.com/us/211785070/81678404.shtml?lcode=AAAARu9x9jTnOoqsRD8OneDxnhRwUEL9FGNRevctYNKyRZEfsVf0H-0kFCse6fviE5GaYnDliNR5KahU1fuUqkUh3ThTcRd3vCGQfA..d4y&amp;lqd=11816?116_视频" target="_blank" title="被禁的咸湿片！黑丝少妇与屌丝的人鬼虐恋">被禁的咸湿片！黑丝少妇与屌丝的人鬼虐恋</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://my.tv.sohu.com/us/202939688/78392026.shtml?lcode=AAAARpiobhBIXc3DBzPF1QVpj9oPBhVtk9R3UtlcaTKdlDanknHCThYWG3DWrl5oUbiqRt0ar3VQVs4egXm9ORd__wPvFPA0cbbLXk..sk5&amp;lqd=11816?117_视频" target="_blank" title="惊鸿一瞥 盘点那些年春晚舞台上的女神">惊鸿一瞥 盘点那些年春晚舞台上的女神</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://my.tv.sohu.com/pl/8352441/81480739.shtml?lcode=AAAAR09x9jTnOoqsRD8OneDxnhRwUEL9FGNRemjyQvDySxeBYo9lelICDjQNlftqKUpC4Hr9YHcWM0r0rUqTyfSS-XWl_R5FsC6h3k..d4y&amp;lqd=11816?118_视频" target="_blank" title="净身不能净心！古时候太监如何跟娘娘啪啪啪">净身不能净心！古时候太监如何跟娘娘啪啪啪</a></p>
+                <p class="title_h2"><span class="point_video"></span><a class="short_a" href="http://tv.sohu.com/20151015/n423344020.shtml?lcode=AAAAS09x9jTnOoqsDBIe-FsGcC2PLi3Z7gpoN6wK3UcxBL6Fk-AzypM5ijwI9AhpTIIEdehV2XT88Q3gkIVxubV8ttxKxNAJ-Fj6XMcDDw8CXFqrd4y&amp;lqd=11816?119_视频" target="_blank" title="高一女生被盒装抛尸柿子树下 目击者称手段残忍">高一女生被盒装抛尸柿子树下 目击者称手段残忍</a></p>
+            </div><!-- end 视频 -->
+        </div>
+        <div class="iframe">
+            <!-- 国内 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128171553394.html?qid=dfmini&amp;_100_国内" target="_blank" title="马英九登上太平岛并发表声明 外交部回应"><img src="http://imgmini.eastday.com/mobile/20160128171553_b347cb7a9a8ccc1f8eab312fe1f9d3d1_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128171553394.html?qid=dfmini&amp;_100_国内" target="_blank" title="马英九登上太平岛并发表声明 外交部回应">马英九登上太平岛并发表声明 外交部回应</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128160232224.html?qid=dfmini&amp;_101_国内" target="_blank" title="石泰峰当选江苏省长(图/简历)"><img src="http://imgmini.eastday.com/mobile/20160128160232_356f1bf9327517aa8af12877f5b55fde_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128160232224.html?qid=dfmini&amp;_101_国内" target="_blank" title="石泰峰当选江苏省长(图/简历)">石泰峰当选江苏省长(图/简历)</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128124639621.html?qid=dfmini&amp;_102_国内" target="_blank" title="大风刮倒10亩甘蔗无人要 5元贱卖一天秒光"><img src="http://imgmini.eastday.com/mobile/20160128124639_406cefba3fa9ee4929f810486850db1e_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128124639621.html?qid=dfmini&amp;_102_国内" target="_blank" title="大风刮倒10亩甘蔗无人要 5元贱卖一天秒光">大风刮倒10亩甘蔗无人要 5元贱卖一天秒光</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128134828012.html?qid=dfmini&amp;_0_国内" target="_blank" title="卫计委：若不给超生孩子上户口 发现即严处">卫计委：若不给超生孩子上户口 发现即严处</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161601441.html?qid=dfmini&amp;_10_国内" target="_blank" title="江苏新任省长石泰峰向宪法宣誓就职">江苏新任省长石泰峰向宪法宣誓就职</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128150306032.html?qid=dfmini&amp;_11_国内" target="_blank" title="调查：你挂不到的号号贩子都能搞到 到底谁为他们撑腰">调查：你挂不到的号号贩子都能搞到 到底谁为他们撑腰</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128131642678.html?qid=dfmini&amp;_12_国内" target="_blank" title="马英九乘军机抵达南沙太平岛">马英九乘军机抵达南沙太平岛</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151819264.html?qid=dfmini&amp;_13_国内" target="_blank" title="北京治安总队会同西城分局抓获号贩子12名">北京治安总队会同西城分局抓获号贩子12名</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128144638234.html?qid=dfmini&amp;_1_国内" target="_blank" title="俄罗斯籍男子因走私象牙制品在中国境内被捕">俄罗斯籍男子因走私象牙制品在中国境内被捕</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128143224810.html?qid=dfmini&amp;_14_国内" target="_blank" title="北京1年来4位区委书记晋升部级">北京1年来4位区委书记晋升部级</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128150501363.html?qid=dfmini&amp;_15_国内" target="_blank" title="延长女医生退休年龄">延长女医生退休年龄</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128110935049.html?qid=dfmini&amp;_16_国内" target="_blank" title="工地百万现金发工资 民工年薪20万秒杀白领">工地百万现金发工资 民工年薪20万秒杀白领</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151326826.html?qid=dfmini&amp;_17_国内" target="_blank" title="北京警方在广安门医院抓获7名号贩子">北京警方在广安门医院抓获7名号贩子</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128134718146.html?qid=dfmini&amp;_2_国内" target="_blank" title="今早市医院一患者从5楼跳下 目前生死不明">今早市医院一患者从5楼跳下 目前生死不明</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128162603860.html?qid=dfmini&amp;_18_国内" target="_blank" title="全面深化改革如何坚持正确方向">全面深化改革如何坚持正确方向</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128134631158.html?qid=dfmini&amp;_19_国内" target="_blank" title="山西省长李小鹏：预期今年山西GDP增长6%">山西省长李小鹏：预期今年山西GDP增长6%</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171853987.html?qid=dfmini&amp;_20_国内" target="_blank" title="2016中国贵阳电子商务大会暨贵阳国际大数据产业博览会将于5月召开">2016中国贵阳电子商务大会暨贵阳国际大数据产业博览会将于5月召开</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128173203719.html?qid=dfmini&amp;_21_国内" target="_blank" title="王岐山秒杀过哪些“老虎”:王宝安会后即被查">王岐山秒杀过哪些“老虎”:王宝安会后即被查</a></p>
+            </div><!-- end 国内 -->
+        </div>
+        <!--国际 人文 星座 家居-->
+        <div class="iframe">
+            <!-- 国际 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128142453741.html?qid=dfmini&amp;_100_国际" target="_blank" title="女子钻入下水道，手中拿着的东西令人震惊"><img src="http://imgmini.eastday.com/mobile/20160128142453_fec1b8f772b4eb7d61a61bf07005e143_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128142453741.html?qid=dfmini&amp;_100_国际" target="_blank" title="女子钻入下水道，手中拿着的东西令人震惊">女子钻入下水道，手中拿着的东西令人震惊</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128170706244.html?qid=dfmini&amp;_101_国际" target="_blank" title="这是世界上最缺男人的国家，而且居然还盛产美女"><img src="http://imgmini.eastday.com/mobile/20160128170706_66e5128c2b249ce6ef3210cec53288a0_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128170706244.html?qid=dfmini&amp;_101_国际" target="_blank" title="这是世界上最缺男人的国家，而且居然还盛产美女">这是世界上最缺男人的国家，而且居然还盛产美女</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128115025292.html?qid=dfmini&amp;_102_国际" target="_blank" title="她长得甜美可人 男生都喜欢 当她外套一脱你绝对不敢有非分之想"><img src="http://imgmini.eastday.com/mobile/20160128115025_549b0b1b605e17afd3d5ffe67e8f2db4_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128115025292.html?qid=dfmini&amp;_102_国际" target="_blank" title="她长得甜美可人 男生都喜欢 当她外套一脱你绝对不敢有非分之想">她长得甜美可人 男生都喜欢 当她外套一脱你绝对不敢有非分之想</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128134950145.html?qid=dfmini&amp;_0_国际" target="_blank" title="活久见！巴西男子同时将4条活蛇放嘴中">活久见！巴西男子同时将4条活蛇放嘴中</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128162603631.html?qid=dfmini&amp;_10_国际" target="_blank" title="日国产X-2隐形战机试验机首度亮相 或将于2月首次试飞">日国产X-2隐形战机试验机首度亮相 或将于2月首次试飞</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128173017935.html?qid=dfmini&amp;_11_国际" target="_blank" title="印尼男子用废铁自造假肢 称可通过脑电波控制">印尼男子用废铁自造假肢 称可通过脑电波控制</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128122720580.html?qid=dfmini&amp;_12_国际" target="_blank" title="这3个新人入选越南“四巨头”，什么来头？">这3个新人入选越南“四巨头”，什么来头？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128173836905.html?qid=dfmini&amp;_13_国际" target="_blank" title="朝鲜中央动物园焕然一新 天鹅蟒蛇鬣狗吸睛">朝鲜中央动物园焕然一新 天鹅蟒蛇鬣狗吸睛</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128165641733.html?qid=dfmini&amp;_1_国际" target="_blank" title="终于找到你！“梅西10号球衣”小男孩真身大揭秘">终于找到你！“梅西10号球衣”小男孩真身大揭秘</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128144456536.html?qid=dfmini&amp;_14_国际" target="_blank" title="以色列精英士兵因用军枪打死骆驼取乐遭受处罚">以色列精英士兵因用军枪打死骆驼取乐遭受处罚</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165822407.html?qid=dfmini&amp;_15_国际" target="_blank" title="《唐顿庄园》：用英式大团圆诠释“英国梦”">《唐顿庄园》：用英式大团圆诠释“英国梦”</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128134126305.html?qid=dfmini&amp;_16_国际" target="_blank" title="印度木匠患多指症 每个手脚长7根指头">印度木匠患多指症 每个手脚长7根指头</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161908196.html?qid=dfmini&amp;_17_国际" target="_blank" title="日本政府与冲绳协议会首开会议 谈美军基地搬迁">日本政府与冲绳协议会首开会议 谈美军基地搬迁</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128161909761.html?qid=dfmini&amp;_2_国际" target="_blank" title="美国大型警车进驻华人区 为平安过新春保驾护航">美国大型警车进驻华人区 为平安过新春保驾护航</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165641877.html?qid=dfmini&amp;_18_国际" target="_blank" title="日本民主党参院大选海报遭狠批 或难逃“被毙”厄运">日本民主党参院大选海报遭狠批 或难逃“被毙”厄运</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161019251.html?qid=dfmini&amp;_19_国际" target="_blank" title="“德罗宁DMC−12”或将恢复生产 回到未来将成现实">“德罗宁DMC−12”或将恢复生产 回到未来将成现实</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128122926667.html?qid=dfmini&amp;_20_国际" target="_blank" title="盗窃美国专利玉米种子中国男子认罪 面临十年监禁">盗窃美国专利玉米种子中国男子认罪 面临十年监禁</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165438901.html?qid=dfmini&amp;_21_国际" target="_blank" title="缅甸昂山不当议长 还能当总统吗">缅甸昂山不当议长 还能当总统吗</a></p>
+            </div><!-- end 国际 -->
+        </div>
+        <div class="iframe">
+            <!-- 人文 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128145430215.html?qid=dfmini&amp;_100_人文" target="_blank" title="一直传说的龙脉存在吗，据说日本曾试图斩断龙脉"><img src="http://imgmini.eastday.com/mobile/20160128145430_cc9592a5c90c942076863e92afa14bcb_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128145430215.html?qid=dfmini&amp;_100_人文" target="_blank" title="一直传说的龙脉存在吗，据说日本曾试图斩断龙脉">一直传说的龙脉存在吗，据说日本曾试图斩断龙脉</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128164238259.html?qid=dfmini&amp;_101_人文" target="_blank" title="三千年没有改过名字的古都，国内仅此一座。。"><img src="http://imgmini.eastday.com/mobile/20160128164238_3468bc5c555a94cf016a44501d886e47_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128164238259.html?qid=dfmini&amp;_101_人文" target="_blank" title="三千年没有改过名字的古都，国内仅此一座。。">三千年没有改过名字的古都，国内仅此一座。。</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128061624550.html?qid=dfmini&amp;_102_人文" target="_blank" title="考古学家发现农场地下有异常，挖开后想不到竟然有这么大的惊喜！"><img src="http://imgmini.eastday.com/mobile/20160128061624_7977d63550df6d4f99471eb3bf669a66_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128061624550.html?qid=dfmini&amp;_102_人文" target="_blank" title="考古学家发现农场地下有异常，挖开后想不到竟然有这么大的惊喜！">考古学家发现农场地下有异常，挖开后想不到竟然有这么大的惊喜！</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128131432969.html?qid=dfmini&amp;_0_人文" target="_blank" title="开国元帅本定是九个人，他险些被挤出元帅行列">开国元帅本定是九个人，他险些被挤出元帅行列</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128123454351.html?qid=dfmini&amp;_10_人文" target="_blank" title="许世友向女记者透露带枪进大会堂原因：有人害我">许世友向女记者透露带枪进大会堂原因：有人害我</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151051936.html?qid=dfmini&amp;_11_人文" target="_blank" title="她甩开普京大帝，找了个小她21岁的文艺青年！">她甩开普京大帝，找了个小她21岁的文艺青年！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165311605.html?qid=dfmini&amp;_12_人文" target="_blank" title="我们的老祖宗留下的金言：句句在理，句句良言！">我们的老祖宗留下的金言：句句在理，句句良言！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128150202475.html?qid=dfmini&amp;_13_人文" target="_blank" title="废品摊上淘到的“国宝重器”！（不可谓不坎坷）">废品摊上淘到的“国宝重器”！（不可谓不坎坷）</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128140314220.html?qid=dfmini&amp;_1_人文" target="_blank" title="王水遇到尸体会变成人油？国内真实的恐怖变态事件">王水遇到尸体会变成人油？国内真实的恐怖变态事件</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151807529.html?qid=dfmini&amp;_14_人文" target="_blank" title="百年老街！千年古塔！万年龙王！竟然都隐藏在松江这一个地方！">百年老街！千年古塔！万年龙王！竟然都隐藏在松江这一个地方！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128123623791.html?qid=dfmini&amp;_15_人文" target="_blank" title="影响少帅张学良一生的4个女人">影响少帅张学良一生的4个女人</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161754539.html?qid=dfmini&amp;_16_人文" target="_blank" title="养生品画：齐白石千古一骂">养生品画：齐白石千古一骂</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128142650696.html?qid=dfmini&amp;_17_人文" target="_blank" title="无情帝王家：光绪与珍妃的凄美爱情">无情帝王家：光绪与珍妃的凄美爱情</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128120543526.html?qid=dfmini&amp;_2_人文" target="_blank" title="洞房夜农村发小对我妻子做了一件事，她宁愿住娘家也不跟我回家">洞房夜农村发小对我妻子做了一件事，她宁愿住娘家也不跟我回家</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171709297.html?qid=dfmini&amp;_18_人文" target="_blank" title="10个最适合隐世安家的古村">10个最适合隐世安家的古村</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128102557031.html?qid=dfmini&amp;_19_人文" target="_blank" title="少帅张作霖的五姨太是个怎样的人">少帅张作霖的五姨太是个怎样的人</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128083405339.html?qid=dfmini&amp;_20_人文" target="_blank" title="张学良老婆于凤至多有钱">张学良老婆于凤至多有钱</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128160439550.html?qid=dfmini&amp;_21_人文" target="_blank" title="有人在我店里买了个盒子，过几天却回来找我换个骨灰盒5">有人在我店里买了个盒子，过几天却回来找我换个骨灰盒5</a></p>
+            </div><!-- end 人文 -->
+        </div>
+        <div class="iframe">
+            <!-- 星座 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128124639707.html?qid=dfmini&amp;_100_星座" target="_blank" title="天生富贵命！孩子是不是富贵命？看你几号生了他！"><img src="http://imgmini.eastday.com/mobile/20160128124639_be013e96987f3a82749996e636c98833_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128124639707.html?qid=dfmini&amp;_100_星座" target="_blank" title="天生富贵命！孩子是不是富贵命？看你几号生了他！">天生富贵命！孩子是不是富贵命？看你几号生了他！</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128145429981.html?qid=dfmini&amp;_101_星座" target="_blank" title="农历这几月出生好命多金又长寿"><img src="http://imgmini.eastday.com/mobile/20160128145429_6e77f3fccfcfab4f5c70ba826f06b0b6_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128145429981.html?qid=dfmini&amp;_101_星座" target="_blank" title="农历这几月出生好命多金又长寿">农历这几月出生好命多金又长寿</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128144245969.html?qid=dfmini&amp;_102_星座" target="_blank" title="最适合养狗的四大生肖，你知道吗？"><img src="http://imgmini.eastday.com/mobile/20160128144245_1c488dde21f829a53ba6ca1fd69e0066_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128144245969.html?qid=dfmini&amp;_102_星座" target="_blank" title="最适合养狗的四大生肖，你知道吗？">最适合养狗的四大生肖，你知道吗？</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128140907423.html?qid=dfmini&amp;_0_星座" target="_blank" title="12星座的好运贵人！">12星座的好运贵人！</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170818438.html?qid=dfmini&amp;_10_星座" target="_blank" title="超注重个人形象、容貌第一的3大生肖男">超注重个人形象、容貌第一的3大生肖男</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128143402349.html?qid=dfmini&amp;_11_星座" target="_blank" title="最具王者风范，领导才能最出众的生肖原来是他？">最具王者风范，领导才能最出众的生肖原来是他？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128120542750.html?qid=dfmini&amp;_12_星座" target="_blank" title="最受男人喜欢的星座女排行榜，看你排第几？">最受男人喜欢的星座女排行榜，看你排第几？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128125359792.html?qid=dfmini&amp;_13_星座" target="_blank" title="姓名笔画看结几次婚">姓名笔画看结几次婚</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128162044241.html?qid=dfmini&amp;_1_星座" target="_blank" title="哪个星座最单纯？万万没想到">哪个星座最单纯？万万没想到</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128113339276.html?qid=dfmini&amp;_14_星座" target="_blank" title="猴年福禄双全的生肖前三名">猴年福禄双全的生肖前三名</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128145427453.html?qid=dfmini&amp;_15_星座" target="_blank" title="属马的人今年多大？属马的人2016年运程">属马的人今年多大？属马的人2016年运程</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128120248861.html?qid=dfmini&amp;_16_星座" target="_blank" title="12星座中，谁最输不起？">12星座中，谁最输不起？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128105622601.html?qid=dfmini&amp;_17_星座" target="_blank" title="未来5年之内，有机会赚取300万的生肖">未来5年之内，有机会赚取300万的生肖</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128132752659.html?qid=dfmini&amp;_2_星座" target="_blank" title="压力越大，越能成就事业的3大生肖">压力越大，越能成就事业的3大生肖</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171412120.html?qid=dfmini&amp;_18_星座" target="_blank" title="哪些星座会得到贵人的一路相助？">哪些星座会得到贵人的一路相助？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128135427663.html?qid=dfmini&amp;_19_星座" target="_blank" title="好运大爆发，注定一生有好运气的星座">好运大爆发，注定一生有好运气的星座</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128112614146.html?qid=dfmini&amp;_20_星座" target="_blank" title="警惕！这些生肖“猴年”摊上大事啦！">警惕！这些生肖“猴年”摊上大事啦！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128122150873.html?qid=dfmini&amp;_21_星座" target="_blank" title="这几农历生日5年内无灾无祸福运连连">这几农历生日5年内无灾无祸福运连连</a></p>
+            </div><!-- end 星座 -->
+        </div>
+        <div class="iframe">
+            <!-- 家居 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128165443606.html?qid=dfmini&amp;_100_家居" target="_blank" title="108平甜蜜婚房，疼老婆就得这么装！"><img src="http://imgmini.eastday.com/mobile/20160128165443_ed9fd3eb20ce7c29f0ce69cbf6920e58_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128165443606.html?qid=dfmini&amp;_100_家居" target="_blank" title="108平甜蜜婚房，疼老婆就得这么装！">108平甜蜜婚房，疼老婆就得这么装！</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128171544535.html?qid=dfmini&amp;_101_家居" target="_blank" title="婚后老公越来越冷淡，想不到装修让他恢复激情"><img src="http://imgmini.eastday.com/mobile/20160128171544_456da54106d17f79c3a5f9c7ea6d303e_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128171544535.html?qid=dfmini&amp;_101_家居" target="_blank" title="婚后老公越来越冷淡，想不到装修让他恢复激情">婚后老公越来越冷淡，想不到装修让他恢复激情</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128170349678.html?qid=dfmini&amp;_102_家居" target="_blank" title="新年新气象之客厅装饰，新年客厅该怎么布置"><img src="http://imgmini.eastday.com/mobile/20160128170349_94ac8ca8e90a506fec21827e9976899e_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128170349678.html?qid=dfmini&amp;_102_家居" target="_blank" title="新年新气象之客厅装饰，新年客厅该怎么布置">新年新气象之客厅装饰，新年客厅该怎么布置</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128165443746.html?qid=dfmini&amp;_0_家居" target="_blank" title="8款餐厅设计攻略 总有一款你的菜">8款餐厅设计攻略 总有一款你的菜</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128142649774.html?qid=dfmini&amp;_10_家居" target="_blank" title="如果你洗手间有这些，赶紧改！">如果你洗手间有这些，赶紧改！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128163218242.html?qid=dfmini&amp;_11_家居" target="_blank" title="看过这7款百叶窗，你会想把家里的窗户都换掉！">看过这7款百叶窗，你会想把家里的窗户都换掉！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170644304.html?qid=dfmini&amp;_12_家居" target="_blank" title="10万打造120平米英伦地中海 三房实景图尽显春日温馨">10万打造120平米英伦地中海 三房实景图尽显春日温馨</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161624008.html?qid=dfmini&amp;_13_家居" target="_blank" title="原生态木质和墙装饰家居，让装修变得更环保！">原生态木质和墙装饰家居，让装修变得更环保！</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128160736419.html?qid=dfmini&amp;_1_家居" target="_blank" title="好男人就是我，我房子就是这么帅气！">好男人就是我，我房子就是这么帅气！</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128165136899.html?qid=dfmini&amp;_14_家居" target="_blank" title="无论是墙暖还是地暖？家里暖和才是正事！">无论是墙暖还是地暖？家里暖和才是正事！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151347266.html?qid=dfmini&amp;_15_家居" target="_blank" title="卧室衣柜摆放的五大禁忌事项">卧室衣柜摆放的五大禁忌事项</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128155121140.html?qid=dfmini&amp;_16_家居" target="_blank" title="今年最流行的卧室吊顶，不一样的视觉冲击！">今年最流行的卧室吊顶，不一样的视觉冲击！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153108563.html?qid=dfmini&amp;_17_家居" target="_blank" title="怎样检查瓷砖的施工质量好不好">怎样检查瓷砖的施工质量好不好</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128151807803.html?qid=dfmini&amp;_2_家居" target="_blank" title="把小区里的房子好好装修一下，80平米足够满足大部分人的需要">把小区里的房子好好装修一下，80平米足够满足大部分人的需要</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128151641794.html?qid=dfmini&amp;_18_家居" target="_blank" title="鬼斧神工-木工解说家装注意事项">鬼斧神工-木工解说家装注意事项</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128150202078.html?qid=dfmini&amp;_19_家居" target="_blank" title="[攻略]抵御严寒 如何提高窗户防寒性能？">[攻略]抵御严寒 如何提高窗户防寒性能？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160127061714936.html?qid=dfmini&amp;_20_家居" target="_blank" title="这个大大的两室一厅竟然只有55平 你信吗？">这个大大的两室一厅竟然只有55平 你信吗？</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128152528857.html?qid=dfmini&amp;_21_家居" target="_blank" title="卧室灯风水讲究及注意事项">卧室灯风水讲究及注意事项</a></p>
+            </div><!-- end 家居 -->
+        </div>
+        <div class="iframe">
+            <!-- 汽车 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128164544775.html?qid=dfmini&amp;_100_汽车" target="_blank" title="一句油箱加满，差点车毁人亡！"><img src="http://imgmini.eastday.com/mobile/20160128164544_08c78be9a5a7d1d982086be6c1aee881_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128164544775.html?qid=dfmini&amp;_100_汽车" target="_blank" title="一句油箱加满，差点车毁人亡！">一句油箱加满，差点车毁人亡！</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128164544964.html?qid=dfmini&amp;_101_汽车" target="_blank" title="买车多花1w块，加个天窗，你知道他的真正用途吗？"><img src="http://imgmini.eastday.com/mobile/20160128164544_70266f5b9b3965625885f77a993bb85b_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128164544964.html?qid=dfmini&amp;_101_汽车" target="_blank" title="买车多花1w块，加个天窗，你知道他的真正用途吗？">买车多花1w块，加个天窗，你知道他的真正用途吗？</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128161029035.html?qid=dfmini&amp;_102_汽车" target="_blank" title="为年轻而生 2016年即将上市10万元内SUV"><img src="http://imgmini.eastday.com/mobile/20160128161029_922579d7b0c928ef474df6632e1a4ec9_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128161029035.html?qid=dfmini&amp;_102_汽车" target="_blank" title="为年轻而生 2016年即将上市10万元内SUV">为年轻而生 2016年即将上市10万元内SUV</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <div class="big_img">
+                    <a href="http://mini.eastday.com/shehui/151027/121839511.html?qid=dfmini&amp;_103_汽车" target="_blank" title="杭瑞高速路上突现&quot;巨坑&quot; 吞掉一辆大货车"><img src="images/9/562f18420da8d.jpg" class="pic" /></a>
+                    <div class="opa"></div>
+                    <a class="opa_txt" href="http://mini.eastday.com/shehui/151027/121839511.html?qid=dfmini&amp;_103_汽车" target="_blank" title="杭瑞高速路上突现&quot;巨坑&quot; 吞掉一辆大货车">杭瑞高速路上突现&quot;巨坑&quot; 吞掉一辆大货车</a>
+                </div>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128163347072.html?qid=dfmini&amp;_0_汽车" target="_blank" title="一汽丰田新车消息 推新款RAV4/威驰两厢">一汽丰田新车消息 推新款RAV4/威驰两厢</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128150800225.html?qid=dfmini&amp;_10_汽车" target="_blank" title="这几款大块头7座SUV，最高10万！">这几款大块头7座SUV，最高10万！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170819143.html?qid=dfmini&amp;_11_汽车" target="_blank" title="全球销量第一并非大众神车？！ 你不敢相信的全球销量大数据揭秘">全球销量第一并非大众神车？！ 你不敢相信的全球销量大数据揭秘</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153407157.html?qid=dfmini&amp;_12_汽车" target="_blank" title="6-8万就能买到紧凑型车？ 2015年最值得出手的车型！">6-8万就能买到紧凑型车？ 2015年最值得出手的车型！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128171114374.html?qid=dfmini&amp;_13_汽车" target="_blank" title="回首2015，你被这10款车型轰炸了吗？">回首2015，你被这10款车型轰炸了吗？</a></p>
+                <div class="h8"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128153000544.html?qid=dfmini&amp;_1_汽车" target="_blank" title="众泰SR7正式上市 售价7.38-10.68万元">众泰SR7正式上市 售价7.38-10.68万元</a></p>
+                <div class="h4"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128161029171.html?qid=dfmini&amp;_14_汽车" target="_blank" title="5-8万买本土车 四款高性价比家用自主车推荐">5-8万买本土车 四款高性价比家用自主车推荐</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128143533017.html?qid=dfmini&amp;_15_汽车" target="_blank" title="春节返乡 最适合你的大空间MPV在这里！">春节返乡 最适合你的大空间MPV在这里！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128160610059.html?qid=dfmini&amp;_16_汽车" target="_blank" title="预算15万 想买台省油为主的家用车看这里">预算15万 想买台省油为主的家用车看这里</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128142519075.html?qid=dfmini&amp;_17_汽车" target="_blank" title="实用又保值的4款国产合资SUV推荐，保值才是硬道理！">实用又保值的4款国产合资SUV推荐，保值才是硬道理！</a></p>
+            </div><!-- end 汽车 -->
+        </div>
+        <div class="iframe">
+            <!-- 时尚 -->
+            <div class="w170">
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128153235616.html?qid=dfmini&amp;_100_时尚" target="_blank" title="高定趴 | 被范冰冰多次穿上红毯的Elie Saab该有多美啊"><img src="http://imgmini.eastday.com/mobile/20160128153235_3e595c6aa88bf2e04c5ec6245f4bf915_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128153235616.html?qid=dfmini&amp;_100_时尚" target="_blank" title="高定趴 | 被范冰冰多次穿上红毯的Elie Saab该有多美啊">高定趴 | 被范冰冰多次穿上红毯的Elie Saab该有多美啊</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128120123038.html?qid=dfmini&amp;_101_时尚" target="_blank" title="郑爽带爸爸参加真人秀，穿衣美的都上头条了！"><img src="http://imgmini.eastday.com/mobile/20160128120123_17571d391db364ea9ed65fd97b620988_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128120123038.html?qid=dfmini&amp;_101_时尚" target="_blank" title="郑爽带爸爸参加真人秀，穿衣美的都上头条了！">郑爽带爸爸参加真人秀，穿衣美的都上头条了！</a>
+                </div>
+                <div class="h15"></div>
+                <div class="img">
+                    <a href="http://mini.eastday.com/a/160128131724608.html?qid=dfmini&amp;_102_时尚" target="_blank" title="今年最火最多人穿的大衣，竟然美成了这样"><img src="http://imgmini.eastday.com/mobile/20160128131724_8670c7f78f83c3790bb492fac2fe35d0_1_mwpm_03200403.jpeg" class="pic" /></a>
+                    <div class="txt"></div>
+                    <a class="txt_a" href="http://mini.eastday.com/a/160128131724608.html?qid=dfmini&amp;_102_时尚" target="_blank" title="今年最火最多人穿的大衣，竟然美成了这样">今年最火最多人穿的大衣，竟然美成了这样</a>
+                </div>
+            </div>
+            <div class="w15"></div>
+            <div class="w355">
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128115240123.html?qid=dfmini&amp;_0_时尚" target="_blank" title="赵丽颖皮草皮裤气场十足 女星巧搭皮草不做暴发户">赵丽颖皮草皮裤气场十足 女星巧搭皮草不做暴发户</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128100239413.html?qid=dfmini&amp;_10_时尚" target="_blank" title="鲜明色彩的内衣泳装驱赶寒潮，快去渡假吧">鲜明色彩的内衣泳装驱赶寒潮，快去渡假吧</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128153537114.html?qid=dfmini&amp;_11_时尚" target="_blank" title="当不同人同穿一件衣 谁说有沟必火？-章子怡">当不同人同穿一件衣 谁说有沟必火？-章子怡</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128143232731.html?qid=dfmini&amp;_12_时尚" target="_blank" title="气质好不好不是看脸蛋，关键在于会不会穿衣">气质好不好不是看脸蛋，关键在于会不会穿衣</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170349883.html?qid=dfmini&amp;_13_时尚" target="_blank" title="范爷是最会穿衣的微胖女神，跟她学穿衣，显瘦又时尚！">范爷是最会穿衣的微胖女神，跟她学穿衣，显瘦又时尚！</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128140612798.html?qid=dfmini&amp;_1_时尚" target="_blank" title="Angelababy一黑遮百美，不比不知道！">Angelababy一黑遮百美，不比不知道！</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128135300363.html?qid=dfmini&amp;_14_时尚" target="_blank" title="baby范爷身材大缩水 深扒女星真实胸围">baby范爷身材大缩水 深扒女星真实胸围</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128132317835.html?qid=dfmini&amp;_15_时尚" target="_blank" title="跟踪大幂幂学潮搭，让你新年少女感爆棚">跟踪大幂幂学潮搭，让你新年少女感爆棚</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128141800025.html?qid=dfmini&amp;_16_时尚" target="_blank" title="今年必买的欧范毛衣长这样">今年必买的欧范毛衣长这样</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128170518058.html?qid=dfmini&amp;_17_时尚" target="_blank" title="说日本设计=性冷淡的人，你一定没有见过这些！">说日本设计=性冷淡的人，你一定没有见过这些！</a></p>
+                <div class="h6"></div>
+                <p class="title_h1"><a href="http://mini.eastday.com/a/160128164238166.html?qid=dfmini&amp;_2_时尚" target="_blank" title="唐嫣旧衣连杨幂都抢着穿 瞧瞧TA有多难搞到手">唐嫣旧衣连杨幂都抢着穿 瞧瞧TA有多难搞到手</a></p>
+                <div class="h3"></div>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128133411470.html?qid=dfmini&amp;_18_时尚" target="_blank" title="古力娜扎头发越剪越短 齐耳短发成时尚新宠">古力娜扎头发越剪越短 齐耳短发成时尚新宠</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128155247882.html?qid=dfmini&amp;_19_时尚" target="_blank" title="牛仔裤要穿就这样穿，女人想不瘦都很难！">牛仔裤要穿就这样穿，女人想不瘦都很难！</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128144246168.html?qid=dfmini&amp;_20_时尚" target="_blank" title="让唇色不脱妆的神技巧">让唇色不脱妆的神技巧</a></p>
+                <p class="title_h2"><span class="point_gray"></span><a href="http://mini.eastday.com/a/160128113210277.html?qid=dfmini&amp;_21_时尚" target="_blank" title="10位新娘结婚当天卸妆后 老公全都被吓傻了">10位新娘结婚当天卸妆后 老公全都被吓傻了</a></p>
+            </div><!-- end 时尚 -->
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+var menu_delay = null;
+var auto_change_time = null;
+var can_auto = true;
+var $navUl = $('.nav_ul');
+var $navLi = $('.nav_li');
+var liLenght = $navLi.length;
+function auto_change(){
+    if(can_auto){
+        auto_change_time = setInterval(function(){
+            if($('.nav_li.now').index() < liLenght - 1){
+                $('.nav_li:eq(' + ($('.nav_li.now').index() + 1) + ')').trigger('click');
+            }else{
+                $('.nav_li:eq(0)').trigger('click');
+                stop_auto();
+            }
+        }, 2700);
+    }
+}
+function stop_auto(){
+    can_auto = false;
+    clearInterval(auto_change_time);
+}
+$(function(){
+    setTimeout(function(){
+        auto_change();
+        external.WebFinished();//c++ 加载完毕
+        external.DragArea("0_0_670_42:375_11_184_22");//c++ 拖拽区域
+        external.UnDoUpToTop();//c++ 不置顶
+    }, 10000);
+    //关闭自动轮播
+    $('body, #iframe').on('mouseover', function(){
+        stop_auto();
+    });
+    var $overNow = $('.over_now'),
+        $moreBtn = $('.more_btn'),
+        hoverFlag = false,
+        chevIndex = 0;
+
+    function more_fun(){
+        if($moreBtn.hasClass('st1')){
+            $navLi.trigger('mouseout');
+            $navLi.eq(12).trigger('mouseover');
+            $moreBtn.removeClass('st1').addClass('st2');
+            
+        }else{
+            $navLi.trigger('mouseout');
+            $navLi.eq(0).trigger('mouseover');
+            $moreBtn.removeClass('st2').addClass('st1');
+        }
+    }
+
+    $moreBtn.on('click', more_fun).on('mouseover', more_fun);
+
+    // 导航hover\click事件
+    $navLi.on('mouseover',navLiHover).on('click',navLiHover);
+
+    function navLiHover(){
+        var $this = $(this);
+        if($this.hasClass('now') && hoverFlag){
+            return false;
+        }
+        hoverFlag = true;
+        menu_delay = setTimeout(function(){
+            $('.nav_li.now').removeClass('now');
+            $this.addClass('now');
+            var ti = $this.index();
+            if(ti < 12){    // 第一行菜单
+                chevIndex = ti;
+                ulScroll();
+            } else {    // 第二行菜单
+                chevIndex = ti - 12;
+                ulScroll(2);
+            }
+            // chev
+            $overNow.stop().animate({
+                left: chevIndex * 58
+            });
+            // content
+            $('.frame_ul').css({
+                left: chevIndex * -755,
+                top: (ti < 12) ? 0 : -466
+            });
+            if(liIndex == 0 || liIndex == 5 || liIndex == 9){
+                parent.showgg(1);
+            }else if(liIndex == 2 || liIndex == 6 || liIndex == 10){
+                parent.showgg(2);
+            }else if(liIndex == 3 || liIndex == 7 || liIndex == 11){
+                parent.showgg(3);
+            }else if(liIndex == 1){
+                parent.showgg(4);
+            }else{
+                parent.showgg(4);
+            }
+            hoverFlag = false;
+        }, 100);
+    }
+
+    /**
+     * 导航栏滚动
+     * @param  {[type]} index 2：滚到第二行；否则滚到第一行
+     */
+    function ulScroll(index){
+        if(index === 2){
+            $navUl.stop().animate({
+                top: -42
+            }, 200);
+            $moreBtn.html('返回&nbsp;&nbsp;<span></span>');
+        } else {
+            $navUl.stop().animate({
+                top: 0
+            }, 200);
+            $moreBtn.html('更多&nbsp;&nbsp;<span></span>');
+        }
+    }
+
+    $navLi.on('mouseout', function(){
+        clearTimeout(menu_delay);
+    });
+});
+</script>
+</body>
+</html>

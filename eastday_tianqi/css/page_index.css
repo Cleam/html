@@ -1,0 +1,81 @@
+@charset "utf-8";
+/**
+ * 天气网首页样式
+ */
+
+/* body */
+@media all and (min-width: 768px){
+  .banner{height: 600px; background-image: url("../img/banner_bg.png");}
+  .banner .container{padding-top: 90px;}
+  .banner .txt .txt1{font-size: 36px;}
+  .banner .txt .txt2{font-size: 22px; margin-left: 20px;}
+  .banner .txt .download{margin-top: 30px;}
+}
+@media all and (min-width: 992px){
+  .banner{height: 800px; background-image: url("../img/banner_bg.png");}
+  .banner .container{padding-top: 130px;}
+  .banner .txt .txt1{font-size: 48px;}
+  .banner .txt .txt2{font-size: 30px; margin-left: 30px;}
+  .banner .txt .download{margin-top: 50px;}
+}
+@media all and (max-width: 767px){
+  .banner{height: 1150px; background-image: url("../img/banner_bg_2.png");}
+  .banner .container{padding-top: 50px;}
+  .banner .txt .txt1{font-size: 48px;}
+  .banner .txt .txt2{font-size: 30px; margin-left: 30px;}
+  .banner .txt .download{margin-top: 50px;}
+  .banner .txt .title{margin-top: 50px;}
+}
+@media all and (max-width: 520px){
+  .banner .txt .txt1,
+  .banner .txt .txt2{display: block;}
+}
+@media all and (max-width: 400px){
+  .banner{height: 1050px;}
+}
+@media all and (max-width: 300px){
+  .banner{height: 950px;}
+}
+.banner{background-position: center top; text-align: center;}
+.banner .txt .txt1,
+.banner .txt .txt2{color: #fff;}
+.banner .txt .txt2 i{color: #f00; font-style: normal;}
+.banner .txt .ewm{margin-top: 30px;}
+/*.banner .txt .download .android{margin-right: 50px;}*/
+
+.section{text-align: center; padding: 50px 0;}
+.section1,.section3{background-color: #fff;}
+.section2,.section4{background-color: #f8f8f8;}
+.section1 .row1{border-bottom: 1px solid #eee; padding-bottom: 30px;}
+.section1 .row1 h3{text-align: left; font-size: 36px; margin-bottom: 30px;}
+.section1 .row1 p{font-size: 20px; color: #666; text-indent: 2em; line-height: 2em;}
+.section1 .row2{margin-top: 30px; font-size: 20px; color: #666;}
+
+.section2,
+.section3,
+.section4{padding: 80px 0;}
+.section2 .row,
+.section3 .row,
+.section4 .row{line-height: 354px;}
+.section2 .desc,
+.section3 .desc,
+.section4 .desc{font-size: 24px; line-height: 2em; color: #666; margin-top: 30px;}
+@media all and (max-width: 768px){
+  .section2 .row,
+  .section3 .row,
+  .section4 .row{line-height: 200px;}
+  .section2 .desc,
+  .section3 .desc,
+  .section4 .desc{font-size: 20px;}
+}
+@media all and (max-width: 400px){
+  .section2,
+  .section3,
+  .section4{padding: 50px 0;}
+}
+@media all and (max-width: 300px){
+  .section2 .row,
+  .section3 .row,
+  .section4 .row{line-height: 135px;}
+}
+
