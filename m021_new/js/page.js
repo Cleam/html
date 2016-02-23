@@ -1,4 +1,35 @@
 Zepto(function() {
+    /* 热站导航宽窄屏判断功能实现 */
+    var $hotSiteMore = $('#J_hot_site_more');
+    $hotSiteMore.click(function(e) { e.preventDefault(); });
+    $hotSiteMore.on('touchstart mousedown', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        if($this.data('state') == '0'){
+            $this.parent().addClass('expand');
+            $this.data('state', '1');
+            $this.find('span').text('收起');
+        } else {
+            $this.parent().removeClass('expand');
+            $this.data('state', '0');
+            $this.find('span').text('更多');
+        }
+    });
+    /*$(window).resize(function(){
+        var screenWidth = window.screen.width,
+            $hotSiteItems =  $('.J-hot-site-list').children();
+        if(screenWidth <= 375){
+            $hotSiteItems.addClass('sm');
+            $hotSiteItems.eq(9).hide();
+            $hotSiteItems.eq(10).hide();
+        } else {
+            $hotSiteItems.removeClass('sm');
+            $hotSiteItems.eq(9).show();
+            $hotSiteItems.eq(10).show();
+        }
+    });
+    $(window).resize();*/
+
     /* 酷站导航tab切换功能实现 */
     var tabsSwiper = new Swiper('#J_tabs_container', {
         speed: 300,
