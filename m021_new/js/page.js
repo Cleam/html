@@ -129,4 +129,14 @@ Zepto(function() {
         ani();
     }
 
+    /* 视频播放 */
+    var $videoCover = $('.video-cover');
+    $videoCover.on('click', function(e) { e.preventDefault(); });
+    $videoCover.on('touchstart mousedown', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        $this.hide();
+        $this.parent().append('<video x-webkit-airplay="true" webkit-playsinline="true" preload="auto" autoplay="autoplay" controls="controls"><source src="video.mp4" type="video/mp4" /></video>');
+    });
+
 });
