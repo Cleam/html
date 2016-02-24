@@ -1,0 +1,39 @@
+@charset "utf-8";
+/**
+ * 气象头条[预报]样式
+ * @author created by lizhigao(lizhigao@021.com)
+ * @date 2016-02-24
+ */
+@media only screen and (min-width: 750px) {body{width: 750px; margin: 0 auto;}}
+html,body{height: 100%;}
+body{ font-size: 20px;  color: #333; background-color: #f8f8f8; min-width: 320px;}
+a:active{background-color: #e5e5e5 !important;}
+
+.nav-list{background-color: #fff;}
+.nav-list .nav-item{width: 20%; padding: 1rem 0 1.2rem;}
+.nav-list .nav-item a{display: block; width: 100%; text-align: center; font-size: 1.7rem; height: 2rem; line-height: 2rem;}
+.nav-list .nav-item a.active{font-size: 1.8rem; color: #4ca4ff;}
+
+
+/*======== 预报 ========*/
+.section{background-color: #fff; margin-top: 1.25rem;}
+.section .section-hd{position: relative; padding: 1rem; position: relative;}
+.section .section-hd h2{font-size: 1.5rem;}
+
+.section .section-bd{position: relative; width: 100%; height: 18.75rem; padding: 0 1rem 1rem;}
+.section .section-bd .video-cover{position: absolute; left: 1rem; top: 0; width: 35.5rem; height: 17.75rem;}
+.section .section-bd .video-cover i{position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -49px 0 0 -46px; background-image: url("../img/play_circle.png"); background-position: 12px 13px; background-repeat: no-repeat; background-size: 110px 72px; background-color: transparent;}
+.section .section-bd .video-cover i:after{content: '';display: blcok; position: absolute; top: 50%; left: 50%; width: 30px; height: 36px; margin: -17px -11px; background: url("../img/play_circle.png") -75px 0 no-repeat; background-size: 110px 72px;}
+.section .section-bd .video-cover img{display: block; width: 100%; height: 100%;}
+.section .section-bd .video-cover span{position: absolute; left: 0; bottom: 0; width: 100%; height: 4rem; line-height: 4rem; font-size: 1.6rem; padding-left: 0.5rem; background-color: rgba(0,0,0,.75); color: #fff;}
+.section .section-bd video{background-color: #000;}
+
+.no-more{font-size: 1.5rem; color: #999; padding: 1rem 0; text-align: center;}
+
+
+
+
+
+
+
+
