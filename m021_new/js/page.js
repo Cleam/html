@@ -3,13 +3,20 @@ Zepto(function() {
      * 输入框清空功能实现
      */
     (function(){
-        var $searchInput = $('#J_search_input');
+        var $searchInput = $('#J_search_input'),
+            $searchClear = $('#J_search_clear');
         $searchInput.on('keyup', function(){
             if($.trim($searchInput.val()) !== ''){
-                
+                $searchClear.show();
             } else {
-                
+                $searchClear.hide();
             }
+        });
+        // $searchClear.on('click', function(e){e.preventDefault();});
+        $searchClear.on('click', function(){
+            $searchInput.val('');
+            $searchClear.hide();
+            e.preventDefault();
         });
 
     })();
@@ -18,19 +25,21 @@ Zepto(function() {
     /* 热站导航宽窄屏判断功能实现 */
     (function(){
         var $hotSiteMore = $('#J_hot_site_more');
-        $hotSiteMore.click(function(e) { e.preventDefault(); });
-        $hotSiteMore.on('touchstart mousedown', function(e) {
-            e.preventDefault();
+        // $hotSiteMore.click(function(e) { e.preventDefault(); });
+        $hotSiteMore.on('click', function(e) {
             var $this = $(this);
             if($this.data('state') == '0'){
                 $this.parent().addClass('expand');
                 $this.data('state', '1');
+                $this.find('img').attr('src', 'img/i_shou.png');
                 $this.find('span').text('收起');
             } else {
                 $this.parent().removeClass('expand');
                 $this.data('state', '0');
+                $this.find('img').attr('src', 'img/i_more.png');
                 $this.find('span').text('更多');
             }
+            e.preventDefault();
         });
         /*$(window).resize(function(){
             var screenWidth = window.screen.width,
@@ -71,11 +80,13 @@ Zepto(function() {
         });
 
         /* 酷站【更多】功能实现 */
-        $('.J-more').click(function(e) { e.preventDefault(); });
-        $('.J-more').on('touchstart mousedown', function(e) {
+        // $('.J-more').click(function(e) { e.preventDefault(); });
+        $('.J-more').on('click', function(e) {
             e.preventDefault();
-            var $this = $(this);
+            var _this = this,
+                $this = $(this);
             $this.parent().parent().parent().css('height', 'auto');
+            
             if ($this.hasClass('active')) {
                 $this.parent().next().hide();
                 $this.removeClass('active');
@@ -83,6 +94,15 @@ Zepto(function() {
                 $this.parent().next().show();
                 $this.addClass('active');
             }
+
+            $('.J-more').each(function(i, ele){
+                var $ele = $(ele);
+                if($ele.hasClass('active') && ele !== _this){
+                    $ele.parent().next().hide();
+                    $ele.removeClass('active');
+                }
+            });
+
         });
     })();
 

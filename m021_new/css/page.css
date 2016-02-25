@@ -23,6 +23,7 @@ a:active{background-color: #e5e5e5 !important;}
 .form-wrap{position: relative; background-color: #fff; height: 0.8rem; border-radius: 0.12rem; font-size: 0.32rem;}
 .form-wrap .input-wrap{width: 100%; height: 100%;}
 .form-wrap .input-wrap .search-logo{position: absolute; width: 0.36rem; height: 0.36rem; top: 0.22rem; left: 0.2rem; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADR0lEQVRYw8XYW4iVVRTA8d9M5ajJTLeX6QKZpg8hGFE9NAXd8UFqUUFFUhgYhHRxiImCInrReogigrCHoojUaIHZhWocCYVKe0hBKrvB1JNQppMYZfWwv/LM6ZzxzO3MetmH7+y99v9be6211/o6tCiZ2YVrcC2WYhF60IVfMYy9+BhvR8RPrequlY4WQHqxBitxGo7iS3yN/dW0OTgPS9CNv/Ah1kXE0JQAZeaJGMCjmF1t8Arei4hfmqw5ARfjNtxVwb2D1RHxw4SBKqtswOXVEayJiM/H86aZ2VO9UD8OY2VE5LiBMnMBPsKZlcJnI+Lv8cDU6VuCjViM+yLi+ZaBMvNsbFd8JSJicKIgdXpPwWb04c6IePW4QJl5EoYUH1gWEVunAqZG/zzF8heiLyJ2NprXWfN7AJcp/jKlMBARI7gFB/FalUYaA2XmOUo0bcULUw1TAzWM+5UctmYsCw0oCe7ByThwi1Cv41P0V8c4Gigz52IF3o2I3dMJUyNrcTpuamShZUoCe7lNMJRkuR+3NgK6Gn/ig3bRRMQfeB9XVNE9Cmgp9kbEwTZaCHZirpIwRwGdj31thqFczpRLeRRQN36eAaAD1dhTD9SBaQ31JvLvnqOur04lc546A0Dd1XioHug7LJwBoEXV+G090G5cUCXIdsolOOKYc/8HNIhZSr3cFsnMTlyHHRFxpB5oi1LRrWijda5HLzbV/9EZEYfwBiIzF41X8wTlISWYNvwPqBrXKp3CU9NNkpnLcSWei4gDDYEiYh+ewQ2Zecc0wpyh1FvDWNdoTm3F+AS+wIuZeek0wMxSjqhXqatHxgSKiMO4Gb9hS2b2TSHMHLyJq/DIWM1jrYVExDdKOB7FYGaumgKY+diG5XgcQ5nZtEFt1iguxFtKa5zoj4jvxwnShdV4TMlz9yq9/3alGFzVqFweq5WejSfxQPVoY6VoW1VgNVu3ALfjHpyFT6rN91SWWY+78VIjqFY+NizGw0q/3oUR7MJXSgnxO+ZhvtJznVst3YWnsal20+NBHReoRlEPblRK3ouUC3lWzZQfHfscszki9oyhqylUy0BNFJ9cQR0Yb/vUDGpSQJOVRlAzCtQAav2MA9VBffYPCSwfmVv1+FwAAAAASUVORK5CYII=') center no-repeat; background-size: 100%;}
+.form-wrap .input-wrap .search-clear{position: absolute; width: 0.32rem; height: 0.32rem; top: 0.24rem; right: 1.04rem; color: #999; text-align: center; display: none; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAABk0lEQVRYw72XPU/DMBBAX7Ly0RF+CYXyMTDRrIeQ+IMMiJOYWmCktMA/6UqBDSSGBGEFJzk7TTJFytnvxb6cL4mqXgGnwIWIPNLDpaqHwA2wSIEhsANMVPWkJ/gE2AVGKXAJvAEbXUs48G1gBZwnxYM94AEYAJ9Atu7t8MAzEZknTkBnEqo6AqZlOEBSCixLjEVk1hX8n0AxYAjcr0OiBH8v5pq7MUnFwNYSFnilQFsJK7xWIFYiBN4oECoRCjcJWCVi4ACpRUBEXoEz/irmVFWPa+CZBW5eAQe0D9y5KwF8e+BP1jmDBCokvor7YHiUgEeCWDgYc8AgHvUiUQKqekC+5wPggzwxN8kT86hTAQ88I0/EaAmzgA8uIjMReS5EoiSshcgLL8WMyBuO35ixJSktpdjNeC+8QsL0ZTQdRmZ4rETdcRwMj5Goakii4SWJxhLta8law0Mkyk2pe+y2gtdIjL1N6Tqb0RCJ3x+TzuBNEkkf8DqJFLjtAw4gIgvysr0CtoDrFFgAy67hjsS8kFgCLz8Y7kiuFd13kgAAAABJRU5ErkJggg==') center no-repeat;}
 .form-wrap .input-wrap .search-input{width: 100%; height: 100%; padding-left: 0.66rem; padding-right: 1.04rem; font-size: 0.32rem;}
 .form-wrap .search-btn{position: absolute; top: 0; right: 0; width: 1.04rem; height: 100%; color: #52ace5; font-size: 0.32rem; padding-left: 0.2rem; padding-right: 0.2rem;}
 
@@ -58,7 +59,7 @@ a:active{background-color: #e5e5e5 !important;}
 .cool-site .cs-tabs-wrap .cs-tabs a.active{color: #52ace5; border-bottom: 2px solid #52ace5;}
 
 .cool-site .cs-container .swiper-wrapper{padding-bottom: 0.3rem;}
-.cool-site .cs-main{position: relative; padding-top: 0.3rem; height: 0.7rem;}
+.cool-site .cs-main{position: relative; padding-top: 0.3rem; height: 0.75rem; padding-bottom: 0.05rem;}
 .cool-site .cs-main a{float: left; display: block; text-align: center; height: 0.4rem; line-height: 0.4rem;}
 .cool-site .cs-main .title{width: 1rem; font-size: 0.22rem; border: 1px solid #52ace5; border-radius: 0.2rem; color: #52ace5;}
 .cool-site .cs-main .link{width: 1.2rem; font-size: 0.28rem; margin-left: 0.05rem;}
@@ -80,17 +81,18 @@ a:active{background-color: #e5e5e5 !important;}
 .tool-list .tool-item a img{width: 0.72rem; height: 0.72rem; border-radius: 50%;}
 .tool-list .tool-item a span{display: block; height: 0.24rem; width: 100%; overflow: hidden; margin-top: 0.12rem; font-size: 0.2rem;}
 
-.tool-link-list .tool-link-item{width: 20%; text-align: center; height: 0.48rem; line-height: 0.48rem; margin-top: 0.16rem;}
+.tool-link-list .tool-link-item{width: 20%; text-align: center; height: 0.48rem; line-height: 0.48rem; margin-top: 0.27rem;}
 .tool-link-list .tool-link-item a{padding: 0.08rem 0.2rem; font-size: 0.28rem;}
 
 /*==== 头条新闻 ====*/
 /* 导航 */
-.tt-news-nav{position: fixed; top: -1.12rem; width: 7.2rem; padding: 0.12rem 0.3rem; background-color: #52ace5; z-index: -1; opacity: 0;}
-.tt-news-nav .home{position: absolute; top: 0.12rem; left: 0.3rem; width: 0.48rem; height: 0.48rem;}
+.tt-news-nav{position: fixed; top: -1.12rem; width: 7.2rem; padding: 0.25rem 0.3rem 0.15rem; background-color: #52ace5; z-index: -1; opacity: 0;}
+.tt-news-nav .home{position: absolute; top: 0.2rem; left: 0.3rem; width: 0.48rem; height: 0.48rem;}
 .tt-news-nav .home img{display: block; width: 100%; height: 100%;}
 .tt-news-nav .news-nav-list{margin-left: 0.6rem; height: 0.48rem;}
 .tt-news-nav .news-nav-list .news-nav-item{width: 20%; text-align: center;}
 .tt-news-nav .news-nav-list .news-nav-item a{display: block; color: #abdeff; font-size: 0.3rem; height: 0.48rem; line-height: 0.48rem;}
+/*.tt-news-nav .news-nav-list .news-nav-item a.active{color: #fff; font-weight: bold;}*/
 .tt-news-nav .news-nav-list .news-nav-item a.active{color: #fff; font-size: 0.36rem;}
 .tt-news-nav a:active{background-color: #3C98D2 !important;}
 
@@ -119,11 +121,11 @@ footer{text-align: center; padding: 0.2rem 0; font-size: 0.16rem;}
 
 
 /* 搜索提示框样式 */
-.bdSug_app{display: none;}
-body .bdSug_wpr{border-radius: 0.1rem; border: 1px solid #eee; overflow: hidden; padding: 0.16rem; /* box-shadow: 0 2px 5px #ccc; */}
+/* .bdSug_app{display: none;}
+body .bdSug_wpr{border-radius: 0.1rem; border: 1px solid #eee; overflow: hidden; padding: 0.16rem; box-shadow: 0 2px 5px #ccc;}
 body .bdSug_wpr table tr td{padding: 0.1rem 0 0.1rem 0.1rem; border-bottom: 1px solid #eee;}
 body .bdSug_wpr table tr:last-child td{border-bottom: 0 none;}
-body .bdSug_wpr table tr td:active{background-color: #FFEDE8 !important;}
+body .bdSug_wpr table tr td:active{background-color: #FFEDE8 !important;} */
 
 
 
