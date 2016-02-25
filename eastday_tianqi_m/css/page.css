@@ -27,25 +27,30 @@ a:active{background-color: #e5e5e5 !important;}
 .section .section-hd a{position: absolute; top: 0.5rem; right: 1rem; width: 4rem; height: 3rem; line-height: 3rem; text-align: center;}
 .section .section-hd a img{position: absolute; top: 50%; right: 1rem; margin-top: -0.65rem; width: 0.7rem; height: 1.3rem;}
 
-.section .section-bd{position: relative; width: 100%; height: 18.75rem; padding: 0 1rem 1rem; overflow: hidden;}
+.section .section-bd{position: relative; width: 100%; height: 21.75rem; padding: 0 1rem 4rem; overflow: hidden;}
 .section .section-bd .video-cover{position: absolute; left: 1rem; top: 0; width: 35.5rem; height: 17.75rem;}
 .section .section-bd .video-cover i{position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -49px 0 0 -46px; background-image: url("../img/play_circle.png"); background-position: 12px 13px; background-repeat: no-repeat; background-size: 110px 72px; background-color: transparent;}
 .section .section-bd .video-cover i:after{content: '';display: blcok; position: absolute; top: 50%; left: 50%; width: 30px; height: 36px; margin: -17px -11px; background: url("../img/play_circle.png") -75px 0 no-repeat; background-size: 110px 72px;}
 .section .section-bd .video-cover img{display: block; width: 100%; height: 100%;}
-.section .section-bd .video-cover span{position: absolute; left: 0; bottom: 0; width: 100%; height: 4rem; line-height: 4rem; font-size: 1.6rem; padding-left: 0.5rem; background-color: rgba(0,0,0,.75); color: #fff;}
+/*.section .section-bd .video-cover span{position: absolute; left: 0; bottom: -4rem; width: 100%; height: 4rem; line-height: 4rem; font-size: 1.6rem; padding-left: 0.5rem; background-color: rgba(0,0,0,.75); color: #fff;}*/
+.section .section-bd .txt{position: absolute; left: 1rem; bottom: 1rem; width: 35.5rem; height: 2rem; line-height: 2rem; font-size: 1.6rem;}
 .section .section-bd video{background-color: #000; visibility: hidden;}
 
-.section-pic .section-bd{height: auto;}
+.section-pic .section-bd{height: auto; padding-bottom: 1rem;}
 .section-pic .section-bd .img-wrap{width: 37rem;}
 .section-pic .section-bd .img-wrap a{display: block; float: left; width: 17.2rem; height: 12.9rem; margin-right: 1.1rem; margin-bottom: 1rem;}
 .section-pic .section-bd .img-wrap a img{display: block; width: 100%; height: 100%;}
 .section-pic .section-bd p{font-size: 1.6rem;}
 
 
-.pop-win{position: fixed; top: 0; width: 37.5rem; height: 100%; background-color: rgba(0,0,0,.8); display: none; z-index: 999999;}
+.pop-win{position: fixed; top: 0; width: 37.5rem; height: 100%; background-color: rgba(0,0,0,.9); display: none; z-index: 999999;}
 .pop-win .swiper-container,
 .pop-win .swiper-container .swiper-wrapper,
 .pop-win .swiper-container .swiper-wrapper .swiper-slide{width: 100%; height: 100%;}
-.pop-win .swiper-container .swiper-wrapper .swiper-slide{display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; align-items: center;}
-.pop-win img{max-width: 100%; max-height: 100%; margin: 0 auto;}
+/* .pop-win .swiper-container .swiper-wrapper .swiper-slide{display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; align-items: center;}
+.pop-win img{max-width: 100%; max-height: 100%; margin: 0 auto;} */
+.pop-win .swiper-container .swiper-wrapper .swiper-slide{white-space: nowrap; text-align: center;}
+.pop-win .swiper-container .swiper-wrapper .swiper-slide:before{content: ''; display: inline-block; height: 100%; vertical-align: middle;}
+.pop-win .swiper-container .swiper-wrapper .swiper-slide .img-wrap{display: inline-block; max-width: 100%; max-height: 100%; vertical-align: middle; -webkit-user-drag: none;}
+.pop-win .swiper-container .swiper-wrapper .swiper-slide .img-wrap img{max-width: 100%; max-height: 100%; -webkit-user-drag: none;}
 .pop-win .swiper-pagination .swiper-pagination-bullet{background-color: #fff;}

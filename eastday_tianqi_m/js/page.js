@@ -4,6 +4,7 @@
  * @date 2016-02-24
  */
 Zepto(function(){
+	/* 视频播放功能实现 */
 	var $videoCover = $('.J-video-cover'),
 		video = null;
 	$videoCover.on('click', function(e){
@@ -16,7 +17,17 @@ Zepto(function(){
 		video.play();
 	});
 
+	/* video暂停事件 */
+	$('.J-video').each(function(i, ele){
+		ele.addEventListener('pause', function(){
+			var $v = $(this),
+				$cover = $v.prev();
+			$cover.show();
+			$v.css({'width': '1px', 'height': '1px', 'visibility': 'hidden'});
+		});
+	});
 	
+	/* 图片浏览功能实现 */
 	var $popWin = $('.pop-win'),
 		$swiperWrap = $popWin.find('.swiper-wrapper'),
 		mySwiper = null;
@@ -27,7 +38,7 @@ Zepto(function(){
 			index = $this.index();
 		$swiperWrap.html('');
 		$imgs.each(function(i, ele){
-			$swiperWrap.append('<div class="swiper-slide"><img src="' + $(ele).attr('src') + '"></div>');
+			$swiperWrap.append('<div class="swiper-slide"><div class="img-wrap"><img src="' + $(ele).attr('src') + '"></div></div>');
 		});
 		video && video.pause();
 		$popWin.fadeIn('fast');
@@ -35,9 +46,14 @@ Zepto(function(){
 			e.preventDefault();
 			$popWin.fadeOut('fast');
 		});
-       	mySwiper = new Swiper ('.swiper-container', {
-			initialSlide: index
-		});
+		if(!mySwiper){
+			mySwiper = new Swiper ('.swiper-container', {
+				initialSlide: index
+			});
+		} else {
+			mySwiper.update();
+			mySwiper.slideTo(index, 10, false);//切换到第一个slide，速度为10ms
+		}
 	});
 
 });

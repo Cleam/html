@@ -26,7 +26,7 @@ a:active{background-color: #e5e5e5 !important;}
 .section .section-bd .video-cover i:after{content: '';display: blcok; position: absolute; top: 50%; left: 50%; width: 30px; height: 36px; margin: -17px -11px; background: url("../img/play_circle.png") -75px 0 no-repeat; background-size: 110px 72px;}
 .section .section-bd .video-cover img{display: block; width: 100%; height: 100%;}
 .section .section-bd .video-cover span{position: absolute; left: 0; bottom: 0; width: 100%; height: 4rem; line-height: 4rem; font-size: 1.6rem; padding-left: 0.5rem; background-color: rgba(0,0,0,.75); color: #fff;}
-.section .section-bd video{background-color: #000;}
+.section .section-bd video{background-color: #000; visibility: hidden;}
 
 .no-more{font-size: 1.5rem; color: #999; padding: 1rem 0; text-align: center;}
 
