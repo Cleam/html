@@ -41,10 +41,12 @@ Zepto(function(){
 			$swiperWrap.append('<div class="swiper-slide"><div class="img-wrap"><img src="' + $(ele).attr('src') + '"></div></div>');
 		});
 		video && video.pause();
+		$('html,body').addClass('ofhidden');
 		$popWin.fadeIn('fast');
 		$popWin.on('click', function(e){
 			e.preventDefault();
 			$popWin.fadeOut('fast');
+			$('html,body').removeClass('ofhidden');
 		});
 		if(!mySwiper){
 			mySwiper = new Swiper ('.swiper-container', {

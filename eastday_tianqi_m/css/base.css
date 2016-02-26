@@ -72,3 +72,6 @@ label {cursor:pointer;}
 .ib{display: inline-block;}
 .inline{display: inline;}
 .block{display: block;}
+
+/*html.ofhidden{overflow: hidden;}*/
+body.ofhidden{overflow: hidden;} 
