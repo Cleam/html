@@ -16,6 +16,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/MB.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/channel.js"></script>
     <script type="text/javascript" src="js/json2.js"></script>
     <script type="text/javascript">
     function divcontrol(btn) {
@@ -101,7 +102,36 @@
         <!--header-->
         <div class="nav">
             <div class="site_nav">
-                <ul class="clearfix">
+                <ul class="J-hot-site-list hot-site-list     clearfix">
+                    <li><a href="https://m.baidu.com/?from=1013634c" target="_blank"><img src="images/new/i_baidu.png" alt="">百度</a></li>
+                    <li><a href="https://m.taobao.com/" target="_blank"><img src="images/new/i_taobao.png" alt="">淘宝</a></li>
+                    <li><a href="http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&Allianceid=299402&sid=772977&OUID=&jumpUrl=http%3A%2F%2Fwww.ctrip.com%2F%3FAllianceid%3D299402%26sid%3D772977%26OUID%3D%26MultiUnionSupport%3Dtrue" target="_blank"><img src="images/new/i_ctrip.png" alt="">携程</a></li>
+                    <li><a href="http://sina.cn/" target="_blank"><img src="images/new/i_sina.png" alt="">新浪</a></li>
+                    <li><a href="http://www.amazon.cn/b?node=1753420071&tag=chgd-lvyou-kindle-0215-23" target="_blank"><img src="images/new/i_amazon.png" alt="">亚马逊</a></li>
+                    <li><a href="http://toutiao.eastday.com/?qid=021dh" target="_blank"><img src="images/new/i_toutiao.png" alt="">头条</a></li>
+
+                    <li><a href="http://ai.m.taobao.com?pid=mm_112599953_11408251_47000534" target="_blank"><img src="images/new/i_aitaobao.png" alt="">爱淘宝</a></li>
+                    <li><a href="http://www.youku.com/" target="_blank"><img src="images/new/i_youku.png" alt="">优酷</a></li>
+                    <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=1146&euid=021&t=http%3A%2F%2Fm.jd.com%2F" target="_blank"><img src="images/new/i_jd.png" alt="">京东</a></li>
+                    <li><a href="http://3g.ganji.com/" target="_blank"><img src="images/new/i_ganji.png" alt="">赶集</a></li>
+                    <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=501&euid=021&t=http%3A%2F%2Fm.suning.com%2F" target="_blank"><img src="images/new/i_suning.png" alt="">苏宁</a></li>
+                    <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=828&euid=021&t=http%3A%2F%2Fm.meilishuo.com%2F" target="_blank"><img src="images/new/i_meili.png" alt="">美丽说</a></li>
+
+                    <!-- <li><a href="http://car.m.autohome.com.cn/" target="_blank"><img src="images/new/i_car.png" alt="">汽车</a></li>
+                    <li><a href="http://i.meituan.com/" target="_blank"><img src="images/new/i_meituan.png" alt="">美团</a></li>
+                    <li><a href="http://inews.ifeng.com/index.shtml" target="_blank"><img src="images/new/i_fenghuang.png" alt="">凤凰</a></li>
+                    <li><a href="http://3g.163.com/touch/all" target="_blank"><img src="images/new/i_wangyi.png" alt="">网易</a></li>
+                    <li><a href="https://www.tmall.com/" target="_blank"><img src="images/new/i_tmall.png" alt="">天猫</a></li>
+                    
+                    <li><a href="http://www.mogujie.com/act/wapbdpz?f=mxrwapbaidupinzhuan&ismobile=1" target="_blank"><img src="images/new/i_mogu.png" alt="">蘑菇街</a></li>
+                    <li><a href="http://m.yhd.com/" target="_blank"><img src="images/new/i_yhd.png" alt="">一号店</a></li>
+                    <li class="hot-site-item-special"><a href="http://ap.vip.com/uploadfiles/short_cache/H5_vip_bdpz.html" target="_blank"><img src="images/new/i_vip.png" alt="">唯品会</a></li>
+                    <li class="hot-site-item-special"><a href="http://c.duomai.com/track.php?site_id=198270&aid=768&euid=021&t=http%3A%2F%2Fm.111.com.cn%2F" target="_blank"><img src="images/new/i_yiyao.png" alt="">壹药网</a></li>
+                    <li class="hot-site-item-special"><a href="http://m.tuniu.com/" target="_blank"><img src="images/new/i_tuniu.png" alt="">途牛</a></li>
+                    <li class="hot-site-item-special"><a href="http://www.baixing.com/m/" target="_blank"><img src="images/new/i_baixing.png" alt="">百姓</a></li>
+                    <li id="J_hot_site_more" data-state="0"><a><img src="images/new/i_more.png" alt="">更多</a></li> -->
+                </ul>
+                <!-- <ul class="clearfix">
                     <li>
                         <a href="http://c.duomai.com/track.php?site_id=198270&aid=1146&euid=021&t=http%3A%2F%2Fm.jd.com%2F" target="_blank"><img src="images/JD.png" />京东</a>
                     </li>
@@ -132,16 +162,13 @@
                     <li>
                         <a href="http://www.amazon.cn/b?node=1753420071&tag=chgd-lvyou-kindle-0215-23" target="_blank"><img src="images/quickline4.png" />亚马逊</a>
                     </li>
-                    <!-- <li>
-                        <a href="http://m.58.com/" target="_blank"><img src="images/quickline5.png" />同城</a>
-                    </li> -->
                     <li>
                         <a href="http://m.qianka.com/?referer_code=5e9b1595ee" target="_blank"><img src="images/qianka.png" />钱咖</a>
                     </li>
                     <li>
                         <a href="http://3g.ganji.com/" target="_blank"><img src="images/quickline6.png" />赶集</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         <!--nav-->
@@ -850,14 +877,14 @@
                     for (var i = 0; i < d.length; i++) {
                         if (i === 0) {
                             $newsListWrap.append('<li class="toutiao-item">' +
-                                '<a class="img-link" href="' + d[i].url + '" target="_blank">' +
+                                '<a class="img-link" href="' + d[i].url + '?qid=' + tt_news_qid + '" target="_blank">' +
                                 '<img src="' + d[i].lbimg.src + '" alt="' + d[i].lbimg.alt + '" />' +
                                 '<span class="txt">' + d[i].topic + '</span>' +
                                 '</a>' +
                                 '</li>');
                         } else {
                             $newsListWrap.append('<li class="toutiao-item">' +
-                                '<a class="txt-link" href="' + d[i].url + '" target="_blank" title="' + d[i].topic + '">' + d[i].topic + '</a>' +
+                                '<a class="txt-link" href="' + d[i].url + '?qid=' + tt_news_qid + '" target="_blank" title="' + d[i].topic + '">' + d[i].topic + '</a>' +
                                 '</li>');
                         }
                     }

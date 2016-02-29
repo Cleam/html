@@ -1,4 +1,4 @@
-Zepto(function() {
+$(function() {
     /**
      * 输入框清空功能实现
      */
@@ -12,7 +12,6 @@ Zepto(function() {
                 $searchClear.hide();
             }
         });
-        // $searchClear.on('click', function(e){e.preventDefault();});
         $searchClear.on('click', function(){
             $searchInput.val('');
             $searchClear.hide();
@@ -25,7 +24,6 @@ Zepto(function() {
     /* 热站导航宽窄屏判断功能实现 */
     (function(){
         var $hotSiteMore = $('#J_hot_site_more');
-        // $hotSiteMore.click(function(e) { e.preventDefault(); });
         $hotSiteMore.on('click', function(e) {
             var $this = $(this);
             if($this.data('state') == '0'){
@@ -70,8 +68,8 @@ Zepto(function() {
                 $(".cs-tabs").children().eq(tabsSwiper.activeIndex).addClass('active');
             }
         });
-        $(".cs-tabs a").click(function(e) { e.preventDefault(); });
-        $(".cs-tabs a").on('touchstart mousedown', function(e) {
+        // $(".cs-tabs a").click(function(e) { e.preventDefault(); });
+        $(".cs-tabs a").on('click', function(e) {
             e.preventDefault();
             var $this = $(this);
             $(".cs-tabs").children('.active').removeClass('active');
@@ -106,123 +104,116 @@ Zepto(function() {
         });
     })();
 
+    var $ttNews = $('#J_tt_news'),
+        $ttNewsList = $('#J_ttnews_list'),
+        $ttNewsNav = $ttNews.children('.tt-news-nav'),
+        $ttNewsNavList = $('#J_ttnews_nav_list'),
+        $ttNewsTabs = $ttNewsNavList.find('.ttnews-tabs'),
+        tnnHeight = $ttNewsNav.outerHeight(),
+        tnnTop = $ttNews.offset().top - tnnHeight,
+        flag = true,
+        sTimer = null,
+        $bgLoading = $('#J_bg_loading'),
+        // 新闻导航左右滑动功能实现
+        ttNewsSwiper = new Swiper('#J_ttnews_nav_container', {
+            freeMode : true,
+            speed: 500,
+            slidesPerView: 6.5
+        });
+    
     /* 头条新闻菜单显示隐藏功能实现 */
-    (function(){
-        var $ttNews = $('#J_tt_news'),
-            $ttNewsNav = $ttNews.children('.tt-news-nav'),
-            tnnHeight = $ttNewsNav.height(),
+    $ttNewsNav.children('.home').on('click', function(e) {
+        e.preventDefault();
+        goTop(200);
+    });
+    $(window).on('scroll', function() {
+        var ttnOT = $ttNews.offset().top,
+            scrollTop = getScrollTop(),
+            $loading = $('#J_loading'),
+            loadOT = $loading.offset().top,
+            cHeight = getClientHeight();
+        if(scrollTop + cHeight >= loadOT && !flag){
+            // 上拉加载数据(延迟执行，防止操作过快多次加载)
+            clearTimeout(sTimer);
+            sTimer = setTimeout(function(){
+                pullUpLoadData('data/data.json');
+            }, 300);
+        }
+        if (scrollTop + tnnHeight >= ttnOT) {
+            if (!flag) { return; }
+            flag = false;
+            $ttNewsNav.css('zIndex', 9);
+            $ttNewsNav.stop().animate({
+                'opacity': 1,
+                'top': '0px'
+            }, 200, 'linear');
+        } else {
+            if (flag) { return; }
             flag = true;
-        $ttNewsNav.children('.home').on('click', function(e) { e.preventDefault(); });
-        $ttNewsNav.children('.home').on('touchstart mousedown', function(e) {
-            e.preventDefault();
-            goTop(200);
-        });
-        $(window).on('scroll', function() {
-            var ttnOT = $ttNews.offset().top,
-                scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
-                $loading = $('#J_loading'),
-                loadOT = $loading.offset().top,
-                cHeight = document.documentElement.clientHeight;
-            if(scrollTop + cHeight >= loadOT && !flag){
-                // 加载数据
-                loadData('data/data.json');
-            }
-            if (scrollTop + tnnHeight >= ttnOT) {
-                if (!flag) { return; }
-                flag = false;
-                $ttNewsNav.css('zIndex', 9);
-                $ttNewsNav.animate({
-                    'opacity': 1,
-                    'top': '0px'
-                }, 400, 'linear');
-            } else {
-                if (flag) { return; }
-                flag = true;
-                $ttNewsNav.animate({
-                    'opacity': 0,
-                    'top': '-' + tnnHeight + 'px'
-                }, 200, 'linear', function() {
-                    $ttNewsNav.css('zIndex', -1);
-                });
-            }
-            
-        });
-    })();
-
+            $ttNewsNav.stop().animate({
+                'opacity': 0,
+                'top': '-' + tnnHeight + 'px'
+            }, 100, 'linear', function() {
+                $ttNewsNav.css('zIndex', -1);
+            });
+        }
+    });
+    
+    // new Swiper("#daohang",{slidesPerView:7,paginationClickable:true,spaceBetween:0,freeMode:true,initialSlide:0,prevButton:".swiper-button-prev",nextButton:".swiper-button-next",});
 
     /**
-     * 头条新闻滑动事件
-     * @return {[type]} [description]
+     * 头条新闻导航点击事件
+     * @param  {[type]} ){                 } [description]
+     * @return {[type]}     [description]
      */
-    /*(function(){
-        var $ttnewsTabs = $(".ttnews-tabs"),
-            newsWrap = new Swiper('#J_ttnews_swiper', {
-            speed: 300,
-            autoHeight: true,
-            onSlideChangeStart: function() {
-                var $activeSlide = $('#J_ttnews_swiper').find('.swiper-slide').eq(newsWrap.activeIndex),
-                    $slideWrapper = $activeSlide.parent();
-                $slideWrapper.height($activeSlide.height());
-                $ttnewsTabs.removeClass('active');
-                $ttnewsTabs.eq(newsWrap.activeIndex).addClass('active');
-            }
-        });
-        $ttnewsTabs.click(function(e) { e.preventDefault(); });
-        $ttnewsTabs.on('touchstart mousedown', function(e) {
-            e.preventDefault();
-            var $this = $(this);
-            $ttnewsTabs.removeClass('active');
-            $this.addClass('active');
-            newsWrap.slideTo($this.parent().index());
-        });
-    })();*/
+    $ttNewsTabs.on('click', function(){
+        var $this = $(this),
+            id = $this.data('id'),
+            index = $this.parent().index();
+        $ttNewsTabs.removeClass('active');
+        $this.addClass('active');
+        ttNewsSwiper.slideTo(index - 3, 200, false);   //切换到第一个slide，速度为200ms
+        loadData('data/data2.json', id);
+        $('body').scrollTop(tnnTop + 1);
+    });
 
-    //返回顶部动画
-    //goTop(500);//500ms内滚回顶部
-    function goTop(times) {
-        if (!!!times) {
-            $(window).scrollTop(0);
-            return;
-        }
-        var sh = $('body').scrollTop(); //移动总距离
-        var inter = 13.333; //ms,每次移动间隔时间
-        var forCount = Math.ceil(times / inter); //移动次数
-        var stepL = Math.ceil(sh / forCount); //移动步长
-        var timeId = null;
-        function ani() {
-            !!timeId && clearTimeout(timeId);
-            timeId = null;
-            //console.log($('body').scrollTop());
-            if ($('body').scrollTop() <= 0 || forCount <= 0) { //移动端判断次数好些，因为移动端的scroll事件触发不频繁，有可能检测不到有<=0的情况
-                $('body').scrollTop(0);
-                return;
-            }
-            forCount--;
-            sh -= stepL;
-            $('body').scrollTop(sh);
-            timeId = setTimeout(function() { ani(); }, inter);
-        }
-        ani();
-    }
-
+    // 首次加载数据
     loadData('data/data2.json');
-    
 
     /**
      * 加载数据
      * @param  {[type]} url 请求地址
      * @return {[type]}   [description]
      */
-    function loadData(url){
+    function loadData(url, id){
+        // console.log(id);
         $.ajax({
             url: url,
             dataType: 'json',
             success: function(data){
                 // console.log(data);
-                generateDom(data)
+                $ttNewsList.html('');
+                $bgLoading.show();
+                // generateDom(data);
+                setTimeout(function(){generateDom(data);}, 1000);
             }
         });
-        
+    }
+
+    /**
+     * 上拉加载数据
+     * @param  {[type]} url 请求地址
+     * @return {[type]}     [description]
+     */
+    function pullUpLoadData(url){
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function(data){
+                generateDom(data);
+                // setTimeout(function(){generateDom(data);}, 1000);
+            }
+        });
     }
 
     /**
@@ -231,8 +222,9 @@ Zepto(function() {
      * @return {[type]}   [description]
      */
     function generateDom(d){
-        var $ttNewsList = $('#J_ttnews_list'),
-            data = d && d.data;
+        var data = d && d.data;
+        // 数组顺序打乱
+        dislocateArr(data);
         if(!data){
             return false;
         }
@@ -250,6 +242,16 @@ Zepto(function() {
                 $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a href="' + url + '" target="_blank"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div><div class="img-wrap fr"><img src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
             }
         }
+        $bgLoading.hide();
+    }
+
+    /**
+     * 打乱数组
+     * @param  {[type]} arr 目标数组
+     * @return {[type]}     [description]
+     */
+    function dislocateArr(arr){
+        return arr.sort(function(){ return 0.5 - Math.random(); });
     }
 
 
@@ -346,7 +348,80 @@ Zepto(function() {
         return str;
     }
 
-    //滚动条在Y轴上的滚动距离
+    /**
+     * 返回顶部动画
+     */
+    //goTop(500);//500ms内滚回顶部
+    function goTop(times) {
+        if (!!!times) {
+            $(window).scrollTop(0);
+            return;
+        }
+        var sh = $('body').scrollTop(); //移动总距离
+        var inter = 13.333; //ms,每次移动间隔时间
+        var forCount = Math.ceil(times / inter); //移动次数
+        var stepL = Math.ceil(sh / forCount); //移动步长
+        var timeId = null;
+        function ani() {
+            !!timeId && clearTimeout(timeId);
+            timeId = null;
+            //console.log($('body').scrollTop());
+            if ($('body').scrollTop() <= 0 || forCount <= 0) { //移动端判断次数好些，因为移动端的scroll事件触发不频繁，有可能检测不到有<=0的情况
+                $('body').scrollTop(0);
+                return;
+            }
+            forCount--;
+            sh -= stepL;
+            $('body').scrollTop(sh);
+            timeId = setTimeout(function() { ani(); }, inter);
+        }
+        ani();
+    }
+
+    function getScrollTop(){
+        if (document.documentElement && document.documentElement.scrollTop) {
+            return document.documentElement.scrollTop;
+        } else if (document.body) {
+            return document.body.scrollTop;
+        }
+    }
+
+    function getClientHeight(){
+        if (document.body.clientHeight && document.documentElement.clientHeight) {
+            return (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
+        } else {
+            return (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
+        }
+    }
+
+    /**
+     * 头条新闻滑动事件
+     * @return {[type]} [description]
+     */
+    /*(function(){
+        var $ttnewsTabs = $(".ttnews-tabs"),
+            newsWrap = new Swiper('#J_ttnews_swiper', {
+            speed: 300,
+            autoHeight: true,
+            onSlideChangeStart: function() {
+                var $activeSlide = $('#J_ttnews_swiper').find('.swiper-slide').eq(newsWrap.activeIndex),
+                    $slideWrapper = $activeSlide.parent();
+                $slideWrapper.height($activeSlide.height());
+                $ttnewsTabs.removeClass('active');
+                $ttnewsTabs.eq(newsWrap.activeIndex).addClass('active');
+            }
+        });
+        $ttnewsTabs.click(function(e) { e.preventDefault(); });
+        $ttnewsTabs.on('touchstart mousedown', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            $ttnewsTabs.removeClass('active');
+            $this.addClass('active');
+            newsWrap.slideTo($this.parent().index());
+        });
+    })();*/
+
+    /*//滚动条在Y轴上的滚动距离
     function getScrollTop(){
     　　var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
     　　if(document.body){
@@ -388,7 +463,7 @@ Zepto(function() {
     　　}else{
           return false;
        }
-    };
+    };*/
 
 
 });
