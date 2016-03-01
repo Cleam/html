@@ -478,7 +478,6 @@
 	<!-- 头条新闻 -->
 	<div id="J_tt_news" class="tt-news">
 		<div class="tt-news-nav">
-			<a class="home" href="javascript:;"><img src="img/home.png" alt=""></a>
 			<!-- <ul id="J_ttnews_nav_list" class="news-nav-list clearfix">
 				<li class="news-nav-item fl"><a class="ttnews-tabs active" href="javascript:;">头条</a></li>
 				<li class="news-nav-item fl"><a class="ttnews-tabs" href="javascript:;">滚动</a></li>
@@ -487,36 +486,67 @@
 				<li class="news-nav-item fl"><a class="ttnews-tabs" href="javascript:;">笑话</a></li>
 				<li class="news-nav-item fl"><a class="ttnews-tabs" href="javascript:;">娱乐</a></li>
 			</ul> -->
-			<div id="J_ttnews_nav_container" class="news-nav-list clearfix swiper-container">
-			    <div id="J_ttnews_nav_list" class="swiper-wrapper">
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs active" data-id="toutiao" href="javascript:;">头条</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="weikandian" href="javascript:;">滚动</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="shehui" href="javascript:;">社会</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="shanghai" href="javascript:;">上海</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="xiaohua" href="javascript:;">笑话</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="yule" href="javascript:;">娱乐</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="guonei" href="javascript:;">国内</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="meinv" href="javascript:;">美女</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="jiankang" href="javascript:;">健康</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="guoji" href="javascript:;">国际</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="renwen" href="javascript:;">人文</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="hulianwang" href="javascript:;">互联网</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="junshi" href="javascript:;">军事</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="nba" href="javascript:;">NBA</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="keji" href="javascript:;">科技</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="tiyu" href="javascript:;">体育</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="shishang" href="javascript:;">时尚</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="xingzuo" href="javascript:;">星座</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="caijing" href="javascript:;">财经</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="youxi" href="javascript:;">游戏</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="qiche" href="javascript:;">汽车</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="nuanwen" href="javascript:;">暖文</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="kexue" href="javascript:;">科学</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-id="jianshen" href="javascript:;">健身</a></div>
-			    </div>
+			<div class="wrap">
+				<a class="home" href="javascript:;"><img src="img/home.png" alt=""><span>头条资讯</span></a>
+				<div id="J_ttnews_nav_container" class="news-nav-list clearfix swiper-container">
+				    <div id="J_ttnews_nav_list" class="swiper-wrapper">
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs active" data-ctg="toutiao" href="javascript:;">头条</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="weikandian" href="javascript:;">滚动</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="shehui" href="javascript:;">社会</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="shanghai" href="javascript:;">上海</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="xiaohua" href="javascript:;">笑话</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="yule" href="javascript:;">娱乐</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="guonei" href="javascript:;">国内</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="meinv" href="javascript:;">美女</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="jiankang" href="javascript:;">健康</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="guoji" href="javascript:;">国际</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="renwen" href="javascript:;">人文</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="hulianwang" href="javascript:;">互联网</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="junshi" href="javascript:;">军事</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="nba" href="javascript:;">NBA</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="keji" href="javascript:;">科技</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="tiyu" href="javascript:;">体育</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="shishang" href="javascript:;">时尚</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="xingzuo" href="javascript:;">星座</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="caijing" href="javascript:;">财经</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="youxi" href="javascript:;">游戏</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="qiche" href="javascript:;">汽车</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="nuanwen" href="javascript:;">暖文</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="kexue" href="javascript:;">科学</a></div>
+				        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-ctg="jianshen" href="javascript:;">健身</a></div>
+				    </div>
+				</div>
 			</div>
+
 		</div>
-		<ul id="J_ttnews_list" class="tt-news-list"></ul>
+		<div id="J_ttnews_list_wrap" class="swiper-container"> 
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="toutiao"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="weikandian"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="shehui"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="shanghai"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="xiaohua"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="yule"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="guonei"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="meinv"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="jiankang"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="guoji"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="renwen"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="hulianwang"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="junshi"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="nba"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="keji"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="tiyu"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="shishang"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="xingzuo"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="caijing"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="youxi"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="qiche"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="nuanwen"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="kexue"></ul></div>
+				<div class="swiper-slide"><ul class="tt-news-list" data-ctg="jianshen"></ul></div>
+			</div> 
+		</div>
 		<div id="J_bg_loading" class="bg-loading">
 			<div class="spinner">
 			  <div class="rect1"></div>
@@ -525,8 +555,9 @@
 			  <div class="rect4"></div>
 			  <div class="rect5"></div>
 			</div>
-			<!-- <p class="txt">数据加载中</p> -->
 		</div>
+
+
 		<!-- 新闻模板 单图 + 三图 -->
 		<!-- <li class="tt-news-item tt-news-item-s1">
 			<a href="javascript:;" target="_blank">

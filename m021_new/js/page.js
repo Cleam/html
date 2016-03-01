@@ -17,9 +17,7 @@ $(function() {
             $searchClear.hide();
             e.preventDefault();
         });
-
     })();
-
 
     /* 热站导航宽窄屏判断功能实现 */
     (function(){
@@ -105,21 +103,44 @@ $(function() {
     })();
 
     var $ttNews = $('#J_tt_news'),
-        $ttNewsList = $('#J_ttnews_list'),
+        $ttNewsListWrap = $('#J_ttnews_list_wrap'),
+        $ttNewsListArr = $ttNewsListWrap.find('.tt-news-list'),
+        // $ttNewsList = $ttNewsListArr.eq(0),
+        ttNewsCtg = '',
+        ttNewsCtgArr = [],
+        // strArr = ['toutiao', 'weikandian', 'shehui', 'shanghai', 'xiaohua', 'yule', 'guonei', 'meinv', 'jiankang', 'guoji', 'renwen', 'hulianwang', 'junshi', 'nba', 'keji', 'tiyu', 'shishang', 'caijing', 'youxi', 'qiche', 'nuanwen', 'kexue', 'jianshen']
         $ttNewsNav = $ttNews.children('.tt-news-nav'),
         $ttNewsNavList = $('#J_ttnews_nav_list'),
         $ttNewsTabs = $ttNewsNavList.find('.ttnews-tabs'),
         tnnHeight = $ttNewsNav.outerHeight(),
-        tnnTop = $ttNews.offset().top - tnnHeight,
+        tnnTop = $ttNews.offset().top,
         flag = true,
+        navStatic = true,
+        navActiveIndex = 0,
         sTimer = null,
         $bgLoading = $('#J_bg_loading'),
         // 新闻导航左右滑动功能实现
-        ttNewsSwiper = new Swiper('#J_ttnews_nav_container', {
+        ttNewsNavSwiper = new Swiper('#J_ttnews_nav_container', {
             freeMode : true,
             speed: 500,
-            slidesPerView: 6.5
+            slidesPerView: 5
+        }),
+        ttNewsContentSwiper = new Swiper('#J_ttnews_list_wrap', {
+            autoHeight: true,
+            // speed: 200,
+            onSlideChangeStart: function(swiper){
+                // console.log(swiper.activeIndex);    // 当前索引
+                // console.log(swiper.container);      // swiper-container
+                // console.log(swiper.wrapper);        // swiper-wrapper
+                // $ttNewsList = $ttNewsListArr.eq(swiper.activeIndex);
+                // ttNewsCtg = $ttNewsList.data('ctg');
+                navActiveIndex = swiper.activeIndex;
+                updateNews('data/data2.json', swiper.activeIndex);
+            }
         });
+
+    // 首次加载数据
+    loadData('data/data2.json', $ttNewsListArr.eq(0));
     
     /* 头条新闻菜单显示隐藏功能实现 */
     $ttNewsNav.children('.home').on('click', function(e) {
@@ -132,34 +153,53 @@ $(function() {
             $loading = $('#J_loading'),
             loadOT = $loading.offset().top,
             cHeight = getClientHeight();
+        // alert('scrollTop: ', scrollTop);
         if(scrollTop + cHeight >= loadOT && !flag){
             // 上拉加载数据(延迟执行，防止操作过快多次加载)
             clearTimeout(sTimer);
             sTimer = setTimeout(function(){
-                pullUpLoadData('data/data.json');
+                pullUpLoadData('data/data.json', $ttNewsListArr.eq(ttNewsContentSwiper.activeIndex));
             }, 300);
         }
-        if (scrollTop + tnnHeight >= ttnOT) {
+        if (scrollTop >= ttnOT) {
             if (!flag) { return; }
             flag = false;
-            $ttNewsNav.css('zIndex', 9);
-            $ttNewsNav.stop().animate({
-                'opacity': 1,
-                'top': '0px'
-            }, 200, 'linear');
+            $ttNewsNav.removeClass('tt-news-nav').addClass('tt-news-nav-fixed');
+            $ttNewsNav.next().css('padding-top', '0.72rem');
+            navStatic = false;
+            updateNavSwiper();
+            // $ttNewsNav.css('zIndex', 9);
+            // $ttNewsNav.stop().animate({
+            //     'position': 'fixed',
+            //     'opacity': 1,
+            //     'top': '0px'
+            // }, 200, 'linear');
+            
         } else {
             if (flag) { return; }
             flag = true;
-            $ttNewsNav.stop().animate({
-                'opacity': 0,
-                'top': '-' + tnnHeight + 'px'
-            }, 100, 'linear', function() {
-                $ttNewsNav.css('zIndex', -1);
-            });
+            $ttNewsNav.removeClass('tt-news-nav-fixed').addClass('tt-news-nav');
+            $ttNewsNav.next().css('padding-top', '0');
+            navStatic = true;
+            updateNavSwiper();
+            // $ttNewsNav.stop().animate({
+            //     'opacity': 0,
+            //     'top': '-' + tnnHeight + 'px'
+            // }, 100, 'linear', function() {
+            //     $ttNewsNav.css('zIndex', -1);
+            // });
         }
     });
+
+    /**
+     * 更新navSwiper
+     * @return {[type]} [description]
+     */
+    function updateNavSwiper(){
+        ttNewsNavSwiper.update();
+        ttNewsNavSwiper.slideTo(navActiveIndex - 2, 200, false);
+    }
     
-    // new Swiper("#daohang",{slidesPerView:7,paginationClickable:true,spaceBetween:0,freeMode:true,initialSlide:0,prevButton:".swiper-button-prev",nextButton:".swiper-button-next",});
 
     /**
      * 头条新闻导航点击事件
@@ -167,26 +207,42 @@ $(function() {
      * @return {[type]}     [description]
      */
     $ttNewsTabs.on('click', function(){
-        var $this = $(this),
-            id = $this.data('id'),
+        var $this = $(this), 
             index = $this.parent().index();
-        $ttNewsTabs.removeClass('active');
-        $this.addClass('active');
-        ttNewsSwiper.slideTo(index - 3, 200, false);   //切换到第一个slide，速度为200ms
-        loadData('data/data2.json', id);
-        $('body').scrollTop(tnnTop + 1);
+        navActiveIndex = index;
+        // ttNewsCtg = $this.data('ctg');
+        ttNewsContentSwiper.slideTo(index, 200, false);
+        updateNews('data/data2.json', index);
     });
 
-    // 首次加载数据
-    loadData('data/data2.json');
+    /**
+     * 新闻数据更新
+     * @param  {[type]} url   请求地址
+     * @param  {[type]} index 类别索引
+     * @return {[type]}       [description]
+     */
+    function updateNews(url, index){
+        console.log('index: ', index);
+        var $ttNewsList = $ttNewsListArr.eq(index);
+        $ttNewsTabs.removeClass('active');
+        $ttNewsTabs.eq(index).addClass('active');
+        ttNewsNavSwiper.slideTo(index - 2, 200, false);
+        if(existInArray(ttNewsCtgArr, $ttNewsList.data('ctg'))){
+            return false;
+        }
+        ttNewsContentSwiper.lockSwipes();
+        if(!navStatic){
+            $('body').scrollTop(tnnTop);
+        }
+        loadData(url, $ttNewsList);
+    }
 
     /**
      * 加载数据
      * @param  {[type]} url 请求地址
      * @return {[type]}   [description]
      */
-    function loadData(url, id){
-        // console.log(id);
+    function loadData(url, $ttNewsList){
         $.ajax({
             url: url,
             dataType: 'json',
@@ -194,8 +250,8 @@ $(function() {
                 // console.log(data);
                 $ttNewsList.html('');
                 $bgLoading.show();
-                // generateDom(data);
-                setTimeout(function(){generateDom(data);}, 1000);
+                generateDom(data, $ttNewsList);
+                // setTimeout(function(){generateDom(data, $ttNewsList);}, 1000);
             }
         });
     }
@@ -205,12 +261,12 @@ $(function() {
      * @param  {[type]} url 请求地址
      * @return {[type]}     [description]
      */
-    function pullUpLoadData(url){
+    function pullUpLoadData(url, $ttNewsList){
         $.ajax({
             url: url,
             dataType: 'json',
             success: function(data){
-                generateDom(data);
+                generateDom(data, $ttNewsList);
                 // setTimeout(function(){generateDom(data);}, 1000);
             }
         });
@@ -221,7 +277,7 @@ $(function() {
      * @param  {[type]} d 数据
      * @return {[type]}   [description]
      */
-    function generateDom(d){
+    function generateDom(d, $ttNewsList){
         var data = d && d.data;
         // 数组顺序打乱
         dislocateArr(data);
@@ -242,7 +298,10 @@ $(function() {
                 $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a href="' + url + '" target="_blank"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div><div class="img-wrap fr"><img src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
             }
         }
+        $ttNewsListWrap.children('.swiper-wrapper').css('height', $ttNewsList.outerHeight() + 'px');
+        ttNewsCtgArr.push($ttNewsList.data('ctg'));
         $bgLoading.hide();
+        ttNewsContentSwiper.unlockSwipes();
     }
 
     /**
@@ -351,7 +410,7 @@ $(function() {
     /**
      * 返回顶部动画
      */
-    //goTop(500);//500ms内滚回顶部
+    //goTop(500);// 500ms内滚回顶部
     function goTop(times) {
         if (!!!times) {
             $(window).scrollTop(0);
@@ -378,6 +437,23 @@ $(function() {
         ani();
     }
 
+    /**
+     * 判断数组中是否存在指定值
+     * @param  {[type]} arr 数组
+     * @param  {[type]} val 值
+     * @return {[type]}     [description]
+     */
+    function existInArray(arr, val){
+        if(val && arr.join(',').indexOf(val) != -1){
+            return true;
+        } 
+        return false;
+    }
+
+    /**
+     * 获取scrollTop值
+     * @return {[type]} [description]
+     */
     function getScrollTop(){
         if (document.documentElement && document.documentElement.scrollTop) {
             return document.documentElement.scrollTop;
@@ -386,8 +462,12 @@ $(function() {
         }
     }
 
+    /**
+     * 获取clientHeight值
+     * @return {[type]} [description]
+     */
     function getClientHeight(){
-        if (document.body.clientHeight && document.documentElement.clientHeight) {
+        if (document.body.clientHeight && document.documentElement.clientHeight ) {
             return (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
         } else {
             return (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
