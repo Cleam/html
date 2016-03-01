@@ -111,7 +111,7 @@
                     <li><a href="http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&Allianceid=299402&sid=772977&OUID=&jumpUrl=http%3A%2F%2Fwww.ctrip.com%2F%3FAllianceid%3D299402%26sid%3D772977%26OUID%3D%26MultiUnionSupport%3Dtrue" target="_blank"><img src="images/new/i_ctrip.png" alt="">携程</a></li>
                     <li><a href="http://sina.cn/" target="_blank"><img src="images/new/i_sina.png" alt="">新浪</a></li>
                     <li><a href="http://www.amazon.cn/b?node=1753420071&tag=chgd-lvyou-kindle-0215-23" target="_blank"><img src="images/new/i_amazon.png" alt="">亚马逊</a></li>
-                    <li><a href="http://toutiao.eastday.com/?qid=021dh" target="_blank"><img src="images/new/i_toutiao.png" alt="">头条</a></li>
+                    <li><a class="J-has-channel" href="http://toutiao.eastday.com/" target="_blank"><img src="images/new/i_toutiao.png" alt="">头条</a></li>
 
                     <li><a href="http://ai.m.taobao.com?pid=mm_112599953_11408251_47000534" target="_blank"><img src="images/new/i_aitaobao.png" alt="">爱淘宝</a></li>
                     <li><a href="http://www.youku.com/" target="_blank"><img src="images/new/i_youku.png" alt="">优酷</a></li>
@@ -196,7 +196,7 @@
                 <ul id="J_toutiao_news_list" class="toutiao-list"></ul>
                 <div class="toutiao-bottom">
                     <!-- <a id="J_change_news" href="javascript:;">换一换</a> -->
-                    <a href="http://toutiao.eastday.com/?qid=m021dh" target="_blank">更多新闻</a>
+                    <a class="J-has-channel" href="http://toutiao.eastday.com/" target="_blank">更多新闻</a>
                     <!-- <span></span> -->
                 </div>
             </div>
@@ -210,7 +210,7 @@
                 <div>
                     <div class="section-t">
                         <ul>
-                            <li><a href="http://toutiao.eastday.com/" target="_blank">头条</a></li>
+                            <li><a class="J-has-channel" href="http://toutiao.eastday.com/" target="_blank">头条</a></li>
                             <li><a href="http://wap.eastday.com/" target="_blank">东方网</a></li>
                             <li><a href="http://wap.eastmoney.com/" target="_blank">东方财富</a></li>
                             <li><a href="http://m.people.cn/" target="_blank">人民网</a></li>
@@ -833,10 +833,15 @@
             $newsListNav = $('#J_news_list_nav'),
             defaultNewsType = 'toutiao',
             $newsListWrap = $('#J_toutiao_news_list'),
+            $hasChannel = $('.J-has-channel'),
             $loading = $('#J_spinner');
         // 初始化数据
         $newsListWrap.empty();
         toutiaoAjax(defaultNewsType);
+        $hasChannel.each(function(i, ele){
+            var $this = $(ele);
+            $this.attr('href', $this.attr('href') + '?qid=' +tt_news_qid);
+        });
 
         // 换一换
         /*$changeList.click(function(event) {

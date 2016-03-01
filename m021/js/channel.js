@@ -13,7 +13,7 @@ var tt_news_qid = '';
 			return 'm021_' + mid;
 		}
 		// 无渠道情况 和 ?xxxx
-		return getQueryString2() ? 'm021_' + getQueryString2() : 'm021';
+		return getQueryString2() ? 'm021_' + getQueryString2() : 'm021dh';
 	}
 
 	/**
