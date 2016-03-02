@@ -1,4 +1,5 @@
 $(function() {
+    FastClick.attach(document.body);
     /**
      * 输入框清空功能实现
      */

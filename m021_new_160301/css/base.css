@@ -15,8 +15,12 @@ h1, h2, h3, h4, h5, h6 { font-weight: normal; }
 textarea { resize: none; }
 input[type=button],input[type=submit]{cursor: pointer;}
 input[type=button] { -webkit-appearance: none; outline: none }
-input::-webkit-input-placeholder { color: #F0F0F0; }
-textarea::-webkit-input-placeholder { color: #F0F0F0; }
+:-moz-placeholder {color: #ccc;} /* Mozilla Firefox 4 to 18 */
+::-moz-placeholder {color: #ccc;} /* Mozilla Firefox 19+ */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {color: #ccc;}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {color: #ccc;} 
 table { border-collapse: collapse; border-spacing: 0 }
 th { text-align: inherit; }
 fieldset, img { border: 0 none; }
