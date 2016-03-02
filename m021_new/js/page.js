@@ -107,6 +107,7 @@ $(function() {
 
     var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
         pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
+        newsType = 'toutiao',
         $ttNews = $('#J_tt_news'),
         $ttNewsList = $('#J_ttnews_list'),
         $ttNewsNav = $ttNews.children('.tt-news-nav'),
@@ -175,13 +176,14 @@ $(function() {
          */
         $ttNewsTabs.on('click', function(){
             var $this = $(this),
-                ctg = $this.data('ctg'),
                 index = $this.parent().index();
+            // 记录新闻类别
+            newsType = $this.data('type');
             $ttNewsTabs.removeClass('active');
             $this.addClass('active');
             ttNewsSwiper.slideTo(index - 2, 200, false);
-            loadData(ctg);
-            $('body').scrollTop(tnnTop + 1);
+            // 加载新闻数据
+            loadData();
         });
     }
 
@@ -190,12 +192,11 @@ $(function() {
      * @param  {[type]} url 请求地址
      * @return {[type]}   [description]
      */
-    function loadData(ctg){
-        // console.log(ctg);
+    function loadData(){
         $.ajax({
             url: refreshUrl,
             data: {
-                type: ctg,
+                type: newsType,
                 endkey: '',
                 picnewsnum: 1
             },
@@ -217,7 +218,7 @@ $(function() {
      * @param  {[type]} url 请求地址
      * @return {[type]}     [description]
      */
-    function pullUpLoadData(url){
+    function pullUpLoadData(){
         $.ajax({
             url: url,
             dataType: 'json',
@@ -235,8 +236,6 @@ $(function() {
      */
     function generateDom(d){
         var data = d && d.data;
-        // 数组顺序打乱
-        // dislocateArr(data);
         if(!data){
             return false;
         }
@@ -255,6 +254,7 @@ $(function() {
             }
         }
         $bgLoading.hide();
+        $('body').scrollTop(tnnTop + 1);
     }
 
     /**
