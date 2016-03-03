@@ -21,7 +21,6 @@ $(function() {
 
     })();
 
-
     /* 热站导航宽窄屏判断功能实现 */
     (function(){
         var $hotSiteMore = $('#J_hot_site_more');
@@ -150,22 +149,24 @@ $(function() {
                 }, 300);
             }
             if (scrollTop + tnnHeight >= ttnOT) {
-                if (!flag) { return; }
-                flag = false;
-                $ttNewsNav.css('zIndex', 9);
-                $ttNewsNav.stop().animate({
-                    'opacity': 1,
-                    'top': '0px'
-                }, 200, 'linear');
+                if (flag) {
+                    flag = false;
+                    $ttNewsNav.css('zIndex', 9);
+                    $ttNewsNav.stop().animate({
+                        'opacity': 1,
+                        'top': '0px'
+                    }, 200, 'linear');
+                }
             } else {
-                if (flag) { return; }
-                flag = true;
-                $ttNewsNav.stop().animate({
-                    'opacity': 0,
-                    'top': '-' + tnnHeight + 'px'
-                }, 100, 'linear', function() {
-                    $ttNewsNav.css('zIndex', -1);
-                });
+                if (!flag) {
+                    flag = true;
+                    $ttNewsNav.stop().animate({
+                        'opacity': 0,
+                        'top': '-' + tnnHeight + 'px'
+                    }, 100, 'linear', function() {
+                        $ttNewsNav.css('zIndex', -1);
+                    });
+                }
             }
         });
         
