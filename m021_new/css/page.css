@@ -6,6 +6,7 @@
  */
 @media only screen and (min-width: 720px) {body{width: 720px; margin: 0 auto;}}
 html,body{height: 100%;}
+html{background-color: #f1f1f1;}
 body{ font-size: 20px;  color: #666; background-color: #f1f1f1; min-width: 320px;}
 a:active{background-color: #e5e5e5 !important;}
 
@@ -38,10 +39,10 @@ a:active{background-color: #e5e5e5 !important;}
 /*===== 热站导航 ====*/
 .hot-site{background-color: #fff; padding-bottom: 0.3rem;}
 .hot-site-list{height: 2.6rem; overflow: hidden; position: relative;}
-.hot-site-list.expand{height: auto; overflow: visible;}
+.hot-site-list.expand{height: auto; overflow: visible; width: 100%;}
 .hot-site-list .hot-site-item{padding-top: 0.14rem; height: 1.3rem;}
 .hot-site-list .hot-site-item:last-child{position: absolute; bottom: 0; right: 0; background-color: #fff;}
-.hot-site-list .hot-site-item{/* width: 1.2rem; */ width: 16.666%;}
+.hot-site-list .hot-site-item{width: 16.666%;}
 /*.hot-site-list .hot-site-item.hot-site-item-special{display: block;}*/
 @media screen and (max-width: 320px){
 	.hot-site-list .hot-site-item{width: 20%;}
@@ -102,18 +103,18 @@ a:active{background-color: #e5e5e5 !important;}
 .tt-news-list{min-height: 800px;}
 .tt-news-list .tt-news-item:last-child a .news-wrap{border-bottom: 0 none;}
 .tt-news-list .tt-news-item-s1 a{display: block; width: 100%; height: 1.68rem; padding: 0.24rem 0.3rem;}
-.tt-news-list .tt-news-item-s1 a .news-wrap{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem; height: 1.44rem;}
-.tt-news-list .tt-news-item-s1 a .txt-wrap{position: relative; width: 4.64rem; height: 1.2rem;}
-.tt-news-list .tt-news-item-s1 a .txt-wrap h3{font-size: 0.34rem; color: #333; width: 100%; height: 0.88rem; line-height: 1.2em; overflow: hidden;}
+.tt-news-list .tt-news-item-s1 a .news-wrap{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem; height: 1.5rem;}
+.tt-news-list .tt-news-item-s1 a .txt-wrap{position: relative; width: 4.64rem; height: 1.25rem;}
+.tt-news-list .tt-news-item-s1 a .txt-wrap h3{font-size: 0.34rem; color: #333; width: 100%; height: 0.82rem; line-height: 1.2em; overflow: hidden;}
 .tt-news-list .tt-news-item-s1 a .txt-wrap p{position: absolute; bottom: 0; width: 100%; font-size: 0.2rem; color: #999;}
-.tt-news-list .tt-news-item-s1 a .img-wrap{width: 1.8rem; height: 1.2rem;}
+.tt-news-list .tt-news-item-s1 a .img-wrap{width: 1.8rem; height: 1.25rem;}
 .tt-news-list .tt-news-item-s1 a .img-wrap img{width: 100%; height: 100%;}
 
 .tt-news-list .tt-news-item-s2 a{display: block; width: 100%; padding: 0.2rem 0.3rem 0;}
-.tt-news-list .tt-news-item-s2 a .news-wrap{position: relative; min-height: 2.5rem; padding-bottom: 0.24rem; border-bottom: 1px solid #eee;}
+.tt-news-list .tt-news-item-s2 a .news-wrap{position: relative; min-height: 2.7rem; padding-bottom: 0.24rem; border-bottom: 1px solid #eee;}
 .tt-news-list .tt-news-item-s2 a h3{font-size: 0.34rem; color: #333; margin-bottom: 0.14rem; width: 100%; max-height: 0.88rem; line-height: 1.2em; overflow: hidden;}
-.tt-news-list .tt-news-item-s2 a .img-wrap{height: 1.4rem;}
-.tt-news-list .tt-news-item-s2 a .img-wrap img{display: block; margin-right: 0.15rem; width: 2.1rem; height: 1.4rem;}
+.tt-news-list .tt-news-item-s2 a .img-wrap{height: 1.58rem;}
+.tt-news-list .tt-news-item-s2 a .img-wrap img{display: block; margin-right: 0.15rem; width: 2.1rem; height: 1.58rem;}
 .tt-news-list .tt-news-item-s2 a .img-wrap img:last-child{margin-right: 0;}
 .tt-news-list .tt-news-item-s2 a p{width: 100%; padding-top: 0.1rem; font-size: 0.2rem; color: #999;}
 
@@ -122,18 +123,26 @@ a:active{background-color: #e5e5e5 !important;}
 .footer{text-align: center; padding: 0.2rem 0; font-size: 0.16rem;}
 
 /* loading */
+.bg-loading{padding: 0.1rem 0; position: absolute; top: 1rem; left: 50%; width: 1.5rem; height: 0.5rem; margin-left: -0.75rem; z-index: 1; display: none;}
+.bg-loading .txt{font-size: 0.22rem; padding: 0.1rem 0; text-align: center; color: #52ace5;}
+.bg-loading .spinner {margin: 0 auto; width: 1.5rem; height: 0.3rem; text-align: center; }
+.bg-loading .spinner > div {width: 0.3rem; height: 0.3rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+.bg-loading .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
+.bg-loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;} 
+
+/* pull up loading */
 .loading{padding: 0.1rem 0; padding: 0.1rem 0 0.2rem;}
 .loading .txt{font-size: 0.22rem; padding: 0.1rem 0; text-align: center; color: #52ace5;}
 .loading .spinner {margin: 0 auto; width: 1.5rem; text-align: center; }
-.loading .spinner > div {width: 0.1rem; height: 0.1rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay1 1.4s infinite ease-in-out; animation: bouncedelay1 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+.loading .spinner > div {width: 0.1rem; height: 0.1rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
 .loading .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
 .loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;}
-@-webkit-keyframes bouncedelay1 {
+@-webkit-keyframes bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0.0); }
   40% { -webkit-transform: scale(1.0); }
 }
  
-@keyframes bouncedelay1 {
+@keyframes bouncedelay {
   0%, 80%, 100% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
@@ -143,7 +152,7 @@ a:active{background-color: #e5e5e5 !important;}
   }
 }
 
-.bg-loading{padding: 0.1rem 0; position: absolute; top: 2rem; left: 50%; width: 1.2rem; height: 1.2rem; margin-left: -0.6rem; z-index: 1; display: none;}
+/* .bg-loading{padding: 0.1rem 0; position: absolute; top: 2rem; left: 50%; width: 1.2rem; height: 1.2rem; margin-left: -0.6rem; z-index: 1; display: none;}
 .bg-loading .txt{font-size: 0.22rem; padding: 0.1rem 0; text-align: center; color: #52ace5;}
 .bg-loading .spinner {margin: 0 auto; width: 1.2rem; height: 1rem; text-align: center; font-size: 0.3rem; }
 .bg-loading .spinner > div {background-color: #52ace5; height: 100%; width: 0.08rem; display: inline-block; -webkit-animation: stretchdelay2 1.2s infinite ease-in-out; animation: stretchdelay2 1.2s infinite ease-in-out; }
@@ -163,16 +172,7 @@ a:active{background-color: #e5e5e5 !important;}
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
-}
-/* .bg-loading .txt{font-size: 0.22rem; padding: 0.1rem 0; text-align: center; color: #52ace5;}
-.bg-loading .spinner {margin: 0 auto; width: 1.5rem; text-align: center; }
-.bg-loading .spinner > div {width: 0.3rem; height: 0.3rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
-.bg-loading .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
-.bg-loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;} */
-
-
-
-
+} */
 
 /* 搜索提示框样式 */
 /* .bdSug_app{display: none;}
@@ -180,6 +180,4 @@ body .bdSug_wpr{border-radius: 0.1rem; border: 1px solid #eee; overflow: hidden;
 body .bdSug_wpr table tr td{padding: 0.1rem 0 0.1rem 0.1rem; border-bottom: 1px solid #eee;}
 body .bdSug_wpr table tr:last-child td{border-bottom: 0 none;}
 body .bdSug_wpr table tr td:active{background-color: #FFEDE8 !important;} */
-
-
 

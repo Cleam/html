@@ -420,22 +420,27 @@
 	                	<a class="sub-link" href="http://t.sohu.com/" target="_blank">搜狐微博</a>
 	                </div>
 
-	                <!-- 美女 -->
+	                <!-- 娱乐 -->
 	                <div class="cs-main clearfix">
-	                	<a class="title" href="javascript:;">美女</a>
-	                	<a class="link" href="http://www.mmlin.com/" target="_blank">林妹妹</a>
-	                	<a class="link" href="http://www.27.cn/" target="_blank">美悦</a>
-	                	<a class="link" href="http://m.uumnt.com/" target="_blank">优优</a>
-	                	<a class="link" href="http://m.app111.com/b/" target="_blank">壁纸</a>
+	                	<a class="title" href="javascript:;">娱乐</a>
+	                	<a class="link" href="http://widget.sina.cn/" target="_blank">新浪</a>
+	                	<a class="link" href="http://mobi.shaqing.com/?021h" target="_blank">杀青娱乐</a>
+	                	<a class="link" href="http://ent.3g.qq.com/" target="_blank">腾讯</a>
+	                	<a class="link" href="http://m.sohu.com/c/4/" target="_blank">搜狐</a>
 	                	<span class="J-more more"><i></i></span>
 	                </div>
 	                <div class="cs-cn clearfix none">
-	                	<a class="sub-link" href="http://m.4493.com/" target="_blank">靓丽美女</a>
-	                	<a class="sub-link" href="http://www.mzitu.com/" target="_blank">JoyTK</a>
-	                	<a class="sub-link" href="http://www.7160.com/" target="_blank">7160</a>
-	                	<a class="sub-link" href="http://ltuj.com/in/87" target="_blank">靓图集</a>
+	                	<a class="sub-link" href="http://ent.youku.com" target="_blank">优酷娱乐</a>
+	                	<a class="sub-link" href="http://3g.163.com/touch/ent/" target="_blank">网易娱乐</a>
+	                	<a class="sub-link" href="http://i.ifeng.com/ent/enti?vt=4" target="_blank">凤凰娱乐</a>
+	                	<a class="sub-link" href="http://ent.3g.cn/" target="_blank">3G娱乐</a>
 
-	                	<a class="sub-link" href="http://m.ixiumei.com/gallery/" target="_blank">秀美图库</a>
+	                	<a class="sub-link" href="http://m.iqiyi.com/yule/" target="_blank">奇艺娱乐</a>
+	                	<a class="sub-link" href="http://ent.news.cn/" target="_blank">新华娱乐</a>
+	                	<a class="sub-link" href="http://3g.yule.com.cn/" target="_blank">中国娱乐</a>
+	                	<a class="sub-link" href="http://m.huabian.com?" target="_blank">花边新闻</a>
+
+	                	<a class="sub-link" href="http://m.pengpeng.com/index.do?v=touch" target="_blank">碰碰网</a>
 	                </div>
 	            </div>	<!-- /休闲 end -->
 
@@ -492,7 +497,7 @@
 			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs active" data-type="toutiao" href="javascript:;">头条</a></div>
 			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-type="weikandian" href="javascript:;">滚动</a></div>
 			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-type="shehui" href="javascript:;">社会</a></div>
-			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-type="shanghai" href="javascript:;">上海</a></div>
+			        <div class="news-nav-item swiper-slide"><a id="J_location" class="ttnews-tabs" data-type="shanghai" href="javascript:;">上海</a></div>
 			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-type="xiaohua" href="javascript:;">笑话</a></div>
 			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-type="yule" href="javascript:;">娱乐</a></div>
 			        <div class="news-nav-item swiper-slide"><a class="ttnews-tabs" data-type="guonei" href="javascript:;">国内</a></div>
@@ -519,14 +524,21 @@
 		<ul id="J_ttnews_list" class="tt-news-list"></ul>
 		<div id="J_bg_loading" class="bg-loading">
 			<div class="spinner">
+			  <div class="bounce1"></div>
+			  <div class="bounce2"></div>
+			  <div class="bounce3"></div>
+			</div>
+			<p class="txt">加载中...</p>
+		</div>
+		<!-- <div id="J_bg_loading" class="bg-loading">
+			<div class="spinner">
 			  <div class="rect1"></div>
 			  <div class="rect2"></div>
 			  <div class="rect3"></div>
 			  <div class="rect4"></div>
 			  <div class="rect5"></div>
 			</div>
-			<!-- <p class="txt">数据加载中</p> -->
-		</div>
+		</div> -->
 		<!-- 新闻模板 单图 + 三图 -->
 		<!-- <li class="tt-news-item tt-news-item-s1">
 			<a href="javascript:;" target="_blank">
@@ -573,8 +585,10 @@
 	<!-- <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
 	<!-- <script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script> -->
 	<script src="js/jquery-2.2.1.min.js"></script>
-	<script src="js/fastclick.min.js"></script>
+	<script src="js/jquery.cookie.min.js"></script>
 	<script src="js/swiper-3.3.0.jquery.min.js"></script>
+	<script src="js/fastclick.min.js"></script>
+	<script src="js/web-storage-cache.min.js"></script>
 	<script src="js/page.js"></script>
 </body>
 </html>

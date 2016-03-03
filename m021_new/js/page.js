@@ -106,7 +106,10 @@ $(function() {
 
     var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
         pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
+        rowkey = '',   // 存储最后一条新闻的rowkey
+        userId = $.cookie('user_id'),   // 获取用户id
         newsType = 'toutiao',
+        $loation = $('#J_location'),
         $ttNews = $('#J_tt_news'),
         $ttNewsList = $('#J_ttnews_list'),
         $ttNewsNav = $ttNews.children('.tt-news-nav'),
@@ -114,23 +117,36 @@ $(function() {
         $ttNewsTabs = $ttNewsNavList.find('.ttnews-tabs'),
         tnnHeight = $ttNewsNav.outerHeight(),
         tnnTop = $ttNews.offset().top - tnnHeight,
-        flag = true,
-        sTimer = null,
+        newsNavFlag = true,
+        scrollTimer = null,
         $bgLoading = $('#J_bg_loading'),
+        wsCache = new WebStorageCache(),
+        idx = $.cookie('idx_' + newsType, Number);  // 参数
+        pgNum = 1,  // 参数
         // 新闻导航左右滑动功能实现
-        ttNewsSwiper = new Swiper('#J_ttnews_nav_container', {
+        ttNewsNavSwiper = new Swiper('#J_ttnews_nav_container', {
             freeMode : true,
             speed: 500,
             slidesPerView: 5.5
         });
-
     init();
 
     function init(){
         // 首次加载数据
         loadData('toutiao');
-        
-        /* 头条新闻菜单显示隐藏功能实现 */
+        // 获取用户ID
+        if(!userId){
+            userId = '';
+            setUid();
+        }
+        // 设置当前位置信息
+        var loc = getCacheCity();
+        if(loc){
+            updateDomLocation(loc);
+        } else {
+            location();
+        }
+        // 头条新闻菜单显示隐藏功能实现
         $ttNewsNav.children('.home').on('click', function(e) {
             e.preventDefault();
             goTop(200);
@@ -141,16 +157,11 @@ $(function() {
                 $loading = $('#J_loading'),
                 loadOT = $loading.offset().top,
                 cHeight = getClientHeight();
-            if(scrollTop + cHeight >= loadOT && !flag){
-                // 上拉加载数据(延迟执行，防止操作过快多次加载)
-                clearTimeout(sTimer);
-                sTimer = setTimeout(function(){
-                    pullUpLoadData('data/data.json');
-                }, 300);
-            }
+            // 缓存浏览位置
+            setCachePos(scrollTop);
             if (scrollTop + tnnHeight >= ttnOT) {
-                if (flag) {
-                    flag = false;
+                if (newsNavFlag) {
+                    newsNavFlag = false;
                     $ttNewsNav.css('zIndex', 9);
                     $ttNewsNav.stop().animate({
                         'opacity': 1,
@@ -158,8 +169,8 @@ $(function() {
                     }, 200, 'linear');
                 }
             } else {
-                if (!flag) {
-                    flag = true;
+                if (!newsNavFlag) {
+                    newsNavFlag = true;
                     $ttNewsNav.stop().animate({
                         'opacity': 0,
                         'top': '-' + tnnHeight + 'px'
@@ -168,64 +179,270 @@ $(function() {
                     });
                 }
             }
+            if(scrollTop + cHeight >= loadOT && !newsNavFlag){
+                // 上拉加载数据(延迟执行，防止操作过快多次加载)
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(function(){
+                    pullUpLoadData();
+                }, 300);
+            }
         });
+        // 刷新页面即触发window的scroll事件（因为浏览器会记忆刷新前滚动条的位置。）
+        $(window).trigger('scroll');
         
-        /**
-         * 头条新闻导航点击事件
-         * @param  {[type]} ){                 } [description]
-         * @return {[type]}     [description]
-         */
+        // 头条新闻导航点击事件
         $ttNewsTabs.on('click', function(){
             var $this = $(this),
                 index = $this.parent().index();
-            // 记录新闻类别
+            // console.log(index);
+            if($this.hasClass('active')){
+                return false;
+            }
+            // 记录新闻类别（作为接口参数）
             newsType = $this.data('type');
+            idx = $.cookie('idx_' + newsType, Number);
             $ttNewsTabs.removeClass('active');
             $this.addClass('active');
-            ttNewsSwiper.slideTo(index - 2, 200, false);
+            ttNewsNavSwiper.slideTo(index - 2, 200, false);
+            // 获取浏览位置
+            var cachePos = getCachePos();
+            if(cachePos){
+                $('body').scrollTop(cachePos);
+            } else {
+                // 跳到新闻顶部
+                $('body').scrollTop(tnnTop + 1);
+            }
             // 加载新闻数据
-            loadData();
+            var cacheNews = getCacheNews();
+            if(cacheNews){
+                $ttNewsList.html(cacheNews);
+            } else {
+                loadData();
+            }
+        });
+    }
+
+    /**
+     * 更新位置信息
+     * @param  {[type]} loc [description]
+     * @return {[type]}     [description]
+     */
+    function updateDomLocation(loc){
+        $loation.attr('data-type', loc.prov_py);
+        $loation.html(loc.prov_name);
+    }
+
+    /**
+     * 获取地方站的接口数据
+     * @return {[type]} [description]
+     */
+    function location(){
+        $.ajax({
+            type : 'POST',
+            url : 'http://123.59.74.13/position/get',
+            dataType : 'jsonp',
+            jsonp : 'jsonpcallback',
+            timeout: 5000,
+        }).done(function(res){
+            try {
+                var pos = res.position,
+                    py = getCityPinyin(pos.provname),
+                    loc = null;
+                if(py){
+                    loc = {"prov_id": pos.pro_id,"prov_py": py,"prov_name": pos.provname};
+                    updateDomLocation(loc);
+                    setCacheCity(loc);
+                } else {
+                    ttNewsNavSwiper.removeSlide(3);
+                }
+            } catch(e) {
+                console.error(e);
+                ttNewsNavSwiper.removeSlide(3);
+            }
+        }).error(function(jqXHR,textStatus){
+            console.error(textStatus);
+            ttNewsNavSwiper.removeSlide(3);
+        });
+    }
+
+    /**
+     * 通过城市中文名获取拼音
+     * @param  {[type]} city 中文名
+     * @return {[type]}      拼音
+     */
+    function getCityPinyin(city){
+        switch(city){
+            case '上海': return 'shanghai'; break;
+            case '北京': return 'beijing'; break;
+            case '河南': return 'henan'; break;
+            case '广东': return 'guangdong'; break;
+            default: return null;
+        }
+    }
+
+    /**
+     * 缓存位置信息（缓存12小时）
+     * @param {Object} loc 位置信息
+     */
+    function setCacheCity(loc){
+        wsCache.isSupported() && wsCache.set('location', loc, {exp: 43200});
+    }
+
+    /**
+     * 获取位置信息
+     * @return {[type]} [description]
+     */
+    function getCacheCity(){
+        if(wsCache.isSupported()){
+            return wsCache.get('location');
+        }
+        return false;
+    }
+
+    /**
+     * 缓存当前类别加载的新闻（缓存20分钟）
+     */
+    function setCacheNews(){
+        wsCache.isSupported() && wsCache.set('ttn_' + newsType, $ttNewsList.html(), {exp: 1200});
+    }
+
+    /**
+     * 获取当前类别缓存的新闻
+     * @return {String|Boolean} 成功返回新闻数据(否则返回false)
+     */
+    function getCacheNews(){
+        if(wsCache.isSupported()){
+            return wsCache.get('ttn_' + newsType);
+        }
+        return false;
+    }
+
+    /**
+     * 缓存当前类别新闻的浏览位置（缓存20分钟）
+     * @param {[type]} st [description]
+     */
+    function setCachePos(st){
+        wsCache.isSupported() && wsCache.set('ttn_pos_' + newsType, st, {exp: 1200});
+    }
+
+    /**
+     * 获取当前类别新闻缓存的浏览位置
+     * @return {String|Boolean} 成功返回滚动位置(否则返回false)
+     */
+    function getCachePos(){
+        if(wsCache.isSupported()){
+            return wsCache.get('ttn_pos_' + newsType);
+        }
+        return false;
+    }
+
+    /**
+     * 设置userId
+     */
+    function setUid(){
+        $.ajax({
+            type : 'POST',
+            url : 'http://toutiao.eastday.com/getwapdata/getuid',
+    //      url:'http://123.59.60.170/getwapdata/getuid',
+            dataType : 'jsonp',
+            data : {
+                softtype : 'news',
+                softname : 'eastday_wapnews',
+            },
+            jsonp : 'jsonpcallback',
+            success : function(msg) {
+                try {
+                    userId = msg.uid;
+                    $.cookie('user_id', userId, {
+                        expires : 365 * 5,
+                        path:'/'
+                    });
+                } catch(e) {
+                    console.error(e);
+                }
+                //用户进入头条时传入的日志
+                // var qid=$.cookie('qid');
+                // if(!qid){
+                //     qid='null';
+                // }
+                // var to=$("#newstype").val();
+                // putdata(qid,uid,'null',softtype,softname,to,'null',to,os_type,browser_type,pixel);
+            }
         });
     }
 
     /**
      * 加载数据
-     * @param  {[type]} url 请求地址
      * @return {[type]}   [description]
      */
     function loadData(){
+        $.cookie('pgnum_' + newsType, 1, { expires: 0.334, path: '/' });
         $.ajax({
             url: refreshUrl,
             data: {
                 type: newsType,
                 endkey: '',
-                picnewsnum: 1
+                recgid: userId, // 用户ID
+                picnewsnum: 1,
+                qid: '',
+                readhistory: '',
+                idx: 0,
+                pgnum: 1
             },
             dataType: 'jsonp',
             jsonp: "jsonpcallback",
             timeout: 8000,
-            success: function(data){
-                // console.log(data);
+            beforeSend: function(){
                 $ttNewsList.html('');
                 $bgLoading.show();
+            },
+            success: function(data){
+                // console.log(data);
                 generateDom(data);
                 // setTimeout(function(){generateDom(data);}, 1000);
+            },
+            complete: function(){
+                $bgLoading.hide();
             }
         });
     }
 
     /**
      * 上拉加载数据
-     * @param  {[type]} url 请求地址
      * @return {[type]}     [description]
      */
     function pullUpLoadData(){
+        // 页码
+        pgNum = $.cookie('pgnum_' + newsType, Number);
+        $.cookie('pgnum_' + newsType, ++pgNum, { expires: 0.334, path: '/' });
+        // 链接索引
+        idx = $.cookie('idx_' + newsType, Number);
+        if(!idx){idx = 0;}
         $.ajax({
-            url: url,
-            dataType: 'json',
+            url: pullUpUrl,
+            data: {
+                type: newsType,
+                startkey: rowkey,
+                newsnum: 20,
+                isnew: 1,
+                readhistory: '',
+                idx: idx,
+                recgid: userId, // 用户ID
+                pgnum: pgNum,
+                qid: ''
+            },
+            dataType: 'jsonp',
+            jsonp: "jsonpcallback",
+            timeout: 8000,
+            beforeSend: function(){
+                
+            },
             success: function(data){
                 generateDom(data);
                 // setTimeout(function(){generateDom(data);}, 1000);
+            },
+            error: function(){
+
             }
         });
     }
@@ -240,22 +457,47 @@ $(function() {
         if(!data){
             return false;
         }
-        for (var i = 0, len = data.length; i < len; i++) {
+        rowkey = getLastRowkey(data);
+        if(!idx){idx = 0;}
+        var len = data.length;
+        for (var i = 0; i < len; i++) {
             var item = data[i],
                 url = item.url,
                 dateStr = item.date,
                 topic = item.topic,
                 source = item.source,
                 imgArr = item.miniimg,
+                recommendtype = item.recommendtype ? item.recommendtype : '-1',
+                hotnews = item.hotnews,
+                type = item.type,
+                subtype = item.subtype,
                 imgLen = imgArr.length;
             if(imgLen >= 3){
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a href="' + url + '" target="_blank"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div></a></li>');
+                $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '" target="_blank"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div></a></li>');
             } else {
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a href="' + url + '" target="_blank"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div><div class="img-wrap fr"><img src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
+                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '" target="_blank"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div><div class="img-wrap fr"><img src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
             }
         }
-        $bgLoading.hide();
-        $('body').scrollTop(tnnTop + 1);
+        $.cookie('idx_' + newsType, idx + len, { expires: 0.334, path: '/' });
+        setCacheNews();
+    }
+
+    /**
+     * 获取最后一条新闻的rowkey
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    function getLastRowkey(arr){
+        try {
+            var i = arr.length - 1;
+            while(i >= 0 && !$.trim(arr[i].rowkey)){
+                i--;
+            }
+            return arr[i].rowkey;
+        } catch(e) {
+            console.error(e);
+            return '';
+        }
     }
 
     /**
@@ -311,7 +553,7 @@ $(function() {
      */
     function strToTime(str){
         try {
-            return new Date(str).getTime();
+            return Date.parse(new Date(str));
         } catch(e){
             console.error(e);
             return false;
@@ -391,6 +633,10 @@ $(function() {
         ani();
     }
 
+    /**
+     * [getScrollTop description]
+     * @return {[type]} [description]
+     */
     function getScrollTop(){
         if (document.documentElement && document.documentElement.scrollTop) {
             return document.documentElement.scrollTop;
@@ -399,6 +645,10 @@ $(function() {
         }
     }
 
+    /**
+     * 获取文档高度
+     * @return {[type]} [description]
+     */
     function getClientHeight(){
         if (document.body.clientHeight && document.documentElement.clientHeight) {
             return (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
@@ -406,33 +656,6 @@ $(function() {
             return (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
         }
     }
-
-    /**
-     * 头条新闻滑动事件
-     * @return {[type]} [description]
-     */
-    /*(function(){
-        var $ttnewsTabs = $(".ttnews-tabs"),
-            newsWrap = new Swiper('#J_ttnews_swiper', {
-            speed: 300,
-            autoHeight: true,
-            onSlideChangeStart: function() {
-                var $activeSlide = $('#J_ttnews_swiper').find('.swiper-slide').eq(newsWrap.activeIndex),
-                    $slideWrapper = $activeSlide.parent();
-                $slideWrapper.height($activeSlide.height());
-                $ttnewsTabs.removeClass('active');
-                $ttnewsTabs.eq(newsWrap.activeIndex).addClass('active');
-            }
-        });
-        $ttnewsTabs.click(function(e) { e.preventDefault(); });
-        $ttnewsTabs.on('touchstart mousedown', function(e) {
-            e.preventDefault();
-            var $this = $(this);
-            $ttnewsTabs.removeClass('active');
-            $this.addClass('active');
-            newsWrap.slideTo($this.parent().index());
-        });
-    })();*/
 
     /*//滚动条在Y轴上的滚动距离
     function getScrollTop(){
@@ -477,6 +700,5 @@ $(function() {
           return false;
        }
     };*/
-
 
 });
