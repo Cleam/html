@@ -101,7 +101,6 @@ a:active{background-color: #e5e5e5 !important;}
 /* 内容 */
 .tt-news{margin-top: 0.2rem; background-color: #fff; position: relative;}
 .tt-news-list{min-height: 800px;}
-.tt-news-list img{background-image: url("../img/img_bg.jpg"); background-position: center; background-size: cover;}
 .tt-news-list .tt-news-item:last-child a .news-wrap{border-bottom: 0 none;}
 .tt-news-list .tt-news-item-s1 a{display: block; width: 100%; height: 1.68rem; padding: 0.24rem 0.3rem;}
 .tt-news-list .tt-news-item-s1 a .news-wrap{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem; height: 1.5rem;}

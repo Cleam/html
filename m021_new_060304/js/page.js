@@ -16,7 +16,7 @@ $(function() {
                 $searchClear.hide();
             }
         });
-        $searchClear.on('click', function(e){
+        $searchClear.on('click', function(){
             $searchInput.val('');
             $searchClear.hide();
             e.preventDefault();
@@ -71,6 +71,7 @@ $(function() {
                 $(".cs-tabs").children().eq(tabsSwiper.activeIndex).addClass('active');
             }
         });
+        // $(".cs-tabs a").click(function(e) { e.preventDefault(); });
         $(".cs-tabs a").on('click', function(e) {
             e.preventDefault();
             var $this = $(this);
@@ -80,6 +81,7 @@ $(function() {
         });
 
         /* 酷站【更多】功能实现 */
+        // $('.J-more').click(function(e) { e.preventDefault(); });
         $('.J-more').on('click', function(e) {
             e.preventDefault();
             var _this = this,
@@ -136,10 +138,6 @@ $(function() {
     init();
 
     function init(){
-        $('.J-has-channel').each(function(i, ele){
-            var $this = $(ele);
-            $this.attr('href', $this.attr('href') + '?qid=' +tt_news_qid);
-        });
         readUrl = wsCache.get('all_read_url');
         if(!readUrl){readUrl = '';}
         // 首次加载数据
@@ -445,6 +443,13 @@ $(function() {
                 } catch(e) {
                     console.error(e);
                 }
+                //用户进入头条时传入的日志
+                // var qid=$.cookie('qid');
+                // if(!qid){
+                //     qid='null';
+                // }
+                // var to=$("#newstype").val();
+                // putdata(qid,uid,'null',softtype,softname,to,'null',to,os_type,browser_type,pixel);
             }
         });
     }
@@ -460,7 +465,6 @@ $(function() {
             data: {
                 type: newsType,
                 endkey: '',
-                domain: '021',
                 recgid: userId, // 用户ID
                 picnewsnum: 1,
                 qid: tt_news_qid,
@@ -503,7 +507,6 @@ $(function() {
                 startkey: rowkey,
                 newsnum: 20,
                 isnew: 1,
-                domain: '021',
                 readhistory: readUrl,
                 idx: idx,
                 recgid: userId, // 用户ID
@@ -518,6 +521,7 @@ $(function() {
             },
             success: function(data){
                 generateDom(data);
+                // setTimeout(function(){generateDom(data);}, 1000);
             },
             error: function(jqXHR, textStatus){
                 console.error(textStatus);
@@ -552,12 +556,18 @@ $(function() {
                 type = item.type,
                 subtype = item.subtype,
                 imgLen = imgArr.length;
+            // console.log(url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html')));
             if(imgLen >= 3){
                 $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div></a></li>');
             } else {
                 $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
             }
         }
+        // $("img.lazy").lazyload({
+        //     placeholder: 'img/img_loading.gif',
+        //     event: 'scroll mouseover',
+        //     effect : "fadeIn"
+        // });
         $.cookie('idx_' + newsType, idx + len, { expires: 0.334, path: '/' });
         setCacheNews();
     }
@@ -588,6 +598,7 @@ $(function() {
     function dislocateArr(arr){
         return arr.sort(function(){ return 0.5 - Math.random(); });
     }
+
 
     /**
      * 计算指定时间与当前时间的时间差 并转换成相应格式字符串
@@ -734,5 +745,49 @@ $(function() {
             return (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;
         }
     }
+
+    /*//滚动条在Y轴上的滚动距离
+    function getScrollTop(){
+    　　var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+    　　if(document.body){
+    　　　　bodyScrollTop = document.body.scrollTop;
+    　　}
+    　　if(document.documentElement){
+    　　　　documentScrollTop = document.documentElement.scrollTop;
+    　　}
+    　　scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+    　　return scrollTop;
+    }
+
+    //文档的总高度
+    function getScrollHeight(){
+    　　var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+    　　if(document.body){
+    　　　　bodyScrollHeight = document.body.scrollHeight;
+    　　}
+    　　if(document.documentElement){
+    　　　　documentScrollHeight = document.documentElement.scrollHeight;
+    　　}
+    　　scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+    　　return scrollHeight;
+    }
+
+    //浏览器视口的高度
+    function getWindowHeight(){
+    　　var windowHeight = 0;
+    　　if(document.compatMode == "CSS1Compat"){
+    　　　　windowHeight = document.documentElement.clientHeight;
+    　　}else{
+    　　　　windowHeight = document.body.clientHeight;
+    　　}
+    　　return windowHeight;
+    }
+    function touchedBottom(){
+       if(getScrollTop() + getWindowHeight() + 20 >= getScrollHeight()){
+    　　　　return true;
+    　　}else{
+          return false;
+       }
+    };*/
 
 });
