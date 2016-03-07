@@ -12,7 +12,8 @@
     <meta name="keywords" content="网址导航,上网导航,网址大全,网址导航,021上网导航,021网址,021导航,021网址大全"/>
     <link rel="shortcut icon" href="img/favicon.ico" />
 	<link rel="bookmark" href="img/favicon.ico" type="image/x-icon"　/>
-    <link rel="apple-touch-icon-precomposed" href="img/log_icon.png">
+    <link rel="apple-touch-icon" href="img/log_icon.png">
+    <link rel="apple-touch-icon-precomposed" href="img/logo_icon.png">
 	<title>网址导航</title>
 	<script>!function(a,b){var c=a.documentElement,d="orientationchange"in window?"orientationchange":"resize",e=function(){var a=c.clientWidth;a&&(a>=720&&(a=720),c.style.fontSize=100*(a/720)+"px")};a.addEventListener&&(b.addEventListener(d,e,!1),e())}(document,window);</script>
 	<link rel="stylesheet" href="css/swiper-3.3.0.min.css">
@@ -522,7 +523,7 @@
 		</div>
 	</div>
 
-	<div id="J_loading" class="loading">
+	<div id="J_loading" class="loading none">
 		<div class="spinner">
 		  <div class="bounce1"></div>
 		  <div class="bounce2"></div>
@@ -531,7 +532,7 @@
 		<p class="txt">数据加载中</p>
 	</div>
 
-	<div class="footer">
+	<div id="J_footer" class="footer">
 		<p>沪ICP备13005144号-3</p>
 	</div>
 
@@ -543,7 +544,7 @@
 	<script src="js/web-storage-cache.min.js"></script>
 	<script src="js/page.js"></script>
 
-	<div style="display:none;">
+	<div class="none">
         <script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb2817cc89100b480d1f5866f7ce419bd' type='text/javascript'%3E%3C/script%3E"));

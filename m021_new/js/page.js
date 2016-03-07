@@ -1,3 +1,8 @@
+/**
+ * 扩展Array对象的方法(判断数组中是否包含指定值)
+ * @param  {[type]} item 指定值
+ * @return {[type]}      [description]
+ */
 Array.prototype.contains = function(item){
     return RegExp(item).test(this);
 };
@@ -116,6 +121,7 @@ $(function() {
         $ttNewsNav = $ttNews.children('.tt-news-nav'),
         $ttNewsNavList = $('#J_ttnews_nav_list'),
         $ttNewsTabs = $ttNewsNavList.find('.ttnews-tabs'),
+        $loading = $('#J_loading'),
         tnnHeight = $ttNewsNav.outerHeight(),
         tnnTop = $ttNews.offset().top - tnnHeight,
         newsNavFlag = true,
@@ -172,8 +178,7 @@ $(function() {
         $(window).on('scroll', function() {
             var ttnOT = $ttNews.offset().top,
                 scrollTop = getScrollTop(),
-                $loading = $('#J_loading'),
-                loadOT = $loading.offset().top,
+                footerOT = $('#J_footer').offset().top,
                 cHeight = getClientHeight();
             // 缓存浏览位置
             setCachePos(scrollTop);
@@ -197,12 +202,12 @@ $(function() {
                     });
                 }
             }
-            if(scrollTop + cHeight >= loadOT && !newsNavFlag){
+            if(scrollTop + cHeight >= footerOT && !newsNavFlag){
                 // 上拉加载数据(延迟执行，防止操作过快多次加载)
                 clearTimeout(scrollTimer);
                 scrollTimer = setTimeout(function(){
                     pullUpLoadData();
-                }, 300);
+                }, 200);
             }
         });
         // 刷新页面即触发window的scroll事件（因为浏览器会记忆刷新前滚动条的位置。）
@@ -514,14 +519,16 @@ $(function() {
             jsonp: "jsonpcallback",
             timeout: 8000,
             beforeSend: function(){
-                $('#J_loading').show();
+                $loading.show();
             },
             success: function(data){
                 generateDom(data);
             },
             error: function(jqXHR, textStatus){
                 console.error(textStatus);
-                $('#J_loading').hide();
+            },
+            complete: function(){
+                $loading.hide();
             }
         });
     }
@@ -534,7 +541,7 @@ $(function() {
     function generateDom(d){
         var data = d && d.data;
         if(!data || !data.length){
-            $('#J_loading').hide();
+            $loading.hide();
             return false;
         }
         rowkey = getLastRowkey(data);
@@ -551,11 +558,28 @@ $(function() {
                 hotnews = item.hotnews,
                 type = item.type,
                 subtype = item.subtype,
-                imgLen = imgArr.length;
+                imgLen = imgArr.length,
+                hot = Number(item.hotnews),     // 热门
+                video = Number(item.isvideo),   // 视频
+                rec = Number(item.isrecom),     // 推荐
+                nuanwen = Number(item.isnxw),   // 暖文
+                tagStr = '';
+            if(hot){
+                tagStr = '<i class="hot">热门</i>';
+                if(video){
+                    tagStr += '<i class="video">视频</i>';
+                }
+            } else if(rec){
+                tagStr = '<i class="rec">推荐</i>';
+            } else if(video){
+                tagStr = '<i class="video">视频</i>';
+            } else if(nuanwen) {
+                tagStr = '<i class="nuanwen">暖文</i>';
+            }
             if(imgLen >= 3){
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div></a></li>');
+                $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></li>');
             } else {
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em><em class="fr">' + getSpecialTimeStr(dateStr) + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
+                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
             }
         }
         $.cookie('idx_' + newsType, idx + len, { expires: 0.334, path: '/' });
@@ -619,7 +643,8 @@ $(function() {
         } else if(tdoa >= minuteTime) {
             return Math.floor(tdoa / minuteTime) + '分钟前';
         } else {
-            return Math.floor(tdoa / 1000) + '秒前';
+            return '最新';
+            // return Math.floor(tdoa / 1000) + '秒前';
         }
     }
 
@@ -712,7 +737,7 @@ $(function() {
     }
 
     /**
-     * [getScrollTop description]
+     * 获取滚动高度
      * @return {[type]} [description]
      */
     function getScrollTop(){

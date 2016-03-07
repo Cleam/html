@@ -61,7 +61,8 @@ a:active{background-color: #e5e5e5 !important;}
 .cool-site .cs-container .swiper-wrapper{padding-bottom: 0.3rem;}
 .cool-site .cs-main{position: relative; padding-top: 0.3rem; height: 0.75rem; padding-bottom: 0.05rem;}
 .cool-site .cs-main a{float: left; display: block; text-align: center; height: 0.4rem; line-height: 0.4rem;}
-.cool-site .cs-main .title{width: 1rem; font-size: 0.22rem; border: 1px solid #52ace5; border-radius: 0.2rem; color: #52ace5;}
+.cool-site .cs-main .title{position: relative; width: 1rem; font-size: 0.22rem; /* border: 1px solid #52ace5; border-radius: 0.2rem; */ color: #52ace5;}
+.cool-site .cs-main .title:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 0.5rem; border-radius: 0.5rem;}
 .cool-site .cs-main .link{width: 1.2rem; font-size: 0.28rem; margin-left: 0.05rem;}
 .cool-site .cs-main .more{position: absolute; right: 0; top: 0.3rem; height: 0.4rem; width: 0.6rem; line-height: 0.4rem; cursor: pointer;}
 .cool-site .cs-main .more:active{background-color: #e5e5e5 !important;} 
@@ -118,9 +119,28 @@ a:active{background-color: #e5e5e5 !important;}
 .tt-news-list .tt-news-item-s2 a .img-wrap img:last-child{margin-right: 0;}
 .tt-news-list .tt-news-item-s2 a p{width: 100%; padding-top: 0.1rem; font-size: 0.2rem; color: #999;}
 
+.tt-news-list .tt-news-item a p i.hot,
+.tt-news-list .tt-news-item a p i.video,
+.tt-news-list .tt-news-item a p i.rec,
+.tt-news-list .tt-news-item a p i.nuanwen{position: relative; display: inline-block; width: 0.5rem; height: 0.26rem; padding: 1px 0; margin-right: 0.06rem; line-height: 0.26rem; text-align: center; vertical-align: middle; /* height: 0.26rem; border-radius: 2px; transform: scale(0.8); border: 1px solid #fff; */}
+
+.tt-news-list .tt-news-item a p i.hot:before,
+.tt-news-list .tt-news-item a p i.video:before,
+.tt-news-list .tt-news-item a p i.rec:before,
+.tt-news-list .tt-news-item a p i.nuanwen:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 4px; border-radius: 4px;}
+.tt-news-list .tt-news-item a p i.hot:before{border-color: rgba(248,89,89,.5);}
+.tt-news-list .tt-news-item a p i.video:before{border-color: rgba(42,144,215,.5);}
+.tt-news-list .tt-news-item a p i.rec:before{border-color: rgba(42,144,215,.5);}
+.tt-news-list .tt-news-item a p i.nuanwen:before{border-color: rgba(248,89,89,.5);}
+
+.tt-news-list .tt-news-item a p i.hot{color: #f85959;}/* 热门 */
+.tt-news-list .tt-news-item a p i.video{color: #2a90d7;}/* 视频 */
+.tt-news-list .tt-news-item a p i.rec{color: #2a90d7;}/* 推荐 */
+.tt-news-list .tt-news-item a p i.nuanwen{color: #f85959;}/* 暖文 */
+
 
 /* footer */
-.footer{text-align: center; padding: 0.2rem 0; font-size: 0.16rem;}
+.footer{text-align: center; margin-top: 0.2rem; padding: 0.3rem 0; font-size: 0.16rem;}
 
 /* loading */
 .bg-loading{padding: 0.1rem 0; position: absolute; top: 1.5rem; left: 50%; width: 1.5rem; height: 0.5rem; margin-left: -0.75rem; z-index: 1; display: none;}
@@ -131,10 +151,10 @@ a:active{background-color: #e5e5e5 !important;}
 .bg-loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;} 
 
 /* pull up loading */
-.loading{padding: 0.1rem 0; padding: 0.1rem 0 0.2rem;}
+.loading{padding: 0.1rem 0 0.2rem; background-color: #fff;}
 .loading .txt{font-size: 0.22rem; padding: 0.1rem 0; text-align: center; color: #52ace5;}
 .loading .spinner {margin: 0 auto; width: 1.5rem; text-align: center; }
-.loading .spinner > div {width: 0.1rem; height: 0.1rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+.loading .spinner > div {width: 0.14rem; height: 0.14rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
 .loading .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
 .loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;}
 @-webkit-keyframes bouncedelay {
