@@ -1,0 +1,14 @@
+{
+    "strict": true,
+    "noarg": true,
+    "noempty": true,
+    "eqeqeq": true,
+    "undef": true,
+    "curly": true,
+    "forin": true,
+    "devel": true,
+    "jquery": true,
+    "browser": true,
+    "wsh": true,
+    "evil": true
+}
