@@ -52,6 +52,16 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 Array.prototype.contains = function(item){
     return RegExp(item).test(this);
 };
+/**
+ * 百度搜索数据（必需是在全局环境下）
+ * @param  {[type]} json [description]
+ * @return {[type]}      [description]
+ */
+/*function bdSearch(json){
+    var sd = json['s'];
+    console.log('sd: ', sd);
+}*/
+
 $(function() {
     FastClick.attach(document.body);
     /**
@@ -66,6 +76,7 @@ $(function() {
             } else {
                 $searchClear.hide();
             }
+            // fillUrls();
         });
         $searchClear.on('click', function(e){
             $searchInput.val('');
@@ -73,6 +84,32 @@ $(function() {
             e.preventDefault();
         });
 
+        /*function fillUrls() {
+            var wd = $.trim($searchInput.val());
+            if(!wd){
+                return;
+            }
+            var qsData = {
+                'wd': wd,
+                'p': '3',
+                'ie': 'utf-8',
+                'json': '1',
+                'from': '1013634c',
+                'cb': 'bdSearch'
+            };
+
+            $.ajax({
+                async: false,
+                url: "http://m.baidu.com/su",
+                type: "GET",
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                data: qsData,
+                timeout: 5000,
+                success: function (json) {},
+                error: function (xhr) {}
+            });
+        }*/
     })();
 
     /* 热站导航宽窄屏判断功能实现 */

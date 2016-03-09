@@ -9,9 +9,9 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     clean = require('gulp-clean'),             //清空文件夹
-    tinylr = require('tiny-lr'),               //livereload
-    server = tinylr(),
-    port = 35729,
+    // tinylr = require('tiny-lr'),               //livereload
+    // server = tinylr(),
+    // port = 35729,
     livereload = require('gulp-livereload'),   //livereload
     del = require('del');
 // HTML处理
@@ -24,8 +24,9 @@ gulp.task('html', function() {
     var htmlSrc = './src/*.html',
         htmlDst = './dist/';
     gulp.src(htmlSrc)
-        .pipe(livereload(server))
-        .pipe(gulp.dest(htmlDst));
+        // .pipe(livereload(server))
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
 });
 
 // 自动添加css前缀和压缩
@@ -38,9 +39,10 @@ gulp.task('css', function () {
 		.pipe(gulp.dest(cssDst))
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
-    .pipe(livereload(server))
+    // .pipe(livereload(server))
     .pipe(gulp.dest(cssDst))
-		.pipe(notify({ message: 'Styles task complete' }));
+    .pipe(livereload());
+		// .pipe(notify({ message: 'Styles task complete' }));
 });
 
 // js代码校验、合并和压缩
@@ -54,9 +56,10 @@ gulp.task('js', function() {
     .pipe(gulp.dest(jsDst))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(livereload(server))
+    // .pipe(livereload(server))
     .pipe(gulp.dest(jsDst))
-    .pipe(notify({ message: 'Scripts task complete' }));
+    .pipe(livereload());
+    // .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 // 压缩图片
@@ -65,8 +68,9 @@ gulp.task('img', function() {
       imgDst = './dist/img';
   return gulp.src(imgSrc)
     .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
-    .pipe(livereload(server))
-    .pipe(gulp.dest(imgDst));
+    // .pipe(livereload(server))
+    .pipe(gulp.dest(imgDst))
+    .pipe(livereload());
     // .pipe(notify({ message: 'Images task complete' }));
 });
 
@@ -89,31 +93,9 @@ gulp.task('default', ['html', 'css', 'img', 'js']);
 // 监听文件
 // 监听任务 运行语句 gulp watch
 gulp.task('watch',function(){
-
-    server.listen(port, function(err){
-        if (err) {
-            return console.log(err);
-        }
-
-        // 监听html
-        gulp.watch('./src/*.html', function(event){
-            gulp.run('html');
-        })
-
-        // 监听css
-        gulp.watch('./src/css/*.css', function(){
-            gulp.run('css');
-        });
-
-        // 监听images
-        gulp.watch('./src/img/**/*', function(){
-            gulp.run('img');
-        });
-
-        // 监听js
-        gulp.watch('./src/js/*.js', function(){
-            gulp.run('js');
-        });
-
-    });
+    livereload.listen();
+    gulp.watch('./src/*.html', ['html']);
+    gulp.watch('./src/css/*.css', ['css']);
+    gulp.watch('./src/img/**/*', ['img']);
+    gulp.watch('./src/js/*.js', ['js']);
 });

@@ -9,6 +9,7 @@ Zepto(function(){
 		video = null;
 	$videoCover.on('click', function(e){
 		e.preventDefault();
+		video && video.pause();
 		var $this = $(this),
 			$video = $this.next();
 		video = $video[0];
@@ -30,6 +31,7 @@ Zepto(function(){
 	/* 图片浏览功能实现 */
 	var $popWin = $('.pop-win'),
 		$swiperWrap = $popWin.find('.swiper-wrapper'),
+		popWinHasClickEvent = false,
 		mySwiper = null;
 	$('.J-pic-scan').on('click', function(e){
 		e.preventDefault();
@@ -40,21 +42,24 @@ Zepto(function(){
 		$imgs.each(function(i, ele){
 			$swiperWrap.append('<div class="swiper-slide"><div class="img-wrap"><img src="' + $(ele).attr('src') + '"></div></div>');
 		});
+		$('body').addClass('ofhidden');
+		$popWin.show();
 		video && video.pause();
-		$('html,body').addClass('ofhidden');
-		$popWin.fadeIn('fast');
-		$popWin.on('click', function(e){
-			e.preventDefault();
-			$popWin.fadeOut('fast');
-			$('html,body').removeClass('ofhidden');
-		});
+		if(!popWinHasClickEvent){
+			$popWin.on('click', function(e){
+				e.preventDefault();
+				$popWin.hide();
+				$('body').removeClass('ofhidden');
+			});
+			popWinHasClickEvent = true;
+		}
 		if(!mySwiper){
 			mySwiper = new Swiper ('.swiper-container', {
 				initialSlide: index
 			});
 		} else {
 			mySwiper.update();
-			mySwiper.slideTo(index, 10, false);//切换到第一个slide，速度为10ms
+			mySwiper.slideTo(index, 0, false);//切换到第一个slide，速度为10ms
 		}
 	});
 
