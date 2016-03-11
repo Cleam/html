@@ -52,25 +52,25 @@ a:active{background-color: #e5e5e5 !important;}
 .hot-site-list .hot-site-item a span{display: block; margin-top: 0.12rem;}
 
 /*===== 酷站导航 ====*/
-.cool-site{margin-top: 0.2rem; background-color: #fff; padding: 0 0.3rem;}
-.cool-site .cs-tabs-wrap{font-size: 0.28rem; border-bottom: 1px solid #eee; height: 0.72rem; line-height: 0.56rem; padding-top: 0.16rem;}
-.cool-site .cs-tabs-wrap .title{color: #333;}
-.cool-site .cs-tabs-wrap .cs-tabs a{display: inline-block; padding: 0 0.1rem; height: 0.56rem; width: 0.9rem; text-align: center;}
-.cool-site .cs-tabs-wrap .cs-tabs a.active{color: #52ace5; border-bottom: 2px solid #52ace5;}
+.famous-site{margin-top: 0.2rem; background-color: #fff; padding: 0 0.3rem;}
+.famous-site .cs-tabs-wrap{font-size: 0.28rem; border-bottom: 1px solid #eee; height: 0.72rem; line-height: 0.56rem; padding-top: 0.16rem;}
+.famous-site .cs-tabs-wrap .title{color: #333;}
+.famous-site .cs-tabs-wrap .cs-tabs a{display: inline-block; padding: 0 0.1rem; height: 0.56rem; width: 0.9rem; text-align: center;}
+.famous-site .cs-tabs-wrap .cs-tabs a.active{color: #52ace5; border-bottom: 2px solid #52ace5;}
 
-.cool-site .cs-container .swiper-wrapper{padding-bottom: 0.3rem;}
-.cool-site .cs-main{position: relative; padding-top: 0.3rem; height: 0.75rem; padding-bottom: 0.05rem;}
-.cool-site .cs-main a{float: left; display: block; text-align: center; height: 0.4rem; line-height: 0.4rem;}
-.cool-site .cs-main .title{position: relative; width: 1rem; font-size: 0.22rem; /* border: 1px solid #52ace5; border-radius: 0.2rem; */ color: #52ace5;}
-.cool-site .cs-main .title:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 0.5rem; border-radius: 0.5rem;}
-.cool-site .cs-main .link{width: 1.2rem; font-size: 0.28rem; margin-left: 0.05rem;}
-.cool-site .cs-main .more{position: absolute; right: 0; top: 0.3rem; height: 0.4rem; width: 0.6rem; line-height: 0.4rem; cursor: pointer;}
-.cool-site .cs-main .more:active{background-color: #e5e5e5 !important;} 
-/*.cool-site .cs-main .more:active{background-color: #FFEDE8 !important;} */
-.cool-site .cs-main .more i{display: block; width: 0.15rem; height: 0.1rem; margin: 0.14rem auto 0;  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAA1UlEQVQoz53OrUoEUQAF4M/ZMiAWi9lmNFkEWZOCwXKLaJhi9AUUmUXEBzCYbzLIWA0GwSA+gmndXbVbr81yF5Z18O/k8x0O/0yIqVeEmM5DTJ2/QtQFDnAdYpr9JaxRo1/gCdu4CzEt/ACP0UMf3QKruMcKHkNMS9/AEzxjvanKt6Kpynds4BKLeAgxrU3BowwHGb5CAU1VfmAPZ5jHbYhpJ8NDnE7Al/HoTMu9fVyggxtsYYhuU5Wjye4XnAc2cYU5jDIcTvdacR5Yzg92m6octHU+AXBkTKgPKKHtAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-size: 100%; background-position: center;}
-.cool-site .cs-main .more.active i{background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAA1ElEQVQoz53Rr0oEURjG4WcmmCzegAomk+VLpjEZFgSta/MyFtFd9hY0iZdgELHuitEva/IPWmwmo2A5YcKMLL75PD/O4VR6lplbOMcwIt66ztQ9cBf32MYsM9cWwpl5hBss4xbrmHcF6haqMnOKC/zgMCIGGJXALDNX27gqcAmXGOIL+xFx1wqPMMULdiLiHarMXMEVGrxiEBFPHc85xqQEmoj4qDLzEZt4wF5EfP7xAyc4xTOausDrcp1eCBExLngD8xpnOIiIbwusBMYl8L9l5uQXEFJOXQQr+4cAAAAASUVORK5CYII=");}
-.cool-site .cs-cn{width: 6.8rem;}
-.cool-site .cs-cn .sub-link{display: block; float: left; width: 1.5rem; height: 0.5rem; line-height: 0.5rem; margin-right: 0.2rem; margin-top: 0.2rem; border: 1px solid #eee; font-size: 0.26rem; text-align: center;}
+.famous-site .cs-container .swiper-wrapper{padding-bottom: 0.3rem;}
+.famous-site .cs-main{position: relative; padding-top: 0.3rem; height: 0.75rem; padding-bottom: 0.05rem;}
+.famous-site .cs-main a{float: left; display: block; text-align: center; height: 0.4rem; line-height: 0.4rem;}
+.famous-site .cs-main .title{position: relative; width: 1rem; font-size: 0.22rem; /* border: 1px solid #52ace5; border-radius: 0.2rem; */ color: #52ace5;}
+.famous-site .cs-main .title:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 0.5rem; border-radius: 0.5rem;}
+.famous-site .cs-main .link{width: 1.2rem; font-size: 0.28rem; margin-left: 0.05rem;}
+.famous-site .cs-main .more{position: absolute; right: 0; top: 0.3rem; height: 0.4rem; width: 0.6rem; line-height: 0.4rem; cursor: pointer;}
+.famous-site .cs-main .more:active{background-color: #e5e5e5 !important;} 
+/*.famous-site .cs-main .more:active{background-color: #FFEDE8 !important;} */
+.famous-site .cs-main .more i{display: block; width: 0.15rem; height: 0.1rem; margin: 0.14rem auto 0;  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAA1UlEQVQoz53OrUoEUQAF4M/ZMiAWi9lmNFkEWZOCwXKLaJhi9AUUmUXEBzCYbzLIWA0GwSA+gmndXbVbr81yF5Z18O/k8x0O/0yIqVeEmM5DTJ2/QtQFDnAdYpr9JaxRo1/gCdu4CzEt/ACP0UMf3QKruMcKHkNMS9/AEzxjvanKt6Kpynds4BKLeAgxrU3BowwHGb5CAU1VfmAPZ5jHbYhpJ8NDnE7Al/HoTMu9fVyggxtsYYhuU5Wjye4XnAc2cYU5jDIcTvdacR5Yzg92m6octHU+AXBkTKgPKKHtAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-size: 100%; background-position: center;}
+.famous-site .cs-main .more.active i{background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAA1ElEQVQoz53Rr0oEURjG4WcmmCzegAomk+VLpjEZFgSta/MyFtFd9hY0iZdgELHuitEva/IPWmwmo2A5YcKMLL75PD/O4VR6lplbOMcwIt66ztQ9cBf32MYsM9cWwpl5hBss4xbrmHcF6haqMnOKC/zgMCIGGJXALDNX27gqcAmXGOIL+xFx1wqPMMULdiLiHarMXMEVGrxiEBFPHc85xqQEmoj4qDLzEZt4wF5EfP7xAyc4xTOausDrcp1eCBExLngD8xpnOIiIbwusBMYl8L9l5uQXEFJOXQQr+4cAAAAASUVORK5CYII=");}
+.famous-site .cs-cn{width: 6.8rem;}
+.famous-site .cs-cn .sub-link{display: block; float: left; width: 1.5rem; height: 0.5rem; line-height: 0.5rem; margin-right: 0.2rem; margin-top: 0.2rem; border: 1px solid #eee; font-size: 0.26rem; text-align: center;}
 
 /* 游戏 */
 .game-list .game-item{width: 20%; height: 1.4rem; margin-top: 0.1rem;}
