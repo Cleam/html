@@ -13,7 +13,14 @@ Array.prototype.contains = function(item){
  */
 /*function bdSearch(json){
     var sd = json['s'];
-    console.log('sd: ', sd);
+    console.log(json);
+    console.log(sd);
+    var k = json.q;
+    for (var i = 0, l = sd.length; i < l; i++) {
+        $searchResult.children('.search-result-list').append('<li class="search-result-item"><a href="https://m.baidu.com/s?word=' + sd[i] + '&ie=utf-8&from=1013634c"><span class="key">百度</span>云</a><div class="ttp" onclick="changeWord(\'' + sd[i] + '\');"></div></li>');
+    }
+
+    $searchResult.show();
 }*/
 
 $(function() {
@@ -24,19 +31,28 @@ $(function() {
     (function(){
         var $searchInput = $('#J_search_input'),
             $searchClear = $('#J_search_clear');
+            // $searchResult = $('#J_search_result'),
+            // $closeSearchResult = $('#J_close_search_result');
+
         $searchInput.on('keyup', function(){
             if($.trim($searchInput.val()) !== ''){
                 $searchClear.show();
+                fillUrls();
             } else {
                 $searchClear.hide();
+                // $searchResult.hide();
             }
-            // fillUrls();
         });
         $searchClear.on('click', function(e){
             $searchInput.val('');
             $searchClear.hide();
             e.preventDefault();
         });
+
+        /*$closeSearchResult.on('click', function(e){
+            $searchResult.hide();
+            e.preventDefault();
+        });*/
 
         /*function fillUrls() {
             var wd = $.trim($searchInput.val());
@@ -150,7 +166,7 @@ $(function() {
     var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
         pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
         uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
-        tjUrl = 'http://120.132.84.84/m021log/record',
+        tjUrl = 'http://021tj.dfshurufa.com/m021log/record',
         browserType = getBrowserType(),
         osType = getOsType(),
         rowkey = '',   // 存储最后一条新闻的rowkey
@@ -303,22 +319,71 @@ $(function() {
      */
     function tongJi(){
         var $top = $('#J_top'),
-            $hotSiteList = $('#J_hot_site_list'),
+            $hotSite = $('#J_hot_site'),
             $famousSite = $('#J_famous_site');
         // top统计
         $top.on('click', '[data-tjname]', function(e){
-            e.preventDefault();
-            tjClick($(this), $top);
+            var $this = $(this),
+                tjname = $this.data('tjname'),
+                url = $this.attr('href'),
+                index = 'null';
+            $top.find('[data-tjname]').each(function(i, ele){
+                if($(this).data('tjname') == tjname){
+                    index = i + 1;
+                    return false;
+                }
+            });
+            tjClick(tjname, url, index);
         });
         // 热站
-        $hotSiteList.on('click', '[data-tjname]', function(e){
-            e.preventDefault();
-            tjClick($(this), $hotSiteList);
+        $hotSite.on('click', '[data-tjname]', function(e){
+            var $this = $(this),
+                tjname = $this.data('tjname'),
+                url = $this.attr('href'),
+                index = 'null';
+            $hotSite.find('[data-tjname]').each(function(i, ele){
+                if($(this).data('tjname') == tjname){
+                    index = i + 1;
+                    return false;
+                }
+            });
+            tjClick(tjname, url, index);
         });
         // 名站统计
         $famousSite.on('click', '[data-tjname]', function(e){
-            e.preventDefault();
-            tjClick($(this), $famousSite);
+            var $this = $(this),
+                tjname = $this.data('tjname'),
+                url = $this.attr('href'),
+                $group = $famousSite.find('.J-group'),
+                index = $this.data('idx');
+            if(!index){
+                index = 0;
+                // 获取点击的链接索引值。
+                $group.each(function(i){
+                    var $tj = $(this).find('[data-tjname]'),
+                        len = $tj.length,
+                        flag = false;
+                    $tj.each(function(j){
+                        if($(this).data('tjname') == tjname){
+                            index = j + 1;
+                            flag = true;
+                            return false;
+                        }
+                    });
+                    if(!flag){
+                        $group.next().each(function(k){
+                            var $ntj = $(this).find('[data-tjname]');
+                            $ntj.each(function(g){
+                                if($(this).data('tjname') == tjname){
+                                    index = len + g + 1;
+                                    return false;
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+            tjClick(tjname, url, index);
         });
     }
 
@@ -328,24 +393,15 @@ $(function() {
      * @param  {[type]} $container 点击的区域（父级对象）
      * @return {[type]} 
      */
-    function tjClick($target, $container){
+    function tjClick(tjname, url, index){
         var referer = document.referer,
-            index = 'null',
-            tjname = $target.data('tjname'),
             tjnameArr = tjname ? tjname.split(',') : [],
             tjnameLen = tjnameArr.length,
             targetName = tjnameArr[tjnameLen - 1],
-            url = $target.attr('href'),
             str = '';
-        $container.find('[data-tjname]').each(function(i, ele){
-            if($(this).data('tjname') == tjname){
-                index = i;
-                return false;
-            }
-        });
-        if(!url){url = 'null';}
+        if(!url || url == 'javascript:;'){url = 'null';}
         if(!referer){referer = 'null';}
-        str += new Date().getTime() + '\t123.59.60.170\t' + tt_news_qid + '\t' + userId + '\t' + osType + '\t' + browserType + '\t';
+        str += tt_news_qid + '\t' + userId + '\t' + osType + '\t' + browserType + '\t';
         for (var i = 0; i < 3; i++) {
             if(tjnameArr[i] && tjnameArr[i+1]){
                 str += tjnameArr[i] + '\t';
@@ -354,10 +410,6 @@ $(function() {
             }
         }
         str += targetName + '\t' + index + '\t' + url;
-        console.log('##################');
-        console.log('str: ', str);
-        console.log(encodeURI(str));
-        console.log('##################');
         sendTjInfo(encodeURI(str));
     }
 
@@ -371,7 +423,7 @@ $(function() {
             data: {param: str},
             dataType : 'jsonp',
             jsonp : 'jsonpcallback',
-            success: function(d){console.info(d);},
+            success: function(d){},
             error: function(jh, st){console.error(st);}
         });
     }
