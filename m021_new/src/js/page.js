@@ -149,8 +149,12 @@ $(function() {
 
     var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
         pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
+        uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
+        tjUrl = 'http://120.132.84.84/m021log/record',
+        browserType = getBrowserType(),
+        osType = getOsType(),
         rowkey = '',   // 存储最后一条新闻的rowkey
-        userId = $.cookie('user_id'),   // 获取用户id
+        userId = getUid(),   // 获取用户id
         newsType = 'toutiao',
         $loation = $('#J_location'),
         $ttNews = $('#J_tt_news'),
@@ -189,8 +193,7 @@ $(function() {
         loadData('toutiao');
         // 获取用户ID
         if(!userId){
-            userId = '';
-            setUid();
+            setUid(function(){userId = getUid();});
         }
         // 保存所有新闻类别到数组
         $ttNewsTabs.each(function(){
@@ -302,16 +305,74 @@ $(function() {
         var $top = $('#J_top'),
             $hotSiteList = $('#J_hot_site_list'),
             $famousSite = $('#J_famous_site');
-        $hotSiteList.on('click', '[data-tj]', function(e){
-            var $this = $(this),
-                url = $this.attr('href'),
-                referer = document.referer;
-            if(!url){url = '';}
-            if(!referer){referer = '';}
-            console.log(url);
-            console.log(referer);
+        // top统计
+        $top.on('click', '[data-tjname]', function(e){
+            e.preventDefault();
+            tjClick($(this), $top);
+        });
+        // 热站
+        $hotSiteList.on('click', '[data-tjname]', function(e){
+            e.preventDefault();
+            tjClick($(this), $hotSiteList);
+        });
+        // 名站统计
+        $famousSite.on('click', '[data-tjname]', function(e){
+            e.preventDefault();
+            tjClick($(this), $famousSite);
+        });
+    }
 
-            
+    /**
+     * 统计点击功能实现
+     * @param  {[type]} $target    点击的目标对象
+     * @param  {[type]} $container 点击的区域（父级对象）
+     * @return {[type]} 
+     */
+    function tjClick($target, $container){
+        var referer = document.referer,
+            index = 'null',
+            tjname = $target.data('tjname'),
+            tjnameArr = tjname ? tjname.split(',') : [],
+            tjnameLen = tjnameArr.length,
+            targetName = tjnameArr[tjnameLen - 1],
+            url = $target.attr('href'),
+            str = '';
+        $container.find('[data-tjname]').each(function(i, ele){
+            if($(this).data('tjname') == tjname){
+                index = i;
+                return false;
+            }
+        });
+        if(!url){url = 'null';}
+        if(!referer){referer = 'null';}
+        str += new Date().getTime() + '\t123.59.60.170\t' + tt_news_qid + '\t' + userId + '\t' + osType + '\t' + browserType + '\t';
+        for (var i = 0; i < 3; i++) {
+            if(tjnameArr[i] && tjnameArr[i+1]){
+                str += tjnameArr[i] + '\t';
+            } else {
+                str += 'null\t';
+            }
+        }
+        str += targetName + '\t' + index + '\t' + url;
+        console.log('##################');
+        console.log('str: ', str);
+        console.log(encodeURI(str));
+        console.log('##################');
+        sendTjInfo(encodeURI(str));
+    }
+
+    /**
+     * 发送统计信息
+     * @return {[type]} [description]
+     */
+    function sendTjInfo(str){
+        $.ajax({
+            url: tjUrl,
+            data: {param: str},
+            dataType : 'jsonp',
+            jsonp : 'jsonpcallback',
+            success: function(d){console.info(d);},
+            error: function(jh, st){console.error(st);}
         });
     }
 
@@ -491,11 +552,10 @@ $(function() {
     /**
      * 设置userId
      */
-    function setUid(){
+    function setUid(callback){
         $.ajax({
             type : 'POST',
-            url : 'http://toutiao.eastday.com/getwapdata/getuid',
-    //      url:'http://123.59.60.170/getwapdata/getuid',
+            url : uidUrl,
             dataType : 'jsonp',
             data : {
                 softtype : 'news',
@@ -509,11 +569,20 @@ $(function() {
                         expires : 365 * 5,
                         path:'/'
                     });
+                    callback();
                 } catch(e) {
                     console.error(e);
                 }
             }
         });
+    }
+
+    /**
+     * 获取uid
+     * @return {[type]} [description]
+     */
+    function getUid(){
+        return $.cookie('user_id');
     }
 
     /**
@@ -913,7 +982,5 @@ $(function() {
         }
         return os_type;
     }
-
-
 
 });
