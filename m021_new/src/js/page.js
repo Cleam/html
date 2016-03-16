@@ -7,21 +7,56 @@ Array.prototype.contains = function(item){
     return RegExp(item).test(this);
 };
 /**
+ * 关键词加红处理
+ * @param  {String} txt   标题
+ * @param  {Array} swArr 关键词数组
+ * @param  {Number} i     0
+ * @return {String}       新的标题
+ */
+function getNewStr(txt, swArr, i){
+    if(!i){i = 0;}
+    if(txt && swArr && swArr.length){
+        var len = swArr.length;
+        if(i == len){
+            return txt;
+        } else {
+            var reg = new RegExp(swArr[i], 'gi');
+            // 处理大小写情况
+            var tempTxt = txt;
+            var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i]);
+            var subTxt = txt.substring(subTxtIndex, subTxtIndex + swArr[i].length);
+            return getNewStr(txt.replace(reg, '<em>' + subTxt + '</em>'), swArr, ++i);
+        }
+    } else {
+        return '';
+    }
+}
+/**
+ * 更新搜索关键字
+ * @param  {[type]} wd 搜索关键字
+ * @return {[type]}    [description]
+ */
+function changeWord(wd){
+    $('#J_search_input').val(wd);
+}
+/**
  * 百度搜索数据（必需是在全局环境下）
  * @param  {[type]} json [description]
  * @return {[type]}      [description]
  */
-/*function bdSearch(json){
-    var sd = json['s'];
-    console.log(json);
-    console.log(sd);
-    var k = json.q;
-    for (var i = 0, l = sd.length; i < l; i++) {
-        $searchResult.children('.search-result-list').append('<li class="search-result-item"><a href="https://m.baidu.com/s?word=' + sd[i] + '&ie=utf-8&from=1013634c"><span class="key">百度</span>云</a><div class="ttp" onclick="changeWord(\'' + sd[i] + '\');"></div></li>');
+function bdSearch(json){
+    var k = json['q'],
+        sd = json['s'],
+        len = sd.length > 5 ? 5 : sd.length,
+        $srList = $searchResult.children('.search-result-list');
+    if(len == 0){return;}
+    $srList.empty();
+    for (var i = 0; i < len; i++) {
+        var str = getNewStr(sd[i], [k]);
+        $srList.append('<li class="search-result-item"><a href="https://m.baidu.com/s?word=' + sd[i] + '&ie=utf-8&from=1013634c">' + str + '</a><div class="ttp" onclick="changeWord(\'' + sd[i] + '\');"></div></li>');
     }
-
     $searchResult.show();
-}*/
+}
 
 $(function() {
     FastClick.attach(document.body);
@@ -31,30 +66,32 @@ $(function() {
     (function(){
         var $searchInput = $('#J_search_input'),
             $searchClear = $('#J_search_clear');
-            // $searchResult = $('#J_search_result'),
-            // $closeSearchResult = $('#J_close_search_result');
-
+            $searchResult = $('#J_search_result'),
+            $closeSearchResult = $('#J_close_search_result');
+        // 搜索框输入事件
         $searchInput.on('keyup', function(){
             if($.trim($searchInput.val()) !== ''){
                 $searchClear.show();
                 fillUrls();
             } else {
                 $searchClear.hide();
-                // $searchResult.hide();
+                $searchResult.hide();
             }
         });
+        // 搜索框清空按钮点击事件
         $searchClear.on('click', function(e){
             $searchInput.val('');
             $searchClear.hide();
+            $searchResult.hide();
+            e.preventDefault();
+        });
+        // 搜索提示列表关闭按钮点击事件
+        $closeSearchResult.on('click', function(e){
+            $searchResult.hide();
             e.preventDefault();
         });
 
-        /*$closeSearchResult.on('click', function(e){
-            $searchResult.hide();
-            e.preventDefault();
-        });*/
-
-        /*function fillUrls() {
+        function fillUrls() {
             var wd = $.trim($searchInput.val());
             if(!wd){
                 return;
@@ -79,12 +116,15 @@ $(function() {
                 success: function (json) {},
                 error: function (xhr) {}
             });
-        }*/
+        }
     })();
 
     /* 热站导航宽窄屏判断功能实现 */
     (function(){
-        var $hotSiteMore = $('#J_hot_site_more');
+        var hotSiteSwiper = new Swiper('#J_hot_site_list', {
+            pagination: '#J_hot_site_pagination'
+        });
+        /*var $hotSiteMore = $('#J_hot_site_more');
         $hotSiteMore.on('click', function(e) {
             var $this = $(this);
             if($this.data('state') == '0'){
@@ -99,24 +139,10 @@ $(function() {
                 $this.find('span').text('更多');
             }
             e.preventDefault();
-        });
-        /*$(window).resize(function(){
-            var screenWidth = window.screen.width,
-                $hotSiteItems =  $('.J-hot-site-list').children();
-            if(screenWidth <= 375){
-                $hotSiteItems.addClass('sm');
-                $hotSiteItems.eq(9).hide();
-                $hotSiteItems.eq(10).hide();
-            } else {
-                $hotSiteItems.removeClass('sm');
-                $hotSiteItems.eq(9).show();
-                $hotSiteItems.eq(10).show();
-            }
-        });
-        $(window).resize();*/
+        });*/
     })();
 
-    /* 酷站导航tab切换功能实现 */
+    /* 名站导航tab切换功能实现 */
     (function(){
         var tabsSwiper = new Swiper('#J_tabs_container', {
             speed: 300,
@@ -137,7 +163,7 @@ $(function() {
             tabsSwiper.slideTo($this.index());
         });
 
-        /* 酷站【更多】功能实现 */
+        /* 名站【更多】功能实现 */
         $('.J-more').on('click', function(e) {
             e.preventDefault();
             var _this = this,
