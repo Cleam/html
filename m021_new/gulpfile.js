@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
-    minifycss = require('gulp-minify-css'),
+    cleanCSS = require('gulp-clean-css'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     htmlmin = require('gulp-htmlmin'),
@@ -38,11 +38,11 @@ gulp.task('css', function () {
     	.pipe(concat('all.css'))
     	// .pipe(gulp.dest(cssDst))
         .pipe(rename({suffix: '.min'}))
-        .pipe(minifycss())
+        .pipe(cleanCSS())
         .pipe(rev())
         .pipe(gulp.dest(cssDst))
-        .pipe(rev.manifest({merge: true}))           //- 生成一个rev-manifest.json
-        .pipe(gulp.dest('./rev'))
+        //.pipe(rev.manifest({merge: true}))           //- 生成一个rev-manifest.json
+        //.pipe(gulp.dest('./rev'))
         .pipe(livereload());
     	// .pipe(notify({ message: 'Styles task complete' }));
 });
@@ -60,8 +60,8 @@ gulp.task('js', function() {
         .pipe(uglify())
         .pipe(rev())
         .pipe(gulp.dest(jsDst))
-        .pipe(rev.manifest({merge: true}))           //- 生成一个rev-manifest.json
-        .pipe(gulp.dest('./rev'))
+        //.pipe(rev.manifest({merge: true}))           //- 生成一个rev-manifest.json
+        //.pipe(gulp.dest('./rev'))
         .pipe(livereload());
         // .pipe(notify({ message: 'Scripts task complete' }));
 });
@@ -89,7 +89,7 @@ gulp.task('rev', function() {
 
 // 清除文件(清除完后回调cb)
 gulp.task('clean', function(cb) {
-    gulp.src(['./dist/css', './dist/js', './dist/img'], {read: false})
+    gulp.src(['./dist/*'], {read: false})
         .pipe(clean());
     // del(['dist/css', 'dist/js', 'dist/img'], cb);
 });

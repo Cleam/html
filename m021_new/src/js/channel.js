@@ -8,12 +8,24 @@ var tt_news_qid = '';
 	 * @return {[type]} [description]
 	 */
 	function getChannelId(){
-		var mid = getQueryString('mid');
+		var mid = getQueryString('mid'),
+			curHost = window.location.host,
+			prefix = '';
+		switch(curHost){
+			case 'm.021.com': prefix = 'm021'; break;
+			case 'mini.apdft.com': prefix = 'apdft'; break;
+			default: prefix = 'm021'; break;
+		}
 		if(mid){	// ?mid=xxxx
-			return 'm021_' + mid;
+			return prefix + '_' + mid;
 		}
 		// 无渠道情况 和 ?xxxx
-		return getQueryString2() ? 'm021_' + getQueryString2() : 'm021dh';
+		var tempMid = getQueryString2();
+		if(tempMid){
+			return prefix + '_' + tempMid;
+		} else {
+			return prefix + 'dh';
+		}
 	}
 
 	/**
