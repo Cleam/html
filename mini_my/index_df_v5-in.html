@@ -452,6 +452,98 @@
         color: #ff2200;
         text-decoration: underline;
     }
+
+    /*导航栏点击*/
+    
+    .nav_ul .nav_li a {
+        color: #444444;
+        text-decoration: none;
+    }
+    
+    .nav_ul .nav_li.now a {
+        color: #EE4B4B;
+        text-decoration: none;
+    }
+    /*未读内容*/
+    
+    .weidu_mian {
+        width: 330px;
+        height: 16px;
+        margin: auto;
+        background: #ffcc99;
+        text-align: center;
+        font: 12px/16px "微软雅黑";
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+    
+    .weidu_mian a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    .weidu_mian a:hover {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    .weidu_mian img {
+        border: none;
+        padding-left: 10px;
+    }
+
+
+    /*滑动下一页*/
+    .huadong_mian {
+        width: 8px;
+        height: 100px;
+        background: #ebedf0;
+        border-radius: 4px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-top: -50px;
+    }
+    
+    .huadong_red {
+        width: 8px;
+        height: 50px;
+        background: #ee4b4b;
+        border-radius: 4px;
+        display: block;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
+    }
+    
+    .huadong_gray {
+        width: 8px;
+        height: 50px;
+        background: #ebedf0;
+        border-radius: 4px;
+        display: block;
+        overflow: hidden;
+        position: absolute;
+        top: 50px;
+        left: 0;
+    }
+    
+    .huodong_nr {
+        width: 544px;
+        height: 406px;
+        float: left;
+        display: block;
+        overflow: hidden;
+        margin-top: 14px;
+    }
+    
+    .iframe-con-box {
+        position: relative;
+    }
 </style>
 <script type="text/javascript" src="resources/jquery.js"></script>
 </head>
@@ -545,64 +637,64 @@
             </script>
         </div>
         <!--购物 End-->
-
+        <!-- 图片 -->
         <div class="iframe">
             <!-- 图片 -->
             <div style="width: 544px; height: 406px; float: left;">
-            <div class="w170">
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_801546148ad1b72c8825fa8cb33053d2.html?qid=dfmini&amp;_1_图片" target="_blank" title="金钱豹保护幼崽与猎豹激战"><img src="images/17/562ed2b92d15b.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_801546148ad1b72c8825fa8cb33053d2.html?qid=dfmini&amp;_1_图片" target="_blank" title="">金钱豹保护幼崽与猎豹激战</a>
+                <div class="w170">
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_801546148ad1b72c8825fa8cb33053d2.html?qid=dfmini&amp;_1_图片" target="_blank" title="金钱豹保护幼崽与猎豹激战"><img src="images/17/562ed2b92d15b.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_801546148ad1b72c8825fa8cb33053d2.html?qid=dfmini&amp;_1_图片" target="_blank" title="">金钱豹保护幼崽与猎豹激战</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_7fd4f683cbced50f707acd728298a4e2.html?qid=dfmini&amp;_2_图片" target="_blank" title="俄罗斯举行婴儿爬行比赛"><img src="images/17/562ed30f0e8eb.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_7fd4f683cbced50f707acd728298a4e2.html?qid=dfmini&amp;_2_图片" target="_blank" title="">俄罗斯举行婴儿爬行比赛</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_4689a42f15d04963aba0788e402986f0.html?qid=dfmini&amp;_3_图片" target="_blank" title="万圣节现僵尸小黄人"><img src="images/17/562ed3a447980.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_4689a42f15d04963aba0788e402986f0.html?qid=dfmini&amp;_3_图片" target="_blank" title="">万圣节现僵尸小黄人</a>
+                    </div>
                 </div>
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_7fd4f683cbced50f707acd728298a4e2.html?qid=dfmini&amp;_2_图片" target="_blank" title="俄罗斯举行婴儿爬行比赛"><img src="images/17/562ed30f0e8eb.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_7fd4f683cbced50f707acd728298a4e2.html?qid=dfmini&amp;_2_图片" target="_blank" title="">俄罗斯举行婴儿爬行比赛</a>
+                <div class="w15"></div>
+                <div class="w170">
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_23a54305a8a743526d662a1d5151e40d.html?qid=dfmini&amp;_4_图片" target="_blank" title="伦敦办流浪狗慈善化装舞会"><img src="images/17/562ed41a4fe65.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_23a54305a8a743526d662a1d5151e40d.html?qid=dfmini&amp;_4_图片" target="_blank" title="">伦敦办流浪狗慈善化装舞会</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_eff4e360ae0af5f306e5045a6af43170.html?qid=dfmini&amp;_5_图片" target="_blank" title="英50余人裸体玩过山车筹款"><img src="images/17/562ed4de1c30b.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_eff4e360ae0af5f306e5045a6af43170.html?qid=dfmini&amp;_5_图片" target="_blank" title="">英50余人裸体玩过山车筹款</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_9a988e574d8bd9fc3ed30a9b1ab62105.html?qid=dfmini&amp;_6_图片" target="_blank" title="动物界的小品大赛"><img src="images/17/562ed535926dc.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_9a988e574d8bd9fc3ed30a9b1ab62105.html?qid=dfmini&amp;_6_图片" target="_blank" title="">动物界的小品大赛</a>
+                    </div>
                 </div>
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_4689a42f15d04963aba0788e402986f0.html?qid=dfmini&amp;_3_图片" target="_blank" title="万圣节现僵尸小黄人"><img src="images/17/562ed3a447980.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_4689a42f15d04963aba0788e402986f0.html?qid=dfmini&amp;_3_图片" target="_blank" title="">万圣节现僵尸小黄人</a>
+                <div class="w15"></div>
+                <div class="w170">
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_517136c190695a593b953e93129508f3.html?qid=dfmini&amp;_7_图片" target="_blank" title="乌龟水中玩南瓜灯迎万圣节"><img src="images/17/562ed5b196641.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_517136c190695a593b953e93129508f3.html?qid=dfmini&amp;_7_图片" target="_blank" title="">乌龟水中玩南瓜灯迎万圣节</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827661499_050000_00_c1b80e432020d390513e21c942d6025f.html?qid=dfmini&amp;_8_图片" target="_blank" title="摄影师翻拍文艺复兴画作"><img src="images/17/562f18bd1b032.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827661499_050000_00_c1b80e432020d390513e21c942d6025f.html?qid=dfmini&amp;_8_图片" target="_blank" title="">摄影师翻拍文艺复兴画作</a>
+                    </div>
+                    <div class="img_p10">
+                        <a href="http://miniimg.eastday.com/detail/9223351885827674668_050000_00_a91e6ac15326323b5472809c7981446d.html?qid=dfmini&amp;_9_图片" target="_blank" title="旧金山云雾缭绕如仙境"><img src="images/17/562f1913eb489.jpg" class="pic"></a>
+                        <div class="opa"></div>
+                        <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827674668_050000_00_a91e6ac15326323b5472809c7981446d.html?qid=dfmini&amp;_9_图片" target="_blank" title="">旧金山云雾缭绕如仙境</a>
+                    </div>
                 </div>
-            </div>
-            <div class="w15"></div>
-            <div class="w170">
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_23a54305a8a743526d662a1d5151e40d.html?qid=dfmini&amp;_4_图片" target="_blank" title="伦敦办流浪狗慈善化装舞会"><img src="images/17/562ed41a4fe65.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_23a54305a8a743526d662a1d5151e40d.html?qid=dfmini&amp;_4_图片" target="_blank" title="">伦敦办流浪狗慈善化装舞会</a>
-                </div>
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_eff4e360ae0af5f306e5045a6af43170.html?qid=dfmini&amp;_5_图片" target="_blank" title="英50余人裸体玩过山车筹款"><img src="images/17/562ed4de1c30b.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_eff4e360ae0af5f306e5045a6af43170.html?qid=dfmini&amp;_5_图片" target="_blank" title="">英50余人裸体玩过山车筹款</a>
-                </div>
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_9a988e574d8bd9fc3ed30a9b1ab62105.html?qid=dfmini&amp;_6_图片" target="_blank" title="动物界的小品大赛"><img src="images/17/562ed535926dc.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_9a988e574d8bd9fc3ed30a9b1ab62105.html?qid=dfmini&amp;_6_图片" target="_blank" title="">动物界的小品大赛</a>
-                </div>
-            </div>
-            <div class="w15"></div>
-            <div class="w170">
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_517136c190695a593b953e93129508f3.html?qid=dfmini&amp;_7_图片" target="_blank" title="乌龟水中玩南瓜灯迎万圣节"><img src="images/17/562ed5b196641.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827691886_050000_00_517136c190695a593b953e93129508f3.html?qid=dfmini&amp;_7_图片" target="_blank" title="">乌龟水中玩南瓜灯迎万圣节</a>
-                </div>
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827661499_050000_00_c1b80e432020d390513e21c942d6025f.html?qid=dfmini&amp;_8_图片" target="_blank" title="摄影师翻拍文艺复兴画作"><img src="images/17/562f18bd1b032.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827661499_050000_00_c1b80e432020d390513e21c942d6025f.html?qid=dfmini&amp;_8_图片" target="_blank" title="">摄影师翻拍文艺复兴画作</a>
-                </div>
-                <div class="img_p10">
-                    <a href="http://miniimg.eastday.com/detail/9223351885827674668_050000_00_a91e6ac15326323b5472809c7981446d.html?qid=dfmini&amp;_9_图片" target="_blank" title="旧金山云雾缭绕如仙境"><img src="images/17/562f1913eb489.jpg" class="pic"></a>
-                    <div class="opa"></div>
-                    <a class="opa_txt" href="http://miniimg.eastday.com/detail/9223351885827674668_050000_00_a91e6ac15326323b5472809c7981446d.html?qid=dfmini&amp;_9_图片" target="_blank" title="">旧金山云雾缭绕如仙境</a>
-                </div>
-            </div>
-        </div><!-- end 图片 -->
+            </div><!-- end 图片 -->
         </div>
         <div class="iframe">
             <!-- 娱乐 -->
