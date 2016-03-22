@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>东方头条 邀请有礼</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <style>
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, header, nav, section, article, aside, footer, figure, figcaption, menu, button { margin: 0;padding: 0 }
+        body{ font-family:"Hiragino Sans GB", "Helvetica Neue", Helvetica, STHeiTi, sans-serif,"\5FAE\8F6F\96C5\9ED1"; color: #666666; background-color: #fff;font-size: 0.2rem;position: relative;}
+        table { border-collapse: collapse; border-spacing: 0 }
+        fieldset, img { border: 0 }
+        hr{border:0;height:1px; background-color: #D9D9D9;}
+        ul, li, ol { list-style: none; }
+        input, textarea, select { font-family: inherit; font-size: inherit; font-weight: inherit }
+        button, input { border: 0;background: 0; -webkit-appearance: none;outline: 0 }
+        a { -webkit-touch-callout: none; text-decoration: none; color: #666666; outline: 0 }
+        a:hover{ text-decoration: none; }
+        em, i { font-style: normal }
+        em { color: #ff7200 }
+        ::-webkit-input-placeholder { color: #999 }
+        label {cursor:pointer;}
+        *{ box-sizing:border-box; -ms-word-break:break-all;word-break:break-all;-ms-word-wrap:break-word;word-wrap:break-word;}
+        html{height: 100%;}
+        body{background-color: #FFDE31; min-height: 100%; margin: 0}
+        .main{ width: 7.5rem;margin:0 auto; position: relative;}
+        .main img{ width: 100%;height:12.03rem; }
+        .main a{ display: block;position: absolute;width:4.7rem;height:1.7rem;top:9.5rem;left:1.2rem; }
+    </style>
+    <script>
+        (function (doc, win) {
+            // 分辨率Resolution适配
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        if (clientWidth >= 750 && clientWidth <= 1000 ) {
+                            docEl.style.fontSize = 100 + 'px';
+                        } else if(clientWidth >= 1000){
+                            docEl.style.fontSize = 100 * (1000 / 750) + 'px';
+                        }else{docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';}
+                    }
+            // Abort if browser does not support addEventListener
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+</head>
+<body>
+    <div class="main">
+        <a id="J_download" class="btn" href="javascript:;"></a>
+        <img src="img/east-yindao.png" alt=""/>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://mini.eastday.com/dcminisite/dynamic/js/jquery.cookie.js"></script>
+    <script>
+        $("#J_download").on("click",function(){
+            browserwechat_share();
+            e.preventDefault();
+        })
+        var ua = navigator.userAgent.toLowerCase();
+        var u = navigator.userAgent, app = navigator.appVersion;
+        function browserwechat_share(){
+            var strQID = $.cookie('qid');
+            //var strType = getQueryString('type');
+            var strType = 'hd5';
+            if (strQID == null) {
+                strQID = '';
+            }
+            var strHref = 'http://down.dftoutiao.com/qdhtml/poling/download.html?mnmentplqid=';
+            strHref += strQID;
+            strHref += '&mnmentpltype=';
+            strHref += strType;
+            window.location.href = strHref;
+        }
+        // function getQueryString(name) {
+        //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        //     var r = window.location.search.substr(1).match(reg);
+        //     if (r != null) return decodeURI(r[2]);
+        //     return '';
+        // }
+    </script>
+</body>
+</html>
