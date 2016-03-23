@@ -9,6 +9,8 @@ html,body{min-height: 100%;}
 body{font-size: 20px;  color: #4c3f36; background-color: #EBF3FF; min-width: 320px;}
 
 /* today and tomorrow */
+.sct.today{min-height: 4.17rem;}
+.sct.tomorrow{min-height: 3.81rem;}
 .sct{position: relative; border-bottom: 1px dotted #c9e2f9; padding: 0.5rem 0 0.7rem;}
 .sct .sct-l{position: absolute; width: 3.6rem;}
 .sct .sct-l img{display: block; margin: 0 auto; width: 2.6rem; height: 2.6rem;}
@@ -25,7 +27,7 @@ body{font-size: 20px;  color: #4c3f36; background-color: #EBF3FF; min-width: 320
 .more .time-line{position: absolute; height: 0.5rem; width: 100%; background-color: #EBF3FF;}
 .more{background: url('../img/line.png') repeat-y scroll 1.82rem 0.4rem;}
 
-.current{position: relative; padding-top: 0.4rem;}
+.current{position: relative; padding-top: 0.4rem; min-height: 3.6rem;}
 .current .time{position: absolute; left: 0.75rem; top: 0.4rem; height: 0.6rem; line-height: 0.6rem; font-size: 0.26rem;}
 .current ul{margin-left: 1.5rem;}
 .current ul li{position: relative; padding-left: 0.8rem; min-height: 0.64rem;}
@@ -59,8 +61,8 @@ body{font-size: 20px;  color: #4c3f36; background-color: #EBF3FF; min-width: 320
 
 /* 未来天气 */
 .future-list .future-item{position: relative; margin-top: 0.6rem;}
-.future-list .future-item .time{position: absolute; left: 0.75rem; top: 0; height: 0.6rem; line-height: 0.6rem; font-size: 0.26rem;}
-.future-list .future-item .time em{position: absolute; left: 50%; bottom: -0.14rem; width: 0.5rem; margin-left: -0.25rem; font-size: 0.22rem; color: #c4c8d0; text-align: center; line-height: 100%;}
+.future-list .future-item .time{position: absolute; left: 0.45rem; top: 0; height: 0.6rem; line-height: 0.6rem; font-size: 0.32rem;}
+.future-list .future-item .time em{position: absolute; left: 0; bottom: -0.16rem; width: 100%; font-size: 0.22rem; color: #c4c8d0; text-align: center; line-height: 100%;}
 .future-list .future-item .content{position: relative; margin-left: 1.5rem; padding-left: 0.8rem; min-height: 0.64rem;}
 .future-list .future-item .content .img{position: absolute; left: 0; top: 0; width: 0.64rem; height: 0.64rem; text-align: center;}
 .future-list .future-item .content .img img{display: block; margin: 0 auto; width: 0.6rem; height: 0.6rem;}
