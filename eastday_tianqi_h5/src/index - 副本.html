@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="Cleam Lee" name="author">
+	<title>天气详情</title>
+	<script>!function(a,b){var c=a.documentElement,d="orientationchange"in window?"orientationchange":"resize",e=function(){var a=c.clientWidth;a&&(a>=750&&(a=750),c.style.fontSize=100*(a/750)+"px")};a.addEventListener&&(b.addEventListener(d,e,!1),e())}(document,window);</script>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+	<!-- today -->
+	<div id="J_today" class="sct today">
+		<!-- <div class="today-wrap">
+			<div class="J-sct-l sct-l">
+				<img src="img/tq_02.png" alt="">
+			</div>
+			<div class="J-sct-r sct-r">
+				<p class="time"><em>今天</em>3.22 周二</p>
+				<p class="temp">4~15℃</p>
+				<p class="weather">大暴雨</p>
+				<p class="aqi">45 空气质量优</p>
+			</div>
+		</div> -->
+	</div>
+	<!-- /today -->
+
+	<!-- tomorrow -->
+	<div id="J_tomorrow" class="sct tomorrow">
+		<!-- <div class="tomorrow-wrap">
+			<div class="sct-l">
+				<img src="img/tq_01.png" alt="">
+			</div>
+			<div class="sct-r">
+				<p class="time"><em>明天</em>3.18 周三</p>
+				<p class="temp">6~15℃</p>
+				<p class="weather">晴转多云</p>
+			</div>
+		</div> -->
+	</div>
+	<!-- /tomorrow -->
+
+	<!-- more -->
+	<div class="more">
+		<div class="time-line"></div>
+		<div class="more-wrap">
+			<div id="J_current" class="current">
+				<!-- <p class="time">10:30</p>
+				<ul>
+					<li>
+						<div class="img1"><img src="img/tq_sm_01.png" alt="晴转多云"></div>
+						<p class="txt1">晴转多云 15℃</p>
+						<p class="txt2"><span class="wet"><i></i>湿度 62%</span><span class="wind"><i></i>东南风 3级 微风</span></p>
+					</li>
+					<li>
+						<div class="img2"><img src="img/aqi_1.png" alt="良好"></div>
+						<p class="txt1">空气指数：83 良好</p>
+						<p class="txt2"><span class="blk">PM2.5  61</span><span class="blk">PM10  61</span><span class="blk">O3  30</span><span class="blk">NO2  49</span></p>
+					</li>
+				</ul> -->
+			</div>
+			<div id="J_today_future" class="today-list-wrap">
+				<!-- <div class="hd">
+					<p class="time">今天</p>
+					<p class="content"><img src="img/time.png" alt="">2016年3月17日 星期四</p>
+				</div>
+				<ul class="today-list">
+					<li class="today-item">
+						<p class="time">20:00</p>
+						<p class="content">
+							<span class="img"><img src="img/tq_sm_01.png" alt=""></span>
+							小雨 14℃<em>带伞</em>
+						</p>
+					</li>
+					<li class="today-item">
+						<p class="time">21:00</p>
+						<p class="content">
+							<span class="img"><img src="img/tq_sm_01.png" alt=""></span>
+							小雨 15℃<em>带伞</em>
+						</p>
+					</li>
+					<li class="today-item">
+						<p class="time">22:00</p>
+						<p class="content">
+							<span class="img"><img src="img/tq_sm_01.png" alt=""></span>晴 20℃
+						</p>
+					</li>
+					<li class="today-item">
+						<p class="time">23:00</p>
+						<p class="content">
+							<span class="img"><img src="img/tq_sm_01.png" alt=""></span>多云 20℃
+						</p>
+					</li>
+				</ul> -->
+			</div>
+			<ul id="J_future" class="future-list">
+				<!-- <li class="future-item">
+					<p class="time">周二<em>3.22</em></p>
+					<div class="content">
+						<div class="img"><img src="img/tq_sm_01.png" alt="晴转多云"></div>
+						<p class="temp">晴 7-17℃</p>
+						<p class="wind"><i></i>东南风 3级 微风</p>
+					</div>
+				</li>
+				<li class="future-item">
+					<p class="time">周三<em>3.23</em></p>
+					<div class="content">
+						<div class="img"><img src="img/tq_sm_01.png" alt="晴转多云"></div>
+						<p class="temp">晴 7-17℃</p>
+						<p class="wind"><i></i>东南风 3级 微风</p>
+					</div>
+				</li>
+				<li class="future-item">
+					<p class="time">周四<em>3.24</em></p>
+					<div class="content">
+						<div class="img"><img src="img/tq_sm_01.png" alt="晴转多云"></div>
+						<p class="temp">晴 7-17℃</p>
+						<p class="wind"><i></i>东南风 3级 微风</p>
+					</div>
+				</li> -->
+			</ul>
+		</div>
+	</div>
+	<!-- /more -->
+
+	<script src="js/zepto.min.js"></script>
+	<script src="js/page.js"></script>
+</body>
+</html>
