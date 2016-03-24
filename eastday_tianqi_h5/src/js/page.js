@@ -1,8 +1,9 @@
 // $: Zepto
 $(function(){
-	var ARR_WEEKS = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六"),
-		// WEATHER_DATA = window.nativeApis.getweatherImageName(weather);
-		WEATHER_DATA = {"resultcode":200,"reason":"\u67e5\u8be2\u6210\u529f!","result":{"today":{"city":"\u9752\u5c9b","code":"101120201","pinyin":"qingdao","temp":"9","wind_direction":"\u4e1c\u5317\u98ce","wind_strength":"3\u7ea7","humidity":"23%","rain":"0%","temp_day":"11","temp_night":"2","weather_day":"\u591a\u4e91","weather_night":"\u6674","aqi":"63","pm2_5":"17.444","no2":"28.444","pm10":"74.666","o3":"63.333","aqi_info":"\u826f","date_y":"2016\u5e7403\u670823\u65e5","week":"\u661f\u671f\u4e09","update_time":"10:44"},"today_24":[{"temp":"9","weather":"\u591a\u4e91"},{"temp":"9","weather":"\u591a\u4e91"},{"temp":"8","weather":"\u591a\u4e91"},{"temp":"9","weather":"\u591a\u4e91"},{"temp":"9","weather":"\u591a\u4e91"},{"temp":"8","weather":"\u591a\u4e91"},{"temp":"7","weather":"\u591a\u4e91"},{"temp":"6","weather":"\u591a\u4e91"},{"temp":"8","weather":"\u9634"},{"temp":"9","weather":"\u9634"},{"temp":"10","weather":"\u9634"},{"temp":"10","weather":"\u9634"},{"temp":"10","weather":"\u9634"},{"temp":"11","weather":"\u9634"},{"temp":"10","weather":"\u9634"},{"temp":"10","weather":"\u591a\u4e91"},{"temp":"9","weather":"\u591a\u4e91"},{"temp":"8","weather":"\u6674"},{"temp":"7","weather":"\u6674"},{"temp":"6","weather":"\u6674"},{"temp":"5","weather":"\u6674"},{"temp":"5","weather":"\u6674"},{"temp":"4","weather":"\u6674"},{"temp":"4","weather":"\u6674"}],"future":[{"temp_day":"11","temp_night":"2","weather_day":"\u591a\u4e91","weather_night":"\u6674","wind_direction":"\u5317\u98ce","wind_level":"4-5\u7ea7","date":"20160323","week":"\u661f\u671f\u4e09"},{"temp_day":"12","temp_night":"3","weather_day":"\u6674","weather_night":"\u6674","wind_direction":"\u5317\u98ce","wind_level":"3-4\u7ea7","date":"20160324","week":"\u661f\u671f\u56db"},{"temp_day":"10","temp_night":"4","weather_day":"\u6674","weather_night":"\u6674","wind_direction":"\u5317\u98ce","wind_level":"3-4\u7ea7","date":"20160325","week":"\u661f\u671f\u4e94"},{"temp_day":"16","temp_night":"5","weather_day":"\u6674","weather_night":"\u6674","wind_direction":"\u5317\u98ce","wind_level":"3-4\u7ea7","date":"20160326","week":"\u661f\u671f\u516d"},{"temp_day":"11","temp_night":"5","weather_day":"\u6674","weather_night":"\u6674","wind_direction":"\u5357\u98ce","wind_level":"3-4\u7ea7","date":"20160327","week":"\u661f\u671f\u65e5"},{"temp_day":"11","temp_night":"7","weather_day":"\u591a\u4e91","weather_night":"\u9635\u96e8","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160328","week":"\u661f\u671f\u4e00"},{"temp_day":"12","temp_night":"7","weather_day":"\u9635\u96e8","weather_night":"\u9634","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160329","week":"\u661f\u671f\u4e8c"},{"temp_day":"15","temp_night":"10","weather_day":" \u9634","weather_night":" \u9634","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160330","week":"\u661f\u671f\u4e09"},{"temp_day":"17","temp_night":"7","weather_day":" \u9634","weather_night":" \u9634","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160331","week":"\u661f\u671f\u56db"},{"temp_day":"12","temp_night":"7","weather_day":" \u591a\u4e91","weather_night":" \u591a\u4e91","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160401","week":"\u661f\u671f\u4e94"},{"temp_day":"14","temp_night":"7","weather_day":"\u6674","weather_night":"\u6674","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160402","week":"\u661f\u671f\u516d"},{"temp_day":"14","temp_night":"8","weather_day":"\u591a\u4e91","weather_night":"\u591a\u4e91","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160403","week":"\u661f\u671f\u65e5"},{"temp_day":"15","temp_night":"8","weather_day":"\u6674","weather_night":"\u6674","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160404","week":"\u661f\u671f\u4e00"},{"temp_day":"17","temp_night":"10","weather_day":" \u9634","weather_night":" \u9634","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160405","week":"\u661f\u671f\u4e8c"},{"temp_day":"19","temp_night":"10","weather_day":" \u9635\u96e8","weather_night":" \u9635\u96e8","wind_direction":"\u5357\u98ce","wind_level":"4-5\u7ea7","date":"20160406","week":"\u661f\u671f\u4e09"}]}};
+	var BASE_PATH = 'http://test.kp.dftoutiao.com/east_weather_h5/',
+		ARR_WEEKS = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六"),
+		IS_IOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+		WEATHER_DATA = IS_IOS ? window.nativeApis.getWeatherDetailInfo() : getWeatherDetailInfo(); //获取天气json
 
 	/**
 	 * 判断是不是晚上（20:00 ~ 8:00 视为晚上）
@@ -35,6 +36,16 @@ $(function(){
 			minute = now.getMinutes();
 		minute = minute < 10 ? ('0' + minute) : minute;
 		return hour + ':' + minute;
+	}
+
+	function isIOS(){
+		var u = navigator.userAgent;
+		return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	}
+
+	function isAndroid(){
+		var u = navigator.userAgent;
+		return u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
 	}
 
 	/**
@@ -75,15 +86,16 @@ $(function(){
 		 */
 		setToday: function(d){
 			var nowStr = d.date_y.substring(5, 7) + '.' + d.date_y.substring(8, 10) + ' ' + d.week,
-				imgSrc = 'img/tq_02.png',
 				temp = d.temp_night + '~' + d.temp_day + '℃',
 				weather = this.isNight ? d.weather_night : d.weather_day,
+				// imgSrc = 'img/tq_02.png',
+				imgSrc = IS_IOS ? window.nativeApis.getWeatherImageName(weather) : getWeatherImageName(weather), // 获取天气图标
 				aqi = d.aqi,
 				aqiInfo = d.aqi_info,
 				$today = $('#J_today');
 			$today.append('<div class="today-wrap">' +
 				'<div class="sct-l">' +
-					'<img src="' + imgSrc + '" alt="' + weather + '">' +
+					'<img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '">' +
 				'</div>' +
 				'<div class="sct-r">' +
 					'<p class="time"><em>今天</em>' + nowStr + '</p>' +
@@ -101,12 +113,12 @@ $(function(){
 			var nowStr = d.date.substring(4, 6) + '.' + d.date.substring(6, 8) + ' ' + d.week,
 				temp = d.temp_night + '~' + d.temp_day + '℃',
 				weather = this.isNight ? d.weather_night : d.weather_day,
-				imgSrc = 'img/tq_01.png',
-				// imgSrc = window.nativeApis.getweatherImageName(weather),
+				// imgSrc = 'img/tq_01.png',
+				imgSrc = IS_IOS ? window.nativeApis.getWeatherImageName(weather) : getWeatherImageName(weather), // 获取天气图标
 				$tomorrow = $('#J_tomorrow');
 			$tomorrow.append('<div class="tomorrow-wrap">' +
 				'<div class="sct-l">' +
-					'<img src="' + imgSrc + '" alt="' + weather + '">' +
+					'<img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '">' +
 				'</div>' +
 				'<div class="sct-r">' +
 					'<p class="time"><em>明天</em>' + nowStr + '</p>' +
@@ -124,14 +136,14 @@ $(function(){
 				curTime = getTime(),
 				temp = (this.isNight ? d.temp_night : d.temp_day) + '℃',
 				weather = this.isNight ? d.weather_night : d.weather_day,
-				imgSrc = 'img/tq_01.png',
-				// imgSrc = window.nativeApis.getweatherImageName(weather),
+				// imgSrc = 'img/tq_01.png',
+				imgSrc = IS_IOS ? window.nativeApis.getWeatherImageName(weather) : getWeatherImageName(weather), // 获取天气图标
 				humidity = d.humidity,	// 湿度
 				windDir = d.wind_direction,	// 风向
 				windStrength = d.wind_strength,	// 风级
 				aqi = d.aqi,
 				aqiInfo = d.aqi_info,
-				aqiImg = 'img/aqi_' + this.getAqiImgNum(aqi) + '.png',
+				aqiImg = BASE_PATH + 'img/aqi_' + this.getAqiImgNum(aqi) + '.png',
 				pm25 = Number(d.pm2_5).toFixed(1),	
 				pm10 = Number(d.pm10).toFixed(1),	
 				o3 = Number(d.o3).toFixed(1),
@@ -140,7 +152,7 @@ $(function(){
 			$current.append('<p class="time">' + curTime + '</p>' +
 				'<ul>' +
 					'<li>' +
-						'<div class="img1"><img src="' + imgSrc + '" alt="' + weather + '"></div>' +
+						'<div class="img1"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '"></div>' +
 						'<p class="txt1">' + weather + ' ' + temp + '</p>' +
 						'<p class="txt2"><span class="wet"><i></i>湿度 ' + humidity + '</span><span class="wind">' + windDir + ' ' + windStrength + '</span></p>' +
 					'</li>' +
@@ -167,26 +179,26 @@ $(function(){
 				imgSrc = '';
 			$tFuture.append('<div class="hd">' + 
 					'<p class="time">今天</p>' + 
-					'<p class="content"><img src="img/time.png" alt="">' + nowStr + '</p>' + 
+					'<p class="content"><img src="' + BASE_PATH + 'img/time.png" alt="">' + nowStr + '</p>' + 
 				'</div>');
 			for (var i = curHour + 1, l = tf.length; i < l; i++) {
 				weather = tf[i].weather;
 				temp = tf[i].temp + '℃';
 				time = this.getTimeByIndex(i);
-				imgSrc = 'img/tq_sm_01.png';
-				// imgSrc = window.nativeApis.getweatherImageName(weather);
+				// imgSrc = 'img/tq_sm_01.png';
+				imgSrc = IS_IOS ? window.nativeApis.getWeatherImageName(weather) : getWeatherImageName(weather); // 获取天气图标
 				if(weather.indexOf('雨') != -1){
 					$ul.append('<li class="today-item">' + 
 							'<p class="time">' + time + '</p>' + 
 							'<p class="content">' + 
-								'<span class="img"><img src="' + imgSrc + '" alt=""></span>' + weather + ' ' + temp + '<em>带伞</em>' + 
+								'<span class="img"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt=""></span>' + weather + ' ' + temp + '<em>带伞</em>' + 
 							'</p>' + 
 						'</li>');
 				} else {
 					$ul.append('<li class="today-item">' + 
 							'<p class="time">' + time + '</p>' + 
 							'<p class="content">' + 
-								'<span class="img"><img src="' + imgSrc + '" alt=""></span>' + weather + ' ' + temp +
+								'<span class="img"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt=""></span>' + weather + ' ' + temp +
 							'</p>' + 
 						'</li>');
 				}
@@ -215,12 +227,12 @@ $(function(){
 				weather = d[i].weather_day;
 				windDir = d[i].wind_direction;
 				windLevel = d[i].wind_level;
-				imgSrc = 'img/tq_sm_01.png';
-				// imgSrc = window.nativeApis.getweatherImageName(weather);
+				// imgSrc = 'img/tq_sm_01.png';
+				imgSrc = IS_IOS ? window.nativeApis.getWeatherImageName(weather) : getWeatherImageName(weather); // 获取天气图标
 				$future.append('<li class="future-item">' +
 					'<p class="time">' + week + '<em>' + date + '</em></p>' +
 					'<div class="content">' +
-						'<div class="img"><img src="' + imgSrc + '" alt="' + weather + '"></div>' +
+						'<div class="img"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '"></div>' +
 						'<p class="temp">' + weather + ' ' + temp + '</p>' +
 						'<p class="wind">' + windDir + ' ' + windLevel + '</p>' +
 					'</div>' +

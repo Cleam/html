@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="Cleam Lee" name="author">
+    <meta name="keywords" content="东方头条,头条新闻,头条,今日新闻头条,头条网,头条新闻,今日头条新闻">
+	<meta name="description" content="东方头条网 东方网 旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!">
+    <meta http-equiv="expires" content="31 Dec 2018">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+	<link rel="bookmark" href="img/favicon.ico" type="image/x-icon"　/>
+    <link rel="apple-touch-icon-precomposed" href="img/favicon.ico">
+	<title>头条新闻</title>
+	<script>!function(a,b){var c=a.documentElement,d="orientationchange"in window?"orientationchange":"resize",e=function(){var a=c.clientWidth;a&&(a>=750&&(a=750),c.style.fontSize=100*(a/750)+"px")};a.addEventListener&&(b.addEventListener(d,e,!1),e())}(document,window);</script>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+	<p class="none">东方头条,头条新闻,头条,今日新闻头条,头条网,头条新闻,今日头条新闻</p>
+	<header>
+		<!-- title -->
+		<section class="top-title">
+			<a href="javascript:;" class="refresh" id="J_refresh">
+				<img src="img/top_title.png" alt=""><span></span>
+			</a>
+			<a href="javascript:;" class="search"></a>
+		</section>
+		<!-- menu -->
+		<section class="top-menu">
+			<div class="top-menu-list">
+				<a class="active" href="javascript:;">头条</a>
+				<a href="javascript:;">滚动</a>
+				<a href="javascript:;">社会</a>
+				<a href="javascript:;">上海</a>
+				<a href="javascript:;">滚动</a>
+				<a href="javascript:;">滚动</a>
+				<a href="javascript:;">滚动</a>
+				<a href="javascript:;">滚动</a>
+				<a href="javascript:;">滚动</a>
+
+			</div>
+		</section>
+	</header>
+	<div id="J_iscroll">
+		<div id="J_wrapper">
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_top" style="transition: all 300ms linear; transform: translate3d(0px, 180px, 0px); top: 60px;">
+		<div class="list_top_con v2">
+			<canvas id="load-tip-canvas" width="200" height="200" class="" style="transition: none; transform: rotate(714.615deg); opacity: 2.61022;"></canvas>
+		</div>
+	</div>
+
+	<script src="js/zepto.min.js"></script>
+	<script src="js/swiper-3.3.0.jquery.min.js"></script>
+	<script src="js/page.js"></script>
+</body>
+</html>

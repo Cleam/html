@@ -1,0 +1,68 @@
+// 转换天气文字为图标
+	private int getWeatherImage(String weatherState) {
+		int WeatherImage = R.drawable.fos_weather_na;
+		if (TextUtils.isEmpty(weatherState))
+			return WeatherImage;
+		if (weatherState.equals("晴") || containState("sun", weatherState)
+				|| containState("clear", weatherState)
+				|| containState("fine", weatherState)) {
+			WeatherImage = R.drawable.bg_sunny;
+		} else if (weatherState.equals("阴")
+				|| containState("cloud", weatherState)) {
+			WeatherImage = R.drawable.bg_overcasts;
+		} else if (weatherState.equals("雾")
+				|| containState("frog", weatherState))
+			WeatherImage = R.drawable.bg_dense_fog;
+		else if (weatherState.equals("多云")) {
+			WeatherImage = R.drawable.bg_cloudy_to_sunny;
+		} else if (weatherState.equals("多云转晴"))
+			WeatherImage = R.drawable.bg_cloudy_to_sunny;
+		else if (weatherState.equals("晴转多云"))
+			WeatherImage = R.drawable.bg_cloudy_to_sunny;
+		else if (weatherState.equals("多云转阴") || weatherState.equals("小雨转阴")
+				|| weatherState.equals("小雨转多云") || weatherState.equals("阴转多云"))
+			WeatherImage = R.drawable.bg_overcasts;
+		else if (weatherState.equals("小雨") || weatherState.equals("中雨转小雨")
+				|| containState("rain", weatherState))
+			WeatherImage = R.drawable.bg_small_rain;
+		else if (weatherState.equals("小到中雨") || weatherState.equals("小雨转中雨")
+				|| weatherState.equals("阵雨转中雨")
+				|| containState("shower", weatherState))
+			WeatherImage = R.drawable.bg_moderate_rain;
+		else if (weatherState.equals("中雨"))
+			WeatherImage = R.drawable.bg_zhongyu;
+		else if (weatherState.equals("阵雨"))
+			WeatherImage = R.drawable.bg_zhenyu;
+		else if (weatherState.equals("大雨") || weatherState.equals("暴雨"))
+			WeatherImage = R.drawable.bg_baoyu;
+		else if (weatherState.equals("阴转小雨") || weatherState.equals("多云转小雨"))
+			WeatherImage = R.drawable.bg_small_rain;
+		else if (weatherState.equals("小雪")
+				|| containState("snow", weatherState))
+			WeatherImage = R.drawable.bg_small_snow;
+		else if (weatherState.equals("小到中雪") || weatherState.equals("中雪")
+				|| weatherState.equals("大雪") || weatherState.equals("暴雪"))
+			WeatherImage = R.drawable.bg_xiaodaozhongxue;
+		else if (weatherState.equals("雨夹雪"))
+			WeatherImage = R.drawable.bg_yujiaxue;
+		else if (weatherState.equals("中到大雨"))
+			WeatherImage = R.drawable.bg_zhongdaodayu;
+		else if (weatherState.equals("冻雨"))
+			WeatherImage = R.drawable.bg_dongyu;
+		else if (weatherState.equals("阵雪"))
+			WeatherImage = R.drawable.bg_zhenxue;
+		else {
+			if (weatherState.indexOf("雷") != -1)
+				WeatherImage = R.drawable.bg_leizhenyu;
+			else if (weatherState.indexOf("雨") != -1)
+				WeatherImage = R.drawable.bg_zhongyu;
+			else if (weatherState.indexOf("雪") != -1)
+				WeatherImage = R.drawable.bg_xiaodaozhongxue;
+			else if (weatherState.indexOf("云") != -1)
+				WeatherImage = R.drawable.bg_cloudy_to_sunny;
+			else
+				WeatherImage = R.drawable.bg_sunny;
+		}
+		return WeatherImage;
+
+	}
