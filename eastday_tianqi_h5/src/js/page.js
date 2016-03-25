@@ -1,6 +1,6 @@
 // $: Zepto
-$(function(){
-	var BASE_PATH = 'http://test.kp.dftoutiao.com/east_weather_h5/',
+function startShowWeather(){
+	var BASE_PATH = 'http://test.kp2.dftoutiao.com/east_weather_h5/',
 		ARR_WEEKS = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六"),
 		IS_IOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
 		WEATHER_DATA = IS_IOS ? window.nativeApis.getWeatherDetailInfo() : getWeatherDetailInfo(); //获取天气json
@@ -95,7 +95,7 @@ $(function(){
 				$today = $('#J_today');
 			$today.append('<div class="today-wrap">' +
 				'<div class="sct-l">' +
-					'<img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '">' +
+					'<img src="' + BASE_PATH + 'img/' + imgSrc + '" alt="' + weather + '">' +
 				'</div>' +
 				'<div class="sct-r">' +
 					'<p class="time"><em>今天</em>' + nowStr + '</p>' +
@@ -118,7 +118,7 @@ $(function(){
 				$tomorrow = $('#J_tomorrow');
 			$tomorrow.append('<div class="tomorrow-wrap">' +
 				'<div class="sct-l">' +
-					'<img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '">' +
+					'<img src="' + BASE_PATH + 'img/' + imgSrc + '" alt="' + weather + '">' +
 				'</div>' +
 				'<div class="sct-r">' +
 					'<p class="time"><em>明天</em>' + nowStr + '</p>' +
@@ -152,7 +152,7 @@ $(function(){
 			$current.append('<p class="time">' + curTime + '</p>' +
 				'<ul>' +
 					'<li>' +
-						'<div class="img1"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '"></div>' +
+						'<div class="img1"><img src="' + BASE_PATH + 'img/' + imgSrc + '" alt="' + weather + '"></div>' +
 						'<p class="txt1">' + weather + ' ' + temp + '</p>' +
 						'<p class="txt2"><span class="wet"><i></i>湿度 ' + humidity + '</span><span class="wind">' + windDir + ' ' + windStrength + '</span></p>' +
 					'</li>' +
@@ -191,14 +191,14 @@ $(function(){
 					$ul.append('<li class="today-item">' + 
 							'<p class="time">' + time + '</p>' + 
 							'<p class="content">' + 
-								'<span class="img"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt=""></span>' + weather + ' ' + temp + '<em>带伞</em>' + 
+								'<span class="img"><img src="' + BASE_PATH + 'img/' + imgSrc + '" alt=""></span>' + weather + ' ' + temp + '<em>带伞</em>' + 
 							'</p>' + 
 						'</li>');
 				} else {
 					$ul.append('<li class="today-item">' + 
 							'<p class="time">' + time + '</p>' + 
 							'<p class="content">' + 
-								'<span class="img"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt=""></span>' + weather + ' ' + temp +
+								'<span class="img"><img src="' + BASE_PATH + 'img/' + imgSrc + '" alt=""></span>' + weather + ' ' + temp +
 							'</p>' + 
 						'</li>');
 				}
@@ -232,7 +232,7 @@ $(function(){
 				$future.append('<li class="future-item">' +
 					'<p class="time">' + week + '<em>' + date + '</em></p>' +
 					'<div class="content">' +
-						'<div class="img"><img src="' + BASE_PATH + 'img' + imgSrc + '" alt="' + weather + '"></div>' +
+						'<div class="img"><img src="' + BASE_PATH + 'img/' + imgSrc + '" alt="' + weather + '"></div>' +
 						'<p class="temp">' + weather + ' ' + temp + '</p>' +
 						'<p class="wind">' + windDir + ' ' + windLevel + '</p>' +
 					'</div>' +
@@ -300,5 +300,6 @@ $(function(){
 		}
 	};
 
-	new WeatherDetails(WEATHER_DATA);
-});
+	new WeatherDetails(JSON.parse(WEATHER_DATA));
+	
+};
