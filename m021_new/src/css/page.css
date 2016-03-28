@@ -7,7 +7,7 @@
 @media only screen and (min-width: 720px) {body{width: 720px; margin: 0 auto;}}
 html,body{height: 100%;}
 html{background-color: #f1f1f1;}
-body{ font-size: 20px;  color: #666; background-color: #f1f1f1; min-width: 320px;}
+body{font-size: 20px;  color: #666; background-color: #f1f1f1; min-width: 320px;}
 a:active{background-color: #e5e5e5 !important;}
 
 .top{width: 100%; padding-left: 0.3rem; padding-right: 0.3rem; background-color: #52ace5; color: #fff; padding-bottom: 0.3rem;}
