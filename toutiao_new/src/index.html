@@ -2,7 +2,8 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<meta content="width=device-width,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5,user-scalable=no" name="viewport">
+	<!-- <meta content="initial-scale=0.5, maximum-scale=0.5,minimum-scale=0.5,user-scalable=no" name="viewport"> -->
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
@@ -32,11 +33,16 @@
 		<!-- menu -->
 		<section class="top-menu">
 			<div class="top-menu-list">
-				<a class="active" href="javascript:;">头条</a><a href="javascript:;">滚动</a><a href="javascript:;">社会</a><a href="javascript:;">上海</a><a href="javascript:;">笑话</a><a href="javascript:;">娱乐</a><a href="javascript:;">国内</a><a href="javascript:;">美女</a><a href="javascript:;">健康</a><a href="javascript:;">国际</a><a href="javascript:;">人文</a><a href="javascript:;">互联网</a><a href="javascript:;">军事</a><a href="javascript:;">NBA</a><a href="javascript:;">科技</a><a href="javascript:;">体育</a><a href="javascript:;">时尚</a><a href="javascript:;">星座</a><a href="javascript:;">财经</a><a href="javascript:;">游戏</a><a href="javascript:;">汽车</a><a href="javascript:;">暖文</a><a href="javascript:;">科学</a><a href="javascript:;">健身</a> </div>
+				<a class="active" href="javascript:;" data-type="toutiao">头条</a><a href="javascript:;" data-type="weikandian">滚动</a><a href="javascript:;" data-type="shehui">社会</a><a href="javascript:;" data-type="shanghai">上海</a><a href="javascript:;" data-type="xiaohua">笑话</a><a href="javascript:;" data-type="yule">娱乐</a><a href="javascript:;" data-type="guonei">国内</a><a href="javascript:;" data-type="meinv">美女</a><a href="javascript:;" data-type="jiakang">健康</a><a href="javascript:;" data-type="guoji">国际</a><a href="javascript:;" data-type="renwen">人文</a><a href="javascript:;" data-type="hulianwang">互联网</a><a href="javascript:;" data-type="junshi">军事</a><a href="javascript:;" data-type="nba">NBA</a><a href="javascript:;" data-type="keji">科技</a><a href="javascript:;" data-type="tiyu">体育</a><a href="javascript:;" data-type="shishang">时尚</a><a href="javascript:;" data-type="xingzuo">星座</a><a href="javascript:;" data-type="caijing">财经</a><a href="javascript:;" data-type="youxi">游戏</a><a href="javascript:;" data-type="qiche">汽车</a><a href="javascript:;" data-type="nuanwen">暖文</a><a href="javascript:;" data-type="kexue">科学</a><a href="javascript:;" data-type="jianshen">健身</a>
+			</div>
+			<div class="menu-more">
+				<div class="list-shadow"></div>
+				<a href="javascript:;" class="more-btn"></a>
+			</div>
 		</section>
 	</header>
 
-	<div id="J_iscroll" class="news-list">
+	<div id="J_content" class="news-list">
 		<div id="J_wrapper" class="news-list-wrap">
 			<section class="news-item news-item-s1">
 				<a data-type="yule" data-subtype="" href="http://mini.eastday.com/mobile/160325061124789.html?qid=m021dh&amp;idx=122&amp;recommendtype=-1&amp;ishot=1"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>我和男友的结婚典礼上，新婚光盘被换掉了，里面的东西让我很丢脸</h3><p><em class="fl"><i class="hot">热门</i></em><em class="fr">末小北</em></p></div><div class="img-wrap fl"><img class="lazy" src="http://imgmini.eastday.com/mobile/20160325061124_0f370c7784918aa038f8dbeda4e8bb24_1_mwpm_03200403.jpeg" alt="我和男友的结婚典礼上，新婚光盘被换掉了，里面的东西让我很丢脸"></div></div></a>
@@ -104,7 +110,6 @@
 
 	<script src="js/zepto.min.js"></script>
 	<script src="js/fastclick.min.js"></script>
-	<script src="js/iscroll.js"></script>
 	<script src="js/page.js"></script>
 </body>
 </html>

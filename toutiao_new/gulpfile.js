@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
+    connect = require('gulp-connect'),
     clean = require('gulp-clean'),                  //清空文件夹
     rev = require('gulp-rev'),                      //- 对文件名加MD5后缀
     revCollector = require('gulp-rev-collector'),   //- 路径替换
@@ -72,6 +73,12 @@ gulp.task('rev', function() {
     gulp.src([revDst, htmlSrc])   
         .pipe(revCollector())          //- 执行文件内css名的替换
         .pipe(gulp.dest(htmlDst));     //- 替换后的文件输出的目录
+});
+
+gulp.task('webserver', function(){
+    connect.server({
+        port: 8888
+    });
 });
 
 // 清除文件(清除完后回调cb)

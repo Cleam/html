@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <meta charset="UTF-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <style>
+        html,body {
+            height: 100%;
+        }
+        body {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            margin: 0;
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 3% 3% 0;
+        }
+        li {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        a {
+            padding: 10px;
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            overflow: hidden;
+                    color: #fff;
+                    background-color: #333;
+        }
+        p {
+            overflow: hidden;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        a p:last-child {
+            margin-bottom: 0;
+        }
+        .logo {
+            margin-right: 10px;
+            float: left;
+            width: 30%;
+            padding-top: 30%;
+            border: 1px solid rgb(213, 213, 213);
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            background-size: cover;
+        }
+        .refresh {
+            color: #999;
+            font-size: 12px;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+        }
+        .refresh .animate {
+            position: relative;
+        }
+        .refresh .animate,
+        .refresh .animate canvas {
+            width: 30px;
+            height: 30px;
+        }
+        .refresh .animate .icon {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAACWklEQVRoge2ZPW/TUBSGXyfho0UQWoj4KgyICTEywERQI1AkGucPMCEW/gBi8+/xwgbjFQyVQFmghCUsliVHjn2vWFioxGGoLbmNk6bJdWyn55HOYp1E76NrH1nHAMMwDMMwDMMwZcWwbbva6/XO2LZdzTvMMjA8z1tXSt2RUt4PguCGZVmVvEMtBSFEzXGcjdFodP3USMesjDABFXqBW9TGFjVRyztP5pCJ99QFRbWbd57MoS7+JoSJOriYd6ZMOSR7UJfzzpQpLMzCKwYLzyk8GAzOATA0x9OPLmHf9+86jrOhO592NAkbUspHYRi+iU66uOg6YaVUPQzDl2EYbhf6vVv30HJdd1NKeUlXPu1kNKWXP7zoOTbJxFvq4B1t48rEvhmF6RkuUAevqYtX9Bhr2SWfEzLxKSHxi9rYSu2bQZhaqFMXXxI9H7I3OCFkYv+IyB610RjrO0aY2mhQF18P9ZjYX57JjJCJjykyY9LThCPZvbEeE5+Xb3QMKbdhqvQk4YmyE+6UQjCLdJpwKWVjqIU6mfg2KfzY9Q7ulVY2ZuqJjV/7WWrZmCkD6F+KYLllY6ac9OrJxpxAupCyc72zziBdSFlEX/fmlzbxI+WZ/l5IWeBgrdLv989iMek/CeHf1EJdc0x92LZdVUo9WGTLQDtYpw6e0g6eUBPndebLBN/3rwVB0Iz2ScVfoulgOBw2giB4KKW8LYRY/S+AAAwhRE0pVQ+C4KbneVdd111bZKgd/X/LsipF3VUZlmVVhBC1uKKgRqKm/j5ZCdHT8bgwDMMwDMMwZeU/5nfGP+Pj6LYAAAAASUVORK5CYII=) 50% 0 no-repeat;
+            background-size: contain;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .refresh .text {
+            margin-left: .3em;
+        }
+    </style>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+</head>
+<body>
+    <div id="wrapper" class="wrapper" style="transform: translate(0px, 0px) translateZ(0px);">
+        <div id="refresh" class="refresh">
+            <div class="animate">
+                <canvas id="loading" width="60" height="60"></canvas>
+                <em class="icon"></em>
+            </div>
+            <span class="text">下拉即可刷新...</span>
+        </div>
+        <ul class="list">
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+            <li><p>我想要下拉即可刷新</p></li>
+        </ul>
+    </div>
+    <script>
+        $(function() {
+
+    var wrapper = document.getElementById('wrapper');
+        var body = document.body;
+        var start, diff;
+        document.addEventListener('touchstart', function(event) {
+            if (event.targetTouches.length == 1) {
+                var touch = event.targetTouches[0];
+                start = touch.pageY;
+            }
+        }, false);
+
+        document.addEventListener('touchend', function(event) {
+            if(body.scrollTop === 0){
+                $(wrapper).animate({
+                    '-webkit-transform': 'translate(0, 0) translateZ(0)',
+                    'transform': 'translate(0, 0) translateZ(0)'
+                }, 600, 'cubic-bezier(0.1, 0.57, 0.1, 1)', function() {
+                    location.reload();
+                })
+            }
+        }, false);
+
+        document.addEventListener('touchmove', function(event) {
+            if(body.scrollTop > 0) {
+                diff = 0;
+                return false;
+            }
+            if(diff < 0) {
+                $(wrapper).css({
+                    '-webkit-transform': 'translate(0, 0) translateZ(0)',
+                    'transform': 'translate(0, 0) translateZ(0)'
+                });
+                return false;
+            }
+            if(body.scrollTop === 0){
+                if (event.targetTouches.length == 1) {
+                　　event.preventDefault();
+                    var touch = event.targetTouches[0];
+                    diff = touch.pageY - start;
+                    $(wrapper).css({
+                        '-webkit-transform': 'translate(0, ' + diff/3 + 'px) translateZ(0)',
+                        'transform': 'translate(0, ' + diff/3 + 'px) translateZ(0)'
+                    });
+                }
+            }
+        }, false);
+
+        var loading = document.getElementById('loading');
+        if(loading.getContext){  
+            var ctx = loading.getContext("2d");
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#ff5002";
+            var circle = {
+                x : 30,    //圆心的x轴坐标值
+                y : 30,    //圆心的y轴坐标值
+                r : 26      //圆的半径
+            };
+            //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+            ctx.arc(circle.x, circle.y, circle.r, Math.PI * 1.45, Math.PI * 1.55, true);    
+            ctx.stroke();
+        }
+    })
+
+    </script>
+</body>
+</html>
