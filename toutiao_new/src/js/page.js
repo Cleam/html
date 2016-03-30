@@ -23,14 +23,17 @@ $(function(){
 		positionUrl = 'http://position.dfshurufa.com/position/get',
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
 		$newsList = $('#J_news_list'),
+		$refresh = $('#J_refresh'),
 		tt_news_qid = '',
 		wsCache = new WebStorageCache();	// 本地存储对象
 
-	alert(7777);
 	function EastNews(){
-		alert('2222222');
-		this.newsType = 'toutiao';
-		this.userId = '';
+		this.newsType = 'toutiao';	// 新闻频道类别
+		this.userId = '';			// 用户ID
+		this.idx = 0;				// 链接索引
+		this.pgNum = 1;				// 页码
+		this.qid = getQueryString('qid');	// 渠道ID
+		this.pullUpFlag = true;		// 上拉加载数据(防止操作过快多次加载)
 		// 初始化
 		this.init();
 	}
@@ -40,23 +43,113 @@ $(function(){
 		 * 初始化
 		 */
 		init: function(){
-			var _this = this;
+			var scope = this;
+			// 获取、存储qid
+			if(scope.qid){
+				scope.setQid(scope.qid);
+			} else {
+				// 无qid的情况，删除cookie中qid
+				Cookies.remove('qid', { path: ''});
+			}
 
-			_this.load();
+			// 获取、存储uid
+			scope.userId = scope.getUid();
+			if(!scope.userId){
+				scope.setUid();
+			}
+			// 首次加载数据
+			scope.refreshData();
+			
+			// 页面滚动监听（当滑到底部时，加载下一页数据。）
+			$(window).on('scroll', function() {
+	            var scrollTop = getScrollTop(),
+	                loadingOT = $('#J_loading').offset().top,
+	                cHeight = getClientHeight();
+	            // 缓存浏览位置
+	            // setCachePos(scrollTop);
+	            
+                // 上拉加载数据(pullUpFlag标志 防止操作过快多次加载)
+	            if(scrollTop + cHeight >= loadingOT && scope.pullUpFlag){
+                    scope.pullUpLoadData();
+	            }
+	        });
+	        // 刷新数据
+	        $refresh.on('click', function(){
+	        	if($refresh.hasClass('active')){
+	        		return;
+	        	}
+	        	$refresh.addClass('active');
+        		setTimeout(function(){
+        			$refresh.removeClass('active');
+        		}, 700);
+	        	scope.refreshData();
+	        });
 		},
 
-		load: function(){
-			alert('aaaaaaaaaaa');
-			var _this = this;
+		setQid: function(qid){
+			if(qid){
+				Cookies.set('qid', qid, { expires: 365, path: '/' });
+			}
+		},
+
+		getQid: function(){
+			var qid = Cookies.get('qid');
+			return qid ? qid : '';
+		},
+
+		/**
+	     * 设置userId
+	     */
+	    setUid: function(){
+	    	var scope = this;
+	        $.ajax({
+	            type: 'POST',
+	            url: uidUrl,
+	            dataType: 'jsonp',
+	            data: {
+	                softtype: 'news',
+	                softname: 'eastday_wapnews',
+	            },
+	            jsonp: 'jsonpcallback',
+	            success: function(msg) {
+	                try {
+	                    scope.userId = msg.uid;
+	                    wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
+	                } catch(e) {
+	                    console.error(e);
+	                }
+	            },
+	            error: function(e){
+	            	console.error(e);
+	            }
+	        });
+	    },
+
+	    /**
+	     * 获取uid
+	     * @return {[type]} [description]
+	     */
+	    getUid: function(){
+	    	var uid = wsCache.get('user_id');
+	        return uid ? uid : '';
+	    },
+
+		/**
+		 * 刷新数据
+		 * @return {[type]} [description]
+		 */
+		refreshData: function(callback){
+			var scope = this;
+			wsCache.set('pgnum_' + scope.newsType, 1, { exp: 20 * 60});
 			$.ajax({
 	            url: refreshUrl,
 	            data: {
-	                type: _this.newsType,
+	                type: scope.newsType,
 	                endkey: '',
-	                domain: 'eastday',
-	                recgid: '', // 用户ID
+	                domain: 'eastday.com',
+	                recgid: scope.userId, // 用户ID
 	                picnewsnum: 1,
-	                qid: '',
+	                qid: scope.qid,
 	                readhistory: '',
 	                idx: 0,
 	                pgnum: 1
@@ -70,10 +163,60 @@ $(function(){
 	            },
 	            success: function(data){
 	            	console.log(data);
-	                _this.generateDom(data);
+	                scope.generateDom(data);
 	            },
 	            complete: function(){
 	                // $bgLoading.hide();
+	                callback && callback();
+	            }
+	        });
+		},
+
+		pullUpLoadData: function(){
+			var scope = this;
+			// if(newsType == 'toutiao' || newsType == 'weikandian'){
+	  //           readUrl = wsCache.get('read_url_all');
+	  //       } else {
+	  //           readUrl = wsCache.get('read_url_' + newsType);
+	  //       }
+	        // 页码（获取之后加一再存储）
+	        scope.pgNum = Number(wsCache.get('pgnum_' + scope.newsType));
+	        wsCache.set('pgnum_' + scope.newsType, ++scope.pgNum, { exp: 24 * 3600});
+	        // 获取链接索引
+	        scope.idx = Number(wsCache.get('idx_' + scope.newsType));
+	        if(!scope.idx){scope.idx = 0;}
+	        $.ajax({
+	            url: pullUpUrl,
+	            data: {
+	                type: scope.newsType,
+	                startkey: wsCache.get('rowkey_' + scope.newsType),
+	                newsnum: 20,
+	                isnew: 1,
+	                domain: 'eastday.com',
+	                readhistory: '',
+	                idx: scope.idx,
+	                recgid: scope.userId, // 用户ID
+	                pgnum: scope.pgNum,
+	                qid: scope.qid
+	            },
+	            dataType: 'jsonp',
+	            jsonp: "jsonpcallback",
+	            timeout: 8000,
+	            beforeSend: function(){
+	            	scope.pullUpFlag = false;
+	            	// $newsList.html('');
+	                // $loading.show();
+	            },
+	            success: function(data){
+	            	console.log(data);
+	                scope.generateDom(data);
+	            },
+	            error: function(jqXHR, textStatus){
+	                console.error(textStatus);
+	            },
+	            complete: function(){
+	            	scope.pullUpFlag = true;
+	                // $loading.hide();
 	            }
 	        });
 		},
@@ -84,15 +227,15 @@ $(function(){
 	     * @return {[type]}   [description]
 	     */
 	    generateDom: function(d){
-	    	var _this = this;
+	    	var scope = this;
 	        var data = d && d.data;
 	        if(!data || !data.length){
 	            // $loading.hide();
 	            return false;
 	        }
-	        // wsCache.set('rowkey_' + _this.newsType, getLastRowkey(data), {exp: 1200});
+	        // 存储加载的新闻中的最后一条新闻的rowkey
+	        wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
-	        if(!idx){idx = 0;}
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -123,53 +266,14 @@ $(function(){
 	                tagStr = '<i class="nuanwen">暖文</i>';
 	            }
 	            if(imgLen >= 3){
-	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:__getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {
-	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:__getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
+	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
-	        }
-	        // $.cookie('idx_' + newsType, idx + len, { expires: 0.334, path: '/' });
-	        // setCacheNews();
-	    },
-
-	    /**
-	     * 计算指定时间与当前时间的时间差 并转换成相应格式字符串
-	     * 如：xx分钟前，xx小时前，昨天 xx:xx，前天 xx:xx，xx-xx xx:xx
-	     * @return {[type]} [description]
-	     */
-	    __getSpecialTimeStr: function(str){
-	        var targetTime = strToTime(str);
-	        if(!targetTime){
-	            return false;
-	        }
-	        var currentTime = new Date().getTime();
-	        var tdoa = Number(currentTime - targetTime),
-	            dayTime = 24 * 60 * 60 * 1000,  // 1天
-	            hourTime = 60 * 60 * 1000,  // 1小时
-	            minuteTime = 60 * 1000; // 1分钟
-
-	        if(tdoa >= dayTime){ // 天
-	            var h = tdoa / dayTime;
-	            if(h > 2){
-	                return timeToString(tdoa);
-	            } else if(h > 1){
-	                return '前天';
-	            } else {
-	                return '昨天';
-	            }
-	        } else if(tdoa >= hourTime){ // 小时
-	            return Math.floor(tdoa / hourTime) + '小时前';
-	        } else if(tdoa >= minuteTime) {
-	            return Math.floor(tdoa / minuteTime) + '分钟前';
-	        } else {
-	            return '最新';
-	            // return Math.floor(tdoa / 1000) + '秒前';
 	        }
 	    }
 
-
 	};
-
 
 	new EastNews();
 

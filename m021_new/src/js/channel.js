@@ -31,7 +31,7 @@ var tt_news_qid = '';
 	/**
 	 * 获取url中参数的值
 	 * @param  {[type]} name 参数名
-	 * @return {[type]}      [description]
+	 * @return {[type]}      参数值
 	 */
 	function getQueryString(name) {  
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
