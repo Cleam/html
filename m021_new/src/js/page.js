@@ -229,7 +229,7 @@ $(function() {
             var $this = $(ele);
             $this.attr('href', $this.attr('href') + '?qid=' +tt_news_qid);
         });
-        readUrl = wsCache.get('all_read_url');
+        readUrl = wsCache.get('read_url_all');
         if(!readUrl){readUrl = '';}
         // 首次加载数据
         loadData('toutiao');
