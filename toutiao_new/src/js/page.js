@@ -17,22 +17,28 @@ $(function(){
 
 		美女点赞（点踩）：http://toutiao.eastday.com/pjson/zan
 	 */
-	var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
-		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',
-		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
-		positionUrl = 'http://position.dfshurufa.com/position/get',
-		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
+	var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',	// 刷新数据
+		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',	// 下拉加载
+		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',		// 上拉加载
+		positionUrl = 'http://position.dfshurufa.com/position/get',		// 获取用户位置
+		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',		// 获取uid
+		moodUrl = 'http://toutiao.eastday.com/pjson/zan',				// 美女点赞（点踩）
+		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志
+		statsUrl = 'http://ot.dftoutiao.com/apponline/online',			// 统计(stats = statistics)
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
+		$loation = $('#J_location'),
 		$newsList = $('#J_news_list'),
 		$refresh = $('#J_refresh'),
 		$newsTabsWrap = $('#J_top_menu'),
 		$newsTabs = $newsTabsWrap.children('a'),
 		topMenuLinkWidth = $newsTabs.eq(0).width(),
+		praiseTrampleFlag = true,
 		wsCache = new WebStorageCache();	// 本地存储对象
 
 	function EastNews(){
-		this.newsType = wsCache.get('current_newstype') ? wsCache.get('current_newstype') : 'toutiao';	// 新闻频道类别
+		var currentNewsType = wsCache.get('current_newstype');
+		this.newsType = currentNewsType ? currentNewsType : 'toutiao';	// 新闻频道类别
 		this.readUrl = '';
 		this.userId = '';			// 用户ID
 		this.idx = 0;				// 链接索引
@@ -80,7 +86,6 @@ $(function(){
 	        /* 删除当前类别记录的位置信息 */
 	        scope.clearPosition(scope.newsType);
 
-
 			/* 还原到上次浏览的类别 */
 			$newsTabs.each(function(){
 				var $this = $(this);
@@ -90,8 +95,18 @@ $(function(){
 				}
 			});
 
+			/* 设置当前位置信息 */
+	        var loc = wsCache.get('location');
+	        if(loc){
+	            scope.updateDomLocation(loc);
+	        } else {
+	            scope.location();
+	        }
+
 			/* 首次加载数据 */
-			scope.refreshData();
+			scope.refreshData(function(){
+				scope.highlightPraiseTrample();
+			});
 
 			/* 频道类别（菜单）点击事件 */
 			$newsTabs.on('click', function(){
@@ -109,7 +124,9 @@ $(function(){
 				if(cacheNews){
 					$newsList.html(cacheNews);
 				} else {
-					scope.refreshData();
+					scope.refreshData(function(){
+						scope.highlightPraiseTrample();
+					});
 				}
 				// 页面滚到记录的位置处
 				if(cachePos){
@@ -145,7 +162,9 @@ $(function(){
         		setTimeout(function(){
         			$refresh.removeClass('active');
         		}, 700);
-	        	scope.refreshData();
+	        	scope.refreshData(function(){
+	        		scope.highlightPraiseTrample();
+	        	});
 	        });
 
 	        /* 记录阅读过的新闻 */
@@ -155,7 +174,192 @@ $(function(){
 	            url = url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html'));
 	            scope.cacheReadUrl(url, $this.data('type'), $this.data('subtype'));
 	        });
+
+	        /**
+	         * 赞/踩点击事件
+	         * @param  {Zepto Object} $target 当前dom对象
+	         * @param  {String} colname 参数
+	         * @param  {Number} ctg     类别（1：赞，-1：踩）
+	         * @return {[type]}         [description]
+	         */
+	        function ptClick($target, colname, ctg){
+	        	var rk = $target.data('rowkey'),
+		        	st = scope.getPraiseTrampleStatus(rk);
+	        	// 已经赞过、踩过就不允许再操作了
+	        	if(st === 1){
+	        		alert('您已经赞过了！');
+	        		return;
+	        	} else if(st === -1){
+	        		alert('您已经踩过了！');
+	        		return;
+	        	}
+	        	// 防止连点
+	        	if(!praiseTrampleFlag){
+	        		return;
+	        	}
+	        	praiseTrampleFlag = false;
+	        	$target.addClass('active').text(Number($target.text()) + 1);
+	        	$.ajax({
+	        		url: moodUrl,
+	        		dataType : 'jsonp',
+	        		data : {
+						"colname" : colname,	// 'z0000'、'zd0000'
+						"rowkey" : rk,
+						"praisecnt" : 1,
+					},
+					jsonp : 'jsonpcallback',
+					success : function(msg) {
+			        	scope.cachePraiseTrampleRowkey(ctg, rk);
+			        	praiseTrampleFlag = true;
+					},
+					error: function(e){
+						console.error(e);
+					}
+	        	});
+	        }
+
+	        /* 赞 */
+	        $newsList.on('click', '.J-good', function(){
+	        	ptClick($(this), 'z0000', 1);
+	        });
+
+	        /* 踩 */
+	        $newsList.on('click', '.J-bad', function(){
+	        	ptClick($(this), 'zd0000', -1);
+	        });
 		},
+
+		/**
+		 * 将已经点过赞、点过踩的图标高亮显示出来
+		 * @return {[type]} [description]
+		 */
+		highlightPraiseTrample: function(){
+			var scope = this;
+	        if(scope.newsType == 'meinv'){
+	        	$newsList.find('.J-good').each(function(){
+	        		var $this = $(this);
+	        		if(scope.getPraiseTrampleStatus($this.data('rowkey')) === 1){
+	        			$this.addClass('active');
+	        		}
+	        	});
+	        	$newsList.find('.J-bad').each(function(){
+	        		var $this = $(this);
+	        		if(scope.getPraiseTrampleStatus($this.data('rowkey')) === -1){
+	        			$this.addClass('active');
+	        		}
+	        	});
+	        }
+		},
+
+		/**
+		 * 判断赞、踩状态
+		 * @param  {String} rk rowkey
+		 * @return {Number}    1：赞过；-1：踩过；0：未赞未踩过。
+		 */
+		getPraiseTrampleStatus: function(rk){
+			var praiseRk = wsCache.get('praise_rowkey'),
+				trampleRk = wsCache.get('trample_rowkey');
+			if(praiseRk && praiseRk.indexOf(rk) != -1) {
+				return 1;
+			} else if(trampleRk && trampleRk.indexOf(rk) != -1){
+				return -1;
+			}
+			return 0;
+		},
+
+		/**
+		 * 缓存赞、踩记录
+		 * @param  {Number} ctg 必需 -  赞：1； 踩：-1；
+		 * @param  {String} rk 必需 -  需要缓存的rowkey
+		 * @return {[type]}     [description]
+		 */
+		cachePraiseTrampleRowkey: function(ctg, rk){
+			var rks = wsCache.get('praise_trample_rowkey'),
+				praiseRk = wsCache.get('praise_rowkey'),
+				trampleRk = wsCache.get('trample_rowkey');
+			if(rks){
+				rks += (',' + rk);
+			} else {
+				rks = rk;
+			}
+			wsCache.set('praise_trample_rowkey', rks, {exp: 365 * 24 * 3600});
+			if(ctg === 1){
+				if(praiseRk){
+					praiseRk += (',' + rk);
+				} else {
+					praiseRk = rk;
+				}
+				wsCache.set('praise_rowkey', praiseRk, {exp: 365 * 24 * 3600});
+			} else {
+				if(trampleRk){
+					trampleRk += (',' + rk);
+				} else {
+					trampleRk = rk;
+				}
+				wsCache.set('trample_rowkey', trampleRk, {exp: 365 * 24 * 3600});
+			}
+		},
+
+		/**
+	     * 获取地方站的接口数据
+	     * @return {[type]} [description]
+	     */
+	    location: function(){
+	    	var scope = this;
+	        $.ajax({
+	            type : 'POST',
+	            url : positionUrl,
+	            dataType : 'jsonp',
+	            jsonp : 'jsonpcallback',
+	            success: function(res){
+	            	try {
+		                var pos = res.position,
+		                    py = scope.getCityPinyin(pos.provname),
+		                    loc = null;
+		                if(py){
+		                    loc = {"prov_id": pos.pro_id,"prov_py": py,"prov_name": pos.provname};
+		                    scope.updateDomLocation(loc);
+		                    // 缓存位置信息
+		                    wsCache.set('location', loc, {exp: 30 * 24 * 3600});
+		                } else {
+		                	$newsTabs.eq(3).remove();
+		                }
+		            } catch(e) {
+		                console.error(e);
+		                $newsTabs.eq(3).remove();
+		            }
+	            },
+	            error: function(jqXHR,textStatus){
+		            console.error(textStatus);
+		            $newsTabs.eq(3).remove();
+		        }
+	        });
+	    },
+
+		/**
+	     * 更新位置信息
+	     * @param  {[type]} loc [description]
+	     * @return {[type]}     [description]
+	     */
+	    updateDomLocation: function(loc){
+	        $loation.attr('data-type', loc.prov_py);
+	        $loation.html(loc.prov_name);
+	    },
+
+		/**
+	     * 通过城市中文名获取拼音
+	     * @param  {[type]} city 中文名
+	     * @return {[type]}      拼音
+	     */
+	    getCityPinyin: function(city){
+	        switch(city){
+	            case '上海': return 'shanghai'; break;
+	            case '北京': return 'beijing'; break;
+	            case '河南': return 'henan'; break;
+	            case '广东': return 'guangdong'; break;
+	            default: return null;
+	        }
+	    },
 
 		/**
 	     * 缓存已经阅读的url编号
@@ -165,39 +369,39 @@ $(function(){
 	        // 判断是否存储过
 	        if(!existReadUrl(urlNum) && newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
 	            // read_url_all
-	            var aru = wsCache.get('read_url_all');
-	            if(aru){
-	                aru = aru.split(',');
-	                while(aru.length >= 5){aru.shift();}
-	                aru.push(urlNum);
-	                scope.readUrl = aru.join(',');
+	            var rua = wsCache.get('read_url_all');
+	            if(rua){
+	                rua = rua.split(',');
+	                while(rua.length >= 5){rua.shift();}
+	                rua.push(urlNum);
+	                scope.readUrl = rua.join(',');
 	            } else {
 	                scope.readUrl = urlNum;
 	            }
 	            wsCache.set('read_url_all', scope.readUrl, {exp: 20 * 60});
-	            // type_read_url
-	            var tru = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
-	            if(tru){
-	                tru = tru.split(',');
-	                while(tru.length >= 3){tru.shift();}
-	                tru.push(urlNum);
-	                tru = tru.join(',');
+	            // read_url_type
+	            var rut = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
+	            if(rut){
+	                rut = rut.split(',');
+	                while(rut.length >= 3){rut.shift();}
+	                rut.push(urlNum);
+	                rut = rut.join(',');
 	            } else {
-	                tru = urlNum;
+	                rut = urlNum;
 	            }
-	            wsCache.set('read_url_' + type, tru, {exp: 20 * 60});
-	            // subtype_read_url
+	            wsCache.set('read_url_' + type, rut, {exp: 20 * 60});
+	            // read_url_subtype
 	            if(subtype){
-	                var stru = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
-	                if(stru){
-	                    stru = stru.split(',');
-	                    while(stru.length >= 3){stru.shift();}
-	                    stru.push(urlNum);
-	                    stru = stru.join(',');
+	                var rust = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
+	                if(rust){
+	                    rust = rust.split(',');
+	                    while(rust.length >= 3){rust.shift();}
+	                    rust.push(urlNum);
+	                    rust = rust.join(',');
 	                } else {
-	                    stru = urlNum;
+	                    rust = urlNum;
 	                }
-	                wsCache.set('read_url_' + subtype, stru, {exp: 20 * 60});
+	                wsCache.set('read_url_' + subtype, rust, {exp: 20 * 60});
 	            }
 	        }
 	    },
@@ -301,8 +505,8 @@ $(function(){
 	                endkey: '',
 	                domain: 'eastday.com',
 	                recgid: scope.userId, // 用户ID
-	                picnewsnum: 1,
 	                qid: scope.qid,
+	                picnewsnum : 1,
 	                readhistory: '',
 	                idx: 0,
 	                pgnum: 1
@@ -380,15 +584,13 @@ $(function(){
 	     * @return {[type]}   [description]
 	     */
 	    generateDom: function(d){
+	    	console.log('data: ', d);
 	    	var scope = this;
 	        var data = d && d.data;
 	        if(!data || !data.length){
 	            // $loading.hide();
 	            return false;
 	        }
-	    	if(scope.newsType == 'meinv'){
-	    		console.log('meinv: ', d);
-	    	}
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
@@ -401,9 +603,11 @@ $(function(){
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
 	                hotnews = item.hotnews,
+	                ispicnews = item.ispicnews,
 	                type = item.type,
 	                subtype = item.subtype,
 	                imgLen = imgArr.length,
+	                rowkey = item.rowkey,
 	                hot = Number(item.hotnews),     // 热门
 	                video = Number(item.isvideo),   // 视频
 	                rec = Number(item.isrecom),     // 推荐
@@ -425,12 +629,19 @@ $(function(){
 	            } else if(nuanwen) {
 	                tagStr = '<i class="nuanwen">暖文</i>';
 	            }
-	            if(scope.newsType == 'meinv'){ // 美女特殊处理
-	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + scope.qid + '&idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + '图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good">' + praisecnt + '</span><span class="J-bad bad">' + tramplecnt + '</span></div></section>');
-	            } else if(imgLen >= 3){
-	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + scope.qid + '&idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            if(scope.newsType == 'meinv'){
+	            	url += '?fr=meinv&#&gid=1&pid=1';
 	            } else {
-	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + scope.qid + '&idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
+	            	url += '?idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + scope.newsType;
+	            }
+	            if(scope.newsType == 'meinv'){ // 美女特殊处理
+	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
+	            } else if(ispicnews == '1'){	// 大图模式
+	            	$newsList.append('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            } else if(imgLen >= 3){
+	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            } else {
+	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
 	        }
 	        // 记录idx
