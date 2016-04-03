@@ -130,6 +130,18 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 }
 /* loading动画 - end */
 
+.pulldown-loading{position: absolute; top: 1rem; width: 1.28rem; left: 50%; margin-left: -0.64rem; height: 0.4rem; opacity: 0; transform: scale(0.5); -webkit-transform: scale(0.5);}
+.pulldown-loading .spinner {margin: 0 auto; width: 1.5rem; text-align: center; }
+.pulldown-loading .spinner > div {width: 0.3rem; height: 0.3rem; background-color: #009A61; border-radius: 100%; display: inline-block;}
+.pulldown-loading.active .spinner > div {-webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+.pulldown-loading.active .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
+.pulldown-loading.active .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;}
+
+/* .pulldown-loading-2{position: absolute; top: 2rem; width: 1.28rem; left: 50%; margin-left: -0.64rem;}
+.pulldown-loading-2 .spinner {margin: 0 auto; width: 1.5rem; text-align: center; }
+.pulldown-loading-2 .spinner > div {width: 0.3rem; height: 0.3rem; background-color: #009A61; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+.pulldown-loading-2 .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
+.pulldown-loading-2 .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;} */
 
 
 

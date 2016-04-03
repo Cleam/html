@@ -34,6 +34,12 @@ $(function(){
 		$newsTabs = $newsTabsWrap.children('a'),
 		topMenuLinkWidth = $newsTabs.eq(0).width(),
 		praiseTrampleFlag = true,
+		startPos = 0,				// 滑动开始位置
+		touchDistance = 0,			// 滑动距离
+		touchDistanceFlag = true,	// 滑动方向判断标志
+		isSwipeDown = false,		// 确定向下滑
+		isTop = false,				// 顶部判断标志
+		$pullDownLoading = $('<div id="J_pulldown_loading" class="pulldown-loading"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>'),	// 下拉动画
 		wsCache = new WebStorageCache();	// 本地存储对象
 
 	function EastNews(){
@@ -107,6 +113,9 @@ $(function(){
 			scope.refreshData(function(){
 				scope.highlightPraiseTrample();
 			});
+
+			/* 注册下拉事件 */
+			scope.pullDown();
 
 			/* 频道类别（菜单）点击事件 */
 			$newsTabs.on('click', function(){
@@ -227,6 +236,88 @@ $(function(){
 	        $newsList.on('click', '.J-bad', function(){
 	        	ptClick($(this), 'zd0000', -1);
 	        });
+		},
+
+		/**
+		 * 注册下拉事件
+		 * @return {[type]}            [description]
+		 */
+		pullDown: function(){
+			$newsList.on('touchstart', function(e){
+				startPos = e.touches[0].pageY;
+				if($('body').scrollTop() <= 0){
+					isTop = true;
+				} else {
+					isTop = false;
+				}
+			});
+			$newsList.on('touchend', function(){
+				if(touchDistance === 220){
+					$pullDownLoading.addClass('active');
+					scope.pullDownLoadData();
+				} else {
+					$pullDownLoading.animate({
+						opacity: 0,
+						scale: '0.5',
+						translateY: '0'
+					});
+				}
+				touchDistanceFlag = true;
+				isSwipeDown = false;
+			});
+			$newsList.on('touchmove', function(e){
+				var py = e.touches[0].pageY;
+				touchDistance = py - startPos;
+				// 根据用户开始的滑动手势判断用户是向下滑还是向上滑
+				if(touchDistanceFlag && touchDistance > 0){
+					isSwipeDown = true;
+					// 根据刚开始的滑动值进行判断，后面用户无论怎么滑都不会触发浏览器滚动。
+					touchDistanceFlag = false;
+				}
+				if(isTop && isSwipeDown){
+					$pullDownLoading.appendTo('body');
+					// 下拉加载
+					if(touchDistance > 220){
+						touchDistance = 220;
+					}
+					$pullDownLoading.css({
+						opacity: touchDistance / 220,
+						transform: 'scale(' + (touchDistance / 440 + 0.5) + ') translateY(' + (touchDistance / 2) + 'px)'
+					});
+					e.preventDefault();
+				}
+			});
+		},
+
+		/**
+		 * 下拉加载数据
+		 * @param  {Function} callback 回调方法
+		 * @return {[type]}            [description]
+		 */
+		pullDownLoadData: function(callback){
+			$.ajax({
+				url: pullDownUrl,
+	            data: {
+	                
+	            },
+	            dataType: 'jsonp',
+	            jsonp: "jsonpcallback",
+	            timeout: 8000,
+	            beforeSend: function(){
+
+	            },
+	            success: function(data){
+	            	// console.log(data);
+	                // scope.generateDom(data);
+	            },
+	            complete: function(){
+	                callback && callback();
+	            }
+
+			});
+			
+
+			// $pullDownLoading.remove();
 		},
 
 		/**
