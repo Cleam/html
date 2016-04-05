@@ -107,7 +107,7 @@ function startShowWeather(){
 					'<p class="time"><em>今天</em>' + nowStr + '</p>' +
 					'<p class="temp">' + temp + '</p>' +
 					'<p class="weather">' + weather + '</p>' +
-					'<p class="aqi">' + aqi + ' 空气质量' + aqiInfo + '</p>' +
+					(aqi > 0 ? '<p class="aqi">' + aqi + ' 空气质量' + aqiInfo + '</p>' : '') +
 				'</div>' +
 			'</div>');
 		},
@@ -154,7 +154,11 @@ function startShowWeather(){
 				pm10 = Math.round(d.pm10),	
 				o3 = Math.round(d.o3),
 				no2 = Math.round(d.no2),
-				$current = $('#J_current');
+				$current = $('#J_current'),
+				pm25Str = pm25 ? '<span class="blk">PM2.5：' + pm25 + '</span>' : '',
+				pm10Str = pm10 ? '<span class="blk">PM10：' + pm10 + '</span>' : '',
+				o3Str = o3 ? '<span class="blk">O<sub>3</sub>：' + o3 + '</span>' : '',
+				no2Str = no2 ? '<span class="blk">NO<sub>2</sub>：' + no2 + '</span>' : '';
 			$current.append('<p class="time">' + curTime + '</p>' +
 				'<ul>' +
 					'<li>' +
@@ -162,11 +166,11 @@ function startShowWeather(){
 						'<p class="txt1">' + weather + ' ' + temp + '</p>' +
 						'<p class="txt2"><span class="wet"><i></i>湿度 ' + humidity + '</span><span class="wind">' + windDir + ' ' + windStrength + '</span></p>' +
 					'</li>' +
-					'<li>' +
+					(aqi > 0 ? '<li>' +
 						'<div class="img2"><img src="' + aqiImg + '" alt="' + aqiInfo + '"></div>' +
 						'<p class="txt1">空气指数：' + aqi + ' ' + aqiInfo + '</p>' +
-						'<p class="txt2"><span class="blk">PM2.5：' + pm25 + '</span><span class="blk">PM10：' + pm10 + '</span><span class="blk">O<sub>3</sub>：' + o3 + '</span><span class="blk">NO<sub>2</sub>：' + no2 + '</span></p>' +
-					'</li>' +
+						'<p class="txt2">' + pm25Str + pm10Str + o3Str + no2Str + '</p>' +
+					'</li>' : '') +
 				'</ul>');
 		},
 		/**
