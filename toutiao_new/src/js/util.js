@@ -251,3 +251,26 @@ function getOsType() {
     }
     return os_type;
 }
+
+/**
+ * 获取字符串字节数
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description]
+ */
+function getBytes(str){
+    var byteLen=0,len=str.length;
+    if(str){
+        for(var i=0; i<len; i++){
+            if(str.charCodeAt(i)>255){
+                byteLen += 2;
+            }
+            else{
+                byteLen++;
+            }
+        }
+        return byteLen;
+    }
+    else{
+        return 0;
+    }
+}

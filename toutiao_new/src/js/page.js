@@ -40,7 +40,8 @@ $(function(){
 		isSwipeDown = false,		// 确定向下滑
 		isTop = false,				// 顶部判断标志
 		$pullDownLoading = null,	// 下拉动画
-		TOUCH_DISTANCE = 390,		// 规定滑动加载距离
+		TOUCH_DISTANCE = 200,		// 规定滑动加载距离
+		pullDownLoadDataFlag = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache();	// 本地存储对象
 
 	function EastNews(){
@@ -249,24 +250,40 @@ $(function(){
 		pullDown: function(){
 			var scope = this;
 			$newsList.on('touchstart', function(e){
+				console.log($pullDownLoading);
+				// 防止重复快速下拉
+				clearTimeout(pullDownLoadDataFlag);
 				startPos = e.touches[0].pageY;
 				if($('body').scrollTop() <= 0){
 					isTop = true;
 				} else {
 					isTop = false;
 				}
-				$pullDownLoading = $('<div id="J_pulldown_loading" class="pulldown-loading"><div class="spinner"><div class="bounce bounce1"></div> <div class="bounce bounce2"></div> <div class="bounce bounce3"></div></div></div>');
+				if(!$pullDownLoading){
+					$pullDownLoading = $('<div class="pulldown-loading"><div class="spinner"><div class="bounce bounce1"></div> <div class="bounce bounce2"></div> <div class="bounce bounce3"></div></div></div>');
+				} else {
+					$pullDownLoading.removeClass('active').css({
+						'display': 'block',
+						'opacity': 0,
+						'transform': 'scale(0.2) translateY(0px)',
+						'-webkit-transform': 'scale(0.2) translateY(0px)'
+					});
+				}
 			});
 			$newsList.on('touchend', function(){
+				// 达到下拉阈值 启动数据加载
 				if(touchDistance === TOUCH_DISTANCE){
 					$pullDownLoading && $pullDownLoading.addClass('active');
-					scope.pullDownLoadData();
-				} else {
+					clearTimeout(pullDownLoadDataFlag);
+					pullDownLoadDataFlag = setTimeout(function(){
+						scope.pullDownLoadData();
+					}, 400);
+				} else {	
 					$pullDownLoading && $pullDownLoading.animate({
-						opacity: 0,
-						scale: '0.2',
-						translateY: '0'
-					}, 'normal', function(){
+						'opacity': 0,
+						'scale': '0.2',
+						'translateY': '0'
+					}, 'fast', function(){
 						$pullDownLoading.remove();
 					});
 				}
@@ -283,17 +300,21 @@ $(function(){
 					touchDistanceFlag = false;
 				}
 				if(isTop && isSwipeDown){
-					$pullDownLoading.appendTo('body');
+					if($('body').find('.pulldown-loading').length === 0){
+						$pullDownLoading.appendTo('body');
+					}
 					// 下拉加载
 					if(touchDistance >= TOUCH_DISTANCE){
-						$pullDownLoading.find('.bounce').css('backgroundColor', '#009A61');
+						$pullDownLoading.find('.bounce').css('backgroundColor', '#2a90d7');
+						// $pullDownLoading.find('.bounce').css('backgroundColor', '#009A61');
 						touchDistance = TOUCH_DISTANCE;
 					} else {
 						$pullDownLoading.find('.bounce').css('backgroundColor', '#d43d3d');
 					}
 					$pullDownLoading.css({
-						opacity: touchDistance / TOUCH_DISTANCE,
-						transform: 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 3) + 'px)'
+						'opacity': touchDistance / TOUCH_DISTANCE,
+						'transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)',
+						'-webkit-transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)'
 					});
 					e.preventDefault();
 				}
@@ -307,6 +328,12 @@ $(function(){
 		 */
 		pullDownLoadData: function(callback){
 			var scope = this;
+			// 获取阅读记录
+			if(scope.newsType == 'toutiao' || scope.newsType == 'weikandian'){
+	            scope.readUrl = wsCache.get('read_url_all');
+	        } else {
+	            scope.readUrl = wsCache.get('read_url_' + scope.newsType);
+	        }
 			// 页码（获取之后加一再存储）
 	        scope.pulldown_pgNum = Number(wsCache.get('pulldown_pgnum_' + scope.newsType));
 	        wsCache.set('pulldown_pgnum_' + scope.newsType, --scope.pulldown_pgNum, { exp: 24 * 3600});
@@ -358,17 +385,13 @@ $(function(){
 	            // $loading.hide();
 	            return false;
 	        }
-	        /*if(scope.pulldown_num > 10){
-	        	scope.pulldown_num = 0;
-	        	$newsList.
-	        }*/
 	        // 计数
 	        scope.pulldown_num++;
 	        wsCache.set('pulldown_startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        wsCache.set('pulldown_lastkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
 	        var len = data.length;
-	        // 反转数组
-	        data = data.reverse();
+	        // 反转数组(reverse方法会改变原来的数组，而不会创建新的数组。)
+	        data.reverse();
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -419,14 +442,23 @@ $(function(){
 	            	$newsList.prepend('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
 	        }
+	        // 提示推荐新闻条数
 	        var $rn = $('<p id="J_recommend_news" class="recommend-news">为您推荐<span>' + len + '</span>条新闻</p>');
 	        $rn.appendTo('body');
 	        setTimeout(function(){
-	        	$rn.fadeOut('normal', function(){
+	        	$rn.fadeOut('slow', function(){
 	        		$rn.remove();
 	        	});
 	        }, 600);
-
+	        // 如果下拉加载数据次数超过20次，清空信息流末尾新闻数据。
+	        if(scope.pulldown_num >= 20){
+	        	scope.pulldown_num = 0;
+	        	var $newsListChildrens = $newsList.children(),
+	        		len = $newsListChildrens.length;
+	        	for (var i = len - 1; i >= len - 20; i--) {
+	        		$newsListChildrens[i].remove();
+	        	}
+	        }
 			// 记录pulldown_idx
 	        wsCache.set('pulldown_idx_' + scope.newsType, scope.pulldown_idx - len, {exp: 20 * 60});
 	        // 缓存当前类别加载的新闻（缓存20分钟）
@@ -570,8 +602,9 @@ $(function(){
 	     * @param {[type]} urlNum url编号
 	     */
 	    cacheReadUrl: function(urlNum, type, subtype){
+	    	var scope = this;
 	        // 判断是否存储过
-	        if(!existReadUrl(urlNum) && newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
+	        if(!scope.existReadUrl(urlNum) && newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
 	            // read_url_all
 	            var rua = wsCache.get('read_url_all');
 	            if(rua){
