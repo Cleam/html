@@ -132,7 +132,7 @@ $(function(){
 				scope.scrollTo($this);
 				// 存储上一个新闻类别和当前新闻类别
 				wsCache.set('prev_newstype', scope.newsType, { exp: 20 * 60});
-				wsCache.set('current_newstype', type, { exp: 20 * 60});
+				wsCache.set('current_newstype', type, {exp: 20 * 60});
 				// 加载当前频道类别新闻数据
 				scope.newsType = type;
 				if(cacheNews){
@@ -543,7 +543,6 @@ $(function(){
 	    location: function(){
 	    	var scope = this;
 	        $.ajax({
-	            type : 'POST',
 	            url : positionUrl,
 	            dataType : 'jsonp',
 	            jsonp : 'jsonpcallback',
@@ -558,16 +557,19 @@ $(function(){
 		                    // 缓存位置信息
 		                    wsCache.set('location', loc, {exp: 30 * 24 * 3600});
 		                } else {
-		                	$newsTabs.eq(3).remove();
+		                	// $newsTabs.eq(3).remove();
+		                	$loation.remove();
 		                }
 		            } catch(e) {
 		                console.error(e);
-		                $newsTabs.eq(3).remove();
+		                // $newsTabs.eq(3).remove();
+		                $loation.remove();
 		            }
 	            },
 	            error: function(jqXHR,textStatus){
 		            console.error(textStatus);
-		            $newsTabs.eq(3).remove();
+		            // $newsTabs.eq(3).remove();
+		            $loation.remove();
 		        }
 	        });
 	    },
@@ -697,7 +699,6 @@ $(function(){
 	    setUid: function(){
 	    	var scope = this;
 	        $.ajax({
-	            type: 'POST',
 	            url: uidUrl,
 	            dataType: 'jsonp',
 	            data: {
@@ -708,7 +709,8 @@ $(function(){
 	            success: function(msg) {
 	                try {
 	                    scope.userId = msg.uid;
-	                    wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
+	                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/' });
+	                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
 	                } catch(e) {
 	                    console.error(e);
 	                }
@@ -724,7 +726,8 @@ $(function(){
 	     * @return {[type]} [description]
 	     */
 	    getUid: function(){
-	    	var uid = wsCache.get('user_id');
+	    	var uid = Cookies.get('user_id');
+	    	// var uid = wsCache.get('user_id');
 	        return uid ? uid : '';
 	    },
 
@@ -875,6 +878,7 @@ $(function(){
 	            if(scope.newsType == 'meinv'){ // 美女特殊处理
 	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else if(ispicnews == '1'){	// 大图模式
+	            	imgArr = item.lbimg;
 	            	$newsList.append('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
 	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
