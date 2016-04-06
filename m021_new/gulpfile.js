@@ -31,7 +31,8 @@ gulp.task('html', function() {
 
 // 自动添加css前缀和压缩
 gulp.task('css', function () {
-    var cssSrc = './src/css/*.css',
+    var cssSrc = ['./src/css/base.css', './src/css/swiper-3.3.0.min.css', './src/css/page.css'],
+        // cssSrc = './src/css/*.css',
         cssDst = './dist/css';
     return gulp.src(cssSrc)
     	.pipe(autoprefixer())
@@ -49,7 +50,16 @@ gulp.task('css', function () {
 
 // js代码校验、合并和压缩
 gulp.task('js', function() {
-    var jsSrc = './src/js/*.js',
+    var cssSrc = [
+            './src/js/channel.js', 
+            './src/js/jquery-2.2.1.min.js', 
+            './src/js/jquery.cookie.min.js',
+            './src/js/swiper-3.3.0.jquery.min.js',
+            './src/js/fastclick.min.js',
+            './src/js/web-storage-cache.min.js',
+            './src/js/page.js'
+        ],
+        //jsSrc = './src/js/*.js',
         jsDst = './dist/js';
     return gulp.src(jsSrc)
         // .pipe(jshint('.jshintrc'))

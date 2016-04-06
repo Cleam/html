@@ -60,6 +60,42 @@ function bdSearch(json){
 
 $(function() {
     FastClick.attach(document.body);
+
+    var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
+        pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
+        uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
+        tjUrl = 'http://021tj.dfshurufa.com/m021log/record',
+        tjPvUrl = 'http://021tj.dfshurufa.com/m021log/active',
+        browserType = getBrowserType(),
+        osType = getOsType(),
+        rowkey = '',   // 存储最后一条新闻的rowkey
+        userId = getUid(),   // 获取用户id
+        newsType = 'toutiao',
+        $loation = $('#J_location'),
+        $ttNews = $('#J_tt_news'),
+        $ttNewsList = $('#J_ttnews_list'),
+        $ttNewsNav = $ttNews.children('.tt-news-nav'),
+        $ttNewsNavList = $('#J_ttnews_nav_list'),
+        $ttNewsTabs = $ttNewsNavList.find('.ttnews-tabs'),
+        $loading = $('#J_loading'),
+        tnnHeight = $ttNewsNav.outerHeight(),
+        tnnTop = $ttNews.offset().top - tnnHeight,
+        newsNavFlag = true,
+        scrollTimer = null,
+        $bgLoading = $('#J_bg_loading'),
+        wsCache = new WebStorageCache(),
+        idx = $.cookie('idx_' + newsType, Number);  // 参数
+        pgNum = 1,  // 参数
+        newsTypeArr = [],   // 保存新闻类别信息
+        // newsTypeArr = ['toutiao', 'weikandian', 'shehui', 'shanghai', 'xiaohua', 'yule', 'guonei', 'jiankang', 'guoji', 'renwen', 'hulianwang', 'junshi', 'nba', 'keji', 'tiyu', 'shishang', 'caijing', 'youxi', 'qiche', 'kexue', 'jianshen'],
+        readUrl = '',
+        // 新闻导航左右滑动功能实现
+        ttNewsNavSwiper = new Swiper('#J_ttnews_nav_container', {
+            freeMode : true,
+            speed: 500,
+            slidesPerView: 5.5
+        });
+
     /**
      * 输入框清空功能实现
      */
@@ -189,39 +225,6 @@ $(function() {
         });
     })();
 
-    var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
-        pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
-        uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
-        tjUrl = 'http://021tj.dfshurufa.com/m021log/record',
-        browserType = getBrowserType(),
-        osType = getOsType(),
-        rowkey = '',   // 存储最后一条新闻的rowkey
-        userId = getUid(),   // 获取用户id
-        newsType = 'toutiao',
-        $loation = $('#J_location'),
-        $ttNews = $('#J_tt_news'),
-        $ttNewsList = $('#J_ttnews_list'),
-        $ttNewsNav = $ttNews.children('.tt-news-nav'),
-        $ttNewsNavList = $('#J_ttnews_nav_list'),
-        $ttNewsTabs = $ttNewsNavList.find('.ttnews-tabs'),
-        $loading = $('#J_loading'),
-        tnnHeight = $ttNewsNav.outerHeight(),
-        tnnTop = $ttNews.offset().top - tnnHeight,
-        newsNavFlag = true,
-        scrollTimer = null,
-        $bgLoading = $('#J_bg_loading'),
-        wsCache = new WebStorageCache(),
-        idx = $.cookie('idx_' + newsType, Number);  // 参数
-        pgNum = 1,  // 参数
-        newsTypeArr = [],   // 保存新闻类别信息
-        // newsTypeArr = ['toutiao', 'weikandian', 'shehui', 'shanghai', 'xiaohua', 'yule', 'guonei', 'jiankang', 'guoji', 'renwen', 'hulianwang', 'junshi', 'nba', 'keji', 'tiyu', 'shishang', 'caijing', 'youxi', 'qiche', 'kexue', 'jianshen'],
-        readUrl = '',
-        // 新闻导航左右滑动功能实现
-        ttNewsNavSwiper = new Swiper('#J_ttnews_nav_container', {
-            freeMode : true,
-            speed: 500,
-            slidesPerView: 5.5
-        });
     init();
 
     function init(){
@@ -334,9 +337,27 @@ $(function() {
             setCacheReadUrl(url, $this.data('type'), $this.data('subtype'));
         });
 
+        // 统计PV
+        recordPv();
+
         // 添加统计
         tongJi();
 
+    }
+
+    /**
+     * 首次访问记录日志
+     * @return {[type]} [description]
+     */
+    function recordPv(){
+        $.ajax({
+            url: tjPvUrl,
+            data: {param: tt_news_qid + '\t' + userId + '\t' + osType + '\t' + browserType},
+            dataType : 'jsonp',
+            jsonp : 'jsonpcallback',
+            success: function(d){},
+            error: function(jh, st){console.error(st);}
+        });
     }
 
     /**
@@ -586,7 +607,7 @@ $(function() {
                 readUrl = urlNum;
             }
             wsCache.set('read_url_all', readUrl, {exp: 2880});
-            // type_read_url
+            // read_url_type
             var tru = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
             if(tru){
                 tru = tru.split(',');
@@ -597,7 +618,7 @@ $(function() {
                 tru = urlNum;
             }
             wsCache.set('read_url_' + type, tru, {exp: 2880});
-            // subtype_read_url
+            // read_url_subtype
             if(subtype){
                 var stru = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
                 if(stru){
