@@ -50,7 +50,7 @@ gulp.task('css', function () {
 
 // js代码校验、合并和压缩
 gulp.task('js', function() {
-    var cssSrc = [
+    var jsSrc = [
             './src/js/channel.js', 
             './src/js/jquery-2.2.1.min.js', 
             './src/js/jquery.cookie.min.js',

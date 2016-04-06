@@ -238,7 +238,14 @@ $(function() {
         loadData('toutiao');
         // 获取用户ID
         if(!userId){
-            setUid(function(){userId = getUid();});
+            setUid(function(){
+                userId = getUid(); 
+                // 统计PV
+                recordPv();
+            });
+        } else {
+            // 统计PV
+            recordPv();
         }
         // 保存所有新闻类别到数组
         $ttNewsTabs.each(function(){
@@ -336,9 +343,6 @@ $(function() {
             // console.log(this);
             setCacheReadUrl(url, $this.data('type'), $this.data('subtype'));
         });
-
-        // 统计PV
-        recordPv();
 
         // 添加统计
         tongJi();
