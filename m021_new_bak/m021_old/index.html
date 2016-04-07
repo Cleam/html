@@ -1,0 +1,875 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- <meta name="full-screen" content="yes"/>
+	<meta name="screen-orientation" content="portrait"/>
+	<meta name="x5-fullscreen" content="true"/>
+	<meta name="360-fullscreen" content="true"/> -->
+	<meta name="x5-page-mode" content="app">
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="bookmark" href="images/favicon.ico" type="image/x-icon"　/>
+    <title>网址导航</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/MB.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/channel.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript">
+    function divcontrol(btn) {
+        $(btn).parent().parent().parent().find(".hidden").hide();
+        $(btn).parent().parent().parent().find(".fenleitextend").removeClass("fenleitextGray");
+        $(btn).parent().parent().parent().find(".fenleitext").removeClass("fenleitextGray");
+        $(btn).parent().parent().parent().find(".fenleitextend").addClass("fenleitextGray");
+        $(btn).parent().parent().parent().find(".fenleitext").addClass("fenleitextGray");
+        $(btn).parent().removeClass("fenleitextGray");
+        if ($(btn).parent().parent().find(".hidden").attr("typs") == undefined || $(btn).parent().parent().find(".hidden").attr("typs") == "0") {
+            $(btn).parent().parent().find(".hidden").show();
+            $(btn).parent().parent().find(".hidden").attr("typs", "1");
+        } else {
+            $(btn).parent().parent().parent().find(".fenleitextend").removeClass("fenleitextGray");
+            $(btn).parent().parent().parent().find(".fenleitext").removeClass("fenleitextGray");
+            $(btn).parent().parent().find(".hidden").hide();
+            $(btn).parent().parent().find(".hidden").attr("typs", "0");
+        }
+    }
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/h5?sId=500001429" charset="UTF-8"></script>
+    <!-- start Dplus -->
+    <script type="text/javascript">!function(a,b){if(!b.__SV){var c,d,e,f;window.dplus=b,b._i=[],b.init=function(a,c,d){function g(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]),a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var h=b;for("undefined"!=typeof d?h=b[d]=[]:d="dplus",h.people=h.people||[],h.toString=function(a){var b="dplus";return"dplus"!==d&&(b+="."+d),a||(b+=" (stub)"),b},h.people.toString=function(){return h.toString(1)+".people (stub)"},e="disable track track_links track_forms register unregister get_property identify clear set_config get_config get_distinct_id track_pageview register_once track_with_tag time_event people.set people.unset people.delete_user".split(" "),f=0;f<e.length;f++)g(h,e[f]);b._i.push([a,c,d])},b.__SV=1.1,c=a.createElement("script"),c.type="text/javascript",c.charset="utf-8",c.async=!0,c.src="//w.cnzz.com/dplus.php?token=f116459e1c7a1k6051b9",d=a.getElementsByTagName("script")[0],d.parentNode.insertBefore(c,d)}}(document,window.dplus||[]),dplus.init("f116459e1c7a1k6051b9");</script>
+    <!-- end Dplus -->
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <div class="Htop">
+                <div class="logo"> <img src="images/logo.jpg" width="100" /></div>
+                <!--logo-->
+                <div class="weather" id="mywrather" style="color: White;">
+                    <!-- 中国天气网 - 天气插件 -->
+                    <script type="text/javascript" src="http://ext.weather.com.cn/101512.js"></script>
+                </div>
+                <!--weather-->
+            </div>
+            <!--Htop-->
+            <div class="Hbottom">
+                <div class="search">
+                    <form action="https://m.baidu.com/s">
+                        <div class="form-wrap">
+                            <div class="input-wrap">
+                                <span class="search-logo"></span>
+                                <input id="J_search_input" type="text" name="word" size="18" class="iptt" placeholder="全国人民在这儿搜" />
+                                <input type="hidden" value="utf-8" name="ie" />
+                                <input type="hidden" value="1013634c" name="from" />
+                            </div>
+                            <input type="submit" value="百度一下" class="iptb" />
+                        </div>
+                    </form>
+                </div>
+                <!--search-->
+            </div>
+            <!--Hbottom-->
+        </div>
+        <!--header-->
+        <div class="nav">
+            <div class="site_nav">
+                <ul class="J-hot-site-list hot-site-list     clearfix">
+                    <li><a href="https://m.baidu.com/?from=1013634c" target="_blank"><img src="images/new/i_baidu.png" alt="">百度</a></li>
+                    <li><a href="https://m.taobao.com/" target="_blank"><img src="images/new/i_taobao.png" alt="">淘宝</a></li>
+                    <li><a href="http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&Allianceid=299402&sid=772977&OUID=&jumpUrl=http%3A%2F%2Fwww.ctrip.com%2F%3FAllianceid%3D299402%26sid%3D772977%26OUID%3D%26MultiUnionSupport%3Dtrue" target="_blank"><img src="images/new/i_ctrip.png" alt="">携程</a></li>
+                    <li><a href="http://sina.cn/" target="_blank"><img src="images/new/i_sina.png" alt="">新浪</a></li>
+                    <li><a href="http://www.amazon.cn/b?node=1753420071&tag=chgd-lvyou-kindle-0215-23" target="_blank"><img src="images/new/i_amazon.png" alt="">亚马逊</a></li>
+                    <li><a class="J-has-channel" href="http://toutiao.eastday.com/" target="_blank"><img src="images/new/i_toutiao.png" alt="">头条</a></li>
+
+                    <li><a href="http://ai.m.taobao.com?pid=mm_112599953_11408251_47000534" target="_blank"><img src="images/new/i_aitaobao.png" alt="">爱淘宝</a></li>
+                    <li><a href="http://www.youku.com/" target="_blank"><img src="images/new/i_youku.png" alt="">优酷</a></li>
+                    <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=1146&euid=021&t=http%3A%2F%2Fm.jd.com%2F" target="_blank"><img src="images/new/i_jd.png" alt="">京东</a></li>
+                    <li><a href="http://www.baixing.com/?bannerId=2078&profile=buliang" target="_blank"><img src="images/new/i_baixing.png" alt="">百姓网</a></li>
+                    <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=501&euid=021&t=http%3A%2F%2Fm.suning.com%2F" target="_blank"><img src="images/new/i_suning.png" alt="">苏宁</a></li>
+                    <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=828&euid=021&t=http%3A%2F%2Fm.meilishuo.com%2F" target="_blank"><img src="images/new/i_meili.png" alt="">美丽说</a></li>
+                </ul>
+                <!-- <ul class="clearfix">
+                    <li>
+                        <a href="http://c.duomai.com/track.php?site_id=198270&aid=1146&euid=021&t=http%3A%2F%2Fm.jd.com%2F" target="_blank"><img src="images/JD.png" />京东</a>
+                    </li>
+                    <li>
+                        <a href="http://c.duomai.com/track.php?site_id=198270&aid=501&euid=021&t=http%3A%2F%2Fm.suning.com%2F" target="_blank"><img src="images/quickline9.png" />苏宁</a>
+                    </li>
+                    <li>
+                        <a href="http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&Allianceid=299402&sid=772977&OUID=&jumpUrl=http%3A%2F%2Fwww.ctrip.com%2F%3FAllianceid%3D299402%26sid%3D772977%26OUID%3D%26MultiUnionSupport%3Dtrue" target="_blank"><img src="images/quickline2.png" />携程</a>
+                    </li>
+                    <li>
+                        <a href="http://c.duomai.com/track.php?site_id=198270&aid=1224&euid=021&t=http%3A%2F%2Ftouch.dujia.qunar.com%2F" target="_blank"><img src="images/quickline13.png" />去哪儿</a>
+                    </li>
+                    <li>
+                        <a href="http://ai.m.taobao.com?pid=mm_112599953_11408251_47000534" target="_blank"><img src="images/quickline12.png" />爱淘宝</a>
+                    </li>
+                    <li>
+                        <a href="http://toutiao.eastday.com/?qid=021dh" target="_blank"><img src="images/quickline11.png" />头条</a>
+                    </li>
+                    <li>
+                        <a href="http://sina.cn/" target="_blank"><img src="images/quickline0.png" />新浪</a>
+                    </li>
+                    <li>
+                        <a href="https://m.baidu.com/?from=1013634c" target="_blank"><img src="images/quickline1.png" />百度</a>
+                    </li>
+                    <li>
+                        <a href="https://m.taobao.com/" target="_blank"><img src="images/quickline3.png" />淘宝</a>
+                    </li>
+                    <li>
+                        <a href="http://www.amazon.cn/b?node=1753420071&tag=chgd-lvyou-kindle-0215-23" target="_blank"><img src="images/quickline4.png" />亚马逊</a>
+                    </li>
+                    <li>
+                        <a href="http://m.qianka.com/?referer_code=5e9b1595ee" target="_blank"><img src="images/qianka.png" />钱咖</a>
+                    </li>
+                    <li>
+                        <a href="http://3g.ganji.com/" target="_blank"><img src="images/quickline6.png" />赶集</a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <!--nav-->
+        <div class="classfical">
+            <h2 style="color:#5AA31F;">头条资讯</h2>
+            <ul id="J_news_list_nav" class="news-list-nav">
+                <li><a class="active" href="javascript:;" data-tag="toutiao">热点<span></span></a></li>
+                <li><a href="javascript:;" data-tag="shehui">社会<span></span></a></li>
+                <li><a href="javascript:;" data-tag="yule">娱乐<span></span></a></li>
+                <li><a href="javascript:;" data-tag="guonei">国内<span></span></a></li>
+            </ul>
+            <div class="classfical_textzero">
+                <div id="J_spinner" class="spinner-wrap">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+                <ul id="J_toutiao_news_list" class="toutiao-list"></ul>
+                <div class="toutiao-bottom">
+                    <!-- <a id="J_change_news" href="javascript:;">换一换</a> -->
+                    <a class="J-has-channel" href="http://toutiao.eastday.com/" target="_blank">更多新闻</a>
+                    <!-- <span></span> -->
+                </div>
+            </div>
+            <!--classfical_text-->
+        </div>
+        <!--classfical-->
+        <!--offen-->
+        <div class=" classfical">
+            <h2 style="color:#2473E1;"> 新闻资讯</h2>
+            <div class="classfical_textone">
+                <div>
+                    <div class="section-t">
+                        <ul>
+                            <li><a class="J-has-channel" href="http://toutiao.eastday.com/" target="_blank">头条</a></li>
+                            <li><a href="http://wap.eastday.com/" target="_blank">东方网</a></li>
+                            <li><a href="http://wap.eastmoney.com/" target="_blank">东方财富</a></li>
+                            <li><a href="http://m.people.cn/" target="_blank">人民网</a></li>
+                            <li><a href="http://m.sohu.com/" target="_blank">搜狐</a></li>
+                            <li><a href="http://m.neihanshequ.com/" target="_blank">内涵段子</a></li>
+                            <li><a href="http://m.pciiss.com/" target="_blank">战略军事</a></li>
+                            <li><a href="http://go.10086.cn/aTouch.do" target="_blank">快讯</a></li>
+                        </ul>
+                    </div>
+                    <div class="fenleitext">
+                        <a href="javascript:;" title="新闻">[新闻]</a>
+                        <a href="http://i.ifeng.com/news/newsi?&amp;amp;vt=2" title="凤凰新闻" target="_blank">凤凰</a>
+                        <a href="http://3g.sina.com.cn/nc.php" title="新浪新闻" target="_blank">新浪</a>
+                        <a href="http://wap.huanqiu.com/" title="环球" target="_blank">环球</a>
+                        <a href="http://3g.163.com/touch/news/" title="网易新闻" target="_blank">网易</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://wap.sohu.com/news/" title="搜狐新闻" target="_blank">搜狐新闻</a>
+                        <a href="http://m.cankaoxiaoxi.com/" title="参考消息" target="_blank">参考消息</a>
+                        <a href="http://info.3g.qq.com/" title="腾讯新闻" target="_blank">腾讯新闻</a>
+                        <a href="http://news.3g.cn/" title="3G新闻" target="_blank">3G新闻</a>
+                        <a href="http://3g.news.cn/" title="新华" target="_blank">新华网</a>
+                        <a href="http://m.chinanews.com/" title="中新网" target="_blank">中新网</a>
+                        <a href="http://m.people.cn/" title="人民网" target="_blank">人民网</a>
+                        <a href="http://m.toutiao.com/?" title="头条网" target="_blank">头条网</a>
+                        <a href="http://wap.cctv.com/" title="央视" target="_blank">央视网</a>
+                        <a href="http://m.bjnews.com.cn/" title="新京报" target="_blank">新京报</a>
+                        <a href="http://wap.gmw.cn/" title="光明网" target="_blank">光明网</a>
+                        <a href="http://m.qiqixw.com/" title="路透社" target="_blank">路透社</a>
+                        <a href="http://mobile.latimes.com/" title="洛杉矶报" target="_blank">洛杉矶报</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="体育">[体育]</a>
+                        <a href="http://sports.sina.cn/" title="新浪体育" target="_blank">新浪</a>
+                        <a href="http://m.china.nba.com/" title="NBA" target="_blank">NBA</a>
+                        <a href="http://3g.163.com/touch/sports/" title="网易体育" target="_blank">网易</a>
+                        <a href="http://wap.sohu.com/sports/" title="搜狐体育" target="_blank">搜狐</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.mop.com/dzh/postlist.do?cid=8&amp;version=4" title="猫扑体育" target="_blank">猫扑体育</a>
+                        <a href="http://m.joy.cn/pps/s.py?pg=c&amp;gd=90&amp;cd=35411" title="激动体育" target="_blank">激动体育</a>
+                        <a href="http://i.ifeng.com/sports/sportsi?vt=4" title="凤凰体育" target="_blank">凤凰体育</a>
+                        <a href="http://m.youku.com/smartphone/channels?cid=98" title="优酷体育" target="_blank">优酷体育</a>
+                        <a href="http://sports.3g.cn/" title="3G体育" target="_blank">3G体育</a>
+                        <!-- <a href="http://news.google.com/news/i/section?topic=s" title="谷歌体育" target="_blank">谷歌体育</a> -->
+                        <a href="http://wap.cctv.com/tiyu/node_160.htm" title="CCTV5" target="_blank">CCTV5</a>
+                        <a href="http://m.hoopchina.com/" title="虎扑" target="_blank">虎扑</a>
+                        <a href="http://www.qianlong.com/" title="球讯" target="_blank">球讯</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="财经">[财经]</a>
+                        <a href="http://c.duomai.com/track.php?site_id=198270&aid=2565&euid=021&t=http%3A%2F%2Fm.rong360.com" title="融360" target="_blank">融360</a>
+                        <a href="http://eastmoney.cn/Full/" title="东方财富" target="_blank">东方</a>
+                        <a href="http://m.jrj.com.cn/" title="金融界" target="_blank">金融界</a>
+                        <a href="http://m.wallstreetcn.com/" title="华尔街" target="_blank">华尔街</a>
+                        
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.stockstar.com/" title="证券之星" target="_blank">证券</a>
+                        <a href="http://m.ebrun.com/" title="亿邦" target="_blank">亿邦</a>
+                        <a href="http://3g.china-invs.cn/" title="中投证券" target="_blank">中投证券</a>
+                        <a href="http://sh.gtja.com/" title="国泰君安" target="_blank">国泰君安</a>
+                        <a href="http://wapgw.cn/" title="大智慧" target="_blank">大智慧</a>
+                        <a href="http://m.hexin.cn/" title="同花顺" target="_blank">同花顺</a>
+                        <a href="http://m.caixin.com/" title="财新网" target="_blank">财新网</a>
+                        <a href="http://wap.stcn.com/" title="证券时报" target="_blank">证券时报</a>
+                        <a href="http://wap.hexun.com/" title="和讯" target="_blank">和讯</a>
+                        <a href="http://i.ifeng.com/finance/financei?mid=3kgl3e&amp;vt=4" title="凤凰财经" target="_blank">凤凰财经</a>
+                        <a href="http://3g.163.com/touch/money/" title="网易财经" target="_blank">网易财经</a>
+                        <a href="http://wap.sohu.com/finance/?nid=42&amp;v=2" title="搜狐财经" target="_blank">搜狐财经</a>
+                        <a href="http://m.cngold.org/" title="路透财经" target="_blank">路透财经</a>
+                        <a href="http://finance.sina.cn/" title="新浪财经" target="_blank">新浪财经</a>
+                        <a href="http://m.caijing.com.cn/" title="财经网" target="_blank">财经网</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="数码">[数码]</a>
+                        <a href="http://3g.pconline.com.cn/" title="太平洋" target="_blank">太平洋</a>
+                        <a href="http://3g.zol.com.cn/" title="中关村" target="_blank">中关村</a>
+                        <a href="http://m.pcpop.com/" title="泡泡网" target="_blank">泡泡网</a>
+                        <a href="http://362638.mfs88888.com:9015/Home/Detail/5166/?channel=zcx_dushe025wxx_android" title="手表" target="_blank">手表</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://mobile.3g.cn/" title="3G手机" target="_blank">3G手机</a>
+                        <a href="http://m.weiphone.com/" title="威锋网" target="_blank">威锋网</a>
+                        <a href="http://3g.sina.com.cn/3g/mobile/" title="新浪手机" target="_blank">新浪手机</a>
+                        <a href="http://m.imobile.com.cn/" title="手机之家" target="_blank">手机之家</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitextend">
+                        <a href="#" title="军事">[军事]</a>
+                        <a href="http://m.7zhan.com/?021" title="第七站" target="_blank">第七站</a>
+                        <a href="http://m.xinjunshi.com/?021" title="环球新军事" target="_blank">新军事</a>
+                        <a href="http://m.liangjan.com" title="亮剑" target="_blank">亮剑</a>
+                        <a href="http://i.ifeng.com/mil/mili?vt=4" title="凤凰军事" target="_blank">凤凰</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden" style="border-top: 1px solid #eeeeee; border-bottom:none; ">
+                        <a href="http://wap.sohu.com/military/" title="搜狐军事" target="_blank">搜狐军事</a>
+                        <a href="http://www.lijiabz.com/" title="华夏军事" target="_blank">华夏军事</a>
+                        <a href="http://www.xinhuanet.com/mil/" title="新华军事" target="_blank">新华军事</a>
+                        <a href="http://m.xilu.com/" title="西陆军事" target="_blank">西陆军事</a>
+                        <a href="http://3g.china.com/mili/" title="中华军事" target="_blank">中华军事</a>
+                        <a href="http://mil.sina.cn/" title="新浪军事" target="_blank">新浪军事</a>
+                        <a href="http://mili.3g.qq.com/" title="腾讯军事" target="_blank">腾讯军事</a>
+                        <a href="http://3g.163.com/touch" title="网易军事" target="_blank">网易军事</a>
+                        <a href="http://m.people.cn/24/index.html" title="人民军事" target="_blank">人民军事</a>
+                        <a href="http://m.tiexue.net/Touch/" title="铁血军事" target="_blank">铁血军事</a>
+                        <a href="http://m.huanqiu.com/" title="环球军事" target="_blank">环球军事</a>
+                        <a href="http://m.miercn.com/" title="米尔军事" target="_blank">米尔军事</a>
+                    </div>
+                </div>
+            </div>
+            <!--classfical_text-->
+        </div>
+        <!--classfical-->
+        <div class=" classfical">
+            <h2 style="color: #DE1325;"> 休闲娱乐</h2>
+            <div class="classfical_texttwo">
+                <div>
+                    <div class="section-t">
+                      <ul>
+                        <li><a href="http://c.soujibing.com/?from=021" target="_blank">问医生</a></li>
+                        <li><a href="http://m.cndzys.com/shenghuoyangsheng/meirong/" target="_blank">美容</a></li>
+                        <li><a href="http://m.cndzys.com/shenghuoyangsheng/jianfei/" target="_blank">减肥</a></li>
+                        <li><a href="http://3g.xywy.com/dzjk/nxtd/jfsh" target="_blank">女人潮</a></li>
+                        <li><a href="http://3g.xywy.com/dzjk/nrsj/nrxq/qg/" target="_blank">真枪实弹</a></li>
+                        <li><a href="http://3g.club.xywy.com/" target="_blank">有问必答</a></li>
+                        <li><a href="http://3g.xywy.com/dzjk/nxtd/lxqg" target="_blank">枕边游戏</a></li>
+                        <li><a href="http://3g.xywy.com/bj/sjjb/fkbj/" target="_blank">夜夜要</a></li>
+                      </ul>
+                    </div>
+                    <div class="fenleitext">
+                        <a href="#" title="小说">[小说]</a>
+                        <a href="http://m.xxsy.net/" title="潇湘" target="_blank">潇湘</a>
+                        <a href="http://w.xs8.cn/" title="言情小说" target="_blank">言情</a>
+                        <a href="http://b.easou.com/" title="宜搜小说" target="_blank">宜搜</a>
+                        <a href="http://book.2345.com/m/rank.html?yd" title="人气榜" target="_blank">人气榜</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://book.2345.com/m/girl.html?yd" title="女生" target="_blank">女生</a>
+                        <a href="http://yicha.cn/union/u.jsp?p=dm&amp;site=2145959930&amp;key=" title="漫画" target="_blank">漫画</a>
+                        <a href="http://novel.wap.soso.com/" title="搜搜小说" target="_blank">搜搜小说</a>
+                        <a href="http://hongxiu.cn/" title="红袖" target="_blank">红袖</a>
+                        <a href="http://fs12077.17kss.com/html5/default.aspx" title="17K" target="_blank">17K</a>
+                        <a href="http://m.qidian.com/" title="起点" target="_blank">起点</a>
+                        <a href="http://www.qiushibaike.com/" title="糗事" target="_blank">糗事</a>
+                        <a href="http://3g.sina.com.cn/3g/book/" title="新浪读书" target="_blank">新浪读书</a>
+                        <a href="http://yicha.cn/union/u.jsp?p=tb&site=2145959930&key=" title="易查小说" target="_blank">易查小说</a>
+                        <a href="http://t.xs.cn/" title="小说阅读" target="_blank">小说阅读</a>
+                        <a href="http://m.zhihu.com/" title="知乎阅读" target="_blank">知乎阅读</a>
+                        <a href="http://xianguo.com/" title="鲜果阅读" target="_blank">鲜果阅读</a>
+                        <a href="http://xm.91.com/" title="91看书" target="_blank">91看书</a>
+                        <a href="http://m.k.sohu.com/" title="搜狐读书" target="_blank">搜狐读书</a>
+                        <a href="http://i.ifeng.com/book/dshome?vt=4" title="凤凰读书" target="_blank">凤凰读书</a>
+                        <a href="http://duokoo.baidu.com/xs/" title="百度小说" target="_blank">百度小说</a>
+                        <a href="http://book.douban.com/review/best/" title="豆瓣书评" target="_blank">豆瓣书评</a>
+                        <a href="http://wap.zhaoxiaoshuo.com/" title="找小说" target="_blank">找小说</a>
+                        <a href="http://h5.17k.com/" title="手机读吧" target="_blank">手机读吧</a>
+                        <a href="http://i.jandan.net/" title="煎蛋" target="_blank">煎蛋</a>
+                        <a href="http://m.guokr.com/" title="果壳网" target="_blank">果壳网</a>
+                        <a href="http://m.kl688.com/" title="快乐麻花" target="_blank">快乐麻花</a>
+                        <a href="http://m.9haow.cn/" title="好玩吧" target="_blank">好玩吧</a>
+                        <a href="http://wap.zreading.cn/" title="左岸读书" target="_blank">左岸读书</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="社交">[社交]</a>
+                        <a href="http://qzone.com/" title="QQ空间" target="_blank">空间</a>
+                        <a href="http://m.weibo.cn/" title="新浪微博" target="_blank">微博</a>
+                        <a href="http://3g.mmbang.com/" title="妈妈帮" target="_blank">妈妈帮</a>
+                        <a href="http://wap.tianya.cn/ally?f=3742" title="天涯社区" target="_blank">天涯</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://blog.sina.cn/?pos=108&amp;vt=4" title="新浪博客" target="_blank">新浪博客</a>
+                        <a href="http://m.kaixin001.com/" title="开心网" target="_blank">开心网</a>
+                        <a href="http://lexun.com/touch/" title="乐讯" target="_blank">乐讯</a>
+                        <a href="http://m.bai.sohu.com/" title="白社会" target="_blank">白社会</a>
+                        <a href="http://wap.maopao.com/" title="冒泡网" target="_blank">冒泡网</a>
+                        <a href="http://t.3g.qq.com" title="腾讯微博" target="_blank">腾讯微博</a>
+                        <a href="http://wap.51.com/?v=2" title="51社区" target="_blank">51社区</a>
+                        <a href="http://tieba.baidu.com/" title="百度贴吧" target="_blank">百度贴吧</a>
+                        <a href="http://bbs.sina.cn/" title="新浪论坛" target="_blank">新浪论坛</a>
+                        <a href="http://m.douban.com/" title="豆瓣" target="_blank">豆瓣</a>
+                        <a href="http://wap.blog.163.com/" title="网易博客" target="_blank">网易博客</a>
+                        <a href="http://m.digu.com/" title="嘀咕网" target="_blank">嘀咕网</a>
+                        <a href="http://t.sohu.com/" title="搜狐微博" target="_blank">搜狐微博</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="音乐">[音乐]</a>
+                        <a href="http://music.baidu.com/?guide=1" title="百度音乐" target="_blank">百度</a>
+                        <a href="http://www.xiami.com/web/radio/uc" title="虾米电台" target="_blank">虾米</a>
+                        <a href="http://m.kugou.com/uc/" title="酷狗" target="_blank">酷狗</a>
+                        <a href="http://douban.fm/partner/uc" title="豆瓣电台" target="_blank">豆瓣</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://fm.baidu.com/" title="百度随心听" target="_blank">百度随心听</a>
+                        <a href="http://y.3g.qq.com/" title="QQ音乐" target="_blank">QQ音乐</a>
+                        <a href="http://mp3.easou.com/" title="宜搜音乐" target="_blank">宜搜音乐</a>
+                        <a href="http://5sing.kugou.com/m/" title="原创音乐" target="_blank">原创音乐</a>
+                        <a href="http://ring.3g.cn/index.aspx?waped=9" title="3G铃声" target="_blank">3G铃声</a>
+                        <a href="http://mp3.3g.cn/" title="3G音乐" target="_blank">3G音乐</a>
+                        <a href="http://dtop.powereasy.net/" title="DTOP" target="_blank">DTOP</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="视频">[视频]</a>
+                        <a href="http://m.youku.com/smartphone/?tpa=W5pb25faWQ9MTAwOTAzXzEwMDkwNF8wMV8wMQ" title="优酷" target="_blank">优酷</a>
+                        <a href="http://v.2345.com/m/?m" title="2345影视" target="_blank">热播</a>
+                        <a href="http://m.iqiyi.com/" title="爱奇艺" target="_blank">爱奇艺</a>
+                        <a href="http://m.tv.sohu.com/?pvid=cbc28788b109892e" title="搜狐" target="_blank">搜狐</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.tudou.com/" title="土豆" target="_blank">土豆网</a>
+                        <a href="http://m.56.com/" title="56视频" target="_blank">56视频</a>
+                        <a href="http://m.pptv.com/" title="PPTV" target="_blank">PPTV</a>
+                        <a href="http://m.letv.com/" title="乐视网" target="_blank">乐视网</a>
+                        <a href="http://stat.ppstream.com/refer.php?" title="PPS" target="_blank">PPS</a>
+                        <a href="http://www.joy.cn/" title="激动" target="_blank">激动网</a>
+                        <a href="http://m.fengyunzhibo.com?" title="风云直播" target="_blank">风云直播</a>
+                        <a href="http://m.mtime.com/" title="时光网" target="_blank">时光网</a>
+                        <a href="http://m.baidu.com/video" title="百度视频" target="_blank">百度视频</a>
+                        <a href="http://video.sina.cn/" title="新浪视频" target="_blank">新浪视频</a>
+                        <a href="http://i.ifeng.com/video/vifeng?vt=5" title="凤凰视频" target="_blank">凤凰视频</a>
+                        <a href="http://3g.maxtv.cn/" title="迈视网" target="_blank">迈视网</a>
+                        <a href="http://m.kankanews.com/" title="看看新闻" target="_blank">看看新闻</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="游戏">[游戏]</a>
+                        <a href="http://wap.tgbus.com/v3/" title="电玩" target="_blank">电玩</a>
+                        <a href="http://x.d.cn/" title="当乐" target="_blank">当乐</a>
+                        <a href="http://duokoo.baidu.com/game/?pageid=Hdkicssp&p_tag=1181082" title="我叫MT" target="_blank">我叫MT</a>
+                        <a href="http://duokoo.baidu.com/game/?pageid=Hdkicssp&p_tag=1181109" title="部落战争COC" target="_blank">部落战争</a>
+                        <!-- <a href="http://bbs.gfan.com/" title="机锋论坛" target="_blank">机锋</a>
+                        <a href="http://9game.cn/" title="九游" target="_blank">九游</a> -->
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://bbs.hiapk.com/" title="安卓论坛" target="_blank">安卓论坛</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="旅游">[旅游]</a>
+                        <a href="http://m.ctrip.com/" title="携程" target="_blank">携程</a>
+                        <a href="http://c.duomai.com/track.php?site_id=198270&aid=1224&euid=021&t=http%3A%2F%2Ftouch.dujia.qunar.com%2F" title="去哪儿" target="_blank">去哪儿</a>
+                        <a href="http://m.elong.com/?" title="艺龙" target="_blank">艺龙</a>
+                        <a href="http://m.tuniu.com/#" title="途牛" target="_blank">途牛</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.mafengwo.cn/mdd/mdd.php?id=11047" title="蚂蜂窝" target="_blank">蚂蜂窝</a>
+                        <a href="http://touch.17u.cn/?refid=1676517" title="同程" target="_blank">同程</a>
+                        <a href="http://m.ceair.com/" title="东方航空" target="_blank">东方航空</a>
+                        <a href="http://wap.csair.com/" title="南方航空" target="_blank">南方航空</a>
+                        <a href="http://3g.hnair.com/" title="海南航空" target="_blank">海南航空</a>
+                        <a href="http://m.airchina.com/" title="国际航空" target="_blank">国际航空</a>
+                        <a href="http://m.china-sss.com/rest/html5/home" title="春秋航空" target="_blank">春秋航空</a>
+                        <a href="http://www.12306.cn/" title="12306" target="_blank">12306</a>
+                        <a href="http://m.dili360.com/" title="国家地理" target="_blank">国家地理</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="娱乐">[娱乐]</a>
+                        <a href="http://widget.sina.cn/" title="新浪娱乐" target="_blank">新浪</a>
+                        <a href="http://mobi.shaqing.com/?021h" title="杀青娱乐" target="_blank">杀青娱乐</a>
+                        <a href="http://ent.3g.qq.com/" title="腾讯娱乐" target="_blank">腾讯</a>
+                        <a href="http://m.sohu.com/c/4/" title="搜狐娱乐" target="_blank">搜狐</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://ent.youku.com" title="优酷娱乐" target="_blank">优酷娱乐</a>
+                        <a href="http://3g.163.com/touch/ent/" title="网易娱乐" target="_blank">网易娱乐</a>
+                        <a href="http://i.ifeng.com/ent/enti?vt=4" title="凤凰娱乐" target="_blank">凤凰娱乐</a>
+                        <a href="http://ent.3g.cn/" title="3G娱乐" target="_blank">3G娱乐</a>
+                        <a href="http://m.iqiyi.com/yule/" title="奇艺娱乐" target="_blank">奇艺娱乐</a>
+                        <a href="http://ent.news.cn/" title="新华娱乐" target="_blank">新华娱乐</a>
+                        <a href="http://3g.yule.com.cn/" title="中国娱乐网" target="_blank">中国娱乐</a>
+                        <a href="http://m.huabian.com?" title="花边新闻" target="_blank">花边新闻</a>
+                        <a href="http://m.pengpeng.com/index.do?v=touch" title="碰碰网" target="_blank">碰碰网</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="美女">[美女]</a>
+                        <a href="http://www.mmlin.com/" title="林妹妹" target="_blank">林妹妹</a>
+                        <a href="http://www.27.cn/" title="美悦" target="_blank">美悦</a>
+                        <a href="http://m.uumnt.com/" title="优优" target="_blank">优优</a>
+                        <a href="http://m.app111.com/b/" title="壁纸" target="_blank">壁纸</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.4493.com/" title="靓丽美女" target="_blank">靓丽美女</a>
+                        <a href="http://www.mzitu.com/" title="joyTK" target="_blank">joyTK</a>
+                        <!-- <a href="http://gate.baidu.com/tc?src=http://www.71715.com/" title="71715" target="_blank">71715</a> -->
+                        <a href="http://www.7160.com/" title="7160" target="_blank">7160</a>
+                        <!-- <a href="http://gate.baidu.com/tc?src=http://www.800meinv.com/" title="800美女" target="_blank">800美女</a> -->
+                        <a href="http://ltuj.com/in/87" title="靓图集" target="_blank">靓图集</a>
+                        <a href="http://m.ixiumei.com/gallery/" title="秀美图库" target="_blank">秀美图库</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="交友">[交友]</a>
+                        <a href="http://m.jiayuan.com/" title="世纪佳缘" target="_blank">佳缘</a>
+                        <a href="http://m.baihe.com/" title="百合网" target="_blank">百合网</a>
+                        <a href="http://3534.yoyuan.com.cn/?from=3534" title="有缘网" target="_blank">有缘网</a>
+                        <a href="http://m.zhenai.com/" title="珍爱网" target="_blank">珍爱网</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://3g.51taonan.com/" title="淘男网" target="_blank">淘男网</a>
+                        <a href="http://www.marry5.com/" title="嫁我网" target="_blank">嫁我网</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitextend">
+                        <a href="#" title="时尚">[时尚]</a>
+                        <a href="http://3g.rayli.com.cn/" title="瑞丽" target="_blank">瑞丽</a>
+                        <a href="http://m.gq.com.cn/" title="男士网" target="_blank">男士网</a>
+                        <a href="http://www.yoka.com/dna/m/" title="时尚网" target="_blank">时尚网</a>
+                        <a href="http://www.27.cn/" title="爱丽" target="_blank">爱丽</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden" style="border-top: 1px solid #eeeeee; border-bottom:none;">
+                        <a href="http://m.ellechina.com/" title="ELLE" target="_blank">ELLE</a>
+                        <a href="http://m.vogue.com.cn/" title="VOGUE" target="_blank">VOGUE</a>
+                        <a href="http://m.self.com.cn/" title="悦己网" target="_blank">悦己网</a>
+                        <a href="http://m.onlylady.com/" title="女人志" target="_blank">女人志</a>
+                        <!-- <a href="http://m.sohu.com/c/6/" title="搜狐时尚" target="_blank">搜狐时尚</a> -->
+                        <a href="http://style.sina.cn/" title="新浪时尚" target="_blank">新浪时尚</a>
+                        <a href="http://fashion.3g.cn/" title="3G时尚" target="_blank">3G时尚</a>
+                        <a href="http://3g.yoka.com/" title="YOKA" target="_blank">YOKA</a>
+                        <a href="http://i.ifeng.com/lady/ladyi?vt=5" title="凤凰时尚" target="_blank">凤凰时尚</a>
+                    </div>
+                </div>
+            </div>
+            <!--classfical_text-->
+        </div>
+        <!--classfical-->
+        <div class=" classfical">
+            <h2 style="color: #7459BE;">时尚购物</h2>
+            <div class="classfical_textthree">
+                <div class="shopping">
+                    <ul>
+                        <li><a href="http://r.m.taobao.com/m3?p=mm_35230885_3477428_11335776&c=1005" target="_blank">热门团购</a></li>
+                        <li><a href="http://c.duomai.com/track.php?site_id=198270&aid=1146&euid=021&t=http%3A%2F%2Fm.jd.com%2F" target="_blank">京东商城</a></li>
+                        <li><a href="http://wap.meilishuo.com/" target="_blank">美丽说</a></li>
+                        <li><a href="http://m.moonbasa.com/rd/rdm?" target="_blank">梦芭莎</a></li>
+                        <li class="endshop"><a href="http://m.mogujie.com/" target="_blank">蘑菇街</a></li>
+                        <li class="endshop"><a href="http://w.lefeng.com/" target="_blank">乐蜂网</a></li>
+                        <li class="endshop"><a href="http://m.suning.com/emall/snmw_10052_10051_.html" target="_blank">苏宁易购</a></li>
+                        <li class="endshop"><a href="http://r.m.taobao.com/m3?p=mm_35230885_3477426_11335774&amp;amp;c=1001" target="_blank">天猫</a></li>
+                    </ul>
+                </div>
+                <!--shopping-->
+            </div>
+            <!--classfical_text-->
+        </div>
+        <!--classfical-->
+        <div class=" classfical">
+            <h2 style="color: #D72D72;"> 生活服务</h2>
+            <div class="classfical_textfour">
+                <div>
+                    <div class="section-t">
+                      <ul>
+                        <li><a href="http://qianbao.baidu.com/hd/sdfanxian" target="_blank">钱包返现</a></li>
+                        <li><a href="http://m.kuaidi100.com/" target="_blank">快递查询</a></li>
+                        <li><a href="http://wap.rayli.com.cn/" target="_blank">瑞丽女人</a></li>
+                        <li><a href="http://m.hao123.com/m/o2o" target="_blank">找酒店</a></li>
+                        <li><a href="http://m.39yst.com/property/15.shtml" target="_blank">情感解密</a></li>
+                        <li><a href="http://m.39yst.com/property/16.shtml" target="_blank">女人私房</a></li>
+                        <li><a href="http://m.39yst.com/property/17.shtml" target="_blank">野史八卦</a></li>
+                        <li><a href="http://m.39yst.com/property/18.shtml" target="_blank">夫妻健康</a></li>
+                      </ul>
+                    </div>
+                    <div class="fenleitext">
+                        <a href="#" title="购物">[购物]</a>
+                        <a href="http://ai.m.taobao.com/?pid=mm_112599953_11408251_47000534" title="淘宝特卖" target="_blank">爱淘宝</a></li>
+                        <a href="http://c.duomai.com/track.php?site_id=198270&aid=1146&euid=021&t=http%3A%2F%2Fm.jd.com%2F" title="京东商城" target="_blank">京东</a>
+                        <a href="http://www.amazon.cn/b?node=1753420071&tag=chgd-lvyou-kindle-0215-23" title="亚马逊" target="_blank">亚马逊</a>
+                        <a href="http://sumo4455.gotoip3.com/kala-2.html" title="考拉" target="_blank">考拉</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="https://m.taobao.com/" title="天猫" target="_blank">天猫</a>
+                        <a href="http://m.51buy.com/?YTAG=0.612100001300000" title="易迅网" target="_blank">易迅网</a>
+                        <a href="http://p.yiqifa.com/c?s=0b078b80&w=658600&c=6487&i=19562&l=0&e=c&t=http://m.dangdang.com/" title="当当" target="_blank">当当</a>
+                        <a href="http://p.yiqifa.com/c?s=a2cbe95e&w=658600&c=6489&i=20262&l=0&e=c&t=http://m.yihaodian.com/index" title="1号店" target="_blank">1号店</a>
+                        <a href="http://m.paipai.com/" title="拍拍" target="_blank">拍拍</a>
+                        <a href="http://m.newegg.com.cn/" title="新蛋" target="_blank">新蛋</a>
+                        <a href="http://m.etao.com/" title="一淘" target="_blank">一淘</a>
+                        <a href="http://u.vipshop.com/scripts/click.php?a_aid=zhituiwap&a_bid=4412752c&chan=100639&desturl=http://m.vipshop.com/" title="唯品会" target="_blank">唯品会</a>
+                        <a href="http://m.vancl.com/" title="凡客诚品" target="_blank">凡客</a>
+                        <a href="http://w.lefeng.com/" title="乐蜂网" target="_blank">乐蜂网</a>
+                        <a href="http://m.jiuxian.com/" title="酒仙网" target="_blank">酒仙网</a>
+                        <a href="http://54162.mmb.cn/wap/touch/column.do?columnId=27" title="买卖宝" target="_blank">买卖宝</a>
+                        <a href="http://p.yiqifa.com/c?s=9084a474&w=658600&c=6559&i=21842&l=0&e=c&t=http://m.mbaobao.com/index.html" title="麦包包" target="_blank">麦包包</a>
+                        <a href="http://m.moonbasa.com/rd/rdm?" title="梦芭莎" target="_blank">梦芭莎</a>
+                        <a href="http://m.zhiwo.com" title="知我药妆" target="_blank">知我药妆</a>
+                        <a href="http://3g.letao.com/" title="乐淘" target="_blank">乐淘</a>
+                        <a href="http://m.vjia.com/" title="V+折扣" target="_blank">V+折扣</a>
+                        <a href="http://m.yougou.com/index.php/" title="优购" target="_blank">优购</a>
+                        <a href="http://wap.meilishuo.com/" title="美丽说" target="_blank">美丽说</a>
+                        <a href="http://m.mogujie.com/" title="蘑菇街" target="_blank">蘑菇街</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="团购">[团购]</a>
+                        <a href="http://tuan.2345.com/m/" title="2345团购" target="_blank">2345团</a>
+                        <a href="http://r.union.meituan.com/url/visit/?a=1&key=U1oTEjyXGhMQOFIzxDeSuBJctfLwR8pa&url=http://i.meituan.com/" title="美团" target="_blank">美团</a>
+                        <a href="http://r.m.taobao.com/m3?p=mm_35230885_3477428_11335776&c=1005" title="聚划算" target="_blank">聚划算</a>
+                        <a href="http://m.tuan800.com/" title="团800" target="_blank">团800</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.nuomi.com/" title="糯米网" target="_blank">糯米网</a>
+                        <a href="http://m.jumei.com/" title="聚美优品" target="_blank">聚美优品</a>
+                        <a href="http://m.lashou.com/?union_pid=197756919&union_sign=27" title="拉手" target="_blank">拉手</a>
+                        <a href="http://m.55tuan.com/" title="窝窝团" target="_blank">窝窝团</a>
+                        <a href="http://m.miqi.cn/" title="米奇团" target="_blank">米奇团</a>
+                        <!-- <a href="http://www.didatuan.com/wap" title="嘀嗒团" target="_blank">嘀嗒团</a> -->
+                        <a href="http://m.dianping.com/" title="点评团" target="_blank">点评团</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="生活">[生活]</a>
+                        <a href="http://m.58.com/?" title="58同城" target="_blank">58同城</a>
+                        <a href="http://3g.ganji.cn/" title="赶集" target="_blank">赶集</a>
+                        <a href="http://m.soufun.com/?" title="搜房" target="_blank">搜房</a>
+                        <a href="http://www.baixing.com/?" title="百姓网" target="_blank">百姓网</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.damai.cn/" title="大麦网" target="_blank">大麦网</a>
+                        <a href="http://wap.zhaopin.com/" title="智联招聘" target="_blank">智联招聘</a>
+                        <a href="http://www.19lou.com/wap" title="19楼" target="_blank">19楼</a>
+                        <a href="http://wap.liba.com/" title="篱笆网" target="_blank">篱笆网</a>
+                        <a href="http://m.jxdyf.com/" title="大药房" target="_blank">大药房</a>
+                        <a href="http://m.aifang.com/" title="爱房网" target="_blank">爱房网</a>
+                        <a href="http://3g.51job.com/" title="前程无忧" target="_blank">前程无忧</a>
+                        <!-- <a href="http://wap.ddmap.com/" title="丁丁优惠" target="_blank">丁丁优惠</a> -->
+                        <!-- <a href="http://wap.fantong.com/" title="饭统网" target="_blank">饭统网</a> -->
+                        <a href="http://bendi.m.taobao.com/" title="淘宝本地" target="_blank">淘宝本地</a>
+                        <a href="http://m.douguo.com/" title="豆果网" target="_blank">豆果网</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="汽车">[汽车]</a>
+                        <a href="http://m.yiche.com/?" title="易车网" target="_blank">易车网</a>
+                        <a href="http://m.pcauto.com.cn/" title="太平洋" target="_blank">太平洋</a>
+                        <a href="http://m.autohome.com.cn/" title="汽车之家" target="_blank">车之家</a>
+                        <a href="http://wap.chexun.com/" title="车讯网" target="_blank">车讯网</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://auto.sina.cn/" title="新浪汽车" target="_blank">新浪汽车</a>
+                        <a href="http://3g.163.com/touch/auto/" title="网易汽车" target="_blank">网易汽车</a>
+                        <a href="http://auto.3g.qq.com/" title="腾讯汽车" target="_blank">腾讯汽车</a>
+                        <a href="http://i.ifeng.com/auto/autoi?vt=5" title="凤凰汽车" target="_blank">凤凰汽车</a>
+                        <a href="http://a.xcar.com.cn/" title="爱卡汽车" target="_blank">爱卡</a>
+                        <a href="http://wap.xgo.com.cn/" title="汽车点评" target="_blank">汽车点评</a>
+                        <a href="http://3g.iautos.cn/" title="第一车网" target="_blank">第一车网</a>
+                        <!-- <a href="http://m.sohu.com/auto" title="搜狐汽车" target="_blank">搜狐汽车</a> -->
+                        <a href="http://a.cheshi.com" title="网上车市" target="_blank">网上车市</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="应用">[应用]</a>
+                        <a href="http://www.51baoku.com/download" title="应用宝库" target="_blank">宝库</a>
+                        <a href="http://market.91.com/android/2" title="91市场" target="_blank">91</a>
+                        <a href="http://m.anzhi.com/" title="安智市场" target="_blank">安智</a>
+                        <a href="http://m.sc.hiapk.com/?1=1&srcCode=80282&clientType=81002" title="安卓市场" target="_blank">安卓</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://m.bianwanjia.com/" title="便玩家" target="_blank">便玩家</a>
+                        <a href="http://m.mumayi.com/" title="木蚂蚁" target="_blank">木蚂蚁</a>
+                        <a href="http://paojiao.com/" title="泡椒" target="_blank">泡椒</a>
+                        <a href="http://m.hiapk.com/" title="安卓网" target="_blank">安卓网</a>
+                        <a href="http://baoruan.com/" title="宝软" target="_blank">宝软</a>
+                        <a href="http://m.appchina.com/" title="应用汇" target="_blank">应用汇</a>
+                        <a href="http://m.gao7.com/" title="搞趣" target="_blank">搞趣</a>
+                        <a href="http://m.app111.com/" title="苹果园" target="_blank">苹果园</a>
+                        <a href="http://qqgame.qq.com/" title="QQ游戏" target="_blank">QQ游戏</a>
+                        <a href="http://m.163.com/" title="网易应用" target="_blank">网易应用</a>
+                        <a href="http://duokoo.baidu.com/" title="多酷" target="_blank">多酷</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="彩票">[彩票]</a>
+                        <a href="http://wap.zhcw.com/" title="中彩网" target="_blank">中彩网</a>
+                        <a href="http://3g.iletou.com/?partnerId=2925" title="爱乐透" target="_blank">福彩</a>
+                        <a href="http://3g.cpdyj.com/?" title="彩票大赢家" target="_blank">双色球</a>
+                        <a href="http://caipiao.3g.cn/" title="3G彩票" target="_blank">3G彩票</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://3g.500wan.com/" title="500彩票" target="_blank">500彩票</a>
+                        <a href="http://m.aicai.com/" title="爱彩票" target="_blank">爱彩票</a>
+                        <a href="http://caipiao.m.taobao.com/" title="淘宝彩票" target="_blank">淘宝彩票</a>
+                        <a href="http://mc.okooo.com/?firstsource=syl.w.okooo.com/&amp;parentuserid=245713" title="澳客彩票" target="_blank">澳客彩票</a> <a href="http://lotto.sina.cn/" title="新浪彩票" target="_blank">新浪彩票</a>
+                        <a href="http://m.sohu.com/c/28/" title="搜狐彩票" target="_blank">搜狐彩票</a>
+                        <a href="http://tecai88.org/" title="特彩吧" target="_blank">特彩吧</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitext">
+                        <a href="#" title="银行">[银行]</a>
+                        <a href="http://m.alipay.com/" title="支付宝" target="_blank">支付宝</a>
+                        <a href="http://wap.icbc.com.cn/" title="工行" target="_blank">工行</a>
+                        <a href="http://wap.boc.cn/" title="中行" target="_blank">中行</a>
+                        <a href="http://m.cmbchina.com/" title="招行" target="_blank">招行</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden">
+                        <a href="http://www.99bill.com/" title="快钱" target="_blank">快钱</a></li>
+                        <a href="http://m.ccb.com/cn/mobile/index.html" title="建行" target="_blank">建行</a></li>
+                        <a href="http://wap.tenpay.com/" title="财付通" target="_blank">财付通</a></li>
+                        <a href="http://m.abchina.com/" title="农行" target="_blank">农行</a></li>
+                        <a href="http://wap.95559.com.cn/" title="交行" target="_blank">交行</a></li>
+                        <a href="http://mobile.paypal.com/" title="PayPal" target="_blank">PayPal</a></li>
+                    </div>
+                </div>
+                <div>
+                    <div class="fenleitextend">
+                        <a href="#" title="邮箱">[邮箱]</a>
+                        <a href="http://www.gmailgmail.net/" title="Gmail" target="_blank">Gmail</a>
+                        <a href="http://smart.mail.163.com/" title="163邮箱" target="_blank">163</a>
+                        <a href="http://m.mail.qq.com/" title="QQ邮箱" target="_blank">QQ邮</a>
+                        <a href="http://mail.sina.cn/" title="新浪邮箱" target="_blank">新浪</a>
+                        <span class="btnmore" onclick="divcontrol(this)"><img src="images/arrow.png" width="16" alt="" /></span>
+                    </div>
+                    <div class="hidden" style="border-top: 1px solid #eeeeee; border-bottom:none; ">
+                        <a href="http://smart.mail.yeah.net/" title="yeah邮箱" target="_blank">yeah邮箱</a>
+                        <a href="http://smart.mail.126.com/" title="126邮箱" target="_blank">126邮箱</a>
+                        <a href="http://wapmail.wo.com.cn/" title="联通沃" target="_blank">联通沃</a>
+                        <a href="http://wapmail.189.cn/" title="189邮箱" target="_blank">189邮箱</a>
+                        <a href="http://html5.mail.10086.cn/" title="139邮箱" target="_blank">139邮箱</a>
+                        <a href="http://wap.mail.sohu.com/" title="搜狐邮箱" target="_blank">搜狐邮箱</a>
+                        <a href="http://mail.yahoo.com/" title="雅虎邮箱" target="_blank">雅虎邮箱</a>
+                        <a href="http://m.exmail.qq.com/" title="QQ企邮" target="_blank">QQ企邮</a>
+                    </div>
+                </div>
+            </div>
+            <!--classfical_text-->
+        </div>
+        <!--classfical-->
+        <div class=" classfical">
+            <h2 style="color:#5AA31F;">实用查询</h2>
+            <div class="classfical_textsix">
+                <div class="shoppingthree">
+                    <ul>
+                        <li><a href="http://waptianqi.2345.com/?m" target="_blank">天气</a></li>
+                        <li><a href="http://map.baidu.com/mobile/webapp/index/index" target="_blank">地图</a></li>
+                        <li><a href="http://tools.2345.com/m/meishi/?m" target="_blank">菜谱</a></li>
+                        <li><a href="http://wap.iciba.com/" target="_blank">翻译</a></li>
+                        <li><a href="http://tools.2345.com/m/kuaidi.htm?m" target="_blank">快递</a></li>
+                        <li><a href="http://map.baidu.com/mobile/webapp/third/transit/force=superman" target="_blank">公交</a></li>
+                        <li><a href="http://tools.2345.com/m/lieche/?m" target="_blank">火车</a></li>
+                        <li><a href="http://tools.2345.com/m/jipiao/?m" target="_blank">机票</a></li>
+                        <li><a href="http://map.baidu.com/mobile/webapp/third/peccancy" target="_blank">违章</a></li>
+                        <li><a href="http://tools.2345.com/m/shenfenzheng.htm?m" target="_blank">身份证</a></li>
+                        <li class="endshop"><a href="http://tools.2345.com/m/zhgjm.htm?m" target="_blank">解梦</a></li>
+                        <li class="endshop"><a href="http://tools.2345.com/m/suanming.htm?m" target="_blank">算命</a></li>
+                        <li class="endshop"><a href="http://tools.2345.com/m/shengxiao/?m" target="_blank">运程</a></li>
+                        <li class="endshop"><a href="http://tools.2345.com/m/suanming/xm?m" target="_blank">姓名</a></li>
+                        <li class="endshop"><a href="http://m.hao123.com/m/baishitong">百事通</a></li>
+                    </ul>
+                </div>
+                <!--shopping-->
+            </div>
+            <!--classfical_text-->
+        </div>
+        <!--classfical-->
+        <div class="footer" style=" margin:0; padding:0;">
+            <span style="padding-bottom:15px;"> 沪ICP备13005144号-3</span>
+        </div>
+        <!--footer-->
+    </div>
+    <!--container-->
+    <div style="display:none;">
+        <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb2817cc89100b480d1f5866f7ce419bd' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+    </div>
+    <!-- 百度搜索框提示 -->
+    <!-- <script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script> -->
+    <script>
+    $(function() {
+        /* 动态加载头条新闻 */
+        var $changeList = $('#J_change_news'),
+            $newsListNav = $('#J_news_list_nav'),
+            defaultNewsType = 'toutiao',
+            $newsListWrap = $('#J_toutiao_news_list'),
+            $hasChannel = $('.J-has-channel'),
+            $loading = $('#J_spinner');
+        // 初始化数据
+        $newsListWrap.empty();
+        toutiaoAjax(defaultNewsType);
+        $hasChannel.each(function(i, ele){
+            var $this = $(ele);
+            $this.attr('href', $this.attr('href') + '?qid=' +tt_news_qid);
+        });
+
+        // 换一换
+        /*$changeList.click(function(event) {
+          event.preventDefault();
+          $newsListWrap.empty();
+          toutiaoAjax(defaultNewsType);
+        });*/
+
+        // 导航菜单点击事件
+        $newsListNav.on('click', 'a', function(event) {
+            event.preventDefault();
+            var $this = $(this),
+                tag = $this.data('tag');
+            $newsListNav.find('a').removeClass('active');
+            $this.addClass('active');
+            $newsListWrap.empty();
+            toutiaoAjax(tag);
+            defaultNewsType = tag;
+        });
+
+        /**
+         * 获取数据
+         * @return {[type]} [description]
+         */
+        function toutiaoAjax(nType) {
+            var t = setTimeout(function() {
+                    $loading.show();
+                }, 200)
+            // var nType = new Array('toutiao','shehui','yule','guonei')[Math.floor(Math.random()*4)];
+            $.ajax({
+                url: 'http://newswifiapi.dfshurufa.com/rdnews/newsjp',
+                type: 'GET',
+                data: {
+                    newstype: nType,
+                    qid: 'm021dh'
+                },
+                dataType: 'jsonp'
+            }).done(function(json) {
+                var d = (json && json.data) ? json.data : [];
+                if (d.length) {
+                    for (var i = 0; i < d.length; i++) {
+                        if (i === 0) {
+                            $newsListWrap.append('<li class="toutiao-item">' +
+                                '<a class="img-link" href="' + d[i].url + '?qid=' + tt_news_qid + '" target="_blank">' +
+                                '<img src="' + d[i].lbimg.src + '" alt="' + d[i].lbimg.alt + '" />' +
+                                '<span class="txt">' + d[i].topic + '</span>' +
+                                '</a>' +
+                                '</li>');
+                        } else {
+                            $newsListWrap.append('<li class="toutiao-item">' +
+                                '<a class="txt-link" href="' + d[i].url + '?qid=' + tt_news_qid + '" target="_blank" title="' + d[i].topic + '">' + d[i].topic + '</a>' +
+                                '</li>');
+                        }
+                    }
+                } else {
+                    $newsListWrap.append('<p style="text-align: center;">数据获取失败！</p>');
+                }
+            }).fail(function() {
+                $newsListWrap.append('<p style="text-align: center;">数据获取失败！</p>');
+            }).always(function() {
+                clearTimeout(t);
+                $loading.hide();
+            });
+
+        }
+    });
+    </script>
+</body>
+
+</html>
