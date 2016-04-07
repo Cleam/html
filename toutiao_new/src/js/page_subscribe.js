@@ -148,30 +148,6 @@ $(function(){
 			}
 
 			return {myChannels: myChannels, recChannels: recChannels};
-		},
-
-		/**
-		 * 获取我的频道
-		 * @param  {Array} sc 服务端频道
-		 * @param  {Array} cc 本地缓存的频道（用户自定义我的频道）
-		 * @return {[type]}    [description]
-		 */
-		getMyChannels: function(sc, cc){
-			if(!sc || !cc){
-				return [];
-			}
-			var arr = new Array(),
-				cLen = cc.length,
-				sLen = sc.length;
-			// 为了保持和缓存顺序一致，请外层循环使用缓存的频道数组
-			for (var i = 0; i < cLen; i++) {
-				for (var j = 0; j < sLen; j++) {
-					if(cc[i].name == sc[j].name){
-						arr.push(cc[i]);
-					}
-				}
-			}
-			return arr;
 		}
 	};
 

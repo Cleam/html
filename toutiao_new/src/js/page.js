@@ -84,6 +84,11 @@ $(function(){
 			scope.readUrl = wsCache.get('read_url_all');
         	if(!scope.readUrl){scope.readUrl = '';}
 
+        	/* 加载新闻频道类别 */
+        	if(wsCache.get('news_channels')){
+
+        	}
+
 			/* 保存所有新闻类别到数组 */
 	        $newsTabs.each(function(){
 	            var $this = $(this),
@@ -95,16 +100,19 @@ $(function(){
 	        });
 
 	        /* 删除当前类别记录的位置信息 */
-	        scope.clearPosition(scope.newsType);
+	        // scope.clearPosition(scope.newsType);
+	        
+	        // scope.initChannels(function(){
+				/* 还原到上次浏览的类别 */
+				$newsTabs.each(function(){
+					var $this = $(this);
+					if($this.data('type') == scope.newsType){
+						scope.scrollTo($this);
+						return false;
+					}
+				});
+	        // });
 
-			/* 还原到上次浏览的类别 */
-			$newsTabs.each(function(){
-				var $this = $(this);
-				if($this.data('type') == scope.newsType){
-					scope.scrollTo($this);
-					return false;
-				}
-			});
 
 			/* 设置当前位置信息 */
 	        var loc = wsCache.get('location');
@@ -241,6 +249,70 @@ $(function(){
 	        $newsList.on('click', '.J-bad', function(){
 	        	ptClick($(this), 'zd0000', -1);
 	        });
+		},
+
+		/**
+		 * 初始化频道类别
+		 * @return {[type]} [description]
+		 */
+		initChannels: function(callback){
+			/* 获取服务端所有频道 */
+			$.ajax({
+				url: 'data/channels.json',
+				dataType: 'json',
+				success: function(data){
+					var channels = data.channels,
+						up = channels.up,
+						serverChannels = up.concat(down),
+						myChannels = wsCache.get('news_channels'),
+						tabsHtml = '';
+					console.log(myChannels);
+					if(myChannels){
+						myChannels = scope.getMyChannels(serverChannels, myChannels);
+					} else {
+						myChannels = up;
+					}
+
+					for (var i = 0; i < myChannels.length; i++) {
+						if(i === 0){
+							tabsHtml += '<a class="active" data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
+						} else {
+							tabsHtml += '<a data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
+						}
+					}
+					$newsTabsWrap.append(tabsHtml);
+					callback();
+					// 缓存我的频道
+					wsCache.set('news_channels', myChannels);
+				},
+				error: function(){
+					console.error(arguments);
+				}
+			});
+		},
+
+		/**
+		 * 获取我的频道
+		 * @param  {Array} sc 服务端频道
+		 * @param  {Array} cc 本地缓存的频道（用户自定义我的频道）
+		 * @return {[type]}    [description]
+		 */
+		getMyChannels: function(sc, cc){
+			if(!sc || !cc){
+				return [];
+			}
+			var arr = new Array(),
+				cLen = cc.length,
+				sLen = sc.length;
+			// 为了保持和缓存顺序一致，请外层循环使用缓存的频道数组
+			for (var i = 0; i < cLen; i++) {
+				for (var j = 0; j < sLen; j++) {
+					if(cc[i].name == sc[j].name){
+						arr.push(cc[i]);
+					}
+				}
+			}
+			return arr;
 		},
 
 		/**
