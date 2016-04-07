@@ -66,6 +66,9 @@ $(function(){
 				}
 			});
 
+			// 聚焦到输入框
+			$searchInput.focus();
+
 			// 搜索框输入事件
 	        $searchInput.on('keyup', function(){
 	            scope.showOrHideClear();
@@ -74,7 +77,8 @@ $(function(){
 	        $searchClear.on('click', function(e){
 	            $searchInput.val('');
 	            $searchClear.hide();
-	            // $searchResult.hide();
+	            scope.clearContent();
+	            $searchInput.focus();
 	            e.preventDefault();
 	        });
 
@@ -92,6 +96,10 @@ $(function(){
 	        scope.showOrHideClear();
 		},
 
+		/**
+		 * 显示-隐藏clear按钮
+		 * @return {[type]} [description]
+		 */
 		showOrHideClear: function(){
 			if($.trim($searchInput.val()) !== ''){
                 $searchClear.show();
@@ -102,11 +110,32 @@ $(function(){
             }
 		},
 
+		/**
+		 * 缓存搜索关键词
+		 * @return {[type]} [description]
+		 */
 		cacheKw: function(){
 			wsCache.set('search_kw', kw);
 		},
 
-		loadSearchData: function(kw){
+		/**
+		 * 清空搜索信息流并显示搜索热词
+		 * @return {[type]} [description]
+		 */
+		clearContent: function(){
+			$newsList.empty();
+			$newsWrap.hide();
+			$hotWords.show();
+			wsCache.delete('search_content');
+		},
+
+		/**
+		 * 加载搜索数据
+		 * @param  {[type]} keywords 搜索关键词
+		 * @return {[type]}    [description]
+		 */
+		loadSearchData: function(keywords){
+			console.log(keywords);
 			var scope = this,
 				qid = Cookies.get('qid'),
 				uid = Cookies.get('user_id'),
@@ -119,7 +148,7 @@ $(function(){
 				dataType: 'jsonp',
 				timeout: 6000,
 				data: {
-					'keywords': encodeURI(kw),
+					'keywords': encodeURI(keywords),
 					'stkey': encodeURI(stkey),
 					'lastcol': lastcol,
 					'splitwordsarr': encodeURI(splitwordsarr),

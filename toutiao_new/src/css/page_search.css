@@ -4,20 +4,15 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-04-06
  */
-@media only screen and (min-width: 750px) {body{width: 750px;}}
-html,body{height: 100%; min-height: 100%;}
-body{padding-top: 1.62rem; font-size: 34px; margin: 0 auto;}
-a:active{background-color: #e5e5e5 !important;}
-input[type="search" i]{display: none;}
+body{padding-top: 1.7rem;}
 
 /* title */
-header{position: fixed; top: 0; z-index: 2; width: 7.5rem; height: 1.62rem;}
-header .top-title{position: relative; width: 100%; height: 0.8rem; background-color: #d43d3d; color: #fff;}
-header .top-title .title{position: relative; display: block; width: 3rem; margin: 0 auto; text-align: center; height: 100%; line-height: 0.8rem; font-weight: bold; font-size: 0.34rem; color: #fff;}
-/*header .top-title .title{position: relative; display: block; width: 3rem; margin: 0 auto; text-align: center; height: 100%; padding: 0.11rem 0; line-height: 0.56em; transform: scale(0.7); -webkit-transform: scale(0.7);}*/
+header{position: fixed; top: 0; z-index: 2; width: 7.5rem; height: 1.7rem;}
+header .top-title{position: relative; width: 100%; height: 0.88rem; background-color: #d43d3d; color: #fff;}
+header .top-title .title{position: relative; display: block; width: 3rem; margin: 0 auto; text-align: center; height: 100%; line-height: 0.88rem; font-weight: bold; font-size: 0.42rem; color: #fff;}
 header .top-title .title:active{background-color: #d43d3d !important;}
 header .top-title .title img{width: 2.34rem; height: 0.56rem;}
-header .top-title .back{position: absolute; left: 0.2rem; top: 50%; margin-top: -0.25rem; width: 0.5rem; height: 0.5rem; background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABCUExURUxpcf///////////////////////////////////////////////////////////////0xpcf///////////////+Nhri4AAAAVdFJOUwDnwEciCdr78hQvzTpWp21hAH6Vi4PgU5gAAAD2SURBVEgNrZbJEoMgEETbBRCXaJnw/7+aMTJWDjl0W/Hs8/UIzAD8+dnl772KijyLijySiIRHsUcJdhIKEtrDoVhCa3VISK4O3pKnU1HKSpafYyXSRhJ9rHWkhSbc0bFEU4mBJcaLmEnHOLiDJWYnmpF0dLeJ1PSkY6nLUaJOZNKx1V9VJpZYZWL3OtpApsLukpaNBejBgM2j0eV/MZHPpi8l0Hk2evmNkbcloG9+QD9ixsgHGegvhm0XxlyN7w7Dtj5Ab7DGeBtPbBs3xodFYk8P4ENMG3znhuMt5vkMZMXijGKxdw+PiEC/kAD6tQfQL1e/K3kDD2Ub0EJ8V6YAAAAASUVORK5CYII=") no-repeat center center; background-size: contain;}
+header .top-title .back{position: absolute; left: 0.2rem; top: 50%; margin-top: -0.25rem; width: 0.5rem; height: 0.5rem; transform: scale(0.8); -webkit-transform: scale(0.8); background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABCUExURUxpcf///////////////////////////////////////////////////////////////0xpcf///////////////+Nhri4AAAAVdFJOUwDnwEciCdr78hQvzTpWp21hAH6Vi4PgU5gAAAD2SURBVEgNrZbJEoMgEETbBRCXaJnw/7+aMTJWDjl0W/Hs8/UIzAD8+dnl772KijyLijySiIRHsUcJdhIKEtrDoVhCa3VISK4O3pKnU1HKSpafYyXSRhJ9rHWkhSbc0bFEU4mBJcaLmEnHOLiDJWYnmpF0dLeJ1PSkY6nLUaJOZNKx1V9VJpZYZWL3OtpApsLukpaNBejBgM2j0eV/MZHPpi8l0Hk2evmNkbcloG9+QD9ixsgHGegvhm0XxlyN7w7Dtj5Ab7DGeBtPbBs3xodFYk8P4ENMG3znhuMt5vkMZMXijGKxdw+PiEC/kAD6tQfQL1e/K3kDD2Ub0EJ8V6YAAAAASUVORK5CYII=") no-repeat center center; background-size: contain;}
 header .top-title .back:active{background-color: #AE2121 !important;}
 
 /* form */
@@ -40,20 +35,20 @@ header .top-form .form .clear-icon{position: absolute; right: 0.04rem; top: 50%;
 .news-list-wrap .news-item img{background-image: url("../img/img_bg.jpg"); background-position: center; background-size: cover;}
 .news-list-wrap .news-item:last-child a .news-wrap{border-bottom: 0 none;}
 .news-list-wrap .news-item a h3 em{color: #d43d3d;}
-.news-list-wrap .news-item-s1 a{display: block; width: 100%; height: 1.56rem; color: #333; padding: 0.24rem 0.3rem;}
+.news-list-wrap .news-item-s1 a{display: block; width: 100%; height: 1.68rem; color: #333; padding: 0.24rem 0.3rem;}
 .news-list-wrap .news-item-s1 a:visited{color: #999;}
-.news-list-wrap .news-item-s1 a .news-wrap{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem; height: 1.33rem;}
-.news-list-wrap .news-item-s1 a .txt-wrap{position: relative; width: 4.8rem; height: 1.08rem;}
+.news-list-wrap .news-item-s1 a .news-wrap{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem; height: 1.45rem;}
+.news-list-wrap .news-item-s1 a .txt-wrap{position: relative; width: 4.8rem; height: 1.2rem;}
 .news-list-wrap .news-item-s1 a .txt-wrap h3{font-size: 0.34rem; width: 100%; height: 0.8rem; line-height: 1.2em; overflow: hidden;}
 .news-list-wrap .news-item-s1 a .txt-wrap p{position: absolute; bottom: 0; width: 100%; font-size: 0.2rem; color: #999;}
-.news-list-wrap .news-item-s1 a .img-wrap{width: 1.92rem; height: 1.08rem; overflow: hidden;}
+.news-list-wrap .news-item-s1 a .img-wrap{width: 1.92rem; height: 1.2rem; overflow: hidden;}
 .news-list-wrap .news-item-s1 a .img-wrap img{width: 100%;}
 
 .news-list-wrap .news-item-s2 a{display: block; width: 100%; color: #333; padding: 0.2rem 0.3rem 0;}
 .news-list-wrap .news-item-s2 a:visited{color: #999;}
-.news-list-wrap .news-item-s2 a .news-wrap{position: relative; min-height: 2.16rem; padding-bottom: 0.24rem; border-bottom: 1px solid #eee;}
+.news-list-wrap .news-item-s2 a .news-wrap{position: relative; min-height: 2.3rem; padding-bottom: 0.24rem; border-bottom: 1px solid #eee;}
 .news-list-wrap .news-item-s2 a h3{font-size: 0.34rem; margin-bottom: 0.14rem; width: 100%; max-height: 0.8rem; line-height: 1.2em; overflow: hidden;}
-.news-list-wrap .news-item-s2 a .img-wrap{height: 1.26rem; overflow: hidden;}
+.news-list-wrap .news-item-s2 a .img-wrap{height: 1.4rem; overflow: hidden;}
 .news-list-wrap .news-item-s2 a .img-wrap img{display: block; margin-right: 0.09rem; width: 2.24rem;}
 .news-list-wrap .news-item-s2 a .img-wrap img:last-child{margin-right: 0;}
 .news-list-wrap .news-item-s2 a p{width: 100%; padding-top: 0.1rem; font-size: 0.2rem; color: #999;}
@@ -61,7 +56,7 @@ header .top-form .form .clear-icon{position: absolute; right: 0.04rem; top: 50%;
 .news-list-wrap .news-item a p i.hot,
 .news-list-wrap .news-item a p i.video,
 .news-list-wrap .news-item a p i.rec,
-.news-list-wrap .news-item a p i.nuanwen{position: relative; display: inline-block; width: 0.5rem; height: 0.26rem; padding: 1px 0; margin-right: 0.06rem; line-height: 0.26rem; text-align: center; vertical-align: middle; /* height: 0.26rem; border-radius: 2px; transform: scale(0.8); border: 1px solid #fff; */}
+.news-list-wrap .news-item a p i.nuanwen{position: relative; display: inline-block; width: 0.5rem; height: 0.26rem; padding: 1px 0; margin-right: 0.06rem;  line-height: 0.26rem;  text-align: center; vertical-align: middle;}
 
 .news-list-wrap .news-item a p i.hot:before,
 .news-list-wrap .news-item a p i.video:before,

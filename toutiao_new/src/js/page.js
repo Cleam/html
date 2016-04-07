@@ -24,7 +24,7 @@ $(function(){
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',		// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',				// 美女点赞（点踩）
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志
-		statsUrl = 'http://ot.dftoutiao.com/apponline/online',			// 统计(stats = statistics)
+		onlineUrl = 'http://ot.dftoutiao.com/apponline/online',			// 在线统计(统计stats = statistics)
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
 		$loation = $('#J_location'),

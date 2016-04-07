@@ -19,7 +19,8 @@
 	<title>头条新闻</title>
 	<script>!function(a,b){var c=a.documentElement,d="orientationchange"in window?"orientationchange":"resize",e=function(){var a=c.clientWidth;a&&(a>=750&&(a=750),c.style.fontSize=100*(a/750)+"px")};a.addEventListener&&(b.addEventListener(d,e,!1),e())}(document,window);</script>
 	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/page_search.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/page_subscribe.css">
 </head>
 <body>
 	<p class="none">东方头条网-东方网旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!</p>
@@ -27,39 +28,23 @@
 		<!-- title -->
 		<section class="top-title">
 			<a href="index.html" class="back"></a>
-			<a href="javascript:;" class="title">头条搜索<!-- <img src="img/top_title.png" alt=""> --></a>
-		</section>
-		<!-- menu -->
-		<section class="top-form">
-			<form id="J_form" class="form" action="" onsubmit="return false;">
-				<input id="J_search_input" type="search" placeholder="请输入搜索关键词">
-				<i class="search-icon"></i>
-				<!-- <a id="J_clear" class="clear-icon none"></a> -->
-			</form>
+			<a href="javascript:;" class="title">频道管理</a>
 		</section>
 	</header>
-
-	<div id="J_content" class="news-list">
-		<div id="J_hot_words" class="hot-words-wrap"></div>
-		<div class="news-wrap none">
-			<div id="J_news_list" class="news-list-wrap">
-			</div>
-			<div id="J_loading" class="loading">
-				<div class="spinner">
-				  <div class="bounce1"></div>
-				  <div class="bounce2"></div>
-				  <div class="bounce3"></div>
-				</div>
-				<p class="txt">数据加载中</p>
-			</div>
-		</div>
+	
+	<div class="content">
+		<p class="type-title type-title-1">我的频道<span>（点击删除）</span></p>
+		<ul id="J_up_list" class="up-list clearfix"></ul>
+		<p class="type-title type-title-2">推荐频道<span>（点击添加）</span></p>
+		<ul id="J_down_list" class="down-list clearfix"></ul>
 	</div>
+
 	
 	<script src="js/zepto.min.js"></script>
 	<script src="js/fastclick.min.js"></script>
 	<script src="js/web-storage-cache.min.js"></script>
 	<script src="js/js.cookie.js"></script>
 	<script src="js/util.js"></script>
-	<script src="js/page_search.js"></script>
+	<script src="js/page_subscribe.js"></script>
 </body>
 </html>
