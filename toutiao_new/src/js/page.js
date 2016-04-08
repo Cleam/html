@@ -27,12 +27,10 @@ $(function(){
 		onlineUrl = 'http://ot.dftoutiao.com/apponline/online',			// 在线统计(统计stats = statistics)
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
-		$loation = $('#J_location'),
+		// $loation = $('#J_location'),
 		$newsList = $('#J_news_list'),
 		$refresh = $('#J_refresh'),
 		$newsTabsWrap = $('#J_top_menu'),
-		$newsTabs = $newsTabsWrap.children('a'),
-		topMenuLinkWidth = $newsTabs.eq(0).width(),
 		praiseTrampleFlag = true,
 		startPos = 0,				// 滑动开始位置
 		touchDistance = 0,			// 滑动距离
@@ -84,25 +82,24 @@ $(function(){
 			scope.readUrl = wsCache.get('read_url_all');
         	if(!scope.readUrl){scope.readUrl = '';}
 
-        	/* 加载新闻频道类别 */
-        	if(wsCache.get('news_channels')){
-
-        	}
-
-			/* 保存所有新闻类别到数组 */
-	        $newsTabs.each(function(){
-	            var $this = $(this),
-	                type = $this.data('type');
-	            newsTypeArr_all.push(type);
-	            if(type !== 'meinv' && type !== 'nuanwen'){
-	                newsTypeArr_special.push(type);
-	            }
-	        });
 
 	        /* 删除当前类别记录的位置信息 */
 	        // scope.clearPosition(scope.newsType);
 	        
-	        // scope.initChannels(function(){
+        	/* 加载新闻频道类别 */
+	        scope.initChannels(function(){
+	        	var $newsTabs = $newsTabsWrap.children('a');
+
+	        	/* 保存所有新闻类别到数组 */
+		        $newsTabs.each(function(){
+		            var $this = $(this),
+		                type = $this.data('type');
+		            newsTypeArr_all.push(type);
+		            if(type !== 'meinv' && type !== 'nuanwen'){
+		                newsTypeArr_special.push(type);
+		            }
+		        });
+
 				/* 还原到上次浏览的类别 */
 				$newsTabs.each(function(){
 					var $this = $(this);
@@ -111,16 +108,14 @@ $(function(){
 						return false;
 					}
 				});
-	        // });
-
-
-			/* 设置当前位置信息 */
-	        var loc = wsCache.get('location');
-	        if(loc){
-	            scope.updateDomLocation(loc);
-	        } else {
-	            scope.location();
-	        }
+				
+				/* 设置当前位置信息 */
+		        if(wsCache.get('location')){
+		            scope.updateDomLocation(wsCache.get('location'));
+		        } else {
+		            scope.location();
+		        }
+	        });
 
 			/* 首次加载数据 */
 			scope.refreshData(function(){
@@ -131,11 +126,9 @@ $(function(){
 			scope.pullDown();
 
 			/* 频道类别（菜单）点击事件 */
-			$newsTabs.on('click', function(){
+			$newsTabsWrap.on('click', 'a', function(){
 				var $this = $(this),
-					type = $this.data('type'),
-					cacheNews = wsCache.get('news_' + type),
-					cachePos = wsCache.get('news_pos_' + type);
+					type = $this.data('type');
 				// 使当前频道分类显示在导航菜单中间
 				scope.scrollTo($this);
 				// 存储上一个新闻类别和当前新闻类别
@@ -143,19 +136,12 @@ $(function(){
 				wsCache.set('current_newstype', type, {exp: 20 * 60});
 				// 加载当前频道类别新闻数据
 				scope.newsType = type;
-				if(cacheNews){
-					$newsList.html(cacheNews);
-				} else {
-					scope.refreshData(function(){
-						scope.highlightPraiseTrample();
-					});
-				}
-				// 页面滚到记录的位置处
-				if(cachePos){
-	                $('body').scrollTop(cachePos);
-	            }
+
+				scope.refreshData(function(){
+					scope.highlightPraiseTrample();
+				});
 			});
-			
+
 			/* 页面滚动监听（当滑到底部时，加载下一页数据。） */
 			$(window).on('scroll', function() {
 	            var scrollTop = getScrollTop(),
@@ -184,6 +170,8 @@ $(function(){
         		setTimeout(function(){
         			$refresh.removeClass('active');
         		}, 700);
+        		wsCache.delete('news_pos_' + scope.newsType);
+        		wsCache.delete('news_' + scope.newsType);
 	        	scope.refreshData(function(){
 	        		scope.highlightPraiseTrample();
 	        	});
@@ -256,39 +244,48 @@ $(function(){
 		 * @return {[type]} [description]
 		 */
 		initChannels: function(callback){
-			/* 获取服务端所有频道 */
-			$.ajax({
-				url: 'data/channels.json',
-				dataType: 'json',
-				success: function(data){
-					var channels = data.channels,
-						up = channels.up,
-						serverChannels = up.concat(down),
-						myChannels = wsCache.get('news_channels'),
-						tabsHtml = '';
-					console.log(myChannels);
-					if(myChannels){
-						myChannels = scope.getMyChannels(serverChannels, myChannels);
-					} else {
-						myChannels = up;
+			var scope = this,
+				myChannels = wsCache.get('news_channels');
+			console.log('myChannels: ', myChannels);
+			if(!myChannels){
+				/* 获取服务端所有频道 */
+				$.ajax({
+					url: 'data/channels.json',
+					dataType: 'json',
+					success: function(data){
+						scope.generateChannelTabs(data.channels.up);
+						callback && callback();
+					},
+					error: function(){
+						console.error(arguments);
 					}
+				});
+			} else {
+				scope.generateChannelTabs(myChannels);
+				callback && callback();
+			}
+		},
 
-					for (var i = 0; i < myChannels.length; i++) {
-						if(i === 0){
-							tabsHtml += '<a class="active" data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
-						} else {
-							tabsHtml += '<a data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
-						}
-					}
-					$newsTabsWrap.append(tabsHtml);
-					callback();
-					// 缓存我的频道
-					wsCache.set('news_channels', myChannels);
-				},
-				error: function(){
-					console.error(arguments);
+		/**
+		 * 生成频道DOM
+		 * @param  {[type]} myChannels 频道数据
+		 * @return {[type]}            [description]
+		 */
+		generateChannelTabs: function(myChannels){
+			if(!myChannels || !(myChannels instanceof Array)){
+				return;
+			}
+			var tabsHtml = '';
+			for (var i = 0; i < myChannels.length; i++) {
+				if(i === 0){
+					tabsHtml += '<a class="active" data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
+				} else {
+					tabsHtml += '<a data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
 				}
-			});
+			}
+			$newsTabsWrap.html(tabsHtml);
+			// 缓存我的频道
+			wsCache.set('news_channels', myChannels);
 		},
 
 		/**
@@ -322,7 +319,6 @@ $(function(){
 		pullDown: function(){
 			var scope = this;
 			$newsList.on('touchstart', function(e){
-				console.log($pullDownLoading);
 				// 防止重复快速下拉
 				clearTimeout(pullDownLoadDataFlag);
 				startPos = e.touches[0].pageY;
@@ -629,19 +625,16 @@ $(function(){
 		                    // 缓存位置信息
 		                    wsCache.set('location', loc, {exp: 30 * 24 * 3600});
 		                } else {
-		                	// $newsTabs.eq(3).remove();
-		                	$loation.remove();
+		                	// $loation.remove();
 		                }
 		            } catch(e) {
 		                console.error(e);
-		                // $newsTabs.eq(3).remove();
-		                $loation.remove();
+		                // $loation.remove();
 		            }
 	            },
 	            error: function(jqXHR,textStatus){
 		            console.error(textStatus);
-		            // $newsTabs.eq(3).remove();
-		            $loation.remove();
+		            // $loation.remove();
 		        }
 	        });
 	    },
@@ -652,8 +645,7 @@ $(function(){
 	     * @return {[type]}     [description]
 	     */
 	    updateDomLocation: function(loc){
-	        $loation.attr('data-type', loc.prov_py);
-	        $loation.html(loc.prov_name);
+	    	$newsTabsWrap.children('a').eq(1).after('<a data-type="' + loc.prov_py + '">' + loc.prov_name + '</a>');
 	    },
 
 		/**
@@ -749,9 +741,10 @@ $(function(){
 		 * @return {[type]}         [description]
 		 */
 		scrollTo: function($target){
+			var $newsTabs = $newsTabsWrap.children('a');
 			$newsTabs.removeClass('active');
 			$target.addClass('active');
-			$newsTabsWrap.scrollLeft($target[0].offsetLeft - (topMenuLinkWidth * 3));
+			$newsTabsWrap.scrollLeft($target[0].offsetLeft - ($newsTabs.eq(0).width() * 3));
 		},
 
 		setQid: function(qid){
@@ -805,41 +798,54 @@ $(function(){
 
 		/**
 		 * 刷新数据
+		 * @param {Function} callback 回调方法
 		 * @return {[type]} [description]
 		 */
 		refreshData: function(callback){
-			var scope = this;
-			wsCache.delete('pulldown_idx_' + scope.newsType);
-			wsCache.set('pgnum_' + scope.newsType, 1, { exp: 20 * 60});
-			$.ajax({
-	            url: refreshUrl,
-	            data: {
-	                type: scope.newsType,
-	                endkey: '',
-	                domain: 'eastday.com',
-	                recgid: scope.userId, // 用户ID
-	                qid: scope.qid,
-	                picnewsnum : 1,
-	                readhistory: '',
-	                idx: 0,
-	                pgnum: 1
-	            },
-	            dataType: 'jsonp',
-	            jsonp: "jsonpcallback",
-	            timeout: 8000,
-	            beforeSend: function(){
-	                $newsList.html('');
-	                // $bgLoading.show();
-	            },
-	            success: function(data){
-	            	// console.log(data);
-	                scope.generateDom(data);
-	            },
-	            complete: function(){
-	                // $bgLoading.hide();
-	                callback && callback();
+			var scope = this,
+				cacheNews = wsCache.get('news_' + scope.newsType),
+				cachePos = wsCache.get('news_pos_' + scope.newsType);
+			if(cacheNews){
+				$newsList.html(cacheNews);
+				// 页面滚到记录的位置处
+				if(cachePos){
+	                $('body').scrollTop(cachePos);
 	            }
-	        });
+			} else {
+				wsCache.delete('pulldown_idx_' + scope.newsType);
+				wsCache.set('pgnum_' + scope.newsType, 1, { exp: 20 * 60});
+				$.ajax({
+		            url: refreshUrl,
+		            data: {
+		                type: scope.newsType,
+		                endkey: '',
+		                domain: 'eastday.com',
+		                recgid: scope.userId, // 用户ID
+		                qid: scope.qid,
+		                picnewsnum : 1,
+		                readhistory: '',
+		                idx: 0,
+		                pgnum: 1
+		            },
+		            dataType: 'jsonp',
+		            jsonp: "jsonpcallback",
+		            timeout: 8000,
+		            beforeSend: function(){
+		                $newsList.html('');
+		            },
+		            success: function(data){
+		            	// console.log(data);
+		                scope.generateDom(data);
+		                // 页面滚到记录的位置处
+						if(cachePos){
+			                $('body').scrollTop(cachePos);
+			            }
+		            },
+		            complete: function(){
+		                callback && callback();
+		            }
+		        });
+			}
 		},
 
 		pullUpLoadData: function(){
@@ -952,9 +958,9 @@ $(function(){
 	            } else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
 	            	$newsList.append('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            } else if(imgLen >= 3){
+	            } else if(imgLen >= 3){		// 三图模式
 	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            } else {
+	            } else {	// 单图模式
 	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
 	        }

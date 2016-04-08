@@ -59,21 +59,20 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 .news-list-wrap .news-item a p i.hot,
 .news-list-wrap .news-item a p i.video,
 .news-list-wrap .news-item a p i.rec,
-.news-list-wrap .news-item a p i.nuanwen{position: relative; display: inline-block; width: 0.5rem; height: 0.26rem; padding: 1px 0; margin-right: 0.06rem; line-height: 0.26rem; text-align: center; vertical-align: middle; /* height: 0.26rem; border-radius: 2px; transform: scale(0.8); border: 1px solid #fff; */}
+.news-list-wrap .news-item a p i.nuanwen{position: relative; display: inline-block; width: 0.5rem; height: 0.26rem; line-height: 0.26rem; margin-right: 0.06rem; text-align: center; font-size: 0.2rem; border-style: solid; border-width: 1px; -webkit-border-radius: 4px; border-radius: 4px;}
+.news-list-wrap .news-item a p i.hot{border-color: rgba(248,89,89,.5); color: #f85959;} /* 热门 */
+.news-list-wrap .news-item a p i.video{border-color: rgba(42,144,215,.5); color: #2a90d7;} /* 视频 */
+.news-list-wrap .news-item a p i.rec{border-color: rgba(42,144,215,.5); color: #2a90d7;} /* 推荐 */
+.news-list-wrap .news-item a p i.nuanwen{border-color: rgba(248,89,89,.5); color: #f85959;} /* 暖文 */
 
-.news-list-wrap .news-item a p i.hot:before,
+/* .news-list-wrap .news-item a p i.hot:before,
 .news-list-wrap .news-item a p i.video:before,
 .news-list-wrap .news-item a p i.rec:before,
 .news-list-wrap .news-item a p i.nuanwen:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 4px; border-radius: 4px;}
 .news-list-wrap .news-item a p i.hot:before{border-color: rgba(248,89,89,.5);}
 .news-list-wrap .news-item a p i.video:before{border-color: rgba(42,144,215,.5);}
 .news-list-wrap .news-item a p i.rec:before{border-color: rgba(42,144,215,.5);}
-.news-list-wrap .news-item a p i.nuanwen:before{border-color: rgba(248,89,89,.5);}
-
-.news-list-wrap .news-item a p i.hot{color: #f85959;}/* 热门 */
-.news-list-wrap .news-item a p i.video{color: #2a90d7;}/* 视频 */
-.news-list-wrap .news-item a p i.rec{color: #2a90d7;}/* 推荐 */
-.news-list-wrap .news-item a p i.nuanwen{color: #f85959;}/* 暖文 */
+.news-list-wrap .news-item a p i.nuanwen:before{border-color: rgba(248,89,89,.5);} */
 
 .news-list-wrap .news-item-s3{position: relative;}
 .news-list-wrap .news-item-s3 a{display: block; width: 100%; color: #333; padding: 0.24rem 0.3rem 0;}
