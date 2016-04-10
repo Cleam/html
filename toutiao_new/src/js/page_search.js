@@ -38,6 +38,7 @@ $(function(){
 
 			/* 热词点击事件监听 */
 			$hotWords.on('click', 'a', function(){
+				scope.clearCaches();
 				kw = $(this).text();
 				scope.loadSearchData(kw);
 				$searchInput.val(kw);
@@ -61,6 +62,7 @@ $(function(){
 				kw = $.trim($searchInput.val());
 				if(kw){
 					$newsList.html('');
+					scope.clearCaches();
 					scope.loadSearchData(kw);
 					scope.cacheKw();
 				}
@@ -130,12 +132,21 @@ $(function(){
 		},
 
 		/**
+		 * 清除本地存储信息(重新搜索时用到)
+		 * @return {[type]} [description]
+		 */
+		clearCaches: function(){
+			wsCache.delete('search_param_lastcol');
+			wsCache.delete('search_param_splitwordsarr');
+			wsCache.delete('search_param_stkey');
+		},
+
+		/**
 		 * 加载搜索数据
 		 * @param  {[type]} keywords 搜索关键词
 		 * @return {[type]}    [description]
 		 */
 		loadSearchData: function(keywords){
-			console.log(keywords);
 			var scope = this,
 				qid = Cookies.get('qid'),
 				uid = Cookies.get('user_id'),
@@ -188,7 +199,11 @@ $(function(){
 			var scope = this,
 				len = d.length
 			if(!idx){idx = 0;}
-			if(len === 0){$loading.hide();}
+			if(len === 0){
+				$loading.before('<p style="text-align: center; font-size: 0.24rem; padding: 30px; color: #999;">抱歉，未找到相关新闻！</p>');
+				$loading.hide();
+				return;
+			}
 			for (var i = 0; i < len; i++) {
 				var url = d[i].url,
 					title = d[i].title,
@@ -244,7 +259,7 @@ $(function(){
 		},
 
 		/**
-		 * 关键词加红处理
+		 * 关键词加红处理（递归算法）
 		 * @param  {String} txt   标题
 		 * @param  {Array} swArr  关键词数组
 		 * @param  {Number} i     0
