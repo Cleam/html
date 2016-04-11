@@ -23,7 +23,7 @@ $(function(){
 		positionUrl = 'http://position.dfshurufa.com/position/get',		// 获取用户位置
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',		// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',				// 美女点赞（点踩）
-		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志
+		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
 		onlineUrl = 'http://ot.dftoutiao.com/apponline/online',			// 在线统计(统计stats = statistics)
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
@@ -54,6 +54,8 @@ $(function(){
 		this.pulldown_num = 0;		// 下拉计数
 		this.qid = getQueryString('qid');	// 渠道ID
 		this.pullUpFlag = true;		// 上拉加载数据(防止操作过快多次加载)
+		this.osType = getOsType();
+		this.browserType = getBrowserType();
 		// 初始化
 		this.init();
 	}
@@ -140,6 +142,44 @@ $(function(){
 				scope.refreshData(function(){
 					scope.highlightPraiseTrample();
 				});
+
+				// 发送操作信息
+				$.ajax({
+					url: logUrl,
+					data: {
+						qid: scope.qid,				// 渠道号
+						uid: '',					// 从服务器端获取的uid
+						loginid: '',				// App端分享新闻时url上追加的ttaccid
+						softtype: '',				// 软件type（当前默认news）
+						softname: '',				// 软件名（当前默认eastday_wapnews）
+						newstype: '',				// 当前新闻类别
+						from: '',					// url上追加的fr字段
+						to: '',						// 当前页面
+						os_type: '',				// 客户端操作系统
+						browser_type: '',			// 客户端浏览器类别
+						pixel: '',					// 客户端分辨率
+						ime: '',					// App端用户imei号
+						idx: '',					// 当前新闻的idx属性
+						ishot: '',					// 当前新闻是不是热点新闻
+						fr_url: '',					// 浏览器的refer属性
+						ver: '',					// App版本（1.2.9）url上追加的ver
+						appqid: '',					// App渠道号url上追加的appqid
+						ttloginid: '',				// App端分享新闻时url上追加的ttloginid
+						apptypeid: '',				// App端的软件类别url上追加的apptypeid
+						appver: '',					// App版本（010209）url上追加的appver
+						recommendtype: '',			// 推荐新闻类别url上追加的recommendtype
+						ispush: ''					// 是不是推送新闻url上追加的ispush
+					},
+					dataType: 'jsonp',
+					jsonp: 'jsonpcallback',
+					success: function(){
+						console.log(arguments);
+					},
+					error: function(){
+						console.error(arguments);
+					}
+				});
+
 			});
 
 			/* 页面滚动监听（当滑到底部时，加载下一页数据。） */
@@ -396,12 +436,8 @@ $(function(){
 		 */
 		pullDownLoadData: function(callback){
 			var scope = this;
-			// 获取阅读记录
-			if(scope.newsType == 'toutiao' || scope.newsType == 'weikandian'){
-	            scope.readUrl = wsCache.get('read_url_all');
-	        } else {
-	            scope.readUrl = wsCache.get('read_url_' + scope.newsType);
-	        }
+			// 获取阅读历史
+	        scope.readUrl = scope.getReadUrl();
 			// 页码（获取之后加一再存储）
 	        scope.pulldown_pgNum = Number(wsCache.get('pulldown_pgnum_' + scope.newsType));
 	        wsCache.set('pulldown_pgnum_' + scope.newsType, --scope.pulldown_pgNum, { exp: 24 * 3600});
@@ -418,7 +454,8 @@ $(function(){
 					idx: scope.pulldown_idx,
 					readhistory: scope.readUrl,
 					recgid: scope.userId,
-					os: getOsType()
+					qid: scope.qid,
+					os: scope.osType
 	            },
 	            dataType: 'jsonp',
 	            jsonp: "jsonpcallback",
@@ -438,6 +475,22 @@ $(function(){
 	                callback && callback();
 	            }
 			});
+		},
+
+		/**
+		 * 从缓存中获取已读历史url
+		 * @return {String} 已读历史url
+		 */
+		getReadUrl: function(){
+			var scope = this,
+				ru = '';
+			// 获取阅读记录
+			if(scope.newsType == 'toutiao' || scope.newsType == 'weikandian'){
+	            ru = wsCache.get('read_url_all');
+	        } else {
+	            ru = wsCache.get('read_url_' + scope.newsType);
+	        }
+	        return ru ? ru : null;
 		},
 
 		/**
@@ -814,18 +867,19 @@ $(function(){
 			} else {
 				wsCache.delete('pulldown_idx_' + scope.newsType);
 				wsCache.set('pgnum_' + scope.newsType, 1, { exp: 20 * 60});
+				// 获取阅读历史
+		        scope.readUrl = scope.getReadUrl();
 				$.ajax({
 		            url: refreshUrl,
 		            data: {
 		                type: scope.newsType,
-		                endkey: '',
-		                domain: 'eastday.com',
 		                recgid: scope.userId, // 用户ID
 		                qid: scope.qid,
 		                picnewsnum : 1,
-		                readhistory: '',
+		                readhistory: scope.readUrl,
 		                idx: 0,
-		                pgnum: 1
+		                pgnum: 1,
+		                os: scope.osType
 		            },
 		            dataType: 'jsonp',
 		            jsonp: "jsonpcallback",
@@ -850,11 +904,8 @@ $(function(){
 
 		pullUpLoadData: function(){
 			var scope = this;
-			if(scope.newsType == 'toutiao' || scope.newsType == 'weikandian'){
-	            scope.readUrl = wsCache.get('read_url_all');
-	        } else {
-	            scope.readUrl = wsCache.get('read_url_' + scope.newsType);
-	        }
+			// 获取阅读历史
+	        scope.readUrl = scope.getReadUrl();
 	        // 页码（获取之后加一再存储）
 	        scope.pgNum = Number(wsCache.get('pgnum_' + scope.newsType));
 	        wsCache.set('pgnum_' + scope.newsType, ++scope.pgNum, { exp: 24 * 3600});
@@ -866,14 +917,13 @@ $(function(){
 	            data: {
 	                type: scope.newsType,
 	                startkey: wsCache.get('rowkey_' + scope.newsType),
-	                newsnum: 20,
-	                isnew: 1,
-	                domain: 'eastday.com',
+	                newsnum: scope.newsType == 'meinv' ? 10 : 20,
+	                qid: scope.qid,
 	                readhistory: scope.readUrl,
 	                idx: scope.idx,
 	                recgid: scope.userId, // 用户ID
 	                pgnum: scope.pgNum,
-	                qid: scope.qid
+	                os: scope.osType
 	            },
 	            dataType: 'jsonp',
 	            jsonp: "jsonpcallback",

@@ -269,6 +269,9 @@ $(function(){
 			var scope = this;
 			if(txt && swArr && swArr.length){
 				var len = swArr.length;
+				swArr.sort(function(a, b){
+					return b.length - a.length;
+				});
 				if(!i){i = 0;}
 				if(i == len){
 					return txt;
