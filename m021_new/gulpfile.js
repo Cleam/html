@@ -31,8 +31,11 @@ gulp.task('html', function() {
 
 // 自动添加css前缀和压缩
 gulp.task('css', function () {
-    var cssSrc = ['./src/css/base.css', './src/css/swiper-3.3.0.min.css', './src/css/page.css'],
-        // cssSrc = './src/css/*.css',
+    var cssSrc = [
+            './src/css/base.css', 
+            './src/css/swiper-3.3.0.min.css', 
+            './src/css/page.css'
+        ],
         cssDst = './dist/css';
     return gulp.src(cssSrc)
     	.pipe(autoprefixer())
@@ -49,9 +52,25 @@ gulp.task('css', function () {
 });
 
 // js代码校验、合并和压缩
-gulp.task('js', function() {
+gulp.task('js_top', function() {
     var jsSrc = [
             './src/js/channel.js', 
+            './src/js/qidToAdid.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(concat('main-top.js'))
+        // .pipe(gulp.dest(jsDst))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        //.pipe(rev.manifest({merge: true}))           //- 生成一个rev-manifest.json
+        //.pipe(gulp.dest('./rev'))
+        .pipe(livereload());
+});
+gulp.task('js_bottom', function() {
+    var jsSrc = [
             './src/js/jquery-2.2.1.min.js', 
             './src/js/jquery.cookie.min.js',
             './src/js/swiper-3.3.0.jquery.min.js',
@@ -59,12 +78,11 @@ gulp.task('js', function() {
             './src/js/web-storage-cache.min.js',
             './src/js/page.js'
         ],
-        //jsSrc = './src/js/*.js',
         jsDst = './dist/js';
     return gulp.src(jsSrc)
         // .pipe(jshint('.jshintrc'))
         // .pipe(jshint.reporter('default'))
-        .pipe(concat('main.js'))
+        .pipe(concat('main-bottom.js'))
         // .pipe(gulp.dest(jsDst))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
@@ -111,7 +129,7 @@ gulp.task('default', ['clean'], function() {
 }); 
 */
 
-gulp.task('default', ['html', 'css', 'img', 'js']);
+gulp.task('default', ['html', 'css', 'img', 'js_top', 'js_bottom']);
 
 // 监听文件
 // 监听任务 运行语句 gulp watch

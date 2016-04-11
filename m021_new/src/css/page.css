@@ -198,4 +198,7 @@ a:active{background-color: #e5e5e5 !important;}
   }
 }
 
+/* 新闻信息流sogou广告 */
+.ad-sogou-wrap{padding: 0.1rem 0; border-bottom: 1px solid #eee;}
+.ad-sogou-wrap iframe{padding: 0 0.3rem; width: 100%; height: 78px;}
 

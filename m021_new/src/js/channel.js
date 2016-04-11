@@ -1,4 +1,4 @@
-var tt_news_qid = '';
+var tt_news_mid = '', tt_news_qid = '';
 (function(){
 	// 获取渠道ID并赋值给全局变量TT_NEWS_QID;
 	tt_news_qid = getChannelId();
@@ -8,23 +8,23 @@ var tt_news_qid = '';
 	 * @return {[type]} [description]
 	 */
 	function getChannelId(){
-		var mid = getQueryString('mid'),
-			curHost = window.location.host,
+		var curHost = window.location.host,
 			prefix = '';
+		tt_news_mid = getQueryString('mid');
 		switch(curHost){
 			case 'm.021.com': prefix = 'm021'; break;
 			case 'mini.apdft.com': prefix = 'apdft'; break;
 			default: prefix = 'm021'; break;
 		}
-		if(mid){	// ?mid=xxxx
-			return prefix + '_' + mid;
-		}
-		// 无渠道情况 和 ?xxxx
-		var tempMid = getQueryString2();
-		if(tempMid){
-			return prefix + '_' + tempMid;
-		} else {
-			return prefix + 'dh';
+		if(tt_news_mid){	// ?mid=xxxx
+			return prefix + '_' + tt_news_mid;
+		} else {	// 无渠道情况 和 ?xxxx
+			tt_news_mid = getQueryString2();
+			if(tt_news_mid){
+				return prefix + '_' + tt_news_mid;
+			} else {
+				return prefix + 'dh';
+			}
 		}
 	}
 
