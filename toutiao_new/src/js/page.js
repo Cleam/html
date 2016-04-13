@@ -1,22 +1,6 @@
 // $: Zepto
 $(function(){
 	FastClick.attach(document.body);
-	/*
-		刷新接口：http://toutiao.eastday.com/toutiao_h5/RefreshJP
-		下拉叠加接口：http://toutiao.eastday.com/toutiao_h5/pulldown
-		上拉加载下一页接口：http://toutiao.eastday.com/toutiao_h5/NextJP
-
-		搜索接口：http://minisearch.dfshurufa.com/search/search02
-		热词接口：http://minisearch.dfshurufa.com/hotwords/hotwords
-
-		获取用户地理位置：http://position.dfshurufa.com/position/get
-		统计用户在线时长：http://ot.dftoutiao.com/apponline/online
-
-		新用户获取用户uid：http://toutiao.eastday.com/getwapdata/getuid
-		上传active日志：http://toutiao.eastday.com/getwapdata/data
-
-		美女点赞（点踩）：http://toutiao.eastday.com/pjson/zan
-	 */
 	var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',	// 刷新数据
 		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',	// 下拉加载
 		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',		// 上拉加载
@@ -42,6 +26,9 @@ $(function(){
 		pullDownLoadDataFlag = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache();	// 本地存储对象
 
+	/**
+	 * 东方头条对象
+	 */
 	function EastNews(){
 		var currentNewsType = wsCache.get('current_newstype');
 		this.newsType = currentNewsType ? currentNewsType : 'toutiao';	// 新闻频道类别
@@ -142,44 +129,8 @@ $(function(){
 				scope.refreshData(function(){
 					scope.highlightPraiseTrample();
 				});
-
-				// 发送操作信息
-				$.ajax({
-					url: logUrl,
-					data: {
-						qid: scope.qid,				// 渠道号
-						uid: '',					// 从服务器端获取的uid
-						loginid: '',				// App端分享新闻时url上追加的ttaccid
-						softtype: '',				// 软件type（当前默认news）
-						softname: '',				// 软件名（当前默认eastday_wapnews）
-						newstype: '',				// 当前新闻类别
-						from: '',					// url上追加的fr字段
-						to: '',						// 当前页面
-						os_type: '',				// 客户端操作系统
-						browser_type: '',			// 客户端浏览器类别
-						pixel: '',					// 客户端分辨率
-						ime: '',					// App端用户imei号
-						idx: '',					// 当前新闻的idx属性
-						ishot: '',					// 当前新闻是不是热点新闻
-						fr_url: '',					// 浏览器的refer属性
-						ver: '',					// App版本（1.2.9）url上追加的ver
-						appqid: '',					// App渠道号url上追加的appqid
-						ttloginid: '',				// App端分享新闻时url上追加的ttloginid
-						apptypeid: '',				// App端的软件类别url上追加的apptypeid
-						appver: '',					// App版本（010209）url上追加的appver
-						recommendtype: '',			// 推荐新闻类别url上追加的recommendtype
-						ispush: ''					// 是不是推送新闻url上追加的ispush
-					},
-					dataType: 'jsonp',
-					jsonp: 'jsonpcallback',
-					success: function(){
-						console.log(arguments);
-					},
-					error: function(){
-						console.error(arguments);
-					}
-				});
-
+				// 日志收集
+				scope.addLog();
 			});
 
 			/* 页面滚动监听（当滑到底部时，加载下一页数据。） */
@@ -277,6 +228,12 @@ $(function(){
 	        $newsList.on('click', '.J-bad', function(){
 	        	ptClick($(this), 'zd0000', -1);
 	        });
+
+	        /* 在线日志 */
+	        // scope.addOnlineLog();
+	        setInterval(function(){
+	        	// scope.addOnlineLog();
+	        }, 10000);
 		},
 
 		/**
@@ -286,7 +243,6 @@ $(function(){
 		initChannels: function(callback){
 			var scope = this,
 				myChannels = wsCache.get('news_channels');
-			console.log('myChannels: ', myChannels);
 			if(!myChannels){
 				/* 获取服务端所有频道 */
 				$.ajax({
@@ -558,7 +514,7 @@ $(function(){
 	            } else if(ispicnews == '1'){	// 大图模式
 	            	$newsList.prepend('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
-	                $newsList.prepend('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	                $newsList.prepend('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {
 	            	$newsList.prepend('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
@@ -849,6 +805,64 @@ $(function(){
 	        return uid ? uid : '';
 	    },
 
+	    /**
+	     * 日志收集
+	     */
+	    addLog: function(){
+	    	var pixel = getPixel(),
+	    		scope = this;
+	    	// 发送操作信息
+			$.ajax({
+				url: logUrl,
+				data: {
+					qid: scope.qid,						// 渠道号
+					uid: scope.userId,						// 从服务器端获取的uid
+					softtype: 'news',					// 软件type（当前默认news）
+					softname: 'eastday_wapnews',		// 软件名（当前默认eastday_wapnews）
+					newstype: scope.newsType,			// 当前新闻类别
+					from: wsCache.get('prev_newstype'),	// url上追加的fr字段
+					to: wsCache.get('current_newstype'),// 当前页面
+					os_type: getOsType(),				// 客户端操作系统
+					browser_type: getBrowserType(),		// 客户端浏览器类别
+					pixel: pixel.w + '*' + pixel.h,		// 客户端分辨率
+					fr_url: getReferrer(),							// 浏览器的refer属性
+					loginid: 'null',			// App端分享新闻时url上追加的ttaccid
+					ime: '',					// App端用户imei号
+					idx: '',					// 当前新闻的idx属性
+					ishot: '',					// 当前新闻是不是热点新闻
+					ver: '',					// App版本（1.2.9）url上追加的ver
+					appqid: '',					// App渠道号url上追加的appqid
+					ttloginid: '',				// App端分享新闻时url上追加的ttloginid
+					apptypeid: '',				// App端的软件类别url上追加的apptypeid
+					appver: '',					// App版本（010209）url上追加的appver
+					recommendtype: '',			// 推荐新闻类别url上追加的recommendtype
+					ispush: ''					// 是不是推送新闻url上追加的ispush
+				},
+				dataType: 'jsonp',
+				jsonp: 'jsonpcallback',
+				success: function(){},
+				error: function(){console.error(arguments);}
+			});
+	    },
+
+	    /**
+	     * 收集在线日志
+	     */
+	    addOnlineLog: function(){
+	    	var scope = this,
+	    		infostr = getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\tnull\tnull\t' + getOsType() + '\tnull';
+	    	$.ajax({
+		    	url : onlineUrl,
+		    	data:{
+		    		param: encodeURI(infostr)
+		    	},
+		    	dataType : 'jsonp',
+		    	jsonp : 'jsonpcallback',
+		    	success: function(){},
+				error: function(){console.error(arguments);}
+		    });
+	    },
+
 		/**
 		 * 刷新数据
 		 * @param {Function} callback 回调方法
@@ -953,7 +967,7 @@ $(function(){
 	     * @return {[type]}   [description]
 	     */
 	    generateDom: function(d){
-	    	console.log('data: ', d);
+	    	// console.log('data: ', d);
 	    	var scope = this;
 	        var data = d && d.data;
 	        if(!data || !data.length){
@@ -1004,14 +1018,14 @@ $(function(){
 	            	url += '?idx=' + (scope.idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + scope.newsType;
 	            }
 	            if(scope.newsType == 'meinv'){ // 美女特殊处理
-	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
+	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
-	            	$newsList.append('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            	$newsList.append('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){		// 三图模式
-	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	                $newsList.append('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {	// 单图模式
-	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
+	            	$newsList.append('<section class="news-item news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
 	            }
 	        }
 	        // 记录idx

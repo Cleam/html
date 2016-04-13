@@ -5,9 +5,8 @@ $(function(){
 	FastClick.attach(document.body);
 	var hotWordsUrl = 'http://minisearch.dfshurufa.com/hotwords/hotwords',
 		searchUrl = 'http://minisearch.dfshurufa.com/search/search02',
-		$form = $('#J_form'),
+		$searchBtn = $('#J_search_btn'),
 		$searchInput = $('#J_search_input'),
-		$searchClear = $('#J_search_clear');
 		$hotWords = $('#J_hot_words'),
 		$newsWrap = $('#J_news_wrap'),
 		$newsList = $('#J_news_list'),
@@ -15,6 +14,7 @@ $(function(){
 		idx = 0,	// 链接索引
 		kw = '',	// 搜索关键词
 		pullUpFlag = true,
+		timer = null,
 		wsCache = new WebStorageCache();	// 本地存储对象
 
 	function NewsSearch(){
@@ -33,6 +33,7 @@ $(function(){
 			if(wsCache.get("search_hotwords")){
 				$hotWords.html(wsCache.get("search_hotwords"));
 			} else {
+				// 加载热词
 				scope.loadHotWords();
 			}
 
@@ -40,48 +41,81 @@ $(function(){
 			$hotWords.on('click', 'a', function(){
 				scope.clearCaches();
 				kw = $(this).text();
+				// 加载新闻
 				scope.loadSearchData(kw);
+				// 搜索框赋值
 				$searchInput.val(kw);
-				$searchClear.show();
+				// 更新搜索按钮状态
+				scope.updateBtnStatus();
+				// 缓存搜索关键词
 				scope.cacheKw();
 			});
 
-			/* 页面滚动监听（当滑到底部时，加载下一页数据。） */
+			/* 页面滚动监听（当滑到底部时，加载下一页数据。）注意：ipone上点击触发滚动事件 */
 			$(window).on('scroll', function() {
 	            var scrollTop = getScrollTop(),
 	                loadingOT = $loading.offset().top,
 	                cHeight = getClientHeight();
-                // 上拉加载数据(pullUpFlag标志 防止操作过快多次加载)
-	            if(scrollTop + cHeight >= loadingOT && pullUpFlag){
+                // 上拉加载数据(pullUpFlag标志 防止操作过快多次加载) loadingOT >= cHeight：防止ios浏览器默认的弹性滚动触发加载数据问题。
+	            if(loadingOT >= cHeight && scrollTop + cHeight >= loadingOT && pullUpFlag && kw){
+	            	pullUpFlag = false;
                     scope.loadSearchData(kw);
 	            }
 	        });
 
 			/* 搜索提交事件 */
-			$form.on('submit', function(){
-				kw = $.trim($searchInput.val());
-				if(kw){
-					$newsList.html('');
-					scope.clearCaches();
-					scope.loadSearchData(kw);
-					scope.cacheKw();
+			$searchBtn.on('click', function(e){
+				var $this = $(this);
+				if($this.hasClass('cancel')){
+					// 清空输入框 - 聚焦输入框
+					$searchInput.val('').focus()
+					// 清空搜索信息流并显示搜索热词
+					scope.clearContent();
+				} else {
+					kw = $.trim($searchInput.val());
+					if(kw){
+						// 清空搜索信息流
+						$newsList.html('');
+						// 清空缓存
+						scope.clearCaches();
+						// 加载搜索新闻
+						scope.loadSearchData(kw);
+						// 缓存关键词
+						scope.cacheKw();
+					}
 				}
+				scope.updateBtnStatus();
+				e.preventDefault();
 			});
 
 			// 聚焦到输入框
-			$searchInput.focus();
+			// $searchInput.focus(); // ios上会导致首次很难聚焦
 
 			// 搜索框输入事件
-	        $searchInput.on('keyup', function(){
-	            scope.showOrHideClear();
-	        });
-	        // 搜索框清空按钮点击事件
-	        $searchClear.on('click', function(e){
-	            $searchInput.val('');
-	            $searchClear.hide();
-	            scope.clearContent();
-	            $searchInput.focus();
-	            e.preventDefault();
+	        $searchInput.on('keyup', function(e){
+	        	timer && clearTimeout(timer);
+	        	timer = setTimeout(function(){
+	        		kw = $.trim($searchInput.val());
+					if(!kw){
+						// 清空搜索信息流并显示搜索热词
+						scope.clearContent();
+			        	scope.updateBtnStatus();
+					}
+	        	}, 300);
+	        	if(e.keyCode === 13){
+	        		kw = $.trim($searchInput.val());
+					if(kw){
+						// 清空搜索信息流
+						$newsList.html('');
+						// 清空缓存
+						scope.clearCaches();
+						// 加载搜索新闻
+						scope.loadSearchData(kw);
+						// 缓存关键词
+						scope.cacheKw();
+					}
+		        	scope.updateBtnStatus();
+	        	}
 	        });
 
 	        if(wsCache.get('search_content')){
@@ -94,22 +128,25 @@ $(function(){
 				wsCache.delete('search_kw');
 	        }
 
-	        wsCache.get('search_kw') && $searchInput.val(wsCache.get('search_kw'));
-	        scope.showOrHideClear();
+	        kw = wsCache.get('search_kw');
+	        kw && $searchInput.val(kw);
+
+	        scope.updateBtnStatus();
 		},
 
 		/**
-		 * 显示-隐藏clear按钮
+		 * 更新搜索按钮状态
 		 * @return {[type]} [description]
 		 */
-		showOrHideClear: function(){
-			if($.trim($searchInput.val()) !== ''){
-                $searchClear.show();
-                // fillUrls();
-            } else {
-                $searchClear.hide();
-                // $searchResult.hide();
-            }
+		updateBtnStatus: function(){
+			var val = $.trim($searchInput.val());
+			if(val){
+				$searchBtn.addClass('cancel');
+				$searchBtn.text('取消');
+			} else {
+				$searchBtn.removeClass('cancel');
+				$searchBtn.text('搜索');
+			}
 		},
 
 		/**
@@ -177,9 +214,15 @@ $(function(){
 					$loading.show();
 				},
 				success: function(data) {
-					$hotWords.hide();
-					$newsWrap.show();
-					scope.generateDom(data);
+					try {
+						$hotWords.hide();
+						$newsWrap.show();
+						scope.generateDom(data);
+					} catch(e) {
+						$('.J-no-news').remove();
+						$loading.before('<p class="J-no-news" style="text-align: center; font-size: 0.24rem; padding: 30px; color: #999;">抱歉，未找到相关新闻！</p>');
+						$loading.hide();
+					}
 				},
 				error: function() {
 					console.error(arguments);
@@ -200,7 +243,8 @@ $(function(){
 				len = d.length
 			if(!idx){idx = 0;}
 			if(len === 0){
-				$loading.before('<p style="text-align: center; font-size: 0.24rem; padding: 30px; color: #999;">抱歉，未找到相关新闻！</p>');
+				$('.J-no-news').remove();
+				$loading.before('<p class="J-no-news" style="text-align: center; font-size: 0.24rem; padding: 30px; color: #999;">抱歉，未找到相关新闻！</p>');
 				$loading.hide();
 				return;
 			}
@@ -214,10 +258,10 @@ $(function(){
 					source = d[i].source;
 				title = scope.getNewStr(title, splitword);
 				url += '?idx=' + (idx++);
-				if(imgLen >= 3){
-	                $newsList.append('<section class="news-item news-item-s2"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            } else {
-	            	$newsList.append('<section class="news-item news-item-s1"><a href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + title + '</h3> <p><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
+				if(imgLen >= 3){		// 三图模式
+	                $newsList.append('<section class="news-item news-item-s2"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            } else {	// 单图模式
+	            	$newsList.append('<section class="news-item news-item-s1"><a href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + title + '</h3> <p><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
 	            }
 			}
 			var stkey = d[0].stkey,
@@ -261,7 +305,7 @@ $(function(){
 		/**
 		 * 关键词加红处理（递归算法）
 		 * @param  {String} txt   标题
-		 * @param  {Array} swArr  关键词数组
+		 * @param  {Array} swArr  关键词数组(字符串)
 		 * @param  {Number} i     0
 		 * @return {String}       新的标题
 		 */
@@ -278,7 +322,7 @@ $(function(){
 				} else {
 					var reg = new RegExp(swArr[i], 'gi');
 					var tempTxt = txt;
-					var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i]);
+					var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i].toLowerCase());
 					var subTxt = txt.substring(subTxtIndex, subTxtIndex + swArr[i].length);
 					return scope.getNewStr(txt.replace(reg, '<em>' + subTxt + '</em>'), swArr, ++i);
 				}

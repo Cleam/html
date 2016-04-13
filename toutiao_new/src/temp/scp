@@ -1,0 +1,3 @@
+scp -P59522 aa.html eastdaypctest01:/data/www/eastday/toutiao_h5
+scp -P59522 aa.html eastdaypctest01:/data/www/eastday/toutiao_h5
+scp -P59522 aa.html eastdaypctest01:/data/www/eastday/toutiao_h5

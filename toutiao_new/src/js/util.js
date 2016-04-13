@@ -284,3 +284,61 @@ function getBytes(str){
         return 0;
     }
 }
+
+/**
+ * Javascript获取页面来源(referer)
+ * @from http://www.au92.com/archives/javascript-get-referer.html
+ * @return {[type]} [description]
+ */
+function getReferrer() {
+    var referrer = '';
+    try {
+        referrer = window.top.document.referrer;
+    } catch(e) {
+        if(window.parent) {
+            try {
+                referrer = window.parent.document.referrer;
+            } catch(e2) {
+                referrer = '';
+            }
+        }
+    }
+    if(referrer === '') {
+        referrer = document.referrer;
+    }
+    return referrer;
+}
+
+/**
+ * 获取url（排除url中参数）
+ * @return {[type]} [description]
+ */
+function getUrlNoParams() {
+    var locaUrl = window.location.href;
+    if(locaUrl.indexOf("?") >= 0){
+        var endIndex = locaUrl.indexOf("?");
+        return locaUrl.substring(0, endIndex);
+    }
+    if(locaUrl.indexOf("#") >= 0){
+        var endIndex = locaUrl.indexOf("#");
+        return locaUrl.substring(0, endIndex);
+    }
+    return locaUrl;
+}
+
+/**
+ * 获取url
+ * @return {[type]} [description]
+ */
+function getUrl() {
+    var locaUrl = window.location.href;
+    if(locaUrl.indexOf("?") >= 0){
+        var endIndex = locaUrl.indexOf("?");
+        return locaUrl.substring(0, endIndex);
+    }
+    if(locaUrl.indexOf("#") >= 0){
+        var endIndex = locaUrl.indexOf("#");
+        return locaUrl.substring(0, endIndex);
+    }
+    return locaUrl;
+}
