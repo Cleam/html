@@ -58,7 +58,6 @@ $(function(){
 						myChannels = wsCache.get('news_channels'),
 						recChannels = null,
 						myRecChannels = null;
-					console.log(myChannels);
 					if(myChannels){
 						myRecChannels = scope.getChannels(serverChannels, myChannels);
 						myChannels = myRecChannels.myChannels;
@@ -67,7 +66,6 @@ $(function(){
 						myChannels = up;
 						recChannels = down;
 					}
-					console.log(myChannels);
 					scope.generateChannelsDom(myChannels, recChannels);
 					// 缓存我的频道
 					wsCache.set('news_channels', myChannels);
@@ -113,7 +111,6 @@ $(function(){
 			});
 			// 缓存我的频道
 			wsCache.set('news_channels', myChannels);
-			console.log(myChannels);
 		},
 
 		/**

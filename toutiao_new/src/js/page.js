@@ -420,7 +420,6 @@ $(function(){
 
 	            },
 	            success: function(data){
-	            	// console.log(data);
 	                scope.generateDomForPulldown(data);
 	            },
 	            error: function(e){
@@ -455,7 +454,6 @@ $(function(){
 		 * @return {[type]}   [description]
 		 */
 		generateDomForPulldown: function(d){
-			console.log(d);
 			var scope = this;
 	        var data = d && d.data;
 	        if(!data || !data.length){
@@ -758,7 +756,7 @@ $(function(){
 
 		setQid: function(qid){
 			if(qid){
-				Cookies.set('qid', qid, { expires: 365, path: '/' });
+				Cookies.set('qid', qid, { expires: 365, path: '/', domain: 'eastday.com'});
 			}
 		},
 
@@ -783,7 +781,7 @@ $(function(){
 	            success: function(msg) {
 	                try {
 	                    scope.userId = msg.uid;
-	                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/' });
+	                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
 	                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
 	                } catch(e) {
 	                    console.error(e);
@@ -902,7 +900,6 @@ $(function(){
 		                $newsList.html('');
 		            },
 		            success: function(data){
-		            	// console.log(data);
 		                scope.generateDom(data);
 		                // 页面滚到记录的位置处
 						if(cachePos){
@@ -948,7 +945,6 @@ $(function(){
 	                // $loading.show();
 	            },
 	            success: function(data){
-	            	// console.log(data);
 	                scope.generateDom(data);
 	            },
 	            error: function(jqXHR, textStatus){
@@ -967,7 +963,6 @@ $(function(){
 	     * @return {[type]}   [description]
 	     */
 	    generateDom: function(d){
-	    	// console.log('data: ', d);
 	    	var scope = this;
 	        var data = d && d.data;
 	        if(!data || !data.length){
