@@ -19,7 +19,11 @@ var gulp = require('gulp'),
   <script src="js/main.min.js"></script>
  */
 gulp.task('html', function() {
-    var htmlSrc = './src/index.html',
+    var htmlSrc = [
+            './src/index.html',
+            './src/search.html',
+            './src/subscribe.html'
+        ],
         htmlDst = './dist/';
     gulp.src(htmlSrc)
         .pipe(htmlmin({collapseWhitespace: true}))
@@ -28,30 +32,74 @@ gulp.task('html', function() {
 });
 
 // 自动添加css前缀和压缩
-gulp.task('css', function () {
-    var cssSrc = ['./src/css/base.css', './src/css/page.css'],
-        // cssSrc = './src/css/*.css',
+gulp.task('css-common', function () {
+    var cssSrc = [
+            './src/css/base.css',
+            './src/css/common.css'
+        ],
+        cssDst = './dist/css';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(concat('common.css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+gulp.task('css-page', function () {
+    var cssSrc = [
+            './src/css/page.css',
+            './src/css/page_search.css',
+            './src/css/page_subscribe.css'
+        ],
         cssDst = './dist/css';
     return gulp.src(cssSrc)
     	.pipe(autoprefixer())
-    	.pipe(concat('all.css'))
         .pipe(rename({suffix: '.min'}))
         .pipe(cleanCSS())
-        // .pipe(rev())
+        .pipe(rev())
         .pipe(gulp.dest(cssDst))
         .pipe(livereload());
 });
 
 // js代码校验、合并和压缩
-gulp.task('js', function() {
-    var jsSrc = ['./src/js/zepto.min.js', './src/js/page.js'],
-        // jsSrc = './src/js/*.js',
+gulp.task('js-common', function() {
+    var jsSrc = [
+            './src/js/zepto.min.js', 
+            './src/js/fastclick.min.js', 
+            './src/js/web-storage-cache.min.js', 
+            './src/js/js.cookie.js', 
+            './src/js/util.js'
+        ],
         jsDst = './dist/js';
     return gulp.src(jsSrc)
-        .pipe(concat('main.js'))
+        .pipe(concat('common.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        // .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+gulp.task('js-page', function() {
+    var jsSrc = [
+            './src/js/page.js', 
+            './src/js/page_search.js', 
+            './src/js/page_subscribe.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+
+gulp.task('data', function() {
+    var jsSrc = [
+            './src/data/channels.json'
+        ],
+        jsDst = './dist/data';
+    return gulp.src(jsSrc)
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
@@ -81,14 +129,6 @@ gulp.task('webserver', function(){
     });
 });
 
-// 清除文件(清除完后回调cb)
-gulp.task('clean', function(cb) {
-    gulp.src(['./dist/*'], {read: false})
-        .pipe(clean());
-});
-
-gulp.task('default', ['html', 'css', 'img', 'js']);
-
 // 监听文件
 // 监听任务 运行语句 gulp watch
 gulp.task('watch',function(){
@@ -98,3 +138,13 @@ gulp.task('watch',function(){
     gulp.watch('./src/img/**/*', ['img']);
     gulp.watch('./src/js/*.js', ['js']);
 });
+
+// 清除文件(清除完后回调cb)
+gulp.task('clean', function(cb) {
+    gulp.src(['./dist/*'], {read: false})
+        .pipe(clean());
+});
+
+gulp.task('css', ['css-common', 'css-page']);
+gulp.task('js', ['js-common', 'js-page']);
+gulp.task('default', ['html', 'css', 'img', 'js', 'data']);
