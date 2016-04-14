@@ -61,6 +61,45 @@ gulp.task('css-page', function () {
         .pipe(gulp.dest(cssDst))
         .pipe(livereload());
 });
+gulp.task('css-index', function () {
+    var cssSrc = [
+            './src/css/page.css'
+        ],
+        cssDst = './dist/css';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(rev())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+gulp.task('css-search', function () {
+    var cssSrc = [
+            './src/css/page_search.css'
+        ],
+        cssDst = './dist/css';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(rev())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+gulp.task('css-subscribe', function () {
+    var cssSrc = [
+            './src/css/page_subscribe.css'
+        ],
+        cssDst = './dist/css';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(rev())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
 
 // js代码校验、合并和压缩
 gulp.task('js-common', function() {
@@ -83,6 +122,42 @@ gulp.task('js-page', function() {
     var jsSrc = [
             './src/js/page.js', 
             './src/js/page_search.js', 
+            './src/js/page_subscribe.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+gulp.task('js-index', function() {
+    var jsSrc = [
+            './src/js/page.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+gulp.task('js-search', function() {
+    var jsSrc = [
+            './src/js/page_search.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+gulp.task('js-subscribe', function() {
+    var jsSrc = [
             './src/js/page_subscribe.js'
         ],
         jsDst = './dist/js';

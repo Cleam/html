@@ -7,8 +7,11 @@ $(function(){
 		positionUrl = 'http://position.dfshurufa.com/position/get',		// 获取用户位置
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',		// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',				// 美女点赞（点踩）
-		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
-		onlineUrl = 'http://ot.dftoutiao.com/apponline/online',			// 在线统计(统计stats = statistics)
+		// logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
+		// onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
+		logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
+		onlineUrl = 'http://123.59.60.170/online/online',				// 测试 在线统计
+		$body = $('body'),
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
 		// $loation = $('#J_location'),
@@ -147,7 +150,7 @@ $(function(){
 	            }, 200);
 	            
                 // 上拉加载数据(pullUpFlag标志 防止操作过快多次加载)
-	            if(scrollTop + cHeight >= loadingOT && scope.pullUpFlag){
+	            if(loadingOT >=cHeight && scrollTop + cHeight >= loadingOT && scope.pullUpFlag){
                     scope.pullUpLoadData();
 	            }
 	        });
@@ -157,10 +160,7 @@ $(function(){
 	        	if($refresh.hasClass('active')){
 	        		return;
 	        	}
-	        	$refresh.addClass('active');
-        		setTimeout(function(){
-        			$refresh.removeClass('active');
-        		}, 700);
+	        	scope.changeRefreshStatus();
         		wsCache.delete('news_pos_' + scope.newsType);
         		wsCache.delete('news_' + scope.newsType);
 	        	scope.refreshData(function(){
@@ -219,6 +219,17 @@ $(function(){
 	        	});
 	        }
 
+	        /* 已浏览位置，刷新事件 */
+	        $body.on('click', '.J-read-position', function(){
+	        	$body.scrollTop(0);
+	        	// 删除阅读历史位置DOM元素（后面重新更新位置）
+	        	$body.find('.J-read-position').remove();
+	        	// 刷新按钮动画效果
+	        	scope.changeRefreshStatus();
+	        	// 调用下拉加载数据接口
+	        	scope.pullDownLoadData();
+	        });
+
 	        /* 赞 */
 	        $newsList.on('click', '.J-good', function(){
 	        	ptClick($(this), 'z0000', 1);
@@ -230,10 +241,21 @@ $(function(){
 	        });
 
 	        /* 在线日志 */
-	        // scope.addOnlineLog();
+	        scope.addOnlineLog();
 	        setInterval(function(){
-	        	// scope.addOnlineLog();
+	        	scope.addOnlineLog();
 	        }, 10000);
+		},
+
+		/**
+		 * 刷新按钮动画效果
+		 * @return {[type]} [description]
+		 */
+		changeRefreshStatus: function(){
+			$refresh.addClass('active');
+    		setTimeout(function(){
+    			$refresh.removeClass('active');
+    		}, 700);
 		},
 
 		/**
@@ -404,7 +426,7 @@ $(function(){
 				url: pullDownUrl,
 	            data: {
 	                type: scope.newsType,
-					startkey: wsCache.get('pulldown_startkey_' + scope.newsType),
+					startkey: wsCache.get('rowkey_' + scope.newsType),
 					lastkey: wsCache.get('pulldown_lastkey_' + scope.newsType),
 					pgnum: scope.pulldown_pgNum,
 					idx: scope.pulldown_idx,
@@ -454,19 +476,20 @@ $(function(){
 		 * @return {[type]}   [description]
 		 */
 		generateDomForPulldown: function(d){
-			var scope = this;
-	        var data = d && d.data;
+			var scope = this,
+	        	data = d && d.data,
+	        	len = data.length;
 	        if(!data || !data.length){
 	            // $loading.hide();
 	            return false;
 	        }
 	        // 计数
 	        scope.pulldown_num++;
-	        wsCache.set('pulldown_startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
+	        wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        wsCache.set('pulldown_lastkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
-	        var len = data.length;
 	        // 反转数组(reverse方法会改变原来的数组，而不会创建新的数组。)
 	        data.reverse();
+	        $newsList.prepend('<a class="J-read-position read-position">上次浏览到这里，点击刷新。</a>');
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -510,6 +533,7 @@ $(function(){
 	            if(scope.newsType == 'meinv'){ // 美女特殊处理
 	            	$newsList.prepend('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else if(ispicnews == '1'){	// 大图模式
+	            	imgArr = item.lbimg;
 	            	$newsList.prepend('<section class="news-item news-item-s3"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
 	                $newsList.prepend('<section class="news-item news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
@@ -524,13 +548,13 @@ $(function(){
 	        	$rn.fadeOut('slow', function(){
 	        		$rn.remove();
 	        	});
-	        }, 600);
+	        }, 1000);
 	        // 如果下拉加载数据次数超过20次，清空信息流末尾新闻数据。
 	        if(scope.pulldown_num >= 20){
 	        	scope.pulldown_num = 0;
 	        	var $newsListChildrens = $newsList.children(),
-	        		len = $newsListChildrens.length;
-	        	for (var i = len - 1; i >= len - 20; i--) {
+	        		newsLen = $newsListChildrens.length;
+	        	for (var i = newsLen - 1; i >= newsLen - 20; i--) {
 	        		$newsListChildrens[i].remove();
 	        	}
 	        }
@@ -855,9 +879,7 @@ $(function(){
 		    		param: encodeURI(infostr)
 		    	},
 		    	dataType : 'jsonp',
-		    	jsonp : 'jsonpcallback',
-		    	success: function(){},
-				error: function(){console.error(arguments);}
+		    	jsonp : 'jsonpcallback'
 		    });
 	    },
 
