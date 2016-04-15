@@ -4,7 +4,7 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-03-24
  */
-header{position: fixed; top: 0; z-index: 2; width: 7.5rem; height: 1.62rem;}
+header{position: fixed; top: 0; z-index: 100; width: 7.5rem; height: 1.62rem;}
 header .top-title{position: relative; width: 100%; height: 0.88rem; background-color: #d43d3d; color: #fff;}
 header .top-title .refresh{position: relative; display: block; width: 3rem; margin: 0 auto; text-align: center; height: 100%; padding: 0.16rem 0.56rem 0.16rem 0; line-height: 0.56em; transform: scale(0.7); -webkit-transform: scale(0.7);}
 header .top-title .refresh:active{background-color: #d43d3d !important;}
@@ -62,10 +62,13 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 .news-list-wrap .news-item-s2 a .img-wrap img:last-child{margin-right: 0;}*/
 .news-list-wrap .news-item-s2 a p{width: 100%; padding-top: 0.1rem; font-size: 0.2rem; color: #999;}
 
+.news-list-wrap .news-item a p i.promote,
 .news-list-wrap .news-item a p i.hot,
 .news-list-wrap .news-item a p i.video,
 .news-list-wrap .news-item a p i.rec,
 .news-list-wrap .news-item a p i.nuanwen{position: relative; display: inline-block; width: 0.5rem; padding: 0.04rem 0; margin-right: 0.06rem; text-align: center; font-size: 0.18rem; /* border-style: solid; border-width: 1px; -webkit-border-radius: 2px; border-radius: 2px; */}
+/* 推广 */
+.news-list-wrap .news-item a p i.promote{/* border-color: rgba(153,153,153,.5);  */color: #999;} 
 /* 热门 */
 .news-list-wrap .news-item a p i.hot{/* border-color: rgba(248,89,89,.5);  */color: #f85959;} 
 /* 视频 */
@@ -75,10 +78,13 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 /* 暖文 */
 .news-list-wrap .news-item a p i.nuanwen{/* border-color: rgba(248,89,89,.5);  */color: #f85959;} 
 
+.news-list-wrap .news-item a p i.promote:before,
 .news-list-wrap .news-item a p i.hot:before,
 .news-list-wrap .news-item a p i.video:before,
 .news-list-wrap .news-item a p i.rec:before,
 .news-list-wrap .news-item a p i.nuanwen:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 4px; border-radius: 4px;}
+
+.news-list-wrap .news-item a p i.promote:before{border-color: rgba(153,153,153,.5);}
 .news-list-wrap .news-item a p i.hot:before{border-color: rgba(248,89,89,.5);}
 .news-list-wrap .news-item a p i.video:before{border-color: rgba(42,144,215,.5);}
 .news-list-wrap .news-item a p i.rec:before{border-color: rgba(42,144,215,.5);}
