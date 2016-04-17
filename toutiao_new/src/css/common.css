@@ -4,6 +4,7 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-04-07
  */
+.f0{font-size: 0;}
 @media only screen and (min-width: 750px) {body{width: 750px;}}
 /*::-webkit-scrollbar{width: 10px;}*/
 html,body{height: 100%; min-height: 100%;}

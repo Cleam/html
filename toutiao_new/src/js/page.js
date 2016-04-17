@@ -30,7 +30,7 @@ $(function(){
 		isTop = false,				// 顶部判断标志
 		$pullDownLoading = null,	// 下拉动画
 		TOUCH_DISTANCE = 200,		// 规定滑动加载距离
-		pullDownLoadDataFlag = null,		// 规定滑动加载距离
+		pullDownLoadDataTimer = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache();	// 本地存储对象
 
 	/**
@@ -382,10 +382,11 @@ $(function(){
 		 * @return {[type]}            [description]
 		 */
 		pullDown: function(){
-			var scope = this;
+			var scope = this,
+				svgTop = 0;
 			$newsList.on('touchstart', function(e){
 				// 防止重复快速下拉
-				clearTimeout(pullDownLoadDataFlag);
+				clearTimeout(pullDownLoadDataTimer);
 				startPos = e.touches[0].pageY;
 				if($body.scrollTop() <= 0){
 					isTop = true;
@@ -393,13 +394,22 @@ $(function(){
 					isTop = false;
 				}
 				if(!$pullDownLoading){
-					$pullDownLoading = $('<div class="pulldown-loading"><div class="spinner"><div class="bounce bounce1"></div> <div class="bounce bounce2"></div> <div class="bounce bounce3"></div></div></div>');
+					// $pullDownLoading = $('<div class="pulldown-loading"><div class="spinner"><div class="bounce bounce1"></div> <div class="bounce bounce2"></div> <div class="bounce bounce3"></div></div></div>');
+					svgTop = ($('header').height() - 40);
+					$pullDownLoading = $('<svg id="J_svg" class="svg" style="top: ' + svgTop + 'px"><g id="J_svg_g"><marker id="J_svg_marker" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,10 L5,5 L0,0" style="fill: #d43d3d;"></path></marker><path stroke-width="3.5" stroke-linecap="round" id="J_svg_path" marker-end="url(#J_svg_marker)" d="M20,9 A11,11 0 1,1 10.5,14.5" style="stroke: #d43d3d; fill: none;"></path><circle id="J_svg_circle" class="path" fill="none" stroke-width="3.5" stroke-linecap="round" cx="25" cy="25" r="11"></circle></g></svg>');
 				} else {
+					// $pullDownLoading.removeClass('active').css({
+					// 	'display': 'block',
+					// 	'opacity': 0,
+					// 	'transform': 'scale(0.2) translateY(0px)',
+					// 	'-webkit-transform': 'scale(0.2) translateY(0px)'
+					// });
 					$pullDownLoading.removeClass('active').css({
 						'display': 'block',
 						'opacity': 0,
-						'transform': 'scale(0.2) translateY(0px)',
-						'-webkit-transform': 'scale(0.2) translateY(0px)'
+						'top': svgTop,
+						'transform': 'translateY(0px)',
+						'-webkit-transform': 'translateY(0px)'
 					});
 				}
 			});
@@ -407,15 +417,23 @@ $(function(){
 				// 达到下拉阈值 启动数据加载
 				if(touchDistance === TOUCH_DISTANCE){
 					$pullDownLoading && $pullDownLoading.addClass('active');
-					clearTimeout(pullDownLoadDataFlag);
-					pullDownLoadDataFlag = setTimeout(function(){
-						scope.pullDownLoadData();
+					clearTimeout(pullDownLoadDataTimer);
+					pullDownLoadDataTimer = setTimeout(function(){
+						// 美女无pulldown接口
+						if(scope.newsType == 'meinv'){
+				        	$refresh.trigger('click');
+				        	$pullDownLoading && $pullDownLoading.remove();
+				        } else {
+							scope.pullDownLoadData(function(){
+					        	$pullDownLoading && $pullDownLoading.remove();
+							});
+				        }
 					}, 400);
 				} else {	
 					$pullDownLoading && $pullDownLoading.animate({
 						'opacity': 0,
-						'scale': '0.2',
-						'translateY': '0'
+						// 'translateY': '0',
+						'top': svgTop,
 					}, 'fast', function(){
 						$pullDownLoading.remove();
 					});
@@ -433,21 +451,27 @@ $(function(){
 					touchDistanceFlag = false;
 				}
 				if(isTop && isSwipeDown){
-					if($body.find('.pulldown-loading').length === 0){
+					if($body.find('.svg').length === 0){
 						$pullDownLoading.appendTo('body');
 					}
 					// 下拉加载
 					if(touchDistance >= TOUCH_DISTANCE){
-						$pullDownLoading.find('.bounce').css('backgroundColor', '#2a90d7');
-						// $pullDownLoading.find('.bounce').css('backgroundColor', '#009A61');
+						// $pullDownLoading.find('.bounce').css('backgroundColor', '#2a90d7');
+						$pullDownLoading.find('#J_svg_marker>path').attr('style', 'fill:#2a90d7');
+						$pullDownLoading.find('#J_svg_g>path').attr('style', 'stroke:#2a90d7;fill:none');
 						touchDistance = TOUCH_DISTANCE;
 					} else {
-						$pullDownLoading.find('.bounce').css('backgroundColor', '#d43d3d');
+						// $pullDownLoading.find('.bounce').css('backgroundColor', '#d43d3d');
+						$pullDownLoading.find('#J_svg_marker>path').attr('style', 'fill:#d43d3d');
+						$pullDownLoading.find('#J_svg_g>path').attr('style', 'stroke:#d43d3d;fill:none');
 					}
 					$pullDownLoading.css({
 						'opacity': touchDistance / TOUCH_DISTANCE,
-						'transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)',
-						'-webkit-transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)'
+						'transform': 'rotate(' + touchDistance / TOUCH_DISTANCE * 360 + 'deg)',
+						'-webkit-transform': 'rotate(' + touchDistance / TOUCH_DISTANCE * 360 + 'deg)',
+						'top': (svgTop + (touchDistance / 3)) + 'px'
+						// 'transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)',
+						// '-webkit-transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)'
 					});
 					e.preventDefault();
 				}
@@ -473,8 +497,8 @@ $(function(){
 				url: pullDownUrl,
 	            data: {
 	                type: scope.newsType,
-					startkey: scope.startKey, // wsCache.get('rowkey_' + scope.newsType),
-					lastkey: scope.startKey, // wsCache.get('pulldown_lastkey_' + scope.newsType),
+					startkey: wsCache.get('startkey_' + scope.newsType),
+					lastkey: wsCache.get('endkey_' + scope.newsType),
 					pgnum: scope.pulldown_pgNum,
 					idx: scope.pulldown_idx,
 					readhistory: scope.readUrl,
@@ -485,9 +509,7 @@ $(function(){
 	            dataType: 'jsonp',
 	            jsonp: "jsonpcallback",
 	            timeout: 8000,
-	            beforeSend: function(){
-
-	            },
+	            beforeSend: function(){},
 	            success: function(data){
 	                scope.generateDomForPulldown(data);
 	            },
@@ -495,7 +517,6 @@ $(function(){
 	            	console.error(e);
 	            },
 	            complete: function(){
-	            	$pullDownLoading && $pullDownLoading.remove();
 	                callback && callback();
 	            }
 			});
@@ -533,9 +554,11 @@ $(function(){
 	        // 计数
 	        scope.pulldown_num++;
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
-	        scope.startKey = d.endkey;
+	        // scope.startKey = d.endkey;
+	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        // wsCache.set('pulldown_lastkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
-	        scope.startKey = d.newkey;
+	        // scope.endKey = d.newkey;
+	        wsCache.set('endkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
 	        // 反转数组(reverse方法会改变原来的数组，而不会创建新的数组。)
 	        data.reverse();
 	        $newsList.prepend('<a class="J-read-position read-position">上次浏览到这里，点击刷新。</a>');
@@ -590,9 +613,10 @@ $(function(){
 	            	url += '?idx=' + (scope.pulldown_idx-i-1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + scope.newsType;
 	            }
 	            
-	            if(scope.newsType == 'meinv'){ // 美女特殊处理
+	            /*if(scope.newsType == 'meinv'){ // 美女特殊处理
 	            	$newsList.prepend('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
-	            } else if(ispicnews == '1'){	// 大图模式
+	            } else */
+	            if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
 	            	$newsList.prepend('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
@@ -805,7 +829,7 @@ $(function(){
 	            } else {
 	                scope.readUrl = urlNum;
 	            }
-	            wsCache.set('read_url_all', scope.readUrl, {exp: 20 * 60});
+	            wsCache.set('read_url_all', scope.readUrl, {exp: 365 * 24 * 3600}); // 2天
 	            // read_url_type
 	            var rut = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
 	            if(rut){
@@ -816,7 +840,7 @@ $(function(){
 	            } else {
 	                rut = urlNum;
 	            }
-	            wsCache.set('read_url_' + type, rut, {exp: 20 * 60});
+	            wsCache.set('read_url_' + type, rut, {exp: 365 * 24 * 3600});
 	            // read_url_subtype
 	            if(subtype){
 	                var rust = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
@@ -828,7 +852,7 @@ $(function(){
 	                } else {
 	                    rust = urlNum;
 	                }
-	                wsCache.set('read_url_' + subtype, rust, {exp: 20 * 60});
+	                wsCache.set('read_url_' + subtype, rust, {exp: 365 * 24 * 3600});
 	            }
 	        }
 	    },
@@ -1042,7 +1066,7 @@ $(function(){
 	            url: pullUpUrl,
 	            data: {
 	                type: scope.newsType,
-	                startkey: scope.startKey, // wsCache.get('rowkey_' + scope.newsType),
+	                startkey: wsCache.get('startkey_' + scope.newsType),
 	                newsnum: scope.newsType == 'meinv' ? 10 : 20,
 	                qid: scope.qid,
 	                readhistory: scope.readUrl,
@@ -1086,7 +1110,8 @@ $(function(){
 	        }
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
-	       	scope.startKey = d.endkey;
+	       	// scope.startKey = d.endkey;
+	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],

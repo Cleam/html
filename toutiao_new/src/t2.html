@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>无标题文档</title>
+    <!--下面excanvas.js需下载才能在IE下支持canvas-->
+    <!--[if IE]> 
+<script src="http://a.tbcdn.cn/p/fp/2011a/html5.js"></script> 
+<script src="http://api.html5media.info/1.1.4/html5media.min.js"></script> 
+<script src="excanvas.js"></script> 
+<![endif]-->
+    <!-- <canvas id="canvas"></canvas> -->
+    <script type="text/javascript">
+    window.onload = function() {
+        var ctx = document.getElementById("pic").getContext('2d');
+
+        //绘制白色半圆的代码如下： 
+        ctx.beginPath();
+        ctx.arc(200, 200, 80, 1.5 * Math.PI, Math.PI / 2, false);
+        ctx.fillStyle = "white";
+        ctx.closePath();
+        ctx.fill();
+
+        //绘制黑色半圆的代码如下： 
+        ctx.beginPath();
+        ctx.arc(200, 200, 80, Math.PI / 2, 1.5 * Math.PI, false);
+        ctx.fillStyle = "black";
+        ctx.closePath();
+        ctx.fill();
+
+        //绘制黑色小圆 
+        ctx.beginPath();
+        ctx.arc(200, 240, 40, 0, Math.PI * 2, true);
+        ctx.fillStyle = "black";
+        ctx.closePath();
+        ctx.fill();
+
+        //绘制白色小圆 
+        ctx.beginPath();
+        ctx.arc(200, 160, 40, 0, Math.PI * 2, true);
+        ctx.fillStyle = "white";
+        ctx.closePath();
+        ctx.fill();
+
+        //绘制白色小圆心 
+        ctx.beginPath();
+        ctx.arc(200, 160, 5, 0, Math.PI * 2, true);
+        ctx.fillStyle = "black";
+        ctx.closePath();
+        ctx.fill();
+
+        //绘制黑色小圆心 
+        ctx.beginPath();
+        ctx.arc(200, 240, 5, 0, Math.PI * 2, true);
+        ctx.fillStyle = "white";
+        ctx.closePath();
+        ctx.fill();
+
+        //绘制文字代码如下： 
+        ctx.save();
+        ctx.fillStyle = "black";
+        ctx.globalAlpha = "0.4";
+        ctx.textAlign = "center";
+        ctx.font = "32px Arial";
+        ctx.shadowColor = "rgba(0,0,0,0.4)";
+        ctx.shadowOffsetX = 15;
+        ctx.shadowOffsetY = -10;
+        ctx.shadowBlur = 2;
+        ctx.fillText('Hello Canavs', 200, 100); //IE不支持 
+
+        ctx.restore();
+    }
+    </script>
+</head>
+
+<body>
+    <canvas id="pic" width="400" height="400" style="border:1px solid; background:#E1E1FF;"></canvas>
+</body>
+
+</html>

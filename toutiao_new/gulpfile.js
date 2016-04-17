@@ -30,6 +30,16 @@ gulp.task('html', function() {
         .pipe(gulp.dest(htmlDst))
         .pipe(livereload());
 });
+gulp.task('html-index', function() {
+    var htmlSrc = [
+            './src/index.html'
+        ],
+        htmlDst = './dist/';
+    gulp.src(htmlSrc)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
+});
 
 // 自动添加css前缀和压缩
 gulp.task('css-common', function () {

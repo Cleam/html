@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="author" content="Cleam Lee">
+    <meta name="keywords" content="东方头条,头条新闻,头条,今日新闻头条,头条网,头条新闻,今日头条新闻">
+    <meta name="description" content="东方头条网-东方网旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!">
+    <meta http-equiv="expires" content="31 Dec 2018">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="bookmark" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="img/favicon.ico">
+    <title>头条新闻</title>
+    <script>
+    ! function(a, b) {
+        var c = a.documentElement,
+            d = "orientationchange" in window ? "orientationchange" : "resize",
+            e = function() {
+                var a = c.clientWidth;
+                a && (a >= 750 && (a = 750), c.style.fontSize = 100 * (a / 750) + "px")
+            };
+        a.addEventListener && (b.addEventListener(d, e, !1), e())
+    }(document, window);
+    </script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        body{background-color: #666;}
+        .svg{width: 40px; height: 40px; display: block; margin: 0 auto; border-radius: 50%; background-color: #fff; box-shadow: 0 0px 10px #ccc;}
+    </style>
+</head>
+<!-- <body>
+    <canvas id="myCanvas" width="800" height="400" style="border:1px solid #333;">
+        您的浏览器不支持canvas！
+    </canvas>
+    <button onclick="actiondo()">圆</button>
+    <script>
+        var canvas = document.getElementById('myCanvas'),
+            width = canvas.width,
+            height = canvas.height,
+            ctx = canvas.getContext('2d');
+        var step, startAngle, endAngle, add = Math.PI * 2 / 100;
+        ctx.shadowOffsetX = 0; // 设置水平位移
+        ctx.shadowOffsetY = 0; // 设置垂直位移
+        ctx.shadowBlur = 10; // 设置模糊度
+        ctx.lineWidth = 1.0;
+        counterClockwise = false;
+        var x;
+        var y;
+        var radius;
+        var animation_interval = 20,
+            n = 100;
+        var varName;
+
+        function actiondo() {
+            step = 1;
+            startAngle = 0;
+            ctx.strokeStyle = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6); //圆圈颜色                
+            ctx.shadowColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6); // 设置阴影颜色
+            //圆心位置
+            x = Math.floor(Math.random() * 1000 + 100);
+            y = Math.floor(Math.random() * 100 + 100);
+            radius = Math.floor(Math.random() * 50 + 50);
+            varName = setInterval(animation, animation_interval);
+        }
+        var animation = function() {
+            if (step <= n) {
+                endAngle = startAngle + add;
+                drawArc(startAngle, endAngle);
+                startAngle = endAngle;
+                step++;
+            } else {
+                clearInterval(varName);
+            }
+
+        };
+
+        function drawArc(s, e) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, s, e, counterClockwise);
+            ctx.lineWidth = 1.0;
+            ctx.stroke();
+        }
+    </script>
+</body> -->
+<body>
+    <svg id="J_svg" class="svg">
+        <g id="J_svg_g">
+            <marker id="J_svg_marker" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M0,0 L0,10 L5,5 L0,0" style="fill: #d43d3d;"></path>
+            </marker>
+            <path stroke-width="3.5" stroke-linecap="round" id="J_svg_path" marker-end="url(#J_svg_marker)" d="M20,9 A11,11 0 1,1 10.5,14.5" style="stroke: #d43d3d; fill: none;">
+            </path>
+            <circle id="J_svg_circle" class="path" fill="none" stroke-width="3.5" stroke-linecap="round" cx="25" cy="25" r="11">
+            </circle>
+            <!-- <animateTransform attributeName="transform" begin="0s" dur="1s" type="rotate" from="0 20 20" to="360 20 20" repeatCount="indefinite"></animateTransform> -->
+        </g>
+    </svg>
+
+    <svg id="J_svg" class="svg"><g id="J_svg_g"><marker id="J_svg_marker" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,10 L5,5 L0,0" style="fill: #2a90d7;"></path></marker><path stroke-width="3.5" stroke-linecap="round" id="J_svg_path" marker-end="url(#J_svg_marker)" d="M20,9 A11,11 0 1,1 10.5,14.5" style="stroke: #2a90d7; fill: none;"></path><circle id="J_svg_circle" class="path" fill="none" stroke-width="3.5" stroke-linecap="round" cx="25" cy="25" r="11"></circle></g></svg>
+
+
+</body>
+
+</html>
