@@ -7,14 +7,14 @@ $(function(){
 		positionUrl = 'http://position.dfshurufa.com/position/get',			// 获取用户位置
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',					// 美女点赞（点踩）
-		// logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
-		// onlineUrl = 'http://ot.dftoutiao.com/online/online',				// 在线统计(统计stats = statistics)
-		// showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
-		// clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息show统计接口
-		logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
-		onlineUrl = 'http://123.59.60.170/online/online',				// 测试 在线统计
-		showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',		// 推广信息show统计接口
-		clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',			// 推广信息show统计接口
+		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
+		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
+		showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
+		clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息show统计接口
+		// logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
+		// onlineUrl = 'http://123.59.60.170/online/online',			// 测试 在线统计
+		// showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',	// 推广信息show统计接口
+		// clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',		// 推广信息show统计接口
 		$body = $('body'),
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
@@ -102,7 +102,7 @@ $(function(){
 				$newsTabs.each(function(){
 					var $this = $(this);
 					if($this.data('type') == scope.newsType){
-						scope.scrollTo($this);
+						scope.scrollTo($this, false);
 						return false;
 					}
 				});
@@ -120,6 +120,9 @@ $(function(){
 				scope.highlightPraiseTrample();
 			});
 
+			// 记录一次日志
+			scope.addLog();
+
 			/* 注册下拉事件 */
 			scope.pullDown();
 
@@ -128,7 +131,7 @@ $(function(){
 				var $this = $(this),
 					type = $this.data('type');
 				// 使当前频道分类显示在导航菜单中间
-				scope.scrollTo($this);
+				scope.scrollTo($this, false);
 				// 存储上一个新闻类别和当前新闻类别
 				wsCache.set('prev_newstype', scope.newsType, { exp: 20 * 60});
 				wsCache.set('current_newstype', type, {exp: 20 * 60});
@@ -227,13 +230,16 @@ $(function(){
 
 	        /* 已浏览位置，点击刷新事件 */
 	        $body.on('click', '.J-read-position', function(){
-	        	$body.scrollTop(0);
-	        	// 删除阅读历史位置DOM元素（后面重新更新位置）
-	        	$body.find('.J-read-position').remove();
-	        	// 刷新按钮动画效果
-	        	scope.changeRefreshStatus();
-	        	// 调用下拉加载数据接口
-	        	scope.pullDownLoadData();
+	        	var scrollTimer = setInterval(function(){
+	        		$body.scrollTop($body.scrollTop() - 20);
+	        		if($body.scrollTop() <= 0){
+	        			clearInterval(scrollTimer);
+			        	// 刷新按钮动画效果
+			        	scope.changeRefreshStatus();
+			        	// 调用下拉加载数据接口
+			        	scope.pullDownLoadData();
+	        		}
+	        	}, 1);
 	        });
 
 	        // 推广新闻点击委托事件
@@ -311,20 +317,20 @@ $(function(){
 				url: clickAdLogUrl,
 				dataType: 'jsonp',
 				data: {
-					"qid": scope.qid,
-					"uid": scope.userId,
+					"qid": scope.qid || 'null',
+					"uid": scope.userId || 'null',
 					"loginid": 'null',
 					"softtype": 'news',
 					"softname": 'eastday_wapnews',
 					"newstype": 'ad',
 					"from": 'null',
-					"to": advUrl,
-					"os_type": getOsType(),
-					"browser_type": getBrowserType(),
+					"to": advUrl || 'null',
+					"os_type": getOsType() || 'null',
+					"browser_type": getBrowserType() || 'null',
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
-					"refer": getReferrer(),
-					"adv": advId
+					"refer": getReferrer() || 'null',
+					"adv": advId || 'null'
 				},
 				jsonp : 'jsonpcallback',
 				success : function(msg) {}
@@ -561,6 +567,8 @@ $(function(){
 	        wsCache.set('endkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
 	        // 反转数组(reverse方法会改变原来的数组，而不会创建新的数组。)
 	        data.reverse();
+	        // 删除阅读历史位置DOM元素（后面重新更新位置）
+        	$body.find('.J-read-position').remove();
 	        $newsList.prepend('<a class="J-read-position read-position">上次浏览到这里，点击刷新。</a>');
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
@@ -661,20 +669,20 @@ $(function(){
 				url: showAdLogUrl,
 				dataType: 'jsonp',
 				data: {
-					"qid": scope.qid,
-					"uid": scope.userId,
+					"qid": scope.qid || 'null',
+					"uid": scope.userId || 'null',
 					"loginid": 'null',
 					"softtype": 'news',
 					"softname": 'eastday_wapnews',
 					"newstype": 'ad',
 					"from": 'null',
-					"advurl": advUrl,
-					"os_type": getOsType(),
-					"browser_type": getBrowserType(),
+					"advurl": advUrl || 'null',
+					"os_type": getOsType() || 'null',
+					"browser_type": getBrowserType() || 'null',
 					"fr_url": "null",
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
-					"adv": advId
+					"adv": advId || 'null'
 				},
 				jsonp : 'jsonpcallback',
 				success : function(msg) {}
@@ -829,7 +837,7 @@ $(function(){
 	            } else {
 	                scope.readUrl = urlNum;
 	            }
-	            wsCache.set('read_url_all', scope.readUrl, {exp: 365 * 24 * 3600}); // 2天
+	            wsCache.set('read_url_all', scope.readUrl, {exp: 3 * 24 * 3600});
 	            // read_url_type
 	            var rut = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
 	            if(rut){
@@ -840,7 +848,7 @@ $(function(){
 	            } else {
 	                rut = urlNum;
 	            }
-	            wsCache.set('read_url_' + type, rut, {exp: 365 * 24 * 3600});
+	            wsCache.set('read_url_' + type, rut, {exp: 3 * 24 * 3600});
 	            // read_url_subtype
 	            if(subtype){
 	                var rust = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
@@ -852,7 +860,7 @@ $(function(){
 	                } else {
 	                    rust = urlNum;
 	                }
-	                wsCache.set('read_url_' + subtype, rust, {exp: 365 * 24 * 3600});
+	                wsCache.set('read_url_' + subtype, rust, {exp: 3 * 24 * 3600});
 	            }
 	        }
 	    },
@@ -886,18 +894,43 @@ $(function(){
 		/**
 		 * 使当前频道分类显示在导航菜单中间
 		 * @param  {[type]} $target [description]
+		 * @param  {[type]} animate true：有动画效果， false：无动画效果.
 		 * @return {[type]}         [description]
 		 */
-		scrollTo: function($target){
-			var $newsTabs = $newsTabsWrap.children('a');
+		scrollTo: function($target, animate){
+			var $newsTabs = $newsTabsWrap.children('a'),
+				curScrollLeft = $newsTabsWrap.scrollLeft(),
+				targetScrollLeft = $target[0].offsetLeft - ($newsTabs.eq(0).width() * 3),
+				range = curScrollLeft - targetScrollLeft,
+				timer = null;
 			$newsTabs.removeClass('active');
 			$target.addClass('active');
-			$newsTabsWrap.scrollLeft($target[0].offsetLeft - ($newsTabs.eq(0).width() * 3));
+			if(animate){
+				if(range <= 0){
+					timer = setInterval(function(){
+						if(curScrollLeft >= targetScrollLeft){
+							clearInterval(timer);
+						}
+						curScrollLeft += 3;
+						$newsTabsWrap.scrollLeft(curScrollLeft);
+					}, 1);
+				} else {
+					timer = setInterval(function(){
+						if(curScrollLeft <= targetScrollLeft){
+							clearInterval(timer);
+						}
+						curScrollLeft -= 3;
+						$newsTabsWrap.scrollLeft(curScrollLeft);
+					}, 1);
+				}
+			} else {
+				$newsTabsWrap.scrollLeft(targetScrollLeft);
+			}
 		},
 
 		setQid: function(qid){
 			if(qid){
-				Cookies.set('qid', qid, { expires: 365, path: '/', domain: 'eastday.com'});
+				Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
 			}
 		},
 
@@ -954,28 +987,28 @@ $(function(){
 			$.ajax({
 				url: logUrl,
 				data: {
-					qid: scope.qid,						// 渠道号
-					uid: scope.userId,						// 从服务器端获取的uid
+					qid: scope.qid || 'null',						// 渠道号
+					uid: scope.userId || 'null',						// 从服务器端获取的uid
 					softtype: 'news',					// 软件type（当前默认news）
 					softname: 'eastday_wapnews',		// 软件名（当前默认eastday_wapnews）
-					newstype: scope.newsType,			// 当前新闻类别
-					from: wsCache.get('prev_newstype'),	// url上追加的fr字段
-					to: wsCache.get('current_newstype'),// 当前页面
-					os_type: getOsType(),				// 客户端操作系统
-					browser_type: getBrowserType(),		// 客户端浏览器类别
+					newstype: scope.newsType || 'null',			// 当前新闻类别
+					from: wsCache.get('prev_newstype') || 'null',	// url上追加的fr字段
+					to: wsCache.get('current_newstype') || 'null',// 当前页面
+					os_type: getOsType() || 'null',				// 客户端操作系统
+					browser_type: getBrowserType() || 'null',		// 客户端浏览器类别
 					pixel: pixel.w + '*' + pixel.h,		// 客户端分辨率
-					fr_url: getReferrer(),							// 浏览器的refer属性
+					fr_url: getReferrer() || 'null',							// 浏览器的refer属性
 					loginid: 'null',			// App端分享新闻时url上追加的ttaccid
-					ime: '',					// App端用户imei号
-					idx: '',					// 当前新闻的idx属性
-					ishot: '',					// 当前新闻是不是热点新闻
-					ver: '',					// App版本（1.2.9）url上追加的ver
-					appqid: '',					// App渠道号url上追加的appqid
-					ttloginid: '',				// App端分享新闻时url上追加的ttloginid
-					apptypeid: '',				// App端的软件类别url上追加的apptypeid
-					appver: '',					// App版本（010209）url上追加的appver
-					recommendtype: '',			// 推荐新闻类别url上追加的recommendtype
-					ispush: ''					// 是不是推送新闻url上追加的ispush
+					ime: 'null',					// App端用户imei号
+					idx: 'null',					// 当前新闻的idx属性
+					ishot: 'null',					// 当前新闻是不是热点新闻
+					ver: 'null',					// App版本（1.2.9）url上追加的ver
+					appqid: 'null',					// App渠道号url上追加的appqid
+					ttloginid: 'null',				// App端分享新闻时url上追加的ttloginid
+					apptypeid: 'null',				// App端的软件类别url上追加的apptypeid
+					appver: 'null',					// App版本（010209）url上追加的appver
+					recommendtype: 'null',			// 推荐新闻类别url上追加的recommendtype
+					ispush: 'null'					// 是不是推送新闻url上追加的ispush
 				},
 				dataType: 'jsonp',
 				jsonp: 'jsonpcallback',
