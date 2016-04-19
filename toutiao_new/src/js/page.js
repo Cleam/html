@@ -46,12 +46,12 @@ $(function(){
 		this.pulldown_pgNum = 0;	// 下拉页码
 		this.pulldown_idx = 0;		// 下拉链接索引
 		this.pulldown_num = 0;		// 下拉计数
-		this.qid = getQueryString('qid');	// 渠道ID
+		this.qid = eastToutiaoQid || GLOBAL.Util.getQueryString('qid');	// 渠道ID
 		this.pullUpFlag = true;		// 上拉加载数据(防止操作过快多次加载)
 		this.startKey = '';
 		this.endKey = '';
-		this.osType = getOsType();
-		this.browserType = getBrowserType();
+		this.osType = GLOBAL.Util.getOsType();
+		this.browserType = GLOBAL.Util.getBrowserType();
 		// 初始化
 		this.init();
 	}
@@ -102,7 +102,9 @@ $(function(){
 				$newsTabs.each(function(){
 					var $this = $(this);
 					if($this.data('type') == scope.newsType){
-						scope.scrollTo($this, false);
+						setTimeout(function(){
+							scope.scrollTo($this, false);
+						}, 50);
 						return false;
 					}
 				});
@@ -147,9 +149,9 @@ $(function(){
 
 			/* 页面滚动监听（当滑到底部时，加载下一页数据。） */
 			$(window).on('scroll', function() {
-	            var scrollTop = getScrollTop(),
+	            var scrollTop = GLOBAL.Util.getScrollTop(),
 	                loadingOT = $('#J_loading').offset().top,
-	                cHeight = getClientHeight(),
+	                cHeight = GLOBAL.Util.getClientHeight(),
 	                timer = null;
 
 	            // 缓存当前类别新闻的浏览位置（缓存20分钟）,延迟缓存
@@ -230,16 +232,22 @@ $(function(){
 
 	        /* 已浏览位置，点击刷新事件 */
 	        $body.on('click', '.J-read-position', function(){
-	        	var scrollTimer = setInterval(function(){
-	        		$body.scrollTop($body.scrollTop() - 20);
+	        	$body.scrollTop(0);
+	        	// 刷新按钮动画效果
+	        	scope.changeRefreshStatus();
+	        	// 调用下拉加载数据接口
+	        	scope.pullDownLoadData();
+	        	/*var scrollTimer = setInterval(function(){
+	        		$body.scrollTop($body.scrollTop() - 200);
 	        		if($body.scrollTop() <= 0){
+	        			$body.scrollTop(0);
 	        			clearInterval(scrollTimer);
 			        	// 刷新按钮动画效果
 			        	scope.changeRefreshStatus();
 			        	// 调用下拉加载数据接口
 			        	scope.pullDownLoadData();
 	        		}
-	        	}, 1);
+	        	}, 1);*/
 	        });
 
 	        // 推广新闻点击委托事件
@@ -312,7 +320,7 @@ $(function(){
 		 */
 		sendPromoteNewslog: function(advUrl, advId){
 			var scope = this,
-				pixel=getPixel();
+				pixel=GLOBAL.Util.getPixel();
 			$.ajax({
 				url: clickAdLogUrl,
 				dataType: 'jsonp',
@@ -325,11 +333,11 @@ $(function(){
 					"newstype": 'ad',
 					"from": 'null',
 					"to": advUrl || 'null',
-					"os_type": getOsType() || 'null',
-					"browser_type": getBrowserType() || 'null',
+					"os_type": GLOBAL.Util.getOsType() || 'null',
+					"browser_type": GLOBAL.Util.getBrowserType() || 'null',
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
-					"refer": getReferrer() || 'null',
+					"refer": GLOBAL.Util.getReferrer() || 'null',
 					"adv": advId || 'null'
 				},
 				jsonp : 'jsonpcallback',
@@ -430,11 +438,12 @@ $(function(){
 				        	$refresh.trigger('click');
 				        	$pullDownLoading && $pullDownLoading.remove();
 				        } else {
+				        	scope.changeRefreshStatus();
 							scope.pullDownLoadData(function(){
 					        	$pullDownLoading && $pullDownLoading.remove();
 							});
 				        }
-					}, 400);
+					}, 200);
 				} else {	
 					$pullDownLoading && $pullDownLoading.animate({
 						'opacity': 0,
@@ -626,11 +635,11 @@ $(function(){
 	            } else */
 	            if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
-	            	$newsList.prepend('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            	$newsList.prepend('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
-	                $newsList.prepend('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	                $newsList.prepend('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {
-	            	$newsList.prepend('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
+	            	$newsList.prepend('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
 	        }
 	        // 提示推荐新闻条数
@@ -664,7 +673,7 @@ $(function(){
 		 */
 		sendAdShowLog: function(advId, advUrl){
 			var scope = this,
-				pixel=getPixel();
+				pixel=GLOBAL.Util.getPixel();
 			$.ajax({
 				url: showAdLogUrl,
 				dataType: 'jsonp',
@@ -677,8 +686,8 @@ $(function(){
 					"newstype": 'ad',
 					"from": 'null',
 					"advurl": advUrl || 'null',
-					"os_type": getOsType() || 'null',
-					"browser_type": getBrowserType() || 'null',
+					"os_type": GLOBAL.Util.getOsType() || 'null',
+					"browser_type": GLOBAL.Util.getBrowserType() || 'null',
 					"fr_url": "null",
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
@@ -899,10 +908,21 @@ $(function(){
 		 */
 		scrollTo: function($target, animate){
 			var $newsTabs = $newsTabsWrap.children('a'),
+				winWidth = $(window).width(),
+				targetOffsetLeft = $target[0].offsetLeft,
+				targetWidth = $target.width();
+			$newsTabs.removeClass('active');
+			$target.addClass('active');
+			$newsTabsWrap.scrollLeft(targetOffsetLeft + (targetWidth / 2) - (winWidth / 2));
+			
+			console.log(targetOffsetLeft, targetWidth / 2, winWidth / 2);
+
+			/*var $newsTabs = $newsTabsWrap.children('a'),
 				curScrollLeft = $newsTabsWrap.scrollLeft(),
-				targetScrollLeft = $target[0].offsetLeft - ($newsTabs.eq(0).width() * 3),
+				targetScrollLeft = $target[0].offsetLeft - ($newsTabs.eq(0).width() * 3) - 10,
 				range = curScrollLeft - targetScrollLeft,
 				timer = null;
+
 			$newsTabs.removeClass('active');
 			$target.addClass('active');
 			if(animate){
@@ -925,7 +945,7 @@ $(function(){
 				}
 			} else {
 				$newsTabsWrap.scrollLeft(targetScrollLeft);
-			}
+			}*/
 		},
 
 		setQid: function(qid){
@@ -981,7 +1001,7 @@ $(function(){
 	     * 日志收集
 	     */
 	    addLog: function(){
-	    	var pixel = getPixel(),
+	    	var pixel = GLOBAL.Util.getPixel(),
 	    		scope = this;
 	    	// 发送操作信息
 			$.ajax({
@@ -994,10 +1014,10 @@ $(function(){
 					newstype: scope.newsType || 'null',			// 当前新闻类别
 					from: wsCache.get('prev_newstype') || 'null',	// url上追加的fr字段
 					to: wsCache.get('current_newstype') || 'null',// 当前页面
-					os_type: getOsType() || 'null',				// 客户端操作系统
-					browser_type: getBrowserType() || 'null',		// 客户端浏览器类别
+					os_type: GLOBAL.Util.getOsType() || 'null',				// 客户端操作系统
+					browser_type: GLOBAL.Util.getBrowserType() || 'null',		// 客户端浏览器类别
 					pixel: pixel.w + '*' + pixel.h,		// 客户端分辨率
-					fr_url: getReferrer() || 'null',							// 浏览器的refer属性
+					fr_url: GLOBAL.Util.getReferrer() || 'null',							// 浏览器的refer属性
 					loginid: 'null',			// App端分享新闻时url上追加的ttaccid
 					ime: 'null',					// App端用户imei号
 					idx: 'null',					// 当前新闻的idx属性
@@ -1022,7 +1042,7 @@ $(function(){
 	     */
 	    addOnlineLog: function(){
 	    	var scope = this,
-	    		infostr = getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\tnull\tnull\t' + getOsType() + '\tnull';
+	    		infostr = GLOBAL.Util.getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\tnull\tnull\t' + GLOBAL.Util.getOsType() + '\tnull';
 	    	$.ajax({
 		    	url : onlineUrl,
 		    	data:{
@@ -1199,11 +1219,11 @@ $(function(){
 	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
-	            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){		// 三图模式
-	                $newsList.append('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	                $newsList.append('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {	// 单图模式
-	            	$newsList.append('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
+	            	$newsList.append('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
 	            }
 	        }
 	        // 记录idx

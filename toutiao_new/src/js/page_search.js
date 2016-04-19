@@ -53,9 +53,9 @@ $(function(){
 
 			/* 页面滚动监听（当滑到底部时，加载下一页数据。）注意：ipone上点击触发滚动事件 */
 			$(window).on('scroll', function() {
-	            var scrollTop = getScrollTop(),
+	            var scrollTop = GLOBAL.Util.getScrollTop(),
 	                loadingOT = $loading.offset().top,
-	                cHeight = getClientHeight();
+	                cHeight = GLOBAL.Util.getClientHeight();
                 // 上拉加载数据(pullUpFlag标志 防止操作过快多次加载) loadingOT >= cHeight：防止ios浏览器默认的弹性滚动触发加载数据问题。
 	            if(loadingOT >= cHeight && scrollTop + cHeight >= loadingOT && pullUpFlag && kw){
 	            	pullUpFlag = false;
@@ -190,7 +190,7 @@ $(function(){
 				lastcol = wsCache.get('search_param_lastcol') ? wsCache.get('search_param_lastcol') : '',
 				splitwordsarr = wsCache.get('search_param_splitwordsarr') ? JSON.parse(wsCache.get('search_param_splitwordsarr')) : '',
 				stkey = wsCache.get('search_param_stkey') ? wsCache.get('search_param_stkey') : '',
-				pixel = getPixel();
+				pixel = GLOBAL.Util.getPixel();
 			$.ajax({
 				url: searchUrl,
 				dataType: 'jsonp',
@@ -204,8 +204,8 @@ $(function(){
 					'qid': qid,
 					'softtype': 'news',
 					'softname': 'eastday_wapnews',
-					'os_type': getOsType(),
-					'browser_type': getBrowserType(),
+					'os_type': GLOBAL.Util.getOsType(),
+					'browser_type': GLOBAL.Util.getBrowserType(),
 					'pixel': pixel.w + '*' + pixel.h
 				},
 				jsonp: 'jsonpcallback',
