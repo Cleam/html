@@ -114,11 +114,11 @@ gulp.task('css-subscribe', function () {
 // js代码校验、合并和压缩
 gulp.task('js-common', function() {
     var jsSrc = [
-            './src/js/zepto.min.js', 
-            './src/js/fastclick.min.js', 
-            './src/js/web-storage-cache.min.js', 
-            './src/js/js.cookie.js', 
-            './src/js/util.js'
+            './src/js/zepto.min.js',
+            './src/js/fastclick.min.js',
+            './src/js/web-storage-cache.min.js',
+            './src/js/js.cookie.js',
+            './src/js/global.js'
         ],
         jsDst = './dist/js';
     return gulp.src(jsSrc)

@@ -1,5 +1,13 @@
-var ggData = {
-	"gg_root": {
+/**
+ * 此js依赖global.js
+ */
+
+GLOBAL.namespace('Et');
+
+// 渠道-广告数据
+GLOBAL.Et.ggData = {
+	"root": {
+		"default": "u2196095",
 		"zuimeitianqi": {"baidu": {"li": "u2592419"}},
 		"zjzy": {"baidu": {"li": "u2462970"}},
 		"zhwnl": {"baidu": {"li": "u2375056"}},
@@ -418,7 +426,6 @@ var ggData = {
 		"dingdingapp": {"baidu": {"li": "u2588898"}},
 		"dianfuyule": {"baidu": {"li": "u2547713"}},
 		"dfweather": {"baidu": {"li": "u2525700"}},
-		"default": {"baidu": {"li": "u2196095"}},
 		"cvbrowser": {"baidu": {"li": "u2327364"}},
 		"coolpadbrowser": {"baidu": {"li": "u2407595"}},
 		"chenmeng": {"baidu": {"li": "u2562486"}},
@@ -457,21 +464,25 @@ var ggData = {
 		"021dh": {"baidu": {"li": "u2530657"}},
 		"8684": {"baidu": {"li": "u2356214"}},
 		"2345m": {"baidu": {"li": "u2607885"}},
-		"shenghuorili":{"baidu":{"li":"u2608701"}}
+		"shenghuorili":{"baidu":{"li":"u2608701"}},
+		"antutu":{"baidu":{"li":"u2610291"}},
+		"114mobile":{"baidu":{"li":"u2610261"}},
+		"114mobileios":{"baidu":{"li":"u2610225"}},
+		"wifijlmm":{"baidu":{"li":"u2610580"}},
+		"wifijl":{"baidu":{"li":"u2610540"}}
 	}
 };
-var channelArr  = ['baidu', 'sogou'];
-window.eastToutiaoDefaultGgId = ggData.gg_root['default'];
-window.eastToutiaoQid = GLOBAL.Util.getQueryString('qid');	// 渠道号
-window.eastToutiaoGgTypeArr = [];	// 广告商数组
-window.eastToutiaoGg = ggData.gg_root[eastToutiaoQid];		// 广告ID数组
-for (var i = 0; i < channelArr.length; i++) {
-	if(eastToutiaoGg && eastToutiaoGg.hasOwnProperty(channelArr[i])){
-		eastToutiaoGgTypeArr.push(channelArr[i]);
+
+// 广告渠道数组
+GLOBAL.Et.channelArr  = ['baidu', 'sogou'];
+
+GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid');	// 渠道号
+GLOBAL.Et.ggTypeArr = [];	// 广告商数组
+GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];		// 广告ID数组
+for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
+	if(GLOBAL.Et.gg && GLOBAL.Et.gg.hasOwnProperty(GLOBAL.Et.channelArr[i])){
+		GLOBAL.Et.ggTypeArr.push(GLOBAL.Et.channelArr[i]);
 	}
 }
-// console.log(tgg.hasOwnProperty('baidu'), tgg.hasOwnProperty('sogou'));
-// console.log(eastToutiaoGgTypeArr);
-// console.log(eastToutiaoGg);
 
 

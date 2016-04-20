@@ -1,3 +1,6 @@
+/**
+ * 依赖其他所有js
+ */
 // $: Zepto
 $(function(){
 	FastClick.attach(document.body);
@@ -22,6 +25,8 @@ $(function(){
 		$newsList = $('#J_news_list'),
 		$refresh = $('#J_refresh'),
 		$newsTabsWrap = $('#J_top_menu'),
+		$ggBaidu = $('#J_gg_baidu_id'),
+		$ggSogou = $('#J_gg_sogou_id');
 		praiseTrampleFlag = true,
 		startPos = 0,				// 滑动开始位置
 		touchDistance = 0,			// 滑动距离
@@ -46,7 +51,7 @@ $(function(){
 		this.pulldown_pgNum = 0;	// 下拉页码
 		this.pulldown_idx = 0;		// 下拉链接索引
 		this.pulldown_num = 0;		// 下拉计数
-		this.qid = eastToutiaoQid || GLOBAL.Util.getQueryString('qid');	// 渠道ID
+		this.qid = GLOBAL.Et.qid || GLOBAL.Util.getQueryString('qid');	// 渠道ID
 		this.pullUpFlag = true;		// 上拉加载数据(防止操作过快多次加载)
 		this.startKey = '';
 		this.endKey = '';
@@ -62,12 +67,16 @@ $(function(){
 		 */
 		init: function(){
 			var scope = this;
+
+			// 设置广告ID（每次刷新需要设置广告ID，防止广告空白不显示）
+			scope.setGgId();
+
 			/* 获取、存储qid */
 			if(scope.qid){
 				scope.setQid(scope.qid);
 			} else {
 				// 无qid的情况，删除cookie中qid
-				Cookies.remove('qid', {path: ''});
+				Cookies.remove('qid', {path: '/', domain: 'eastday.com'});
 			}
 
 			/* 获取、存储uid */
@@ -79,7 +88,6 @@ $(function(){
 			/* 获取缓存中的已阅读新闻 */
 			scope.readUrl = wsCache.get('read_url_all');
         	if(!scope.readUrl){scope.readUrl = '';}
-
 
 	        /* 删除当前类别记录的位置信息 */
 	        // scope.clearPosition(scope.newsType);
@@ -646,10 +654,16 @@ $(function(){
 	        var $rn = $('<p id="J_recommend_news" class="recommend-news">为您推荐<span>' + len + '</span>条新闻</p>');
 	        $rn.appendTo('body');
 	        setTimeout(function(){
-	        	$rn.fadeOut('slow', function(){
+	        	$rn.animate({
+	        		'scale': 0,
+	        		'opacity': 0.5
+	        	}, '600', function(){
 	        		$rn.remove();
 	        	});
-	        }, 1000);
+	        	// $rn.fadeOut('slow', function(){
+	        	// 	$rn.remove();
+	        	// });
+	        }, 1200);
 	        // 如果下拉加载数据次数超过20次，清空信息流末尾新闻数据。
 	        if(scope.pulldown_num >= 20){
 	        	scope.pulldown_num = 0;
@@ -915,8 +929,6 @@ $(function(){
 			$target.addClass('active');
 			$newsTabsWrap.scrollLeft(targetOffsetLeft + (targetWidth / 2) - (winWidth / 2));
 			
-			console.log(targetOffsetLeft, targetWidth / 2, winWidth / 2);
-
 			/*var $newsTabs = $newsTabsWrap.children('a'),
 				curScrollLeft = $newsTabsWrap.scrollLeft(),
 				targetScrollLeft = $target[0].offsetLeft - ($newsTabs.eq(0).width() * 3) - 10,
@@ -1217,19 +1229,73 @@ $(function(){
 	            }
 	            if(scope.newsType == 'meinv'){ // 美女特殊处理
 	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
-	            } else if(ispicnews == '1'){	// 大图模式
-	            	imgArr = item.lbimg;
-	            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            } else if(imgLen >= 3){		// 三图模式
-	                $newsList.append('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            } else {	// 单图模式
-	            	$newsList.append('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
+	            } else {
+	            	/*====== 插入广告 ========*/
+            		var baiduHtmlWrap = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>',
+            			sogouHtmlWrap = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>';
+	            	if(GLOBAL.Et.gg){	// 有渠道号情况
+						if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
+							// 策略一(8 13 18 23 ...)
+							if(i === 7 || i === 15){	// 百度广告
+								$newsList.append(baiduHtmlWrap);
+							} else if(i === 11 || i === 19){	// 搜狗广告
+								$newsList.append(sogouHtmlWrap);
+							}
+						} else if(GLOBAL.Et.ggTypeArr.contains('sogou')){
+							// 策略三(8 13 18 23 ...)
+							if(i === 7 || i === 11 || i === 15 || i === 19){	// 百度广告
+								$newsList.append(sogouHtmlWrap);
+							}
+						} else if(GLOBAL.Et.ggTypeArr.contains('baidu')){
+							// 策略二(8 18 ...)
+							if(i === 7 || i === 15){	// 百度广告
+								$newsList.append(baiduHtmlWrap);
+							}
+						} else {	// 默认百度广告
+							if(i === 7 || i === 15){
+								$newsList.append(baiduHtmlWrap);
+							}
+						}
+					} else {	// 无渠道号情况，默认百度广告
+						if(i === 7 || i === 15){
+							$newsList.append(baiduHtmlWrap);
+						}
+					}
+					/*======== 新闻流 =========*/
+	            	if(ispicnews == '1'){	// 大图模式
+		            	imgArr = item.lbimg;
+		            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+		            } else if(imgLen >= 3){		// 三图模式
+		                $newsList.append('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+		            } else {	// 单图模式
+		            	$newsList.append('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
+		            }
 	            }
 	        }
 	        // 记录idx
 	        wsCache.set('idx_' + scope.newsType, scope.idx + len, {exp: 20 * 60});
 	        // 缓存当前类别加载的新闻（缓存20分钟）
 	        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
+	    },
+
+	    /**
+	     * 设置广告ID
+	     */
+	    setGgId: function(){
+	    	if(GLOBAL.Et.gg){	// 有渠道号情况
+				if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
+					$ggBaidu.val(GLOBAL.Et.gg['baidu']['li']);
+					$ggSogou.val(GLOBAL.Et.gg['sogou']['li']);
+				} else if(GLOBAL.Et.ggTypeArr.contains('sogou')){
+					$ggSogou.val(GLOBAL.Et.gg['sogou']['li']);
+				} else if(GLOBAL.Et.ggTypeArr.contains('baidu')){
+					$ggBaidu.val(GLOBAL.Et.gg['baidu']['li']);
+				} else {	// 默认百度广告
+					$ggBaidu.val(GLOBAL.Et.ggData.root['default']); // first.js
+				}
+			} else {	// 无渠道号情况，默认百度广告
+				$ggBaidu.val(GLOBAL.Et.ggData.root['default']); // first.js
+			}
 	    }
 
 	};
