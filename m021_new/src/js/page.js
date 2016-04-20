@@ -63,7 +63,7 @@ $(function() {
 
     var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
         pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
-        uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',
+        uidUrl = 'http://021tj.dfshurufa.com/m021log/getuid',
         tjUrl = 'http://021tj.dfshurufa.com/m021log/record',
         tjPvUrl = 'http://021tj.dfshurufa.com/m021log/active',
         browserType = getBrowserType(),
