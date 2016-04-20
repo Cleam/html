@@ -40,6 +40,18 @@ gulp.task('html-index', function() {
         .pipe(gulp.dest(htmlDst))
         .pipe(livereload());
 });
+// 广告html
+gulp.task('gg-html', function() {
+    var htmlSrc = [
+            './src/gg/gg_baidu.html',
+            './src/gg/gg_sogou.html'
+        ],
+        htmlDst = './dist/gg';
+    gulp.src(htmlSrc)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
+});
 
 // 自动添加css前缀和压缩
 gulp.task('css-common', function () {
@@ -130,6 +142,7 @@ gulp.task('js-common', function() {
 });
 gulp.task('js-page', function() {
     var jsSrc = [
+            './src/js/gg.js',
             './src/js/page.js', 
             './src/js/page_search.js', 
             './src/js/page_subscribe.js'
@@ -232,4 +245,4 @@ gulp.task('clean', function(cb) {
 
 gulp.task('css', ['css-common', 'css-page']);
 gulp.task('js', ['js-common', 'js-page']);
-gulp.task('default', ['html', 'css', 'img', 'js', 'data']);
+gulp.task('default', ['html', 'css', 'img', 'js', 'data', 'gg-html']);
