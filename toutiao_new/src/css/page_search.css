@@ -27,14 +27,14 @@ header .form-wrap .search-btn{position: absolute; top: 0; right: 0.2rem; width: 
 
 /* 热词 */
 .hot-words-wrap{text-align: center;}
-.hot-words-wrap h3{font-size: 0.4rem; margin: 0.6rem 0 0.3rem;}
-.hot-words-wrap p{font-size: 0.3rem; margin-bottom: 0.24rem;}
+.hot-words-wrap h3{font-size: 0.4rem; margin: 0.8rem 0 0.4rem;}
+.hot-words-wrap p{font-size: 0.3rem; margin-bottom: 0.24rem; line-height: 1.6em;}
 .hot-words-wrap p a{font-size: 0.3rem; color: #2183db; margin-bottom: 0.2rem;}
 
 /*===== 新闻内容 ======*/
 .news-list{width: 100%; overflow: hidden;}
 
-.news-list-wrap .news-item img{background-image: url("../img/img_bg2.png"); background-position: center; background-size: cover;}
+.news-list-wrap .news-item img{background-image: url("../img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 60%;}
 .news-list-wrap .news-item:last-child a .news-wrap{border-bottom: 0 none;}
 /* 单图模式 */
 .news-list-wrap .news-item-s1 a{display: block; width: 100%; height: 1.68rem; color: #333; padding: 0.24rem 0.3rem;}

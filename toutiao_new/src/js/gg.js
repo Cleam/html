@@ -469,7 +469,8 @@ GLOBAL.Et.ggData = {
 		"114mobile":{"baidu":{"li":"u2610261"}},
 		"114mobileios":{"baidu":{"li":"u2610225"}},
 		"wifijlmm":{"baidu":{"li":"u2610580"}},
-		"wifijl":{"baidu":{"li":"u2610540"}}
+		"wifijl":{"baidu":{"li":"u2610540"}},
+		"shangyewifiliu2":{"baidu":{"li":"u2612143"}}
 	}
 };
 

@@ -155,6 +155,18 @@ gulp.task('js-page', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
+gulp.task('js-gg', function() {
+    var jsSrc = [
+            './src/js/gg.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
 gulp.task('js-index', function() {
     var jsSrc = [
             './src/js/page.js'

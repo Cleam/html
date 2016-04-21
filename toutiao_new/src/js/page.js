@@ -34,7 +34,7 @@ $(function(){
 		isSwipeDown = false,		// 确定向下滑
 		isTop = false,				// 顶部判断标志
 		$pullDownLoading = null,	// 下拉动画
-		TOUCH_DISTANCE = 200,		// 规定滑动加载距离
+		TOUCH_DISTANCE = 150,		// 规定滑动加载距离
 		pullDownLoadDataTimer = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache();	// 本地存储对象
 
@@ -137,9 +137,12 @@ $(function(){
 			scope.pullDown();
 
 			/* 频道类别（菜单）点击事件 */
-			$newsTabsWrap.on('click', 'a', function(){
+			$newsTabsWrap.on('tap', 'a', function(){
 				var $this = $(this),
 					type = $this.data('type');
+				if($this.hasClass('active')){
+					return;
+				}
 				// 使当前频道分类显示在导航菜单中间
 				scope.scrollTo($this, false);
 				// 存储上一个新闻类别和当前新闻类别
@@ -175,7 +178,7 @@ $(function(){
 	        });
 
 	        /* 刷新数据 */
-	        $refresh.on('click', function(){
+	        $refresh.on('tap', function(){
 	        	if($refresh.hasClass('active')){
 	        		return;
 	        	}
@@ -416,16 +419,9 @@ $(function(){
 					isTop = false;
 				}
 				if(!$pullDownLoading){
-					// $pullDownLoading = $('<div class="pulldown-loading"><div class="spinner"><div class="bounce bounce1"></div> <div class="bounce bounce2"></div> <div class="bounce bounce3"></div></div></div>');
 					svgTop = ($('header').height() - 40);
 					$pullDownLoading = $('<svg id="J_svg" class="svg" style="top: ' + svgTop + 'px"><g id="J_svg_g"><marker id="J_svg_marker" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,10 L5,5 L0,0" style="fill: #d43d3d;"></path></marker><path stroke-width="3.5" stroke-linecap="round" id="J_svg_path" marker-end="url(#J_svg_marker)" d="M20,9 A11,11 0 1,1 10.5,14.5" style="stroke: #d43d3d; fill: none;"></path><circle id="J_svg_circle" class="path" fill="none" stroke-width="3.5" stroke-linecap="round" cx="25" cy="25" r="11"></circle></g></svg>');
 				} else {
-					// $pullDownLoading.removeClass('active').css({
-					// 	'display': 'block',
-					// 	'opacity': 0,
-					// 	'transform': 'scale(0.2) translateY(0px)',
-					// 	'-webkit-transform': 'scale(0.2) translateY(0px)'
-					// });
 					$pullDownLoading.removeClass('active').css({
 						'display': 'block',
 						'opacity': 0,
@@ -437,26 +433,32 @@ $(function(){
 			});
 			$newsList.on('touchend', function(){
 				// 达到下拉阈值 启动数据加载
-				if(touchDistance === TOUCH_DISTANCE){
-					$pullDownLoading && $pullDownLoading.addClass('active');
-					clearTimeout(pullDownLoadDataTimer);
-					pullDownLoadDataTimer = setTimeout(function(){
-						// 美女无pulldown接口
-						if(scope.newsType == 'meinv'){
-				        	$refresh.trigger('click');
-				        	$pullDownLoading && $pullDownLoading.remove();
-				        } else {
-				        	scope.changeRefreshStatus();
-							scope.pullDownLoadData(function(){
+				if(touchDistance >= TOUCH_DISTANCE){
+					$pullDownLoading.animate({
+						// 'transform': 'rotate(0deg)',
+						// '-webkit-transform': 'rotate(0deg)',
+						'top': (svgTop + (TOUCH_DISTANCE / 3)) + 'px'
+					}, 'fast', function(){
+						$pullDownLoading && $pullDownLoading.addClass('active');
+						clearTimeout(pullDownLoadDataTimer);
+							pullDownLoadDataTimer = setTimeout(function(){
+							// 美女无pulldown接口
+							if(scope.newsType == 'meinv'){
+					        	$refresh.trigger('click');
 					        	$pullDownLoading && $pullDownLoading.remove();
-							});
-				        }
-					}, 200);
+					        } else {
+					        	scope.changeRefreshStatus();
+								scope.pullDownLoadData(function(){
+						        	$pullDownLoading && $pullDownLoading.remove();
+								});
+					        }
+						}, 200);
+					});
 				} else {	
 					$pullDownLoading && $pullDownLoading.animate({
 						'opacity': 0,
 						// 'translateY': '0',
-						'top': svgTop,
+						'top': svgTop
 					}, 'fast', function(){
 						$pullDownLoading.remove();
 					});
@@ -479,22 +481,20 @@ $(function(){
 					}
 					// 下拉加载
 					if(touchDistance >= TOUCH_DISTANCE){
-						// $pullDownLoading.find('.bounce').css('backgroundColor', '#2a90d7');
 						$pullDownLoading.find('#J_svg_marker>path').attr('style', 'fill:#2a90d7');
 						$pullDownLoading.find('#J_svg_g>path').attr('style', 'stroke:#2a90d7;fill:none');
-						touchDistance = TOUCH_DISTANCE;
+						if(touchDistance >= TOUCH_DISTANCE + 80){
+							touchDistance = TOUCH_DISTANCE + 80;
+						}
 					} else {
-						// $pullDownLoading.find('.bounce').css('backgroundColor', '#d43d3d');
 						$pullDownLoading.find('#J_svg_marker>path').attr('style', 'fill:#d43d3d');
 						$pullDownLoading.find('#J_svg_g>path').attr('style', 'stroke:#d43d3d;fill:none');
 					}
 					$pullDownLoading.css({
 						'opacity': touchDistance / TOUCH_DISTANCE,
-						'transform': 'rotate(' + touchDistance / TOUCH_DISTANCE * 360 + 'deg)',
-						'-webkit-transform': 'rotate(' + touchDistance / TOUCH_DISTANCE * 360 + 'deg)',
+						'transform': 'rotate(' + touchDistance / TOUCH_DISTANCE * 720 + 'deg)',
+						'-webkit-transform': 'rotate(' + touchDistance / TOUCH_DISTANCE * 720 + 'deg)',
 						'top': (svgTop + (touchDistance / 3)) + 'px'
-						// 'transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)',
-						// '-webkit-transform': 'scale(' + ((touchDistance * 0.8) / TOUCH_DISTANCE + 0.2) + ') translateY(' + (touchDistance / 6) + 'px)'
 					});
 					e.preventDefault();
 				}
@@ -643,11 +643,11 @@ $(function(){
 	            } else */
 	            if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
-	            	$newsList.prepend('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            	$newsList.prepend('<section class="pull-down news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
-	                $newsList.prepend('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	                $newsList.prepend('<section class="pull-down news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {
-	            	$newsList.prepend('<section class="news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
+	            	$newsList.prepend('<section class="pull-down news-item news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></section>');
 	            }
 	        }
 	        // 提示推荐新闻条数
@@ -675,8 +675,12 @@ $(function(){
 	        }
 			// 记录pulldown_idx
 	        wsCache.set('pulldown_idx_' + scope.newsType, scope.pulldown_idx - len, {exp: 20 * 60});
-	        // 缓存当前类别加载的新闻（缓存20分钟）
-	        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
+	        setTimeout(function(){
+	        	// 清除pull-down类
+		        $newsList.children().removeClass('pull-down');
+		        // 缓存当前类别加载的新闻（缓存20分钟）
+		        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
+	        }, 400);
 		},
 
 		/**
