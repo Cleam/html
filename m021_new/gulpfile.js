@@ -84,6 +84,7 @@ gulp.task('js_bottom', function() {
             './src/js/swiper-3.3.0.jquery.min.js',
             './src/js/fastclick.min.js',
             './src/js/web-storage-cache.min.js',
+            './src/js/changeUrl.js',
             './src/js/page.js'
         ],
         jsDst = './dist/js';

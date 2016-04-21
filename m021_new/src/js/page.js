@@ -3,9 +3,11 @@
  * @param  {[type]} item 指定值
  * @return {[type]}      [description]
  */
-Array.prototype.contains = function(item){
-    return RegExp(item).test(this);
-};
+if(!Array.prototype.hasOwnProperty('contains')){
+    Array.prototype.contains = function(item){
+        return RegExp(item).test(this);
+    };
+}
 /**
  * 关键词加红处理
  * @param  {String} txt   标题
