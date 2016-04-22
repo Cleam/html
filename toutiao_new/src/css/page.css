@@ -61,8 +61,8 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 	100%{opacity: 1;}
 } 
 
-.news-list-wrap .news-item img{background-image: url("../img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 60%;}
-.news-list-wrap .news-item.news-item-s3 .img-wrap{background-image: url("../img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 40%;}
+.news-list-wrap .news-item img{background-image: url("http://mini.eastday.com/toutiaoh5/img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 60%;}
+.news-list-wrap .news-item.news-item-s3 .img-wrap{background-image: url("http://mini.eastday.com/toutiaoh5/img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 40%;}
 .news-list-wrap .news-item.news-item-s3 img{background-image: none; background-color: transparent;}
 .news-list-wrap .news-item:last-child a .news-wrap{border-bottom: 0 none;}
 .news-list-wrap .news-item-s1 a{display: block; width: 100%; height: 1.68rem; color: #333; padding: 0.24rem 0.3rem;}

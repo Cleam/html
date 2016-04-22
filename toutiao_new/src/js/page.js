@@ -4,7 +4,8 @@
 // $: Zepto
 $(function(){
 	FastClick.attach(document.body);
-	var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
+	var channelsUrl = './data/channels.json',	// 新闻频道类别
+		refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
 		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
 		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
 		positionUrl = 'http://position.dfshurufa.com/position/get',			// 获取用户位置
@@ -36,13 +37,18 @@ $(function(){
 		$pullDownLoading = null,	// 下拉动画
 		TOUCH_DISTANCE = 150,		// 规定滑动加载距离
 		pullDownLoadDataTimer = null,		// 规定滑动加载距离
-		wsCache = new WebStorageCache();	// 本地存储对象
+		wsCache = new WebStorageCache(),	// 本地存储对象
+		// 百度广告iframe
+		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>',
+		// 搜狗广告iframe
+		sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>';
 
 	/**
 	 * 东方头条对象
 	 */
 	function EastNews(){
-		var currentNewsType = wsCache.get('current_newstype');
+		var ct = GLOBAL.Util.getQueryString('type');
+		var currentNewsType = ct ? ct : wsCache.get('current_newstype');
 		this.newsType = currentNewsType ? currentNewsType : 'toutiao';	// 新闻频道类别
 		this.readUrl = '';
 		this.userId = '';			// 用户ID
@@ -51,7 +57,8 @@ $(function(){
 		this.pulldown_pgNum = 0;	// 下拉页码
 		this.pulldown_idx = 0;		// 下拉链接索引
 		this.pulldown_num = 0;		// 下拉计数
-		this.qid = GLOBAL.Et.qid || GLOBAL.Util.getQueryString('qid');	// 渠道ID
+		this.toType = GLOBAL.Util.getQueryString('type');	// 
+		this.qid = GLOBAL.Et.qid || GLOBAL.Util.getQueryString('qid') || Cookies.get('qid');	// 渠道ID
 		this.pullUpFlag = true;		// 上拉加载数据(防止操作过快多次加载)
 		this.startKey = '';
 		this.endKey = '';
@@ -307,7 +314,7 @@ $(function(){
 			if(!myChannels){
 				/* 获取服务端所有频道 */
 				$.ajax({
-					url: 'data/channels.json',
+					url: channelsUrl,
 					dataType: 'json',
 					success: function(data){
 						scope.generateChannelTabs(data.channels.up);
@@ -375,7 +382,7 @@ $(function(){
 			}
 			$newsTabsWrap.html(tabsHtml);
 			// 缓存我的频道
-			wsCache.set('news_channels', myChannels);
+			(wsCache.get('custom_channels') == '1') && wsCache.set('news_channels', myChannels);
 		},
 
 		/**
@@ -433,35 +440,43 @@ $(function(){
 			});
 			$newsList.on('touchend', function(){
 				// 达到下拉阈值 启动数据加载
-				if(touchDistance >= TOUCH_DISTANCE){
-					$pullDownLoading.animate({
-						// 'transform': 'rotate(0deg)',
-						// '-webkit-transform': 'rotate(0deg)',
-						'top': (svgTop + (TOUCH_DISTANCE / 3)) + 'px'
-					}, 'fast', function(){
-						$pullDownLoading && $pullDownLoading.addClass('active');
-						clearTimeout(pullDownLoadDataTimer);
-							pullDownLoadDataTimer = setTimeout(function(){
-							// 美女无pulldown接口
-							if(scope.newsType == 'meinv'){
-					        	$refresh.trigger('click');
-					        	$pullDownLoading && $pullDownLoading.remove();
-					        } else {
-					        	scope.changeRefreshStatus();
-								scope.pullDownLoadData(function(){
+				if(isSwipeDown){
+					if(touchDistance >= TOUCH_DISTANCE){
+						$pullDownLoading.animate({
+							// 'transform': 'rotate(0deg)',
+							// '-webkit-transform': 'rotate(0deg)',
+							'top': (svgTop + (TOUCH_DISTANCE / 3)) + 'px'
+						}, 'fast', function(){
+							$pullDownLoading && $pullDownLoading.addClass('active');
+							clearTimeout(pullDownLoadDataTimer);
+								pullDownLoadDataTimer = setTimeout(function(){
+								// 美女无pulldown接口
+								if(scope.newsType == 'meinv'){
+						        	$refresh.trigger('click');
 						        	$pullDownLoading && $pullDownLoading.remove();
-								});
-					        }
-						}, 200);
-					});
-				} else {	
-					$pullDownLoading && $pullDownLoading.animate({
-						'opacity': 0,
-						// 'translateY': '0',
-						'top': svgTop
-					}, 'fast', function(){
-						$pullDownLoading.remove();
-					});
+						        } else {
+						        	scope.changeRefreshStatus();
+									scope.pullDownLoadData(function(){
+							        	setTimeout(function(){
+							        		if($pullDownLoading){
+							        			$pullDownLoading.fadeOut('fast', function(){
+								        			$pullDownLoading.remove();
+							        			});
+							        		}
+							        	}, 500);
+									});
+						        }
+							}, 200);
+						});
+					} else {	
+						$pullDownLoading && $pullDownLoading.animate({
+							'opacity': 0,
+							// 'translateY': '0',
+							'top': svgTop
+						}, 'fast', function(){
+							$pullDownLoading.remove();
+						});
+					}
 				}
 				touchDistanceFlag = true;
 				isSwipeDown = false;
@@ -470,7 +485,7 @@ $(function(){
 				var py = e.touches[0].pageY;
 				touchDistance = py - startPos;
 				// 根据用户开始的滑动手势判断用户是向下滑还是向上滑
-				if(touchDistanceFlag && touchDistance > 0){
+				if(isTop && touchDistanceFlag && touchDistance > 0){
 					isSwipeDown = true;
 					// 根据刚开始的滑动值进行判断，后面用户无论怎么滑都不会触发浏览器滚动。
 					touchDistanceFlag = false;
@@ -569,7 +584,11 @@ $(function(){
 		generateDomForPulldown: function(d){
 			var scope = this,
 	        	data = d && d.data,
-	        	len = data.length;
+	        	len = data.length,
+	        	existGg = false,
+	        	min = 0, 
+	        	max = 3, 
+	        	randomNum = len;
 	        if(!data || !data.length){
 	            // $loading.hide();
 	            return false;
@@ -587,6 +606,16 @@ $(function(){
 	        // 删除阅读历史位置DOM元素（后面重新更新位置）
         	$body.find('.J-read-position').remove();
 	        $newsList.prepend('<a class="J-read-position read-position">上次浏览到这里，点击刷新。</a>');
+	        // 随机位置插入广告(一条)
+            if(len > 4 && len < 8){
+            	min = 0; 
+            	max = 3;
+            } else if(len > 8){
+            	min = len - 8; 
+            	max = len - 5;
+            }
+            randomNum = Math.floor((max - min + 1) * Math.random() + min);
+            // 循环生成新闻
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -637,10 +666,17 @@ $(function(){
 	            } else {
 	            	url += '?idx=' + (scope.pulldown_idx-i-1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + scope.newsType;
 	            }
+	            // 随机位置插入广告(一条)
+            	if(!existGg && i === randomNum){
+            		if(!$ggBaidu.val()){
+	            		$newsList.prepend(sogouHtmlIframe);
+            		} else {
+	            		$newsList.prepend(baiduHtmlIframe);
+            		}
+            		// 保证只插入一条广告
+            		existGg = true;
+            	}
 	            
-	            /*if(scope.newsType == 'meinv'){ // 美女特殊处理
-	            	$newsList.prepend('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
-	            } else */
 	            if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
 	            	$newsList.prepend('<section class="pull-down news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
@@ -1084,6 +1120,7 @@ $(function(){
 				if(cachePos){
 	                $body.scrollTop(cachePos);
 	            }
+	            callback && callback();
 			} else {
 				wsCache.delete('pulldown_idx_' + scope.newsType);
 				wsCache.set('pgnum_' + scope.newsType, 1, { exp: 20 * 60});
@@ -1235,34 +1272,32 @@ $(function(){
 	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else {
 	            	/*====== 插入广告 ========*/
-            		var baiduHtmlWrap = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>',
-            			sogouHtmlWrap = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>';
 	            	if(GLOBAL.Et.gg){	// 有渠道号情况
 						if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
 							// 策略一(8 13 18 23 ...)
 							if(i === 7 || i === 15){	// 百度广告
-								$newsList.append(baiduHtmlWrap);
+								$newsList.append(baiduHtmlIframe);
 							} else if(i === 11 || i === 19){	// 搜狗广告
-								$newsList.append(sogouHtmlWrap);
+								$newsList.append(sogouHtmlIframe);
 							}
 						} else if(GLOBAL.Et.ggTypeArr.contains('sogou')){
 							// 策略三(8 13 18 23 ...)
 							if(i === 7 || i === 11 || i === 15 || i === 19){	// 百度广告
-								$newsList.append(sogouHtmlWrap);
+								$newsList.append(sogouHtmlIframe);
 							}
 						} else if(GLOBAL.Et.ggTypeArr.contains('baidu')){
 							// 策略二(8 18 ...)
 							if(i === 7 || i === 15){	// 百度广告
-								$newsList.append(baiduHtmlWrap);
+								$newsList.append(baiduHtmlIframe);
 							}
 						} else {	// 默认百度广告
 							if(i === 7 || i === 15){
-								$newsList.append(baiduHtmlWrap);
+								$newsList.append(baiduHtmlIframe);
 							}
 						}
 					} else {	// 无渠道号情况，默认百度广告
 						if(i === 7 || i === 15){
-							$newsList.append(baiduHtmlWrap);
+							$newsList.append(baiduHtmlIframe);
 						}
 					}
 					/*======== 新闻流 =========*/

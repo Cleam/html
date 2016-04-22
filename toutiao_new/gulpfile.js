@@ -257,4 +257,4 @@ gulp.task('clean', function(cb) {
 
 gulp.task('css', ['css-common', 'css-page']);
 gulp.task('js', ['js-common', 'js-page']);
-gulp.task('default', ['html', 'css', 'img', 'js', 'data', 'gg-html']);
+gulp.task('default', ['html', 'gg-html', 'css', 'img', 'js', 'data']);

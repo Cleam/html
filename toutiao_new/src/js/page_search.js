@@ -60,6 +60,8 @@ $(function(){
 	            if(loadingOT >= cHeight && scrollTop + cHeight >= loadingOT && pullUpFlag && kw){
 	            	pullUpFlag = false;
                     scope.loadSearchData(kw);
+	            } else if(loadingOT < cHeight) {
+	            	$loading.hide();
 	            }
 	        });
 
@@ -122,6 +124,7 @@ $(function(){
 	        	$hotWords.hide();
 				$newsWrap.show();
 	        	$newsList.html(wsCache.get('search_content'));
+	        	scope.hideOfShowLoading();
 	        } else {
 	        	$hotWords.show();
 				$newsWrap.hide();
@@ -257,7 +260,7 @@ $(function(){
 					imgLen = imgArr.length,
 					source = d[i].source;
 				title = scope.getNewStr(title, splitword);
-				url += '?idx=' + (idx++);
+				url += '?idx=' + (idx++) + '&fr=search';
 				if(imgLen >= 3){		// 三图模式
 	                $newsList.append('<section class="news-item news-item-s2"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {	// 单图模式
@@ -271,6 +274,17 @@ $(function(){
 			wsCache.set('search_param_lastcol', lastcol);
 			wsCache.set('search_param_splitwordsarr', JSON.stringify(splitwordsarr));
 			wsCache.set('search_content', $newsList.html(), {exp: 20 * 60});
+			scope.hideOfShowLoading();
+		},
+
+		/**
+		 * 当loading的到浏览器顶部的距离小于窗口高度时，隐藏loading
+		 * @return {[type]} [description]
+		 */
+		hideOfShowLoading: function(){
+			if($loading.offset().top < GLOBAL.Util.getClientHeight()){
+				$loading.hide();
+			}
 		},
 
 		/**

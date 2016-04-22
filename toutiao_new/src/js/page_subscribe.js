@@ -27,6 +27,7 @@ $(function(){
 				$this.parent().remove();
 				$downList.append('<li class="down-item"><a data-type="' + type + '">' + txt + '</a></li>');
 				scope.updateMyChannels();
+				wsCache.set('custom_channels', 1);
 			});
 			
 			/* 添加频道  */
@@ -37,6 +38,7 @@ $(function(){
 				$this.parent().remove();
 				$upList.append('<li class="down-item"><a data-type="' + type + '">' + txt + '</a></li>');
 				scope.updateMyChannels();
+				wsCache.set('custom_channels', 1);
 			});
 
 			/*
@@ -48,7 +50,7 @@ $(function(){
 			
 			/* 获取服务端所有频道 */
 			$.ajax({
-				url: 'data/channels.json',
+				url: './data/channels.json',
 				dataType: 'json',
 				success: function(data){
 					var channels = data.channels,

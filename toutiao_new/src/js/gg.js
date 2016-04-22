@@ -118,7 +118,7 @@ GLOBAL.Et.ggData = {
 		"m021apdft_lc003": {"baidu": {"li": "u2563659"}},
 		"m021apdft_lc002": {"baidu": {"li": "u2563646"}},
 		"m021apdft_lc001": {"baidu": {"li": "u2563520"}},
-		"m021_wy100": {"baidu": {"li": "u2536739"}},
+		/*"m021_wy100": {"baidu": {"li": "u2536739"}},
 		"m021_wy099": {"baidu": {"li": "u2536747"}},
 		"m021_wy098": {"baidu": {"li": "u2536751"}},
 		"m021_wy097": {"baidu": {"li": "u2536753"}},
@@ -217,7 +217,7 @@ GLOBAL.Et.ggData = {
 		"m021_wy004": {"baidu": {"li": "u2536282"}},
 		"m021_wy003": {"baidu": {"li": "u2536284"}},
 		"m021_wy002": {"sogou": {"li": "565296"}},
-		"m021_wy001": {"sogou": {"li": "565296"}},
+		"m021_wy001": {"sogou": {"li": "565296"}},*/
 		"m021_waitui040": {"sogou": {"li": "565296"}},
 		"m021_waitui039": {"sogou": {"li": "565296"}},
 		"m021_waitui038": {"sogou": {"li": "565296"}},
@@ -470,7 +470,9 @@ GLOBAL.Et.ggData = {
 		"114mobileios":{"baidu":{"li":"u2610225"}},
 		"wifijlmm":{"baidu":{"li":"u2610580"}},
 		"wifijl":{"baidu":{"li":"u2610540"}},
-		"shangyewifiliu2":{"baidu":{"li":"u2612143"}}
+		"shangyewifiliu2":{"baidu":{"li":"u2612143"}},
+		"Jzonline1":{"baidu":{"li":"u2594033"}},
+		"Jzonline2":{"baidu":{"li":"u2613800"}}
 	}
 };
 
