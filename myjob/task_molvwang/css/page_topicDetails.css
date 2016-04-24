@@ -1,0 +1,94 @@
+@charset "utf-8";
+/**
+ * 话题列表页样式
+ */
+.content-wrap{position: relative; width: 1180px; margin: 24px auto 22px;}
+/* 面包屑 */
+.crumbs{margin-bottom: 10px;}
+.crumbs a{color: #666666; padding: 0 10px;}
+.crumbs a:hover{color: #0060c6;}
+.crumbs .index{background-image: url("../img/house.png"); background-repeat: no-repeat; background-position: left center; padding-left: 20px;}
+
+/*==== 帖子 ====*/
+.content-top{background-color: #fff; box-shadow: 0 0 3px #ccc; padding: 15px 18px;}
+.post{position: relative;}
+.post>.btns{position: absolute; right: 20px; top: 28px;}
+.post>.btns a{font-size: 16px; color: #949494; padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #e3e3e3; border-radius: 3px; margin-left:15px;}
+/* 帖子标题 */
+.post .post-title{height: 46px; background-color: #fcfcfc; border-top: 2px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; padding: 16px 20px 20px;}
+.post .post-title h3{color: #393939; font-size: 16px; line-height: 1em; padding-bottom: 15px;}
+.post .post-title p{color: #373b46; font-size: 12px;}
+.post .post-title p .time,
+.post .post-title p .comment,
+.post .post-title p .reply{background-repeat: no-repeat; background-position: left center;}
+.post .post-title p em{color: #949494;}
+.post .post-title p .time{background-image: url("../img/time.png"); padding-left: 18px; margin-right: 20px;}
+.post .post-title p .comment{background-image: url("../img/msg.png"); padding-left: 18px; margin-right: 20px;}
+.post .post-title p .reply{background-image: url("../img/reply.png"); padding-left: 20px;}
+/* 帖子内容 */
+.post-content{padding: 26px 0; border-bottom: 1px solid #e3e3e3;}
+.post-content .pc-l .img{display: block; width: 50px; height: 50px;}
+.post-content .pc-l .info{margin-left: 10px;}
+.post-content .pc-l .info h4{font-size: 14px; color: #393939; line-height: 22px;}
+.post-content .pc-l .info h4 a{color: #393939;}
+.post-content .pc-l .info h4 .tag{background-image: url("../img/tag.png"); background-repeat: no-repeat; background-position: center; display: inline-block; width: 61px; height: 22px; text-align: center; color: #fff; margin-left: 15px;}
+.post-content .pc-l .info p{font-size: 12px; color: #373b46;}
+.post-content .pc-l .info p em{ color: #949494;}
+.post-content .pc-l .btns{padding-top: 10px;}
+.post-content .pc-l .btns a{font-size: 16px; color: #949494; padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #e3e3e3; border-radius: 3px; margin-right:15px;}
+.post-content .pc-r{width: 920px;}
+.post-content .pc-r p{color: #393939; font-size: 16px;}
+.post-content .btns{clear: both;}
+
+.reply-num{color: #373b46; font-size: 16px; margin-top: 20px;}
+.reply-num em{color: #949494;}
+/* 帖子回复 */
+.post-reply{padding: 26px 0;}
+.post-reply .pr-l .img{display: block; width: 50px; height: 50px;}
+.post-reply .pr-l .info{margin-left: 10px;}
+.post-reply .pr-l .info h4{font-size: 14px; color: #393939; line-height: 22px;}
+.post-reply .pr-l .info h4 a{color: #393939;}
+.post-reply .pr-l .info h4 .tag{background-image: url("../img/tag.png"); background-repeat: no-repeat; background-position: center; display: inline-block; width: 61px; height: 22px; text-align: center; color: #fff; margin-left: 15px;}
+.post-reply .pr-l .info p{font-size: 12px; color: #373b46;}
+.post-reply .pr-l .info p em{ color: #949494;}
+.post-reply .pr-l .btns{padding-top: 10px;}
+.post-reply .pr-l .btns a{font-size: 16px; color: #949494; padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #e3e3e3; border-radius: 3px; margin-right:15px;}
+.post-reply .pr-r{position: relative; width: 900px; border: 1px solid #d5d5d5; padding: 10px 15px 20px;}
+.post-reply .pr-r .arrow{background-image: url("../img/chev_l.png"); background-repeat: no-repeat; background-position: center; position: absolute; top: -1px; left: -14px; width: 15px; height: 14px;}
+.post-reply .pr-r>p{color: #393939; font-size: 16px;}
+.post-reply .pr-r .cite{position: relative; background-color: #ebf3fb; padding: 15px 70px 35px; margin-top: 20px;}
+.post-reply .pr-r .cite .cite-l,
+.post-reply .pr-r .cite .cite-r{position: absolute; background-repeat: no-repeat; background-position: center; width: 25px; height: 21px;}
+.post-reply .pr-r .cite .cite-l{left: 20px; top: 15px; background-image: url("../img/cite_l.png");}
+.post-reply .pr-r .cite .cite-r{right: 20px; bottom: 15px; background-image: url("../img/cite_r.png");}
+.post-reply .pr-r .cite .title{font-size: 12px; color: #949494;}
+.post-reply .pr-r .cite .title span{color: #373b46;}
+.post-reply .pr-r .cite .content{color: #949494; font-size: 16px; padding-top: 10px;}
+.post-reply .btns{clear: both;}
+
+/* 分页 */
+.pagination{position: relative; margin-top: 30px; margin-bottom: 20px; background-image: url("../img/pagination_bg.png"); background-repeat: no-repeat; background-position: center 12px; text-align: center; line-height: 56px;}
+.pagination a{font-size: 14px; color: #393939; padding: 5px 12px;}
+.pagination a.cur{background-image: url("../img/page_bg.png"); background-repeat: no-repeat; background-position: center; color: #fff; display: inline-block; width: 34px; height: 46px; line-height: 46px;}
+.pagination a:hover{color: #0060c6;}
+.pagination a.cur:hover{color: #fff;}
+.pagination .to-page{position: absolute; right: 200px; top: 0; }
+.pagination .to-page input{width: 30px;}
+
+/* 回复输入 */
+.reply-input-wrap{background-color: #fff; box-shadow: 0 0 3px #ccc; padding: 24px 20px;}
+.reply-input-wrap .user-info .img{display: block; width: 50px; height: 50px;}
+.reply-input-wrap .user-info .info{margin-left: 10px;}
+.reply-input-wrap .user-info .info h4{font-size: 14px; color: #393939; line-height: 22px;}
+.reply-input-wrap .user-info .info h4 a{color: #393939;}
+.reply-input-wrap .user-info .info h4 .tag{background-image: url("../img/tag.png"); background-repeat: no-repeat; background-position: center; display: inline-block; width: 61px; height: 22px; text-align: center; color: #fff; margin-left: 15px;}
+.reply-input-wrap .user-info .info p{font-size: 12px; color: #373b46;}
+.reply-input-wrap .user-info .info p em{ color: #949494;}
+.reply-input-wrap .fwb{width: 900px;}
+.reply-input-wrap .fwb textarea{width: 890px;}
+.reply-input-wrap .reply-btn{clear: both; margin-top: 15px; color: #fff;}
+.reply-input-wrap .reply-btn a{font-size: 14px; background-image: url("../img/reply_btn_bg.png"); background-repeat: no-repeat; background-position: center; display: block; width: 89px; height: 34px; line-height: 34px; text-align: center; color: #fff;}
+
+
+
+

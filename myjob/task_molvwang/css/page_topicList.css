@@ -1,0 +1,72 @@
+@charset "utf-8";
+/**
+ * 话题列表页样式
+ */
+.content-wrap{position: relative; width: 1180px; margin: 24px auto 0; padding-bottom: 22px;}
+
+/*==== 左侧内容 ====*/
+.content-left{width: 844px; min-height: 600px;}
+
+/* 版块名称 */
+.blk-name{background-color: #fff; padding: 16px; box-shadow: 0 0 5px #ccc;}
+.blk-name .img{background-color: #e3e3e3; width: 100px; height: 100px; overflow: hidden;}
+.blk-name .txt{width: 690px;}
+.blk-name h4{font-size: 16px; color: #666666; line-height: 1em; padding-bottom: 8px;}
+.blk-name h4 a{color: #666666;}
+.blk-name h4 a:hover{color: #0060c6;}
+.blk-name p.num{font-size: 12px; color: #373b46; padding-bottom: 10px;}
+.blk-name p.num em{color: #0060c6;}
+.blk-name p.desc{font-size: 12px; color: #949494;}
+.blk-name p.desc em{color: #373b46;}
+
+/* 最新话题 */
+.newest-topic{position: relative; margin-top: 30px;}
+.newest-topic .topic-opt{position: absolute; right: 0; top: 5px; width: 750px;}
+.topic-opt .opt-list .opt-item a{display: block; width: 50px; text-align: center; height: 30px; line-height: 30px; color: #949494;}
+.topic-opt .opt-list .opt-item a:hover{color: #393939;}
+.topic-opt .opt-list .opt-item a.active{border: 1px solid #d5d5d5; border-radius: 3px; color: #393939;}
+.topic-opt .opt-list .opt-item a.more{border: 1px solid #d5d5d5; border-radius: 3px; background-image: url("../img/select_chev.png"); background-repeat: no-repeat; background-position: 43px center; padding-right: 10px;}
+.topic-opt .publish{background-image: url("../img/publish_bg.png"); background-repeat: no-repeat; background-position: center; color: #fff; text-align: center; width: 89px; height: 34px; line-height: 34px;}
+
+.newest-topic h3{font-size: 16px; color: #373b46; line-height: 40px; padding-bottom: 10px;}
+.newest-topic .table{background-color: #fff; padding: 15px 20px; box-shadow: 0 0 5px #ccc;}
+.newest-topic table{width: 100%;}
+.newest-topic table thead tr{border-bottom: 2px solid #e3e3e3; font-size: 16px; color: #393939;}
+.newest-topic table thead tr th{font-weight: normal; padding: 5px 0;}
+.newest-topic table tbody tr{border-bottom: 1px solid #e3e3e3; font-size: 14px; color: #949494;}
+.newest-topic table tbody tr:last-child{border-bottom: 0 none;}
+.newest-topic table tbody tr td{padding: 15px 0;}
+.newest-topic table tbody tr td a{color: #949494;}
+.newest-topic table tbody tr td.cm,
+.newest-topic table tbody tr td.tm{color: #393939;}
+.newest-topic table tbody tr td .to-top{font-size: 14px; color: #0060c6; background-color: #f5f5f5; border-radius: 3px; padding: 6px 12px; margin-right: 10px;}
+
+/* 分页 */
+.pagination{position: relative; margin-top: 30px; margin-bottom: 20px; background-image: url("../img/pagination_bg.png"); background-repeat: no-repeat; background-position: 0 12px; text-align: center; line-height: 56px;}
+.pagination a{font-size: 14px; color: #393939; padding: 5px 12px;}
+.pagination a.cur{background-image: url("../img/page_bg.png"); background-repeat: no-repeat; background-position: center; color: #fff; display: inline-block; width: 34px; height: 46px; line-height: 46px;}
+.pagination a:hover{color: #0060c6;}
+.pagination a.cur:hover{color: #fff;}
+.pagination .to-page{position: absolute; right: 50px; top: 0; }
+.pagination .to-page input{width: 30px;}
+
+
+/*==== 右侧内容 ====*/
+.content-right{position: absolute; top: 0; right: 0; width: 318px;}
+/* 版块公告 */
+.announcement{background-color: #fff; padding: 16px; box-shadow: 0 0 5px #ccc;}
+.announcement h3{font-size: 16px; color: #373b46; line-height: 1em; padding-bottom: 12px; border-bottom: 1px solid #e3e3e3;}
+.announcement p{font-size: 12px; color: #949494; padding-top: 10px; padding-bottom: 10px;}
+
+/*==== 用户 ====*/
+.user{margin-top: 20px;}
+.user h3{position: relative; font-size: 16px; color: #373b46; line-height: 1em; margin-bottom: 10px;}
+.user h3 a{position: absolute; right: 0; font-size: 14px; color: #393939;}
+.user-list{width: 330px;}
+.user-list .user-item{width: 50px; margin-right: 15px; margin-bottom: 20px;}
+.user-list .user-item a{display: block;}
+.user-list .user-item a img{display: block; width: 50px; height: 50px;}
+.user-list .user-item a span{display: block; text-align: center; font-size: 12px; color: #949494;}
+
+
+

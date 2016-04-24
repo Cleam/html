@@ -1,0 +1,25 @@
+@charset "utf-8";
+/**
+ * 注册页样式
+ */
+.empty{background-color: #0060c6; height: 90px;}
+.content-wrap{position: relative; width: 660px; margin: -84px auto 40px;}
+.content-wrap h3{font-size: 40px; color: #fff;}
+.content-wrap form{background-color: #fff; box-shadow: 0 0 3px #ccc;}
+.content-wrap form .login{font-size: 18px; color: #373b46; margin-bottom: 40px;}
+.content-wrap form .login span{font-size: 14px; color: #949494; margin-left: 20px;}
+.content-wrap form .login span a{color: #0060c6;}
+.content-wrap form p{margin-bottom: 20px;}
+.content-wrap form{padding-top: 34px; padding-left: 60px; padding-bottom: 66px;}
+.content-wrap form input{background-image: url("../img/input_bg.png"); background-repeat: no-repeat; background-position: center; width: 357px; height: 24px; border: 0 none; padding: 5px 10px;}
+.content-wrap form label{width: 60px; text-align: right; display: inline-block; margin-right: 10px; font-size: 14px; color: #666;}
+.content-wrap form .reg-btn{background-image: url("../img/reg_btn_bg.png"); background-repeat: no-repeat; background-position: center; color: #fff; width: 377px; height: 34px; padding: 0; background-color: transparent;}
+
+
+
+
+
+
+
+
+
