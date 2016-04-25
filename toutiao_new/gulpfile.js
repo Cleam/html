@@ -163,7 +163,7 @@ gulp.task('js-gg', function() {
     return gulp.src(jsSrc)
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(rev())
+        //.pipe(rev())
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
