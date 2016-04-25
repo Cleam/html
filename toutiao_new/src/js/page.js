@@ -535,8 +535,8 @@ $(function(){
 				url: pullDownUrl,
 	            data: {
 	                type: scope.newsType,
-					startkey: wsCache.get('startkey_' + scope.newsType),
-					lastkey: wsCache.get('endkey_' + scope.newsType),
+					startkey: wsCache.get('startkey_' + scope.newsType) ? wsCache.get('startkey_' + scope.newsType) : scope.startkey,
+					lastkey: wsCache.get('endkey_' + scope.newsType) ? wsCache.get('endkey_' + scope.newsType) : scope.endKey,
 					pgnum: scope.pulldown_pgNum,
 					idx: scope.pulldown_idx,
 					readhistory: scope.readUrl,
@@ -595,11 +595,9 @@ $(function(){
 	        }
 	        // 计数
 	        scope.pulldown_num++;
-	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
-	        // scope.startKey = d.endkey;
+	        scope.startKey = d.endkey;
 	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
-	        // wsCache.set('pulldown_lastkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
-	        // scope.endKey = d.newkey;
+	        scope.endKey = d.newkey;
 	        wsCache.set('endkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
 	        // 反转数组(reverse方法会改变原来的数组，而不会创建新的数组。)
 	        data.reverse();
@@ -1172,7 +1170,7 @@ $(function(){
 	            url: pullUpUrl,
 	            data: {
 	                type: scope.newsType,
-	                startkey: wsCache.get('startkey_' + scope.newsType),
+	                startkey: wsCache.get('startkey_' + scope.newsType) ? wsCache.get('startkey_' + scope.newsType) : scope.startKey,
 	                newsnum: scope.newsType == 'meinv' ? 10 : 20,
 	                qid: scope.qid,
 	                readhistory: scope.readUrl,
@@ -1214,9 +1212,10 @@ $(function(){
 	            // $loading.hide();
 	            return false;
 	        }
+	        console.log('d.endkey: ', d.endkey);
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
-	       	// scope.startKey = d.endkey;
+	       	scope.startKey = d.endkey;
 	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
 	        for (var i = 0; i < len; i++) {
