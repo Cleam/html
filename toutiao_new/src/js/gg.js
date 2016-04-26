@@ -412,7 +412,10 @@ GLOBAL.Et.ggData = {
 		"wifijl":{"baidu":{"li":"u2610540"}},
 		"shangyewifiliu2":{"baidu":{"li":"u2612143"}},
 		"jsonline1":{"baidu":{"li":"u2594033"}},
-		"jsonline2":{"baidu":{"li":"u2613800"}}
+		"jsonline2":{"baidu":{"li":"u2613800"}},
+		"renrensuoping":{"baidu":{"li":"u2618179"}},
+		"aoyouie":{"baidu":{"li":"u2615534"}},
+		"yonglian":{"baidu":{"li":"u2615542"}}
 	}
 };
 
