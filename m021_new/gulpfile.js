@@ -60,7 +60,7 @@ gulp.task('css', function () {
 });
 
 // js代码校验、合并和压缩
-gulp.task('js_top', function() {
+gulp.task('js-top', function() {
     var jsSrc = [
             './src/js/channel.js', 
             './src/js/qidToAdid.js'
@@ -77,7 +77,7 @@ gulp.task('js_top', function() {
         //.pipe(gulp.dest('./rev'))
         .pipe(livereload());
 });
-gulp.task('js_bottom', function() {
+gulp.task('js-bottom', function() {
     var jsSrc = [
             './src/js/jquery-2.2.1.min.js', 
             './src/js/jquery.cookie.min.js',
