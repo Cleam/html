@@ -142,6 +142,14 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 .news-list-wrap .news-item-s4 .options .good,
 .news-list-wrap .news-item-s4 .options .bad{background-position: left center; background-size: contain;}
 
+/* 视频 */
+.news-list-wrap .news-item-video{position: relative;}
+.news-list-wrap .news-item-video .video-wrap{padding: 0.24rem 0.3rem 0; width: 100%;}
+.news-list-wrap .news-item-video .video-wrap>h3{font-size: .34rem; width: 100%; margin-bottom: .14rem; max-height: .8rem; line-height: 1.2em; overflow: hidden;}
+.news-list-wrap .news-item-video .video-wrap>video{width: 100%;}
+.news-list-wrap .news-item-video .video-wrap>p{position: relative; padding-top: 0.1rem; padding-bottom: .24rem; border-bottom: 1px solid #eee;}
+.news-list-wrap .news-item-video .video-wrap>p>em{font-size: 0.2rem; color: #999;}
+
 
 /* loading动画 - start */
 .loading{padding: 0.1rem 0 0.2rem; background-color: #fff; font-size: 0.6rem;}
