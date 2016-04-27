@@ -1092,7 +1092,7 @@ $(function(){
 	     */
 	    addOnlineLog: function(){
 	    	var scope = this,
-	    		infostr = GLOBAL.Util.getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\tnull\tnull\t' + GLOBAL.Util.getOsType() + '\tnull';
+	    		infostr = GLOBAL.Util.getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\t10' + '\tnull\tnull\t' + GLOBAL.Util.getOsType() + '\tnull';
 	    	$.ajax({
 		    	url : onlineUrl,
 		    	data:{
