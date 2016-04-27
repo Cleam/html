@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="author" content="Cleam Lee">
+	<title>video deomo</title>
+	<style>
+		*{margin: 0; padding: 0;}
+		#J_video{width: 100%; background-color: #000;}
+		.video{padding: 24px 30px 0;}
+		.video video{display: block;}
+	</style>
+</head>
+<body>
+
+	<!-- <video id="J_video" width="320" height="240" controls="auto" poster="poster.png">
+		<source src="video.mp4" type="video/mp4">
+		您的浏览器不支持 video 标签。
+	</video> -->
+
+	<div class="video">
+		<h3>这是一个测试视频 - 雨好大！</h3>
+		<video id="J_video" controls="auto" poster="video_poster.jpg">
+			<source src="http://mv.dfshurufa.com/paike/20160427/20160427094742699115165_1_06400360.mp4" type="video/mp4">
+			您的浏览器不支持 video 标签。
+		</video>
+		<p class="clearfix"><em class="fl">200万次播放</em><em class="fr">中华网</em></p>
+	</div>
+
+	<p id="J_netWorkState"></p>
+
+	<script>
+		var video = document.getElementById('J_video');
+
+		// 读取错误状态
+		video.addEventListener('error', function(e){
+			var err = video.error;
+			console.log('er::', er);
+			switch(err.code){
+				case 1: console.log('视频的下载过程被终止！'); break;
+				case 2: console.log('网络发生故障，视频的下载过程终止！'); break;
+				case 3: console.log('解码失败！'); break;
+				case 4: console.log('不支持的视频播放格式！'); break;
+			}
+		}, false);
+
+		video.addEventListener('progress', function(e){
+
+		});
+
+
+	</script>
+</body>
+</html>
