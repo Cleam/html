@@ -149,7 +149,8 @@ header .top-menu .menu-more .more-btn{background: url('data:image/png;base64,iVB
 .news-list-wrap .news-item-video .video-wrap>video{width: 100%;}
 .news-list-wrap .news-item-video .video-wrap>p{position: relative; padding-top: 0.1rem; padding-bottom: .24rem; border-bottom: 1px solid #eee;}
 .news-list-wrap .news-item-video .video-wrap>p>em{font-size: 0.2rem; color: #999;}
-
+.news-list-wrap .news-item-video .video-wrap>p>em>i.video{position: relative; display: inline-block; width: 0.5rem; padding: 0.04rem 0; margin-right: 0.06rem; text-align: center; font-size: 0.18rem; color: #2a90d7;}
+.news-list-wrap .news-item-video .video-wrap>p>em>i.video:before{content: ''; position: absolute; top: -50%; bottom: -50%; left: -50%; right: -50%; -webkit-transform: scale(0.5); transform: scale(0.5); border-style: solid; border-width: 1px; -webkit-border-radius: 4px; border-radius: 4px; border-color: rgba(42,144,215,.5);}
 
 /* loading动画 - start */
 .loading{padding: 0.1rem 0 0.2rem; background-color: #fff; font-size: 0.6rem;}

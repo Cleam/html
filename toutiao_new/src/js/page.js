@@ -1301,7 +1301,7 @@ $(function(){
 					}
 
 					if(i === ranNum){
-						$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>这是一个测试视频 - 雨好大！</h3><video id="J_video" controls="auto" poster="video/test.jpg"><source src="video/test.mp4" type="video/mp4">您的浏览器不支持 video 标签。</video><p class="clearfix"><em class="fl">200万次播放</em><em class="fr">中华网</em></p></div></section>');
+						$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>这是一个测试视频 - 雨好大！</h3><video id="J_video" controls="auto" poster="video/test.jpg"><source src="video/test.mp4" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">中华网</em></p></div></section>');
 					}
 
 					/*======== 新闻流 =========*/
