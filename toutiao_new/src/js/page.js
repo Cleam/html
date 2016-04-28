@@ -1217,6 +1217,7 @@ $(function(){
 	       	scope.startKey[scope.newsType] = d.endkey;
 	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
+	        var ranNum = Math.floor((len - 1) * Math.random());
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -1298,6 +1299,11 @@ $(function(){
 							$newsList.append(baiduHtmlIframe);
 						}
 					}
+
+					if(i === ranNum){
+						$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>这是一个测试视频 - 雨好大！</h3><video id="J_video" controls="auto" poster="http://mini.eastday.com/toutiaoh5/video/test.jpg"><source src="http://mini.eastday.com/toutiaoh5/video/test.mp4" type="video/mp4">您的浏览器不支持 video 标签。</video><p class="clearfix"><em class="fl">200万次播放</em><em class="fr">中华网</em></p></div></section>');
+					}
+
 					/*======== 新闻流 =========*/
 	            	if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
