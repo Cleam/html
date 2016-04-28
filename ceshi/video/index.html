@@ -27,7 +27,7 @@
 
 	<div class="video">
 		<h3>这是一个测试视频 - 雨好大！</h3>
-		<video id="J_video" controls="auto" poster="video_poster.jpg">
+		<video id="J_video" controls="auto" poster="video_poster.jpg" autobuffer="true">
 			<source src="http://mv.dfshurufa.com/paike/20160427/20160427094742699115165_1_06400360.mp4" type="video/mp4">
 			您的浏览器不支持 video 标签。
 		</video>
@@ -36,13 +36,89 @@
 
 	<p id="J_netWorkState"></p>
 
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-		var video = document.getElementById('J_video');
+		var $video = $('#J_video'),
+			video = $video[0];
+
+		// 获取视频已经下载的时长
+		function getEnd(video) {
+		  	var end = 0;
+		  	try {
+		    	end = video.buffered.end(0) || 0;
+		    	// end = parseInt(end * 1000 + 1) / 1000;
+		  	} catch(e) {}
+		  return end;
+		}
+
+		$video.one('loadeddata', function() {
+			// 暂停，但下载还在继续
+		  	video.pause();
+		  	// 启动定时器检测视频下载进度
+		  	/*var timer = setInterval(function() {
+		    	var end = getEnd(video),
+		        	duration = video.duration;
+		        // console.log(end, duration);
+		    	if(end < duration) {
+		      		return;
+		    	}
+		    	var width = $video.parent().width(),
+		    		height = $video.parent().height();
+		    	// 下载完了，开始播放吧
+		    	$video.attr({
+		      		width: width,
+		      		height: height
+		    	});
+		    	video.play();
+		    	clearInterval(timer);
+		  	}, 1000);*/
+
+
+		});
+
+
+		$video.on('playing', function() {
+  			// 开始播放是打点
+  			$video.attr('data-updateTime', +new Date());
+		});
+
+		$video.on('pause', function() {
+  			// 暂停播放时清除打点
+  			$video.removeAttr('data-updateTime');
+		});
+
+		// 累加播放时间
+		$video.on('timeupdate', function(event) {
+  			var $video = $(event.target),
+	      		updateTime = parseInt($video.attr('data-updateTime') || 0),
+	      		playingTime = parseInt($video.attr('data-playingTime') || 0),
+	      		times = parseInt($video.attr('data-times') || 0),
+	      		newtimes = 0,
+	      		video = $video.get(0),
+	      		duration = parseFloat($video.attr('data-duration') || 0),
+	      		now = +new Date();
+
+  			// 播放时间
+  			playingTime = playingTime + now - updateTime;
+
+  			// 播放次数
+  			newtimes = Math.ceil(playingTime / 1000 / duration);
+
+  			$video.attr('data-playingTime', playingTime);
+			$video.attr('data-updateTime', now);
+			$video.attr('data-playTimes', newtimes);
+		});
+
 
 		// 读取错误状态
-		video.addEventListener('error', function(e){
+		$video.on('error', function(e){
 			var err = video.error;
-			console.log('er::', er);
+			/*
+				MEDIA_ERR_ABORTED : 1
+				MEDIA_ERR_NETWORK : 2
+				MEDIA_ERR_DECODE : 3
+				MEDIA_ERR_SRC_NOT_SUPPORTED : 4
+			 */
 			switch(err.code){
 				case 1: console.log('视频的下载过程被终止！'); break;
 				case 2: console.log('网络发生故障，视频的下载过程终止！'); break;
@@ -51,9 +127,67 @@
 			}
 		}, false);
 
-		video.addEventListener('progress', function(e){
-
+		/*
+			当音频/视频处于加载过程中时，会依次发生以下事件(实际效果不是这样的，progress事件比较特殊)：
+			loadstart
+			durationchange
+			loadedmetadata
+			loadeddata
+			progress
+			canplay
+			canplaythrough
+		 */
+		
+		/*// loadstart
+		video.addEventListener('loadstart', function(e){
+			console.log('loadstart::', e);
 		});
+
+		// durationchange
+		video.addEventListener('durationchange', function(e){
+			console.log('durationchange::', video.duration);
+		});
+
+		// loadedmetadata
+		video.addEventListener('loadedmetadata', function(e){
+			console.log('loadedmetadata::', e);
+			// progress
+			video.addEventListener('progress', function(e){
+				// console.log(e);
+				// console.log(video.networkState);
+				var end = 0;
+				try {
+					end = video.buffered.end(0) || 0;
+				    // end = parseInt(end * 1000 + 1) / 1000;
+				} catch(e) {
+				}
+				console.log('end::', end);
+				var networkStateDisplay = document.getElementById('J_netWorkState');
+				// 根据networkState的值进行处理
+				if(video.networkState === 2){
+					// 计算已加载的字节数和总字节数
+					networkStateDisplay.innerHTML = '加载中...[' + e.loaded + '/' + e.total + 'byte]';
+				} else if(video.networkState === 3){
+					networkStateDisplay.innerHTML = '加载失败！';
+				}
+			});
+		});
+
+		// loadeddata
+		video.addEventListener('loadeddata', function(e){
+			console.log('loadeddata::', video.duration);
+		});
+
+
+		// canplay
+		video.addEventListener('canplay', function(e){
+			console.log('canplay::', video.duration);
+		});
+
+		// canplaythrough
+		video.addEventListener('canplaythrough', function(e){
+			console.log('canplaythrough::', e);
+		});*/
 
 
 	</script>
