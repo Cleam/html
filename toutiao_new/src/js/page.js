@@ -5,6 +5,9 @@
 $(function(){
 	FastClick.attach(document.body);
 	var channelsUrl = './data/channels.json',	// 新闻频道类别
+		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据
+		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载
+		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载
 		refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
 		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
 		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
@@ -15,6 +18,8 @@ $(function(){
 		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
 		showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
 		clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息show统计接口
+		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',		// 视频统计接口
+		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口
 		// logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
 		// onlineUrl = 'http://123.59.60.170/online/online',			// 测试 在线统计
 		// showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',	// 推广信息show统计接口
@@ -192,6 +197,7 @@ $(function(){
 	        	scope.changeRefreshStatus();
         		wsCache.delete('news_pos_' + scope.newsType);
         		wsCache.delete('news_' + scope.newsType);
+        		wsCache.set('pulldown_pgnum_' + scope.newsType, 0, {exp: 24 * 3600});
 	        	scope.refreshData(function(){
 	        		scope.highlightPraiseTrample();
 	        	});
@@ -351,8 +357,8 @@ $(function(){
 					"newstype": 'ad',
 					"from": 'null',
 					"to": advUrl || 'null',
-					"os_type": GLOBAL.Util.getOsType() || 'null',
-					"browser_type": GLOBAL.Util.getBrowserType() || 'null',
+					"os_type": scope.osType || 'null',
+					"browser_type": scope.browserType || 'null',
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
 					"refer": GLOBAL.Util.getReferrer() || 'null',
@@ -613,6 +619,8 @@ $(function(){
             	max = len - 5;
             }
             randomNum = Math.floor((max - min + 1) * Math.random() + min);
+
+            // var ranNum = Math.floor((len - 1) * Math.random());
             // 循环生成新闻
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
@@ -623,7 +631,9 @@ $(function(){
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
 	                hotnews = item.hotnews,
-	                ispicnews = item.ispicnews,
+	                ispicnews = item.ispicnews,	// 大图新闻
+	                videonews = item.videonews,	// 视频新闻
+	                videoList = item.videolist,	// 视频列表
 	                isadv = item.isadv || '',
 	               	advId = item.adv_id || '',
 	                type = item.type,
@@ -674,8 +684,31 @@ $(function(){
             		// 保证只插入一条广告
             		existGg = true;
             	}
+
+            	// if(i === ranNum){
+            	// 	$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>警察枪"走火"吓坏路人</h3><video controls="auto" poster="http://imgmini.eastday.com/video/gaoxiao/20160427/20160427161442214702653_1_mwpm_05501609.jpeg"><source src="http://mv.dfshurufa.com/gaoxiao/20160427/20160427161442214702653_1_06400360.mp4" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">优酷视频</em></p></div></section>');
+            	// }
 	            
-	            if(ispicnews == '1'){	// 大图模式
+	            /*==== 新闻流 ====*/
+	            // android 4.0以下不放视频
+				var rightOs = true;
+				if(scope.osType.indexOf('Android') >= 0 && Number(scope.osType.split(' ')[1]) < 4.0){
+					rightOs = false;
+				}
+	            if(videonews == '1'){	// 视频模式
+	            	if(rightOs){
+	            		var videoImg = item.lbimg[0].src,
+	            			$section = $('<section class="news-item news-item-video"></section>'),
+	            			$videoWrap = $('<div class="video-wrap"><h3>' + topic + '</h3></div>'),
+	            			$video = $('<video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video>');
+	            		$videoWrap.append($video).append('<p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p>');
+	            		$section.append($videoWrap);
+	            		// 插入video
+	            		$newsList.prepend($section);
+	            		// 给video注册事件
+	            		scope.videoListener($video);
+	            	}
+            	} else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
 	            	$newsList.prepend('<section class="pull-down news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
@@ -738,8 +771,8 @@ $(function(){
 					"newstype": 'ad',
 					"from": 'null',
 					"advurl": advUrl || 'null',
-					"os_type": GLOBAL.Util.getOsType() || 'null',
-					"browser_type": GLOBAL.Util.getBrowserType() || 'null',
+					"os_type": scope.osType || 'null',
+					"browser_type": scope.browserType || 'null',
 					"fr_url": "null",
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
@@ -1064,8 +1097,8 @@ $(function(){
 					newstype: scope.newsType || 'null',			// 当前新闻类别
 					from: wsCache.get('prev_newstype') || 'null',	// url上追加的fr字段
 					to: wsCache.get('current_newstype') || 'null',// 当前页面
-					os_type: GLOBAL.Util.getOsType() || 'null',				// 客户端操作系统
-					browser_type: GLOBAL.Util.getBrowserType() || 'null',		// 客户端浏览器类别
+					os_type: scope.osType || 'null',				// 客户端操作系统
+					browser_type: scope.browserType || 'null',		// 客户端浏览器类别
 					pixel: pixel.w + '*' + pixel.h,		// 客户端分辨率
 					fr_url: GLOBAL.Util.getReferrer() || 'null',							// 浏览器的refer属性
 					loginid: 'null',			// App端分享新闻时url上追加的ttaccid
@@ -1092,7 +1125,7 @@ $(function(){
 	     */
 	    addOnlineLog: function(){
 	    	var scope = this,
-	    		infostr = GLOBAL.Util.getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\t10' + '\tnull\tnull\t' + GLOBAL.Util.getOsType() + '\tnull';
+	    		infostr = GLOBAL.Util.getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + scope.newsType + '\t10' + '\tnull\tnull\t' + scope.osType + '\tnull';
 	    	$.ajax({
 		    	url : onlineUrl,
 		    	data:{
@@ -1212,12 +1245,14 @@ $(function(){
 	            // $loading.hide();
 	            return false;
 	        }
+	        // console.log('data::', data);
+
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	       	scope.startKey[scope.newsType] = d.endkey;
 	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
-	        var ranNum = Math.floor((len - 1) * Math.random());
+	        // var ranNum = Math.floor((len - 1) * Math.random());
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -1227,7 +1262,9 @@ $(function(){
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
 	                hotnews = item.hotnews,
-	                ispicnews = item.ispicnews,
+	                ispicnews = item.ispicnews,	// 大图新闻
+	                videonews = item.videonews,	// 视频新闻
+	                videoList = item.videolist,	// 视频列表
 	                isadv = item.isadv || '',
 	               	advId = item.adv_id || '',
 	                type = item.type,
@@ -1300,12 +1337,24 @@ $(function(){
 						}
 					}
 
-					if(i === ranNum){
-						$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>这是一个测试视频 - 雨好大！</h3><video id="J_video" controls="auto" poster="video/test.jpg"><source src="video/test.mp4" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">中华网</em></p></div></section>');
-					}
-
 					/*======== 新闻流 =========*/
-	            	if(ispicnews == '1'){	// 大图模式
+					// android 4.0以下不放视频
+					var rightOs = true;
+					if(scope.osType.indexOf('Android') >= 0 && Number(scope.osType.split(' ')[1]) < 4.0){
+						rightOs = false;
+					}
+	            	if(videonews == '1' && rightOs){	// 视频模式
+	            		var videoImg = item.lbimg[0].src,
+	            			$section = $('<section class="news-item news-item-video"></section>'),
+	            			$videoWrap = $('<div class="video-wrap"><h3>' + topic + '</h3></div>'),
+	            			$video = $('<video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video>');
+	            		$videoWrap.append($video).append('<p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p>');
+	            		$section.append($videoWrap);
+	            		// 插入video
+	            		$newsList.append($section);
+	            		// 给video注册事件
+	            		scope.videoListener($video);
+	            	} else if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
 		            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 		            } else if(imgLen >= 3){		// 三图模式
@@ -1320,6 +1369,93 @@ $(function(){
 	        // 缓存当前类别加载的新闻（缓存20分钟）
 	        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
 	    },
+
+	    videoListener: function($video){
+	    	var scope = this;
+	    	// 给video纠正宽高
+	    	setTimeout(function(){
+	    		$video[0].width = $video.width();
+	    		$video[0].height = $video[0].width * 9 / 16;
+	    	}, 100);
+	    	$video.on('loadeddata', function(event){
+	    		$video[0].width = $video.width();
+	    		$video[0].height = $video.width() * 9 / 16;
+	    	});
+	    	// 播放事件
+	    	$video.on('playing', function(event){
+				try {
+					var $video = $(event.target),
+						video = $video[0],
+						src = video.currentSrc,
+						duration = Math.floor(video.duration * 1000),
+						idx = $video.attr('data-idx'),
+						videoType = $video.attr('data-type'),
+						playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
+						currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
+						param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + scope.newsType + '\t' + videoType + '\t' + scope.osType + '\t' + idx + '\t' + scope.osType + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tplay';
+					// 用于记录实际播放时长
+					$video.attr('data-updateTime', +new Date());
+					scope.sendVideoLog(param);
+				} catch(e){
+					console.log('Event playing has error!!!', e);
+				}
+			});
+	    	// 暂停事件
+			$video.on('pause', function(event){
+				try {
+					var $video = $(event.target),
+						video = $video[0],
+						src = video.currentSrc,
+						duration = Math.floor(video.duration * 1000),
+						idx = $video.attr('data-idx'),
+						videoType = $video.attr('data-type'),
+						playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
+						currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
+						param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + scope.newsType + '\t' + videoType + '\t' + scope.osType + '\t' + idx + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tpause';
+					// 用于记录实际播放时长
+					scope.sendVideoLog(param);
+				} catch(e){
+					console.log('Event pause has error!!!', e);
+				}
+			});
+			// 播放时间更新事件（记录实际播放时间）
+			$video.on('timeupdate', function(event){
+				try {
+					var $video = $(event.target),
+			      		updateTime = parseInt($video.attr('data-updateTime'), 10) || (+new Date()),
+			      		playingTime = parseInt($video.attr('data-playingTime'), 10) || 0,
+			      		now = +new Date();
+		  			// 播放时间
+		  			playingTime = playingTime + now - updateTime;
+		  			$video.attr('data-playingTime', playingTime);
+					$video.attr('data-updateTime', now);
+				} catch(e){
+					console.log('Event timeupdate has error!!!', e);
+				}
+			});
+	    },
+
+	    /**
+	     * 发送视频操作日志
+	     * @param  {String} param 必需 - 参数(qid,uid,osType,browserType,url,duration,playingTime,currentTime,action)
+	     */
+	    sendVideoLog: function(param){
+	    	// console.log('param::', param);
+			$.ajax({
+				url: videoLogUrl,
+				data: {
+					param: param
+				},
+				dataType: 'jsonp',
+				json: 'jsonpcallback',
+				success: function(){
+					// console.log('success::', arguments);
+				},
+				error: function(){
+					// console.log('error::', arguments);
+				},
+			});
+		},
 
 	    /**
 	     * 设置广告ID
