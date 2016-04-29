@@ -331,7 +331,7 @@ $(function(){
 					return b.length - a.length;
 				});
 				if(!i){i = 0;}
-				if(i == len){
+				if(i == len || swArr[i] == '..'){
 					return txt;
 				} else {
 					var reg = new RegExp(swArr[i], 'gi');

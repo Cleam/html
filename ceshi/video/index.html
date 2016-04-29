@@ -27,8 +27,8 @@
 
 	<div class="video">
 		<h3>这是一个测试视频 - 雨好大！</h3>
-		<video id="J_video" controls="auto" poster="video_poster.jpg">
-			<source src="http://mv.dfshurufa.com/paike/20160427/20160427094742699115165_1_06400360.mp4" type="video/mp4">
+		<video id="J_video" controls="auto" poster="video_poster.jpg" autobuffer="true">
+			<source src="test.mp4" type="video/mp4">
 			您的浏览器不支持 video 标签。
 		</video>
 		<p class="clearfix"><em class="fl">200万次播放</em><em class="fr">中华网</em></p>
@@ -36,25 +36,121 @@
 
 	<p id="J_netWorkState"></p>
 
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-		var video = document.getElementById('J_video');
+		var $video = $('#J_video'), duration = 0;
 
-		// 读取错误状态
-		video.addEventListener('error', function(e){
-			var err = video.error;
-			console.log('er::', er);
-			switch(err.code){
-				case 1: console.log('视频的下载过程被终止！'); break;
-				case 2: console.log('网络发生故障，视频的下载过程终止！'); break;
-				case 3: console.log('解码失败！'); break;
-				case 4: console.log('不支持的视频播放格式！'); break;
+		/*$video.on('durationchange', function(event){
+			try	{
+				var video = event.target;
+				duration = video.duration;
+			} catch(e){
+				console.log('Event durationchange has error!!!', e);
 			}
-		}, false);
+		}).on('loadedmetadata', function(event){
+			try	{
+				var video = event.target;
+				duration = video.duration;
+			} catch(e){
+				console.log('Event loadedmetadata has error!!!', e);
+			}
+		}).on('loadeddata', function(event){
+			try	{
+				var video = event.target;
+				duration = video.duration;
+			} catch(e){
+				console.log('Event loadeddata has error!!!', e);
+			}
+		});*/
 
-		video.addEventListener('progress', function(e){
+		$video.on('playing', function(event){
+			console.log('playing');
+			try {
+				var $video = $(event.target),
+					video = $video[0],
+					src = video.currentSrc,
+					duration = Math.floor(video.duration * 1000),
+					playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
+					currentTime = Math.floor(video.currentTime * 1000);	// 当前播放时间位置
+				// 用于记录实际播放时长
+				$video.attr('data-updateTime', +new Date());
 
+				console.log('currentTime', currentTime);
+
+				var param = 'qid\tuid\tosType\tbrowserType\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tplay';
+				// console.log('param::', param);
+				sendVideoLog(param);
+			} catch(e){
+				console.log('Event playing has error!!!', e);
+			}
 		});
 
+		$video.on('pause', function(event){
+			console.log('pause');
+			try {
+				var video = event.target;
+				duration = video.duration;
+			} catch(e){
+				console.log('Event pause has error!!!', e);
+			}
+		});
+
+		// 记录实际播放时间
+		$video.on('timeupdate', function(event){
+			try {
+				var $video = $(event.target),
+		      		updateTime = parseInt($video.attr('data-updateTime'), 10) || (+new Date()),
+		      		playingTime = parseInt($video.attr('data-playingTime'), 10) || 0,
+		      		now = +new Date();
+	  			// 播放时间
+	  			playingTime = playingTime + now - updateTime;
+	  			$video.attr('data-playingTime', playingTime);
+				$video.attr('data-updateTime', now);
+			} catch(e){
+				console.log('Event timeupdate has error!!!', e);
+			}
+		});
+
+		/*// 快进中..
+		$video.on('seeking', function(event){
+			console.log('快进中...');
+			try {
+				var video = event.target;
+				duration = video.duration;
+			} catch(e){
+				console.log('Event seeking has error!!!', e);
+			}
+		});
+
+		// 已快进
+		$video.on('seeked', function(event){
+			console.log('已快进');
+			try {
+				var video = event.target;
+				duration = video.duration;
+			} catch(e){
+				console.log('Event seeked has error!!!', e);
+			}
+		});*/
+
+		
+
+		function sendVideoLog(param){
+			$.ajax({
+				url: 'http://123.59.60.170/getwapdata/videoact',
+				data: {
+					param: param
+				},
+				dataType: 'jsonp',
+				json: 'jsonpcallback',
+				success: function(){
+					// console.log('success::', arguments);
+				},
+				error: function(){
+					// console.log('error::', arguments);
+				},
+			});
+		}
 
 	</script>
 </body>
