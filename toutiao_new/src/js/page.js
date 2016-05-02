@@ -140,6 +140,10 @@ $(function(){
 			/* 首次加载数据 */
 			scope.refreshData(function(){
 				scope.highlightPraiseTrample();
+				// 注册video事件
+				$newsList.find('video').each(function(i, ele){
+					scope.addVideoListener($(this));
+				});
 			});
 
 			// 记录一次日志
@@ -152,6 +156,8 @@ $(function(){
 			$newsTabsWrap.on('tap', 'a', function(){
 				var $this = $(this),
 					type = $this.data('type');
+				// 加载当前频道类别新闻数据
+				scope.newsType = type;
 				if($this.hasClass('active')){
 					return;
 				}
@@ -160,11 +166,13 @@ $(function(){
 				// 存储上一个新闻类别和当前新闻类别
 				wsCache.set('prev_newstype', scope.newsType, { exp: 20 * 60});
 				wsCache.set('current_newstype', type, {exp: 20 * 60});
-				// 加载当前频道类别新闻数据
-				scope.newsType = type;
 
 				scope.refreshData(function(){
 					scope.highlightPraiseTrample();
+					// 注册video事件
+					$newsList.find('video').each(function(i, ele){
+						scope.addVideoListener($(this));
+					});
 				});
 				// 日志收集
 				scope.addLog();
@@ -697,7 +705,10 @@ $(function(){
 				}
 	            if(videonews == '1'){	// 视频模式
 	            	if(rightOs){
-	            		var videoImg = item.lbimg[0].src,
+	            		var videoImg = item.lbimg[0].src;
+	            		$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>'); 
+
+	            		/*var videoImg = item.lbimg[0].src,
 	            			$section = $('<section class="news-item news-item-video"></section>'),
 	            			$videoWrap = $('<div class="video-wrap"><h3>' + topic + '</h3></div>'),
 	            			$video = $('<video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video>');
@@ -705,8 +716,9 @@ $(function(){
 	            		$section.append($videoWrap);
 	            		// 插入video
 	            		$newsList.prepend($section);
-	            		// 给video注册事件
-	            		scope.videoListener($video);
+	            		// 给video设置宽高
+	            		scope.setVideoWidthAndHeight($video);
+	            		scope.addVideoListener($video);*/
 	            	}
             	} else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
@@ -748,6 +760,11 @@ $(function(){
 		        // 缓存当前类别加载的新闻（缓存20分钟）
 		        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
 	        }, 400);
+
+	        // 注册video事件
+			$newsList.find('video').each(function(i, ele){
+				scope.addVideoListener($(this));
+			});
 		},
 
 		/**
@@ -1344,7 +1361,9 @@ $(function(){
 						rightOs = false;
 					}
 	            	if(videonews == '1' && rightOs){	// 视频模式
-	            		var videoImg = item.lbimg[0].src,
+	            		var videoImg = item.lbimg[0].src;
+	            		$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+	            		/*var videoImg = item.lbimg[0].src,
 	            			$section = $('<section class="news-item news-item-video"></section>'),
 	            			$videoWrap = $('<div class="video-wrap"><h3>' + topic + '</h3></div>'),
 	            			$video = $('<video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video>');
@@ -1352,8 +1371,9 @@ $(function(){
 	            		$section.append($videoWrap);
 	            		// 插入video
 	            		$newsList.append($section);
-	            		// 给video注册事件
-	            		scope.videoListener($video);
+	            		// 给video设置宽高
+	            		scope.setVideoWidthAndHeight($video);
+	            		scope.addVideoListener($video);*/
 	            	} else if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
 		            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
@@ -1368,10 +1388,18 @@ $(function(){
 	        wsCache.set('idx_' + scope.newsType, scope.idx + len, {exp: 20 * 60});
 	        // 缓存当前类别加载的新闻（缓存20分钟）
 	        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
+
+	        // 注册video事件
+			$newsList.find('video').each(function(i, ele){
+				scope.addVideoListener($(this));
+			});
 	    },
 
-	    videoListener: function($video){
-	    	var scope = this;
+	    /**
+	     * 设置video的宽高
+	     * @param {[type]} $video [description]
+	     */
+	    setVideoWidthAndHeight: function($video){
 	    	// 给video纠正宽高
 	    	setTimeout(function(){
 	    		$video[0].width = $video.width();
@@ -1381,6 +1409,15 @@ $(function(){
 	    		$video[0].width = $video.width();
 	    		$video[0].height = $video.width() * 9 / 16;
 	    	});
+	    },
+
+	    /**
+	     * video事件监听
+	     * @param {Object} $video video对象
+	     * @return {[type]}        [description]
+	     */
+	    addVideoListener: function($video){
+	    	var scope = this;
 	    	// 播放事件
 	    	$video.on('playing', function(event){
 				try {
@@ -1392,7 +1429,7 @@ $(function(){
 						videoType = $video.attr('data-type'),
 						playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
 						currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
-						param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + scope.newsType + '\t' + videoType + '\t' + scope.osType + '\t' + idx + '\t' + scope.osType + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tplay';
+						param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + scope.newsType + '\t' + videoType + '\t' + scope.osType + '\t' + idx + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tplay';
 					// 用于记录实际播放时长
 					$video.attr('data-updateTime', +new Date());
 					scope.sendVideoLog(param);
