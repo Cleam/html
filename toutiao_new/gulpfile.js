@@ -41,7 +41,7 @@ gulp.task('html-index', function() {
         .pipe(livereload());
 });
 // 广告html
-gulp.task('gg-html', function() {
+gulp.task('html-gg', function() {
     var htmlSrc = [
             './src/gg/gg_baidu.html',
             './src/gg/gg_sogou.html'

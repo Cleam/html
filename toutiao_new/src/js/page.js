@@ -44,9 +44,9 @@ $(function(){
 		pullDownLoadDataTimer = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache(),	// 本地存储对象
 		// 百度广告iframe
-		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>',
+		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="62"></iframe></div>',
 		// 搜狗广告iframe
-		sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78px"></iframe></div>';
+		sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
 
 	/**
 	 * 东方头条对象
