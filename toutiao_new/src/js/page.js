@@ -142,6 +142,7 @@ $(function(){
 				scope.highlightPraiseTrample();
 				// 注册video事件
 				$newsList.find('video').each(function(i, ele){
+					scope.setVideoWidthAndHeight($(this));
 					scope.addVideoListener($(this));
 				});
 			});
@@ -171,6 +172,7 @@ $(function(){
 					scope.highlightPraiseTrample();
 					// 注册video事件
 					$newsList.find('video').each(function(i, ele){
+						scope.setVideoWidthAndHeight($(this));
 						scope.addVideoListener($(this));
 					});
 				});
@@ -763,6 +765,7 @@ $(function(){
 
 	        // 注册video事件
 			$newsList.find('video').each(function(i, ele){
+				scope.setVideoWidthAndHeight($(this));
 				scope.addVideoListener($(this));
 			});
 		},
@@ -1391,6 +1394,7 @@ $(function(){
 
 	        // 注册video事件
 			$newsList.find('video').each(function(i, ele){
+				scope.setVideoWidthAndHeight($(this));
 				scope.addVideoListener($(this));
 			});
 	    },
