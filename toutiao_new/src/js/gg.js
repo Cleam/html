@@ -425,7 +425,12 @@ GLOBAL.Et.ggData = {
 		"operashangdian":{"baidu":{"li":"u2627154"}},
 		"chamm":{"baidu":{"li":"u2627173"}},
 		"wifixhwy":{"baidu":{"li":"u2627265"}},
-		"360wifi":{"baidu":{"li":"u2627956"}}
+		"360wifi":{"baidu":{"li":"u2627956"}},
+		"zhuanqianbao":{"baidu":{"li":"u2628207"}},
+		"nduowang":{"baidu":{"li":"u2628490"}},
+		"hongbaokuaishou":{"baidu":{"li":"u2628441"}},
+		"hihizhuanfa":{"baidu":{"li":"u2628422"}},
+		"hihizhuanfamm":{"baidu":{"li":"u2628453"}}
 	}
 };
 
