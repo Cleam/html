@@ -424,7 +424,8 @@ GLOBAL.Et.ggData = {
 		"operashangdianmm":{"baidu":{"li":"u2627179"}},
 		"operashangdian":{"baidu":{"li":"u2627154"}},
 		"chamm":{"baidu":{"li":"u2627173"}},
-		"wifixhwy":{"baidu":{"li":"u2627265"}}
+		"wifixhwy":{"baidu":{"li":"u2627265"}},
+		"360wifi":{"baidu":{"li":"u2627956"}}
 	}
 };
 
