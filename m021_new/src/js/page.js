@@ -796,6 +796,7 @@ $(function() {
                 imgArr = item.miniimg,
                 recommendtype = item.recommendtype ? item.recommendtype : '-1',
                 hotnews = item.hotnews,
+                videonews = item.videonews,
                 type = item.type,
                 subtype = item.subtype,
                 imgLen = imgArr.length,
@@ -817,17 +818,25 @@ $(function() {
                 tagStr = '<i class="nuanwen">暖文</i>';
             }
 
-            // 新闻信息流插入广告
-            var j = i + 1;
-            if(j != 1 && j % 4 == 0){
-                $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
+            // 新闻信息流插入广告(wy001~wy100不显示广告)
+            if(tt_news_mid.indexOf('wy') !== 0){
+                var j = i + 1;
+                if(j != 1 && j % 4 == 0){
+                    $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
+                }
             }
 
             // 添加新闻信息流
-            if(imgLen >= 3){
+            if(imgLen >= 3 && videonews !== '1'){
                 $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></li>');
-            } else {
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div></div></a></li> ');
+            } else if(videonews !== '1') {
+                if(imgArr.length == 0){
+                    console.log('item::', item);
+                }
+                var imgSrc = ((imgArr.length > 0 && imgArr[0].src) ? imgArr[0].src : ''),
+                    imgAlt = ((imgArr.length > 0 && imgArr[0].alt) ? imgArr[0].alt : '');
+
+                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="' + imgAlt + '"></div></div></a></li> ');
             }
         }
         $.cookie('idx_' + newsType, idx + len, { expires: 0.334, path: '/' });

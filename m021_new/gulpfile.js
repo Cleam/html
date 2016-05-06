@@ -8,12 +8,12 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     // notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
+    // cache = require('gulp-cache'),
     clean = require('gulp-clean'),                  //清空文件夹
     rev = require('gulp-rev'),                      //- 对文件名加MD5后缀
     revCollector = require('gulp-rev-collector'),   //- 路径替换
-    livereload = require('gulp-livereload'),        //livereload
-    del = require('del');
+    livereload = require('gulp-livereload');        //livereload
+    // del = require('del');
 // HTML处理
 /*
   注意更新css和js的引用：
