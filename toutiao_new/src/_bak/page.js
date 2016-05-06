@@ -140,6 +140,11 @@ $(function(){
 			/* 首次加载数据 */
 			scope.refreshData(function(){
 				scope.highlightPraiseTrample();
+				// 注册video事件
+				/*$newsList.find('video').each(function(i, ele){
+					scope.setVideoWidthAndHeight($(this));
+					scope.addVideoListener($(this));
+				});*/
 			});
 
 			// 记录一次日志
@@ -165,6 +170,11 @@ $(function(){
 
 				scope.refreshData(function(){
 					scope.highlightPraiseTrample();
+					// 注册video事件
+					/*$newsList.find('video').each(function(i, ele){
+						scope.setVideoWidthAndHeight($(this));
+						scope.addVideoListener($(this));
+					});*/
 				});
 				// 日志收集
 				scope.addLog();
@@ -698,7 +708,19 @@ $(function(){
 	            if(videonews == '1'){	// 视频模式
 	            	if(rightOs){
 	            		var videoImg = item.lbimg[0].src;
-	            		$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+	            		$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>'); 
+
+	            		/*var videoImg = item.lbimg[0].src,
+	            			$section = $('<section class="news-item news-item-video"></section>'),
+	            			$videoWrap = $('<div class="video-wrap"><h3>' + topic + '</h3></div>'),
+	            			$video = $('<video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video>');
+	            		$videoWrap.append($video).append('<p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p>');
+	            		$section.append($videoWrap);
+	            		// 插入video
+	            		$newsList.prepend($section);
+	            		// 给video设置宽高
+	            		scope.setVideoWidthAndHeight($video);
+	            		scope.addVideoListener($video);*/
 	            	}
             	} else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
@@ -742,9 +764,12 @@ $(function(){
 	        }, 400);
 
 	        // 注册video事件
-			$newsList.find('video').each(function(i, ele){
+			/*$newsList.find('video').each(function(i, ele){
 				scope.setVideoWidthAndHeight($(this));
 				scope.addVideoListener($(this));
+			});*/
+			$newsList.find('.zg-video-player').each(function(i, ele){
+				scope.addVideoListener2($(this));
 			});
 		},
 
@@ -1150,10 +1175,8 @@ $(function(){
 	                $body.scrollTop(cachePos);
 	            }
 	            callback && callback();
-	            // 注册video事件
-				$newsList.find('video').each(function(i, ele){
-					scope.setVideoWidthAndHeight($(this));
-					scope.addVideoListener($(this));
+	            $newsList.find('.zg-video-player').each(function(i, ele){
+					scope.addVideoListener2($(this));
 				});
 			} else {
 				wsCache.delete('pulldown_idx_' + scope.newsType);
@@ -1255,7 +1278,7 @@ $(function(){
 	       	scope.startKey[scope.newsType] = d.endkey;
 	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
-	        // var ranNum = Math.floor((len - 1) * Math.random());
+	        var ranNum = Math.floor((len - 1) * Math.random());
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -1340,17 +1363,32 @@ $(function(){
 						}
 					}
 
+					//=================测试start
+					if(ranNum === i){
+						$newsList.append('<section class="news-item news-item-video"><div class="zvp-wrap"><h3>测试视频测试视频</h3><div class="zg-video-player zvp-title-controls-hide"><div class="zvp-interlayer"><div class="zvp-video"><video class="J-zvp-video video-hide" src="video/video.mp4" poster="img/poster.png" width="100%" height="100%" x-webkit-airplay="true" webkit-playsinline="true" preload="none"></video><div class="zvp-video-shadow"></div></div><div class="zvp-poster"><img src="img/poster.png" alt=""></div><div class="zvp-title none"><h1>测试视频</h1></div><div class="zvp-overlay-play"><span>播放</span></div><div class="zvp-overlay-loading none"><span>加载中...</span></div><div class="zvp-controls"><div class="vc-button vc-playpause-button vc-play"><button type="button" title="播放/暂停"><span class="vc-btn-value">播放</span></button></div><div class="vc-time-rail"><span class="vc-time-total"><span class="vc-time-loaded"></span><span class="vc-time-current"><span class="vc-time-handle"></span></span></span><span class="vc-time-panel"><span class="vc-time-panel-current">00:00</span><span class="vc-time-panel-split">/</span><span class="vc-time-panel-total">00:00</span></span></div><div class="vc-button vc-fullscreen-button vc-fullscreen"><button type="button" title="切换全屏"><span class="vc-btn-value">全屏</span></button></div></div></div></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">软软其实不太硬</em></p></div></section>');
+					}
+					//=================测试end
+
 					/*======== 新闻流 =========*/
 					// android 4.0以下不放视频
 					var rightOs = true;
 					if(scope.osType.indexOf('Android') >= 0 && Number(scope.osType.split(' ')[1]) < 4.0){
 						rightOs = false;
 					}
-	            	if(videonews == '1'){	// 视频模式
-	            		if(rightOs){
-		            		var videoImg = item.lbimg[0].src;
-		            		$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
-	            		}
+	            	if(videonews == '1' && rightOs){	// 视频模式
+	            		var videoImg = item.lbimg[0].src;
+	            		$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+	            		/*var videoImg = item.lbimg[0].src,
+	            			$section = $('<section class="news-item news-item-video"></section>'),
+	            			$videoWrap = $('<div class="video-wrap"><h3>' + topic + '</h3></div>'),
+	            			$video = $('<video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video>');
+	            		$videoWrap.append($video).append('<p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p>');
+	            		$section.append($videoWrap);
+	            		// 插入video
+	            		$newsList.append($section);
+	            		// 给video设置宽高
+	            		scope.setVideoWidthAndHeight($video);
+	            		scope.addVideoListener($video);*/
 	            	} else if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
 		            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
@@ -1367,9 +1405,12 @@ $(function(){
 	        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
 
 	        // 注册video事件
-			$newsList.find('video').each(function(i, ele){
+			/*$newsList.find('video').each(function(i, ele){
 				scope.setVideoWidthAndHeight($(this));
 				scope.addVideoListener($(this));
+			});*/
+			$newsList.find('.zg-video-player').each(function(i, ele){
+				scope.addVideoListener2($(this));
 			});
 	    },
 
@@ -1387,6 +1428,179 @@ $(function(){
 	    		$video[0].width = $video.width();
 	    		$video[0].height = $video.width() * 9 / 16;
 	    	});
+	    },
+
+	    addVideoListener2: function($videoPlayer){
+	    	var scope = this,
+		    	$video = $videoPlayer.find('.J-zvp-video'), // video zepto对象
+		        video = $video[0],  // video dom对象
+		        $loading = $videoPlayer.find('.zvp-overlay-loading'),   // 加载中 zepto对象
+		        $videoShadow = $videoPlayer.find('.zvp-video-shadow'),  // video覆盖层 zepto对象
+		        $play = $videoPlayer.find('.zvp-overlay-play'), // 播放按钮 zopto对象
+		        $poster = $videoPlayer.find('.zvp-poster'), // 视频海报 zepto对象
+		        $playPause = $videoPlayer.find('.vc-playpause-button'), // 播放/暂停 zepto对象
+		        $progressLoaded = $videoPlayer.find('.vc-time-loaded'), // 视频已加载进度 zepto对象
+		        $progressCurrent = $videoPlayer.find('.vc-time-current'), // 视频已播放进度  zepto对象
+		        $progressTotal = $videoPlayer.find('.vc-time-total'), // 视频已播放进度  zepto对象
+		        $timeCurrent = $videoPlayer.find('.vc-time-panel-current'), // 视频已播放时间  zepto对象
+		        $timeTotal = $videoPlayer.find('.vc-time-panel-total'), // 视频总时间  zepto对象
+		        $timeHandle = $videoPlayer.find('.vc-time-handle'), // 视频总时间  zepto对象
+		        $fullscreen = $videoPlayer.find('.vc-fullscreen-button'), // 全屏播放  zepto对象
+		    	ctrlTimer = null,
+		    	playTimer = null,
+		        startPos = 0,
+		        touchDis = 0,
+		        duration = 0,
+		        canplay = false;
+
+		    $progressCurrent.width('0');
+            $timeCurrent.html('00:00');
+
+            $video.on('loadedmetadata', function(event){    // 元数据加载
+                duration = video.duration;
+                $timeTotal.html(convert(video.duration));
+            }).on('canplaythrough', function(event){    // 元数据加载
+                canplay = true;
+            }).on('timeupdate', function(){     // 播放时间更新
+                $timeCurrent.html(convert(video.currentTime));
+                updateProgress();
+            }).on('playing', function(){    //  开始播放了
+                $loading.hide();
+                $poster.hide();
+        		$play.hide();
+                $video.hasClass('video-hide') && $video.removeClass('video-hide');
+                $playPause.removeClass('vc-play').addClass('vc-pause');
+            }).on('pause', function(){  //  开始播放了
+            	$play.show();
+                $playPause.removeClass('vc-pause').addClass('vc-play');
+            });
+
+            // 播放按钮点击事件
+            $play.on('click', function(){
+            	$loading.show();
+        		$poster.hide();
+        		$play.hide();
+            	videoPlay();
+            });
+            // 播放暂停按钮点击事件
+            $playPause.on('click', function(){
+                if($(this).hasClass('vc-play')){
+                    videoPlay();
+                } else {
+                    $play.show();
+                    videoPause();
+                }
+            });
+
+            // 视频点击事件（显示视频操作控件）
+            $videoShadow.on('click', function(){
+                $videoPlayer.removeClass('zvp-title-controls-hide');
+                ctrlTimer && clearTimeout(ctrlTimer);
+                ctrlTimer = setTimeout(function(){
+                    $videoPlayer.addClass('zvp-title-controls-hide');
+                }, 3000);
+            });
+
+            // 快进快退事件
+            var progressWidth = 0, curTime = 0;
+            $timeHandle.on('touchstart', function(event){
+                startPos = event.targetTouches[0].pageX;
+                progressWidth = $progressCurrent.width();
+                curTime = video.currentTime;
+                videoPause();
+            }).on('touchmove', function(event){
+                var endPos = event.targetTouches[0].pageX;
+                touchDis = endPos - startPos;
+                if(touchDis > 0){
+                    $progressCurrent.width(progressWidth + touchDis);
+                    video.currentTime = curTime + (duration * touchDis / $progressTotal.width());
+                } else {
+                    $progressCurrent.width(progressWidth - Math.abs(touchDis));
+                    video.currentTime = curTime - (duration * Math.abs(touchDis) / $progressTotal.width());
+                }
+                ctrlTimer && clearTimeout(ctrlTimer);
+            }).on('touchend', function(event){
+                if(touchDis > 0){
+                    video.currentTime = curTime + (duration * touchDis / $progressTotal.width());
+                } else {
+                    video.currentTime = curTime - (duration * Math.abs(touchDis) / $progressTotal.width());
+                }
+                videoPlay();
+                ctrlTimer = setTimeout(function(){
+                    $videoPlayer.addClass('zvp-title-controls-hide');
+                }, 3000);
+            });
+
+            // 全屏播放
+            $fullscreen.on('click', function(event){
+                if($fullscreen.hasClass('vc-fullscreen')){
+                    $fullscreen.removeClass('vc-fullscreen').addClass('vc-unfullscreen');
+                    $videoPlayer.addClass('fullscreen');
+                } else {
+                    $fullscreen.removeClass('vc-unfullscreen').addClass('vc-fullscreen');
+                    $videoPlayer.removeClass('fullscreen');
+                }
+            });
+
+            /**
+	         * 播放
+	         * @param  {[type]} ct [description]
+	         * @return {[type]}    [description]
+	         */
+	        function videoPlay(ct) {
+                if(ct){
+                    video.currentTime = ct;
+                }
+                video.play();
+	        }
+
+	        /**
+	         * 暂停
+	         * @return {[type]} [description]
+	         */
+	        function videoPause() {
+	            video.pause();
+	        }
+
+	        /**
+	         * 更新进度条
+	         * @return {[type]} [description]
+	         */
+	        function updateProgress() {
+	            $progressCurrent.width($progressTotal.width() * video.currentTime / duration);
+	        }
+
+	        /**
+	         * 时间转换方法
+	         * @param  {[type]} seconds 时间（s）
+	         * @return {[type]}         mm:ss
+	         */
+	        function convert(seconds){
+	            var hh, mm, ss;
+	            // 传入的时间为空或小于0
+	            if(seconds == null || seconds < 0 ){
+	                return;
+	            }
+	            seconds = Math.ceil(seconds);
+	            // 得到小时
+	            hh = seconds / 3600 | 0;
+	            seconds = parseInt(seconds) - hh * 3600;
+	            if(parseInt(hh) < 10){
+	                hh = '0' + hh;
+	            }
+	            // 得到分
+	            mm = seconds / 60 | 0;
+	            if(parseInt(mm) < 10){
+	                mm = '0' + mm;
+	            }
+	            // 得到秒
+	            ss = parseInt(seconds) - mm * 60;
+	            if(ss < 10){
+	                ss = '0' + ss;
+	            }
+	            return mm + ':' + ss;
+	            // return hh + ':' + mm + ':' + ss;
+	        }
 	    },
 
 	    /**
