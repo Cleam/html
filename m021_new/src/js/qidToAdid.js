@@ -19,10 +19,10 @@ function _getAdidByQid(qid){
 
 	if(qid){
 		if(qid.indexOf('pgzs') >= 0 || qid.indexOf('waitui') >= 0){
-			return '576725';
+			return '565294';
 		}
 	}
-	return '576724';
+	return '565295';
 }
 // 存储广告ID，方便iframe中子页面获取。(tt_news_mid: 未经过m021处理的渠道ID。)
 document.write('<input type="hidden" value="' + _getAdidByQid(tt_news_mid) + '" id="J_ad_sogou_id"></input>');

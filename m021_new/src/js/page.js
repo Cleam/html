@@ -818,10 +818,12 @@ $(function() {
                 tagStr = '<i class="nuanwen">暖文</i>';
             }
 
-            // 新闻信息流插入广告
-            var j = i + 1;
-            if(j != 1 && j % 4 == 0){
-                $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
+            // 新闻信息流插入广告(wy001~wy100不显示广告)
+            if(tt_news_mid.indexOf('wy') !== 0){
+                var j = i + 1;
+                if(j != 1 && j % 4 == 0){
+                    $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
+                }
             }
 
             // 添加新闻信息流

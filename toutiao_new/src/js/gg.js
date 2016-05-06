@@ -432,7 +432,8 @@ GLOBAL.Et.ggData = {
 		"hihizhuanfa":{"baidu":{"li":"u2628422"}},
 		"hihizhuanfamm":{"baidu":{"li":"u2628453"}},
 		"romcloud":{"baidu":{"li":"u2629634"}},
-		"chatiyu1":{"baidu":{"li":"u2629820"}}
+		"chatiyu1":{"baidu":{"li":"u2629820"}},
+		"guguniao":{"baidu":{"li":"u2630978"}}
 	}
 };
 
