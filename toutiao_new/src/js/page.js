@@ -187,6 +187,18 @@ $(function(){
 	            if(loadingOT >= cHeight && scrollTop + cHeight >= loadingOT && scope.pullUpFlag){
                     scope.pullUpLoadData();
 	            }
+
+	            // 视频出了屏幕暂停
+	            $newsList.find('video').each(function(){
+	            	var $video = $(this),
+	            		videoTop = $video.offset().top,
+	            		scrollTop = $body.scrollTop();
+	            	if(scrollTop >= videoTop || videoTop - scrollTop >= $(window).height() - $video.height()){
+	            		if(!this.paused){
+	            			this.pause();
+	            		}
+	            	}
+	            });
 	        });
 
 	        /* 刷新数据 */
@@ -209,6 +221,12 @@ $(function(){
 	                url = $this.attr('href');
 	            url = url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html'));
 	            scope.cacheReadUrl(url, $this.data('type'), $this.data('subtype'));
+	            // 点击新闻时，暂停播放中的视频
+	            $newsList.find('video').each(function(){
+	            	if(!this.paused){
+		            	this.pause();
+	            	}
+	            });
 	        });
 
 	        /**
