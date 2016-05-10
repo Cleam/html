@@ -430,7 +430,13 @@ GLOBAL.Et.ggData = {
 		"nduowang":{"baidu":{"li":"u2628490"}},
 		"hongbaokuaishou":{"baidu":{"li":"u2628441"}},
 		"hihizhuanfa":{"baidu":{"li":"u2628422"}},
-		"hihizhuanfamm":{"baidu":{"li":"u2628453"}}
+		"hihizhuanfamm":{"baidu":{"li":"u2628453"}},
+		"romcloud":{"baidu":{"li":"u2629634"}},
+		"chatiyu1":{"baidu":{"li":"u2629820"}},
+		"guguniao":{"baidu":{"li":"u2630978"}},
+		"zuoankeji":{"baidu":{"li":"u2633133"}},
+		"jiuyi160":{"baidu":{"li":"u2634489"}},
+		"qiaohuiwangluo":{"baidu":{"li":"u2634489"}}
 	}
 };
 

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<style>
+		body{margin: 0; padding: 0; font-family: "Hiragino Sans GB", "Helvetica Neue", Helvetica, STHeiTi, sans-serif; color: #666666; background-color: #fff; position: relative;}
+		html, body{width: 100%; height: 100%;}
+		.gg-gdt{margin-top: 50px; padding: 20px 30px;}
+	</style>
+</head>
+<body>
+	<div class="gg-wrap">
+		<div id="J_gg_gdt" class="gdt-wrap">
+			<h3><i></i>真实场景下需要开发者实时判断</h3>
+			<p>真实场景下需要开发者实时判断真实场景下需要开发者实时判断</p>
+			<div class="img"><img src="" alt=""></div>
+		</div>
+	</div>
+	
+	<script src="../js/zepto.min.js"></script>
+	<!-- 嵩恒_头条_h5_默认渠道_li 广告ID=9080517190793768 -->
+	<script type="text/javascript"> 
+		var $gdtContainer = $('#J_gg_gdt');
+		//广告渲染
+	    // function renderAd(pid,objList,cnt) {
+	    //     posCount ++;
+	    //     for(var i = 0; i < objList.length; i ++){
+	    //         var divObj = document.createElement("div");
+	    //         divObj.setAttribute('id','native'+posCount +i);
+	    //         if(objList[i].isAPP){
+	    //             divObj.innerHTML = tmpl("tplApp", objList[i]);
+	    //         } else {
+	    //             divObj.innerHTML = tmpl("tplUrl", objList[i]);
+	    //         }
+	    //         cnt.appendChild(divObj);
+	    //     }
+	    //     initClickEvent(pid,objList);
+	    //     if(dataList.length == TencentGDT.length){       //所有广告渲染结束后进行初始化曝光判断
+	    //         initExpose(pid,dataList);
+	    //     }
+	    // }
+
+	    //初始化曝光：这里只展示初始化曝光，真实场景下需要开发者实时判断广告是否满足有效曝光条件
+	    // function initExpose(pid,objList) {
+	    //     for (var i = 0; i < objList.length; i++){
+	    //         var posElm = objList[i];
+	    //         for (var j = 0;  j < posElm.length; j++){
+	    //             var a = i+1;
+	    //             var elm = document.getElementById("native"+a+j);
+	    //             if(document.documentElement.clientHeight - elm.offsetTop > 40) {    //有效曝光的条件：广告展示区域顶部位置及以下至少40像素的区域可见则满足曝光条件
+	    //                  var obj = {
+	    //                     cnt : elm,          //cnt为展示广告的document元素id
+	    //                     oid : posElm[j].oid,     //广告ID
+	    //                      posid : pid            //广告位ID
+	    //                  }
+	    //                 TencentGDT.NATIVE.doExpose && TencentGDT.NATIVE.doExpose(obj);      //调用曝光上报接口
+	    //             }
+	    //         }
+	    //     }
+	    // }
+
+	    // 拉取广告的回调处理
+	    function checkForRender(pid,obj,$cnt) {
+	        var d = ( typeof obj == 'string')?JSON.parse(obj):obj;
+	        console.log(d.adList.length);
+	        console.log(d.adList);
+	        console.log(d);
+	        // if(d.ret && d.adList.length > 0) {
+	        //     dataList.push(d.adList);
+	        //     renderAd(pid,d.adList,cnt);     //渲染广告
+	        // } else {
+	        //     setTimeout(function() {
+	        //         TencentGDT.NATIVE.loadAd && TencentGDT.NATIVE.loadAd(pid);          //拉取广告失败或无广告数据返回时，重新拉取广告
+	        //     },2000);
+	        // }
+	    }
+
+	    // JS接入
+		var TencentGDT = TencentGDT || [];
+		TencentGDT.push({
+			placement_id: '9080517190793768',
+			app_id:'0',
+			type: 'native',
+			count:3,	//拉取广告的数量，必填，默认是3，最高支持10
+			onComplete: function(obj){
+				console.log(obj.data);
+				checkForRender(this.placement_id, obj, $gdtContainer);
+			}	//拉取完广告的回调函数，必填
+		});
+		(function() {
+			var doc=document, h=doc.getElementsByTagName('head')[0], s=doc.createElement('script');
+			s.async=true; 
+			s.src='http://qzs.qq.com/qzone/biz/res/i.js';
+			h && h.insertBefore(s,h.firstChild);
+		})();
+	</script>
+
+
+	<!-- 
+	<div id="gg" class="gg-gdt">
+		
+	</div>
+	
+	<script type="text/javascript" id="gdt-5000513151022413">
+		var TencentGDT = TencentGDT || [];
+			TencentGDT.push({
+				placement_id:'5000513151022413',
+				type:'banner',
+				containerid:'gg',//如果容器不合适，可自定义广告容器
+				fill_type:'full',//填充方式，full：填满宽度，fix:固定大小,
+				app_id: "0"
+			});
+		(function() {
+			var doc=document, h=doc.getElementsByTagName('head')[0], s=doc.createElement('script');
+			s.async=true; s.src='http://qzs.qq.com/qzone/biz/res/i.js';
+			h && h.insertBefore(s,h.firstChild)
+		})()
+	</script>
+
+	 -->
+</body>
+</html>

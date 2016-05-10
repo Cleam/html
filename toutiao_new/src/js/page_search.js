@@ -225,6 +225,7 @@ $(function(){
 						$('.J-no-news').remove();
 						$loading.before('<p class="J-no-news" style="text-align: center; font-size: 0.24rem; padding: 30px; color: #999;">抱歉，未找到相关新闻！</p>');
 						$loading.hide();
+						console.error(e);
 					}
 				},
 				error: function() {
@@ -251,18 +252,27 @@ $(function(){
 				$loading.hide();
 				return;
 			}
+			// var ranNum = Math.floor((len - 1) * Math.random());
 			for (var i = 0; i < len; i++) {
 				var url = d[i].url,
 					title = d[i].title,
 					splitword = d[0].splitword,
 					date = d[i].date,
+					ispicnews = d[i].ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(2)
 					imgArr = d[i].imgstr,
 					imgLen = imgArr.length,
 					source = d[i].source;
 				title = scope.getNewStr(title, splitword);
 				url += '?idx=' + (idx++) + '&fr=search';
+
+				/*if(i === ranNum){
+            		$newsList.append('<section class="news-item news-item-noimg"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+            	}*/
+
 				if(imgLen >= 3){		// 三图模式
 	                $newsList.append('<section class="news-item news-item-s2"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            } else if(ispicnews == '-1'){		// 无图模式
+	            	$newsList.append('<section class="news-item news-item-noimg"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {	// 单图模式
 	            	$newsList.append('<section class="news-item news-item-s1"><a href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + title + '</h3> <p><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
 	            }
