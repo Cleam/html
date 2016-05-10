@@ -434,7 +434,8 @@ GLOBAL.Et.ggData = {
 		"romcloud":{"baidu":{"li":"u2629634"}},
 		"chatiyu1":{"baidu":{"li":"u2629820"}},
 		"guguniao":{"baidu":{"li":"u2630978"}},
-		"zuoankeji":{"baidu":{"li":"u2633133"}}
+		"zuoankeji":{"baidu":{"li":"u2633133"}},
+		"jiuyi160":{"baidu":{"li":"u2634489"}}
 	}
 };
 
