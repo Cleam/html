@@ -46,6 +46,16 @@ header .form-wrap .search-btn{position: absolute; top: 0; right: 0.2rem; width: 
 .news-list-wrap .news-item-s1 a .txt-wrap p{position: absolute; bottom: 0; width: 100%; font-size: 0.2rem; color: #999;}
 .news-list-wrap .news-item-s1 a .img-wrap{width: 1.92rem; height: 1.2rem; overflow: hidden;}
 .news-list-wrap .news-item-s1 a .img-wrap img{width: 100%;}
+/* 无图模式 */
+.news-list-wrap .news-item-noimg a{display: block; width: 100%; color: #333; padding: 0.24rem 0.3rem 0;}
+.news-list-wrap .news-item-noimg a:visited{color: #999;}
+.news-list-wrap .news-item-noimg a .news-wrap{position: relative; min-height: 1.05rem; padding-bottom: 0.24rem; border-bottom: 1px solid #eee;}
+.news-list-wrap .news-item-noimg a h3{font-size: 0.34rem; margin-bottom: 0.14rem; width: 100%; max-height: 0.8rem; line-height: 1.2em; overflow: hidden;}
+.news-list-wrap .news-item-noimg a .img-wrap{height: 1.4rem; overflow: hidden;}
+.news-list-wrap .news-item-noimg a .img-wrap .img{margin-right: 0.09rem; width: 2.24rem;}
+.news-list-wrap .news-item-noimg a .img-wrap .img:last-child{margin-right: 0;}
+.news-list-wrap .news-item-noimg a .img-wrap .img img{width: 100%; min-height: 1.4rem;}
+.news-list-wrap .news-item-noimg a p{width: 100%; font-size: 0.2rem; color: #999;}
 /* 三图模式 */
 .news-list-wrap .news-item-s2 a{display: block; width: 100%; color: #333; padding: 0.2rem 0.3rem 0;}
 .news-list-wrap .news-item-s2 a:visited{color: #999;}

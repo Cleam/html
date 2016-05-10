@@ -263,6 +263,8 @@ $(function(){
 				url += '?idx=' + (idx++) + '&fr=search';
 				if(imgLen >= 3){		// 三图模式
 	                $newsList.append('<section class="news-item news-item-s2"><a href="' + url + '"><div class="news-wrap"><h3>' + title + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            } else if(ispicnews == '2'){		// 无图模式
+	            	$newsList.append('<section class="news-item news-item-noimg"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else {	// 单图模式
 	            	$newsList.append('<section class="news-item news-item-s1"><a href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + title + '</h3> <p><em class="fl">' + date + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"></div></div></a></section>');
 	            }
