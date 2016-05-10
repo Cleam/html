@@ -435,7 +435,8 @@ GLOBAL.Et.ggData = {
 		"chatiyu1":{"baidu":{"li":"u2629820"}},
 		"guguniao":{"baidu":{"li":"u2630978"}},
 		"zuoankeji":{"baidu":{"li":"u2633133"}},
-		"jiuyi160":{"baidu":{"li":"u2634489"}}
+		"jiuyi160":{"baidu":{"li":"u2634489"}},
+		"qiaohuiwangluo":{"baidu":{"li":"u2634489"}}
 	}
 };
 

@@ -649,7 +649,7 @@ $(function(){
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
 	                hotnews = item.hotnews,
-	                ispicnews = item.ispicnews,	// 大图新闻
+	                ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(-1)
 	                videonews = item.videonews,	// 视频新闻
 	                videoList = item.videolist,	// 视频列表
 	                isadv = item.isadv || '',
@@ -721,7 +721,7 @@ $(function(){
             	} else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
 	            	$newsList.prepend('<section class="pull-down news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            } else if(ispicnews == '2'){	// 无图新闻
+	            } else if(ispicnews == '-1'){	// 无图新闻
 	            	$newsList.prepend('<section class="news-item news-item-noimg"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 	            } else if(imgLen >= 3){
 	                $newsList.prepend('<section class="pull-down news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
@@ -1245,7 +1245,7 @@ $(function(){
 	       	scope.startKey[scope.newsType] = d.endkey;
 	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	        var len = data.length;
-	        var ranNum = Math.floor((len - 1) * Math.random());
+	        // var ranNum = Math.floor((len - 1) * Math.random());
 	        for (var i = 0; i < len; i++) {
 	            var item = data[i],
 	                url = item.url,
@@ -1255,7 +1255,7 @@ $(function(){
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
 	                hotnews = item.hotnews,
-	                ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(2)
+	                ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(-1)
 	                videonews = item.videonews,	// 视频新闻
 	                videoList = item.videolist,	// 视频列表
 	                isadv = item.isadv || '',
@@ -1330,9 +1330,9 @@ $(function(){
 						}
 					}
 
-					if(i === ranNum){
+					/*if(i === ranNum){
 	            		$newsList.append('<section class="news-item news-item-noimg"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-	            	}
+	            	}*/
 
 					/*======== 新闻流 =========*/
 					// android 4.0以下不放视频
@@ -1348,7 +1348,7 @@ $(function(){
 	            	} else if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
 		            	$newsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-		            } else if(ispicnews == '2'){	// 无图模式
+		            } else if(ispicnews == '-1'){	// 无图模式
 		            	$newsList.append('<section class="news-item news-item-noimg"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
 		            } else if(imgLen >= 3){		// 三图模式
 		                $newsList.append('<section class="news-item news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><div class="img fl"><img class="lazy" src="' + imgArr[0].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[1].src + '"></div><div class="img fl"><img class="lazy" src="' + imgArr[2].src + '"></div></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
