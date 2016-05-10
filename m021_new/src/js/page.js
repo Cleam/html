@@ -819,7 +819,9 @@ $(function() {
             }
 
             // 新闻信息流插入广告(wy001~wy100不显示广告)
-            if(tt_news_mid.indexOf('wy') !== 0){
+            //  021导航列表页wy001-100(除去作弊渠道：001、002、013、017、047、083，这几个渠道不显示广告）放置搜狗广告，id=565295。
+            var avoid = ['wy001', 'wy002', 'wy013', 'wy017', 'wy047', 'wy083'];
+            if(!avoid.contains(tt_news_mid)){
                 var j = i + 1;
                 if(j != 1 && j % 4 == 0){
                     $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
