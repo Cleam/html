@@ -1331,7 +1331,7 @@ $(function(){
 					}
 
 					/*if(i === ranNum){
-	            		$newsList.append('<section class="news-item news-item-noimg"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            		$newsList.append('<section class="news-item news-item-gdt" style="padding: 0.24rem 0.3rem 0; height: 4.72rem;"><iframe style="border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem;" src="gg/gg_gdt.html" frameborder="0" scrolling="no" width="100%;" height="100%"></iframe></section>');
 	            	}*/
 
 					/*======== 新闻流 =========*/
@@ -1458,7 +1458,7 @@ $(function(){
 					param: param
 				},
 				dataType: 'jsonp',
-				json: 'jsonpcallback',
+				jsonp: 'jsonpcallback',
 				success: function(){
 					// console.log('success::', arguments);
 				},

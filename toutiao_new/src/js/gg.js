@@ -436,7 +436,12 @@ GLOBAL.Et.ggData = {
 		"guguniao":{"baidu":{"li":"u2630978"}},
 		"zuoankeji":{"baidu":{"li":"u2633133"}},
 		"jiuyi160":{"baidu":{"li":"u2634489"}},
-		"qiaohuiwangluo":{"baidu":{"li":"u2634679"}}
+		"qiaohuiwangluo":{"baidu":{"li":"u2634679"}},
+		"mzol":{"baidu":{"li":"u2635722"}},
+		"chubaophone":{"baidu":{"li":"u2636092"}},
+		"yijianqinglidashi":{"baidu":{"li":"u2635951"}},
+		"m021_hyx001":{"baidu":{"li":"u2636107"}},
+		"m021_hyx002":{"baidu":{"li":"u2636117"}}
 	}
 };
 
