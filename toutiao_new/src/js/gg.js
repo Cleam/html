@@ -441,7 +441,8 @@ GLOBAL.Et.ggData = {
 		"chubaophone":{"baidu":{"li":"u2636092"}},
 		"yijianqinglidashi":{"baidu":{"li":"u2635951"}},
 		"m021_hyx001":{"baidu":{"li":"u2636107"}},
-		"m021_hyx002":{"baidu":{"li":"u2636117"}}
+		"m021_hyx002":{"baidu":{"li":"u2636117"}},
+		"laokgame":{"baidu":{"li":"u2637445"}}
 	}
 };
 
