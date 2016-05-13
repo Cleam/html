@@ -16,12 +16,21 @@
 		for (var i = 0; i < links.length; i++) {
 			$('.J-qid-' + links[i]).attr('href', urls[i]);
 		}
-	} else if(tt_news_mid === 'chenz'){	// chenz渠道
+	} else if(tt_news_mid === 'chenz' || tt_news_mid === 'wy027'){	// chenz渠道
 		links = ['baidu'];
 	 	urls = [
 	 		'https://m.baidu.com/?from=1017246a'
 	 	];
 		$('input[name=from]').val('1017246a');
+		for (var i = 0; i < links.length; i++) {
+			$('.J-qid-' + links[i]).attr('href', urls[i]);
+		}
+	} else if(tt_news_mid === 'mbzm'){
+		links = ['baidu'];
+	 	urls = [
+	 		'https://m.baidu.com/?from=1012150b'
+	 	];
+		$('input[name=from]').val('1012150b');
 		for (var i = 0; i < links.length; i++) {
 			$('.J-qid-' + links[i]).attr('href', urls[i]);
 		}
