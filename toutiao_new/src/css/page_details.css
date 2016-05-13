@@ -4,13 +4,23 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-05-12
  */
-body{padding-top: 0;}
+body{padding-top: 0; background-color: #F3F3F3; color: #333; font-family: "Microsoft Yahei";}
+
+.article{background-color: #fff; padding: 0.3rem; text-align: justify;}
+.article-title{margin-bottom: 0.2rem;}
+.article-title h1{font-size: 0.4rem; line-height: 1.5em; color: #000;}
+.article-src-time{border-bottom: 1px solid #e5e5e5; font-size: 0.2rem; color: #999999; padding-bottom: 0.2rem; margin-bottom: 0.3rem;}
+.article-content .txt{font-size: 0.32rem; line-height: 1.8em; margin-bottom: 0.3rem; text-indent: 2em;}
+.article-content .img{margin-bottom: 0.3rem;}
+.article-content .img img{display: block; width: 100%;}
+.article-content .img p{font-size: 0.32rem; line-height: 2em;}
 
 
 
 
-
-
+/* 评论 */
+#SOHUCS{background-color: #fff !important;}
+#SOHUCS>section{background-color: #fff !important;}
 
 
 

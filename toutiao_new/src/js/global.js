@@ -252,8 +252,8 @@ GLOBAL.Util = {
      * @return {json} {w: xxx, h: xxx}
      */
     getPixel: function(){
-        var height = window.screen.width;
-        var width = window.screen.height;
+        var width = window.screen.width;
+        var height = window.screen.height;
         return {w: width, h: height};
     },
 
