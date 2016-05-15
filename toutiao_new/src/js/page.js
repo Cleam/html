@@ -670,7 +670,8 @@ $(function(){
 	                tagStr = '';
 	            
 	            if(isadv == '1'){
-	            	tagStr = '<i class="promote">推广</i>';
+	            	tagStr = '&nbsp;';
+	            	// tagStr = '<i class="promote">推广</i>';
 	            	advStr = 'class="J-promote-news" data-advid="' + advId + '"';
 	            	// 调用show统计接口
 	            	scope.sendAdShowLog(advId, url);
@@ -1276,7 +1277,8 @@ $(function(){
 	                tagStr = '';
 
 	            if(isadv == '1'){
-	            	tagStr = '<i class="promote">推广</i>';
+	            	tagStr = '&nbsp;';
+	            	// tagStr = '<i class="promote">推广</i>';
 	                advStr = 'class="J-promote-news" data-advid="' + advId + '"';
 	            	// 调用show统计接口
 	            	scope.sendAdShowLog(advId, url);
