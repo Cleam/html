@@ -63,8 +63,14 @@ function bdSearch(json){
 $(function() {
     FastClick.attach(document.body);
 
+        // refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',
+        // pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',
     var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
         pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
+        clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',     // 推广信息show统计接口
+        showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',     // 推广信息show统计接口
+        // clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',     // 推广信息show统计接口
+        // showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',     // 推广信息show统计接口
         uidUrl = 'http://021tj.dfshurufa.com/m021log/getuid',
         tjUrl = 'http://021tj.dfshurufa.com/m021log/record',
         tjPvUrl = 'http://021tj.dfshurufa.com/m021log/active',
@@ -227,12 +233,36 @@ $(function() {
         });
     })();
 
+    /* 夺宝大咖特殊处理 */
+    (function(){
+        var $osSpecial = $('#J_os_special'),
+            ost = osType.toLowerCase();
+        if(ost.indexOf('ios') < 0){
+            $osSpecial.attr({
+                'href': 'http://sina.cn/',
+                'data-tjname': 'hotsite,xinlang'
+            });
+            $osSpecial.append('<img src="img/i_sina.png" alt=""><span>新浪</span>');
+        } else {
+            $osSpecial.attr({
+                'href': 'http://m.duobaodaka.com/h5/static/page12/ch/dftt01',
+                'data-tjname': 'hotsite,duobaodaka'
+            });
+            $osSpecial.append('<img src="img/i_car3.png" alt=""><span>夺宝大咖</span>');
+            // show日志
+            sendAdShowLog('m021icon100000001', 'http://m.duobaodaka.com/h5/static/page12/ch/dftt01');
+            $osSpecial.on('click', function(){
+                sendPromoteNewslog('m021icon100000001', 'http://m.duobaodaka.com/h5/static/page12/ch/dftt01');
+            });
+        }
+    })();
+
     init();
 
     function init(){
         $('.J-has-channel').each(function(i, ele){
             var $this = $(ele);
-            $this.attr('href', $this.attr('href') + '?qid=' +tt_news_qid);
+            $this.attr('href', $this.attr('href') + '?qid=' + tt_news_qid);
         });
         readUrl = wsCache.get('read_url_all');
         if(!readUrl){readUrl = '';}
@@ -346,9 +376,113 @@ $(function() {
             setCacheReadUrl(url, $this.data('type'), $this.data('subtype'));
         });
 
+        // 推广新闻点击委托事件
+        $ttNewsList.on('click', '.J-promote-news', function(){
+            var $this = $(this)
+            sendPromoteNewslog($this.data('advid'), $this.attr('href'));
+        });
+
         // 添加统计
         tongJi();
 
+    }
+
+    /**
+     * 发送推广新闻的点击日志
+     * @param  {[type]} advUrl url
+     * @param  {[type]} advId  id
+     * @return {[type]}        [description]
+     */
+    function sendPromoteNewslog(advId, advUrl){
+        var pixel = getPixel();
+        $.ajax({
+            url: clickAdLogUrl,
+            dataType: 'jsonp',
+            data: {
+                "qid": tt_news_qid || 'null',
+                "uid": userId || 'null',
+                "loginid": 'null',
+                "softtype": 'news',
+                "softname": 'eastday_wapnews',
+                "newstype": 'ad',
+                "from": 'null',
+                "to": advUrl || 'null',
+                "os_type": osType || 'null',
+                "browser_type": browserType || 'null',
+                "pixel": pixel.w + '*' + pixel.h,
+                "ime": "null",
+                "refer": getReferrer() || 'null',
+                "adv": advId || 'null'
+            },
+            jsonp : 'jsonpcallback',
+            success : function(msg) {}
+        });
+    }
+
+    /**
+     * 发送推广自然（show）的统计信息
+     * @param  {[type]} advId  广告ID
+     * @param  {[type]} advUrl 广告URL
+     * @return {[type]}        [description]
+     */
+    function sendAdShowLog(advId, advUrl){
+        var pixel = getPixel();
+        $.ajax({
+            url: showAdLogUrl,
+            dataType: 'jsonp',
+            data: {
+                "qid": tt_news_qid || 'null',
+                "uid": userId || 'null',
+                "loginid": 'null',
+                "softtype": 'news',
+                "softname": 'eastday_wapnews',
+                "newstype": 'ad',
+                "from": 'null',
+                "advurl": advUrl || 'null',
+                "os_type": osType || 'null',
+                "browser_type": browserType || 'null',
+                "fr_url": "null",
+                "pixel": pixel.w + '*' + pixel.h,
+                "ime": "null",
+                "adv": advId || 'null'
+            },
+            jsonp : 'jsonpcallback',
+            success : function(msg) {}
+        });
+    }
+
+    /**
+     * 获取当前手机屏幕分辨率的高宽
+     * @return {json} {w: xxx, h: xxx}
+     */
+    function getPixel(){
+        var width = window.screen.width;
+        var height = window.screen.height;
+        return {w: width, h: height};
+    }
+
+    /**
+     * Javascript获取页面来源(referer)
+     * @from http://www.au92.com/archives/javascript-get-referer.html
+     * @return {[type]} [description]
+     */
+    function getReferrer() {
+        var referrer = '';
+        try {
+            referrer = window.top.document.referrer;
+        } catch(e) {
+            if(window.parent) {
+                try {
+                    referrer = window.parent.document.referrer;
+                } catch(e2) {
+                    referrer = '';
+                }
+            }
+        }
+        if(referrer === '') {
+            referrer = document.referrer;
+        }
+        return referrer;
     }
 
     /**
@@ -702,6 +836,7 @@ $(function() {
                 type: newsType,
                 endkey: '',
                 domain: '021',
+                // os: osType,
                 recgid: userId, // 用户ID
                 picnewsnum: 1,
                 qid: tt_news_qid,
@@ -749,6 +884,7 @@ $(function() {
                 newsnum: 20,
                 isnew: 1,
                 domain: '021',
+                // os: osType,
                 readhistory: readUrl,
                 idx: idx,
                 recgid: userId, // 用户ID
@@ -796,7 +932,11 @@ $(function() {
                 imgArr = item.miniimg,
                 recommendtype = item.recommendtype ? item.recommendtype : '-1',
                 hotnews = item.hotnews,
-                videonews = item.videonews,
+                ispicnews = item.ispicnews, // 大图新闻(1)、小图新闻(0)、无图新闻(-1)
+                videonews = item.videonews, // 视频新闻
+                videoList = item.videolist, // 视频列表
+                isadv = item.isadv || '',
+                advId = item.adv_id || '',
                 type = item.type,
                 subtype = item.subtype,
                 imgLen = imgArr.length,
@@ -804,8 +944,13 @@ $(function() {
                 video = Number(item.isvideo),   // 视频
                 rec = Number(item.isrecom),     // 推荐
                 nuanwen = Number(item.isnxw),   // 暖文
+                advStr = '',
                 tagStr = '';
-            if(hot){
+            if(isadv == '1'){
+                tagStr = '&nbsp;';
+                // tagStr = '<i class="promote">推广</i>';
+                advStr = 'class="J-promote-news" data-advid="' + advId + '"';
+            } else if(hot){
                 tagStr = '<i class="hot">热门</i>';
                 if(video){
                     tagStr += '<i class="video">视频</i>';
@@ -821,24 +966,28 @@ $(function() {
             // 新闻信息流插入广告(wy001~wy100不显示广告)
             //  021导航列表页wy001-100(除去作弊渠道：001、002、013、017、047、083，这几个渠道不显示广告）放置搜狗广告，id=565295。
             var avoid = ['wy001', 'wy002', 'wy013', 'wy017', 'wy047', 'wy083'];
-            if(!avoid.contains(tt_news_mid)){
+            if(!tt_news_mid || !avoid.contains(tt_news_mid)){
                 var j = i + 1;
-                if(j != 1 && j % 4 == 0){
+                if(j != 1 && j % 6 == 0){
                     $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
                 }
             }
-
             // 添加新闻信息流
-            if(imgLen >= 3 && videonews !== '1'){
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></li>');
-            } else if(videonews !== '1') {
-                if(imgArr.length == 0){
-                    console.log('item::', item);
-                }
-                var imgSrc = ((imgArr.length > 0 && imgArr[0].src) ? imgArr[0].src : ''),
-                    imgAlt = ((imgArr.length > 0 && imgArr[0].alt) ? imgArr[0].alt : '');
+            if(videonews == '1'){
 
-                $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="' + imgAlt + '"></div></div></a></li> ');
+            } else if(ispicnews == '1'){
+                // imgArr = item.lbimg;
+                // $ttNewsList.append('<section class="news-item news-item-s3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+            } else if(ispicnews == '-1'){
+                // $ttNewsList.append('<section class="news-item news-item-noimg"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+            } else if(ispicnews == '0'){
+                if(imgLen >= 3){
+                    $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt="' + imgArr[0].alt + '"><img class="lazy fl" src="' + imgArr[1].src + '" alt="' + imgArr[1].alt + '"><img class="lazy fl" src="' + imgArr[2].src + '" alt="' + imgArr[2].alt + '"></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></li>');
+                } else {
+                    var imgSrc = ((imgArr.length > 0 && imgArr[0].src) ? imgArr[0].src : ''),
+                        imgAlt = ((imgArr.length > 0 && imgArr[0].alt) ? imgArr[0].alt : '');
+                    $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="' + imgAlt + '"></div></div></a></li> ');
+                }
             }
         }
         $.cookie('idx_' + newsType, idx + len, { expires: 0.334, path: '/' });
