@@ -248,7 +248,7 @@ $(function() {
                 'href': 'http://m.duobaodaka.com/h5/static/page12/ch/dftt01',
                 'data-tjname': 'hotsite,duobaodaka'
             });
-            $osSpecial.append('<img src="img/i_car3.png" alt=""><span>夺宝大咖</span>');
+            $osSpecial.append('<img src="img/i_car3.png" alt=""><span>一元买车</span>');
             // show日志
             sendAdShowLog('m021icon100000001', 'http://m.duobaodaka.com/h5/static/page12/ch/dftt01');
             $osSpecial.on('click', function(){
