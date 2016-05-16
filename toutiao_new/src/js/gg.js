@@ -443,7 +443,6 @@ GLOBAL.Et.ggData = {
 		"m021_hyx001":{"baidu":{"li":"u2636107"}},
 		"m021_hyx002":{"baidu":{"li":"u2636117"}},
 		"laokgame":{"baidu":{"li":"u2637445"}},
-
 		"m021_hyx003":{"baidu":{"li":"u2636653"}},
 		"m021_hyx004":{"baidu":{"li":"u2636706"}},
 		"m021_hyx005":{"baidu":{"li":"u2636729"}},
@@ -452,7 +451,11 @@ GLOBAL.Et.ggData = {
 		"chinatelnj":{"baidu":{"li":"u2636822"}},
 		"511dianying":{"baidu":{"li":"u2636922"}},
 		"xiaozikeji":{"baidu":{"li":"u2637023"}},
-		"youxinh5":{"baidu":{"li":"u2637042"}}
+		"youxinh5":{"baidu":{"li":"u2637042"}},
+		"zhuanyidou":{"baidu":{"li":"u2640987"}},
+		"taosuoping":{"baidu":{"li":"u2641079"}},
+		"operashangdian":{"baidu":{"li":"u2627154"}},
+		"operashangdianmm":{"baidu":{"li":"u2627179"}}
 	}
 };
 

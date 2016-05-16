@@ -2,7 +2,8 @@ $(function(){
 
 	var uidUrl = 'http://123.59.60.170/getwapdata/getuid',			// 获取uid
 		logUrl = 'http://123.59.60.170/getwapdata/data',			// 日志（操作统计）
-		videoLogUrl = 'http://123.59.60.170/getwapdata/videoact';		// 视频统计接口
+		videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',	// 视频统计接口
+		videoUrl = 'http://123.59.62.164/pjson/morevideos';			// 视频信息流接口
 
 	function Video(){
 		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';	// 渠道ID
@@ -28,51 +29,41 @@ $(function(){
 		}
 		/* 视频事件监听 */
 		scope.addVideoListener($('#J_video'));
+		/* 获取视频信息流 */
+		scope.getVideoList();
 
 		/* 发送日志信息 */
 		scope.addLog();
 	};
 
-	Video.prototype._setQid = function(qid) {
-		if(qid){
-			Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
-		}
-	};
-
-	Video.prototype._getQid = function(qid) {
-		var qid = Cookies.get('qid');
-		return qid ? qid : '';
-	};
-
-	Video.prototype._setUid = function(qid) {
+	Video.prototype.getVideoList = function(callback) {
+		console.log('GLOBAL.Util.getUrlNoParams()::', GLOBAL.Util.getUrlNoParams());
 		var scope = this;
-        $.ajax({
-            url: uidUrl,
-            dataType: 'jsonp',
+		$.ajax({
+			url: videoUrl,
             data: {
-                softtype: 'news',
-                softname: 'eastday_wapnews',
+                type: $('#J_video').attr('data-type'),
+				num: '6',
+				url: GLOBAL.Util.getUrlNoParams()
             },
-            jsonp: 'jsonpcallback',
-            success: function(msg) {
-                try {
-                    scope.userId = msg.uid;
-                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
-                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
-                } catch(e) {
-                    console.error(e);
-                }
+            dataType: 'jsonp',
+            jsonp: "jsonpcallback",
+            timeout: 8000,
+            beforeSend: function(){},
+            success: function(data){
+                scope.generateVideoList(data);
             },
             error: function(e){
             	console.error(e);
+            },
+            complete: function(){
+                callback && callback();
             }
-        });
+		});
 	};
 
-	Video.prototype._getUid = function(qid) {
-		var uid = Cookies.get('user_id');
-    	// var uid = wsCache.get('user_id');
-        return uid ? uid : '';
+	Video.prototype.generateVideoList = function(data) {
+		console.log('data::', data);
 	};
 
 	/**
@@ -156,7 +147,9 @@ $(function(){
 			}
 		});
     };
-
+    /**
+     * 添加日志
+     */
     Video.prototype.addLog = function() {
     	var pixel = GLOBAL.Util.getPixel(),
     		scope = this;
@@ -193,6 +186,48 @@ $(function(){
 			error: function(){console.error(arguments);}
 		});
     };
+
+	Video.prototype._setQid = function(qid) {
+		if(qid){
+			Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
+		}
+	};
+
+	Video.prototype._getQid = function(qid) {
+		var qid = Cookies.get('qid');
+		return qid ? qid : '';
+	};
+
+	Video.prototype._setUid = function(qid) {
+		var scope = this;
+        $.ajax({
+            url: uidUrl,
+            dataType: 'jsonp',
+            data: {
+                softtype: 'news',
+                softname: 'eastday_wapnews',
+            },
+            jsonp: 'jsonpcallback',
+            success: function(msg) {
+                try {
+                    scope.userId = msg.uid;
+                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
+                } catch(e) {
+                    console.error(e);
+                }
+            },
+            error: function(e){
+            	console.error(e);
+            }
+        });
+	};
+
+	Video.prototype._getUid = function(qid) {
+		var uid = Cookies.get('user_id');
+    	// var uid = wsCache.get('user_id');
+        return uid ? uid : '';
+	};
 
     new Video();
 
