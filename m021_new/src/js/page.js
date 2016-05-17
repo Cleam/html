@@ -836,7 +836,7 @@ $(function() {
                 type: newsType,
                 endkey: '',
                 domain: '021',
-                // os: osType,
+                os: osType,
                 recgid: userId, // 用户ID
                 picnewsnum: 1,
                 qid: tt_news_qid,
@@ -884,7 +884,7 @@ $(function() {
                 newsnum: 20,
                 isnew: 1,
                 domain: '021',
-                // os: osType,
+                os: osType,
                 readhistory: readUrl,
                 idx: idx,
                 recgid: userId, // 用户ID
