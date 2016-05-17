@@ -1,8 +1,8 @@
 var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
-    cleanCSS = require('gulp-clean-css'),
+    cleanCSS = require('gulp-clean-css'),   // css 压缩
     jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify'),    // js 压缩
     htmlmin = require('gulp-htmlmin'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
@@ -83,6 +83,19 @@ gulp.task('css-page', function () {
         .pipe(gulp.dest(cssDst))
         .pipe(livereload());
 });
+// video css
+gulp.task('css-video', function () {
+    var cssSrc = [
+            './src/css/video/*.css',
+        ],
+        cssDst = './dist/css/video/';
+    return gulp.src(cssSrc)
+        .pipe(cleanCSS())
+        // .pipe(rev())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+// 首页css
 gulp.task('css-index', function () {
     var cssSrc = [
             './src/css/page.css'
@@ -155,6 +168,19 @@ gulp.task('js-page', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
+// video
+gulp.task('js-video', function() {
+    var jsSrc = [
+            './src/js/video/*.js'
+        ],
+        jsDst = './dist/js/video/';
+    return gulp.src(jsSrc)
+        .pipe(uglify())
+        // .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+// 广告
 gulp.task('js-gg', function() {
     var jsSrc = [
             './src/js/gg.js'
@@ -167,6 +193,7 @@ gulp.task('js-gg', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
+// 首页
 gulp.task('js-index', function() {
     var jsSrc = [
             './src/js/page.js'

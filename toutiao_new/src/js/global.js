@@ -53,7 +53,8 @@ GLOBAL.Util = {
      */
     dislocateArr: function(arr) {
         return arr.sort(function() {
-            return 0.5 - Math.random(); });
+            return 0.5 - Math.random(); 
+        });
     },
 
     /**
@@ -146,6 +147,52 @@ GLOBAL.Util = {
             str = str.replace(/-/g, splitStr);
         }
         return str;
+    },
+
+    /**
+     * 毫秒转成时间字符串
+     * @param  {Number}  seconds 毫秒[必需]
+     * @param  {Boolean} hasHour 是否需要区分小时[可选]
+     * @return {String}          hasHour[true]: hh:mm:ss；否则[默认]：mm:ss。
+     */
+    msToTimestr: function(ts, hasHour){
+       var seconds = (ts ? Number(ts) / 1000 : 0);
+       return GLOBAL.Util.secondsToTimestr(seconds, hasHour);
+    },
+
+    /**
+     * 秒转成时间字符串
+     * @param  {Number}  seconds 秒[必需]
+     * @param  {Boolean} hasHour 是否需要区分小时[可选]
+     * @return {String}          hasHour[true]: hh:mm:ss；否则[默认]：mm:ss。
+     */
+    secondsToTimestr: function(seconds, hasHour){
+        var hh, mm, ss;
+        // 传入的时间为空或小于0
+        if(seconds == null || seconds < 0 ){
+            return;
+        }
+        seconds = Math.ceil(seconds);
+        // 得到小时
+        hh = seconds / 3600 | 0;
+        seconds = parseInt(seconds) - hh * 3600;
+        if(parseInt(hh) < 10){
+            hh = '0' + hh;
+        }
+        // 得到分
+        mm = seconds / 60 | 0;
+        if(parseInt(mm) < 10){
+            mm = '0' + mm;
+        }
+        // 得到秒
+        ss = parseInt(seconds) - mm * 60;
+        if(ss < 10){
+            ss = '0' + ss;
+        }
+        if(hasHour){
+            return hh + ':' + mm + ':' + ss;
+        }
+        return mm + ':' + ss;
     },
 
     /**
@@ -382,10 +429,10 @@ GLOBAL.Cookie = {
      * 设置cookie
      * @param name 名称
      * @param value 值
-     * @param expires 有效时间（单位：小时）（可选）
+     * @param expires 有效时间（单位：小时）（可选） 默认：24h
      */
     set: function(name, value, expires){
-        var expTimes = expires * 60 * 60 * 1000; // 毫秒
+        var expTimes = expires ? (Number(expires) * 60 * 60 * 1000) : (24 * 60 * 60 * 1000); // 毫秒
         var expDate = new Date();
         expDate.setTime(expDate.getTime() + expTimes);
         var expString = expires ? '; expires=' + expDate.toUTCString() : '';

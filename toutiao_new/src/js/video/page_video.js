@@ -6,7 +6,7 @@ $(function(){
 		videoUrl = 'http://123.59.62.164/pjson/morevideos';			// 视频信息流接口
 
 	function Video(){
-		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';	// 渠道ID
+		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || '';	// 渠道ID
 		this.userId = '';
 		this.osType = GLOBAL.Util.getOsType();
 		this.browserType = GLOBAL.Util.getBrowserType();
@@ -37,13 +37,13 @@ $(function(){
 	};
 
 	Video.prototype.getVideoList = function(callback) {
-		console.log('GLOBAL.Util.getUrlNoParams()::', GLOBAL.Util.getUrlNoParams());
+		// console.log('GLOBAL.Util.getUrlNoParams()::', GLOBAL.Util.getUrlNoParams());
 		var scope = this;
 		$.ajax({
 			url: videoUrl,
             data: {
                 type: $('#J_video').attr('data-type'),
-				num: '6',
+				num: '10',
 				url: GLOBAL.Util.getUrlNoParams()
             },
             dataType: 'jsonp',
@@ -62,8 +62,38 @@ $(function(){
 		});
 	};
 
+	/**
+	 * 生成列表
+	 * @param  {[type]} data [description]
+	 * @return {[type]}      [description]
+	 */
 	Video.prototype.generateVideoList = function(data) {
-		console.log('data::', data);
+		// console.log('data::', data);
+		var scope = this,
+			d = data.data ? data.data : null,
+			len = d ? d.length : 0,
+			$relared = $('#J_related'),
+			$listWrap = $('<div class="related-cnt"></div>');
+		if(len > 0){
+			$relared.append('<div class="related-tit"><h2>相关视频</h2></div>');
+			for (var i = 0; i < len; i++) {
+				var item = d[i],
+					itemImg43 = item.miniimg_01,	// 4:3
+					itemImg = itemImg43[0],
+					idx = i + 1,
+					fr = GLOBAL.Util.getUrlNoParams(),
+					href = item['url'] + '?qid=' + scope.qid + '&idx=' + idx + '&fr=' + fr,
+					type = item['type'],
+					topic = item['topic'],
+					source = item['source'],
+					imgSrc = itemImg['src'],
+					imgWidth = itemImg['imgwidth'],
+					imgHeight = itemImg['imgheight'],
+					duration = GLOBAL.Util.msToTimestr(item['videoalltime']);
+				$listWrap.append('<section class="news-item news-item-video"><a data-type="' + type + '" data-subtype="" href="' + href + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"><span class="duration">' + duration + '</span></div></div></a></section>');
+			}
+		}
+		$listWrap.appendTo($relared);
 	};
 
 	/**
@@ -71,6 +101,7 @@ $(function(){
      * @param  {String} param 必需 - 参数(qid,uid,osType,browserType,url,duration,playingTime,currentTime,action)
      */
     Video.prototype.sendVideoLog = function(param){
+    	console.log('param::', param);
     	if(!param){
     		return;
     	}
@@ -86,7 +117,6 @@ $(function(){
 		});
 	}
 
-
 	/**
      * video事件监听
      * @param {Object} $video video对象
@@ -100,7 +130,7 @@ $(function(){
 				var $video = $(event.target),
 					video = $video[0],
 					src = video.currentSrc,
-					duration = Math.floor(video.duration * 1000),
+					duration = video.duration ? Math.floor(video.duration * 1000) : $video.attr('data-duration'),
 					idx = $video.attr('data-idx'),
 					videoType = $video.attr('data-type'),
 					playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
@@ -119,7 +149,7 @@ $(function(){
 				var $video = $(event.target),
 					video = $video[0],
 					src = video.currentSrc,
-					duration = Math.floor(video.duration * 1000),
+					duration = video.duration ? Math.floor(video.duration * 1000) : $video.attr('data-duration'),
 					idx = $video.attr('data-idx'),
 					videoType = $video.attr('data-type'),
 					playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
@@ -135,9 +165,17 @@ $(function(){
 		$video.on('timeupdate', function(event){
 			try {
 				var $video = $(event.target),
+					video = $video[0],
+					duration = video.duration,
+					currentTime = video.currentTime,
 		      		updateTime = parseInt($video.attr('data-updateTime'), 10) || (+new Date()),
 		      		playingTime = parseInt($video.attr('data-playingTime'), 10) || 0,
 		      		now = +new Date();
+				// console.log('duration::', video.duration);
+				// console.log('currentTime::', video.currentTime);
+				if(currentTime >= duration){
+					console.log('$video::', $video);
+				}
 	  			// 播放时间
 	  			playingTime = playingTime + now - updateTime;
 	  			$video.attr('data-playingTime', playingTime);
@@ -168,9 +206,9 @@ $(function(){
 				browser_type: scope.browserType || 'null',		// 客户端浏览器类别
 				pixel: pixel.w + '*' + pixel.h,		// 客户端分辨率
 				fr_url: GLOBAL.Util.getReferrer() || 'null',	// 浏览器的refer属性
-				loginid: 'null',			// App端分享新闻时url上追加的ttaccid
+				loginid: 'null',				// App端分享新闻时url上追加的ttaccid
 				ime: 'null',					// App端用户imei号
-				idx: 'null',					// 当前新闻的idx属性
+				idx: GLOBAL.Util.getQueryString('idx'),					// 当前新闻的idx属性
 				ishot: 'null',					// 当前新闻是不是热点新闻
 				ver: 'null',					// App版本（1.2.9）url上追加的ver
 				appqid: 'null',					// App渠道号url上追加的appqid
