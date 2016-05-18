@@ -1,9 +1,11 @@
 $(function(){
 
-	var uidUrl = 'http://123.59.60.170/getwapdata/getuid',			// 获取uid
-		logUrl = 'http://123.59.60.170/getwapdata/data',			// 日志（操作统计）
-		videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',	// 视频统计接口
-		videoUrl = 'http://123.59.62.164/pjson/morevideos';			// 视频信息流接口
+	var uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
+		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
+		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',	// 视频统计接口
+		videoUrl = 'http://toutiao.eastday.com/pjson/morevideos',			// 视频信息流接口
+		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
+		onlineHz = 10;	// 在线日志记录频率(单位：秒；10s一次)
 
 	function Video(){
 		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || '';	// 渠道ID
@@ -33,7 +35,13 @@ $(function(){
 		scope.getVideoList();
 
 		/* 发送日志信息 */
-		scope.addLog();
+		scope._addLog();
+
+		/* 在线日志 */
+        scope._addOnlineLog();
+        setInterval(function(){
+        	scope._addOnlineLog();
+        }, onlineHz * 1000);
 	};
 
 	Video.prototype.getVideoList = function(callback) {
@@ -44,6 +52,8 @@ $(function(){
             data: {
                 type: $('#J_video').attr('data-type'),
 				num: '10',
+				qid: scope.qid,
+				recgid: scope.userId,
 				url: GLOBAL.Util.getUrlNoParams()
             },
             dataType: 'jsonp',
@@ -72,10 +82,10 @@ $(function(){
 		var scope = this,
 			d = data.data ? data.data : null,
 			len = d ? d.length : 0,
-			$relared = $('#J_related'),
+			$related = $('#J_related'),
 			$listWrap = $('<div class="related-cnt"></div>');
 		if(len > 0){
-			$relared.append('<div class="related-tit"><h2>相关视频</h2></div>');
+			$related.append('<div class="related-tit"><h2>相关视频</h2></div>');
 			for (var i = 0; i < len; i++) {
 				var item = d[i],
 					itemImg43 = item.miniimg_01,	// 4:3
@@ -93,7 +103,7 @@ $(function(){
 				$listWrap.append('<section class="news-item news-item-video"><a data-type="' + type + '" data-subtype="" href="' + href + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"><span class="duration">' + duration + '</span></div></div></a></section>');
 			}
 		}
-		$listWrap.appendTo($relared);
+		$listWrap.appendTo($related);
 	};
 
 	/**
@@ -101,7 +111,7 @@ $(function(){
      * @param  {String} param 必需 - 参数(qid,uid,osType,browserType,url,duration,playingTime,currentTime,action)
      */
     Video.prototype.sendVideoLog = function(param){
-    	console.log('param::', param);
+    	// console.log('param::', param);
     	if(!param){
     		return;
     	}
@@ -171,11 +181,9 @@ $(function(){
 		      		updateTime = parseInt($video.attr('data-updateTime'), 10) || (+new Date()),
 		      		playingTime = parseInt($video.attr('data-playingTime'), 10) || 0,
 		      		now = +new Date();
-				// console.log('duration::', video.duration);
-				// console.log('currentTime::', video.currentTime);
-				if(currentTime >= duration){
+				/*if(currentTime >= duration){
 					console.log('$video::', $video);
-				}
+				}*/
 	  			// 播放时间
 	  			playingTime = playingTime + now - updateTime;
 	  			$video.attr('data-playingTime', playingTime);
@@ -188,7 +196,7 @@ $(function(){
     /**
      * 添加日志
      */
-    Video.prototype.addLog = function() {
+    Video.prototype._addLog = function() {
     	var pixel = GLOBAL.Util.getPixel(),
     		scope = this;
     	// 发送操作信息
@@ -199,7 +207,7 @@ $(function(){
 				uid: scope.userId || 'null',						// 从服务器端获取的uid
 				softtype: 'news',					// 软件type（当前默认news）
 				softname: 'eastday_wapnews',		// 软件名（当前默认eastday_wapnews）
-				newstype: 'null',			// 当前新闻类别
+				newstype: $('#J_video').attr('data-type') || 'null',			// 当前新闻类别
 				from: GLOBAL.Util.getQueryString('fr') || 'null',	// url上追加的fr字段
 				to: GLOBAL.Util.getUrlNoParams() || 'null',		// 当前页面
 				os_type: scope.osType || 'null',				// 客户端操作系统
@@ -224,6 +232,22 @@ $(function(){
 			error: function(){console.error(arguments);}
 		});
     };
+
+    /**
+     * 收集在线日志
+     */
+    Video.prototype._addOnlineLog = function(){
+    	var scope = this,
+    		infostr = GLOBAL.Util.getUrlNoParams() + '\t' + scope.userId + '\t' + scope.qid + '\tnull\tnull\tnull\t' + ($('#J_video').attr('data-type') || 'null') + '\t' + onlineHz + '\tnull\tnull\t' + scope.osType + '\tnull';
+    	$.ajax({
+	    	url : onlineUrl,
+	    	data:{
+	    		param: encodeURI(infostr)
+	    	},
+	    	dataType : 'jsonp',
+	    	jsonp : 'jsonpcallback'
+	    });
+    },
 
 	Video.prototype._setQid = function(qid) {
 		if(qid){
