@@ -62,7 +62,7 @@ GLOBAL.Et.ggData = {
 		"weimibrowser": {"sogou": {"li": "562460"}},
 		"wangyi": {"baidu": {"li": "u2542920"}},
 		"vivobrowser": {
-			"baidu": {"li": "u2407603"},
+			"baidu": {"li": "u2380766"},
 			"sogou": {"li": "524815"}
 		},
 		"v2345com": {"baidu": {"li": "u2482184"}},
@@ -95,7 +95,7 @@ GLOBAL.Et.ggData = {
 		"phone001": {"baidu": {"li": "u2602491"}},
 		"paoba": {"baidu": {"li": "u2576004"}},
 		"oppobrowser": {
-			"baidu": {"li": "u2323755"},
+			"baidu": {"li": "u2380766"},
 			"sogou": {"li": "524815"}
 		},
 		"operabrower": {"baidu": {"li": "u2455281"}},
@@ -367,7 +367,10 @@ GLOBAL.Et.ggData = {
 		"dianfuyule": {"baidu": {"li": "u2547713"}},
 		"dfweather": {"baidu": {"li": "u2525700"}},
 		"cvbrowser": {"baidu": {"li": "u2327364"}},
-		"coolpadbrowser": {"baidu": {"li": "u2407595"}},
+		"coolpadbrowser": {
+			"baidu": {"li": "u2380766"},
+			"sogou": {"li": "524815"}
+		},
 		"chenmeng": {"baidu": {"li": "u2562486"}},
 		"chaojiwifi": {"baidu": {"li": "u2361491"}},
 		"chamusdk": {"baidu": {"li": "u2597498"}},
@@ -400,7 +403,10 @@ GLOBAL.Et.ggData = {
 		"28app": {"sogou": {"li": "562456"}},
 		"2345yuki": {"baidu": {"li": "u2272378"}},
 		"2345daohang": {"baidu": {"li": "u2272381"}},
-		"10086wy": {"baidu": {"li": "u2426684"}},
+		"10086wy": {
+			"baidu": {"li": "u2380766"},
+			"sogou": {"li": "524815"}
+		},
 		"021dh": {"baidu": {"li": "u2530657"}},
 		"8684": {"baidu": {"li": "u2356214"}},
 		"2345m": {"baidu": {"li": "u2607885"}},
@@ -455,7 +461,8 @@ GLOBAL.Et.ggData = {
 		"zhuanyidou":{"baidu":{"li":"u2640987"}},
 		"taosuoping":{"baidu":{"li":"u2641079"}},
 		"operashangdian":{"baidu":{"li":"u2627154"}},
-		"operashangdianmm":{"baidu":{"li":"u2627179"}}
+		"operashangdianmm":{"baidu":{"li":"u2627179"}},
+		"zhanglida":{"baidu":{"li":"u2642800"}}
 	}
 };
 
