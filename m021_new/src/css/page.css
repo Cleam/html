@@ -13,7 +13,7 @@ a:active{background-color: #e5e5e5 !important;}
 .top{width: 100%; padding-left: 0.3rem; padding-right: 0.3rem; background-color: #52ace5; color: #fff; padding-bottom: 0.3rem;}
 .top>.header{width: 100%; height: 1.1rem; padding-top: 0.2rem;}
 .top>.header .logo img{width: 2.4rem; height: 0.78rem;}
-.top>.header .weather{display: block; height: 100%; padding-top: 0.3rem; color: #fff;}
+.top>.header .weather{display: block; height: 100%; padding-top: 0.1rem; color: #fff;}
 .top>.header .weather:active{background-color: #3C98D2 !important;}
 .top>.header .weather img{width: 0.66rem; height: 0.5rem;}
 .top>.header .weather .img{margin-right: 0.12rem; padding-top: 0.06rem;}

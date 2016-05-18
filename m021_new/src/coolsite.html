@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="Cleam Lee" name="author">
+	<meta name="description" content="021网址导航，汇集最优秀的网站及资源。及时收录影视、音乐、小说、游戏等分类的网址和内容，让您的网络生活更简单精彩。上网，从021网址导航开始。" />
+    <meta name="keywords" content="网址导航,上网导航,网址大全,网址导航,021上网导航,021网址,021导航,021网址大全"/>
+    <meta http-equiv="expires" content="31 Dec 2018">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+	<link rel="bookmark" href="img/favicon.ico" type="image/x-icon"　/>
+    <link rel="apple-touch-icon-precomposed" href="img/logo_icon.png">
+	<title>网址导航</title>
+	<script>!function(a,b){var c=a.documentElement,d="orientationchange"in window?"orientationchange":"resize",e=function(){var a=c.clientWidth;a&&(a>=720&&(a=720),c.style.fontSize=100*(a/720)+"px")};a.addEventListener&&(b.addEventListener(d,e,!1),e())}(document,window);</script>
+	<!-- <link rel="stylesheet" href="css/swiper-3.3.0.min.css"> -->
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/page_coolsite.css">
+</head>
+<body>
+	<!-- 搜索 -->
+	<div class="search">
+		<form class="pr" action="https://m.baidu.com/s">
+			<div class="form-wrap">
+	            <div class="input-wrap">
+	                <span class="search-logo"></span>
+	                <input class="search-input" id="J_search_input" type="text" name="word" placeholder="搜索或输入网址" autocomplete="off"/>
+	                <a id="J_search_clear" class="search-clear"></a>
+	                <input type="hidden" value="utf-8" name="ie"/>
+	                <input type="hidden" value="1013634c" name="from"/>
+	            </div>
+	            <input class="search-btn" type="submit" data-tjname="top,sousuo" value="搜索"/>
+	        </div>
+	        <!-- 搜索结果列表 -->
+			<div id="J_search_result" class="search-result">
+				<ul class="search-result-list"></ul>
+				<div id="J_close_search_result" class="close-wrap"><a>关闭</a></div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 热门 -->
+	<div class="hot">
+		<h2>热门</h2>
+	</div>
+
+	<div class="hot-site">
+		<div class="hs-list clearfix">
+			<a href="###" class="hs-item"><img src="img/coolsite/i_jiuyou.png" alt=""><span class="txt">久游</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_souhu.png" alt=""><span class="txt">搜狐</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_anjuke.png" alt=""><span class="txt">安居客</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_fenghuang.png" alt=""><span class="txt">凤凰</span></a>
+
+			<a href="###" class="hs-item"><img src="img/coolsite/i_tencent.png" alt=""><span class="txt">腾讯</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_baidu.png" alt=""><span class="txt">百度</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_sina.png" alt=""><span class="txt">新浪</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_qunaer.png" alt=""><span class="txt">去哪儿</span></a>
+
+			<a href="###" class="hs-item"><img src="img/coolsite/i_guomei.png" alt=""><span class="txt">国美</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_tmall.png" alt=""><span class="txt">天猫</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_jingdong.png" alt=""><span class="txt">京东</span></a>
+			<a href="###" class="hs-item"><img src="img/coolsite/i_car.png" alt=""><span class="txt">汽车之家</span></a>
+		</div>
+		<!-- 新闻 -->
+	    <div class="J-group hs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,xinwen,xinwen" href="javascript:;">新闻</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">环球</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">头条</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,renmin" href="http://m.people.cn/" target="_blank">人民</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">新华</a>
+	    </div>
+	    <!-- 小说 -->
+	    <div class="J-group hs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,xinwen,xinwen" href="javascript:;">小说</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">都市</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">穿越</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,renmin" href="http://m.people.cn/" target="_blank">免费</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">潇湘</a>
+	    </div>
+	    <!-- 视频 -->
+	    <div class="J-group hs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,xinwen,xinwen" href="javascript:;">视频</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">优酷</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">腾讯</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,renmin" href="http://m.people.cn/" target="_blank">土豆</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">爱奇艺</a>
+	    </div>
+	    <!-- 购物 -->
+	    <div class="J-group hs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,xinwen,xinwen" href="javascript:;">购物</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">苏宁</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">当当</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,renmin" href="http://m.people.cn/" target="_blank">淘宝</a>
+	    	<a class="link" data-tjname="hotsite,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">天猫</a>
+	    </div>
+
+	    <!-- 推广 -->
+		<div class="promote hs-promote">
+			<img src="img/coolsite/ad_banner.png" alt="">
+		</div>
+	</div>
+	
+	<!-- 资讯 -->
+	<div class="info">
+		<h2>资讯</h2>
+	</div>
+
+	<div class="info-site">
+		<div class="is-list clearfix">
+        	<a class="is-item" data-tjname="infosite,list,wangyi" href="http://3g.163.com/touch/news/" target="_blank">网易</a>
+        	<a class="is-item" data-tjname="infosite,list,fenghuang" href="http://i.ifeng.com/news/newsi?&amp;vt=2" target="_blank">凤凰</a>
+        	<a class="is-item" data-tjname="infosite,list,xinlang" href="http://3g.sina.com.cn/nc.php" target="_blank">新浪</a>
+        	<a class="is-item" data-tjname="infosite,list,souhu" href="http://wap.sohu.com/news/" target="_blank">搜狐</a>
+
+        	<a class="is-item" data-tjname="infosite,list,tengxun" href="http://info.3g.qq.com/" target="_blank">腾讯</a>
+        	<a class="is-item" data-tjname="infosite,list,3gxinwen" href="http://news.3g.cn/" target="_blank">3G新闻</a>
+        	<a class="is-item" data-tjname="infosite,list,yangshiwang" href="http://wap.cctv.com/" target="_blank">央视网</a>
+        	<a class="is-item" data-tjname="infosite,list,zhongxinwang" href="http://m.chinanews.com/" target="_blank">中新网</a>
+
+        	<a class="is-item" data-tjname="infosite,list,xinjingbao" href="http://m.bjnews.com.cn/" target="_blank">新京报</a>
+        	<a class="is-item" data-tjname="infosite,list,guangmingwang" href="http://wap.gmw.cn/" target="_blank">光明网</a>
+        	<a class="is-item" data-tjname="infosite,list,lutoushe" href="http://m.qiqixw.com/" target="_blank">路透社</a>
+        	<a class="is-item" data-tjname="infosite,list,luoshanji" href="http://mobile.latimes.com/" target="_blank">洛杉矶报</a>
+        </div>
+
+		<!-- 新闻 -->
+	    <div class="J-group is-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">新闻</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">环球</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">头条</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">人民</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">新华</a>
+	    </div>
+	    <!-- 小说 -->
+	    <div class="J-group is-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">小说</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">都市</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">穿越</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">免费</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">潇湘</a>
+	    </div>
+	    <!-- 视频 -->
+	    <div class="J-group is-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">视频</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">优酷</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">腾讯</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">土豆</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">爱奇艺</a>
+	    </div>
+	    <!-- 购物 -->
+	    <div class="J-group is-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">购物</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">苏宁</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">当当</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">淘宝</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">天猫</a>
+	    </div>
+	</div>
+
+	<!-- 娱乐 -->
+	<div class="entertainment">
+		<h2>娱乐</h2>
+	</div>
+
+	<div class="entertainment-site">
+		<div class="es-list clearfix">
+        	<a class="es-item" data-tjname="infosite,list,wangyi" href="http://3g.163.com/touch/news/" target="_blank">环球娱乐</a>
+        	<a class="es-item" data-tjname="infosite,list,fenghuang" href="http://i.ifeng.com/news/newsi?&amp;vt=2" target="_blank">凤凰</a>
+        	<a class="es-item" data-tjname="infosite,list,xinlang" href="http://3g.sina.com.cn/nc.php" target="_blank">新浪</a>
+        	<a class="es-item" data-tjname="infosite,list,souhu" href="http://wap.sohu.com/news/" target="_blank">搜狐</a>
+        </div>
+
+		<!-- 视频 -->
+	    <div class="J-group es-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">视频</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">土豆</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">优酷</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">2345</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">搜狐视频</a>
+	    </div>
+	    <!-- 音乐 -->
+	    <div class="J-group es-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">酷狗</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">QQ音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">天天</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">虾米</a>
+	    </div>
+	    <!-- 搞笑 -->
+	    <div class="J-group es-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">搞笑</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">冷笑话</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">糗百</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">不得姐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">捧腹网</a>
+	    </div>
+	    <!-- 动漫 -->
+	    <div class="J-group es-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">动漫</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">腾讯</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">有妖气</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">漫客栈</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">看漫画</a>
+	    </div>
+	    <!-- 推广 -->
+	    <div class="promote es-promote">
+	    	<a href="###"><span class="tag">推广</span><span class="txt">蹭网神器，无限WiFi免费链接</span></a>
+	    </div>
+	</div>
+
+	<!-- 购物 -->
+	<div class="shopping">
+		<h2>购物</h2>
+	</div>
+
+	<div class="shopping-site">
+		<div class="ss-list clearfix">
+        	<a class="ss-item" data-tjname="shoppingsite,list,wangyi" href="http://3g.163.com/touch/news/" target="_blank">环球娱乐</a>
+        	<a class="ss-item" data-tjname="shoppingsite,list,fenghuang" href="http://i.ifeng.com/news/newsi?&amp;vt=2" target="_blank">凤凰</a>
+        	<a class="ss-item" data-tjname="shoppingsite,list,xinlang" href="http://3g.sina.com.cn/nc.php" target="_blank">新浪</a>
+        	<a class="ss-item" data-tjname="shoppingsite,list,souhu" href="http://wap.sohu.com/news/" target="_blank">搜狐</a>
+        </div>
+
+		<!-- 视频 -->
+	    <div class="J-group ss-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">视频</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">土豆</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">优酷</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">2345</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">搜狐视频</a>
+	    </div>
+	    <!-- 音乐 -->
+	    <div class="J-group ss-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">酷狗</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">QQ音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">天天</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">虾米</a>
+	    </div>
+	    <!-- 搞笑 -->
+	    <div class="J-group ss-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">搞笑</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">冷笑话</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">糗百</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">不得姐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">捧腹网</a>
+	    </div>
+	    <!-- 动漫 -->
+	    <div class="J-group ss-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">动漫</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">腾讯</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">有妖气</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">漫客栈</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">看漫画</a>
+	    </div>
+	</div>
+
+	<!-- 游戏 -->
+	<div class="game">
+		<h2>游戏</h2>
+	</div>
+
+	<div class="game-site">
+		<div class="gs-list clearfix">
+        	<a class="gs-item" data-tjname="shoppingsite,list,wangyi" href="http://3g.163.com/touch/news/" target="_blank">环球娱乐</a>
+        	<a class="gs-item" data-tjname="shoppingsite,list,fenghuang" href="http://i.ifeng.com/news/newsi?&amp;vt=2" target="_blank">凤凰</a>
+        	<a class="gs-item" data-tjname="shoppingsite,list,xinlang" href="http://3g.sina.com.cn/nc.php" target="_blank">新浪</a>
+        	<a class="gs-item" data-tjname="shoppingsite,list,souhu" href="http://wap.sohu.com/news/" target="_blank">搜狐</a>
+        </div>
+
+		<!-- 视频 -->
+	    <div class="J-group gs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">视频</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">土豆</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">优酷</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">2345</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">搜狐视频</a>
+	    </div>
+	    <!-- 音乐 -->
+	    <div class="J-group gs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">酷狗</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">QQ音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">天天</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">虾米</a>
+	    </div>
+	    <!-- 搞笑 -->
+	    <div class="J-group gs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">搞笑</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">冷笑话</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">糗百</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">不得姐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">捧腹网</a>
+	    </div>
+	    <!-- 动漫 -->
+	    <div class="J-group gs-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">动漫</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">腾讯</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">有妖气</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">漫客栈</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">看漫画</a>
+	    </div>
+	</div>
+
+	<!-- 生活 -->
+	<div class="live">
+		<h2>生活</h2>
+	</div>
+
+	<div class="live-site">
+		<div class="ls-list clearfix">
+        	<a class="ls-item" data-tjname="shoppingsite,list,wangyi" href="http://3g.163.com/touch/news/" target="_blank">环球娱乐</a>
+        	<a class="ls-item" data-tjname="shoppingsite,list,fenghuang" href="http://i.ifeng.com/news/newsi?&amp;vt=2" target="_blank">凤凰</a>
+        	<a class="ls-item" data-tjname="shoppingsite,list,xinlang" href="http://3g.sina.com.cn/nc.php" target="_blank">新浪</a>
+        	<a class="ls-item" data-tjname="shoppingsite,list,souhu" href="http://wap.sohu.com/news/" target="_blank">搜狐</a>
+        </div>
+
+		<!-- 视频 -->
+	    <div class="J-group ls-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">视频</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">土豆</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">优酷</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">2345</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">搜狐视频</a>
+	    </div>
+	    <!-- 音乐 -->
+	    <div class="J-group ls-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">酷狗</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">QQ音乐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">天天</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">虾米</a>
+	    </div>
+	    <!-- 搞笑 -->
+	    <div class="J-group ls-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">搞笑</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">冷笑话</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">糗百</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">不得姐</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">捧腹网</a>
+	    </div>
+	    <!-- 动漫 -->
+	    <div class="J-group ls-group clearfix">
+	    	<a class="title" data-tjname="hotsite,remen,xinwen,xinwen" href="javascript:;">动漫</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,huanqiu" href="http://wap.huanqiu.com/" target="_blank">腾讯</a>
+	    	<a class="link J-has-channel" data-tjname="hotsite,remen,xinwen,toutiao" href="http://toutiao.eastday.com/" target="_blank">有妖气</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,renmin" href="http://m.people.cn/" target="_blank">漫客栈</a>
+	    	<a class="link" data-tjname="hotsite,remen,xinwen,xinhua" href="http://3g.news.cn/" target="_blank">看漫画</a>
+	    </div>
+	</div>
+	
+	
+
+
+
+</body>
+</html>
