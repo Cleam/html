@@ -1,11 +1,47 @@
+FastClick.attach(document.body);
+// $: Zepto
 $(function(){
-
-	var uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
+	var $ggCloseVideo = {},	//$('#J_gg_close_video'),
+		$ggVideo = {},	//$('#J_gg_video'),
+		$video = $('#J_video'),
+		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
 		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',	// 视频统计接口
 		videoUrl = 'http://toutiao.eastday.com/pjson/morevideos',			// 视频信息流接口
 		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
 		onlineHz = 10;	// 在线日志记录频率(单位：秒；10s一次)
+
+	/**
+	 * 生成广告DOM
+	 * <div id="J_gg_video" class="gg-video">
+			<div class="gg">...</div>
+			<a id="J_gg_close_video" class="gg-close-video">关闭广告</a>
+		</div>
+	 * @return {[type]} [description]
+	 */
+	 function generateGgDom(){
+	 	$ggVideo = $('<div id="J_gg_video" class="gg-video"><div class="gg"></div><a id="J_gg_close_video" class="gg-close-video">关闭广告</a></div>');
+	 	$ggVideo.appendTo($video.parents('.video-wrap'));
+	 	$ggCloseVideo = $ggVideo.find('#J_gg_close_video');
+	 }
+
+	/**
+	 * 加载视频广告
+	 * @return {[type]} [description]
+	 */
+	function loadGg(){
+		var div = document.createElement('div');
+		var script1 = document.createElement('script');
+		var script2 = document.createElement('script');
+		var ggId = 'u2643659';
+		div.id = 'bdUserDefInlay_' + ggId;
+		script1.type = 'text/javascript';
+		script1.innerHTML = 'var cpro_id = "' + ggId + '";';
+		script2.type = 'text/javascript';
+		script2.src = 'http://cpro.baidustatic.com/cpro/ui/cm.js';
+		$ggVideo.children('.gg').append(div).append(script1).append(script2);
+	}
+
 
 	function Video(){
 		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || '';	// 渠道ID
@@ -15,8 +51,15 @@ $(function(){
 		this.init();
 	}
 
+	/**
+	 * 初始化
+	 * @return {[type]} [description]
+	 */
 	Video.prototype.init = function() {
 		var scope = this;
+		/* 生成广告DOM */
+		generateGgDom();
+
 		/* 获取、存储qid */
 		if(scope.qid){
 			scope._setQid(scope.qid);
@@ -30,18 +73,25 @@ $(function(){
 			scope._setUid();
 		}
 		/* 视频事件监听 */
-		scope.addVideoListener($('#J_video'));
+		scope.addVideoListener();
 		/* 获取视频信息流 */
 		scope.getVideoList();
+
+		/* 关闭广告 */
+		$ggCloseVideo.on('click', function(){
+			scope.hideGg();
+		});
 
 		/* 发送日志信息 */
 		scope._addLog();
 
 		/* 在线日志 */
-        scope._addOnlineLog();
+        // scope._addOnlineLog();
         setInterval(function(){
-        	scope._addOnlineLog();
+        	// scope._addOnlineLog();
         }, onlineHz * 1000);
+
+        loadGg();
 	};
 
 	Video.prototype.getVideoList = function(callback) {
@@ -129,40 +179,41 @@ $(function(){
 
 	/**
      * video事件监听
-     * @param {Object} $video video对象
      * @return {[type]}        [description]
      */
-    Video.prototype.addVideoListener = function($video) {
+    Video.prototype.addVideoListener = function() {
     	var scope = this;
     	// 播放事件
     	$video.on('playing', function(event){
 			try {
-				var $video = $(event.target),
-					video = $video[0],
+				var $vd = $(event.target),
+					video = $vd[0],
 					src = video.currentSrc,
-					duration = video.duration ? Math.floor(video.duration * 1000) : $video.attr('data-duration'),
-					idx = $video.attr('data-idx'),
-					videoType = $video.attr('data-type'),
-					playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
+					duration = video.duration ? Math.floor(video.duration * 1000) : $vd.attr('data-duration'),
+					idx = $vd.attr('data-idx'),
+					videoType = $vd.attr('data-type'),
+					playingTime = $vd.attr('data-playingTime') ? $vd.attr('data-playingTime') : 'null',
 					currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
 					param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + 'null' + '\t' + (videoType || 'null') + '\t' + scope.osType + '\t' + (idx || 'null') + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\t' + 'play';
 				// 用于记录实际播放时长
-				$video.attr('data-updateTime', +new Date());
+				$vd.attr('data-updateTime', +new Date());
 				scope.sendVideoLog(param);
 			} catch(e){
 				console.log('Event playing has error!!!', e);
 			}
+			$ggCloseVideo.trigger('click');
 		});
     	// 暂停事件
 		$video.on('pause', function(event){
+			$video[0].paused && scope.showGg();
 			try {
-				var $video = $(event.target),
-					video = $video[0],
+				var $vd = $(event.target),
+					video = $vd[0],
 					src = video.currentSrc,
-					duration = video.duration ? Math.floor(video.duration * 1000) : $video.attr('data-duration'),
-					idx = $video.attr('data-idx'),
-					videoType = $video.attr('data-type'),
-					playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
+					duration = video.duration ? Math.floor(video.duration * 1000) : $vd.attr('data-duration'),
+					idx = $vd.attr('data-idx'),
+					videoType = $vd.attr('data-type'),
+					playingTime = $vd.attr('data-playingTime') ? $vd.attr('data-playingTime') : 'null',
 					currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
 					param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + 'null' + '\t' + videoType + '\t' + scope.osType + '\t' + (idx || 'null') + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\t' + 'pause';
 				// 用于记录实际播放时长
@@ -174,25 +225,52 @@ $(function(){
 		// 播放时间更新事件（记录实际播放时间）
 		$video.on('timeupdate', function(event){
 			try {
-				var $video = $(event.target),
-					video = $video[0],
+				var $vd = $(event.target),
+					video = $vd[0],
 					duration = video.duration,
 					currentTime = video.currentTime,
-		      		updateTime = parseInt($video.attr('data-updateTime'), 10) || (+new Date()),
-		      		playingTime = parseInt($video.attr('data-playingTime'), 10) || 0,
+		      		updateTime = parseInt($vd.attr('data-updateTime'), 10) || (+new Date()),
+		      		playingTime = parseInt($vd.attr('data-playingTime'), 10) || 0,
 		      		now = +new Date();
 				/*if(currentTime >= duration){
-					console.log('$video::', $video);
+					console.log('$vd::', $vd);
 				}*/
 	  			// 播放时间
 	  			playingTime = playingTime + now - updateTime;
-	  			$video.attr('data-playingTime', playingTime);
-				$video.attr('data-updateTime', now);
+	  			$vd.attr('data-playingTime', playingTime);
+				$vd.attr('data-updateTime', now);
 			} catch(e){
 				console.log('Event timeupdate has error!!!', e);
 			}
 		});
     };
+
+    /**
+     * 显示广告
+     * @return {[type]} [description]
+     */
+    Video.prototype.showGg = function() {
+    	// $ggVideo.css('z-index', '2');
+    	$ggVideo.show();
+		$video.css({
+			width: 1,
+			height: 1
+		});
+    };
+
+    /**
+     * 隐藏广告
+     * @return {[type]} [description]
+     */
+    Video.prototype.hideGg = function() {
+    	// $ggVideo.css('z-index', '-1');
+    	$ggVideo.hide();
+		$video.css({
+			width: '100%',
+			height: '100%'
+		});
+    };
+
     /**
      * 添加日志
      */
@@ -249,43 +327,64 @@ $(function(){
 	    });
     },
 
+    /**
+     * 配置渠道ID
+     * @param {[type]} qid [description]
+     */
 	Video.prototype._setQid = function(qid) {
 		if(qid){
 			Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
 		}
 	};
 
-	Video.prototype._getQid = function(qid) {
+	/**
+	 * 获取渠道ID
+	 * @return {[type]}     [description]
+	 */
+	Video.prototype._getQid = function() {
 		var qid = Cookies.get('qid');
 		return qid ? qid : '';
 	};
 
-	Video.prototype._setUid = function(qid) {
+	/**
+	 * 配置用户ID
+	 * @param {[type]} uid 用户ID(可选)
+	 */
+	Video.prototype._setUid = function(uid) {
 		var scope = this;
-        $.ajax({
-            url: uidUrl,
-            dataType: 'jsonp',
-            data: {
-                softtype: 'news',
-                softname: 'eastday_wapnews',
-            },
-            jsonp: 'jsonpcallback',
-            success: function(msg) {
-                try {
-                    scope.userId = msg.uid;
-                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
-                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
-                } catch(e) {
-                    console.error(e);
-                }
-            },
-            error: function(e){
-            	console.error(e);
-            }
-        });
+		if(uid){
+			scope.userId = uid;
+            Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+		} else {
+			$.ajax({
+	            url: uidUrl,
+	            dataType: 'jsonp',
+	            data: {
+	                softtype: 'news',
+	                softname: 'eastday_wapnews',
+	            },
+	            jsonp: 'jsonpcallback',
+	            success: function(msg) {
+	                try {
+	                    scope.userId = msg.uid;
+	                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+	                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
+	                } catch(e) {
+	                    console.error(e);
+	                }
+	            },
+	            error: function(e){
+	            	console.error(e);
+	            }
+	        });
+		}
 	};
 
-	Video.prototype._getUid = function(qid) {
+	/**
+	 * 获取用户id
+	 * @return {[type]}     [description]
+	 */
+	Video.prototype._getUid = function() {
 		var uid = Cookies.get('user_id');
     	// var uid = wsCache.get('user_id');
         return uid ? uid : '';
