@@ -17,7 +17,7 @@ $(function(){
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
 		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
 		showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
-		clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息show统计接口
+		clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息click统计接口
 		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',		// 视频统计接口
 		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口
 		// logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
@@ -43,8 +43,12 @@ $(function(){
 		TOUCH_DISTANCE = 150,		// 规定滑动加载距离
 		pullDownLoadDataTimer = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache(),	// 本地存储对象
+		// 视频广告
+		// videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%" onLoad="GLOBAL.Util.setIframeContent(this)"></iframe>',
+		videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe>',
+		// videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" onLoad="GLOBAL.Util.setIframe(this)"></iframe>',
 		// 百度广告iframe
-		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="62"></iframe></div>',
+		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>',
 		// 搜狗广告iframe
 		sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
 
@@ -311,10 +315,10 @@ $(function(){
 	        });
 
 	        /* 关闭视频广告事件 */
-	        $newsList.on('click', '.J-gg-close-video', function(){
-	        	var $this = $(this);
-	        	scope.hideGg($this.parent());
-	        });
+	        // $newsList.on('click', '.J-gg-close-video', function(){
+	        // 	var $this = $(this);
+	        // 	scope.hideGg($this.parent());
+	        // });
 
 	        /* 在线日志 */
 	        scope.addOnlineLog();
@@ -723,7 +727,10 @@ $(function(){
 	            if(videonews == '1'){	// 视频模式
 	            	if(rightOs){
 	            		var videoImg = item.lbimg[0].src;
-	            		$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><div class="J-video-box video-box"><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+	            		var $itemVideo = $('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><div class="J-video-box video-box"><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+	            		$newsList.prepend($itemVideo);
+	            		// scope.loadVideoGg($itemVideo.find('.J-video-box').eq(0));
+	            		// $itemVideo.find('.J-video-box').eq(0).append('<div class="J-gg-video gg-video"><div class="gg">' + videoHtmlIframe + '</div><a class="J-gg-close-video gg-close-video">关闭广告</a></div>');
 	            	}
             	} else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
@@ -1355,7 +1362,8 @@ $(function(){
 		            		var videoImg = item.lbimg[0].src;
 		            		var $itemVideo = $('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><div class="J-video-box video-box"><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
 		            		$newsList.append($itemVideo);
-		            		scope.loadVideoGg($itemVideo.find('.J-video-box').eq(0));
+		            		// scope.loadVideoGg($itemVideo.find('.J-video-box').eq(0));
+		            		// $itemVideo.find('.J-video-box').eq(0).append('<div class="J-gg-video gg-video"><div class="gg">' + videoHtmlIframe + '</div><a class="J-gg-close-video gg-close-video">关闭广告</a></div>');
 	            		}
 	            	} else if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
@@ -1438,7 +1446,7 @@ $(function(){
 						currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
 						param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + scope.newsType + '\t' + videoType + '\t' + scope.osType + '\t' + idx + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tpause';
 					// 显示广告
-					scope.showGg($video.next());
+					// scope.showGg($video.next());
 
 					// 用于记录实际播放时长
 					scope.sendVideoLog(param);
@@ -1525,6 +1533,11 @@ $(function(){
 			$ggVideo.appendTo($ggWrap);
 	    },
 
+	    /**
+	     * 显示视频广告
+	     * @param  {[type]} $gg [description]
+	     * @return {[type]}     [description]
+	     */
 	    showGg: function($gg){
 	    	$gg.show();
 	    	$gg.prev().css({
@@ -1533,6 +1546,11 @@ $(function(){
 			});
 	    },
 
+	    /**
+	     * 隐藏视频广告
+	     * @param  {[type]} $gg [description]
+	     * @return {[type]}     [description]
+	     */
 	    hideGg: function($gg){
 	    	$gg.hide();
 	    	$gg.prev().css({

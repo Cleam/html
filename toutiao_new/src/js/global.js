@@ -383,6 +383,49 @@ GLOBAL.Util = {
             return locaUrl.substring(0, endIndex);
         }
         return locaUrl;
+    },
+
+    /**
+     * 设置iframe宽高
+     * @param {[type]} ifm iframe DOM对象
+     */
+    setIframe: function(ifm) {   
+        var ifm= ifm || window.frames['iframe'] || document.getElementById('iframe') || null;
+        if(ifm){
+            var subWeb = document.frames ? document.frames["iframe"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+               ifm.height = subWeb.body.scrollHeight;
+               ifm.width = subWeb.body.scrollWidth;
+            }   
+        }
+    },
+
+    /**
+     * 设置iframe content宽高
+     * @param {[type]} ifm iframe DOM对象
+     */
+    setIframeContent: function(ifm) {   
+        var ifm= ifm || window.frames['iframe'] || document.getElementById('iframe') || null;
+        if(ifm){
+            var subWeb = document.frames ? document.frames["iframe"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+               // ifm.height = subWeb.body.scrollHeight;
+               // ifm.width = subWeb.body.scrollWidth;
+               console.log('ifm.width::', ifm.parentNode);
+               console.log('ifm.parentNode.offsetWidth::', ifm.parentNode.offsetWidth);
+               console.log('ifm.parentNode.offsetHeight::', ifm.parentNode.offsetHeight);
+               // console.log('subWeb::', subWeb);
+               console.log('subWeb.documentElement::', subWeb.documentElement);
+               console.log('subWeb.body::', subWeb.body);
+               subWeb.documentElement.width = ifm.parentNode.offsetWidth;
+               subWeb.documentElement.height = ifm.parentNode.offsetHeight;
+               subWeb.body.setAttribute('width', ifm.parentNode.offsetWidth);
+               subWeb.body.setAttribute('height', ifm.parentNode.offsetHeight);
+
+               // subWeb.body.width = ifm.width;
+               // subWeb.body.height = ifm.height;
+            }   
+        }
     }
 
 };
