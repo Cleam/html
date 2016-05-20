@@ -310,6 +310,12 @@ $(function(){
 	        	ptClick($(this), 'zd0000', -1);
 	        });
 
+	        /* 关闭视频广告事件 */
+	        $newsList.on('click', '.J-gg-close-video', function(){
+	        	var $this = $(this);
+	        	scope.hideGg($this.parent());
+	        });
+
 	        /* 在线日志 */
 	        scope.addOnlineLog();
 	        setInterval(function(){
@@ -705,7 +711,7 @@ $(function(){
             	}
 
             	// if(i === ranNum){
-            	// 	$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>警察枪"走火"吓坏路人</h3><video controls="auto" poster="http://imgmini.eastday.com/video/gaoxiao/20160427/20160427161442214702653_1_mwpm_05501609.jpeg"><source src="http://mv.dfshurufa.com/gaoxiao/20160427/20160427161442214702653_1_06400360.mp4" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">优酷视频</em></p></div></section>');
+            	// 	$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>警察枪"走火"吓坏路人</h3><div class="J-video-box video-box"><video controls="auto" poster="http://imgmini.eastday.com/video/gaoxiao/20160427/20160427161442214702653_1_mwpm_05501609.jpeg"><source src="http://mv.dfshurufa.com/gaoxiao/20160427/20160427161442214702653_1_06400360.mp4" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">优酷视频</em></p></div></section>');
             	// }
 	            
 	            /*==== 新闻流 ====*/
@@ -717,7 +723,7 @@ $(function(){
 	            if(videonews == '1'){	// 视频模式
 	            	if(rightOs){
 	            		var videoImg = item.lbimg[0].src;
-	            		$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+	            		$newsList.prepend('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><div class="J-video-box video-box"><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
 	            	}
             	} else if(ispicnews == '1'){	// 大图模式
 	            	imgArr = item.lbimg;
@@ -1347,7 +1353,9 @@ $(function(){
 	            	if(videonews == '1'){	// 视频模式
 	            		if(rightOs){
 		            		var videoImg = item.lbimg[0].src;
-		            		$newsList.append('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+		            		var $itemVideo = $('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><div class="J-video-box video-box"><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
+		            		$newsList.append($itemVideo);
+		            		scope.loadVideoGg($itemVideo.find('.J-video-box').eq(0));
 	            		}
 	            	} else if(ispicnews == '1'){	// 大图模式
 		            	imgArr = item.lbimg;
@@ -1429,6 +1437,9 @@ $(function(){
 						playingTime = $video.attr('data-playingTime') ? $video.attr('data-playingTime') : 'null',
 						currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
 						param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + scope.newsType + '\t' + videoType + '\t' + scope.osType + '\t' + idx + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\tpause';
+					// 显示广告
+					scope.showGg($video.next());
+
 					// 用于记录实际播放时长
 					scope.sendVideoLog(param);
 				} catch(e){
@@ -1492,6 +1503,42 @@ $(function(){
 			} else {	// 无渠道号情况，默认百度广告
 				$ggBaidu.val(GLOBAL.Et.ggData.root['default']); // first.js
 			}
+	    },
+
+	    /**
+	     * 加载视频广告
+	     * @param  {[type]} $ggWrap [description]
+	     * @return {[type]}         [description]
+	     */
+	    loadVideoGg: function($ggWrap){
+	    	var $ggVideo = $('<div class="J-gg-video gg-video"><div class="gg"></div><a class="J-gg-close-video gg-close-video">关闭广告</a></div>');
+	    	var div = document.createElement('div');
+			var script1 = document.createElement('script');
+			var script2 = document.createElement('script');
+			var ggId = 'u2643659';
+			div.id = 'bdUserDefInlay_' + ggId;
+			script1.type = 'text/javascript';
+			script1.innerHTML = 'var cpro_id = "' + ggId + '";';
+			script2.type = 'text/javascript';
+			script2.src = 'http://cpro.baidustatic.com/cpro/ui/cm.js';
+			$ggVideo.find('.gg').append(div).append(script1).append(script2);
+			$ggVideo.appendTo($ggWrap);
+	    },
+
+	    showGg: function($gg){
+	    	$gg.show();
+	    	$gg.prev().css({
+				width: 1,
+				height: 1
+			});
+	    },
+
+	    hideGg: function($gg){
+	    	$gg.hide();
+	    	$gg.prev().css({
+				width: '100%',
+				height: '100%'
+			});
 	    }
 
 	};
