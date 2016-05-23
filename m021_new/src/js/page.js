@@ -15,17 +15,44 @@ if(!Array.prototype.hasOwnProperty('contains')){
  * @param  {Number} i     0
  * @return {String}       新的标题
  */
+// function getNewStr(txt, swArr, i){
+//     if(!i){i = 0;}
+//     if(txt && swArr && swArr.length){
+//         var len = swArr.length;
+//         if(i == len){
+//             return txt;
+//         } else {
+//             var reg = new RegExp(swArr[i], 'gi');
+//             // 处理大小写情况
+//             var tempTxt = txt;
+//             var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i]);
+//             var subTxt = txt.substring(subTxtIndex, subTxtIndex + swArr[i].length);
+//             return getNewStr(txt.replace(reg, '<em>' + subTxt + '</em>'), swArr, ++i);
+//         }
+//     } else {
+//         return '';
+//     }
+// }
+/**
+ * 关键词高亮处理（递归算法）
+ * @param  {String} txt   标题
+ * @param  {Array} swArr  关键词数组(字符串)
+ * @param  {Number} i     0
+ * @return {String}       新的标题
+ */
 function getNewStr(txt, swArr, i){
-    if(!i){i = 0;}
     if(txt && swArr && swArr.length){
         var len = swArr.length;
-        if(i == len){
+        swArr.sort(function(a, b){
+            return b.length - a.length;
+        });
+        if(!i){i = 0;}
+        if(i == len || swArr[i] == '..'){
             return txt;
         } else {
             var reg = new RegExp(swArr[i], 'gi');
-            // 处理大小写情况
             var tempTxt = txt;
-            var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i]);
+            var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i].toLowerCase());
             var subTxt = txt.substring(subTxtIndex, subTxtIndex + swArr[i].length);
             return getNewStr(txt.replace(reg, '<em>' + subTxt + '</em>'), swArr, ++i);
         }

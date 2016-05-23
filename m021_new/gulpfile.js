@@ -15,11 +15,6 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload');        //livereload
     // del = require('del');
 // HTML处理
-/*
-  注意更新css和js的引用：
-  <link rel="stylesheet" href="css/all.min.css">
-  <script src="js/main.min.js"></script>
- */
 gulp.task('html', function() {
     var htmlSrc = './src/*.html',
         htmlDst = './dist/';
@@ -36,27 +31,65 @@ gulp.task('html-index', function() {
         .pipe(gulp.dest(htmlDst))
         .pipe(livereload());
 });
+gulp.task('html-coolsite', function() {
+    var htmlSrc = './src/coolsite.html',
+        htmlDst = './dist/';
+    gulp.src(htmlSrc)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
+});
+gulp.task('html-gg', function() {
+    var htmlSrc = './src/ad_sogou.html',
+        htmlDst = './dist/';
+    gulp.src(htmlSrc)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
+});
 
 // 自动添加css前缀和压缩
-gulp.task('css', function () {
-    var cssSrc = [
-            './src/css/base.css', 
-            './src/css/swiper-3.3.0.min.css', 
-            './src/css/page.css'
+gulp.task('css-common', function(){
+    var cssCommonSrc = [
+            './src/css/swiper-3.3.0.min.css',
+            './src/css/base.css'
         ],
+        cssCommonDist = './dist/css';
+    return gulp.src(cssCommonSrc)
+        .pipe(autoprefixer())
+        .pipe(concat('common.css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(cssCommonDist))
+        .pipe(livereload());
+});
+// page.css
+gulp.task('css-index', function () {
+    var cssSrc = ['./src/css/page.css'],
         cssDst = './dist/css';
     return gulp.src(cssSrc)
     	.pipe(autoprefixer())
-    	.pipe(concat('all.css'))
-    	// .pipe(gulp.dest(cssDst))
+    	//.pipe(concat('all.css'))
         .pipe(rename({suffix: '.min'}))
         .pipe(cleanCSS())
-        .pipe(rev())
+        .pipe(rev())    // MD5
         .pipe(gulp.dest(cssDst))
         //.pipe(rev.manifest({merge: true}))           //- 生成一个rev-manifest.json
         //.pipe(gulp.dest('./rev'))
         .pipe(livereload());
     	// .pipe(notify({ message: 'Styles task complete' }));
+});
+// page_coolsite.css
+gulp.task('css-coolsite', function () {
+    var cssSrc = ['./src/css/page_coolsite.css'],
+        cssDst = './dist/css';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(rev())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
 });
 
 // js代码校验、合并和压缩
@@ -102,6 +135,21 @@ gulp.task('js-bottom', function() {
         .pipe(livereload());
         // .pipe(notify({ message: 'Scripts task complete' }));
 });
+// page_coolsite.js
+gulp.task('js-coolsite', function() {
+    var jsSrc = [
+            './src/js/jquery-2.2.1.min.js', 
+            './src/js/page_coolsite.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(concat('page_coolsite.js'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
 
 // 压缩图片
 gulp.task('img', function() {
@@ -138,7 +186,7 @@ gulp.task('default', ['clean'], function() {
 }); 
 */
 
-gulp.task('default', ['html', 'css', 'img', 'js_top', 'js_bottom']);
+gulp.task('default', ['html', 'css-common', 'css-index', 'css-coolsite', 'img', 'js_top', 'js_bottom', 'js-coolsite']);
 
 // 监听文件
 // 监听任务 运行语句 gulp watch

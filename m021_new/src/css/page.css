@@ -28,7 +28,7 @@ a:active{background-color: #e5e5e5 !important;}
 .form-wrap .input-wrap .search-input{width: 100%; height: 100%; padding-left: 0.66rem; padding-right: 1.2rem; font-size: 0.32rem;}
 .form-wrap .search-btn{position: absolute; top: 0; right: 0; width: 1.2rem; text-align: center; height: 100%; color: #52ace5; font-size: 0.32rem; padding-left: 0.2rem; padding-right: 0.2rem;}
 /* 搜索列表 */
-.search-result{position: absolute; top: 1.2rem; left: 0; width: 6.6rem; background-color: #fff; border-radius: 0.12rem; box-shadow: 0 3px 8px #999; z-index: 999; display: none;}
+.search-result{position: absolute; top: 1rem; left: 0; width: 6.6rem; background-color: #fff; border-radius: 0.12rem; box-shadow: 0 3px 8px #999; z-index: 999; display: none;}
 .search-result-list{width: 100%;}
 .search-result-list .search-result-item{position: relative; width: 100%; height: 0.7rem; border-bottom: 1px solid #dcdcdc;}
 .search-result-list .search-result-item:before{content: ''; position: absolute; width: 0.34rem; height: 0.34rem; top: 0.2rem; left: 0.2rem; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADR0lEQVRYw8XYW4iVVRTA8d9M5ajJTLeX6QKZpg8hGFE9NAXd8UFqUUFFUhgYhHRxiImCInrReogigrCHoojUaIHZhWocCYVKe0hBKrvB1JNQppMYZfWwv/LM6ZzxzO3MetmH7+y99v9be6211/o6tCiZ2YVrcC2WYhF60IVfMYy9+BhvR8RPrequlY4WQHqxBitxGo7iS3yN/dW0OTgPS9CNv/Ah1kXE0JQAZeaJGMCjmF1t8Arei4hfmqw5ARfjNtxVwb2D1RHxw4SBKqtswOXVEayJiM/H86aZ2VO9UD8OY2VE5LiBMnMBPsKZlcJnI+Lv8cDU6VuCjViM+yLi+ZaBMvNsbFd8JSJicKIgdXpPwWb04c6IePW4QJl5EoYUH1gWEVunAqZG/zzF8heiLyJ2NprXWfN7AJcp/jKlMBARI7gFB/FalUYaA2XmOUo0bcULUw1TAzWM+5UctmYsCw0oCe7ByThwi1Cv41P0V8c4Gigz52IF3o2I3dMJUyNrcTpuamShZUoCe7lNMJRkuR+3NgK6Gn/ig3bRRMQfeB9XVNE9Cmgp9kbEwTZaCHZirpIwRwGdj31thqFczpRLeRRQN36eAaAD1dhTD9SBaQ31JvLvnqOur04lc546A0Dd1XioHug7LJwBoEXV+G090G5cUCXIdsolOOKYc/8HNIhZSr3cFsnMTlyHHRFxpB5oi1LRrWijda5HLzbV/9EZEYfwBiIzF41X8wTlISWYNvwPqBrXKp3CU9NNkpnLcSWei4gDDYEiYh+ewQ2Zecc0wpyh1FvDWNdoTm3F+AS+wIuZeek0wMxSjqhXqatHxgSKiMO4Gb9hS2b2TSHMHLyJq/DIWM1jrYVExDdKOB7FYGaumgKY+diG5XgcQ5nZtEFt1iguxFtKa5zoj4jvxwnShdV4TMlz9yq9/3alGFzVqFweq5WejSfxQPVoY6VoW1VgNVu3ALfjHpyFT6rN91SWWY+78VIjqFY+NizGw0q/3oUR7MJXSgnxO+ZhvtJznVst3YWnsal20+NBHReoRlEPblRK3ouUC3lWzZQfHfscszki9oyhqylUy0BNFJ9cQR0Yb/vUDGpSQJOVRlAzCtQAav2MA9VBffYPCSwfmVv1+FwAAAAASUVORK5CYII=') center no-repeat; background-size: 100%;}
@@ -177,8 +177,8 @@ a:active{background-color: #e5e5e5 !important;}
 .bg-loading .txt{font-size: 0.3rem; padding: 0.2rem 0; text-align: center; color: #52ace5;}
 .bg-loading .spinner {margin: 0 auto; width: 1.5rem; height: 0.3rem; text-align: center; }
 .bg-loading .spinner > div {width: 0.3rem; height: 0.3rem; background-color: #52ace5; border-radius: 100%; display: inline-block; -webkit-animation: bouncedelay 1.4s infinite ease-in-out; animation: bouncedelay 1.4s infinite ease-in-out; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
-.bg-loading .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s;}
-.bg-loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s;} 
+.bg-loading .spinner .bounce1 {-webkit-animation-delay: -0.32s; animation-delay: -0.32s; margin-right: 5px;}
+.bg-loading .spinner .bounce2 {-webkit-animation-delay: -0.16s; animation-delay: -0.16s; margin-right: 5px;} 
 
 /* pull up loading */
 .loading{padding: 0.1rem 0 0.2rem; background-color: #fff;}
