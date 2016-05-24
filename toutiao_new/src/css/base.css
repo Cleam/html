@@ -10,7 +10,7 @@ html, body { -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 
 /*html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 { -webkit-text-size-adjust: none; }*/
 body{font-size: 62.5%;}
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { margin: 0; padding: 0; }
-body, button, input, select, textarea{ font-family: "Hiragino Sans GB", "Helvetica Neue", Helvetica, STHeiTi, sans-serif; color: #666666; background-color: #fff; position: relative;}
+body, button, input, select, textarea{ font-family: "Hiragino Sans GB", "Helvetica Neue", Helvetica, STHeiTi,"Microsoft Yahei", sans-serif; color: #666666; background-color: #fff; position: relative;}
 h1, h2, h3, h4, h5, h6 { font-weight: normal; }
 textarea { resize: none; }
 input[type=button],input[type=submit]{cursor: pointer;}

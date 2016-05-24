@@ -1254,7 +1254,7 @@ $(function(){
 	            // $loading.hide();
 	            return false;
 	        }
-	        // console.log('data::', data);
+	        console.log('data::', JSON.stringify(data));
 
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
