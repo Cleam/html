@@ -261,7 +261,7 @@ $(function() {
     })();
 
     /* 夺宝大咖特殊处理 */
-    (function(){
+    /*(function(){
         var $osSpecial = $('#J_os_special'),
             ost = osType.toLowerCase();
         if(ost.indexOf('ios') < 0){
@@ -282,7 +282,7 @@ $(function() {
                 sendPromoteNewslog('m021icon100000001', 'http://m.duobaodaka.com/h5/static/page12/ch/dftt01');
             });
         }
-    })();
+    })();*/
 
     init();
 
