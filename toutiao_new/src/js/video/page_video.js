@@ -1,8 +1,9 @@
 FastClick.attach(document.body);
 // $: Zepto
 $(function(){
-	var $ggCloseVideo = {},	//$('#J_gg_close_video'),
-		$ggVideo = {},	//$('#J_gg_video'),
+	var $ggCloseVideo = null,	//$('#J_gg_close_video'),
+		$ggVideo = null,	//$('#J_gg_video'),
+		$loading = null,
 		$video = $('#J_video'),
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
@@ -57,8 +58,6 @@ $(function(){
 	 */
 	Video.prototype.init = function() {
 		var scope = this;
-		/* 生成广告DOM */
-		generateGgDom();
 
 		/* 获取、存储qid */
 		if(scope.qid){
@@ -77,21 +76,25 @@ $(function(){
 		/* 获取视频信息流 */
 		scope.getVideoList();
 
-		/* 关闭广告 */
-		$ggCloseVideo.on('click', function(){
-			scope.hideGg();
-		});
 
 		/* 发送日志信息 */
 		scope._addLog();
 
 		/* 在线日志 */
-        // scope._addOnlineLog();
+        scope._addOnlineLog();
         setInterval(function(){
-        	// scope._addOnlineLog();
+        	scope._addOnlineLog();
         }, onlineHz * 1000);
 
-        loadGg();
+        if(scope.qid !== 'wnwifishipin'){
+			/* 生成广告DOM */
+			generateGgDom();
+	        loadGg();
+			/* 关闭广告 */
+			$ggCloseVideo.on('click', function(){
+				scope.hideGg();
+			});
+        }
 	};
 
 	Video.prototype.getVideoList = function(callback) {
@@ -183,8 +186,13 @@ $(function(){
      */
     Video.prototype.addVideoListener = function() {
     	var scope = this;
+    	$video.on('waiting', function(event){
+    		$loading = $('<div id="J_video_loading" class="video-loading"><div class="video-loading-wrap"><img src="img/loading2.gif" alt=""></div></div>');
+	 		$loading.appendTo($video.parents('.video-wrap'));
+    	});
     	// 播放事件
     	$video.on('playing', function(event){
+    		$loading && $loading.remove();
 			try {
 				var $vd = $(event.target),
 					video = $vd[0],
@@ -201,7 +209,7 @@ $(function(){
 			} catch(e){
 				console.log('Event playing has error!!!', e);
 			}
-			$ggCloseVideo.trigger('click');
+			$ggCloseVideo && $ggCloseVideo.trigger('click');
 		});
     	// 暂停事件
 		$video.on('pause', function(event){
@@ -251,11 +259,13 @@ $(function(){
      */
     Video.prototype.showGg = function() {
     	// $ggVideo.css('z-index', '2');
-    	$ggVideo.show();
-		$video.css({
-			width: 1,
-			height: 1
-		});
+    	if($ggVideo){
+	    	$ggVideo.show();
+			$video.css({
+				width: 1,
+				height: 1
+			});
+    	}
     };
 
     /**
@@ -264,11 +274,13 @@ $(function(){
      */
     Video.prototype.hideGg = function() {
     	// $ggVideo.css('z-index', '-1');
-    	$ggVideo.hide();
-		$video.css({
-			width: '100%',
-			height: '100%'
-		});
+    	if($ggVideo){
+	    	$ggVideo.hide();
+			$video.css({
+				width: '100%',
+				height: '100%'
+			});
+    	}
     };
 
     /**

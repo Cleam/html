@@ -3,9 +3,7 @@ var tempData=[{adv_id:"0",date:"2016-05-24 13:07",hotnews:"1",isadv:"0",isnxw:"0
 
 
 $(function(){
-	var $article = $('#J_article');	// 文章
-	var $hnList = $('#J_hn_list');	// 热点新闻
-	var $inList = $('#J_in_list');	// 猜你感兴趣
+	var $hnList = $('#J_hn_list');
 
 	/**
       * 动态加载js文件
@@ -66,34 +64,18 @@ $(function(){
     }
 
 	/**
-	 * 新闻内页对象
+	 * 详情对象
 	 */
 	function Details(){
 
 	}
 
 	Details.prototype = {
-
 		/**
-		 * 猜你感兴趣（六宫格广告）
+		 * 生成新闻列表
 		 * @return {[type]} [description]
 		 */
-		generateInterestNews: function(){
-			var ggId = 'u2610264';
-    		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
-    		$inList.append('<div id="cpro_' + ggId + '"></div>');
-    		
-    		createGgConfigScript(ggConfig, function(){
-    			// console.log('js/gg_details.js loaded!!!');
-    			getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
-    		}, $('#cpro_' + ggId)[0]);
-		},
-
-		/**
-		 * 生成新闻列表（含三宫格广告、文字链广告）
-		 * @return {[type]} [description]
-		 */
-		generateHotNews: function(data){
+		generateList: function(data){
 			var scope = this;
 	        // var data = d && d.data;
 	        if(!data || !data.length){
@@ -148,9 +130,10 @@ $(function(){
 	                tagStr = '<i class="nuanwen">暖文</i>';
 	            }
 
-            	var ggArr = ['u2370262', 'u2649544'];
-            	if(i === 3 || i === 6){
-            		var ggId = ggArr[i/3 - 1];
+	            var ggArr = ['u2370262', 'u2649544'];
+
+            	if(i === 2 || i === 4){
+            		var ggId = ggArr[i/2 - 1];
             		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
             		
             		$hnList.append('<section class="news-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
@@ -178,30 +161,14 @@ $(function(){
 	        }
 		}
 
+
 	};
-
-	/*===========================================================================*/
-	
-	/**
-	 * wnwifi渠道内页
-	 */
-	function DetailsWnwifi(){
-		
-	}
-
-	DetailsWnwifi.prototype = {
-
-	}
 
 
 	+function(){
-		console.log('tempData::', tempData);
-
+		// console.log('tempData::', tempData);
 		var details = new Details();
-		// 猜你感兴趣
-		details.generateInterestNews();
-		// 热点新闻
-		details.generateHotNews(tempData);
+		details.generateList(tempData);
 	}();
 
 

@@ -78,9 +78,9 @@ body{padding-top: 0; background-color: #F3F3F3; color: #333;}
 .news-item-img3>a .news-wrap .img-wrap img:last-child{margin-right: 0;}
 .news-item-img3>a .news-wrap p{width: 100%; padding-top: .1rem; font-size: .2rem; color: #999;}
 
-.news-gg-img3 .gg-img3-wrap{position: relative; max-width: 7.5rem; margin: auto; overflow: hidden;}
-.news-gg-img3 .gg-img3-wrap .line{position: absolute; bottom: 0; left: 0.3rem; width: 6.9rem; height: 1px; background-color: #eee;}
-.news-item:last-child .gg-img3-wrap .line{height: 0;}
+.news-gg-img3{position: relative; max-width: 7.5rem; margin: auto; overflow: hidden;}
+.news-gg-img3 .line{position: absolute; bottom: 0; left: 0.3rem; width: 6.9rem; height: 1px; background-color: #eee;}
+.news-item:last-child .line{height: 0;}
 
 
 /* 评论 */
