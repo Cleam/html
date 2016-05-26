@@ -295,17 +295,15 @@ $(function() {
         if(!readUrl){readUrl = '';}
         // 首次加载数据
         loadData('toutiao');
-        // 获取用户ID
+
+        /* 获取、存储uid */
         if(!userId){
-            setUid(function(){
-                userId = getUid(); 
-                // 统计PV
-                recordPv();
-            });
-        } else {
-            // 统计PV
-            recordPv();
+            userId = (+new Date()) + Math.random().toString(10).substring(2, 6);
+            $.cookie('user_id', userId, {expires : 365 * 5, path:'/'});
         }
+        // 统计PV
+        recordPv();
+
         // 保存所有新闻类别到数组
         $ttNewsTabs.each(function(){
             var $this = $(this),
@@ -1013,7 +1011,7 @@ $(function() {
                 } else {
                     var imgSrc = ((imgArr.length > 0 && imgArr[0].src) ? imgArr[0].src : ''),
                         imgAlt = ((imgArr.length > 0 && imgArr[0].alt) ? imgArr[0].alt : '');
-                    $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="' + imgAlt + '"></div></div></a></li> ');
+                    $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '?qid=' + tt_news_qid + '&idx=' + (idx+i+1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl">' + (tagStr?tagStr:getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgSrc + '" alt="' + imgAlt + '"></div></div></a></li> ');
                 }
             }
         }
