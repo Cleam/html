@@ -7,6 +7,29 @@ $(function(){
 	var $hnList = $('#J_hn_list');	// 热点新闻
 	var $inList = $('#J_in_list');	// 猜你感兴趣
 
+  (function(){
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    // build items array
+    var items = [];
+    $article.find('img').each(function(){
+        var $this = $(this);
+        items.push({
+          src: $this.attr('src'),
+          w: $this.data('width'),
+          h: $this.data('height')
+        });
+    });
+    // define options (if needed)
+    var options = {
+        // optionName: 'option value'
+        // for example:
+        index: 0 // start at first slide
+    };
+    // Initializes and opens PhotoSwipe
+    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    // gallery.init();
+  })();
+
 	/**
       * 动态加载js文件
       * @param  {string}   url      js文件的url地址
@@ -160,6 +183,19 @@ $(function(){
             			getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
             		}, $('#cpro_' + ggId)[0]);
             	}
+
+              /*var ggArr2 = ['u2590737', 'u2590739'];
+              if(i === 4 || i === 8){
+                var ggId2 = ggArr2[i/4 - 1];
+                var ggConfig2 = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId2 + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
+                
+                $hnList.append('<section class="news-item news-gg-img3"><div id="cpro_' + ggId2 + '"></div><div class="line"></div></section>');
+                
+                createGgConfigScript(ggConfig2, function(){
+                  // console.log('js/gg_details.js loaded!!!');
+                  getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId2)[0]);
+                }, $('#cpro_' + ggId2)[0]);
+              }*/
 
 				/*======== 新闻流 =========*/
             	if(videonews == '1'){	// 视频模式
