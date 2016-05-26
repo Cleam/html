@@ -60,7 +60,7 @@ $(function(){
 		var currentNewsType = ct ? ct : wsCache.get('current_newstype');
 		this.newsType = currentNewsType ? currentNewsType : 'toutiao';	// 新闻频道类别
 		this.readUrl = '';
-		this.userId = '';			// 用户ID
+		this.userId = Cookies.get('user_id');			// 用户ID
 		this.idx = 0;				// 链接索引
 		this.pgNum = 1;				// 页码
 		this.pulldown_pgNum = 0;	// 下拉页码
@@ -96,10 +96,10 @@ $(function(){
 			}
 
 			/* 获取、存储uid */
-			scope.userId = scope.getUid();
-			if(!scope.userId){
-				scope.setUid();
-			}
+	        if(!scope.userId){
+	            scope.userId = (+new Date()) + Math.random().toString(10).substring(2, 6);
+	            Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+	        }
 
 			/* 获取缓存中的已阅读新闻 */
 			scope.readUrl = wsCache.get('read_url_all');
@@ -1254,7 +1254,7 @@ $(function(){
 	            // $loading.hide();
 	            return false;
 	        }
-	        console.log('data::', JSON.stringify(data));
+	        // console.log('data::', JSON.stringify(data));
 
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});

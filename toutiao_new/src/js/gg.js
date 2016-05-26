@@ -481,7 +481,9 @@ GLOBAL.Et.ggData = {
 		"ucllqsun02":{"baidu":{"li":"u2649525"}},
 		"ucllqsun03":{"baidu":{"li":"u2649542"}},
 		"zhuanyidoumm":{"baidu":{"li":"u2649744"}},
-		"shujuan01":{"baidu":{"li":"u2649899"}}
+		"shujuan01":{"baidu":{"li":"u2649899"}},
+		"m021_myworld":{"baidu":{"li":"u2652106"}},
+		"uckuzhan":{"baidu":{"li":"u2652124"}}
 	}
 };
 
