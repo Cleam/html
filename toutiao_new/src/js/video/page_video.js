@@ -5,6 +5,8 @@ $(function(){
 		$ggVideo = null,	//$('#J_gg_video'),
 		$loading = null,
 		$video = $('#J_video'),
+		$related = $('#J_related'),
+		bufferedNum = 0,
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
 		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',	// 视频统计接口
@@ -59,6 +61,7 @@ $(function(){
 	Video.prototype.init = function() {
 		var scope = this;
 
+
 		/* 获取、存储qid */
 		if(scope.qid){
 			scope._setQid(scope.qid);
@@ -85,6 +88,17 @@ $(function(){
         setInterval(function(){
         	scope._addOnlineLog();
         }, onlineHz * 1000);
+
+        $related.on('click', 'a', function(){
+        	$video[0].pause();
+        	scope.removeLoading();
+        });
+
+		// 自动缓冲页面
+		$video.attr('preload', true);
+		$video.attr('autobuffer', true);
+		$video.attr('x-webkit-airplay', 'allow');
+		// scope.play();
 
         if(scope.qid !== 'wnwifishipin'){
 			/* 生成广告DOM */
@@ -135,7 +149,7 @@ $(function(){
 		var scope = this,
 			d = data.data ? data.data : null,
 			len = d ? d.length : 0,
-			$related = $('#J_related'),
+			// $related = $('#J_related'),
 			$listWrap = $('<div class="related-cnt"></div>');
 		if(len > 0){
 			$related.append('<div class="related-tit"><h2>相关视频</h2></div>');
@@ -178,7 +192,56 @@ $(function(){
 			success: function(){},
 			error: function(){}
 		});
-	}
+	};
+
+	Video.prototype.showLoading = function(){
+		// $loading = $('<div id="J_video_loading" class="video-loading"><div class="video-loading-wrap"><img src="img/loading2.gif" alt=""></div></div>');
+		// $loading = $('<div class="vjs-waiting-wrap"><div class="vjs-waiting"><div class="vjs-loading-spinner vjs-waiting"></div></div></div>');
+		$loading = $('<div class="video-loading"><div class="img"></div><div class="ball-beat"><div></div> <div></div> <div></div></div></div>');
+ 		$loading.appendTo($video.parents('.video-wrap'));
+	};
+
+	Video.prototype.removeLoading = function(){
+		$loading && $loading.remove();
+	};
+
+	Video.prototype.play = function(){
+		var scope = this,
+			end = scope.getEnd(),
+			video = $video[0];
+		if(bufferedNum >= 3 && end <= 0.01){
+			// alert(end);
+			video.play();
+			// video.pause();
+			bufferedNum = 0;
+			scope.removeLoading();
+			// setTimeout(function(){
+			// 	scope.play();
+			// 	bufferedNum++;
+			// }, 1000);
+		} else if(end <= 5){
+			if(!$loading){
+				scope.showLoading();
+			}
+			setTimeout(function(){
+				scope.play();
+				bufferedNum++;
+			}, 1000);
+		} else {
+			scope.removeLoading();
+			video.play();
+		}
+	};
+
+	Video.prototype.getEnd = function(){
+		var video = $video[0];
+		var end = 0;
+        try {
+            end = video.buffered.end(0) || 0;
+            end = parseInt(end * 1000 + 1) / 1000;
+        } catch(e) {}
+        return end;
+	};
 
 	/**
      * video事件监听
@@ -186,13 +249,24 @@ $(function(){
      */
     Video.prototype.addVideoListener = function() {
     	var scope = this;
-    	$video.on('waiting', function(event){
-    		$loading = $('<div id="J_video_loading" class="video-loading"><div class="video-loading-wrap"><img src="img/loading2.gif" alt=""></div></div>');
-	 		$loading.appendTo($video.parents('.video-wrap'));
+    	$video.one('play', function(event){
+    		scope.showLoading();
+    		var timer = setInterval(function(){
+    			var video = $video[0];
+    			if(Math.floor(video.currentTime * 1000) < 100){
+    				return;
+    			}
+    			scope.removeLoading();
+    			clearInterval(timer);
+    		}, 200);
     	});
+
+    	// $video.one('canplaythrough', function(event){
+    	// 	scope.removeLoading();
+    	// });
+
     	// 播放事件
     	$video.on('playing', function(event){
-    		$loading && $loading.remove();
 			try {
 				var $vd = $(event.target),
 					video = $vd[0],
@@ -203,6 +277,17 @@ $(function(){
 					playingTime = $vd.attr('data-playingTime') ? $vd.attr('data-playingTime') : 'null',
 					currentTime = Math.floor(video.currentTime * 1000),	// 当前播放时间位置
 					param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + 'null' + '\t' + (videoType || 'null') + '\t' + scope.osType + '\t' + (idx || 'null') + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\t' + 'play';
+	    		/*if(currentTime < 500){
+		    		scope.showLoading();
+		    		var timer = setInterval(function(){
+		    			// console.log(video.currentTime);
+		    			if(Math.floor(video.currentTime * 1000) < 500){
+		    				return;
+		    			}
+		    			scope.removeLoading();
+		    			clearInterval(timer);
+		    		}, 200);
+	    		}*/
 				// 用于记录实际播放时长
 				$vd.attr('data-updateTime', +new Date());
 				scope.sendVideoLog(param);
@@ -213,7 +298,6 @@ $(function(){
 		});
     	// 暂停事件
 		$video.on('pause', function(event){
-			$video[0].paused && scope.showGg();
 			try {
 				var $vd = $(event.target),
 					video = $vd[0],
@@ -226,6 +310,9 @@ $(function(){
 					param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + 'null' + '\t' + videoType + '\t' + scope.osType + '\t' + (idx || 'null') + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\t' + 'pause';
 				// 用于记录实际播放时长
 				scope.sendVideoLog(param);
+				if(Math.floor($video[0].currentTime * 1000) > 1000 && $video[0].paused){
+					scope.showGg();
+				}
 			} catch(e){
 				console.log('Event pause has error!!!', e);
 			}
@@ -251,6 +338,7 @@ $(function(){
 				console.log('Event timeupdate has error!!!', e);
 			}
 		});
+
     };
 
     /**

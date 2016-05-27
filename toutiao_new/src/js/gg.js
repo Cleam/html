@@ -155,7 +155,6 @@ GLOBAL.Et.ggData = {
 		"m021_wy006": {"baidu": {"li": "u2536379"}},
 		"m021_wy005": {"baidu": {"li": "u2536383"}},
 		"m021_wy004": {"baidu": {"li": "u2536282"}},
-		"m021_wy003": {"baidu": {"li": "u2536284"}},
 		"m021_wy002": {"baidu": {"li": "u2536257"}},
 		"m021_wy001": {"baidu": {"li": "u2536248"}},
 		"m021_waitui040": {"sogou": {"li": "565296"}},
@@ -483,7 +482,8 @@ GLOBAL.Et.ggData = {
 		"zhuanyidoumm":{"baidu":{"li":"u2649744"}},
 		"shujuan01":{"baidu":{"li":"u2649899"}},
 		"m021_myworld":{"baidu":{"li":"u2652106"}},
-		"uckuzhan":{"baidu":{"li":"u2652124"}}
+		"uckuzhan":{"baidu":{"li":"u2652124"}},
+		"haixunyidong":{"baidu":{"li":"u2654118"}}
 	}
 };
 
