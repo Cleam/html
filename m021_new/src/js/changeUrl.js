@@ -8,7 +8,7 @@
 	if(tt_news_mid === 'pgzs' || tt_news_mid.indexOf('waitui') > -1){	// 天明渠道(pgzs和waitui开头的渠道)
 		links = ['jingdong', 'baidu', 'youxizhongxin', 'tianmao', 'aitaobao'];
 		urls = [
-	 		'http://union.click.jd.com/jdc?e=&p=AyIHVCtaJQMiQwpDBUoyS0IQWlALHE4YDk5ER1xOGWV5PRxpdH4TYj59dGVgHnA%2FY2FkYzRdVxkyFwZRE1kWChAFZRtaFAMTBFUTXRMyImEoKxB7AyIHZRteEQsUD10fWBAEEwJlHGtIVlNXDV0LSlRPQwsraw%3D%3D&t=W1dCFBBFC14NXAAECUteDA%3D%3D',
+	 		'http://union.click.jd.com/jdc?e=&p=AyIHVCtaJQMiQwpDBUoyS0IQWlALHE4YDk5ER1xONythJ1QcSgNTeCxNQRtnUmgEVmlOAzUXVyUHEgRTE1kUABM3VRpaFAMRB10bXyUydHplUDUUMhI3VR5cFwobBlYdUhUAEjdSK46cucWD087TtNWatWUraw%3D%3D&t=W1dCFBBFC14NXAAECUte',
 	 		'https://m.baidu.com/?from=1017246b',
 	 		'http://tongji.51pgzs.com/51pgzs/appid/index.html',
 	 		'http://ai.m.taobao.com/index.html?pid=mm_112599953_11408251_55960340',	// 天猫
