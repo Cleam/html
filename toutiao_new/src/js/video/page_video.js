@@ -7,6 +7,9 @@ $(function(){
 		$video = $('#J_video'),
 		$related = $('#J_related'),
 		bufferedNum = 0,
+		winWidth = $(window).width(),
+		videoWidth = parseInt($video.attr('data-width')),
+		videoHeight = parseInt($video.attr('data-height')),
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
 		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',	// 视频统计接口
@@ -45,7 +48,9 @@ $(function(){
 		$ggVideo.children('.gg').append(div).append(script1).append(script2);
 	}
 
-
+	/**
+	 * video对象
+	 */
 	function Video(){
 		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || '';	// 渠道ID
 		this.userId = '';
@@ -60,7 +65,10 @@ $(function(){
 	 */
 	Video.prototype.init = function() {
 		var scope = this;
-
+		// 设置视频容器宽高
+		if(videoWidth && videoHeight){
+			$video.parents('.video-wrap').css('paddingBottom', '0').height(winWidth * videoHeight / videoWidth);
+		}
 
 		/* 获取、存储qid */
 		if(scope.qid){
