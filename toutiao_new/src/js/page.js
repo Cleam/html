@@ -877,21 +877,21 @@ $(function(){
 			} else {
 				rks = rk;
 			}
-			wsCache.set('praise_trample_rowkey', rks, {exp: 365 * 24 * 3600});
+			wsCache.set('praise_trample_rowkey', rks, {exp: 2 * 3600});
 			if(ctg === 1){
 				if(praiseRk){
 					praiseRk += (',' + rk);
 				} else {
 					praiseRk = rk;
 				}
-				wsCache.set('praise_rowkey', praiseRk, {exp: 365 * 24 * 3600});
+				wsCache.set('praise_rowkey', praiseRk, {exp: 2 * 3600});
 			} else {
 				if(trampleRk){
 					trampleRk += (',' + rk);
 				} else {
 					trampleRk = rk;
 				}
-				wsCache.set('trample_rowkey', trampleRk, {exp: 365 * 24 * 3600});
+				wsCache.set('trample_rowkey', trampleRk, {exp: 2 * 3600});
 			}
 		},
 
