@@ -11,7 +11,7 @@ $(function(){
 		if (!Array.prototype.forEach) {
 		  Array.prototype.forEach = function(callback, thisArg) {
 		    var T, k;
-		    if (this == null) {
+		    if (this === null) {
 		      throw new TypeError(' this is null or not defined');
 		    }
 		    // 1. Let O be the result of calling toObject() passing the
