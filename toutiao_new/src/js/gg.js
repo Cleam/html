@@ -487,7 +487,11 @@ GLOBAL.Et.ggData = {
 		"wdcx":{"baidu":{"li":"u2656512"}},
 		"jinyu01":{"baidu":{"li":"u2656519"}},
 		"jinyu02":{"baidu":{"li":"u2656526"}},
-		"jinyu03":{"baidu":{"li":"u2656534"}}
+		"jinyu03":{"baidu":{"li":"u2656534"}},
+		"yilangkeji01":{"baidu":{"li":"u2657394"}},
+		"yilangkeji02":{"baidu":{"li":"u2657403"}},
+		"zhongmaikeji":{"baidu":{"li":"u2657410"}},
+		"wdcx01":{"baidu":{"li":"u2658903"}}
 	}
 };
 

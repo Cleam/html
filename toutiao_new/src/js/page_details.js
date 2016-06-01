@@ -77,6 +77,86 @@ var module = (function(my){
 })(module || {});
 
 /**
+ * 公用方法
+ */
+var module = (function(my){
+	// 存储一系列初始化方法
+	my.inits = my.inits || [];
+	
+	/**
+      * 动态加载js文件
+      * @param  {string}   url      js文件的url地址
+      * @param  {Function} callback 加载完成后的回调函数
+      */
+    my.getScript = function(url, callback, element) {
+        var head = document.getElementsByTagName('head')[0],
+            js = document.createElement('script');
+
+        js.setAttribute('type', 'text/javascript'); 
+        js.setAttribute('src', url); 
+        if(element){
+	        element.appendChild(js);
+        } else {
+	        head.appendChild(js);
+        }
+        //执行回调
+        var callbackFn = function(){
+            if(typeof callback === 'function'){
+                callback();
+            }
+        };
+
+        if (document.all) { //IE
+            js.onreadystatechange = function() {
+                if (js.readyState == 'loaded' || js.readyState == 'complete') {
+                    callbackFn();
+                }
+            }
+        } else {
+            js.onload = function() {
+                callbackFn();
+            }
+        }
+    }
+    /**
+     * 动态创建广告代码
+     * @param  {string}   scriptCode     脚本代码
+     * @param  {Function} callback   回调
+     * @param  {DOM}   element  广告js代码父级标签
+     * @return {undefined}    
+     */
+    my.createScript = function(scriptCode, callback, element){
+        if(scriptCode){
+	    	var head = document.getElementsByTagName('head')[0],
+	            js = document.createElement('script');
+	        js.setAttribute('type', 'text/javascript'); 
+	        js.innerHTML =  scriptCode;
+	        if(element){
+		        element.appendChild(js);
+	        } else {
+		        head.appendChild(js);
+	        }
+	        //执行回调
+            callback();
+        }
+    }
+
+    /**
+     * 获取随机数
+     * @param  {number} min 随机数下限
+     * @param  {number} max 随机数上限
+     * @return {number}     大于等于min且小于max的数
+     */
+    my.getRandom = function(min, max){
+    	return Math.floor(Math.random() * (max - min) + min);
+    }
+
+	return my;
+})(module || {});
+
+
+
+/**
  * 图片浏览
  */
 var module = (function(my){
@@ -278,7 +358,136 @@ var module = (function(my){
 	// 初始化
 	my.inits.push(function(){
 		initPhotoSwipeFromDOM('.J-article-content');
-		var $aaa=1;   alert(aaa);
+	});
+
+	return my;
+})(module || {});
+
+/**
+ * 通用详情内页
+ */
+var module = (function(my){
+	// 存储一系列初始化方法
+	my.inits = my.inits || [];
+
+	// var $article = $('#J_article');	// 文章
+	var $hnList = $('#J_hn_list');	// 热点新闻
+	var $inList = $('#J_in_list');	// 猜你感兴趣
+	
+	/**
+	 * 加载猜你感兴趣新闻（目前是广告）
+	 * @return {undefined} 
+	 */
+	var loadInterestNews = function() {
+		var ggId = 'u2610264';
+		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+		$inList.append('<div id="cpro_' + ggId + '"></div>');
+		
+		my.createScript(ggConfig, function(){
+			// console.log('js/gg_details.js loaded!!!');
+			my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
+		}, $('#cpro_' + ggId)[0]);
+	};
+
+	/**
+	 * 加载热点新闻
+	 * @param  {Array} data 新闻数据
+	 * @return {undefined} 
+	 */
+	var loadHotNews = function(data) {
+		var scope = this;
+        // var data = d && d.data;
+        if(!data || !data.length){
+            return false;
+        }
+        var len = data.length;
+        for (var i = 0; i < len; i++) {
+            var item = data[i],
+                url = item.url,
+                dateStr = item.date,
+                topic = item.topic,
+                source = item.source,
+                imgArr = item.miniimg,
+                recommendtype = item.recommendtype ? item.recommendtype : '-1',
+                hotnews = item.hotnews,
+                ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(-1)
+                videonews = item.videonews,	// 视频新闻
+                videoList = item.videolist,	// 视频列表
+                isadv = item.isadv || '',
+               	advId = item.adv_id || '',
+                type = item.type,
+                subtype = item.subtype,
+                imgLen = imgArr.length,
+                rowkey = item.rowkey,
+                hot = Number(item.hotnews),     // 热门
+                video = Number(item.isvideo),   // 视频
+                rec = Number(item.isrecom),     // 推荐
+                nuanwen = Number(item.isnxw),   // 暖文
+                urlpv = item.urlpv,				// 浏览量
+                picnums = item.picnums,			// 图片数量
+                praisecnt = item.praisecnt,		// 顶
+                tramplecnt = item.tramplecnt,	// 踩
+                advStr = '',
+                tagStr = '';
+
+            if(isadv == '1'){
+            	tagStr = '&nbsp;';
+            	// tagStr = '<i class="promote">推广</i>';
+                advStr = 'class="J-promote-news" data-advid="' + advId + '"';
+            } else if(hot){
+                tagStr = '<i class="hot">热门</i>';
+                if(video){
+                    tagStr += '<i class="video">视频</i>';
+                }
+            } else if(rec){
+                tagStr = '<i class="rec">推荐</i>';
+            } else if(video){
+                tagStr = '<i class="video">视频</i>';
+            } else if(nuanwen) {
+                tagStr = '<i class="nuanwen">暖文</i>';
+            }
+
+			/*======== 新闻流 =========*/
+        	if(videonews == '1'){	// 视频模式
+
+        	} else if(ispicnews == '1'){	// 大图模式
+
+            } else if(ispicnews == '-1'){	// 无图模式
+
+            } else if(ispicnews == '0'){
+            	if(imgLen >= 3){		// 三图模式
+	            	$hnList.append('<section class="news-item news-item-img3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt=""><img class="lazy fl" src="' + imgArr[1].src + '" alt=""><img class="lazy fl" src="' + imgArr[2].src + '" alt=""></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
+	            } else {	// 单图模式
+	                $hnList.append('<section class="news-item news-item-img1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt=""></div><div class="txt-wrap fr"><h3>' + topic + '</h3><p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></div></a></section>');
+	            }
+            }
+        }
+	};
+
+	/**
+	 * 热点新闻中插入广告
+	 * @param  {number} pos 插入位置
+	 * @return {undefined} 
+	 */
+	var insertGg = function(pos, ggId){
+		var ggArr = ['u2370262', 'u2649544'],
+			ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
+		console.log(pos);
+
+		$hnList.children().eq(pos > 0 ? pos - 1 : 0).after('<section class="news-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
+		// $hnList.append('<section class="news-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
+		
+		my.createScript(ggConfig, function(){
+			my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
+		}, $('#cpro_' + ggId)[0]);
+
+	};
+
+	my.inits.push(function(){
+		loadInterestNews();
+		loadHotNews(tempData);
+		insertGg(3, 'u2370262');
+		insertGg(7, 'u2649544');
 	});
 
 	return my;
@@ -286,239 +495,7 @@ var module = (function(my){
 
 
 
-
 $(function(){
-	var $article = $('#J_article');	// 文章
-	var $hnList = $('#J_hn_list');	// 热点新闻
-	var $inList = $('#J_in_list');	// 猜你感兴趣
-
-  	(function(){
-		// var pswpElement = document.querySelectorAll('.pswp')[0],
-		// 	$linkEl = $article.find('figure').children('a'),
-		// 	linkLen = $linkEl.length,
-  //   		items = [],
-  //   		options = {},
-  //   		gallery = null;
-  //   	$linkEl.each(function(){
-  //       	var $this = $(this),
-  //       		$img = $this.children('img');
-  //       	items.push({
-  //         		src: $this.attr('href'),
-  //         		w: $img.attr('data-weight'),
-  //         		h: $img.attr('data-height'),
-  //         		title: $this.next().text()
-  //       	});
-  //   	});
-  //   	// define options (if needed)
-  //   	options = {
-  //       	index: 0 // start at first slide
-  //   	};
-  //   	// Initializes
-  //   	gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-	
-		// $linkEl.each(function(i){
-		// 	var $this = $(this);
-		// 	$this.attr('data-index', i);
-		// 	$this.on('click', function(e){
-		// 		e = e || window.event;
-	 //            e.preventDefault ? e.preventDefault() : e.returnValue = false;
-		// 		gallery.options.index = parseInt($(this).attr('data-index')) || 0;
-		// 		console.log(gallery.options.index);
-		// 		// opens PhotoSwipe
-		//     	gallery.init();
-		// 	})
-		// });
-
-  	})();
-
-	/**
-      * 动态加载js文件
-      * @param  {string}   url      js文件的url地址
-      * @param  {Function} callback 加载完成后的回调函数
-      */
-    var getScript = function(url, callback, element) {
-        var head = document.getElementsByTagName('head')[0],
-            js = document.createElement('script');
-
-        js.setAttribute('type', 'text/javascript'); 
-        js.setAttribute('src', url); 
-        if(element){
-	        element.appendChild(js);
-        } else {
-	        head.appendChild(js);
-        }
-        //执行回调
-        var callbackFn = function(){
-            if(typeof callback === 'function'){
-                callback();
-            }
-        };
-
-        if (document.all) { //IE
-            js.onreadystatechange = function() {
-                if (js.readyState == 'loaded' || js.readyState == 'complete') {
-                    callbackFn();
-                }
-            }
-        } else {
-            js.onload = function() {
-                callbackFn();
-            }
-        }
-    }
-    /**
-     * 动态创建广告代码
-     * @param  {[type]}   ggConfigCode     广告配置代码
-     * @param  {Function} callback 回调
-     * @param  {[type]}   element  广告js代码父级标签
-     * @return {[type]}            [description]
-     */
-    var createGgConfigScript = function(ggConfigCode, callback, element){
-        if(ggConfigCode){
-	    	var head = document.getElementsByTagName('head')[0],
-	            js = document.createElement('script');
-	        js.setAttribute('type', 'text/javascript'); 
-	        js.innerHTML =  ggConfigCode;
-	        if(element){
-		        element.appendChild(js);
-	        } else {
-		        head.appendChild(js);
-	        }
-	        //执行回调
-            callback();
-        }
-    }
-
-	/**
-	 * 新闻内页对象
-	 */
-	function Details(){
-
-	}
-
-	Details.prototype = {
-
-		/**
-		 * 猜你感兴趣（六宫格广告）
-		 * @return {[type]} [description]
-		 */
-		generateInterestNews: function(){
-			var ggId = 'u2610264';
-    		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
-    		$inList.append('<div id="cpro_' + ggId + '"></div>');
-    		
-    		createGgConfigScript(ggConfig, function(){
-    			// console.log('js/gg_details.js loaded!!!');
-    			getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
-    		}, $('#cpro_' + ggId)[0]);
-		},
-
-		/**
-		 * 生成新闻列表（含三宫格广告、文字链广告）
-		 * @return {[type]} [description]
-		 */
-		generateHotNews: function(data){
-			var scope = this;
-	        // var data = d && d.data;
-	        if(!data || !data.length){
-	            return false;
-	        }
-	        var len = data.length;
-	        // var ranNum = Math.floor((len - 1) * Math.random());
-	        // console.log(ranNum);
-	        for (var i = 0; i < len; i++) {
-	            var item = data[i],
-	                url = item.url,
-	                dateStr = item.date,
-	                topic = item.topic,
-	                source = item.source,
-	                imgArr = item.miniimg,
-	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
-	                hotnews = item.hotnews,
-	                ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(-1)
-	                videonews = item.videonews,	// 视频新闻
-	                videoList = item.videolist,	// 视频列表
-	                isadv = item.isadv || '',
-	               	advId = item.adv_id || '',
-	                type = item.type,
-	                subtype = item.subtype,
-	                imgLen = imgArr.length,
-	                rowkey = item.rowkey,
-	                hot = Number(item.hotnews),     // 热门
-	                video = Number(item.isvideo),   // 视频
-	                rec = Number(item.isrecom),     // 推荐
-	                nuanwen = Number(item.isnxw),   // 暖文
-	                urlpv = item.urlpv,				// 浏览量
-	                picnums = item.picnums,			// 图片数量
-	                praisecnt = item.praisecnt,		// 顶
-	                tramplecnt = item.tramplecnt,	// 踩
-	                advStr = '',
-	                tagStr = '';
-
-	            if(isadv == '1'){
-	            	tagStr = '&nbsp;';
-	            	// tagStr = '<i class="promote">推广</i>';
-	                advStr = 'class="J-promote-news" data-advid="' + advId + '"';
-	            } else if(hot){
-	                tagStr = '<i class="hot">热门</i>';
-	                if(video){
-	                    tagStr += '<i class="video">视频</i>';
-	                }
-	            } else if(rec){
-	                tagStr = '<i class="rec">推荐</i>';
-	            } else if(video){
-	                tagStr = '<i class="video">视频</i>';
-	            } else if(nuanwen) {
-	                tagStr = '<i class="nuanwen">暖文</i>';
-	            }
-
-            	var ggArr = ['u2370262', 'u2649544'];
-            	if(i === 3 || i === 6){
-            		var ggId = ggArr[i/3 - 1];
-            		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
-            		
-            		$hnList.append('<section class="news-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
-            		
-            		createGgConfigScript(ggConfig, function(){
-            			// console.log('js/gg_details.js loaded!!!');
-            			getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
-            		}, $('#cpro_' + ggId)[0]);
-            	}
-
-              /*var ggArr2 = ['u2590737', 'u2590739'];
-              if(i === 4 || i === 8){
-                var ggId2 = ggArr2[i/4 - 1];
-                var ggConfig2 = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId2 + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
-                
-                $hnList.append('<section class="news-item news-gg-img3"><div id="cpro_' + ggId2 + '"></div><div class="line"></div></section>');
-                
-                createGgConfigScript(ggConfig2, function(){
-                  // console.log('js/gg_details.js loaded!!!');
-                  getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId2)[0]);
-                }, $('#cpro_' + ggId2)[0]);
-              }*/
-
-				/*======== 新闻流 =========*/
-            	if(videonews == '1'){	// 视频模式
-
-            	} else if(ispicnews == '1'){	// 大图模式
-
-	            } else if(ispicnews == '-1'){	// 无图模式
-
-	            } else if(ispicnews == '0'){
-	            	if(imgLen >= 3){		// 三图模式
-		            	$hnList.append('<section class="news-item news-item-img3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt=""><img class="lazy fl" src="' + imgArr[1].src + '" alt=""><img class="lazy fl" src="' + imgArr[2].src + '" alt=""></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
-		            } else {	// 单图模式
-		                $hnList.append('<section class="news-item news-item-img1"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '" alt=""></div><div class="txt-wrap fr"><h3>' + topic + '</h3><p><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></div></a></section>');
-		            }
-	            }
-	        }
-		}
-
-	};
-
-	/*===========================================================================*/
-	
 	/**
 	 * wnwifi渠道内页
 	 */
@@ -534,11 +511,11 @@ $(function(){
 	+function(){
 		console.log('tempData::', tempData);
 
-		var details = new Details();
+		// var details = new Details();
 		// 猜你感兴趣
-		details.generateInterestNews();
+		// details.generateInterestNews();
 		// 热点新闻
-		details.generateHotNews(tempData);
+		// details.generateHotNews(tempData);
 	}();
 
 
