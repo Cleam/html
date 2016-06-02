@@ -1,0 +1,381 @@
+﻿/* 全局 */
+*{padding:0;margin:0;}
+body{padding:0;margin:0;text-align:left;background:#ffffff;}
+body,html{width:100%;height:100%;background:#ffffff;}
+div,p,img,span,form,table,td,input{margin:0;padding:0;font-size:0;}
+a,textarea,button,input,ul,li,div,span,td{-webkit-appearance:none;}
+div,p,img,span,form,table,td,textarea,input{border:none;margin:0;padding:0}
+h1,h2,h3,h4{font-weight:normal}
+
+.fl{float:left}
+.fr{float:right}
+.tl{text-align:left}
+.tr{text-align:right}
+.tc{text-align:center}
+.clear{clear:both}
+.off{display: none}
+
+ul li{list-style:none}
+a:link{text-decoration:none}
+a:visited{text-decoration:none}
+a:active{text-decoration:none}
+a:hover{text-decoration:none}
+
+.em{ text-indent:2em;}
+img{border:0;}
+
+
+/*高度百分比*/
+.blank1em{height:0.8em;clear:both;overflow:hidden}
+.blank2em{height:2em;clear:both;overflow:hidden}
+.blank3em{height:3em;clear:both;overflow:hidden}
+
+/*垂直居中*/
+.outer {height:100%; display:table; position:static;}  
+.middle {display: table-cell; vertical-align: middle; position: static;}  
+
+/*行高*/
+.lh_per120{line-height:1.2em}
+.lh_per150{line-height:1.5em}
+
+/*字体颜色*/
+.grey{font-family:"黑体";color:#444}
+.grey2{font-family:"黑体";color:#aaa}
+.grey3{font-family:"黑体";color:#666}
+.black{font-family:"黑体";color:#000}
+.white{font-family:"黑体";color:#fff}
+.red{font-family:"黑体";color:#c10101}
+.blue{font-family:"黑体";color:#2c457a}
+
+/*字体大小*/
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:10px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:11px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:12px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:14px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a{font:16px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a,#zw p{font:18px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:20px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:22px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:24px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:26px/1.5em "黑体";}
+@media screen and (min-width:360px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:11px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:12px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:13px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:16px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a{font:18px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a,#zw p{font:20px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:22px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:24px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:26px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:30px/1.5em "黑体";}
+}
+
+@media screen and (min-width:401px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:12px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:13px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:15px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:17px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a{font:20px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a,#zw p{font:22px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:25px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:27px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:30px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:32px/1.5em "黑体";}
+}
+
+@media screen and (min-width:480px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:15px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:16px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:18px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:21px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a{font:24px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a,#zw p{font:27px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:30px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:33px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:36px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:39px/1.5em "黑体";}
+}
+@media screen and (min-width:640px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:20px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:22px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:24px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:28px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a,#zw p{font:32px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a{font:36px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:40px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:44px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:48px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:52px/1.5em "黑体";}
+}
+@media screen and (min-width:720px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:22px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:24px/1.5em "黑体";}
+/*.font12,.font12 a,ul.font12 li,ul.font12 li a{font:26px/1.5em "黑体";}*/
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:16px/1.5em "黑体";}
+#zw p{font:28px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:32px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a{font:36px/1.5em "黑体";}
+/*.font18,.font18 a,ul.font18 li,ul.font18 li a{font:40px/1.5em "黑体";}*/
+.font18,.font18 a,ul.font18 li,ul.font18 li a,.title{font:36px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a{font:44px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:48px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:52px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:60px/1.5em "黑体";}
+}
+@media screen and (min-width:768px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:24px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:26px/1.5em "黑体";}
+/*.font12,.font12 a,ul.font12 li,ul.font12 li a{font:28px/1.5em "黑体";}*/
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:16px/1.5em "黑体";}
+#zw p{font:28px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:34px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a{font:38px/1.5em "黑体";}
+/*.font18,.font18 a,ul.font18 li,ul.font18 li a{font:43px/1.5em "黑体";}*/
+.font18,.font18 a,ul.font18 li,ul.font18 li a,.title{font:36px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a{font:48px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:53px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:58px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:62px/1.5em "黑体";}
+}
+@media screen and (min-width:960px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:30px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:32px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:36px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:42px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a,#zw p{font:48px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a{font:54px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:60px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:66px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:72px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:78px/1.5em "黑体";}
+}
+@media screen and (min-width:1024px) {
+.font10,.font10 a,ul.font10 li,ul.font10 li a{font:32px/1.5em "黑体";}
+.font11,.font11 a,ul.font11 li,ul.font10 li a{font:36px/1.5em "黑体";}
+.font12,.font12 a,ul.font12 li,ul.font12 li a{font:38px/1.5em "黑体";}
+.font14,.font14 a,ul.font14 li,ul.font14 li a{font:44px/1.5em "黑体";}
+.font16,.font16 a,ul.font16 li,ul.font16 li a,#zw p{font:51px/1.5em "黑体";}
+.font18,.font18 a,ul.font18 li,ul.font18 li a{font:57px/1.5em "黑体";}
+.font20,.font20 a,ul.font20 li,ul.font20 li a,.title{font:64px/1.5em "黑体";}
+.font22,.font22 a,ul.font22 li,ul.font22 li a{font:70px/1.5em "黑体";}
+.font24,.font24 a,ul.font24 li,ul.font24 li a{font:76px/1.5em "黑体";}
+.font26,.font26 a,ul.font26 li,ul.font26 li a{font:83px/1.5em "黑体";}
+}
+
+
+/*topbanner*/
+.topbanner{position:relative;width:100%;}
+.topbanner a{width:50%;position:absolute;top:0;right:0;display:block}
+
+/*main*/
+.main92{width:92%;margin:0 auto;position:relative;background:#ffffff;}
+.dotline{width:100%;height:0.2em;margin-bottom:1.2em;border-bottom:1px solid #dbdbdb}
+@media screen and (min-width:768px) {
+.dotline{width:80%;margin-left:auto;margin-right:auto}
+.main92{width:80%;margin:0 auto;position:relative;background:#ffffff;}
+}
+.title{line-height:1.35em; font-family:"黑体"; font-weight:800;}
+.date{line-height:2.8em;}
+#zw p{width:100%;margin-bottom:1em;line-height:1.6em;word-break: break-all;}
+#zw img{width:90%;display:block;margin:0 auto;}
+
+
+/*list1*/
+.list1{width:100%}
+.list1 li{font:14px/24px "黑体";margin-left:0;min-height:24px;padding-left:1em;background:url(http://listen.eastday.com/images/css_20160429/lmlist.gif) no-repeat 0 0.72em ,url(line1.gif) no-repeat 0 bottom ;background-size:2% ,100%;width:96%;color:#444;margin-top:0.5em;padding-bottom:0.5em}
+.list1 a{font:14px/24px "黑体";color:#444;}
+@media screen and (min-width:360px) {
+.list1 li{font:16px/27px "黑体";margin-left:0;min-height:27px;}
+.list1 a{font:16px/27px "黑体";}
+}
+@media screen and (min-width:480px) {
+.list1 li{font:21px/36px "黑体";margin-left:0;min-height:36px;}
+.list1 a{font:21px/36px "黑体";}
+}
+@media screen and (min-width:640px) {
+.list1 li{font:28px/48px "黑体";margin-left:0;min-height:48px;}
+.list1 a{font:28px/48px "黑体";}
+}
+@media screen and (min-width:720px) {
+.list1 li{font:32px/54px "黑体";margin-left:0;min-height:54px;}
+.list1 a{font:32px/54px "黑体";}
+}
+@media screen and (min-width:1024px) {
+.list1 li{font:44px/77px "黑体";margin-left:0;min-height:77px;}
+.list1 a{font:44px/77px "黑体";}
+}
+
+
+.piclist1 {width:100%}
+.piclist1 .pic{width:28%;}
+.piclist1 .title{width:69%;}
+.piclist1 li{font:14px/24px "黑体";margin-left:0;padding-left:0;border-bottom:1px dotted #ccc;width:100%;color:#444;margin-top:0.9em;}
+.piclist1 li:last-child{border:none}
+.piclist1 a{font:14px/24px "黑体";color:#444;}
+@media screen and (min-width:360px) {
+.piclist1 li{font:16px/27px "黑体";margin-left:0;min-height:27px;}
+.piclist1 a{font:16px/27px "黑体";}
+}
+@media screen and (min-width:480px) {
+.piclist1 li{font:21px/36px "黑体";margin-left:0;min-height:36px;}
+.piclist1 a{font:21px/36px "黑体";}
+}
+@media screen and (min-width:640px) {
+.piclist1 li{font:28px/48px "黑体";margin-left:0;min-height:48px;}
+.piclist1 a{font:28px/48px "黑体";}
+}
+@media screen and (min-width:720px) {
+.piclist1 li{font:32px/54px "黑体";margin-left:0;min-height:54px;}
+.piclist1 a{font:32px/54px "黑体";}
+}
+@media screen and (min-width:1024px) {
+.piclist1 li{font:44px/77px "黑体";margin-left:0;min-height:77px;}
+.piclist1 a{font:44px/77px "黑体";}
+}
+/*liuyanban*/
+.liuyanban{background:#7fc3ee;line-height:2em;padding-left:0.9em}
+.lybleft{width:4%;margin-top:1em}
+.lyb{position:relative;width:72%;margin-top:1em}
+.lyb img{border:1px solid #cbcbcb}
+.lybright{width:2.66666%;margin-top:1em}
+.fasong{width:17.33333%;margin-top:1em}
+#liuyanban{position:absolute;top:0.2em;left:0.3em;width:97%;}
+.h2em{line-height:1.8em}
+
+/*pinglun*/
+.pinglun{background:#7fc3ee;line-height:2em;padding-left:0.9em;position:relative;z-index:99999;}
+.pinglun2{background:#7fc3ee;line-height:2em;padding-left:0.9em;position:relative;z-index:99999;}
+/*section {width:100%;margin:1em auto 0;background:url(http://listen.eastday.com/images/css_20160429/line1.gif) no-repeat 0 bottom ;background-size:100% auto;padding-bottom:0.5em}*/
+section {width:100%;margin:1em auto 0;border-bottom:1px dotted #ccc;padding-bottom:0.5em}
+
+section div:first-child {width:9%;margin-right:4%}
+.yhpic {border: 1px solid #fff;box-shadow: 0 0 1px #bbb;width:100%;font-size:0}
+section div:nth-child(2) {width:53%;}
+h3 {font-size:1em;height:1.2em;color:#444;font-weight:600}
+time{font-size:0.6em;color:#999;}
+.plcontent p{font-size:1.25em;}
+section div:nth-child(3) {width:34%;}
+
+.ding{margin-left:25%;background:url(http://listen.eastday.com/images/css_20160429/ding.gif) no-repeat 0 center;background-size:1em;padding-left:1.1em}
+.ding span{font-size:0.8em;color:#999;line-height:0.8em;}
+.ping{margin-left:15%;background:url(http://listen.eastday.com/images/css_20160429/ping.gif) no-repeat 0 center;background-size:1em;padding-left:1.1em}
+.ping span{font-size:0.8em;color:#999;line-height:0.8em;}
+
+
+.w100{width:100%}
+
+
+
+
+.yp {width:35%;background:#f6f6f6;border:1px solid #d7d7d7;border-radius:0.5em;padding:0.3em;margin:0 0 0.6em;}
+
+.yp,.yp p,.yp span{font:14px/1em "黑体";}
+@media screen and (min-width:360px) {
+
+.yp,.yp p,.yp span{font:16px/1em "黑体";}
+
+}
+
+@media screen and (min-width:401px) {
+
+.yp,.yp p,.yp span{font:17px/1em "黑体";}
+
+}
+
+@media screen and (min-width:480px) {
+
+
+.yp,.yp p,.yp span{font:21px/1em "黑体";}
+
+}
+@media screen and (min-width:640px) {
+
+.yp,.yp p,.yp span{font:28px/1em "黑体";}
+
+}
+@media screen and (min-width:720px) {
+
+.yp,.yp p,.yp span{font:32px/1em "黑体";}
+
+}
+@media screen and (min-width:768px) {
+
+.yp,.yp p,.yp span{font:34px/1em "黑体";}
+
+}
+@media screen and (min-width:960px) {
+
+.yp,.yp p,.yp span{font:42px/1em "黑体";}
+
+}
+@media screen and (min-width:1024px) {
+
+.yp,.yp p,.yp span{font:44px/1em "黑体";}
+
+}
+
+.yp p{width:100%;position:relative;line-height:100%;color:#444;height:1em}
+.yp img {height:100%}
+.yp span {position:absolute;height:1em;text-align:right;right:0;bottom:0;color:#444;}
+
+#media{width:294px;height:166px;margin-bottom:1em}
+@media screen and (min-width:360px) {
+#media{width:330px;height:187px;}
+}
+@media screen and (min-width:375px) {
+#media{width:345px;height:195px;}
+}
+@media screen and (min-width:414px) {
+#media{width:380px;height:215px;}
+}
+@media screen and (min-width:480px) {
+#media{width:441px;height:249px;}
+}
+@media screen and (min-width:540px) {
+#media{width:496px;height:280px;}
+}
+@media screen and (min-width:640px) {
+#media{width:588px;height:332px;}
+}
+@media screen and (min-width:720px) {
+#media{width:660px;height:374px;}
+}
+@media screen and (min-width:768px) {
+#media{width:706px;height:398px;}
+}
+@media screen and (min-width:960px) {
+#media{width:882px;height:498px;}
+}
+@media screen and (min-width:1024px) {
+#media{width:940px;height:531px;}
+}
+@media screen and (min-width:1280px) {
+#media{width:1176px;height:664px;}
+}
+/*music*/
+.listen{position:absolute;bottom:0.4em;right:0;width:1.5em;height:1.5em;}
+@media screen and (min-width:768px) {
+.listen{position:absolute;bottom:0.2em;right:0;width:1.0em;height:1.0em;}
+}
+.listen img{width:100%;}
+
+/*bottom*/
+#btmnav {min-height:2.5em;width:100%;position:fixed;bottom:0;left:0;background:#0087dd;z-index:99999;}
+#btmnav li {float:left;width:30%;padding:0.5em 5% 0 0;text-align:center;}
+#btmnav li:last-child {padding:0.5em 0 0 0;}
+#btmnav li img {width:70%;}
+.bottom{height:3em;}
+
+/*fixed*/
+#sqtplist li {display:inline-block;width:25%;padding:1em 5% 0 0;}
+#sqtplist li:last-child {padding:1em 0 0 0;}
+#sqtplist li img{width:100%}
+
+/*相关评论*/
+.xgpl{margin-top:-2em}
+.whitebg{position:relative;z-index:99999;background:#fff;}
+
+#plmore {clear:both;height:2.5em;background:#c8c8c8;width:93%;margin:1em auto;}
+#plmore a {display:block;line-height:2.5em;width:80%;margin:0 auto;color:#606060;background:url(http://listen.eastday.com/images/css_20160429/tp10.png) 100% 50% no-repeat;-webkit-background-size:2em auto;background-size:2em auto;}
+#plmore div {display:block;line-height:2.5em;width:80%;margin:0 auto;color:#606060;text-align: center;}

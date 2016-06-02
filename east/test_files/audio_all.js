@@ -1,0 +1,1 @@
+if(v!=2 && v!=1){document.write("<script src='http://listen.eastday.com/images/css_20160429/audio_web.js'><"+"/script>");}else{document.write("<script src='http://listen.eastday.com/images/css_20160429/audio_ax.js'><"+"/script>");}
