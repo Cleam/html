@@ -491,7 +491,11 @@ GLOBAL.Et.ggData = {
 		"yilangkeji01":{"baidu":{"li":"u2657394"}},
 		"yilangkeji02":{"baidu":{"li":"u2657403"}},
 		"zhongmaikeji":{"baidu":{"li":"u2657410"}},
-		"wdcx01":{"baidu":{"li":"u2658903"}}
+		"wdcx01":{"baidu":{"li":"u2658903"}},
+		"m021_gsbrowser_install":{"baidu":{"li":"u2659936"}},
+		"gsbrowser":{"baidu":{"li":"u2659921"}},
+		"lianxianglvcha":{"baidu":{"li":"u2659957"}},
+		"juheshuju":{"baidu":{"li":"u2659969"}}
 	}
 };
 
@@ -507,4 +511,12 @@ for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
 	}
 }
 
+// 度宝广告
+if(GLOBAL.Et.qid == 'lt114116'){
+	document.write('<scr' + 'ipt type="text/javascript">var cpro_id = "u2660118";</scr' + 'ipt>');
+	document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
+} else if(GLOBAL.Et.qid == '10086wy'){
+	document.write('<scr' + 'ipt type="text/javascript">var cpro_id = "u2660132";</scr' + 'ipt>');
+	document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
+}
 

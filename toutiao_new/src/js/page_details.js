@@ -154,8 +154,6 @@ var module = (function(my){
 	return my;
 })(module || {});
 
-
-
 /**
  * 图片浏览
  */
