@@ -1,74 +1,21 @@
-console.log(GLOBAL);
-
-(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({
-	id : "u2649544",
-	at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"
-});
-
-
-
-
-// var cpro_id = 'u2610264';
-// (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id]={at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"}
-
 /**
- * 此js依赖global.js
+ * 详情页广告JS
+ * @deps global.js
+ * @author  lizhigao(lizhigao@021.com)
+ * @date 2016-06-03
  */
 
 GLOBAL.namespace('Et');
-
-// 渠道-广告数据
-GLOBAL.Et.ggDataDetails = {
-	root: {
-		default: {
-			threeUp: {
-				baidu: '',
-				sogou: ''
-			}
-			threeDown: {
-				baidu: '',
-				sogou: ''
-			}
-			tujia: {
-				baidu: '',
-				sogou: ''
-			}
-			txt: {
-				baidu: '',
-				sogou: ''
-			}
-			gongjian: {
-				baidu: '',
-				sogou: ''
-			}
-		},
-		wnwifi: {
-			threeUp: {
-				baidu: '',
-				sogou: ''
-			}
-			threeDown: {
-				baidu: '',
-				sogou: ''
-			}
-			tujia: {
-				baidu: '',
-				sogou: ''
-			}
-			txt: {
-				baidu: '',
-				sogou: ''
-			}
-			gongjian: {
-				baidu: '',
-				sogou: ''
-			}
-		}
-
-	}
-};
-
-
-function getUserId(){
-	return (+new Date()) + Math.random().toString(10).substring(2, 6);
+// 缓存用户id
+GLOBAL.Et.uid = Cookies.get('user_id');
+if(!GLOBAL.Et.uid) {
+	GLOBAL.Et.uid = (+new Date()) + Math.random().toString(10).substring(2, 6);
+	Cookies.set('user_id', GLOBAL.Et.uid, { expires: 365, path: '/', domain: 'eastday.com'});
 }
+// 缓存渠道ID
+GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid');
+if(GLOBAL.Et.qid){
+	Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com'});
+}
+
+

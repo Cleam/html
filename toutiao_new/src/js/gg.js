@@ -495,7 +495,8 @@ GLOBAL.Et.ggData = {
 		"m021_gsbrowser_install":{"baidu":{"li":"u2659936"}},
 		"gsbrowser":{"baidu":{"li":"u2659921"}},
 		"lianxianglvcha":{"baidu":{"li":"u2659957"}},
-		"juheshuju":{"baidu":{"li":"u2659969"}}
+		"juheshuju":{"baidu":{"li":"u2659969"}},
+		"yousu":{"baidu":{"li":"u2661155"}}
 	}
 };
 
