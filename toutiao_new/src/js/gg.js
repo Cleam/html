@@ -513,11 +513,11 @@ for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
 }
 
 // 度宝广告
-if(GLOBAL.Et.qid == 'lt114116'){
-	document.write('<scr' + 'ipt type="text/javascript">var cpro_id = "u2660118";</scr' + 'ipt>');
-	document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
-} else if(GLOBAL.Et.qid == '10086wy'){
-	document.write('<scr' + 'ipt type="text/javascript">var cpro_id = "u2660132";</scr' + 'ipt>');
-	document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
-}
+// if(GLOBAL.Et.qid == 'lt114116'){
+// 	document.write('<scr' + 'ipt type="text/javascript">var cpro_id = "u2660118";</scr' + 'ipt>');
+// 	document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
+// } else if(GLOBAL.Et.qid == '10086wy'){
+// 	document.write('<scr' + 'ipt type="text/javascript">var cpro_id = "u2660132";</scr' + 'ipt>');
+// 	document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
+// }
 

@@ -1,3 +1,4 @@
+/* 工具模块 */
 var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     cleanCSS = require('gulp-clean-css'),   // css 压缩
@@ -12,12 +13,13 @@ var gulp = require('gulp'),
     rev = require('gulp-rev'),                      //- 对文件名加MD5后缀
     revCollector = require('gulp-rev-collector'),   //- 路径替换
     livereload = require('gulp-livereload');        //livereload
-// HTML处理
-/*
-  注意更新css和js的引用：
-  <link rel="stylesheet" href="css/all.min.css">
-  <script src="js/main.min.js"></script>
- */
+
+/* ========================================
+  HTML: 压缩
+ ======================================== */
+ /**
+  * 所有html模板（特殊模板除外）
+  */
 gulp.task('html', function() {
     var htmlSrc = [
             './src/index.html',
@@ -30,6 +32,9 @@ gulp.task('html', function() {
         .pipe(gulp.dest(htmlDst))
         .pipe(livereload());
 });
+/**
+ * 首页html模板
+ */
 gulp.task('html-index', function() {
     var htmlSrc = [
             './src/index.html'
@@ -40,7 +45,9 @@ gulp.task('html-index', function() {
         .pipe(gulp.dest(htmlDst))
         .pipe(livereload());
 });
-// 广告html
+/**
+ * 广告html
+ */
 gulp.task('html-gg', function() {
     var htmlSrc = [
             './src/gg/gg_baidu.html',
@@ -53,7 +60,12 @@ gulp.task('html-gg', function() {
         .pipe(livereload());
 });
 
-// 自动添加css前缀和压缩
+/* ========================================
+  CSS: 自动添加css前缀和压缩
+ ======================================== */
+/**
+ * 公用css样式压缩合并（不需要加MD5版本号，更新不需要改模板）
+ */
 gulp.task('css-common', function () {
     var cssSrc = [
             './src/css/base.css',
@@ -68,34 +80,10 @@ gulp.task('css-common', function () {
         .pipe(gulp.dest(cssDst))
         .pipe(livereload());
 });
-gulp.task('css-page', function () {
-    var cssSrc = [
-            './src/css/page.css',
-            './src/css/page_search.css',
-            './src/css/page_subscribe.css'
-        ],
-        cssDst = './dist/css';
-    return gulp.src(cssSrc)
-    	.pipe(autoprefixer())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(cleanCSS())
-        .pipe(rev())
-        .pipe(gulp.dest(cssDst))
-        .pipe(livereload());
-});
-// video css
-gulp.task('css-video', function () {
-    var cssSrc = [
-            './src/css/video/*.css',
-        ],
-        cssDst = './dist/css/video/';
-    return gulp.src(cssSrc)
-        .pipe(cleanCSS())
-        // .pipe(rev())
-        .pipe(gulp.dest(cssDst))
-        .pipe(livereload());
-});
-// 首页css
+
+/**
+ * 首页css样式（每次更新，需要改模板）
+ */
 gulp.task('css-index', function () {
     var cssSrc = [
             './src/css/page.css'
@@ -109,6 +97,10 @@ gulp.task('css-index', function () {
         .pipe(gulp.dest(cssDst))
         .pipe(livereload());
 });
+
+/**
+ * 搜索页css样式（每次更新，需要改模板）
+ */
 gulp.task('css-search', function () {
     var cssSrc = [
             './src/css/page_search.css'
@@ -122,6 +114,10 @@ gulp.task('css-search', function () {
         .pipe(gulp.dest(cssDst))
         .pipe(livereload());
 });
+
+/**
+ * 订阅页css样式（每次更新，需要改模板）
+ */
 gulp.task('css-subscribe', function () {
     var cssSrc = [
             './src/css/page_subscribe.css'
@@ -136,7 +132,73 @@ gulp.task('css-subscribe', function () {
         .pipe(livereload());
 });
 
-// js代码校验、合并和压缩
+gulp.task('css-page', ['css-index', 'css-search', 'css-subscribe']);
+
+/**
+ * 视频页css样式（由于模板更新麻烦，所以不需要加MD5版本号，更新不需要改模板）
+ */
+gulp.task('css-video', function () {
+    var cssSrc = [
+            './src/css/video/*.css',
+        ],
+        cssDst = './dist/css/video/';
+    return gulp.src(cssSrc)
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+
+/**
+ * 详情页css样式（由于模板更新麻烦，所以不需要加MD5版本号，更新不需要改模板）
+ */
+gulp.task('css-details', function () {
+    var cssSrc = [
+            './src/css/page_details.css'
+        ],
+        cssDst = './dist/css';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+
+/**
+ * 详情页图片浏览插件css样式合并、压缩、复制
+ */
+gulp.task('pswp-css', function () {
+    var cssSrc = [
+            './src/css/photoswipe/*.css'
+        ],
+        cssDst = './dist/css/photoswipe';
+    return gulp.src(cssSrc)
+        .pipe(autoprefixer())
+        .pipe(concat('photoswipe.css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(cssDst))
+        .pipe(livereload());
+});
+gulp.task('pswp-src', function () {
+    var pswpSrc = [
+            './src/css/photoswipe/default-skin.png',
+            './src/css/photoswipe/preloader.gif',
+            './src/css/photoswipe/default-skin.svg'
+        ],
+        pswpDst = './dist/css/photoswipe';
+    return gulp.src(pswpSrc)
+        .pipe(gulp.dest(pswpDst))
+        .pipe(livereload());
+});
+gulp.task('css-pswp', ['pswp-css', 'pswp-src']);
+
+/* ========================================
+  JS: js代码校验、合并和压缩
+ ======================================== */
+/**
+ * 公用js代码
+ */
 gulp.task('js-common', function() {
     var jsSrc = [
             './src/js/zepto.min.js',
@@ -153,34 +215,9 @@ gulp.task('js-common', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
-gulp.task('js-page', function() {
-    var jsSrc = [
-            './src/js/gg.js',
-            './src/js/page.js', 
-            './src/js/page_search.js', 
-            './src/js/page_subscribe.js'
-        ],
-        jsDst = './dist/js';
-    return gulp.src(jsSrc)
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(rev())
-        .pipe(gulp.dest(jsDst))
-        .pipe(livereload());
-});
-// video
-gulp.task('js-video', function() {
-    var jsSrc = [
-            './src/js/video/*.js'
-        ],
-        jsDst = './dist/js/video/';
-    return gulp.src(jsSrc)
-        .pipe(uglify())
-        // .pipe(rev())
-        .pipe(gulp.dest(jsDst))
-        .pipe(livereload());
-});
-// 广告
+/**
+ * 广告js
+ */
 gulp.task('js-gg', function() {
     var jsSrc = [
             './src/js/gg.js'
@@ -193,7 +230,9 @@ gulp.task('js-gg', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
-// 首页
+/**
+ * 首页js
+ */
 gulp.task('js-index', function() {
     var jsSrc = [
             './src/js/page.js'
@@ -206,6 +245,9 @@ gulp.task('js-index', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
+/**
+ * 搜索页js
+ */
 gulp.task('js-search', function() {
     var jsSrc = [
             './src/js/page_search.js'
@@ -218,6 +260,9 @@ gulp.task('js-search', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
+/**
+ * 订阅页js
+ */
 gulp.task('js-subscribe', function() {
     var jsSrc = [
             './src/js/page_subscribe.js'
@@ -230,16 +275,34 @@ gulp.task('js-subscribe', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
-
-gulp.task('data', function() {
+gulp.task('js-page', ['js-gg', 'js-index', 'js-search', 'js-subscribe']);
+// video
+gulp.task('js-video', function() {
     var jsSrc = [
-            './src/data/channels.json'
+            './src/js/video/*.js'
         ],
-        jsDst = './dist/data';
+        jsDst = './dist/js/video/';
     return gulp.src(jsSrc)
+        .pipe(uglify())
+        // .pipe(rev())
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
+
+gulp.task('js-details', function() {
+    var jsSrc = [
+            './src/js/page_details.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+
+
+
 
 // 压缩图片
 gulp.task('img', function() {
@@ -248,6 +311,16 @@ gulp.task('img', function() {
     return gulp.src(imgSrc)
         .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
         .pipe(gulp.dest(imgDst))
+        .pipe(livereload());
+});
+
+gulp.task('data', function() {
+    var jsSrc = [
+            './src/data/channels.json'
+        ],
+        jsDst = './dist/data';
+    return gulp.src(jsSrc)
+        .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
 
@@ -271,9 +344,9 @@ gulp.task('webserver', function(){
 gulp.task('watch',function(){
     livereload.listen();
     gulp.watch('./src/*.html', ['html']);
-    gulp.watch('./src/css/*.css', ['css']);
+    gulp.watch('./src/css/**/*.css', ['css']);
     gulp.watch('./src/img/**/*', ['img']);
-    gulp.watch('./src/js/*.js', ['js']);
+    gulp.watch('./src/js/**/*.js', ['js']);
 });
 
 // 清除文件(清除完后回调cb)
