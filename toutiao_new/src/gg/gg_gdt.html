@@ -37,9 +37,19 @@
 	<script type="text/javascript"> 
 		var gdtContainer = document.getElementById('J_gg_gdt'),
 			// advId = '9080517190793768',
-			advId = '8010115151216515',
+			// advId = '8010115151216515',
+			// advId = '4080619188310363',	// qid = ucllqsun
+			advId = getQueryString('ggid'),
+			uid = getQueryString('uid') || Cookies.get('user_id') || 'null',
+        	qid = getQueryString('qid') || Cookies.get('qid') || 'null',
+        	osType = getOsType() || 'null',
+        	browserType = getBrowserType() || 'null',
 			dataList = [];
-
+		/**
+		 * 展示日志记录
+		 * @param  {[type]} param 记录参数
+		 * @return {[type]}       [description]
+		 */
 	    function showLog(param){
 			$.ajax({
 				url: 'http://123.59.60.170/tencentAds/adshow',
@@ -53,6 +63,11 @@
 			});
 	    }
 
+	    /**
+		 * 点击操作日志记录
+		 * @param  {[type]} param 记录参数
+		 * @return {[type]}       [description]
+		 */
 	    function clkLog(param){
 			$.ajax({
 				url: 'http://123.59.60.170/tencentAds/adclk',
@@ -88,10 +103,6 @@
 	                    }
 	                    TencentGDT.NATIVE.doClick && TencentGDT.NATIVE.doClick(contentObj);	//调用点击上报接口
 	                    // 调用本地统计接口
-	                    var uid = Cookies.get('user_id') || 'null',
-	                    	qid = Cookies.get('qid') || 'null',
-	                    	osType = getOsType() || 'null',
-	                    	browserType = getBrowserType() || 'null';
 	                    var param = uid + '\t' + qid + '\t' + (window.parent.location.href || 'null') + '\t' + pid + '\t' + da[v].advertisement_id + '\t' + 'six' + '\t' + osType + '\t' + browserType;
 	                    clkLog(param);
 	                }
@@ -117,8 +128,21 @@
 		    return node;
 	    }
 
-	    function imgLoaded(t, i){
-	    	window.parent.document.getElementById('gg_gdt_iframe' + i).height = getParentNode(getParentNode(t)).offsetHeight
+	    /**
+	     * 获取url中参数的值
+	     * @param  {[type]} name 参数名
+	     * @return {[type]}      参数值
+	     */
+	    function getQueryString(name){
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	        var r = window.location.search.substr(1).match(reg);
+	        if (r != null) return decodeURI(r[2]);
+	        return null;
+	    }
+
+	    function imgLoaded(t){
+	    	var iframeid = getQueryString('iframeid');
+	    	window.parent.document.getElementById(iframeid).height = getParentNode(getParentNode(t)).offsetHeight;
 	    }
 
 		//广告渲染
@@ -127,9 +151,9 @@
 	            var divObj = document.createElement("div");
 	            divObj.setAttribute('id','gdt_' + i + '_' + objList[i].advertisement_id);
 	            if(objList[i].is_app){
-	                divObj.innerHTML = '<h3>' + objList[i].description + '</h3><div class="img"><img src="' + objList[i].img_url + '" alt="" onload="imgLoaded(this, 1);"></div><span class="promote">广告</span>';
+	                divObj.innerHTML = '<h3>' + objList[i].description + '</h3><div class="img"><img src="' + objList[i].img_url + '" alt="" onload="imgLoaded(this);"></div><span class="promote">广告</span>';
 	            } else {
-	                divObj.innerHTML = '<h3>' + objList[i].description + '</h3><div class="img"><img src="' + objList[i].img_url + '" alt="" onload="imgLoaded(this, 1);"></div><span class="promote">广告</span>';
+	                divObj.innerHTML = '<h3>' + objList[i].description + '</h3><div class="img"><img src="' + objList[i].img_url + '" alt="" onload="imgLoaded(this);"></div><span class="promote">广告</span>';
 	            }
 	            cnt.appendChild(divObj);
 	        }
@@ -153,12 +177,7 @@
 	                    }
 	                    TencentGDT.NATIVE.doExpose && TencentGDT.NATIVE.doExpose(obj);      //调用曝光上报接口
 	                    // 调用本地统计接口
-	                    var uid = Cookies.get('user_id') || 'null',
-	                    	qid = Cookies.get('qid') || 'null',
-	                    	osType = getOsType() || 'null',
-	                    	browserType = getBrowserType() || 'null';
 	                    var param = uid + '\t' + qid + '\t' + (window.parent.location.href || 'null') + '\t' + pid + '\t' + posElm[j].advertisement_id + '\t' + 'six' + '\t' + osType + '\t' + browserType;
-	                    console.log('param::', param);
 	                    showLog(param);
 	                // }
 	            }

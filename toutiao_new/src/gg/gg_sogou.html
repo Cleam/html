@@ -9,7 +9,19 @@
 </head>
 <body>
 	<script type="text/javascript">
-	 	sogou_ad_id=window.parent.document.getElementById('J_gg_sogou_id').getAttribute('value');
+		/**
+	     * 获取url中参数的值
+	     * @param  {[type]} name 参数名
+	     * @return {[type]}      参数值
+	     */
+	    function getQueryString(name){
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	        var r = window.location.search.substr(1).match(reg);
+	        if (r != null) return decodeURI(r[2]);
+	        return null;
+	    }
+	 	// sogou_ad_id=window.parent.document.getElementById('J_gg_sogou_id').getAttribute('value');
+	 	sogou_ad_id = getQueryString('ggid');
 	 	sogou_ad_content_height = "76";
 	</script>
 	<script src="http://vjoz.lu.sogou.com/wap/js/wc.js "></script>

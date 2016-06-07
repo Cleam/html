@@ -463,7 +463,11 @@ GLOBAL.Et.ggData = {
 		"operashangdianmm":{"baidu":{"li":"u2627179"}},
 		"zhanglida":{"baidu":{"li":"u2642800"}},
 		"hjjingling":{"baidu":{"li":"u2646233"}},
-		"ucllqsun":{"baidu":{"li":"u2638680"}},
+		"ucllqsun":{
+			"baidu":{"li":"u2638680"},
+			"sogou":{"li":"503901"},
+			"gdt":{"li":"4080619188310363"}
+		},
 		"jinlisun":{"baidu":{"li":"u2641147"}},
 		"ljbrowser":{"baidu":{"li":"u2648226"}},
 		"tiantianrj":{"baidu":{"li":"u2648334"}},
@@ -501,9 +505,9 @@ GLOBAL.Et.ggData = {
 };
 
 // 广告渠道数组
-GLOBAL.Et.channelArr  = ['baidu', 'sogou'];
+GLOBAL.Et.channelArr  = ['baidu', 'sogou', 'gdt'];
 
-GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid');	// 渠道号
+GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || GLOBAL.Cookie.get('qid');	// 渠道号
 GLOBAL.Et.ggTypeArr = [];	// 广告商数组
 GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];		// 广告ID数组
 for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {

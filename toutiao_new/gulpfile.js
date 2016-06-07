@@ -51,7 +51,8 @@ gulp.task('html-index', function() {
 gulp.task('html-gg', function() {
     var htmlSrc = [
             './src/gg/gg_baidu.html',
-            './src/gg/gg_sogou.html'
+            './src/gg/gg_sogou.html',
+            './src/gg/gg_gdt.html'
         ],
         htmlDst = './dist/gg';
     gulp.src(htmlSrc)
