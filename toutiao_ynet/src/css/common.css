@@ -1,0 +1,13 @@
+@charset "utf-8";
+/**
+ * 头条新闻H5 - 公共样式
+ * @author created by lizhigao(lizhigao@021.com)
+ * @date 2016-04-07
+ */
+.f0{font-size: 0;}
+@media only screen and (min-width: 750px) {body{width: 750px;}}
+/*::-webkit-scrollbar{width: 10px;}*/
+html,body{height: 100%; min-height: 100%;}
+body{padding-top: 1.62rem; font-size: 16px; line-height: 1; margin: 0 auto;}
+/*a:active{background-color: #e5e5e5 !important;}*/
+a{-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);}

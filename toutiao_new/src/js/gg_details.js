@@ -4,8 +4,12 @@
  * @author  lizhigao(lizhigao@021.com)
  * @date 2016-06-03
  */
-
+// 创建一个Et命名空间
 GLOBAL.namespace('Et');
+
+GLOBAL.Et.ggData = {}
+
+
 // 缓存用户id
 GLOBAL.Et.uid = Cookies.get('user_id');
 if(!GLOBAL.Et.uid) {
