@@ -34,7 +34,7 @@ header .form-wrap .search-btn{position: absolute; top: 0; right: 0.2rem; width: 
 /*===== 新闻内容 ======*/
 .news-list{width: 100%; overflow: hidden;}
 
-.news-list-wrap .news-item img{background-image: url("http://mini.eastday.com/toutiaoh5/img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 60%;}
+.news-list-wrap .news-item img{background-image: url("http://m.toutiao.ynet.com/img/img_preview.png"); background-color: rgba(150,150,150,0.1); background-repeat: no-repeat; background-position: center; background-size: 60%;}
 .news-list-wrap .news-item:last-child a .news-wrap{border-bottom: 0 none;}
 /* 单图模式 */
 .news-list-wrap .news-item-s1 a{display: block; width: 100%; height: 1.68rem; color: #333; padding: 0.24rem 0.3rem;}

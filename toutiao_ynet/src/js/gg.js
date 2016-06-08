@@ -500,7 +500,7 @@ GLOBAL.Et.ggData = {
 		"gsbrowser":{"baidu":{"li":"u2659921"}},
 		"lianxianglvcha":{"baidu":{"li":"u2659957"}},
 		"juheshuju":{"baidu":{"li":"u2659969"}},
-		"yousu":{"baidu":{"li":"u2661155"}}
+		"yousu":{"baidu":{"li":"u2661155"}}		
 	}
 };
 
