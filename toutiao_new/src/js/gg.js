@@ -465,8 +465,7 @@ GLOBAL.Et.ggData = {
 		"hjjingling":{"baidu":{"li":"u2646233"}},
 		"ucllqsun":{
 			"baidu":{"li":"u2638680"},
-			"sogou":{"li":"503901"},
-			"gdt":{"li":"4080619188310363"}
+			"sogou":{"li":"503901"}
 		},
 		"jinlisun":{"baidu":{"li":"u2641147"}},
 		"ljbrowser":{"baidu":{"li":"u2648226"}},
@@ -500,7 +499,10 @@ GLOBAL.Et.ggData = {
 		"gsbrowser":{"baidu":{"li":"u2659921"}},
 		"lianxianglvcha":{"baidu":{"li":"u2659957"}},
 		"juheshuju":{"baidu":{"li":"u2659969"}},
-		"yousu":{"baidu":{"li":"u2661155"}}
+		"yousu":{"baidu":{"li":"u2661155"}},
+		"baidubrowser":{"baidu":{"li":"u2666263"}},
+		"xiaomi":{"baidu":{"li":"u2666305"}},
+		"chubao":{"baidu":{"li":"u2666374"}}
 	}
 };
 

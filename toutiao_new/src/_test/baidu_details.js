@@ -247,9 +247,3 @@
 "baidu": {"li": "", "six": "u2607299", "threeup": "--------", "threedown": "--------", "bottom": "", "tujia": "u2607284", "chaping": "u2607341", "float": ""}
 "baidu": {"li": "", "six": "u2607287", "threeup": "--------", "threedown": "--------", "bottom": "", "tujia": "u2607281", "chaping": "u2607336", "float": ""}
 "baidu": {"li": "", "six": "u2607321", "threeup": "--------", "threedown": "--------", "bottom": "", "tujia": "u2607279", "chaping": "u2607334", "float": ""}
-
-baidu: {li: "", six: "u2607285", threeup: "--------", threedown: "--------", bottom: "", tujia: "u2607326", chaping: "u2607344", float: ""}
-baidu: {li: "", six: "u2607363", threeup: "--------", threedown: "--------", bottom: "", tujia: "u2607290", chaping: "u2607342", float: ""}
-baidu: {li: "", six: "u2607299", threeup: "--------", threedown: "--------", bottom: "", tujia: "u2607284", chaping: "u2607341", float: ""}
-baidu: {li: "", six: "u2607287", threeup: "--------", threedown: "--------", bottom: "", tujia: "u2607281", chaping: "u2607336", float: ""}
-baidu: {li: "", six: "u2607321", threeup: "--------", threedown: "--------", bottom: "", tujia: "u2607279", chaping: "u2607334", float: ""}
