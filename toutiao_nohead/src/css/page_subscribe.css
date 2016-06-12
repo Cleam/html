@@ -1,0 +1,29 @@
+@charset "utf-8";
+/**
+ * 头条新闻H5 - 搜索页样式
+ * @author created by lizhigao(lizhigao@021.com)
+ * @date 2016-04-07
+ */
+body{padding-top: 0.88rem;}
+/* title */
+header{position: fixed; top: 0; z-index: 2; width: 7.5rem; height: 0.88rem;}
+header .top-title{position: relative; width: 100%; height: 0.88rem; background-color: #d43d3d; color: #fff;}
+header .top-title .title{position: relative; display: block; width: 3rem; margin: 0 auto; text-align: center; height: 100%; line-height: 0.88rem; font-weight: bold; font-size: 0.42rem; color: #fff;}
+header .top-title .title:active{background-color: #d43d3d !important;}
+header .top-title .title img{width: 2.34rem; height: 0.56rem;}
+header .top-title .back{position: absolute; left: 0; top: 0; width: 1rem; height: 0.88rem;}
+header .top-title .back img{width: 0.5rem; height: 0.5rem; margin-left: 0.3rem; margin-top: 0.2rem; -webkit-transform: scale(0.8); transform: scale(0.8);}
+header .top-title .back:active{background-color: #AE2121 !important;}
+
+.content .type-title{background-color: #f4f5f6; font-size: 0.24rem; padding: 0.1rem 0.2rem;}
+.content .type-title span{margin-left: 0.1rem; color: #999;}
+
+.content ul{padding: 0.3rem 0;}
+.content ul li{width: 1.875rem; height: 0.68rem; float: left; text-align: center; margin-bottom: 0.2rem; -webkit-animation: zoomIn 300ms ease; -o-animation: zoomIn 300ms ease; animation: zoomIn 300ms ease;}
+.content ul li a{display: block; line-height: 0.6rem; margin-left: 0.2rem; margin-right: 0.2rem; font-size: 0.32rem; border: 1px solid #ddd;}
+@-webkit-keyframes zoomIn {
+    0% {opacity: 0; -webkit-transform: scale3d(.3,.3,.3); transform: scale3d(.3,.3,.3)}
+    50% {opacity: 1}
+}
+.content ul li a.disable{background-color: #DDDDDD;}
+

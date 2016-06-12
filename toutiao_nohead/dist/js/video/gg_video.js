@@ -1,0 +1,1 @@
+function customerLoadGg(t){if("gg_video"===t){var i="u2643659";document.write('<div id="bdUserDefInlay_'+i+'"></div>'),document.write('<script type="text/javascript">var cpro_id = "'+i+'";</script>'),document.write('<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>')}}
