@@ -309,35 +309,37 @@ var module = (function(my){
 		$hotNews = $('#J_hot_news'),	// 热点新闻
 		$hnList = $('<div id="J_hn_list" class="hn-list"></div>');	// 热点新闻列表
 
-	$interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2></div>').append($inList);
-	$hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2></div>').append($hnList);
-	
-	/**
-	 * 加载猜你感兴趣新闻（目前是广告）
-	 * @return {undefined} 
-	 */
-	var loadInterestNews = function() {
-		var ggId = 'u2610264';
-		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
-		$inList.append('<div id="cpro_' + ggId + '"></div>');
-		
-		my.createScript(ggConfig, function(){
-			// console.log('js/gg_details.js loaded!!!');
-			my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
-		}, $('#cpro_' + ggId)[0]);
-	};
+    
+    /**
+     * 加载猜你感兴趣新闻（目前是广告）
+     * @return {undefined} 
+     */
+    var loadSix = function(ggId) {
+        // 分类标题
+        $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2></div>').append($inList);
+        // var ggId = 'u2610264';
+        var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+        $inList.append('<div id="cpro_' + ggId + '"></div>');
+        
+        my.createScript(ggConfig, function(){
+            // console.log('js/gg_details.js loaded!!!');
+            my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
+        }, $('#cpro_' + ggId)[0]);
+    };
 
-	/**
-	 * 加载热点新闻
-	 * @param  {Array} data 新闻数据
-	 * @return {undefined} 
-	 */
-	var loadHotNews = function(data) {
-		var scope = this;
+    /**
+     * 加载热点新闻
+     * @param  {Array} data 新闻数据
+     * @return {undefined} 
+     */
+    var loadHotNews = function(data) {
+        var scope = this;
         // var data = d && d.data;
         if(!data || !data.length){
             return false;
         }
+        // 分类标题
+        $hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2></div>').append($hnList);
         var len = data.length;
         for (var i = 0; i < len; i++) {
             var item = data[i],
@@ -403,11 +405,11 @@ var module = (function(my){
 	};
 
 	/**
-	 * 热点新闻中插入广告
+	 * 热点新闻中插入广告（三宫格）
 	 * @param  {number} pos 插入位置
 	 * @return {undefined} 
 	 */
-	var insertGg = function(pos, ggId){
+	var loadThree = function(pos, ggId){
 		var ggArr = ['u2370262', 'u2649544'],
 			ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
 
@@ -419,19 +421,68 @@ var module = (function(my){
 		}, $('#cpro_' + ggId)[0]);
 
 	};
+    /**
+     * 加载tujia图加广告
+     * @return {[type]} [description]
+     */
+    var loadTujia = function(){
+
+    };
+
+    /**
+     * 加载cptop顶部插屏广告
+     * @return {[type]} [description]
+     */
+    var loadCptop = function(){
+        
+    };
+
+    /**
+     * 加载txt1、txt2、txt3文字链广告
+     * @return {[type]} [description]
+     */
+    var loadTxt = function(){
+        
+    };
+
+    /**
+     * 加载bottom广告
+     * @return {[type]} [description]
+     */
+    var loadBottom = function(){
+        
+    };
 
 	my.loadCommonPage = function() {
-		loadInterestNews();
-		loadHotNews(tempData);
-		insertGg(3, 'u2370262');
-		insertGg(7, 'u2649544');
+        var mygg = GLOBAL.Et.gg.my;
+        console.log('GLOBAL.Et.gg::', mygg);
+
+		try {
+            loadSix('u2610264');
+        } catch (e) {
+            console.log('loadSix has error!', e);
+        }
+
+        try {
+    		loadHotNews(tempData);
+        } catch (e) {
+            console.log('loadHotNews has error!', e);
+        }
+
+
+		try {
+            loadThree(3, 'u2370262');
+            loadThree(7, 'u2649544');
+        } catch (e) {
+            console.log('loadThree has error!', e);
+        }
 	};
 
 	/*my.inits.push(function(){
-		loadInterestNews();
+		loadSix();
 		loadHotNews(tempData);
-		insertGg(3, 'u2370262');
-		insertGg(7, 'u2649544');
+		loadThree(3, 'u2370262');
+		loadThree(7, 'u2649544');
 	});*/
 
 	return my;
@@ -459,7 +510,7 @@ var module = (function(my){
 
 $(function(){
 	// 不兼容forEach方法的解决方法
-	+function(){
+	(function(){
 		// Production steps of ECMA-262, Edition 5, 15.4.4.18
 		// Reference: http://es5.github.io/#x15.4.4.18
 		if (!Array.prototype.forEach) {
@@ -510,7 +561,7 @@ $(function(){
 		    // 8. return undefined
 		  };
 		}
-	}();
+	}());
 
 	// 调用初始化方法
 	module.inits.forEach(function(fn,index){

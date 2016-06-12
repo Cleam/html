@@ -1,11 +1,26 @@
 /**
  * 详情页广告JS
+ * 名称约定：
+ *     six: 六宫格广告
+ *     threeup： 信息流三宫格广告（靠上）
+ *     threedown： 信息流三宫格广告（靠下）
+ *     tujia： 图加广告（靠下）
+ *     cptop： 插屏 - 顶部横幅
+ *     bottom： 信息流广告（末尾）
+ *     txt1： 信息流文字链广告1
+ *     txt2： 信息流文字链广告2
+ *     txt3： 信息流文字链广告3
+ *     txt3： 信息流文字链广告3
+ *     three： 三宫格广告（wnwifi渠道专用）
  * @deps global.js
  * @author  lizhigao(lizhigao@021.com)
  * @date 2016-06-03
  */
 // 创建一个Et命名空间
 GLOBAL.namespace('Et');
+// 广告联盟商
+GLOBAL.Et.channelArr  = ['baidu', 'sogou', 'gdt'];
+// 广告配置数据
 GLOBAL.Et.ggData = {
     'root': {
         'zjzy': {
@@ -35,7 +50,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2594071',
                 threedown: 'u2594073',
                 tujia: 'u2594075',
-                chaping: 'u2594076'
+                cptop: 'u2594076'
             },
             'sogou': {
                 bottom: '542151'
@@ -80,7 +95,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2594084',
                 threedown: 'u2594086',
                 tujia: 'u2594089',
-                chaping: 'u2594091'
+                cptop: 'u2594091'
             },
             'sogou': {
                 bottom: '542151'
@@ -92,7 +107,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602389',
                 threedown: 'u2602392',
                 tujia: 'u2602395',
-                chaping: 'u2602396'
+                cptop: 'u2602396'
             },
             'sogou': {
                 bottom: '542151'
@@ -136,7 +151,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2600919',
                 threedown: 'u2600921',
                 tujia: 'u2600925',
-                chaping: 'u2600938'
+                cptop: 'u2600938'
             },
             'sogou': {
                 bottom: '542151'
@@ -225,7 +240,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2597512',
                 threedown: 'u2597514',
                 tujia: 'u2597515',
-                chaping: 'u2597517'
+                cptop: 'u2597517'
             },
             'sogou': {
                 bottom: '542151'
@@ -301,7 +316,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2375377',
                 threedown: 'u2375378',
                 tujia: 'u2480224',
-                chaping: 'u2570147'
+                cptop: 'u2570147'
             },
             'sogou': {
                 bottom: '542151'
@@ -324,7 +339,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2579336',
                 threedown: 'u2579333',
                 tujia: 'u2576959',
-                chaping: 'u2649539'
+                cptop: 'u2649539'
             },
             'sogou': {
                 bottom: '542151'
@@ -366,7 +381,7 @@ GLOBAL.Et.ggData = {
                 six: 'u2506074',
                 threeup: 'u2506077',
                 threedown: 'u2506078',
-                chaping: 'u2560793',
+                cptop: 'u2560793',
                 txt1: 'u2590748',
                 txt2: 'u2590749',
                 txt3: 'u2590751'
@@ -391,7 +406,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2608740',
                 threedown: 'u2608742',
                 tujia: 'u2608744',
-                chaping: 'u2608749'
+                cptop: 'u2608749'
             },
             'sogou': {
                 bottom: '542151'
@@ -424,7 +439,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602378',
                 threedown: 'u2602380',
                 tujia: 'u2602382',
-                chaping: 'u2602383'
+                cptop: 'u2602383'
             },
             'sogou': {
                 bottom: '542151'
@@ -480,7 +495,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2603245',
                 threedown: 'u2603251',
                 tujia: 'u2603254',
-                chaping: 'u2603255'
+                cptop: 'u2603255'
             },
             'sogou': {
                 bottom: '542151'
@@ -492,7 +507,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602499',
                 threedown: 'u2602501',
                 tujia: 'u2602505',
-                chaping: 'u2602509'
+                cptop: 'u2602509'
             },
             'sogou': {
                 bottom: '542151'
@@ -514,7 +529,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2600928',
                 threedown: 'u2600931',
                 tujia: 'u2600935',
-                chaping: 'u2600937'
+                cptop: 'u2600937'
             },
             'sogou': {
                 bottom: '542151'
@@ -526,7 +541,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2449813',
                 threedown: 'u2449815',
                 tujia: 'u2477684',
-                chaping: 'u2570140',
+                cptop: 'u2570140',
                 txt1: 'u2603762',
                 txt2: 'u2603761',
                 txt3: 'u2603738'
@@ -551,7 +566,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2597485',
                 threedown: 'u2597489',
                 tujia: 'u2597490',
-                chaping: 'u2597493'
+                cptop: 'u2597493'
             },
             'sogou': {
                 bottom: '542151'
@@ -860,7 +875,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602652',
                 threedown: 'u2602650',
                 tujia: 'u2602648',
-                chaping: 'u2602664'
+                cptop: 'u2602664'
             },
             'sogou': {
                 threeup: '565296',
@@ -874,7 +889,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602632',
                 threedown: 'u2602557',
                 tujia: 'u2602629',
-                chaping: 'u2602660'
+                cptop: 'u2602660'
             },
             'sogou': {
                 threeup: '565296',
@@ -888,7 +903,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602622',
                 threedown: 'u2602621',
                 tujia: 'u2602617',
-                chaping: 'u2602658'
+                cptop: 'u2602658'
             },
             'sogou': {
                 threeup: '565296',
@@ -902,7 +917,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602593',
                 threedown: 'u2602595',
                 tujia: 'u2602597',
-                chaping: 'u2602606'
+                cptop: 'u2602606'
             },
             'sogou': {
                 threeup: '565296',
@@ -916,7 +931,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602572',
                 threedown: 'u2602575',
                 tujia: 'u2602576',
-                chaping: 'u2602600'
+                cptop: 'u2602600'
             },
             'sogou': {
                 threeup: '565296',
@@ -930,7 +945,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2602596',
                 threedown: 'u2602592',
                 tujia: 'u2602588',
-                chaping: 'u2602668'
+                cptop: 'u2602668'
             },
             'sogou': {
                 threeup: '565296',
@@ -944,7 +959,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541248',
                 threedown: 'u2541307',
                 tujia: 'u2541171',
-                chaping: 'u2603852'
+                cptop: 'u2603852'
             },
             'sogou': {
                 threeup: '565296',
@@ -958,7 +973,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541244',
                 threedown: 'u2541301',
                 tujia: 'u2541178',
-                chaping: 'u2603847'
+                cptop: 'u2603847'
             },
             'sogou': {
                 threeup: '565296',
@@ -972,7 +987,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541233',
                 threedown: 'u2541285',
                 tujia: 'u2541124',
-                chaping: 'u2603835'
+                cptop: 'u2603835'
             },
             'sogou': {
                 threeup: '565296',
@@ -986,7 +1001,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541232',
                 threedown: 'u2541283',
                 tujia: 'u2541121',
-                chaping: 'u2603832'
+                cptop: 'u2603832'
             },
             'sogou': {
                 threeup: '565296',
@@ -1000,7 +1015,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541228',
                 threedown: 'u2541280',
                 tujia: 'u2541076',
-                chaping: 'u2603831'
+                cptop: 'u2603831'
             },
             'sogou': {
                 threeup: '565296',
@@ -1014,7 +1029,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541226',
                 threedown: 'u2541276',
                 tujia: 'u2541074',
-                chaping: 'u2603827'
+                cptop: 'u2603827'
             },
             'sogou': {
                 threeup: '565296',
@@ -1028,7 +1043,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541223',
                 threedown: 'u2541275',
                 tujia: 'u2541072',
-                chaping: 'u2603824'
+                cptop: 'u2603824'
             },
             'sogou': {
                 threeup: '565296',
@@ -1042,7 +1057,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541222',
                 threedown: 'u2541272',
                 tujia: 'u2541070',
-                chaping: 'u2603823'
+                cptop: 'u2603823'
             },
             'sogou': {
                 threeup: '565296',
@@ -1056,7 +1071,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541218',
                 threedown: 'u2541270',
                 tujia: 'u2541069',
-                chaping: 'u2603820'
+                cptop: 'u2603820'
             },
             'sogou': {
                 threeup: '565296',
@@ -1070,7 +1085,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541213',
                 threedown: 'u2541267',
                 tujia: 'u2541067',
-                chaping: 'u2603817'
+                cptop: 'u2603817'
             },
             'sogou': {
                 threeup: '565296',
@@ -1084,7 +1099,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541207',
                 threedown: 'u2541265',
                 tujia: 'u2541066',
-                chaping: 'u2603812'
+                cptop: 'u2603812'
             },
             'sogou': {
                 threeup: '565296',
@@ -1098,7 +1113,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541205',
                 threedown: 'u2541215',
                 tujia: 'u2541064',
-                chaping: 'u2603808'
+                cptop: 'u2603808'
             },
             'sogou': {
                 threeup: '565296',
@@ -1112,7 +1127,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2541130',
                 threedown: 'u2541212',
                 tujia: 'u2541062',
-                chaping: 'u2603807'
+                cptop: 'u2603807'
             },
             'sogou': {
                 threeup: '565296',
@@ -1184,7 +1199,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2380768',
                 threedown: 'u2380770',
                 tujia: 'u2477424',
-                chaping: 'u2588867',
+                cptop: 'u2588867',
                 txt1: 'u2590723',
                 txt2: 'u2590726',
                 txt3: 'u2590728'
@@ -1306,7 +1321,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2375321',
                 threedown: 'u2375324',
                 tujia: 'u2477629',
-                chaping: 'u2497102'
+                cptop: 'u2497102'
             },
             'sogou': {
                 bottom: '542151'
@@ -1329,7 +1344,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2592507',
                 threedown: 'u2592509',
                 tujia: 'u2592511',
-                chaping: 'u2592497'
+                cptop: 'u2592497'
             },
             'sogou': {
                 bottom: '542151'
@@ -1352,7 +1367,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2601777',
                 threedown: 'u2601781',
                 tujia: 'u2601784',
-                chaping: 'u2601787'
+                cptop: 'u2601787'
             },
             'sogou': {
                 bottom: '542151'
@@ -1364,7 +1379,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2576940',
                 threedown: 'u2576942',
                 tujia: 'u2576946',
-                chaping: 'u2588877',
+                cptop: 'u2588877',
                 txt1: 'u2592612',
                 txt2: 'u2592614',
                 txt3: 'u2592615'
@@ -1392,7 +1407,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2613811',
                 threedown: 'u2613813',
                 tujia: 'u2613815',
-                chaping: 'u2613816'
+                cptop: 'u2613816'
             }
         },
         'jsonline': {
@@ -1511,7 +1526,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2596943',
                 threedown: 'u2596946',
                 tujia: 'u2596950',
-                chaping: 'u2596951'
+                cptop: 'u2596951'
             },
             'sogou': {
                 bottom: '542151'
@@ -1558,7 +1573,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2375514',
                 threedown: 'u2375516',
                 tujia: 'u2480212',
-                chaping: 'u2497099'
+                cptop: 'u2497099'
             },
             'sogou': {
                 bottom: '542151'
@@ -1600,7 +1615,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2594057',
                 threedown: 'u2594059',
                 tujia: 'u2594062',
-                chaping: 'u2594063'
+                cptop: 'u2594063'
             },
             'sogou': {
                 bottom: '542151'
@@ -1658,7 +1673,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2407599',
                 threedown: 'u2407602',
                 tujia: 'u2480198',
-                chaping: 'u2588874',
+                cptop: 'u2588874',
                 txt1: 'u2590761',
                 txt2: 'u2590763',
                 txt3: 'u2590767'
@@ -1684,7 +1699,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2375614',
                 threedown: 'u2375638',
                 tujia: 'u2543322',
-                chaping: 'u2570150'
+                cptop: 'u2570150'
             },
             'sogou': {
                 bottom: '542151'
@@ -1696,7 +1711,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2597500',
                 threedown: 'u2597503',
                 tujia: 'u2597504',
-                chaping: 'u2597505'
+                cptop: 'u2597505'
             },
             'sogou': {
                 bottom: '542151'
@@ -1813,7 +1828,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2615536',
                 threedown: 'u2615537',
                 tujia: 'u2615538',
-                chaping: 'u2615539'
+                cptop: 'u2615539'
             },
             'sogou': {
                 bottom: '542151'
@@ -1900,7 +1915,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2380773',
                 threedown: 'u2380774',
                 tujia: 'u2614045',
-                chaping: 'u2614040'
+                cptop: 'u2614040'
             },
             'sogou': {
                 bottom: '542151'
@@ -1923,7 +1938,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2426686',
                 threedown: 'u2426687',
                 tujia: 'u2477619',
-                chaping: 'u2588870',
+                cptop: 'u2588870',
                 txt1: 'u2590742',
                 txt2: 'u2590743',
                 txt3: 'u2590745'
@@ -1955,7 +1970,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2612150',
                 threedown: 'u2612154',
                 tujia: 'u2612158',
-                chaping: 'u2612160'
+                cptop: 'u2612160'
             },
             'sogou': {
                 bottom: '542151'
@@ -1978,7 +1993,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2610340',
                 threedown: 'u2610367',
                 tujia: 'u2610369',
-                chaping: 'u2610337'
+                cptop: 'u2610337'
             },
             'sogou': {
                 bottom: '542151'
@@ -1990,7 +2005,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2612533',
                 threedown: 'u2612536',
                 tujia: 'u2612543',
-                chaping: 'u2612545'
+                cptop: 'u2612545'
             },
             'sogou': {
                 bottom: '542151'
@@ -2002,7 +2017,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2610253',
                 threedown: 'u2610254',
                 tujia: 'u2610257',
-                chaping: 'u2610334'
+                cptop: 'u2610334'
             },
             'sogou': {
                 bottom: '542151'
@@ -2014,7 +2029,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2610270',
                 threedown: 'u2610276',
                 tujia: 'u2610288',
-                chaping: 'u2610335'
+                cptop: 'u2610335'
             },
             'sogou': {
                 bottom: '542151'
@@ -2026,7 +2041,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2618188',
                 threedown: 'u2618190',
                 tujia: 'u2618192',
-                chaping: 'u2618194'
+                cptop: 'u2618194'
             }
         },
         '16gongjiaowifi': {
@@ -2043,7 +2058,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2622809',
                 threedown: 'u2622816',
                 tujia: 'u2622817',
-                chaping: 'u2622884'
+                cptop: 'u2622884'
             }
         },
         'yijianqinglidashi03': {
@@ -2052,7 +2067,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2622825',
                 threedown: 'u2622827',
                 tujia: 'u2622829',
-                chaping: 'u2622888'
+                cptop: 'u2622888'
             }
         },
         'operashangdian': {
@@ -2061,7 +2076,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2627164',
                 threedown: 'u2627163',
                 tujia: 'u2627165',
-                chaping: 'u2627159'
+                cptop: 'u2627159'
             }
         },
         'zhuanqianbao': {
@@ -2070,7 +2085,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2628235',
                 threedown: 'u2628229',
                 tujia: 'u2628239',
-                chaping: 'u2628214'
+                cptop: 'u2628214'
             }
         },
         '360wifi': {
@@ -2079,7 +2094,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2627949',
                 threedown: 'u2627951',
                 tujia: 'u2627947',
-                chaping: 'u2627958'
+                cptop: 'u2627958'
             }
         },
         'nduowang': {
@@ -2088,7 +2103,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2628498',
                 threedown: 'u2628497',
                 tujia: 'u2628499',
-                chaping: 'u2628492'
+                cptop: 'u2628492'
             }
         },
         'hongbaokuaishou': {
@@ -2097,7 +2112,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2628446',
                 threedown: 'u2628445',
                 tujia: 'u2628448',
-                chaping: 'u2628450'
+                cptop: 'u2628450'
             }
         },
         'hihizhuanfa': {
@@ -2106,7 +2121,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2628436',
                 threedown: 'u2628425',
                 tujia: 'u2628439',
-                chaping: 'u2628421'
+                cptop: 'u2628421'
             }
         },
         'romcloud': {
@@ -2115,7 +2130,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2629633',
                 threedown: 'u2629639',
                 tujia: 'u2629628',
-                chaping: 'u2629642'
+                cptop: 'u2629642'
             }
         },
         'chatiyu1': {
@@ -2124,7 +2139,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2629821',
                 threedown: 'u2629817',
                 tujia: 'u2629911',
-                chaping: 'u2629824'
+                cptop: 'u2629824'
             }
         },
         'jiuyi160': {
@@ -2133,7 +2148,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2634488',
                 threedown: 'u2634491',
                 tujia: 'u2634484',
-                chaping: 'u2634497'
+                cptop: 'u2634497'
             }
         },
         'qiaohuiwangluo': {
@@ -2142,7 +2157,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2634682',
                 threedown: 'u2634678',
                 tujia: 'u2634683',
-                chaping: 'u2634685'
+                cptop: 'u2634685'
             }
         },
         'mzol': {
@@ -2151,7 +2166,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2635721',
                 threedown: 'u2635724',
                 tujia: 'u2635712',
-                chaping: 'u2635726'
+                cptop: 'u2635726'
             }
         },
         'yijianqinglidashi': {
@@ -2160,7 +2175,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2635953',
                 threedown: 'u2635950',
                 tujia: 'u2635955',
-                chaping: 'u2635957'
+                cptop: 'u2635957'
             }
         },
         'chubaophone': {
@@ -2169,7 +2184,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636090',
                 threedown: 'u2636094',
                 tujia: 'u2636089',
-                chaping: 'u2636096'
+                cptop: 'u2636096'
             }
         },
         'm021_hyx001': {
@@ -2178,7 +2193,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636108',
                 threedown: 'u2636106',
                 tujia: 'u2636110',
-                chaping: 'u2636112'
+                cptop: 'u2636112'
             }
         },
         'm021_hyx002': {
@@ -2187,7 +2202,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636119',
                 threedown: 'u2636115',
                 tujia: 'u2636120',
-                chaping: 'u2636121'
+                cptop: 'u2636121'
             }
         },
         'm021_hyx003': {
@@ -2196,7 +2211,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636688',
                 threedown: 'u2636647',
                 tujia: 'u2636630',
-                chaping: 'u2637153'
+                cptop: 'u2637153'
             }
         },
         'm021_hyx004': {
@@ -2205,7 +2220,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636714',
                 threedown: 'u2636705',
                 tujia: 'u2636721',
-                chaping: 'u2636724'
+                cptop: 'u2636724'
             }
         },
         'm021_hyx005': {
@@ -2214,7 +2229,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636731',
                 threedown: 'u2636728',
                 tujia: 'u2636732',
-                chaping: 'u2636733'
+                cptop: 'u2636733'
             }
         },
         'm021_hyx006': {
@@ -2223,7 +2238,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636759',
                 threedown: 'u2636746',
                 tujia: 'u2636762',
-                chaping: 'u2636767'
+                cptop: 'u2636767'
             }
         },
         'm021_hyx007': {
@@ -2232,7 +2247,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636784',
                 threedown: 'u2636776',
                 tujia: 'u2636786',
-                chaping: 'u2636787'
+                cptop: 'u2636787'
             }
         },
         '511dianying': {
@@ -2241,7 +2256,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636925',
                 threedown: 'u2636919',
                 tujia: 'u2636926',
-                chaping: 'u2636927'
+                cptop: 'u2636927'
             }
         },
         'chinatelnj': {
@@ -2250,7 +2265,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2636824',
                 threedown: 'u2636820',
                 tujia: 'u2636837',
-                chaping: 'u2636827'
+                cptop: 'u2636827'
             }
         },
         'xiaozikeji': {
@@ -2259,7 +2274,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2637024',
                 threedown: 'u2637019',
                 tujia: 'u2637028',
-                chaping: 'u2637029'
+                cptop: 'u2637029'
             }
         },
         'youxinh5': {
@@ -2268,7 +2283,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2637046',
                 threedown: 'u2637040',
                 tujia: 'u2637048',
-                chaping: 'u2637051'
+                cptop: 'u2637051'
             }
         },
         'laokgame ': {
@@ -2277,7 +2292,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2637446',
                 threedown: 'u2637444',
                 tujia: 'u2637447',
-                chaping: 'u2637450'
+                cptop: 'u2637450'
             }
         },
         'wpsios': {
@@ -2286,7 +2301,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2637993',
                 threedown: 'u2637974',
                 tujia: 'u2638010',
-                chaping: 'u2638003'
+                cptop: 'u2638003'
             }
         },
         'ucllqsun': {
@@ -2303,7 +2318,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2640986',
                 threedown: 'u2640988',
                 tujia: 'u2640981',
-                chaping: 'u2640985'
+                cptop: 'u2640985'
             }
         },
         'taosuoping': {
@@ -2328,7 +2343,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2642793',
                 threedown: 'u2642795',
                 tujia: 'u2642802',
-                chaping: 'u2642805'
+                cptop: 'u2642805'
             }
         },
         'ucllqsun01': {
@@ -2376,7 +2391,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2646227',
                 threedown: 'u2646229',
                 tujia: 'u2646234',
-                chaping: 'u2646236'
+                cptop: 'u2646236'
             }
         },
         'kuaijiewifi': {
@@ -2385,7 +2400,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2648543',
                 threedown: 'u2648529',
                 tujia: 'u2648555',
-                chaping: 'u2648557'
+                cptop: 'u2648557'
             }
         },
         'yuedu1': {
@@ -2434,7 +2449,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2649280',
                 threedown: 'u2649285',
                 tujia: 'u2649271',
-                chaping: 'u2649272'
+                cptop: 'u2649272'
             }
         },
         'ucllqsun02': {
@@ -2459,7 +2474,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2649901',
                 threedown: 'u2649897',
                 tujia: 'u2649907',
-                chaping: 'u2649908'
+                cptop: 'u2649908'
             }
         },
         'm021_myworld': {
@@ -2484,7 +2499,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2649901',
                 threedown: 'u2649897',
                 tujia: 'u2649907',
-                chaping: 'u2649908'
+                cptop: 'u2649908'
             }
         },
         'jinyu01': {
@@ -2493,7 +2508,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2656520',
                 threedown: 'u2656518',
                 tujia: 'u2656521',
-                chaping: 'u2656522'
+                cptop: 'u2656522'
             }
         },
         'jinyu02': {
@@ -2502,7 +2517,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2656527',
                 threedown: 'u2656525',
                 tujia: 'u2656528',
-                chaping: 'u2656529'
+                cptop: 'u2656529'
             }
         },
         'jinyu03': {
@@ -2511,7 +2526,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2656535',
                 threedown: 'u2656533',
                 tujia: 'u2656536',
-                chaping: 'u2656537'
+                cptop: 'u2656537'
             }
         },
         'wdcx': {
@@ -2520,7 +2535,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2656513',
                 threedown: 'u2656509',
                 tujia: 'u2656514',
-                chaping: 'u2656515'
+                cptop: 'u2656515'
             }
         },
         'yilangkeji01': {
@@ -2529,7 +2544,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2657395',
                 threedown: 'u2657392',
                 tujia: 'u2657397',
-                chaping: 'u2657398'
+                cptop: 'u2657398'
             }
         },
         'yilangkeji02': {
@@ -2538,7 +2553,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2657404',
                 threedown: 'u2657401',
                 tujia: 'u2657405',
-                chaping: 'u2657406'
+                cptop: 'u2657406'
             }
         },
         'zhongmaikeji': {
@@ -2547,7 +2562,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2657411',
                 threedown: 'u2657409',
                 tujia: 'u2657413',
-                chaping: 'u2657414'
+                cptop: 'u2657414'
             }
         },
         'wdcx01': {
@@ -2556,7 +2571,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2658904',
                 threedown: 'u2658902',
                 tujia: 'u2658907',
-                chaping: 'u2658912'
+                cptop: 'u2658912'
             }
         },
         'm021_gsbrowser_install': {
@@ -2565,7 +2580,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2659938',
                 threedown: 'u2659935',
                 tujia: 'u2659942',
-                chaping: 'u2659944'
+                cptop: 'u2659944'
             }
         },
         'gsbrowser': {
@@ -2574,7 +2589,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2429964',
                 threedown: 'u2429965',
                 tujia: 'u2659924',
-                chaping: 'u2659929'
+                cptop: 'u2659929'
             }
         },
         'lianxianglvcha': {
@@ -2583,7 +2598,7 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2659958',
                 threedown: 'u2659956',
                 tujia: 'u2659959',
-                chaping: 'u2659961'
+                cptop: 'u2659961'
             }
         },
         'juheshuju': {
@@ -2599,14 +2614,14 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2661383',
                 threedown: 'u2661386',
                 tujia: 'u2661149',
-                chaping: 'u2661160'
+                cptop: 'u2661160'
             }
         },
         'm021_waitui035': {
             'baidu': {
                 six: 'u2607285',
                 tujia: 'u2607326',
-                chaping: 'u2607344'
+                cptop: 'u2607344'
             },
             'sogou': {
                 threeup: '565296',
@@ -2618,7 +2633,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2607363',
                 tujia: 'u2607290',
-                chaping: 'u2607342'
+                cptop: 'u2607342'
             },
             'sogou': {
                 threeup: '565296',
@@ -2630,7 +2645,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2607299',
                 tujia: 'u2607284',
-                chaping: 'u2607341'
+                cptop: 'u2607341'
             },
             'sogou': {
                 threeup: '565296',
@@ -2642,7 +2657,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2607287',
                 tujia: 'u2607281',
-                chaping: 'u2607336'
+                cptop: 'u2607336'
             },
             'sogou': {
                 threeup: '565296',
@@ -2654,7 +2669,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2607321',
                 tujia: 'u2607279',
-                chaping: 'u2607334'
+                cptop: 'u2607334'
             },
             'sogou': {
                 threeup: '565296',
@@ -2739,75 +2754,139 @@ GLOBAL.Et.ggData = {
                 threedown: '562456',
                 bottom: '562456'
             }
+        },
+        'jsonline1': {
+            'baidu': {
+                six: 'u2594035',
+                threeup: 'u2594038',
+                threedown: 'u2594042',
+                cptop: 'u2594048',
+                tujia: 'u2594046'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'jsonline3': {
+            'baidu': {
+                six: 'u2668904',
+                threeup: 'u2668903',
+                threedown: 'u2668901',
+                cptop: 'u2668898',
+                tujia: 'u2668899'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'jsonline4': {
+            'baidu': {
+                six: 'u2668984',
+                threeup: 'u2668983',
+                threedown: 'u2668982',
+                cptop: 'u2668980',
+                tujia: 'u2668981'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'jsonline4': {
+            'baidu': {
+                six: 'u2668991',
+                threeup: 'u2668990',
+                threedown: 'u2668989',
+                cptop: 'u2668987',
+                tujia: 'u2668988'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'tianyizone': {
+            'baidu': {
+                six: 'u2669316',
+                threeup: 'u2669314',
+                threedown: 'u2669313',
+                tujia: 'u2669311'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'movietiantang': {
+            'baidu': {
+                six: 'u2669401',
+                threeup: 'u2669400',
+                threedown: 'u2669395',
+                cptop: 'u2669393',
+                tujia: 'u2669398'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
 
+(function(){
+    // 缓存用户id（365天）
+    GLOBAL.Et.uid = Cookies.get('user_id');
+    if(!GLOBAL.Et.uid) {
+        GLOBAL.Et.uid = (+new Date()) + Math.random().toString(10).substring(2, 6);
+        Cookies.set('user_id', GLOBAL.Et.uid, { expires: 365, path: '/', domain: 'eastday.com'});
+    }
+    // 缓存渠道号（3天）
+    GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';
+    if(GLOBAL.Et.qid){
+        Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com'});
+    }
 
-// 缓存用户id
-GLOBAL.Et.uid = Cookies.get('user_id');
-if(!GLOBAL.Et.uid) {
-	GLOBAL.Et.uid = (+new Date()) + Math.random().toString(10).substring(2, 6);
-	Cookies.set('user_id', GLOBAL.Et.uid, { expires: 365, path: '/', domain: 'eastday.com'});
-}
-// 缓存渠道ID
-GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';
-if(GLOBAL.Et.qid){
-	Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com'});
-}
+    // 当前渠道广告商数组
+    GLOBAL.Et.ggTypeArr = [];
+    // 当前渠道广告ID数组
+    GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];        
+    for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
+        if(GLOBAL.Et.gg && GLOBAL.Et.gg.hasOwnProperty(GLOBAL.Et.channelArr[i])){
+            GLOBAL.Et.ggTypeArr.push(GLOBAL.Et.channelArr[i]);
+        }
+    }
 
-// 广告渠道数组
-GLOBAL.Et.channelArr  = ['baidu', 'sogou', 'gdt'];
+    /**
+     * 对广告ID处理（为了方便获取、判断）
+     */
+    var ggBaidu = GLOBAL.Et.gg['baidu'],
+        ggSogou = GLOBAL.Et.gg['sogou'],
+        ggGdt = GLOBAL.Et.gg['gdt'];
+    GLOBAL.namespace('GLOBAL.Et.gg.my');
+    // six - baidu/sogou/gdt
+    GLOBAL.Et.gg.my['six'] = (ggBaidu ? (ggBaidu['six'] ? 'baidu_' + ggBaidu['six'] : '') : '') 
+        || (ggSogou ? (ggSogou['six'] ? 'sogou_' + ggSogou['six'] : '') : '') 
+        || (ggGdt ? (ggGdt['six'] ? 'gdt_' + ggGdt['six'] : '') : '');
+    // threeup - baidu/sogou
+    GLOBAL.Et.gg.my['threeup'] = (ggBaidu ? (ggBaidu['threeup'] ? 'baidu_' + ggBaidu['threeup'] : '') : '') 
+        || (ggSogou ? (ggSogou['threeup'] ? 'sogou_' + ggSogou['threeup'] : '') : '');
+    // threedown - baidu/sogou
+    GLOBAL.Et.gg.my['threedown'] = (ggBaidu ? (ggBaidu['threedown'] ? 'baidu_' + ggBaidu['threedown'] : '') : '') 
+        || (ggSogou ? (ggSogou['threedown'] ? 'sogou_' + ggSogou['threedown'] : '') : '');
+    // bottom - sogou/gdt
+    GLOBAL.Et.gg.my['bottom'] = (ggSogou ? (ggSogou['bottom'] ? 'sogou_' + ggSogou['bottom'] : '') : '') 
+        || (ggGdt ? (ggGdt['bottom'] ? 'gdt_' + ggGdt['bottom'] : '') : '');
+    // tujia - baidu
+    GLOBAL.Et.gg.my['tujia'] = (ggBaidu ? (ggBaidu['tujia'] ? 'baidu_' + ggBaidu['tujia'] : '') : '');
+    // txt1 - baidu
+    GLOBAL.Et.gg.my['txt1'] = (ggBaidu ? (ggBaidu['txt1'] ? 'baidu_' + ggBaidu['txt1'] : '') : '');
+    // txt2 - baidu
+    GLOBAL.Et.gg.my['txt2'] = (ggBaidu ? (ggBaidu['txt2'] ? 'baidu_' + ggBaidu['txt2'] : '') : '');
+    // txt3 - baidu
+    GLOBAL.Et.gg.my['txt3'] = (ggBaidu ? (ggBaidu['txt3'] ? 'baidu_' + ggBaidu['txt3'] : '') : '');
+    // cptop - baidu
+    GLOBAL.Et.gg.my['cptop'] = (ggBaidu ? (ggBaidu['cptop'] ? 'baidu_' + ggBaidu['cptop'] : '') : '');
+    // three (wnwifi) - baidu/sogou
+    GLOBAL.Et.gg.my['three'] = (ggBaidu ? (ggBaidu['three'] ? 'baidu_' + ggBaidu['three'] : '') : '') 
+        || (ggSogou ? (ggSogou['three'] ? 'sogou_' + ggSogou['three'] : '') : '');
+        
+}());
 
-GLOBAL.Et.ggTypeArr = [];	// 广告商数组
-GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];		// 广告ID数组
-for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
-	if(GLOBAL.Et.gg && GLOBAL.Et.gg.hasOwnProperty(GLOBAL.Et.channelArr[i])){
-		GLOBAL.Et.ggTypeArr.push(GLOBAL.Et.channelArr[i]);
-	}
-}
-
-// console.log('GLOBAL.Et.qid::', GLOBAL.Et.qid);
-// console.log('GLOBAL.Et.ggTypeArr::', GLOBAL.Et.ggTypeArr);
-// console.log('GLOBAL.Et.ggTypeArr::', GLOBAL.Et.ggTypeArr.contains('sogou'));
-console.log('GLOBAL.Et.gg::', GLOBAL.Et.gg);
-
-// six
-GLOBAL.Et.gg.hasSix = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['six'] : '') 
-	|| (GLOBAL.Et.gg['sogou'] ? GLOBAL.Et.gg['sogou']['six'] : '') 
-	|| (GLOBAL.Et.gg['gdt'] ? GLOBAL.Et.gg['gdt']['six'] : '');
-// threeup
-GLOBAL.Et.gg.hasThreeup = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['threeup'] : '') 
-	|| (GLOBAL.Et.gg['sogou'] ? GLOBAL.Et.gg['sogou']['threeup'] : '');
-// threedown
-GLOBAL.Et.gg.hasThreedown = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['threedown'] : '') 
-	|| (GLOBAL.Et.gg['sogou'] ? GLOBAL.Et.gg['sogou']['threedown'] : '');
-// bottom
-GLOBAL.Et.gg.hasBottom = (GLOBAL.Et.gg['sogou'] ? GLOBAL.Et.gg['sogou']['bottom'] : '') 
-	|| (GLOBAL.Et.gg['gdt'] ? GLOBAL.Et.gg['gdt']['bottom'] : '');
-// tujia
-GLOBAL.Et.gg.hasTujia = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['tujia'] : '');
-// txt1
-GLOBAL.Et.gg.hasTxt1 = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['txt1'] : '');
-// txt2
-GLOBAL.Et.gg.hasTxt2 = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['txt2'] : '');
-// txt3
-GLOBAL.Et.gg.hasTxt3 = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['txt3'] : '');
-// chaping
-GLOBAL.Et.gg.hasChaping = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['chaping'] : '');
-// three (wnwifi)
-GLOBAL.Et.gg.hasThree = (GLOBAL.Et.gg['baidu'] ? GLOBAL.Et.gg['baidu']['three'] : '') 
-	|| (GLOBAL.Et.gg['sogou'] ? GLOBAL.Et.gg['sogou']['three'] : '');
-
-console.log('hasSix::', GLOBAL.Et.gg.hasSix);
-console.log('hasThreeup::', GLOBAL.Et.gg.hasThreeup);
-console.log('hasThreedown::', GLOBAL.Et.gg.hasThreedown);
-console.log('hasBottom::', GLOBAL.Et.gg.hasBottom);
-console.log('hasTujia::', GLOBAL.Et.gg.hasTujia);
-console.log('hasTxt1::', GLOBAL.Et.gg.hasTxt1);
-console.log('hasTxt2::', GLOBAL.Et.gg.hasTxt2);
-console.log('hasTxt3::', GLOBAL.Et.gg.hasTxt3);
-console.log('hasChaping::', GLOBAL.Et.gg.hasChaping);
-console.log('hasThree::', GLOBAL.Et.gg.hasThree);
 
 
