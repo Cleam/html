@@ -1388,7 +1388,8 @@ GLOBAL.Et.ggData = {
                 bottom: '542151'
             },
             'gdt': {
-                six: '5090915115252200'
+                // six: '5090915115252200'
+                six: '5090915115252208'
             }
         },
         'kkbrowser': {
@@ -2755,6 +2756,38 @@ GLOBAL.Et.ggData = {
                 bottom: '562456'
             }
         },
+        'baidubrowser': {
+            'baidu': {
+                six: 'u2666264',
+                threeup: 'u2666265',
+                threedown: 'u2666266',
+                tujia: 'u2666269'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'xiaomi': {
+            'baidu': {
+                six: 'u2666304',
+                threeup: 'u2666302',
+                threedown: 'u2666301',
+                tujia: 'u2666300'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'chubao': {
+            'baidu': {
+                six: 'u2666373',
+                threeup: 'u2666372',
+                threedown: 'u2666370'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
         'jsonline1': {
             'baidu': {
                 six: 'u2594035',
@@ -2860,9 +2893,9 @@ GLOBAL.Et.ggData = {
         ggGdt = GLOBAL.Et.gg['gdt'];
     GLOBAL.namespace('GLOBAL.Et.gg.my');
     // six - baidu/sogou/gdt
-    GLOBAL.Et.gg.my['six'] = (ggBaidu ? (ggBaidu['six'] ? 'baidu_' + ggBaidu['six'] : '') : '') 
-        || (ggSogou ? (ggSogou['six'] ? 'sogou_' + ggSogou['six'] : '') : '') 
-        || (ggGdt ? (ggGdt['six'] ? 'gdt_' + ggGdt['six'] : '') : '');
+    GLOBAL.Et.gg.my['six'] = (ggGdt ? (ggGdt['six'] ? 'gdt_' + ggGdt['six'] : '') : '')
+        || (ggBaidu ? (ggBaidu['six'] ? 'baidu_' + ggBaidu['six'] : '') : '') 
+        || (ggSogou ? (ggSogou['six'] ? 'sogou_' + ggSogou['six'] : '') : '');
     // threeup - baidu/sogou
     GLOBAL.Et.gg.my['threeup'] = (ggBaidu ? (ggBaidu['threeup'] ? 'baidu_' + ggBaidu['threeup'] : '') : '') 
         || (ggSogou ? (ggSogou['threeup'] ? 'sogou_' + ggSogou['threeup'] : '') : '');

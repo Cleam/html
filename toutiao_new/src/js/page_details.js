@@ -121,7 +121,8 @@ var module = (function(my){
                 linkEl,
                 imgEl,
                 size,
-                item;
+                item,
+                cnode;
             for(var i = 0; i < figureLen; i++) {
                 figureEl = figureNodes[i]; // <figure> element
                 // include only element nodes 
@@ -135,14 +136,20 @@ var module = (function(my){
                 // create slide object
                 item = {
                     src: linkEl.getAttribute('href'),
-                    w: parseInt(imgEl.getAttribute('data-weight')),
+                    w: parseInt(imgEl.getAttribute('data-width')) || parseInt(imgEl.getAttribute('data-weight')),
                     h: parseInt(imgEl.getAttribute('data-height'))
                     // w: parseInt(size[0], 10),
                     // h: parseInt(size[1], 10)
                 };
                 if(figureEl.children.length > 1) {
                     // <figcaption> content
-                    item.title = figureEl.children[1].innerHTML; 
+                    cnode = figureEl.children[1];
+                    while(cnode && cnode.nodeName !== 'FIGCAPTION'){
+                        cnode = cnode.nextSibling;
+                    }
+                    if(cnode){
+                        item.title = cnode.innerHTML;
+                    }
                 }
                 if(linkEl.children.length > 0) {
                     // <img> thumbnail element, retrieving thumbnail url
@@ -162,11 +169,11 @@ var module = (function(my){
         // triggers when user clicks on thumbnail
         var onThumbnailsClick = function(e) {
             e = e || window.event;
-            e.preventDefault ? e.preventDefault() : e.returnValue = false;
             var eTarget = e.target || e.srcElement;
-           	if(eTarget.tagName.toUpperCase() !== 'IMG'){
-           		return;
-           	}
+            if(eTarget.tagName.toUpperCase() !== 'IMG'){
+                return;
+            }
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
             // find root element of slide
             var clickedListItem = closest(eTarget, function(el) {
                 return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
@@ -309,30 +316,57 @@ var module = (function(my){
 		$hotNews = $('#J_hot_news'),	// 热点新闻
 		$hnList = $('<div id="J_hn_list" class="hn-list"></div>');	// 热点新闻列表
 
-    
     /**
      * 加载猜你感兴趣新闻（目前是广告）
      * @return {undefined} 
      */
-    var loadSix = function(ggId) {
+    function loadSix(gg) {
+        if(!gg){
+            return;
+        }
+        var arr = gg.split('_'),
+            alliance = arr[0],  // 联盟
+            ggId = arr[1];      // 广告ID
+        console.log('arr::', arr);
+
         // 分类标题
         $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2></div>').append($inList);
-        // var ggId = 'u2610264';
-        var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
-        $inList.append('<div id="cpro_' + ggId + '"></div>');
-        
-        my.createScript(ggConfig, function(){
-            // console.log('js/gg_details.js loaded!!!');
-            my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
-        }, $('#cpro_' + ggId)[0]);
-    };
+        switch(alliance) {
+            case 'baidu':
+                var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+                $inList.append('<div id="cpro_' + ggId + '"></div>');
+                
+                my.createScript(ggConfig, function(){
+                    // console.log('js/gg_details.js loaded!!!');
+                    my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
+                }, $('#cpro_' + ggId)[0]);
+                break;
+            case 'gdt':
+                var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
+                $inList.append('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>');
+                break;
+            default: 
+                if(!ggId){
+                    ggId = GLOBAL.Et.ggData.root['null']['baidu']['six'] || 'u2370261';
+                }
+                var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+                $inList.append('<div id="cpro_' + ggId + '"></div>');
+                
+                my.createScript(ggConfig, function(){
+                    // console.log('js/gg_details.js loaded!!!');
+                    my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
+                }, $('#cpro_' + ggId)[0]);
+                break;
+        }
+    }
+
 
     /**
      * 加载热点新闻
      * @param  {Array} data 新闻数据
      * @return {undefined} 
      */
-    var loadHotNews = function(data) {
+    function loadHotNews(data) {
         var scope = this;
         // var data = d && d.data;
         if(!data || !data.length){
@@ -402,14 +436,14 @@ var module = (function(my){
 	            }
             }
         }
-	};
+	}
 
 	/**
 	 * 热点新闻中插入广告（三宫格）
 	 * @param  {number} pos 插入位置
 	 * @return {undefined} 
 	 */
-	var loadThree = function(pos, ggId){
+	function loadThree(pos, ggId){
 		var ggArr = ['u2370262', 'u2649544'],
 			ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
 
@@ -420,45 +454,45 @@ var module = (function(my){
 			my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
 		}, $('#cpro_' + ggId)[0]);
 
-	};
+	}
     /**
      * 加载tujia图加广告
      * @return {[type]} [description]
      */
-    var loadTujia = function(){
+    function loadTujia(){
 
-    };
+    }
 
     /**
      * 加载cptop顶部插屏广告
      * @return {[type]} [description]
      */
-    var loadCptop = function(){
+    function loadCptop(){
         
-    };
+    }
 
     /**
      * 加载txt1、txt2、txt3文字链广告
      * @return {[type]} [description]
      */
-    var loadTxt = function(){
+    function loadTxt(){
         
-    };
+    }
 
     /**
      * 加载bottom广告
      * @return {[type]} [description]
      */
-    var loadBottom = function(){
+    function loadBottom(){
         
-    };
+    }
 
 	my.loadCommonPage = function() {
         var mygg = GLOBAL.Et.gg.my;
         console.log('GLOBAL.Et.gg::', mygg);
 
 		try {
-            loadSix('u2610264');
+            loadSix(mygg['six']);
         } catch (e) {
             console.log('loadSix has error!', e);
         }

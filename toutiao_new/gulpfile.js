@@ -229,6 +229,21 @@ gulp.task('js-common', function() {
         .pipe(livereload());
 });
 /**
+ * 响应式js
+ */
+gulp.task('js-responsive', function() {
+    var jsSrc = [
+            './src/js/responsive.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        //.pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+/**
  * 广告js
  */
 gulp.task('js-gg', function() {

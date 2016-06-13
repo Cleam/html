@@ -506,7 +506,9 @@ GLOBAL.Et.ggData = {
 		"baidubrowser":{"baidu":{"li":"u2666263"}},
 		"xiaomi":{"baidu":{"li":"u2666305"}},
 		"chubao":{"baidu":{"li":"u2666374"}},
-		"tianyizone":{"baidu":{"li":"u2669318"}}
+		"tianyizone":{"baidu":{"li":"u2669318"}},
+		"10086mz":{"baidu":{"li":"u2670470"}},
+		"huituikeji":{"baidu":{"li":"u2670435"}}
 	}
 };
 

@@ -17,6 +17,10 @@ body{padding-top: 0; background-color: #F3F3F3; color: #333;}
 /* .article-content .img .img-wrap{position: relative; display: block; width: 100%; height: 0; background-image: url("http://mini.eastday.com/toutiaoh5/img/img_preview.png"); background-color: rgba(150,150,150,.1); background-repeat: no-repeat; background-position: center;} */
 .article-content .img .img-wrap img{position: absolute; left: 0; top: 0; display: block; width: 100%;}
 .article-content .img .txt-wrap{font-size: 0.36rem; line-height: 2em;}
+/* app下载引导 */
+.article-content .app-download{position: relative; display: block; width: 100%; height: 0.8rem; text-align: center; color: #f00; line-height: 0.8rem; border: 1px solid #e5e5e5; border-top: 0 none; font-size: 0.34rem;}
+.article-content .app-download img{position: absolute; width: 0.42rem; height: 0.42rem; margin-right: 0.15rem; top: 50%; margin-top: -0.21rem; left: 0.66rem;}
+/* 内页中视频使用的是iframe嵌入，对其样式进行优化 */
 .article-content iframe{margin-bottom: 0.3rem;}
 
 /*==== 猜你感兴趣 ====*/
@@ -26,6 +30,8 @@ body{padding-top: 0; background-color: #F3F3F3; color: #333;}
 .in-title h2{position: relative; /* border-left: 3px solid #d43d3d; */ color: #000; font-size: 0.34rem; padding-left: 0.15rem;}
 .in-title h2 span{position: absolute; left: 0; top: 0; width: 3px; height: 100%; background-color: #d43d3d;}
 .in-list{width: 7.5rem; padding-top: 0.2rem; padding-bottom: 0.2rem; overflow: hidden;}
+/* 广点通广告样式优化 */
+.in-list .gdt-wrap{opacity: 1; margin: 0 0.3rem;}
 
 /*==== 热点新闻 ====*/
 .hot-news{background-color: #fff;}
