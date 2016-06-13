@@ -227,7 +227,7 @@ $(function(){
 	        $newsList.on('click', 'a', function(e){
 	            var $this = $(this),
 	                url = $this.attr('href');
-	            url = url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html'));
+	            url = url.substring(url.indexOf('/a/') + 8, url.indexOf('.html'));
 	            scope.cacheReadUrl(url, $this.data('type'), $this.data('subtype'));
 	            // 点击新闻时，暂停播放中的视频
 	            $newsList.find('video').each(function(){
