@@ -50,7 +50,7 @@ $(function(){
 			
 			/* 获取服务端所有频道 */
 			$.ajax({
-				url: './data/channels.json',
+				url: 'http://m.toutiao.ynet.com/data/channels.json',
 				dataType: 'json',
 				success: function(data){
 					var channels = data.channels,

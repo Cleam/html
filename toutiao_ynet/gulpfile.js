@@ -229,6 +229,21 @@ gulp.task('js-common', function() {
         .pipe(livereload());
 });
 /**
+ * 响应式js
+ */
+gulp.task('js-responsive', function() {
+    var jsSrc = [
+            './src/js/responsive.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        //.pipe(rev())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+/**
  * 广告js
  */
 gulp.task('js-gg', function() {
@@ -289,7 +304,7 @@ gulp.task('js-subscribe', function() {
         .pipe(gulp.dest(jsDst))
         .pipe(livereload());
 });
-gulp.task('js-page', ['js-gg', 'js-index', 'js-search', 'js-subscribe']);
+gulp.task('js-page', ['js-responsive', 'js-gg', 'js-index', 'js-search', 'js-subscribe']);
 // video
 gulp.task('js-video', function() {
     var jsSrc = [

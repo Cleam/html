@@ -4,26 +4,30 @@
 // $: Zepto
 $(function(){
 	FastClick.attach(document.body);
-	var channelsUrl = './data/channels.json',	// 新闻频道类别
-		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据
-		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载
-		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载
-		refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
-		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
-		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
+	var channelsUrl = 'http://m.toutiao.ynet.com/data/channels.json',	// 新闻频道类别
+		refreshUrl = 'http://106.75.20.245/wapjson_h5/RefreshJP',		// 刷新数据
+		pullDownUrl = 'http://106.75.20.245/wapjson_h5/pulldown',		// 下拉加载
+		pullUpUrl = 'http://106.75.20.245/wapjson_h5/NextJP',			// 上拉加载
+		// --------------------------------------------------
+		// refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
+		// pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
+		// pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
+		// --------------------------------------------------
+		logUrl = 'http://106.75.21.113/wapdata/data',				// 测试 日志（操作统计）
+		onlineUrl = 'http://106.75.21.115/online/online',			// 测试 在线统计
+		showAdLogUrl = 'http://106.75.21.113/wapdata/ggshow',	// 推广信息show统计接口
+		clickAdLogUrl = 'http://106.75.21.113/wapdata/ggclk',		// 推广信息show统计接口
+		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口
+		// --------------------------------------------------
+		// logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
+		// onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
+		// showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
+		// clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息click统计接口
+		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',		// 视频统计接口
+		// --------------------------------------------------
 		positionUrl = 'http://position.dfshurufa.com/position/get',			// 获取用户位置
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',					// 美女点赞（点踩）
-		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
-		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
-		showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
-		clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息click统计接口
-		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',		// 视频统计接口
-		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口
-		// logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
-		// onlineUrl = 'http://123.59.60.170/online/online',			// 测试 在线统计
-		// showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',	// 推广信息show统计接口
-		// clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',		// 推广信息show统计接口
 		$body = $('body'),
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
@@ -134,11 +138,11 @@ $(function(){
 				});
 				
 				/* 设置当前位置信息 */
-		        if(wsCache.get('location')){
-		            scope.updateDomLocation(wsCache.get('location'));
-		        } else {
-		            scope.location();
-		        }
+		        // if(wsCache.get('location')){
+		        //     scope.updateDomLocation(wsCache.get('location'));
+		        // } else {
+		        //     scope.location();
+		        // }
 	        });
 
 			/* 首次加载数据 */
@@ -156,8 +160,6 @@ $(function(){
 			$newsTabsWrap.on('tap', 'a', function(){
 				var $this = $(this),
 					type = $this.data('type');
-				// 加载当前频道类别新闻数据
-				scope.newsType = type;
 				if($this.hasClass('active')){
 					return;
 				}
@@ -166,6 +168,8 @@ $(function(){
 				// 存储上一个新闻类别和当前新闻类别
 				wsCache.set('prev_newstype', scope.newsType, { exp: 20 * 60});
 				wsCache.set('current_newstype', type, {exp: 20 * 60});
+				// 更新当前频道
+				scope.newsType = type;
 
 				scope.refreshData(function(){
 					scope.highlightPraiseTrample();
@@ -661,6 +665,7 @@ $(function(){
 	                url = item.url,
 	                dateStr = item.date,
 	                topic = item.topic,
+	                isgg = item.isgg,
 	                source = item.source,
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
@@ -704,12 +709,16 @@ $(function(){
 	                tagStr = '<i class="nuanwen">暖文</i>';
 	            }
 
+	            // url处理
+	            url = (isgg != '1') ? ('http://toutiao.ynet.com/a/' + url) : url;
+
 	            if(scope.newsType == 'meinv'){
 	            	url += '?fr=meinv&#&gid=1&pid=1';
 	            } else {
 	            	url += '?idx=' + (scope.pulldown_idx-i-1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + scope.newsType;
 	            }
 	            // 随机位置插入广告(一条)
+	            existGg = true; // 先不展示广告
             	if(!existGg && i === randomNum){
             		if (GLOBAL.Et.ggTypeArr.contains('gdt')) {
             			var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
@@ -1286,6 +1295,7 @@ $(function(){
 	                url = item.url,
 	                dateStr = item.date,
 	                topic = item.topic,
+	                isgg = item.isgg,
 	                source = item.source,
 	                imgArr = item.miniimg,
 	                recommendtype = item.recommendtype ? item.recommendtype : '-1',
@@ -1328,6 +1338,10 @@ $(function(){
 	            } else if(nuanwen) {
 	                tagStr = '<i class="nuanwen">暖文</i>';
 	            }
+
+	            // url处理
+	            url = (isgg != '1') ? ('http://toutiao.ynet.com/a/' + url) : url;
+
 	            if(scope.newsType == 'meinv'){
 	            	url += '?fr=meinv&#&gid=1&pid=1';
 	            } else {
@@ -1337,12 +1351,8 @@ $(function(){
 	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else {
 	            	/*====== 插入广告 ========*/
-	            	if(GLOBAL.Et.gg){	// 有渠道号情况
-	            		// 渠道(ucllqsun)的百度广告换成广点通广告
-	            		// if(scope.qid == 'ucllqsun'){
-	            		// 	var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-		            	// 	baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
-	            		// }
+	            	// 暂停展示广告
+	            	/*if(GLOBAL.Et.gg){	// 有渠道号情况
 	            		if (GLOBAL.Et.ggTypeArr.contains('gdt')) {
 	            			var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
 		            		baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + GLOBAL.Et.gg['gdt']['li'] + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
@@ -1373,7 +1383,7 @@ $(function(){
 						if(i === 7 || i === 15){
 							$newsList.append(baiduHtmlIframe);
 						}
-					}
+					}*/
 
 					/*if(i === ranNum){
 	            		$newsList.append('<section class="news-item news-item-gdt" style="padding: 0.24rem 0.3rem 0; height: 4.72rem;"><iframe style="border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem;" src="gg/gg_gdt.html" frameborder="0" scrolling="no" width="100%;" height="100%"></iframe></section>');

@@ -1,6 +1,4 @@
 FastClick.attach(document.body);
-var tempData=[{adv_id:"0",date:"2016-05-24 13:07",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:219,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg",imgwidth:439,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572788351482",source:"\u4e00\u5e8a\u60c5\u4e66",subtype:"bagua",topic:"\u5468\u6770\u4f26\u9886\u8854\u88ab\u9a82\u201c\u5783\u573e\u201d\u768410\u5927\u660e\u661f\uff0c\u6700\u540e\u4e00\u4e2a\u662f\u786e\u5b9e\u5f88\u5783\u573e",tramplecnt:"0",type:"yule",url:"http://mini.eastday.com/mobile/160524130704325.html",urlfrom:"weikandian",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 14:14",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:200,imgname:"20160524141427_12e3dc5481f1233a2247cee690d265e0_1_mwpl_05500201.jpeg",imgwidth:400,src:"http://07.imgmini.eastday.com/mobile/20160524/20160524141427_12e3dc5481f1233a2247cee690d265e0_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524141427_12e3dc5481f1233a2247cee690d265e0_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://07.imgmini.eastday.com/mobile/20160524/20160524141427_12e3dc5481f1233a2247cee690d265e0_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524141427_c1e011d302fd38f566d50f5582877206_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://07.imgmini.eastday.com/mobile/20160524/20160524141427_c1e011d302fd38f566d50f5582877206_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524141427_bce2dd76159675e95cdd25c6bd998b1f_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://07.imgmini.eastday.com/mobile/20160524/20160524141427_bce2dd76159675e95cdd25c6bd998b1f_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572784308044",source:"\u5170\u5dde\u6668\u62a5",subtype:"",topic:"\u5634\u8854\u7b14\u4f5c\u753b\u53565\u4e07 \u4e5e\u8ba8\u4e2d\u9047\u4f2f\u4e50\u575a\u6301\u7ed8\u753b28\u5e74\u6210\u753b\u5e08",tramplecnt:"0",type:"shehui",url:"http://mini.eastday.com/mobile/160524141427763.html",urlfrom:"youth",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 13:07",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:219,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg",imgwidth:439,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572788351482",source:"\u4e00\u5e8a\u60c5\u4e66",subtype:"bagua",topic:"\u5468\u6770\u4f26\u9886\u8854\u88ab\u9a82\u201c\u5783\u573e\u201d\u768410\u5927\u660e\u661f\uff0c\u6700\u540e\u4e00\u4e2a\u662f\u786e\u5b9e\u5f88\u5783\u573e",tramplecnt:"0",type:"yule",url:"http://mini.eastday.com/mobile/160524130704325.html",urlfrom:"weikandian",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 15:33",hotnews:"0",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:275,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpl_05500201.jpeg",imgwidth:550,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"3001_9223370572779547913_3ffe40e8bea89d06",source:"\u5a5a\u604b\u5fc3\u7406\u5b66",subtype:"bagua",topic:"\u6211\u65e0\u610f\u4e2d\u78b0\u89c1\u6211\u4eec\u8001\u677f\u5a18\u548c\u4e1a\u52a1\u7ecf\u7406\u73a9\u8f66\u9707\uff0c\u7136\u540e\u6211\u88ab\u7092\u4e86\uff01",tramplecnt:"0",type:"yule",url:"http://mini.eastday.com/mobile/160524153347894.html",urlfrom:"weikandian",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 14:37",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:175,imgname:"20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpl_05500201.jpeg",imgwidth:351,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:220,imgname:"20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpm_03200403.jpeg",imgwidth:293,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpm_03200403.jpeg"}],miniimg_size:"1",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572782915605",source:"\u76d0\u6dee\u7f51",subtype:"",topic:"\u9ec4\u6cb3\u6f02\u4e00\u5bf9\u7537\u5973\u6d6e\u5c38 \u4e24\u540d\u6b7b\u8005\u4e92\u76f8\u6402\u62b1\u4e00\u8d77\u3010\u56fe\u3011",tramplecnt:"0",type:"shehui",url:"http://mini.eastday.com/mobile/160524143740202.html",urlfrom:"youth",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 13:07",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:219,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg",imgwidth:439,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572788351482",source:"\u4e00\u5e8a\u60c5\u4e66",subtype:"bagua",topic:"\u5468\u6770\u4f26\u9886\u8854\u88ab\u9a82\u201c\u5783\u573e\u201d\u768410\u5927\u660e\u661f\uff0c\u6700\u540e\u4e00\u4e2a\u662f\u786e\u5b9e\u5f88\u5783\u573e",tramplecnt:"0",type:"yule",url:"http://mini.eastday.com/mobile/160524130704325.html",urlfrom:"weikandian",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 15:33",hotnews:"0",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:275,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpl_05500201.jpeg",imgwidth:550,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524153347_95ccac333ffe40e8bea89d06e45f3a56_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://09.imgmini.eastday.com/mobile/20160524/20160524153347_95ccac333ffe40e8bea89d06e45f3a56_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"3001_9223370572779547913_3ffe40e8bea89d06",source:"\u5a5a\u604b\u5fc3\u7406\u5b66",subtype:"bagua",topic:"\u6211\u65e0\u610f\u4e2d\u78b0\u89c1\u6211\u4eec\u8001\u677f\u5a18\u548c\u4e1a\u52a1\u7ecf\u7406\u73a9\u8f66\u9707\uff0c\u7136\u540e\u6211\u88ab\u7092\u4e86\uff01",tramplecnt:"0",type:"yule",url:"http://mini.eastday.com/mobile/160524153347894.html",urlfrom:"weikandian",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 14:37",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:175,imgname:"20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpl_05500201.jpeg",imgwidth:351,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:220,imgname:"20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpm_03200403.jpeg",imgwidth:293,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpm_03200403.jpeg"}],miniimg_size:"1",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572782915605",source:"\u76d0\u6dee\u7f51",subtype:"",topic:"\u9ec4\u6cb3\u6f02\u4e00\u5bf9\u7537\u5973\u6d6e\u5c38 \u4e24\u540d\u6b7b\u8005\u4e92\u76f8\u6402\u62b1\u4e00\u8d77\u3010\u56fe\u3011",tramplecnt:"0",type:"shehui",url:"http://mini.eastday.com/mobile/160524143740202.html",urlfrom:"youth",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 13:07",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:219,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg",imgwidth:439,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_1_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_2_mwpm_03200403.jpeg"},{alt:"",describe:"",imgheight:240,imgname:"20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg",imgwidth:320,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524130704_408fe7f2b76a88633a7119222f18e158_3_mwpm_03200403.jpeg"}],miniimg_size:"3",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572788351482",source:"\u4e00\u5e8a\u60c5\u4e66",subtype:"bagua",topic:"\u5468\u6770\u4f26\u9886\u8854\u88ab\u9a82\u201c\u5783\u573e\u201d\u768410\u5927\u660e\u661f\uff0c\u6700\u540e\u4e00\u4e2a\u662f\u786e\u5b9e\u5f88\u5783\u573e",tramplecnt:"0",type:"yule",url:"http://mini.eastday.com/mobile/160524130704325.html",urlfrom:"weikandian",urlpv:"0",videolist:[],videonews:"0"},{adv_id:"0",date:"2016-05-24 14:37",hotnews:"1",isadv:"0",isnxw:"0",ispicnews:"0",isrecom:"0",isvideo:"0",lbimg:[{alt:"",describe:"",imgheight:175,imgname:"20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpl_05500201.jpeg",imgwidth:351,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpl_05500201.jpeg"}],miniimg:[{alt:"",describe:"",imgheight:220,imgname:"20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpm_03200403.jpeg",imgwidth:293,src:"http://01.imgmini.eastday.com/mobile/20160524/20160524143740_0d5eb590358ed631d6395222cd885040_1_mwpm_03200403.jpeg"}],miniimg_size:"1",picnums:"0",praisecnt:"0",recommendtype:"-1",rowkey:"9223370572782915605",source:"\u76d0\u6dee\u7f51",subtype:"",topic:"\u9ec4\u6cb3\u6f02\u4e00\u5bf9\u7537\u5973\u6d6e\u5c38 \u4e24\u540d\u6b7b\u8005\u4e92\u76f8\u6402\u62b1\u4e00\u8d77\u3010\u56fe\u3011",tramplecnt:"0",type:"shehui",url:"http://mini.eastday.com/mobile/160524143740202.html",urlfrom:"youth",urlpv:"0",videolist:[],videonews:"0"}];
-
 /**
  * 模块模板
  */
@@ -307,67 +305,79 @@ var module = (function(my){
 	var $interestNews = $('#J_interest_news'),	// 猜你感兴趣
 		$inList = $('<div id="J_in_list" class="in-list"></div>'),	// 猜你感兴趣列表
 		$hotNews = $('#J_hot_news'),	// 热点新闻
-		$hnList = $('<div id="J_hn_list" class="hn-list"></div>');	// 热点新闻列表
+		$hnList = $('<div id="J_hn_list" class="hn-list"></div>'),	// 热点新闻列表
+        activeLogUrl = 'http://106.75.21.113/wapdata/data',
+        onlineLogUrl = 'http://106.75.21.115/online/online';
 
-	$interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2></div>').append($inList);
-	$hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2></div>').append($hnList);
-	
-	/**
-	 * 加载猜你感兴趣新闻（目前是广告）
-	 * @return {undefined} 
-	 */
-	var loadInterestNews = function() {
-		var ggId = 'u2610264';
-		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
-		$inList.append('<div id="cpro_' + ggId + '"></div>');
-		
-		my.createScript(ggConfig, function(){
-			// console.log('js/gg_details.js loaded!!!');
-			my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
-		}, $('#cpro_' + ggId)[0]);
-	};
 
-	/**
-	 * 加载热点新闻
-	 * @param  {Array} data 新闻数据
-	 * @return {undefined} 
-	 */
-	var loadHotNews = function(data) {
-		var scope = this;
-        // var data = d && d.data;
+    
+    /**
+     * 加载猜你感兴趣新闻（目前是广告）
+     * @return {undefined} 
+     */
+    function loadInterestNews() {
+        var ggId = 'u2610264';
+        var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+        
+        // 类别标题
+        $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2></div>').append($inList);
+        $inList.append('<div id="cpro_' + ggId + '"></div>');
+        my.createScript(ggConfig, function(){
+            // console.log('js/gg_details.js loaded!!!');
+            my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
+        }, $('#cpro_' + ggId)[0]);
+    }
+
+    /**
+     * 加载热点新闻
+     * @param  {Array} data 新闻数据
+     * @return {undefined} 
+     */
+    function loadHotNews(data) {
         if(!data || !data.length){
             return false;
         }
+        // 类别标题
+        $hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2></div>').append($hnList);
         var len = data.length;
         for (var i = 0; i < len; i++) {
             var item = data[i],
                 url = item.url,
                 dateStr = item.date,
+                isgg = item.isgg,
                 topic = item.topic,
                 source = item.source,
                 imgArr = item.miniimg,
                 recommendtype = item.recommendtype ? item.recommendtype : '-1',
-                hotnews = item.hotnews,
+                // hotnews = item.hotnews,
                 ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(-1)
                 videonews = item.videonews,	// 视频新闻
-                videoList = item.videolist,	// 视频列表
+                // videoList = item.videolist,	// 视频列表
                 isadv = item.isadv || '',
                	advId = item.adv_id || '',
                 type = item.type,
                 subtype = item.subtype,
                 imgLen = imgArr.length,
-                rowkey = item.rowkey,
+                // rowkey = item.rowkey,
                 hot = Number(item.hotnews),     // 热门
                 video = Number(item.isvideo),   // 视频
                 rec = Number(item.isrecom),     // 推荐
                 nuanwen = Number(item.isnxw),   // 暖文
-                urlpv = item.urlpv,				// 浏览量
-                picnums = item.picnums,			// 图片数量
-                praisecnt = item.praisecnt,		// 顶
-                tramplecnt = item.tramplecnt,	// 踩
+                // urlpv = item.urlpv,				// 浏览量
+                // picnums = item.picnums,			// 图片数量
+                // praisecnt = item.praisecnt,		// 顶
+                // tramplecnt = item.tramplecnt,	// 踩
+                idx = i + 1,
+                fr = GLOBAL.Util.getUrlNoParams(),
                 advStr = '',
                 tagStr = '';
 
+            // url处理
+            url = (isgg != '1') ? ('http://toutiao.ynet.com/a/' + url) : url;
+
+            url = url + '?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype;
+
+            // 类别处理
             if(isadv == '1'){
             	tagStr = '&nbsp;';
             	// tagStr = '<i class="promote">推广</i>';
@@ -386,7 +396,7 @@ var module = (function(my){
             }
 
 			/*======== 新闻流 =========*/
-        	if(videonews == '1'){	// 视频模式
+        	if(videonews == '1'){	// 视频模式 
 
         	} else if(ispicnews == '1'){	// 大图模式
 
@@ -400,16 +410,15 @@ var module = (function(my){
 	            }
             }
         }
-	};
+	}
 
 	/**
 	 * 热点新闻中插入广告
 	 * @param  {number} pos 插入位置
 	 * @return {undefined} 
 	 */
-	var insertGg = function(pos, ggId){
-		var ggArr = ['u2370262', 'u2649544'],
-			ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
+	function insertGg(pos, ggId){
+		var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
 
 		$hnList.children().eq(pos > 0 ? pos - 1 : 0).after('<section class="news-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
 		// $hnList.append('<section class="news-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
@@ -417,14 +426,128 @@ var module = (function(my){
 		my.createScript(ggConfig, function(){
 			my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
 		}, $('#cpro_' + ggId)[0]);
+	}
 
-	};
+    /**
+     * 访问日志记录
+     */
+    function activeLog(){
+        $.ajax({
+            url : activeLogUrl, // active
+            dataType : 'jsonp',
+            data : {
+                "qid": GLOBAL.Et.qid || 'null',
+                "uid": GLOBAL.Et.uid || 'null',
+                "loginid": 'null',
+                "softtype": 'news',
+                "softname": 'toutiao_ynet',
+                "newstype": GLOBAL.Et.newsType || 'null',
+                "from": GLOBAL.Util.getQueryString('fr') || 'null',
+                "to": GLOBAL.Util.getUrlNoParams() || 'null',
+                "os_type": GLOBAL.Util.getOsType() || 'null',
+                "browser_type": GLOBAL.Util.getBrowserType() || 'null',
+                "pixel": window.screen.width + '*' + window.screen.height,
+                "ime": 'null',
+                "idx": GLOBAL.Util.getQueryString('idx') || 'null',
+                "ishot": 'null',
+                "fr_url": GLOBAL.Util.getReferrer() || 'null',
+                "ver": 'null',
+                "appqid": 'null',
+                "ttloginid": 'null',
+                "apptypeid": 'null',
+                "appver": 'null',
+                "recommendtype": GLOBAL.Util.getQueryString('recommendtype') || 'null',
+                "ispush": GLOBAL.Util.getQueryString('ispush') || 'null',
+                "deviceid": 'null'
+            },
+            jsonp : 'jsonpcallback',
+            success : function(msg) {
+                console.log(msg);
+            }
+        });
+    }
+
+    /**
+     * 在线日志记录
+     */
+    function onlineLog(params){
+        $.ajax({
+            url : onlineLogUrl, // online
+            dataType : 'jsonp',
+            data : {
+                param: encodeURI(params)
+            },
+            jsonp : 'jsonpcallback'
+        });
+    }
 
 	my.loadCommonPage = function() {
-		loadInterestNews();
-		loadHotNews(tempData);
-		insertGg(3, 'u2370262');
-		insertGg(7, 'u2649544');
+        // 日志记录
+        try {
+            // 访问日志
+            activeLog();
+
+            // 在线日志
+            var urlNoParams = GLOBAL.Util.getUrlNoParams(),
+                uid = GLOBAL.Et.uid,
+                qid = GLOBAL.Et.qid || 'null',
+                apptypeid = 'null',
+                ime = 'null',
+                ttaccid = 'null',
+                type = GLOBAL.Et.newsType || 'null',
+                intervaltime = 10,  // 10s
+                ver = 'null',
+                appqid = 'null',
+                os = GLOBAL.Util.getOsType(),
+                ttloginid = 'null',
+                params = urlNoParams + '\t' + uid + '\t' + qid + '\t' + apptypeid + '\t' + ime + '\t' + ttaccid + '\t' + type + '\t' + intervaltime + '\t' + ver + '\t' + appqid + '\t' + os + '\t' + ttloginid + '\t' + qid;
+            onlineLog(params);
+            // 每隔10s发送一次
+            setInterval(function(){
+                onlineLog(params);
+            }, intervaltime * 1000);
+        } catch (e) {
+            console.error('Log error: \n', e);
+        }
+
+        // 猜你感兴趣
+		// loadInterestNews();
+        
+     
+        // 热点新闻 
+        try {
+            $.ajax({
+                url: 'http://106.75.20.245/wapjson_st/checknews',
+                data : {
+                    "type": GLOBAL.Et.newsType,
+                    "endkey": '',
+                    "url": GLOBAL.Util.getUrlNoParams(),
+                    "newsnum": 10,
+                    'recgid': GLOBAL.Et.uid,
+                    'qid': GLOBAL.Et.qid,
+                    'os': GLOBAL.Util.getOsType(),
+                    'isapp': '0',
+                    'iswifi': '0'
+                },
+                dataType: 'jsonp',
+                jsonp: 'jsonpcallback',
+                success: function(rst){
+                    var data = rst ? rst.data : '';
+                    console.log('data::', data);
+                    if(data){
+                        loadHotNews(data);
+                    } else {
+                        console.warn('未获取到数据!');
+                    }
+                }
+            });
+        } catch (e) {
+            console.error('LoadHotNews error: \n', e);
+        }
+
+        // 新闻流中插入广告
+		// insertGg(3, 'u2370262');
+		// insertGg(7, 'u2649544');
 	};
 
 	/*my.inits.push(function(){
@@ -449,7 +572,7 @@ var module = (function(my){
 	 * @return {[type]} [description]
 	 */
 	my.loadWnwifiPage = function() {
-		console.log('这是wnwifi渠道页面！');
+		// console.log('这是wnwifi渠道页面！');
 	};
 
 	return my;
@@ -514,7 +637,7 @@ $(function(){
 
 	// 调用初始化方法
 	module.inits.forEach(function(fn,index){
-		if(typeof fn == 'function'){
+		if(typeof fn === 'function'){
 			try {
 				fn();
 			} catch (e) {
@@ -523,13 +646,15 @@ $(function(){
 		}
 	});
 
-	// 根据不同渠道加载不同页面
+	/*// 根据不同渠道加载不同页面
 	if(GLOBAL.Et.qid && GLOBAL.Et.qid == 'wnwifi'){
 		// 加载特殊渠道（wnwifi）页面
 		module.loadWnwifiPage();
 	} else {
 		// 加载一般渠道页面
 		module.loadCommonPage();
-	}
+	}*/
+
+    module.loadCommonPage();
 
 });
