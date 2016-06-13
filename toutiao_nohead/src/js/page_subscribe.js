@@ -50,7 +50,7 @@ $(function(){
 			
 			/* 获取服务端所有频道 */
 			$.ajax({
-				url: './data/channels.json',
+				url: 'http://mini.eastday.com/toutiaoh5/nohead/data/channels.json',
 				dataType: 'json',
 				success: function(data){
 					var channels = data.channels,

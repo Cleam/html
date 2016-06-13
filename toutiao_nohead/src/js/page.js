@@ -4,7 +4,7 @@
 // $: Zepto
 $(function(){
 	FastClick.attach(document.body);
-	var channelsUrl = './data/channels.json',	// 新闻频道类别
+	var channelsUrl = 'http://mini.eastday.com/toutiaoh5/nohead/data/channels.json',	// 新闻频道类别
 		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据
 		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载
 		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载

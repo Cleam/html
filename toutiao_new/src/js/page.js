@@ -158,8 +158,6 @@ $(function(){
 			$newsTabsWrap.on('tap', 'a', function(){
 				var $this = $(this),
 					type = $this.data('type');
-				// 加载当前频道类别新闻数据
-				scope.newsType = type;
 				if($this.hasClass('active')){
 					return;
 				}
@@ -168,6 +166,8 @@ $(function(){
 				// 存储上一个新闻类别和当前新闻类别
 				wsCache.set('prev_newstype', scope.newsType, { exp: 20 * 60});
 				wsCache.set('current_newstype', type, {exp: 20 * 60});
+				// 更新当前频道
+				scope.newsType = type;
 
 				scope.refreshData(function(){
 					scope.highlightPraiseTrample();

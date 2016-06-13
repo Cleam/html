@@ -1,7 +1,7 @@
 {
 	"channels": {
 		"up": [
-			{"name": "toutiao", "value": "头条"},
+			{"name": "toutiao", "value": "热点"},
 			{"name": "weikandian", "value": "滚动"},
 			{"name": "shehui", "value": "社会"},
 			{"name": "guonei", "value": "国内"},
