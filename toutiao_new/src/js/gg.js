@@ -508,7 +508,11 @@ GLOBAL.Et.ggData = {
 		"chubao":{"baidu":{"li":"u2666374"}},
 		"tianyizone":{"baidu":{"li":"u2669318"}},
 		"10086mz":{"baidu":{"li":"u2670470"}},
-		"huituikeji":{"baidu":{"li":"u2670435"}}
+		"huituikeji":{"baidu":{"li":"u2670435"}},
+		"youxinapp":{"baidu":{"li":"u2671418"}},
+		"weixinfxzf":{"baidu":{"li":"u2671614"}},
+		"daping":{"baidu":{"li":"u2671812"}},
+		"qqbrowser":{"gdt":{"li":"6080512200788158"}}
 	}
 };
 

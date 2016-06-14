@@ -66,9 +66,9 @@ $(function(){
 	Video.prototype.init = function() {
 		var scope = this;
 		// 设置视频容器宽高
-		if(videoWidth && videoHeight){
-			$video.parents('.video-wrap').css('paddingBottom', '0').height(winWidth * videoHeight / videoWidth);
-		}
+		// if(videoWidth && videoHeight){
+		// 	$video.parents('.video-wrap').css('paddingBottom', '0').height(winWidth * videoHeight / videoWidth);
+		// }
 
 		/* 获取、存储qid */
 		if(scope.qid){
