@@ -3097,6 +3097,14 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'qqbrowser': {
+            'gdt': {
+                six: '2050819280187107'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
