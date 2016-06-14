@@ -4,7 +4,7 @@
  * @return {[type]} [description]
  */
 +function(){
-	var links, urls;
+	var i = 0, links, urls;
 	if(tt_news_mid === 'pgzs' || tt_news_mid.indexOf('waitui') > -1){	// 天明渠道(pgzs和waitui开头的渠道)
 		links = ['jingdong', 'baidu', 'tianmao', 'aitaobao'];
 		urls = [
@@ -14,7 +14,7 @@
 	 		'http://ai.m.taobao.com/index.html?pid=mm_112599953_11408251_55960340'	// 爱淘宝
 	 	];
 		$('input[name=from]').val('1017246b');
-		for (var i = 0; i < links.length; i++) {
+		for (i = 0; i < links.length; i++) {
 			$('.J-qid-' + links[i]).attr('href', urls[i]);
 		}
 		// 苹果助手的去掉  同城约替换成游戏中心
@@ -26,7 +26,7 @@
 	 		'https://m.baidu.com/?from=1017246a'
 	 	];
 		$('input[name=from]').val('1017246a');
-		for (var i = 0; i < links.length; i++) {
+		for (i = 0; i < links.length; i++) {
 			$('.J-qid-' + links[i]).attr('href', urls[i]);
 		}
 	} else if(tt_news_mid === 'mbzm'){
@@ -35,7 +35,16 @@
 	 		'https://m.baidu.com/?from=1012150b'
 	 	];
 		$('input[name=from]').val('1012150b');
-		for (var i = 0; i < links.length; i++) {
+		for (i = 0; i < links.length; i++) {
+			$('.J-qid-' + links[i]).attr('href', urls[i]);
+		}
+	} else if(tt_news_mid === 'hyx007'){
+		links = ['baidu'];
+	 	urls = [
+	 		'https://www.baidu.com/?from=1017246f'
+	 	];
+		$('input[name=from]').val('1017246f');
+		for (i = 0; i < links.length; i++) {
 			$('.J-qid-' + links[i]).attr('href', urls[i]);
 		}
 	}

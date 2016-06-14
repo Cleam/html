@@ -1,14 +1,27 @@
 {
-    "strict": true,
-    "noarg": true,
-    "noempty": true,
-    "eqeqeq": true,
-    "undef": true,
+    "bitwise": true,
     "curly": true,
+    "eqeqeq": true,
+    "esversion": 3,
+    "evil": true,
     "forin": true,
-    "devel": true,
-    "jquery": true,
+    "freeze": true,
+    "funcscope": true,
+    "maxdepth": 4,
+    "maxerr": 50,
+    "maxparams": 3,
+    "maxstatements": 4,
+    "undef": true,
+    "unused": true,
     "browser": true,
-    "wsh": true,
-    "evil": true
+    "jquery": true,
+    "globals": {
+        "GLOBAL": true,
+        "jQuery": true,
+        "Zepto": true
+    },
+    "devel": {
+        "console": true,
+        "alert": true
+    }
 }
