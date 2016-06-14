@@ -306,9 +306,14 @@ var module = (function(my){
 		$inList = $('<div id="J_in_list" class="in-list"></div>'),	// 猜你感兴趣列表
 		$hotNews = $('#J_hot_news'),	// 热点新闻
 		$hnList = $('<div id="J_hn_list" class="hn-list"></div>'),	// 热点新闻列表
-        activeLogUrl = 'http://106.75.21.113/wapdata/data',
-        onlineLogUrl = 'http://106.75.21.115/online/online';
-
+        // 获取数据接口：          106.75.20.245       ynetsocketh5.dfshurufa.com
+        // 上传active日志接口：    106.75.21.113       ynetactiveh5.dfshurufa.com
+        // 上传online日志接口：    106.75.21.115       ynetonlineh5.dfshurufa.com
+        activeLogUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/data',
+        onlineLogUrl = 'http://ynetonlineh5.dfshurufa.com/online/online',
+        dataUrl = 'http://ynetsocketh5.dfshurufa.com/wapjson_st/checknews';
+    
+     
 
     
     /**
@@ -440,7 +445,7 @@ var module = (function(my){
                 "uid": GLOBAL.Et.uid || 'null',
                 "loginid": 'null',
                 "softtype": 'news',
-                "softname": 'toutiao_ynet',
+                "softname": 'toutiao_ynet_h5',
                 "newstype": GLOBAL.Et.newsType || 'null',
                 "from": GLOBAL.Util.getQueryString('fr') || 'null',
                 "to": GLOBAL.Util.getUrlNoParams() || 'null',
@@ -517,7 +522,7 @@ var module = (function(my){
         // 热点新闻 
         try {
             $.ajax({
-                url: 'http://106.75.20.245/wapjson_st/checknews',
+                url: dataUrl,
                 data : {
                     "type": GLOBAL.Et.newsType,
                     "endkey": '',

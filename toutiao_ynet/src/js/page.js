@@ -5,18 +5,18 @@
 $(function(){
 	FastClick.attach(document.body);
 	var channelsUrl = 'http://m.toutiao.ynet.com/data/channels.json',	// 新闻频道类别
-		refreshUrl = 'http://106.75.20.245/wapjson_h5/RefreshJP',		// 刷新数据
-		pullDownUrl = 'http://106.75.20.245/wapjson_h5/pulldown',		// 下拉加载
-		pullUpUrl = 'http://106.75.20.245/wapjson_h5/NextJP',			// 上拉加载
+		refreshUrl = 'http://ynetsocketh5.dfshurufa.com/wapjson_h5/RefreshJP',		// 刷新数据
+		pullDownUrl = 'http://ynetsocketh5.dfshurufa.com/wapjson_h5/pulldown',		// 下拉加载
+		pullUpUrl = 'http://ynetsocketh5.dfshurufa.com/wapjson_h5/NextJP',			// 上拉加载
 		// --------------------------------------------------
 		// refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
 		// pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
 		// pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
 		// --------------------------------------------------
-		logUrl = 'http://106.75.21.113/wapdata/data',				// 测试 日志（操作统计）
-		onlineUrl = 'http://106.75.21.115/online/online',			// 测试 在线统计
-		showAdLogUrl = 'http://106.75.21.113/wapdata/ggshow',	// 推广信息show统计接口
-		clickAdLogUrl = 'http://106.75.21.113/wapdata/ggclk',		// 推广信息show统计接口
+		logUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/data',				// 测试 日志（操作统计）
+		onlineUrl = 'http://ynetonlineh5.dfshurufa.com/online/online',			// 测试 在线统计
+		showAdLogUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/ggshow',	// 推广信息show统计接口
+		clickAdLogUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/ggclk',		// 推广信息show统计接口
 		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口
 		// --------------------------------------------------
 		// logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
@@ -385,7 +385,7 @@ $(function(){
 					"uid": scope.userId || 'null',
 					"loginid": 'null',
 					"softtype": 'news',
-					"softname": 'eastday_wapnews',
+					"softname": 'toutiao_ynet_h5',
 					"newstype": 'ad',
 					"from": 'null',
 					"to": advUrl || 'null',
@@ -826,7 +826,7 @@ $(function(){
 					"uid": scope.userId || 'null',
 					"loginid": 'null',
 					"softtype": 'news',
-					"softname": 'eastday_wapnews',
+					"softname": 'toutiao_ynet_h5',
 					"newstype": 'ad',
 					"from": 'null',
 					"advurl": advUrl || 'null',
@@ -1081,7 +1081,7 @@ $(function(){
 	            dataType: 'jsonp',
 	            data: {
 	                softtype: 'news',
-	                softname: 'eastday_wapnews',
+	                softname: 'toutiao_ynet_h5',
 	            },
 	            jsonp: 'jsonpcallback',
 	            success: function(msg) {
@@ -1122,7 +1122,7 @@ $(function(){
 					qid: scope.qid || 'null',						// 渠道号
 					uid: scope.userId || 'null',						// 从服务器端获取的uid
 					softtype: 'news',					// 软件type（当前默认news）
-					softname: 'eastday_wapnews',		// 软件名（当前默认eastday_wapnews）
+					softname: 'toutiao_ynet_h5',		// 软件名（当前默认eastday_wapnews）
 					newstype: scope.newsType || 'null',			// 当前新闻类别
 					from: wsCache.get('prev_newstype') || 'null',	// url上追加的fr字段
 					to: wsCache.get('current_newstype') || 'null',// 当前页面
