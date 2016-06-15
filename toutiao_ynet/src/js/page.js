@@ -96,13 +96,13 @@ $(function(){
 				scope.setQid(scope.qid);
 			} else {
 				// 无qid的情况，删除cookie中qid
-				Cookies.remove('qid', {path: '/', domain: 'eastday.com'});
+				Cookies.remove('qid', {path: '/', domain: 'ynet.com'});
 			}
 
 			/* 获取、存储uid */
 	        if(!scope.userId){
 	            scope.userId = (+new Date()) + Math.random().toString(10).substring(2, 6);
-	            Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+	            Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'ynet.com'});
 	        }
 
 			/* 获取缓存中的已阅读新闻 */
@@ -1062,7 +1062,7 @@ $(function(){
 
 		setQid: function(qid){
 			if(qid){
-				Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
+				Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'ynet.com'});
 			}
 		},
 
@@ -1087,7 +1087,7 @@ $(function(){
 	            success: function(msg) {
 	                try {
 	                    scope.userId = msg.uid;
-	                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+	                    Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'ynet.com'});
 	                    // wsCache.set('user_id', scope.userId, {exp: 365 * 24 * 3600});
 	                } catch(e) {
 	                    console.error(e);
@@ -1119,8 +1119,8 @@ $(function(){
 			$.ajax({
 				url: logUrl,
 				data: {
-					qid: scope.qid || 'null',						// 渠道号
-					uid: scope.userId || 'null',						// 从服务器端获取的uid
+					qid: scope.qid || 'null',			// 渠道号
+					uid: scope.userId || 'null',		// 用户ID
 					softtype: 'news',					// 软件type（当前默认news）
 					softname: 'toutiao_ynet_h5',		// 软件名（当前默认eastday_wapnews）
 					newstype: scope.newsType || 'null',			// 当前新闻类别

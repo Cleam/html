@@ -325,7 +325,7 @@ var module = (function(my){
         var ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
         
         // 类别标题
-        $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2></div>').append($inList);
+        $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2><span class="line"></span></div>').append($inList);
         $inList.append('<div id="cpro_' + ggId + '"></div>');
         my.createScript(ggConfig, function(){
             // console.log('js/gg_details.js loaded!!!');
@@ -343,7 +343,7 @@ var module = (function(my){
             return false;
         }
         // 类别标题
-        $hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2></div>').append($hnList);
+        $hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2><span class="line"></span></div>').append($hnList);
         var len = data.length;
         for (var i = 0; i < len; i++) {
             var item = data[i],
@@ -467,7 +467,7 @@ var module = (function(my){
             },
             jsonp : 'jsonpcallback',
             success : function(msg) {
-                console.log(msg);
+                // console.log(msg);
             }
         });
     }
@@ -538,7 +538,7 @@ var module = (function(my){
                 jsonp: 'jsonpcallback',
                 success: function(rst){
                     var data = rst ? rst.data : '';
-                    console.log('data::', data);
+                    // console.log('data::', data);
                     if(data){
                         loadHotNews(data);
                     } else {

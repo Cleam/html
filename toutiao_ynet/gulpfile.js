@@ -58,6 +58,18 @@ gulp.task('html-details', function() {
         .pipe(livereload());
 });
 /**
+ * 详情页404 html模板
+ */
+gulp.task('html-404', function() {
+    var htmlSrc = [
+            './src/404.html'
+        ],
+        htmlDst = './dist/';
+    gulp.src(htmlSrc)
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
+});
+/**
  * 广告html
  */
 gulp.task('html-gg', function() {
