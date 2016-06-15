@@ -313,6 +313,7 @@ var module = (function(my){
 		$inList = $('<div id="J_in_list" class="in-list"></div>'),	// 猜你感兴趣列表
 		$hotNews = $('#J_hot_news'),	// 热点新闻
 		$hnList = $('<div id="J_hn_list" class="hn-list"></div>'),	// 热点新闻列表
+        // http://toutiao.eastday.com/getwapdata/data
         activeLogUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/data',
         onlineLogUrl = 'http://ynetonlineh5.dfshurufa.com/online/online',
         dataUrl = 'http://ynetsocketh5.dfshurufa.com/wapjson_st/checknews',
@@ -363,7 +364,7 @@ var module = (function(my){
                 tagStr = '';
 
             // url处理
-            url = (isgg != '1') ? ('http://toutiao.ynet.com/a/' + url) : url;
+            url = (isgg != '1') ? ('http://mini.eastday.com/mobile/' + url) : url;
 
             url = url + '?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype;
 
@@ -400,6 +401,8 @@ var module = (function(my){
                 }
             }
         }
+        // 插入“点击查看更多新闻”链接按钮
+        addMoreNewsBtn();
         // 判断新闻加载完成的标志
         hasListNews = true;
     }
@@ -588,17 +591,53 @@ var module = (function(my){
             specialQids = {
                 ios: ['lt114116', 'smcn'],
                 android: ['lt114116', 'smcn', 'lemonbrowser', 'hongbaoliulanqi', '10086wy', 'coolpadbrowser', 'ningmengzhuomian', 'vivobrowser', '2345yuki', 'gioneebrowser', 'kuhuasuoping']
-            };
+            },
+            downloadBtn = '<a class="app-download" href="http://down.dftoutiao.com/qdhtml/poling/index.html?mnmentplqid=' + GLOBAL.Et.qid + '" target="_blank"><img src="http://mini.eastday.com/dcminisite/img/download_btn01.png">打开应用，查看更多相关图片</a>';
         if(GLOBAL.Os.ios){
             if(specialQids.ios.contains(GLOBAL.Et.qid)){
-                $articleContent.find('figure').append('<a class="app-download" href="http://down.dftoutiao.com/qdhtml/poling/index.html?mnmentplqid=' + GLOBAL.Et.qid + '" target="_blank"><img src="http://mini.eastday.com/dcminisite/img/download_btn01.png">打开应用，查看更多相关图片</a>');
+                $articleContent.find('figure').append(downloadBtn);
             }
         } else if (GLOBAL.Os.android) {
             if(specialQids.android.contains(GLOBAL.Et.qid)){
-                $articleContent.find('figure').append('<a class="app-download" href="http://down.dftoutiao.com/qdhtml/poling/index.html?mnmentplqid=' + GLOBAL.Et.qid + '" target="_blank"><img src="http://mini.eastday.com/dcminisite/img/download_btn01.png">打开应用，查看更多相关图片</a>');
+                $articleContent.find('figure').append(downloadBtn);
             }
         }
     };
+
+    /**
+     * 插入“点击查看更多新闻”链接按钮
+     */
+    function addMoreNewsBtn(){
+        var newsType = (GLOBAL.Et.newsType === 'weikandian' ? 'toutiao' : GLOBAL.Et.newsType),
+            qid = GLOBAL.Et.qid,
+            fr = GLOBAL.Util.getUrlNoParams(),
+            href = 'http://toutiao.eastday.com/?type=' + newsType + '&fr=' + fr,
+            btn = '';
+        switch(qid) {
+            case 'wnwifi':
+                href = 'http://toutiao.eastday.com/pages/index.html?type=' + newsType + '&fr=' + fr;
+                btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
+                break;
+            case 'yichawang':
+                href = 'http://toutiao.eastday.com/pages/index.html?type=' + newsType + '&fr=' + fr;
+                btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
+                break;
+            case '51shoujizhushou':
+                btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '">点击查看更多新闻</a></div>';
+                break;
+            case 'vivobrowser':
+                btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '">点击查看更多新闻</a></div>';
+                break;
+            case 'qqbrowser':
+                href = 'http://toutiao.eastday.com/nohd/index.html?type=' + newsType + '&fr=' + fr;
+                btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
+                break;
+            default: 
+                btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
+                break;
+        }
+        $hotNews.after(btn);
+    }
 
     /**
      * 访问日志记录
@@ -661,7 +700,7 @@ var module = (function(my){
         // 日志记录
         try {
             // 访问日志
-            /*activeLog();*/
+            activeLog();
             // 在线日志
             var urlNoParams = GLOBAL.Util.getUrlNoParams(),
                 uid = GLOBAL.Et.uid,
@@ -676,7 +715,7 @@ var module = (function(my){
                 os = GLOBAL.Util.getOsType(),
                 ttloginid = 'null',
                 params = urlNoParams + '\t' + uid + '\t' + qid + '\t' + apptypeid + '\t' + ime + '\t' + ttaccid + '\t' + type + '\t' + intervaltime + '\t' + ver + '\t' + appqid + '\t' + os + '\t' + ttloginid + '\t' + qid;
-            /*onlineLog(params);*/
+            onlineLog(params);
             // 每隔10s发送一次
             setInterval(function(){
                 /*onlineLog(params);*/
@@ -721,6 +760,46 @@ var module = (function(my){
             });
         } catch (e) {
             console.error('LoadHotNews has error: \n', e);
+        }
+
+        try {
+            $('body').on('click', '#J_more_news_btn', function(){
+                /*$.ajax({
+                    url : activeLogUrl, // active
+                    dataType : 'jsonp',
+                    data : {
+                        "qid": GLOBAL.Et.qid || 'null',
+                        "uid": GLOBAL.Et.uid || 'null',
+                        "loginid": 'null',
+                        "softtype": 'news',
+                        "softname": 'toutiao_ynet',
+                        "newstype": GLOBAL.Et.newsType || 'null',
+                        "from": GLOBAL.Util.getQueryString('fr') || 'null',
+                        "to": GLOBAL.Util.getUrlNoParams() || 'null',
+                        "os_type": GLOBAL.Util.getOsType() || 'null',
+                        "browser_type": GLOBAL.Util.getBrowserType() || 'null',
+                        "pixel": window.screen.width + '*' + window.screen.height,
+                        "ime": 'null',
+                        "idx": GLOBAL.Util.getQueryString('idx') || 'null',
+                        "ishot": 'null',
+                        "fr_url": GLOBAL.Util.getReferrer() || 'null',
+                        "ver": 'null',
+                        "appqid": 'null',
+                        "ttloginid": 'null',
+                        "apptypeid": 'null',
+                        "appver": 'null',
+                        "recommendtype": GLOBAL.Util.getQueryString('recommendtype') || 'null',
+                        "ispush": GLOBAL.Util.getQueryString('ispush') || 'null',
+                        "deviceid": 'null'
+                    },
+                    jsonp : 'jsonpcallback',
+                    success : function(msg) {
+                        console.log(msg);
+                    }
+                });*/
+            });
+        } catch (e) {
+
         }
 
         // 加载引导下载app的链接

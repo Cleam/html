@@ -109,6 +109,9 @@ body{padding-top: 0; background-color: #F3F3F3; color: #333;}
 /* bottom 搜狗广告 */
 .news-gg-img1{position: relative; max-width: 7.5rem; margin: auto 0.3rem; overflow: hidden; padding: 0.2rem 0;}
 
+.more-news{padding: 0.2rem 0.3rem; background-color: #fff;}
+.more-news a{display: block; width: 100%; font-size: 0.34rem; text-align: center; color: #d43d3d; padding: 0.2rem; border: 1px solid #f0f0f0; background-color: #f9f9f9;}
+
 /* 评论 */
 #SOHUCS{background-color: #fff !important;}
 #SOHUCS>section{background-color: #fff !important;}

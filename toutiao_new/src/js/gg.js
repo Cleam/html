@@ -512,7 +512,9 @@ GLOBAL.Et.ggData = {
 		"youxinapp":{"baidu":{"li":"u2671418"}},
 		"weixinfxzf":{"baidu":{"li":"u2671614"}},
 		"daping":{"baidu":{"li":"u2671812"}},
-		"qqbrowser":{"gdt":{"li":"6080512200788158"}}
+		"qqbrowser":{"gdt":{"li":"6080512200788158"}},
+		"678sjdh":{"baidu":{"li":"u2672654"}},
+		"m021_wy050":{"baidu":{"li":"u2536591"}}
 	}
 };
 

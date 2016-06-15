@@ -315,8 +315,7 @@ GLOBAL.Et.ggData = {
                 six: 'u2329106',
                 threeup: 'u2375377',
                 threedown: 'u2375378',
-                tujia: 'u2480224',
-                cptop: 'u2570147'
+                tujia: 'u2480224'
             },
             'sogou': {
                 bottom: '542151'
@@ -2917,14 +2916,6 @@ GLOBAL.Et.ggData = {
                 bottom: '542153'
             }
         },
-        'm021_wy013': {
-            'sogou': {
-                six: '562453',
-                threeup: '562453',
-                threedown: '562453',
-                bottom: '562453'
-            }
-        },
         'm021_wy047': {
             'sogou': {
                 six: '571747',
@@ -3105,11 +3096,57 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        '678sjdh': {
+            'baidu': {
+                six: 'u2672656',
+                threeup: 'u2672658',
+                threedown: 'u2672661',
+                tujia: 'u2672664',
+                cptop: 'u2672674'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'm021_wy050': {
+            'baidu': {
+                six: 'u2536300',
+                threeup: 'u2536278',
+                threedown: 'u2536264',
+                tujia: 'u2536574'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'm021_wy012': {
+            'baidu': {
+                six: 'u2536150',
+                threeup: 'u2536118',
+                threedown: 'u2536133',
+                tujia: 'u2536594'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'm021_wy013': {
+            'baidu': {
+                six: 'u2673208',
+                threeup: 'u2673206',
+                threedown: 'u2673205',
+                tujia: 'u2673204'
+            },
+            'sogou': {
+                bottom: '562453'
+            }
         }
     }
 };
 
 (function(){
+    var i = 0;
     // 缓存用户id（365天）
     GLOBAL.Et.uid = Cookies.get('user_id');
     if(!GLOBAL.Et.uid) {
@@ -3126,7 +3163,7 @@ GLOBAL.Et.ggData = {
     GLOBAL.Et.ggTypeArr = [];
     // 当前渠道广告ID数组
     GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];        
-    for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
+    for (i = 0; i < GLOBAL.Et.channelArr.length; i++) {
         if(GLOBAL.Et.gg && GLOBAL.Et.gg.hasOwnProperty(GLOBAL.Et.channelArr[i])){
             GLOBAL.Et.ggTypeArr.push(GLOBAL.Et.channelArr[i]);
         }
@@ -3167,6 +3204,38 @@ GLOBAL.Et.ggData = {
     // three (wnwifi) - baidu/sogou
     GLOBAL.Et.gg.my.three = (ggBaidu ? (ggBaidu.three ? 'baidu_' + ggBaidu.three : '') : '') || 
         (ggSogou ? (ggSogou.three ? 'sogou_' + ggSogou.three : '') : '');
+
+    // 存储新闻类别
+    try {
+        GLOBAL.Et.newsType = document.getElementById('newstype') ? document.getElementById('newstype').value : 'null';
+    } catch (e) {
+        console.error('newstype has error: \n', e);
+    }
+
+    // 关键词过滤（带领导人的新闻，不添加图加广告）
+    GLOBAL.Et.keywords = [
+        '习近平','李克强','张德江','俞正声','刘云山','王岐山','张高丽','马凯','王沪宁','刘延东',
+        '刘奇葆','许其亮','孙春兰','孙政才','李建国','李源潮','汪洋','张春贤','范长龙','孟建柱',
+        '赵乐际','胡春华','俞正声','栗战书','郭金龙','韩正','杜青林','赵洪祝','杨晶','常万全',
+        '房峰辉','张阳','赵克石','张又侠','吴胜利','马晓天','魏凤和','黄树贤','李玉赋','杜金才',
+        '吴玉良','张军','陈文清','王伟','毛泽东','朱德','刘少奇','周恩来','陈云','林彪','彭德怀',
+        '邓小平','邓子恢','贺龙','陈毅','乌兰夫','李富春','李先念','聂荣臻','薄一波','宋庆龄',
+        '董必武','习仲勋','薄一波','谭震林','陆定一','罗瑞卿','江泽民','荣毅仁','乔石','李鹏',
+        '朱镕基','邹家华','钱其琛','李岚清','吴邦国','姜春云','李瑞怀','刘华清','张震','胡锦涛',
+        '曾庆红','吴邦国','温家宝','黄菊','吴仪','曾培炎','回良玉','贾庆林'
+    ];
+
+    for (i = 0; i < GLOBAL.Et.keywords.length; i++) {
+        if(document.title.indexOf(GLOBAL.Et.keywords[i]) !== -1){
+            GLOBAL.Et.gg.my.tujia = null;
+            break;
+        }
+    }
+
+    // 去掉百度文字链广告
+    GLOBAL.Et.gg.my.txt1 = null;
+    GLOBAL.Et.gg.my.txt2 = null;
+    GLOBAL.Et.gg.my.txt3 = null;
         
 }());
 
