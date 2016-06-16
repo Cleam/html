@@ -2197,7 +2197,8 @@ GLOBAL.Et.ggData = {
                 six: 'u2634677',
                 threeup: 'u2634682',
                 threedown: 'u2634678',
-                tujia: 'u2634683'
+                tujia: 'u2634683',
+                cptop: 'u2634685'
             },
             'sogou': {
                 bottom: '542151'
@@ -3149,7 +3150,7 @@ GLOBAL.Et.ggData = {
                 cptop: 'u2674308'
             },
             'sogou': {
-                bottom: '542151'
+                bottom: '571748'
             }
         },
         'zhongyangtianqi': {
@@ -3161,7 +3162,7 @@ GLOBAL.Et.ggData = {
                 cptop: 'u2674306'
             },
             'sogou': {
-                bottom: '542151'
+                bottom: '571748'
             }
         },
         'xianguo': {
@@ -3172,76 +3173,7 @@ GLOBAL.Et.ggData = {
                 tujia: 'u2674281'
             },
             'sogou': {
-                bottom: '542151'
-            }
-        },
-        'qiaohuiwangluomm': {
-            'baidu': {
-                six: 'u2674378',
-                tujia: 'u2674376'
-            },
-            'sogou': {
-                bottom: '542151'
-            }
-        },
-        'shujuan06': {
-            'baidu': {
-                six: 'u2674450',
-                threeup: 'u2674449',
-                threedown: 'u2674448',
-                tujia: 'u2674447',
-                cptop: 'u2674452'
-            },
-            'sogou': {
-                bottom: '542151'
-            }
-        },
-        'shujuan05': {
-            'baidu': {
-                six: 'u2674443',
-                threeup: 'u2674442',
-                threedown: 'u2674441',
-                tujia: 'u2674439',
-                cptop: 'u2674438'
-            },
-            'sogou': {
-                bottom: '542151'
-            }
-        },
-        'shujuan04': {
-            'baidu': {
-                six: 'u2674434',
-                threeup: 'u2674433',
-                threedown: 'u2674432',
-                tujia: 'u2674431',
-                cptop: 'u2674437'
-            },
-            'sogou': {
-                bottom: '542151'
-            }
-        },
-        'shujuan03': {
-            'baidu': {
-                six: 'u2674429',
-                threeup: 'u2674427',
-                threedown: 'u2674426',
-                tujia: 'u2674425',
-                cptop: 'u2674423'
-            },
-            'sogou': {
-                bottom: '542151'
-            }
-        },
-        'shujuan02': {
-            'baidu': {
-                six: 'u2674420',
-                threeup: 'u2674418',
-                threedown: 'u2674417',
-                tujia: 'u2674416',
-                cptop: 'u2674422'
-            },
-            'sogou': {
-                bottom: '542151'
+                bottom: '571748'
             }
         }
     }

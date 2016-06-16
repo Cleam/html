@@ -517,13 +517,7 @@ GLOBAL.Et.ggData = {
 		"m021_wy050":{"baidu":{"li":"u2536591"}},
 		"weimipush":{"baidu":{"li":"u2674317"}},
 		"zhongyangtianqi":{"baidu":{"li":"u2674305"}},
-		"xianguo":{"baidu":{"li":"u2674289"}},
-		"qiaohuiwangluomm":{"baidu":{"li":"u2674375"}},
-		"shujuan06":{"baidu":{"li":"u2674451"}},
-		"shujuan05":{"baidu":{"li":"u2674445"}},
-		"shujuan04":{"baidu":{"li":"u2674436"}},
-		"shujuan03":{"baidu":{"li":"u2674430"}},
-		"shujuan02":{"baidu":{"li":"u2674421"}}
+		"xianguo":{"baidu":{"li":"u2674289"}}
 	}
 };
 
