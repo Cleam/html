@@ -369,10 +369,10 @@ var module = (function(my){
                 advStr = '',
                 tagStr = '';
 
-            // url处理
-            url = (isgg != '1') ? ('http://mini.eastday.com/mobile/' + url) : url;
+            // url处理（对于不带域名的链接需要自己拼接域名）
+            // url = (isgg != '1') ? ('http://mini.eastday.com/mobile/' + url) : url;
 
-            url = url + '?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype;
+            url += '?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype;
 
             // 类别处理
             if(isadv == '1'){
@@ -384,6 +384,7 @@ var module = (function(my){
                 if(video){
                     tagStr += '<i class="video">视频</i>';
                 }
+                url += '&ishot=1';
             } else if(rec){
                 tagStr = '<i class="rec">推荐</i>';
             } else if(video){
@@ -393,13 +394,14 @@ var module = (function(my){
             }
 
             /*======== 新闻流 =========*/
-            if(videonews == '1'){   // 视频模式 
+            // if(videonews == '1'){   // 视频模式 
 
-            } else if(ispicnews == '1'){    // 大图模式
+            // } else if(ispicnews == '1'){    // 大图模式
 
-            } else if(ispicnews == '-1'){   // 无图模式
+            // } else if(ispicnews == '-1'){   // 无图模式
 
-            } else if(ispicnews == '0'){
+            // } else 
+            if(ispicnews == '0'){
                 if(imgLen >= 3){        // 三图模式
                     $hnList.append('<section class="news-item news-item-img3"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '" alt=""><img class="lazy fl" src="' + imgArr[1].src + '" alt=""><img class="lazy fl" src="' + imgArr[2].src + '" alt=""></div><p class="clearfix"><em class="fl">' + (tagStr?tagStr:GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p></div></a></section>');
                 } else {    // 单图模式
@@ -411,6 +413,34 @@ var module = (function(my){
         addMoreNewsBtn();
         // 判断新闻加载完成的标志
         hasListNews = true;
+    }
+
+    function loadHotNewsData(){
+        $.ajax({
+            url: dataUrl,
+            data : {
+                "type": GLOBAL.Et.newsType,
+                "endkey": '',
+                "url": GLOBAL.Util.getUrlNoParams(),
+                "newsnum": 10,
+                'recgid': GLOBAL.Et.uid,
+                'qid': GLOBAL.Et.qid,
+                'os': GLOBAL.Util.getOsType(),
+                'isapp': '0',
+                'iswifi': '0'
+            },
+            dataType: 'jsonp',
+            jsonp: 'jsonpcallback',
+            success: function(rst){
+                var data = rst ? rst.data : '';
+                // console.log('data::', data);
+                if(data){
+                    loadHotNews(data);
+                } else {
+                    console.warn('未获取到数据!');
+                }
+            }
+        });
     }
 
     /**
@@ -747,7 +777,7 @@ var module = (function(my){
                 'pixel': window.screen.width + '*' + window.screen.height,
                 'ime': 'null',
                 'idx': GLOBAL.Util.getQueryString('idx') || 'null',
-                'ishot': 'null',
+                'ishot': GLOBAL.Util.getQueryString('ishot') || 'null',
                 'fr_url': GLOBAL.Util.getReferrer() || 'null',
                 'ver': 'null',
                 'appqid': 'null',
@@ -820,33 +850,9 @@ var module = (function(my){
 
         // 热点新闻 
         try {
-            $.ajax({
-                url: dataUrl,
-                data : {
-                    "type": GLOBAL.Et.newsType,
-                    "endkey": '',
-                    "url": GLOBAL.Util.getUrlNoParams(),
-                    "newsnum": 10,
-                    'recgid': GLOBAL.Et.uid,
-                    'qid': GLOBAL.Et.qid,
-                    'os': GLOBAL.Util.getOsType(),
-                    'isapp': '0',
-                    'iswifi': '0'
-                },
-                dataType: 'jsonp',
-                jsonp: 'jsonpcallback',
-                success: function(rst){
-                    var data = rst ? rst.data : '';
-                    console.log('data::', data);
-                    if(data){
-                        loadHotNews(data);
-                    } else {
-                        console.warn('未获取到数据!');
-                    }
-                }
-            });
+            loadHotNewsData();
         } catch (e) {
-            console.error('LoadHotNews has error: \n', e);
+            console.error('loadHotNewsData has error: \n', e);
         }
 
         try {
@@ -873,7 +879,7 @@ var module = (function(my){
                 });
             });
         } catch (e) {
-
+            console.error('MoreNewsBtn(click event) has error: \n', e);
         }
 
         // 加载引导下载app的链接
@@ -942,11 +948,99 @@ var module = (function(my){
 	// 存储一系列初始化方法
 	my.inits = my.inits || [];
 
+    var dataUrl = 'http://toutiao.eastday.com/toutiao_h5/newsmore';
+
+    function loadData(){
+        $.ajax({
+            url: dataUrl,
+            data : {
+                "type": GLOBAL.Et.newsType,
+                "endkey": '',
+                "url": GLOBAL.Util.getUrlNoParams(),
+                "newsnum": 10,
+                'recgid': GLOBAL.Et.uid
+            },
+            dataType: 'jsonp',
+            jsonp: 'jsonpcallback',
+            success: function(rst){
+                var data = rst ? rst.data : '';
+                if(data){
+                    generateDom(data);
+                } else {
+                    console.warn('未获取到数据!');
+                }
+            }
+        });
+    }
+
+    function generateDom(data){
+        console.log('data::', data);
+        return;
+        if(!data || !data.length){
+            return false;
+        }
+        // 类别标题
+        $hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2><span class="line"></span></div>').append($hnList);
+        var len = data.length;
+        for (var i = 0; i < len; i++) {
+            var item = data[i],
+                url = item.url,
+                dateStr = item.date,
+                isgg = item.isgg,
+                topic = item.topic,
+                source = item.source,
+                imgArr = item.miniimg,
+                recommendtype = item.recommendtype ? item.recommendtype : '-1',
+                // hotnews = item.hotnews,
+                ispicnews = item.ispicnews, // 大图新闻(1)、小图新闻(0)、无图新闻(-1)
+                videonews = item.videonews, // 视频新闻
+                // videoList = item.videolist,  // 视频列表
+                isadv = item.isadv || '',
+                advId = item.adv_id || '',
+                type = item.type,
+                subtype = item.subtype,
+                imgLen = imgArr.length,
+                // rowkey = item.rowkey,
+                hot = Number(item.hotnews),     // 热门
+                video = Number(item.isvideo),   // 视频
+                rec = Number(item.isrecom),     // 推荐
+                nuanwen = Number(item.isnxw),   // 暖文
+                // urlpv = item.urlpv,              // 浏览量
+                // picnums = item.picnums,          // 图片数量
+                // praisecnt = item.praisecnt,      // 顶
+                // tramplecnt = item.tramplecnt,    // 踩
+                idx = i + 1,
+                fr = GLOBAL.Util.getUrlNoParams(),
+                advStr = '',
+                tagStr = '';
+
+            // url处理
+            // url = (isgg != '1') ? ('http://mini.eastday.com/mobile/' + url) : url;
+
+            url += '?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype;
+
+            if(hot){
+                url += '&ishot=1';
+            } else if(rec){
+                url += '&isrecom=1';
+            } else {
+                url += '&ishot=0';
+            }
+            
+                        
+        }
+    }
+
 	/**
 	 * 加载wnwifi特殊渠道详情内页模板
 	 * @return {[type]} [description]
 	 */
 	my.loadWnwifiPage = function() {
+        try {
+            loadData();
+        } catch (e) {
+            console.error('LoadHotNews has error: \n', e);
+        }
 		console.log('这是wnwifi渠道页面！');
 	};
 
