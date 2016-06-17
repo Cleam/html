@@ -3243,6 +3243,75 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        '360so': {
+            'baidu': {
+                six: 'u2624223',
+                threeup: 'u2624224',
+                threedown: 'u2624222'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'wutongwifi': {
+            'baidu': {
+                six: 'u2675981',
+                threeup: 'u2675980',
+                threedown: 'u2675979',
+                tujia: 'u2675978',
+                cptop: 'u2675983'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'aishang': {
+            'baidu': {
+                six: 'u2675533',
+                threeup: 'u2675532',
+                threedown: 'u2675531',
+                tujia: 'u2675530'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'boxmarket': {
+            'baidu': {
+                six: 'u2675815',
+                threeup: 'u2675813',
+                threedown: 'u2675812',
+                tujia: 'u2675810',
+                cptop: 'u2675809'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'duotuo': {
+            'baidu': {
+                six: 'u2675802',
+                threeup: 'u2675801',
+                threedown: 'u2675799',
+                tujia: 'u2675798',
+                cptop: 'u2675808'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'xiaobowifi': {
+            'baidu': {
+                six: 'u2675859',
+                threeup: 'u2675857',
+                threedown: 'u2675856',
+                tujia: 'u2675852',
+                cptop: 'u2675851'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
@@ -3259,6 +3328,24 @@ GLOBAL.Et.ggData = {
     GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';
     if (GLOBAL.Et.qid) {
         Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com' });
+    }
+
+    // 特殊渠道处理
+    try {
+        var specialChannel = [
+            {referer: 'baidu.com', qid: 'baiducom'},
+            {referer: 'so.com', qid: '360so'},
+            {referer: 'sogou.com', qid: 'sogoucom'},
+            {referer: 'sm.cn', qid: 'smcn'}
+        ];
+        for (i = 0; i < specialChannel.length; i++) {
+            if(GLOBAL.Util.getReferrer() && GLOBAL.Util.getReferrer().indexOf(specialChannel[i].referer) !== -1){
+                GLOBAL.Et.qid = specialChannel[i].qid;
+                break;
+            }
+        }
+    } catch (e) {
+        console.log('specialChannel has error: \n', e);
     }
 
     // 当前渠道广告商数组
@@ -3315,7 +3402,7 @@ GLOBAL.Et.ggData = {
     }
 
     // 关键词过滤（带领导人的新闻，不添加图加广告）
-    GLOBAL.Et.keywords = [
+    var keywords = [
         '习近平', '李克强', '张德江', '俞正声', '刘云山', '王岐山', '张高丽', '马凯', '王沪宁', '刘延东',
         '刘奇葆', '许其亮', '孙春兰', '孙政才', '李建国', '李源潮', '汪洋', '张春贤', '范长龙', '孟建柱',
         '赵乐际', '胡春华', '俞正声', '栗战书', '郭金龙', '韩正', '杜青林', '赵洪祝', '杨晶', '常万全',
@@ -3327,8 +3414,8 @@ GLOBAL.Et.ggData = {
         '曾庆红', '吴邦国', '温家宝', '黄菊', '吴仪', '曾培炎', '回良玉', '贾庆林'
     ];
 
-    for (i = 0; i < GLOBAL.Et.keywords.length; i++) {
-        if (document.title.indexOf(GLOBAL.Et.keywords[i]) !== -1) {
+    for (i = 0; i < keywords.length; i++) {
+        if (document.title.indexOf(keywords[i]) !== -1) {
             GLOBAL.Et.gg.my.tujia = null;
             break;
         }
