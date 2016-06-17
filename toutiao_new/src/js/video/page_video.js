@@ -6,10 +6,11 @@ $(function(){
 		$loading = null,
 		$video = $('#J_video'),
 		$related = $('#J_related'),
-		bufferedNum = 0,
-		winWidth = $(window).width(),
-		videoWidth = parseInt($video.attr('data-width')),
-		videoHeight = parseInt($video.attr('data-height')),
+		bufferedNum = 0,	
+		$moreVideoLoading = $('<div class="loading"><div class="spinner"><div class="bounce1"></div> <div class="bounce2"></div> <div class="bounce3"></div></div><p class="txt">更多视频加载中</p></div>'),
+		// winWidth = $(window).width(),
+		// videoWidth = parseInt($video.attr('data-width')),
+		// videoHeight = parseInt($video.attr('data-height')),
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		logUrl = 'http://toutiao.eastday.com/getwapdata/data',			// 日志（操作统计）
 		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',	// 视频统计接口
@@ -52,8 +53,8 @@ $(function(){
 	 * video对象
 	 */
 	function Video(){
-		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || '';	// 渠道ID
-		this.userId = '';
+		this.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';	// 渠道ID
+		this.userId = Cookies.get('user_id');
 		this.osType = GLOBAL.Util.getOsType();
 		this.browserType = GLOBAL.Util.getBrowserType();
 		this.init();
@@ -65,7 +66,8 @@ $(function(){
 	 */
 	Video.prototype.init = function() {
 		var scope = this;
-		// 设置视频容器宽高
+
+		// 设置视频容器宽高（暂时强制视频以16:9形式展现，不判断视频的实际尺寸）
 		// if(videoWidth && videoHeight){
 		// 	$video.parents('.video-wrap').css('paddingBottom', '0').height(winWidth * videoHeight / videoWidth);
 		// }
@@ -78,15 +80,17 @@ $(function(){
 			Cookies.remove('qid', {path: '/', domain: 'eastday.com'});
 		}
 		/* 获取、存储uid */
-		scope.userId = scope._getUid();
-		if(!scope.userId){
-			scope._setUid();
-		}
+		// scope.userId = scope._getUid();
+		/* 获取、存储uid */
+        if(!scope.userId){
+            scope.userId = (+new Date()) + Math.random().toString(10).substring(2, 6);
+            Cookies.set('user_id', scope.userId, { expires: 365, path: '/', domain: 'eastday.com'});
+        }
 		/* 视频事件监听 */
 		scope.addVideoListener();
+
 		/* 获取视频信息流 */
 		scope.getVideoList();
-
 
 		/* 发送日志信息 */
 		scope._addLog();
@@ -134,15 +138,21 @@ $(function(){
             dataType: 'jsonp',
             jsonp: "jsonpcallback",
             timeout: 8000,
-            beforeSend: function(){},
+            beforeSend: function(){
+            	$related.append($moreVideoLoading);
+            },
             success: function(data){
                 scope.generateVideoList(data);
             },
             error: function(e){
             	console.error(e);
             },
-            complete: function(){
+            complete: function(jqXHR, textStatus){
                 callback && callback();
+                if('timeout' === textStatus){
+                	$related.append('<p style="padding: 0.1rem 0 0.2rem; font-size: 0.24rem; color: #999; text-align: center; margin-top: 0.2rem;">请求超时，请检查网络连接状态或<a href="javascript:location.reload();">刷新页面</a>重试。</p>');
+                }
+                $moreVideoLoading && $moreVideoLoading.remove();
             }
 		});
 	};
@@ -159,6 +169,7 @@ $(function(){
 			len = d ? d.length : 0,
 			// $related = $('#J_related'),
 			$listWrap = $('<div class="related-cnt"></div>');
+		var t1 = +new Date();
 		if(len > 0){
 			$related.append('<div class="related-tit"><h2>相关视频</h2></div>');
 			for (var i = 0; i < len; i++) {
@@ -167,14 +178,14 @@ $(function(){
 					itemImg = itemImg43[0],
 					idx = i + 1,
 					fr = GLOBAL.Util.getUrlNoParams(),
-					href = item['url'] + '?qid=' + scope.qid + '&idx=' + idx + '&fr=' + fr,
-					type = item['type'],
-					topic = item['topic'],
-					source = item['source'],
-					imgSrc = itemImg['src'],
-					imgWidth = itemImg['imgwidth'],
-					imgHeight = itemImg['imgheight'],
-					duration = GLOBAL.Util.msToTimestr(item['videoalltime']);
+					href = item.url + '?qid=' + scope.qid + '&idx=' + idx + '&fr=' + fr,
+					type = item.type,
+					topic = item.topic,
+					source = item.source,
+					imgSrc = itemImg.src,
+					imgWidth = itemImg.imgwidth,
+					imgHeight = itemImg.imgheight,
+					duration = GLOBAL.Util.msToTimestr(item.videoalltime);
 				$listWrap.append('<section class="news-item news-item-video"><a data-type="' + type + '" data-subtype="" href="' + href + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"><span class="duration">' + duration + '</span></div></div></a></section>');
 			}
 		}
@@ -246,7 +257,7 @@ $(function(){
 		var end = 0;
         try {
             end = video.buffered.end(0) || 0;
-            end = parseInt(end * 1000 + 1) / 1000;
+            end = parseInt(end * 1000 + 1, 10) / 1000;
         } catch(e) {}
         return end;
 	};
@@ -261,6 +272,7 @@ $(function(){
     		scope.showLoading();
     		var timer = setInterval(function(){
     			var video = $video[0];
+    			// 当播放了100ms之后再移除loading动画，否则显示loading动画
     			if(Math.floor(video.currentTime * 1000) < 100){
     				return;
     			}
@@ -318,6 +330,7 @@ $(function(){
 					param = scope.qid + '\t' + scope.userId + '\t' + 'news' + '\t' + 'eastday_wapnews' + '\t' + 'null' + '\t' + videoType + '\t' + scope.osType + '\t' + (idx || 'null') + '\t' + scope.browserType + '\t' + src + '\t' + duration + '\t' + playingTime + '\t' + currentTime + '\t' + 'pause';
 				// 用于记录实际播放时长
 				scope.sendVideoLog(param);
+				// 兼容处理（在小米浏览器上碰到过一次，点击播放就会触发暂停，导致出现广告）
 				if(Math.floor($video[0].currentTime * 1000) > 1000 && $video[0].paused){
 					scope.showGg();
 				}
@@ -329,9 +342,9 @@ $(function(){
 		$video.on('timeupdate', function(event){
 			try {
 				var $vd = $(event.target),
-					video = $vd[0],
-					duration = video.duration,
-					currentTime = video.currentTime,
+					// video = $vd[0],
+					// duration = video.duration,
+					// currentTime = video.currentTime,
 		      		updateTime = parseInt($vd.attr('data-updateTime'), 10) || (+new Date()),
 		      		playingTime = parseInt($vd.attr('data-playingTime'), 10) || 0,
 		      		now = +new Date();
@@ -440,9 +453,7 @@ $(function(){
      * @param {[type]} qid [description]
      */
 	Video.prototype._setQid = function(qid) {
-		if(qid){
-			Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
-		}
+		Cookies.set('qid', qid, { expires: 3, path: '/', domain: 'eastday.com'});
 	};
 
 	/**
@@ -469,7 +480,7 @@ $(function(){
 	            dataType: 'jsonp',
 	            data: {
 	                softtype: 'news',
-	                softname: 'eastday_wapnews',
+	                softname: 'eastday_wapnews'
 	            },
 	            jsonp: 'jsonpcallback',
 	            success: function(msg) {
@@ -488,16 +499,11 @@ $(function(){
 		}
 	};
 
-	/**
-	 * 获取用户id
-	 * @return {[type]}     [description]
-	 */
-	Video.prototype._getUid = function() {
-		var uid = Cookies.get('user_id');
-    	// var uid = wsCache.get('user_id');
-        return uid ? uid : '';
-	};
-
     new Video();
 
 });
+
+// document.write('<div id="SOHUCS" sid="160513160358356"></div>');
+// document.write('<scr' + 'ipt id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=cyrQbYhjk&conf=prod_d09a50b0a2f9861e77a6cb5ad28e3c2b"></scr' + 'ipt>');
+	
+	

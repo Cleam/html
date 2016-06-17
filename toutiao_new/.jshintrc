@@ -10,7 +10,7 @@
     "maxdepth": 4,
     "maxerr": 50,
     "maxparams": 3,
-    "maxstatements": 4,
+    "maxstatements": 10,
     "undef": true,
     "unused": true,
     "browser": true,
@@ -18,7 +18,9 @@
     "globals": {
         "GLOBAL": true,
         "jQuery": true,
-        "Zepto": true
+        "Zepto": true,
+        "Cookies": true,
+        "FastClick": true
     },
     "devel": {
         "console": true,
