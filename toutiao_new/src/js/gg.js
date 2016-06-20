@@ -525,7 +525,10 @@ GLOBAL.Et.ggData = {
 		"aishang":{"baidu":{"li":"u2675535"}},
 		"boxmarket":{"baidu":{"li":"u2675817"}},
 		"duotuo":{"baidu":{"li":"u2675804"}},
-		"xiaobowifi":{"baidu":{"li":"u2675861"}}
+		"xiaobowifi":{"baidu":{"li":"u2675861"}},
+		"appylm":{"baidu":{"li":"u2678139"}},
+		"qiaohuiwangluo01":{"baidu":{"li":"u2678182"}},
+		"coolpadbrowser01":{"baidu":{"li":"u2678417"}}
 	}
 };
 

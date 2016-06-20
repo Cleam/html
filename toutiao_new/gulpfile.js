@@ -244,6 +244,20 @@ gulp.task('js-responsive', function() {
         .pipe(livereload());
 });
 /**
+ * vast广告JS
+ */
+gulp.task('js-vast', function() {
+    var jsSrc = [
+            './src/js/vast.js'
+        ],
+        jsDst = './dist/js';
+    return gulp.src(jsSrc)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDst))
+        .pipe(livereload());
+});
+/**
  * 广告js
  */
 gulp.task('js-gg', function() {

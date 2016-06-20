@@ -3092,7 +3092,7 @@ GLOBAL.Et.ggData = {
                 six: '2050819280187107'
             },
             'sogou': {
-                bottom: '542151'
+                bottom: '5000111220584129'
             }
         },
         '678sjdh': {
@@ -3168,8 +3168,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2674287',
                 threeup: 'u2674286',
-                threedown: 'u2674284',
-                tujia: 'u2674281'
+                threedown: 'u2674284'
             },
             'sogou': {
                 bottom: '542151'
@@ -3312,6 +3311,41 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'appylm': {
+            'baidu': {
+                six: 'u2678137',
+                threeup: 'u2678136',
+                threedown: 'u2678135',
+                tujia: 'u2678134',
+                cptop: 'u2678140'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'qiaohuiwangluo01': {
+            'baidu': {
+                six: 'u2678181',
+                threeup: 'u2678179',
+                threedown: 'u2678178',
+                tujia: 'u2678177',
+                cptop: 'u2678183'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'coolpadbrowser01': {
+            'baidu': {
+                six: 'u2678416',
+                threeup: 'u2678413',
+                threedown: 'u2678412',
+                tujia: 'u2678411'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
@@ -3330,7 +3364,7 @@ GLOBAL.Et.ggData = {
         Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com' });
     }
 
-    // 特殊渠道处理
+    // 通过搜索引擎进入的（渠道处理）
     try {
         var specialChannel = [
             {referer: 'baidu.com', qid: 'baiducom'},
@@ -3345,7 +3379,19 @@ GLOBAL.Et.ggData = {
             }
         }
     } catch (e) {
-        console.log('specialChannel has error: \n', e);
+        console.log('Fix SEO has error: \n', e);
+    }
+
+    // 通过APP分享出去的（渠道处理）
+    try {
+        var ttaccid = GLOBAL.Util.getQueryString('ttaccid') || null;
+        if(ttaccid && GLOBAL.Browser.wechat){
+            GLOBAL.Et.qid = 'ioswechat';
+        } else if(ttaccid && (GLOBAL.Browser.qq || GLOBAL.Browser.qqbrowser)){
+            GLOBAL.Et.qid = 'qqwechat';
+        }
+    } catch (e) {
+        console.log('Fix APP share has error: \n', e);
     }
 
     // 当前渠道广告商数组
@@ -3394,6 +3440,21 @@ GLOBAL.Et.ggData = {
     GLOBAL.Et.gg.my.three = (ggBaidu ? (ggBaidu.three ? 'baidu_' + ggBaidu.three : '') : '') ||
         (ggSogou ? (ggSogou.three ? 'sogou_' + ggSogou.three : '') : '');
 
+    // 特殊处理（如果是QQ或QQ浏览器访问页面，six、bottom位置就展示广点通'gdt'广告）
+    try {
+        if(!GLOBAL.Browser.wechat){
+            if(GLOBAL.Browser.qqbrowser){
+                GLOBAL.Et.gg.my.six = 'gdt_8010115151216515';
+                GLOBAL.Et.gg.my.bottom = 'gdt_1040015141913673';
+            } else if(GLOBAL.Browser.qq) {
+                GLOBAL.Et.gg.my.six = 'gdt_1050119184991199';
+                GLOBAL.Et.gg.my.bottom = 'gdt_1060014174891168';
+            }
+        }
+    } catch (e) {
+        console.error('Fix gg(gdt) has error: \n', e);
+    }
+
     // 存储新闻类别
     try {
         GLOBAL.Et.newsType = document.getElementById('newstype') ? document.getElementById('newstype').value : 'null';
@@ -3425,5 +3486,6 @@ GLOBAL.Et.ggData = {
     GLOBAL.Et.gg.my.txt1 = null;
     GLOBAL.Et.gg.my.txt2 = null;
     GLOBAL.Et.gg.my.txt3 = null;
+
 
 }());

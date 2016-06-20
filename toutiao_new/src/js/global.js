@@ -502,14 +502,18 @@ GLOBAL.Cookie = {
 
 // 操作系统
 GLOBAL.Os = function () { 
-    var u = navigator.userAgent; 
-    return { 
+    var u = navigator.userAgent,
+        Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"),  
+        mobile = false;  
+    for (var v = 0; v < Agents.length; v++) {  
+        if (u.indexOf(Agents[v]) > -1) { 
+            mobile = true; 
+            break; 
+        }  
+    }
+    return {
         //移动终端浏览器版本信息 
-        trident: u.indexOf('Trident') > -1, //IE内核 
-        presto: u.indexOf('Presto') > -1, //opera内核 
-        webkit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核 
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, //火狐内核 
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端 
+        mobile: mobile, //是否为移动终端 
         ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端 
         android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器 
         iphone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器 
@@ -520,19 +524,16 @@ GLOBAL.Os = function () {
 
 // 浏览器
 GLOBAL.Browser = function () { 
-    var ua = navigator.userAgent.toLowerCase(), //获取判断用的对象
-        mobile = !!ua.match(/AppleWebKit.*Mobile.*/);
+    var ua = navigator.userAgent, //获取判断用的对象
+        mobile = GLOBAL.Os.mobile;
     if(mobile){    // mobile
-        //移动终端浏览器版本信息 
+        //移动终端浏览器版本信息
         return { 
-            wechat: ua.match(/MicroMessenger/i) === "micromessenger", // 在微信中打开  
-            weibo: ua.match(/WeiBo/i) === "weibo", // 在新浪微博客户端打开
-            webKit: ua.match(/QQ/i) === "qq", // 在QQ空间打开 
-            ios: GLOBAL.Os.ios, // 是否在IOS浏览器打开 
-            android: GLOBAL.Os.android // 是否在安卓浏览器打开
+            wechat: ua.indexOf('MicroMessenger') > -1, // 在微信中打开  
+            weibo: ua.toLowerCase().indexOf('weibo') > -1, // 在新浪微博客户端打开
+            qq: ua.indexOf('QQ') > -1, // 在QQ空间打开 
+            qqbrowser: ua.indexOf('MQQBrowser') > -1 // 在QQ空间打开 
         }; 
-    } else { // pc
-        return {pc: true};
     }
 }();
 

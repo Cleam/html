@@ -317,6 +317,8 @@ var module = (function(my){
         // http://toutiao.eastday.com/getwapdata/advshow
         appShowLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',
         appClickLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',
+        iframeLogUrl = 'http://123.59.60.170/iframe/getiframe', // iframe统计测试接口
+        // iframeLogUrl = 'http://ifrcheck.dfshurufa.com/iframe/getiframe', // iframe统计正式接口
         activeLogUrl = 'http://toutiao.eastday.com/getwapdata/data',
         // activeLogUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/data',
         onlineLogUrl = 'http://123.59.40.127/online/online',
@@ -341,14 +343,14 @@ var module = (function(my){
             var item = data[i],
                 url = item.url,
                 dateStr = item.date,
-                isgg = item.isgg,
+                // isgg = item.isgg,
                 topic = item.topic,
                 source = item.source,
                 imgArr = item.miniimg,
                 recommendtype = item.recommendtype ? item.recommendtype : '-1',
                 // hotnews = item.hotnews,
                 ispicnews = item.ispicnews, // 大图新闻(1)、小图新闻(0)、无图新闻(-1)
-                videonews = item.videonews, // 视频新闻
+                // videonews = item.videonews, // 视频新闻
                 // videoList = item.videolist,  // 视频列表
                 isadv = item.isadv || '',
                 advId = item.adv_id || '',
@@ -455,7 +457,7 @@ var module = (function(my){
             arr = gg.split('_'),
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
-        console.log('six::', ggId);
+        // console.log('six::', ggId);
 
         // 分类标题
         $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2><span class="line"></span></div>').append($inList);
@@ -504,7 +506,7 @@ var module = (function(my){
             arr = gg.split('_'),
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
-        console.log('three::', ggId);
+        // console.log('three::', ggId);
         if(pos >= len){
             pos = len - 1;
         } else if(pos < 0){
@@ -553,7 +555,7 @@ var module = (function(my){
         var arr = gg.split('_'),
             // alliance = arr[0],  // 联盟 目前只有baidu
             ggId = arr[1];      // 广告ID
-        console.log('arr::', arr);
+        // console.log('arr::', arr);
         document.write('<scr' + 'ipt type="text/javascript"> var cpro_id = "' + ggId + '"; </scr' + 'ipt>');
         document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
     };
@@ -572,7 +574,7 @@ var module = (function(my){
             alliance = arr[0],  // 联盟
             ggId = arr[1],      // 广告ID
             ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '", at : "3", pat : "8", cpro_h : "30", tn : "template_inlay_all_mobile_lu_native_ad_txt", rss1 : "#ffffff", titFF : "%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS : "16", rss2 : "#3C3C3C", conpl : "10", desfs : "10", conpr:"25", rss3 : "#999999", desbc : "#ffffff", pimc : "21", titSU : "0"})';
-        console.log('txt' + type + '::', ggId);
+        // console.log('txt' + type + '::', ggId);
         if(pos >= len){
             pos = len - 1;
         } else if(pos < 0){
@@ -608,10 +610,14 @@ var module = (function(my){
             arr = gg.split('_'),
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
-        console.log('bottom::', ggId);
+        // console.log('bottom::', ggId);
         switch(alliance) {
             case 'sogou':
                 $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
+                break;
+            case 'gdt':
+                var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
+                $inList.append('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>');
                 break;
             default: 
                 $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
@@ -664,6 +670,21 @@ var module = (function(my){
         }
         // 展示日志记录
         appLinkShowLog(url, qidToId[qid]);
+    };
+
+    /**
+     * 特殊广告处理（kuhuasuoping、huisuoping）
+     */
+    my.addSpecialGg = function(){
+        var qid = GLOBAL.Et.qid;
+        if(qid === 'kuhuasuoping' && GLOBAL.Os.android){
+            $('body').append('<div class="J-special-gg special-gg"><a href="http://app.coohua.com/CooHuaClient-2.1.2.3-cpqz_jrtt.apk"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/kuhuasuoping.jpg" alt="酷划锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
+        } else if(qid === 'huisuoping' && GLOBAL.Os.android){
+            $('body').append('<div class="J-special-gg special-gg"><a href="http://page.huisuoping.com/share/2/index.html?apk=b305"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/huisuoping.jpg" alt="惠锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
+        }
+        $('body').on('click', '.J-special-gg-close', function(){
+            $(this).parent().remove();
+        });
     };
 
     /**
@@ -790,7 +811,7 @@ var module = (function(my){
             },
             jsonp : 'jsonpcallback',
             success : function(msg) {
-                console.log(msg);
+                // console.log(msg);
             }
         });
     }
@@ -809,10 +830,38 @@ var module = (function(my){
         });
     }
 
+    function iframeLog(){
+        var $iframes = $('iframe'),
+            uid = GLOBAL.Et.uid,
+            qid = GLOBAL.Et.qid,
+            os = GLOBAL.Util.getOsType(),
+            browser = GLOBAL.Util.getBrowserType(),
+            url = window.location.href,
+            ifrStr = '',
+            params = '';
+        $iframes.each(function(){
+            var src = $(this).attr('src').split('?')[0];
+            if(ifrStr){
+                ifrStr += ('@#' + src);
+            } else {
+                ifrStr += src;
+            }
+        });
+        params = uid + '\t' + qid + '\t' + os + '\t' + browser + '\t' + url + '\t' + ifrStr;
+        $.ajax({
+            url : iframeLogUrl, // online
+            dataType : 'jsonp',
+            data : {
+                param: encodeURI(params)
+            },
+            jsonp : 'jsonpcallback'
+        });
+    }
+
 	my.loadCommonPage = function() {
         var scope = this,
             mygg = GLOBAL.Et.gg.my;
-        console.log('GLOBAL.Et.gg::', mygg);
+        // console.log('GLOBAL.Et.gg::', mygg);
 
         // 日志记录
         try {
@@ -883,8 +932,15 @@ var module = (function(my){
             console.error('MoreNewsBtn(click event) has error: \n', e);
         }
 
-        // 加载引导下载app的链接
+        // 特殊广告添加
         try {
+            scope.addSpecialGg();
+        } catch (e) {
+            console.error('addSpecialGg has error: \n', e);
+        }
+
+        // 加载引导下载app的链接（暂时先下线）
+        /*try {
             var t0 = setInterval(function(){
                 if(hasListNews){
                     scope.addAppLink();
@@ -893,7 +949,7 @@ var module = (function(my){
             }, 400);
         } catch (e) {
             console.error('loadTxt has error: \n', e);
-        }
+        }*/
 
         // 广告txt1、txt2、txt3
         try {
@@ -937,6 +993,17 @@ var module = (function(my){
         } catch (e) {
             console.error('loadBottom has error!', e);
         }
+
+        // iframe统计
+        try {
+            // iframe日志记录(20s之后)
+            setTimeout(function(){
+                iframeLog();
+            }, 20000);
+        } catch (e) {
+            console.error('iframeLog has error!', e);
+        }
+
 	};
 
 	return my;
@@ -1058,16 +1125,18 @@ var module = (function(my){
         try {
             module.loadCptop(mygg.cptop);
         } catch (e) {
-            console.log('loadCptop has error: \n', e);
+            console.error('loadCptop has error: \n', e);
         }
     }
+    // vast广告
+    document.write('<scr' + 'ipt src="http://mini.eastday.com/toutiaoh5/js/vast.min.js"></scr' + 'ipt>');
 }());
 
 /* ==============================
     DOM生成后执行的代码
  ================================ */
 $(function(){
-	// 不兼容forEach方法的解决方法
+	// forEach方法的兼容解决方法
 	(function(){
 		// Production steps of ECMA-262, Edition 5, 15.4.4.18
 		// Reference: http://es5.github.io/#x15.4.4.18
@@ -1133,11 +1202,11 @@ $(function(){
 	});
 
 	// 根据不同渠道加载数据模板
-	if(GLOBAL.Et.qid && GLOBAL.Et.qid === 'wnwifi'){
-		// 加载特殊渠道（wnwifi）页面
-		module.loadWnwifiPage();
-	} else {
+	if(GLOBAL.Et.qid && GLOBAL.Et.qid !== 'wnwifi'){
 		// 加载一般渠道页面
 		module.loadCommonPage();
+    } else {
+        // 加载特殊渠道（wnwifi）页面
+        module.loadWnwifiPage();
 	}
 });
