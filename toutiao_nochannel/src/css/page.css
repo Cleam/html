@@ -4,7 +4,28 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-03-24
  */
-body{padding-top: 0;}
+body{padding-top: 0.88rem;}
+header{position: fixed; top: 0; z-index: 100; width: 7.5rem; height: 0.88rem;}
+header .top-title{position: relative; width: 100%; height: 0.88rem; background-color: #d43d3d; color: #fff;}
+header .top-title .refresh{position: relative; display: block; width: 3.6rem; margin: 0 auto; text-align: center; height: 100%; padding: 0.16rem 0.16rem 0.16rem 0; line-height: 0.56em; transform: scale(0.7); -webkit-transform: scale(0.7);}
+/*header .top-title .refresh:active{background-color: #d43d3d !important;}*/
+header .top-title .refresh img{width: 2.34rem; height: 0.56rem;}
+header .top-title .refresh span{position: absolute; right: 0; top: 50%; margin-top: -0.24rem; width: 0.48rem; height: 0.48rem; background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAeUExURQAAAP///////////////////////////////////yR8m5UAAAAJdFJOUwDmjQtZSKnHILcCFnAAAAC3SURBVBjTbZE5DsIwEEVHuHENSCgdFBR0jpBSkzItTcgRXCLR+AAcwCwWc1vGS7zB757/2OP5A2B1vuJmD7PYDq2WInCPXmuPC7IuxzsVbR3LYPRovG38RSZdwRDKrPMagTUmNpKIdLiKPBG3eJpxpJ4w6WgPlg+PyFwRq3dk6IibT2K6AfjMmKuSoSvrSfl7Vlk//0ddcvZf4G7INE97E+W8WlR5/MmrztPnDSnveh8/+wr7dPgFtTdFaiI/HzEAAAAASUVORK5CYII=") no-repeat center center; background-size: contain;}
+header .top-title .search{position: absolute; right: 0; top: 0; width: 1rem; height: 0.88rem;}
+header .top-title .search img{width: 0.6rem; height: 0.6rem; margin-top: 0.14rem; margin-left: 0.2rem;}
+header .top-title .search:active{background-color: #AE2121 !important;}
+header .top-title .refresh.active span{-webkit-transform-style: preserve-3d; animation: rtt .7s linear; -webkit-animation: rtt .7s linear;}
+@keyframes rtt {
+	0% {transform: rotateZ(0deg); -webkit-transform: rotateZ(0deg);}
+	50% {transform: rotateZ(180deg); -webkit-transform: rotateZ(180deg);}
+	100% {transform: rotate(360deg); -webkit-transform: rotateZ(360deg);}
+}
+@-webkit-keyframes rtt {
+	0% {transform: rotateZ(0deg); -webkit-transform: rotateZ(0deg);}
+	50% {transform: rotateZ(180deg); -webkit-transform: rotateZ(180deg);}
+	100% {transform: rotate(360deg); -webkit-transform: rotateZ(360deg);}
+}
+
 /*====== 新闻内容 ======*/
 .news-list{width: 100%; overflow: hidden;}
 
@@ -173,7 +194,7 @@ body{padding-top: 0;}
 }
 
 /* 推荐新闻 */
-.recommend-news{position: absolute; top: 0; text-align: center; color: #2a90d7; vertical-align: middle; background: rgba(213,233,247,.9); z-index: 99; width: 100%; opacity: 1; font-size: 0.34rem; padding: 0.1rem 0; animation: zoomin 400ms ease-in-out; -webkit-animation: zoomin 400ms ease-in-out;}
+.recommend-news{position: absolute; top: 0.88rem; text-align: center; color: #2a90d7; vertical-align: middle; background: rgba(213,233,247,.9); z-index: 99; width: 100%; opacity: 1; font-size: 0.34rem; padding: 0.1rem 0; animation: zoomin 400ms ease-in-out; -webkit-animation: zoomin 400ms ease-in-out;}
 @keyframes zoomin{
 	0%{opacity: 0;}
 	100%{opacity: 1;}

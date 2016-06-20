@@ -6,7 +6,8 @@ $(function(){
 	FastClick.attach(document.body);
 	// ./data/channels.json
 	// http://mini.eastday.com/toutiaoh5/data/channels.json
-	var channelsUrl = 'http://mini.eastday.com/toutiaoh5/data/channels.json',	// 新闻频道类别 
+	var logoUrl = 'http://mini.eastday.com/toutiaoh5/img/ttjk.png',
+		channelsUrl = 'http://mini.eastday.com/toutiaoh5/data/channels.json',	// 新闻频道类别 
 		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据
 		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载
 		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载
@@ -29,10 +30,10 @@ $(function(){
 		$body = $('body'),
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
-		// $loation = $('#J_location'),
+		$loation = $('#J_location'),
 		$newsList = $('#J_news_list'),
-		// $refresh = $('#J_refresh'),
-		// $newsTabsWrap = $('#J_top_menu'),
+		$refresh = $('#J_refresh'),
+		$newsTabsWrap = $('#J_top_menu'),
 		$ggBaidu = $('#J_gg_baidu_id'),
 		$ggSogou = $('#J_gg_sogou_id');
 		praiseTrampleFlag = true,
@@ -107,24 +108,31 @@ $(function(){
 			scope.readUrl = wsCache.get('read_url_all');
         	if(!scope.readUrl){scope.readUrl = '';}
 
-	        /* 删除当前类别记录的位置信息 */
-	        // scope.clearPosition(scope.newsType);
+			// 设置当前位置信息 
+	        if(wsCache.get('location')){
+	            scope.updateDomLocation(wsCache.get('location'));
+	        } else {
+	            scope.location();
+	        }
+
+	        // 设置标题
+	        $refresh.append('<img src="' + logoUrl + '" alt=""><span></span>');
 	        
         	/* 加载新闻频道类别 */
-	   //      scope.initChannels(function(){
-	   //      	var $newsTabs = $newsTabsWrap.children('a');
+	        // scope.initChannels(function(){
+	        	// var $newsTabs = $newsTabsWrap.children('a');
 
-	   //      	// 保存所有新闻类别到数组
-		  //       $newsTabs.each(function(){
-		  //           var $this = $(this),
-		  //               type = $this.data('type');
-		  //           newsTypeArr_all.push(type);
-		  //           if(type !== 'meinv' && type !== 'nuanwen'){
-		  //               newsTypeArr_special.push(type);
-		  //           }
-		  //       });
+	        	// 保存所有新闻类别到数组
+		        // $newsTabs.each(function(){
+		        //     var $this = $(this),
+		        //         type = $this.data('type');
+		        //     newsTypeArr_all.push(type);
+		        //     if(type !== 'meinv' && type !== 'nuanwen'){
+		        //         newsTypeArr_special.push(type);
+		        //     }
+		        // });
 
-				// // 还原到上次浏览的类别
+				// 还原到上次浏览的类别
 				// $newsTabs.each(function(){
 				// 	var $this = $(this);
 				// 	if($this.data('type') == scope.newsType){
@@ -141,7 +149,7 @@ $(function(){
 		  //       } else {
 		  //           scope.location();
 		  //       }
-	   //      });
+	        // });
 
 			/* 首次加载数据 */
 			scope.refreshData(function(){
@@ -208,12 +216,12 @@ $(function(){
 	        });
 
 	        /* 刷新数据 */
-	        // $refresh.on('tap', function(){
-	        // 	if($refresh.hasClass('active')){
-	        // 		return;
-	        // 	}
-	        // 	scope.reloadData();
-	        // });
+	        $refresh.on('tap', function(){
+	        	if($refresh.hasClass('active')){
+	        		return;
+	        	}
+	        	scope.reloadData();
+	        });
 
 	        /* 记录阅读过的新闻 */
 	        $newsList.on('click', 'a', function(){
@@ -276,10 +284,10 @@ $(function(){
 	        $body.on('click', '.J-read-position', function(){
 	        	$body.scrollTop(0);
 	        	// 刷新按钮动画效果
-	        	// scope.changeRefreshStatus();
+	        	scope.changeRefreshStatus();
 	        	// 调用下拉加载数据接口
 	        	scope.pullDownLoadData();
-	        	/*var scrollTimer = setInterval(function(){
+	        	var scrollTimer = setInterval(function(){
 	        		$body.scrollTop($body.scrollTop() - 200);
 	        		if($body.scrollTop() <= 0){
 	        			$body.scrollTop(0);
@@ -289,7 +297,7 @@ $(function(){
 			        	// 调用下拉加载数据接口
 			        	scope.pullDownLoadData();
 	        		}
-	        	}, 1);*/
+	        	}, 1);
 	        });
 
 	        // 推广新闻点击委托事件
@@ -329,7 +337,7 @@ $(function(){
 		 */
 		reloadData: function(){
 			var scope = this;
-			// scope.changeRefreshStatus();
+			scope.changeRefreshStatus();
     		wsCache.delete('news_pos_' + scope.newsType);
     		wsCache.delete('news_' + scope.newsType);
     		wsCache.set('pulldown_pgnum_' + scope.newsType, 0, {exp: 24 * 3600});
@@ -497,10 +505,10 @@ $(function(){
 								pullDownLoadDataTimer = setTimeout(function(){
 								// 美女无pulldown接口
 								if(scope.newsType === 'meinv'){
-						        	// $refresh.trigger('tap');
+						        	$refresh.trigger('tap');
 						        	$pullDownLoading && $pullDownLoading.remove();
 						        } else {
-						        	// scope.changeRefreshStatus();
+						        	scope.changeRefreshStatus();
 									scope.pullDownLoadData(function(){
 							        	setTimeout(function(){
 							        		if($pullDownLoading){
@@ -1174,8 +1182,8 @@ $(function(){
 		 */
 		refreshData: function(callback){
 			var scope = this,
-				cacheNews = null,	// 不从缓存中获取新闻，每次刷新请求加载新的新闻。
-				// cacheNews = wsCache.get('news_' + scope.newsType),
+				// cacheNews = null,	// 不从缓存中获取新闻，每次刷新请求加载新的新闻。
+				cacheNews = wsCache.get('news_' + scope.newsType),
 				cachePos = wsCache.get('news_pos_' + scope.newsType);
 			if(cacheNews){
 				$newsList.html(cacheNews);
