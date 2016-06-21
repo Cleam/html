@@ -437,7 +437,7 @@ $(function(){
 			// 为了保持和缓存顺序一致，请外层循环使用缓存的频道数组
 			for (var i = 0; i < cLen; i++) {
 				for (var j = 0; j < sLen; j++) {
-					if(cc[i].name == sc[j].name){
+					if(cc[i].name === sc[j].name){
 						arr.push(cc[i]);
 					}
 				}
@@ -487,7 +487,7 @@ $(function(){
 							clearTimeout(pullDownLoadDataTimer);
 								pullDownLoadDataTimer = setTimeout(function(){
 								// 美女无pulldown接口
-								if(scope.newsType == 'meinv'){
+								if(scope.newsType === 'meinv'){
 						        	// $refresh.trigger('tap');
 						        	$pullDownLoading && $pullDownLoading.remove();
 						        } else {

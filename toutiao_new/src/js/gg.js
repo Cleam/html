@@ -35,7 +35,6 @@ GLOBAL.Et.ggData = {
 		"xbrowser": {"baidu": {"li": "u2375247"}},
 		"wxgzh": {"baidu": {"li": "u2410915"}},
 		"wpswapdh": {"baidu": {"li": "u2593996"}},
-		"woliuliang": {"baidu": {"li": "u2600917"}},
 		"wifixinhaocha": {"baidu": {"li": "u2607233"}},
 		"wifixh": {"baidu": {"li": "u2292088"}},
 		"wifiwn": {"baidu": {"li": "u2374441"}},
@@ -528,7 +527,9 @@ GLOBAL.Et.ggData = {
 		"xiaobowifi":{"baidu":{"li":"u2675861"}},
 		"appylm":{"baidu":{"li":"u2678139"}},
 		"qiaohuiwangluo01":{"baidu":{"li":"u2678182"}},
-		"coolpadbrowser01":{"baidu":{"li":"u2678417"}}
+		"coolpadbrowser01":{"baidu":{"li":"u2678417"}},
+		"dopah5":{"baidu":{"li":"u2679924"}},
+		"xltianqitong":{"baidu":{"li":"u2680059"}}
 	}
 };
 

@@ -531,8 +531,8 @@ GLOBAL.Browser = function () {
         return { 
             wechat: ua.indexOf('MicroMessenger') > -1, // 在微信中打开  
             weibo: ua.toLowerCase().indexOf('weibo') > -1, // 在新浪微博客户端打开
-            qq: ua.indexOf('QQ') > -1, // 在QQ空间打开 
-            qqbrowser: ua.indexOf('MQQBrowser') > -1 // 在QQ空间打开 
+            qq: ua.indexOf('QQ/') > -1, // 在QQ、QQ空间中打开 
+            qqbrowser: ua.indexOf('MQQBrowser') > -1 // 在QQ空间打开
         }; 
     }
 }();

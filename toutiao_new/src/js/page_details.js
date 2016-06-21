@@ -458,7 +458,7 @@ var module = (function(my){
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
         // console.log('six::', ggId);
-
+        // alert('alliance::' + alliance + '\n' + 'ggId::' + ggId);
         // 分类标题
         $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2><span class="line"></span></div>').append($inList);
         switch(alliance) {
@@ -472,6 +472,7 @@ var module = (function(my){
                 }, $('#cpro_' + ggId)[0]);
                 break;
             case 'gdt':
+                // alert('gdt_id::' + ggId);
                 var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
                 $inList.append('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>');
                 break;
@@ -611,13 +612,14 @@ var module = (function(my){
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
         // console.log('bottom::', ggId);
+        // alert('bottom:: \n' + 'alliance::' + alliance + '\n' + 'ggId::' + ggId);
         switch(alliance) {
             case 'sogou':
                 $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
                 break;
             case 'gdt':
                 var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-                $inList.append('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>');
+                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></section>');
                 break;
             default: 
                 $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
@@ -962,7 +964,7 @@ var module = (function(my){
                     scope.loadTxt(mygg.txt3, 3, 8);
                     clearInterval(t1);
                 }
-            }, 800);
+            }, 400);
         } catch (e) {
             console.error('loadTxt has error: \n', e);
         }
@@ -976,7 +978,7 @@ var module = (function(my){
                     scope.loadThree(mygg.threedown, 7);
                     clearInterval(t2);
                 }
-            }, 1200);
+            }, 400);
         } catch (e) {
             console.error('loadThree has error!', e);
         }
@@ -989,7 +991,7 @@ var module = (function(my){
                     scope.loadBottom(mygg.bottom);
                     clearInterval(t3);
                 }
-            }, 1600);
+            }, 400);
         } catch (e) {
             console.error('loadBottom has error!', e);
         }
@@ -1129,7 +1131,10 @@ var module = (function(my){
         }
     }
     // vast广告
-    document.write('<scr' + 'ipt src="http://mini.eastday.com/toutiaoh5/js/vast.min.js"></scr' + 'ipt>');
+    document.write('<scr' + 'ipt src="./js/vast.js"></scr' + 'ipt>');
+
+    // document.write('<scr' + 'ipt>var _hmt = _hmt || [];_hmt.push(["_setUserId", "' + GLOBAL.Et.uid + '"]); (function() {var hm = document.createElement("script"); hm.src = "//hm.baidu.com/hm.js?3696496bc8f50e6f4c37edd0d0fe5090"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })();</scr' + 'ipt>');
+    
 }());
 
 /* ==============================
@@ -1209,4 +1214,5 @@ $(function(){
         // 加载特殊渠道（wnwifi）页面
         module.loadWnwifiPage();
 	}
+
 });
