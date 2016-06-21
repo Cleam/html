@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="author" content="Cleam Lee">
+    <meta name="keywords" content="东方头条,头条新闻,头条,今日新闻头条,头条网,头条新闻,今日头条新闻">
+	<meta name="description" content="东方头条网-东方网旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!">
+    <meta http-equiv="expires" content="31 Dec 2018">
+    <link rel="shortcut icon" href="http://mini.eastday.com/toutiaoh5/img/favicon.ico" />
+	<link rel="bookmark" href="http://mini.eastday.com/toutiaoh5/img/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon-precomposed" href="http://mini.eastday.com/toutiaoh5/img/favicon.ico">
+	<title>头条新闻</title>
+	<script>!function(a,b){var c=a.documentElement,d="orientationchange"in window?"orientationchange":"resize",e=function(){var a=c.clientWidth;a&&(a>=750&&(a=750),c.style.fontSize=100*(a/750)+"px")};a.addEventListener&&(b.addEventListener(d,e,!1),e())}(document,window);</script>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/page_search.css">
+</head>
+<body>
+	<p class="none">东方头条网-东方网旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!</p>
+	<header>
+		<!-- title -->
+		<section class="top-title">
+			<a href="/" class="back"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABCUExURUxpcf///////////////////////////////////////////////////////////////0xpcf///////////////+Nhri4AAAAVdFJOUwDnwEciCdr78hQvzTpWp21hAH6Vi4PgU5gAAAD2SURBVEgNrZbJEoMgEETbBRCXaJnw/7+aMTJWDjl0W/Hs8/UIzAD8+dnl772KijyLijySiIRHsUcJdhIKEtrDoVhCa3VISK4O3pKnU1HKSpafYyXSRhJ9rHWkhSbc0bFEU4mBJcaLmEnHOLiDJWYnmpF0dLeJ1PSkY6nLUaJOZNKx1V9VJpZYZWL3OtpApsLukpaNBejBgM2j0eV/MZHPpi8l0Hk2evmNkbcloG9+QD9ixsgHGegvhm0XxlyN7w7Dtj5Ab7DGeBtPbBs3xodFYk8P4ENMG3znhuMt5vkMZMXijGKxdw+PiEC/kAD6tQfQL1e/K3kDD2Ub0EJ8V6YAAAAASUVORK5CYII=" alt="返回首页"></a>
+			<h1 class="title">头条搜索</h1>
+		</section>
+		<!-- menu -->
+		<section class="top-form">
+			<div class="form-wrap">
+	            <div class="input-wrap">
+	                <span class="search-logo"></span>
+	                <input class="search-input" id="J_search_input" type="text" placeholder="请输入您感兴趣的内容" autocomplete="off"/>
+	            </div>
+	            <button id="J_search_btn" class="search-btn" type="button">搜索</button>
+	        </div>
+		</section>
+	</header>
+
+	<div id="J_content" class="news-list">
+		<div id="J_hot_words" class="hot-words-wrap none"></div>
+		<div id="J_news_wrap" class="news-wrap none">
+			<div id="J_news_list" class="news-list-wrap">
+			</div>
+			<div id="J_loading" class="loading">
+				<div class="spinner">
+				  <div class="bounce1"></div>
+				  <div class="bounce2"></div>
+				  <div class="bounce3"></div>
+				</div>
+				<p class="txt">数据加载中</p>
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/zepto.min.js"></script>
+	<script src="js/fastclick.min.js"></script>
+	<script src="js/web-storage-cache.min.js"></script>
+	<script src="js/js.cookie.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/page_search.js"></script>
+</body>
+</html>
