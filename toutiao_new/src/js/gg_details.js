@@ -843,8 +843,8 @@ GLOBAL.Et.ggData = {
                 cptop: 'u2603835'
             },
             'sogou': {
-                threeup: '565296',
-                threedown: '565296',
+                // threeup: '565296',
+                // threedown: '565296',
                 bottom: '565296'
             }
         },
@@ -969,8 +969,8 @@ GLOBAL.Et.ggData = {
                 cptop: 'u2603808'
             },
             'sogou': {
-                threeup: '565296',
-                threedown: '565296',
+                // threeup: '565296',
+                // threedown: '565296',
                 bottom: '565296'
             }
         },
@@ -990,15 +990,15 @@ GLOBAL.Et.ggData = {
         },
         'm021_pgzs': {
             'baidu': {
-                six: 'u2536113',
+                six: 'u2536082',
                 threeup: 'u2536073',
                 threedown: 'u2536081',
                 tujia: 'u2536538'
             },
             'sogou': {
-                six: '565296',
-                threeup: '565296',
-                threedown: '565296',
+                // six: '565296',
+                // threeup: '565296',
+                // threedown: '565296',
                 bottom: '565296'
             }
         },
@@ -1259,10 +1259,6 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
-            /*,
-                        'gdt': {
-                            six: '8060214175858267'
-                        }*/
         },
         'hongbaoliulanqi': {
             'baidu': {
@@ -2573,9 +2569,7 @@ GLOBAL.Et.ggData = {
         },
         'qqbrowser': {
             'gdt': {
-                six: '2050819280187107'
-            },
-            'sogou': {
+                six: '2050819280187107',
                 bottom: '5000111220584129'
             }
         },
@@ -2852,12 +2846,57 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'wifixhwy': {
+            'baidu': {
+                six: 'u2627268',
+                threeup: 'u2627274',
+                threedown: 'u2627271',
+                tujia: 'u2627276',
+                cptop: 'u2627263'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'yiwanwuxian': {
+            'baidu': {
+                six: 'u2681177',
+                threeup: 'u2681176',
+                threedown: 'u2681174',
+                tujia: 'u2681173',
+                cptop: 'u2681179'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'uckuzhanjk': {
+            'baidu': {
+                six: 'u2681197',
+                threeup: 'u2681196',
+                threedown: 'u2681195',
+                tujia: 'u2681194'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
 
 (function() {
-    var i = 0;
+    var i = 0,
+        specialChannel = [],
+        ggBaidu = null,
+        ggSogou = null,
+        ggGdt = null,
+        keywords = [],
+        ime = '',
+        noAppGgQid = [],
+        ttaccid = '',
+        apptypeid = '',
+        noAppGgFlag = true;
     // 缓存用户id（365天）
     GLOBAL.Et.uid = Cookies.get('user_id');
     if (!GLOBAL.Et.uid) {
@@ -2872,7 +2911,7 @@ GLOBAL.Et.ggData = {
 
     // 通过搜索引擎进入的（渠道处理）
     try {
-        var specialChannel = [
+        specialChannel = [
             {referer: 'baidu.com', qid: 'baiducom'},
             {referer: 'so.com', qid: '360so'},
             {referer: 'sogou.com', qid: 'sogoucom'},
@@ -2890,11 +2929,20 @@ GLOBAL.Et.ggData = {
 
     // 通过APP分享出去的（渠道处理）
     try {
-        var ttaccid = GLOBAL.Util.getQueryString('ttaccid') || null;
+        ttaccid = GLOBAL.Util.getQueryString('ttaccid') || null;
+        apptypeid = GLOBAL.Util.getQueryString('apptypeid') || null;
         if(ttaccid && GLOBAL.Browser.wechat){
             GLOBAL.Et.qid = 'ioswechat';
         } else if(ttaccid && (GLOBAL.Browser.qq || GLOBAL.Browser.qqbrowser)){
             GLOBAL.Et.qid = 'qqwechat';
+        }
+        // 以下很特殊（即使url中有ime的值，也要显示对应渠道广告）
+        if(apptypeid === 'gsbrowser'){
+            GLOBAL.Et.qid = 'gsbrowser';
+            noAppGgFlag = false;
+        } else if(apptypeid === 'ltbrowser') {
+            GLOBAL.Et.qid = 'liantongbrowser';
+            noAppGgFlag = false;
         }
     } catch (e) {
         console.log('Fix APP share has error: \n', e);
@@ -2913,9 +2961,9 @@ GLOBAL.Et.ggData = {
     /*
      * 对广告ID处理（为了方便获取、判断）
      */
-    var ggBaidu = GLOBAL.Et.gg.baidu,
-        ggSogou = GLOBAL.Et.gg.sogou,
-        ggGdt = GLOBAL.Et.gg.gdt;
+    ggBaidu = GLOBAL.Et.gg.baidu;
+    ggSogou = GLOBAL.Et.gg.sogou;
+    ggGdt = GLOBAL.Et.gg.gdt;
     GLOBAL.namespace('GLOBAL.Et.gg.my');
     // six - baidu/sogou/gdt
     GLOBAL.Et.gg.my.six = (ggGdt ? (ggGdt.six ? 'gdt_' + ggGdt.six : '') : '') ||
@@ -2953,6 +3001,7 @@ GLOBAL.Et.ggData = {
         // GLOBAL.Et.gg.my.six = 'gdt_1050119184991199';
         // GLOBAL.Et.gg.my.bottom = 'gdt_1060014174891168';
         if(typeof GLOBAL.Browser.wechat === 'boolean' && !GLOBAL.Browser.wechat){
+            // GLOBAL.Et.qid = 'm021_wy083';
             // qq一定要在qqbrowser之前判断
             if(GLOBAL.Browser.qq){
                 GLOBAL.Et.gg.my.six = 'gdt_1050119184991199';
@@ -2974,7 +3023,7 @@ GLOBAL.Et.ggData = {
     }
 
     // 关键词过滤（带领导人的新闻，不添加图加广告）
-    var keywords = [
+    keywords = [
         '习近平', '李克强', '张德江', '俞正声', '刘云山', '王岐山', '张高丽', '马凯', '王沪宁', '刘延东',
         '刘奇葆', '许其亮', '孙春兰', '孙政才', '李建国', '李源潮', '汪洋', '张春贤', '范长龙', '孟建柱',
         '赵乐际', '胡春华', '俞正声', '栗战书', '郭金龙', '韩正', '杜青林', '赵洪祝', '杨晶', '常万全',
@@ -3000,24 +3049,20 @@ GLOBAL.Et.ggData = {
 
 
     // 无任何广告的渠道处理
-    (function(){
-        var ime = GLOBAL.Util.getQueryString('ime'),
-            noGgQid = ['wpsios', 'wpsandroid', 'm021_wy003', 'shangyewifiliu2'];
-
-        if(ime || noGgQid.contains(GLOBAL.Et.qid)){
-            GLOBAL.Et.gg.my.six = null;
-            GLOBAL.Et.gg.my.threeup = null;
-            GLOBAL.Et.gg.my.threedown = null;
-            GLOBAL.Et.gg.my.bottom = null;
-            GLOBAL.Et.gg.my.tujia = null;
-            GLOBAL.Et.gg.my.cptop = null;
-            GLOBAL.Et.gg.my.txt1 = null;
-            GLOBAL.Et.gg.my.txt2 = null;
-            GLOBAL.Et.gg.my.txt3 = null;
-            GLOBAL.Et.gg.my.three = null;
-        }
-
-    }());    
+    ime = GLOBAL.Util.getQueryString('ime');
+    noAppGgQid = ['wpsios', 'wpsandroid', 'm021_wy003', 'shangyewifiliu2'];
+    if(noAppGgFlag && (ime || noAppGgQid.contains(GLOBAL.Et.qid))){
+        GLOBAL.Et.gg.my.six = null;
+        GLOBAL.Et.gg.my.threeup = null;
+        GLOBAL.Et.gg.my.threedown = null;
+        GLOBAL.Et.gg.my.bottom = null;
+        GLOBAL.Et.gg.my.tujia = null;
+        GLOBAL.Et.gg.my.cptop = null;
+        GLOBAL.Et.gg.my.txt1 = null;
+        GLOBAL.Et.gg.my.txt2 = null;
+        GLOBAL.Et.gg.my.txt3 = null;
+        GLOBAL.Et.gg.my.three = null;
+    }
 
 
 }());

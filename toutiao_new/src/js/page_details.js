@@ -1,3 +1,13 @@
+/**
+ * 头条详情页脚本
+ * @deps （依赖文件列表）
+ *     fastclick.min.js
+ *     zepto.min.js
+ *     js.cookie.js
+ *     global.js
+ * @author lizhigao(lizhigao@021.com)
+ * @date 2016-05-01
+ */
 FastClick.attach(document.body);
 /**
  * 模块模板
@@ -315,17 +325,23 @@ var module = (function(my){
 		$hnList = $('<div id="J_hn_list" class="hn-list"></div>'),	// 热点新闻列表
         // http://toutiao.eastday.com/getwapdata/data
         // http://toutiao.eastday.com/getwapdata/advshow
-        appShowLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',
-        appClickLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',
+        appShowLogUrl = 'http://123.59.60.170/getwapdata/advshow',
+        // appShowLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',
+        appClickLogUrl = 'http://123.59.60.170/getwapdata/ad',
+        // appClickLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',
         iframeLogUrl = 'http://123.59.60.170/iframe/getiframe', // iframe统计测试接口
         // iframeLogUrl = 'http://ifrcheck.dfshurufa.com/iframe/getiframe', // iframe统计正式接口
-        activeLogUrl = 'http://toutiao.eastday.com/getwapdata/data',
+        activeLogUrl = 'http://123.59.60.170/getwapdata/data',
+        // activeLogUrl = 'http://toutiao.eastday.com/wapdata/data',
         // activeLogUrl = 'http://ynetactiveh5.dfshurufa.com/wapdata/data',
-        onlineLogUrl = 'http://123.59.40.127/online/online',
+        onlineLogUrl = 'http://123.59.60.170/online/online',
+        // onlineLogUrl = 'http://123.59.40.127/online/online',
         // onlineLogUrl = 'http://ynetonlineh5.dfshurufa.com/online/online',
         dataUrl = 'http://toutiao.eastday.com/pjson/checknews',
         // dataUrl = 'http://ynetsocketh5.dfshurufa.com/wapjson_st/checknews',
-        hasListNews = false;
+        softWordsUrl = 'http://softwords.dfshurufa.com/loadsoftwords/load',
+        hasListNews = false,
+        hasSofrWords = false;
 
     /**
      * 加载热点新闻
@@ -417,6 +433,49 @@ var module = (function(my){
         hasListNews = true;
     }
 
+    /**
+     * 添加软文到文章末尾
+     */
+    function loadSoftWords(){   // softWordsUrl
+        $.ajax({
+            url: softWordsUrl,
+            data : {
+                // "url": 'http://mini.eastday.com/mobile/160622025016520.html',
+                "url": GLOBAL.Util.getUrlNoParams(),
+                "qid": GLOBAL.Et.qid,
+                "uid": GLOBAL.Et.uid,
+                "plat": 'wap'
+            },
+            dataType: 'jsonp',
+            jsonp: 'jsonpcallback',
+            success: function(rst){
+                if(rst && rst.stat == "1"){
+                    $interestNews.before('<p style="background-color: #fff; padding: 0 0.3rem 0.3rem; font-size: 0.32rem;">' + rst.words + '</p>');
+                }
+            },
+            complete: function(){
+                hasSofrWords = true;
+            }
+        });
+    }
+
+    /**
+     * 添加微信二维码
+     */
+    function loadWechatEwm(){
+        var imgArr = [
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160621-1.jpg',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160621-2.jpg',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160621-3.jpg'
+            ],
+            random = Math.floor(Math.random() * imgArr.length);
+
+        $interestNews.before('<p style="background-color: #fff; padding: 0 0.3rem 0.3rem; font-size: 0.32rem;"><img src="' + imgArr[random] + '" alt="" width="100%" /></p>');
+    }
+
+    /**
+     * 加载热点新闻数据
+     */
     function loadHotNewsData(){
         $.ajax({
             url: dataUrl,
@@ -474,11 +533,11 @@ var module = (function(my){
             case 'gdt':
                 // alert('gdt_id::' + ggId);
                 var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-                $inList.append('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>');
+                $inList.append('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="http://mini.eastday.com/toutiaoh5/gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%"></iframe></div>');
                 break;
             case 'sogou':
-                $inList.append('<div class="sogou-wrap"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>');
-                $inList.append('<div class="sogou-wrap mt5"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>');
+                $inList.append('<div class="sogou-wrap"><iframe src="http://mini.eastday.com/toutiaoh5/gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>');
+                $inList.append('<div class="sogou-wrap mt5"><iframe src="http://mini.eastday.com/toutiaoh5/gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>');
                 break;
             default: 
                 ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
@@ -524,7 +583,7 @@ var module = (function(my){
                 }, $('#cpro_' + ggId)[0]);
                 break;
             case 'sogou':
-                $newsItems.eq(pos).after('<section class="gg-item news-gg-img3"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
+                $newsItems.eq(pos).after('<section class="gg-item news-gg-img1" style="border-bottom: 1px solid #f5f5f5;"><iframe src="http://mini.eastday.com/toutiaoh5/gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
                 break;
             default: break;
         }
@@ -613,16 +672,17 @@ var module = (function(my){
             ggId = arr[1];      // 广告ID
         // console.log('bottom::', ggId);
         // alert('bottom:: \n' + 'alliance::' + alliance + '\n' + 'ggId::' + ggId);
+        // console.log('bottom:: \n' + 'alliance::' + alliance + '\n' + 'ggId::' + ggId);
         switch(alliance) {
             case 'sogou':
-                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
+                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="http://mini.eastday.com/toutiaoh5/gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
                 break;
             case 'gdt':
                 var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></section>');
+                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe id="' + iframeId + '" name="iframe" src="http://mini.eastday.com/toutiaoh5/gg/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%"></iframe></section>');
                 break;
             default: 
-                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
+                $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="http://mini.eastday.com/toutiaoh5/gg/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
                 break;
         }
     };
@@ -765,7 +825,7 @@ var module = (function(my){
                 'softtype': 'news',
                 'softname': 'eastday_wapnews',
                 'newstype': 'ad',
-                'from': 'null',
+                'from': GLOBAL.Util.getUrlNoParams(),
                 'to': advUrl,   // 下载链接
                 'os_type': GLOBAL.Util.getOsType() || 'null',   // 操作系统
                 'browser_type': GLOBAL.Util.getBrowserType() || 'null', // 浏览器类型
@@ -789,7 +849,7 @@ var module = (function(my){
             data : {
                 'qid': GLOBAL.Et.qid || 'null',
                 'uid': GLOBAL.Et.uid || 'null',
-                'loginid': 'null',
+                'loginid': GLOBAL.Util.getQueryString('ttaccid') || 'null',
                 'softtype': 'news',
                 'softname': 'eastday_wapnews',
                 'newstype': GLOBAL.Et.newsType || 'null',
@@ -798,18 +858,18 @@ var module = (function(my){
                 'os_type': GLOBAL.Util.getOsType() || 'null',
                 'browser_type': GLOBAL.Util.getBrowserType() || 'null',
                 'pixel': window.screen.width + '*' + window.screen.height,
-                'ime': 'null',
+                'ime': GLOBAL.Util.getQueryString('ime') || 'null',
                 'idx': GLOBAL.Util.getQueryString('idx') || 'null',
                 'ishot': GLOBAL.Util.getQueryString('ishot') || 'null',
                 'fr_url': GLOBAL.Util.getReferrer() || 'null',
-                'ver': 'null',
-                'appqid': 'null',
-                'ttloginid': 'null',
-                'apptypeid': 'null',
-                'appver': 'null',
+                'ver': GLOBAL.Util.getQueryString('ver') || 'null',
+                'appqid': GLOBAL.Util.getQueryString('appqid') || 'null',
+                'ttloginid': GLOBAL.Util.getQueryString('ttloginid') || 'null',
+                'apptypeid': GLOBAL.Util.getQueryString('apptypeid') || 'null',
+                'appver': GLOBAL.Util.getQueryString('appver') || 'null',
                 'recommendtype': GLOBAL.Util.getQueryString('recommendtype') || 'null',
                 'ispush': GLOBAL.Util.getQueryString('ispush') || 'null',
-                'deviceid': 'null'
+                'deviceid': GLOBAL.Util.getQueryString('deviceid') || 'null'
             },
             jsonp : 'jsonpcallback',
             success : function(msg) {
@@ -854,7 +914,7 @@ var module = (function(my){
             url : iframeLogUrl, // online
             dataType : 'jsonp',
             data : {
-                param: encodeURI(params)
+                param: params
             },
             jsonp : 'jsonpcallback'
         });
@@ -882,12 +942,17 @@ var module = (function(my){
                 appqid = 'null',
                 os = GLOBAL.Util.getOsType(),
                 ttloginid = 'null',
+                onlineLogTime = 10 * 60 * 1000, // 10分钟之后不再上传online日志
+                onlineTimer = null,
                 params = urlNoParams + '\t' + uid + '\t' + qid + '\t' + apptypeid + '\t' + ime + '\t' + ttaccid + '\t' + type + '\t' + intervaltime + '\t' + ver + '\t' + appqid + '\t' + os + '\t' + ttloginid + '\t' + qid;
             onlineLog(params);
             // 每隔10s发送一次
-            setInterval(function(){
-                /*onlineLog(params);*/
+            onlineTimer = setInterval(function(){
+                onlineLog(params);
             }, intervaltime * 1000);
+            setTimeout(function(){
+                clearInterval(onlineTimer);
+            }, onlineLogTime);
         } catch (e) {
             console.error('Log error: \n', e);
         }
@@ -897,6 +962,27 @@ var module = (function(my){
             scope.loadSix(mygg.six);
         } catch (e) {
             console.error('loadSix has error: \n', e);
+        }
+
+        // 插入软文
+        try {
+            loadSoftWords();
+        } catch (e) {
+            console.error('loadSoftWords has error: \n', e);
+        }
+
+        // 插入微信二维码（新闻早餐）
+        try {
+            if(GLOBAL.Browser.wechat){
+                var wechatTimer = setInterval(function(){
+                    if(hasSofrWords){
+                        loadWechatEwm();
+                        clearInterval(wechatTimer);
+                    }
+                }, 1000);
+            }
+        } catch (e) {
+            console.error('loadWechatEwm has error: \n', e);
         }
 
         // 热点新闻 
@@ -924,7 +1010,7 @@ var module = (function(my){
                         "os_type": GLOBAL.Util.getOsType() || 'null',
                         "browser_type": GLOBAL.Util.getBrowserType() || 'null',
                         "pixel": window.screen.width + '*' + window.screen.height,
-                        "ime": 'null'
+                        "ime": GLOBAL.Util.getQueryString('ime') || 'null'
                     },
                     jsonp : 'jsonpcallback',
                     success : function() {}
@@ -942,7 +1028,7 @@ var module = (function(my){
         }
 
         // 加载引导下载app的链接（暂时先下线）
-        /*try {
+        try {
             var t0 = setInterval(function(){
                 if(hasListNews){
                     scope.addAppLink();
@@ -951,7 +1037,7 @@ var module = (function(my){
             }, 400);
         } catch (e) {
             console.error('loadTxt has error: \n', e);
-        }*/
+        }
 
         // 广告txt1、txt2、txt3
         try {
@@ -1131,7 +1217,8 @@ var module = (function(my){
         }
     }
     // vast广告
-    document.write('<scr' + 'ipt src="./js/vast.js"></scr' + 'ipt>');
+    // document.write('<scr' + 'ipt src="./js/vast.js"></scr' + 'ipt>');
+    // document.write('<scr' + 'ipt src="http://mini.eastday.com/toutiaoh5/js/vast.min.js"></scr' + 'ipt>');
 
     // document.write('<scr' + 'ipt>var _hmt = _hmt || [];_hmt.push(["_setUserId", "' + GLOBAL.Et.uid + '"]); (function() {var hm = document.createElement("script"); hm.src = "//hm.baidu.com/hm.js?3696496bc8f50e6f4c37edd0d0fe5090"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })();</scr' + 'ipt>');
     

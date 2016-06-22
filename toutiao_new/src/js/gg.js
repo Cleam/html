@@ -529,7 +529,9 @@ GLOBAL.Et.ggData = {
 		"qiaohuiwangluo01":{"baidu":{"li":"u2678182"}},
 		"coolpadbrowser01":{"baidu":{"li":"u2678417"}},
 		"dopah5":{"baidu":{"li":"u2679924"}},
-		"xltianqitong":{"baidu":{"li":"u2680059"}}
+		"xltianqitong":{"baidu":{"li":"u2680059"}},
+		"yiwanwuxian":{"baidu":{"li":"u2681178"}},
+		"uckuzhanjk":{"baidu":{"li":"u2681198"}}
 	}
 };
 
