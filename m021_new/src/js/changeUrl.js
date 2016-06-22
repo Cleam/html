@@ -18,8 +18,8 @@
 			$('.J-qid-' + links[i]).attr('href', urls[i]);
 		}
 		// 苹果助手的去掉  同城约替换成游戏中心
-		$('.J-tongchengyue').hide();
-		$('.J-youxi').show();
+		$('.J-pgzs-hide').hide();
+		$('.J-pgzs-show').show();
 	} else if(tt_news_mid === 'chenz' || tt_news_mid === 'wy027'){	// chenz渠道
 		links = ['baidu'];
 	 	urls = [
