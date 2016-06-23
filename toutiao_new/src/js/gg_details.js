@@ -2996,14 +2996,18 @@ GLOBAL.Et.ggData = {
 
     // 特殊处理（如果是QQ或QQ浏览器访问页面，six、bottom位置就展示广点通'gdt'广告）
     try {
-        // GLOBAL.Et.gg.my.six = 'gdt_8010115151216515';
-        // GLOBAL.Et.gg.my.bottom = 'gdt_1040015141913673';
-        // GLOBAL.Et.gg.my.six = 'gdt_1050119184991199';
-        // GLOBAL.Et.gg.my.bottom = 'gdt_1060014174891168';
+        // GLOBAL.Et.gg.my.six = 'gdt_7030211295816964';
+        // GLOBAL.Et.gg.my.bottom = 'gdt_5050515205011906';
+        /*
+          广点通测试ID
+            7030211295816964
+            5050515205011906
+            4010810235519907
+            1020613265313948
+         */
         if(typeof GLOBAL.Browser.wechat === 'boolean' && !GLOBAL.Browser.wechat){
-            // GLOBAL.Et.qid = 'm021_wy083';
             // qq一定要在qqbrowser之前判断
-            if(GLOBAL.Browser.qq){
+            if(GLOBAL.Browser.qq) {
                 GLOBAL.Et.gg.my.six = 'gdt_1050119184991199';
                 GLOBAL.Et.gg.my.bottom = 'gdt_1060014174891168';
             } else if(GLOBAL.Browser.qqbrowser) {

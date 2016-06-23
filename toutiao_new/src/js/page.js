@@ -391,7 +391,7 @@ $(function(){
 					"browser_type": scope.browserType || 'null',
 					"pixel": pixel.w + '*' + pixel.h,
 					"ime": "null",
-					"refer": GLOBAL.Util.getReferrer() || 'null',
+					'fr_url': GLOBAL.Util.getUrlNoParams() || 'null',
 					"adv": advId || 'null'
 				},
 				jsonp : 'jsonpcallback',

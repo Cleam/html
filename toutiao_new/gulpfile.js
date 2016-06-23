@@ -72,6 +72,18 @@ gulp.task('html-gg', function() {
         .pipe(gulp.dest(htmlDst))
         .pipe(livereload());
 });
+gulp.task('html-partner', function() {
+    var htmlSrc = [
+            './src/gg/gg_baidu.html',
+            './src/gg/gg_sogou.html',
+            './src/gg/gg_gdt.html'
+        ],
+        htmlDst = './dist/partner';
+    gulp.src(htmlSrc)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(htmlDst))
+        .pipe(livereload());
+});
 
 /* ========================================
   CSS: 自动添加css前缀和压缩
