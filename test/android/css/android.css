@@ -1,0 +1,52 @@
+body {
+	background-color: #f8f8f8 ;
+	font-family: "微软雅黑";
+	margin: 0;
+}
+
+p {
+	font-size: 20px;
+	line-height: 29px;
+	margin-top: 25px;
+	color: #333333;
+	text-align: justify;
+	text-justify: inter-ideograph;
+}
+
+.title {
+	font-size: 23px;
+	color:#333333 ;
+}
+
+.src {
+	font-size: 12px;
+	display: block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	color: #999999;
+}
+
+.main {
+	font-family: "微软雅黑";
+	margin-left: 16px;
+	margin-right: 16px;
+	min-width: 280px;
+}
+
+#borderLogo {
+	border-bottom: 1px solid #E0E0E0;
+	margin: 10px 16px;
+}
+
+#title {
+	border-bottom: 1px solid #E0E0E0;
+	margin: 20px 16px 0 16px;
+}
+
+figure {
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
+}
