@@ -323,18 +323,16 @@ var module = (function(my){
 		$inList = $('<div id="J_in_list" class="in-list"></div>'),	// 猜你感兴趣列表
 		$hotNews = $('#J_hot_news'),	// 热点新闻
 		$hnList = $('<div id="J_hn_list" class="hn-list"></div>'),	// 热点新闻列表
-        // http://toutiao.eastday.com/getwapdata/data
-        // http://toutiao.eastday.com/getwapdata/advshow
-        appShowLogUrl = 'http://123.59.60.170/getwapdata/advshow',
-        // appShowLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',
-        appClickLogUrl = 'http://123.59.60.170/getwapdata/ad',
-        // appClickLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',
-        iframeLogUrl = 'http://123.59.60.170/iframe/getiframe', // iframe统计测试接口
-        // iframeLogUrl = 'http://ifrcheck.dfshurufa.com/iframe/getiframe', // iframe统计正式接口
-        activeLogUrl = 'http://123.59.60.170/getwapdata/data',
-        // activeLogUrl = 'http://toutiao.eastday.com/wapdata/data',
-        onlineLogUrl = 'http://123.59.60.170/online/online',
-        // onlineLogUrl = 'http://ot.dftoutiao.com/online/online',
+        // appShowLogUrl = 'http://123.59.60.170/getwapdata/advshow',   // 测试接口
+        appShowLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',    // 正式接口
+        // appClickLogUrl = 'http://123.59.60.170/getwapdata/ad',       // 测试接口
+        appClickLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',    // 正式接口
+        // iframeLogUrl = 'http://123.59.60.170/iframe/getiframe', // iframe统计测试接口
+        iframeLogUrl = 'http://ifrcheck.dfshurufa.com/iframe/getiframe', // iframe统计正式接口
+        // activeLogUrl = 'http://123.59.60.170/getwapdata/data',   // active测试接口
+        activeLogUrl = 'http://toutiao.eastday.com/wapdata/data',   // active正式接口
+        // onlineLogUrl = 'http://123.59.60.170/online/online',    // online测试接口
+        onlineLogUrl = 'http://ot.dftoutiao.com/online/online',    // online测试接口
         dataUrl = 'http://toutiao.eastday.com/pjson/checknews',
         softWordsUrl = 'http://softwords.dfshurufa.com/loadsoftwords/load',
         hasListNews = false,
@@ -463,9 +461,9 @@ var module = (function(my){
      */
     function loadWechatEwm(){
         var imgArr = [
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160621-1.jpg',
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160621-2.jpg',
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160621-3.jpg'
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-1.jpg',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-2.jpg',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-3.jpg'
             ],
             random = Math.floor(Math.random() * imgArr.length);
 
@@ -493,7 +491,6 @@ var module = (function(my){
             jsonp: 'jsonpcallback',
             success: function(rst){
                 var data = rst ? rst.data : '';
-                // console.log('data::', data);
                 if(data){
                     loadHotNews(data);
                 } else {
@@ -515,17 +512,14 @@ var module = (function(my){
             arr = gg.split('_'),
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
-        // console.log('six::', ggId);
-        // alert('alliance::' + alliance + '\n' + 'ggId::' + ggId + '\n' + 'ua::' + navigator.userAgent);
         // 分类标题
         $interestNews.append('<div class="in-title"><h2><span></span>猜你感兴趣</h2><span class="line"></span></div>').append($inList);
         switch(alliance) {
             case 'baidu':
-                ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+                ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "200", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
                 $inList.append('<div class="baidu-wrap"><div id="cpro_' + ggId + '"></div></div>');
                 
                 my.createScript(ggConfig, function(){
-                    // console.log('js/gg_details.js loaded!!!');
                     my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
                 }, $('#cpro_' + ggId)[0]);
                 break;
@@ -538,11 +532,10 @@ var module = (function(my){
                 $inList.append('<div class="sogou-wrap mt5"><iframe src="http://mini.eastday.com/toutiaoh5/partner/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>');
                 break;
             default: 
-                ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "160", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
+                ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", hn:"2", wn:"3", cpro_h : "200", imgRatio:"1.7", scale:"20.15", pat:"6", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", adp:"1", ptt:"0", ptc:"%E7%8C%9C%E4%BD%A0%E6%84%9F%E5%85%B4%E8%B6%A3", ptFS:"14", ptFC:"#000000", ptBC:"#cc0000", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#FFFFFF", titSU:"0", ptbg:"50", ptp:"1"})';
                 $inList.append('<div class="baidu-wrap"><div id="cpro_' + ggId + '"></div></div>');
                 
                 my.createScript(ggConfig, function(){
-                    // console.log('js/gg_details.js loaded!!!');
                     my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
                 }, $('#cpro_' + ggId)[0]);
                 break;
@@ -564,7 +557,6 @@ var module = (function(my){
             arr = gg.split('_'),
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
-        // console.log('three::', ggId);
         if(pos >= len){
             pos = len - 1;
         } else if(pos < 0){
@@ -574,7 +566,7 @@ var module = (function(my){
         }
         switch(alliance) {
             case 'baidu':
-                ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"120", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
+                ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '",at:"3", pat:"21", ptLH:"30", tn:"template_inlay_all_mobile_lu_native", rss1:"#FFFFFF", titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS:"12", rss2:"#000000", ptFS:"17", ptFC:"#000000", ptFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", ptFW:"0", conpl:"15", conpr:"15", conpt:"8", conpb:"15", cpro_h:"140", ptn:"1", ptp:"0", itecpl:"10", piw:"0", pih:"0", ptDesc:"2", ptLogo:"0", ptLogoFS:"10", ptLogoBg:"#FFFFFF", ptLogoC:"#999999", ptLogoH:"0", ptLogoW:"0"})';
                 $newsItems.eq(pos).after('<section class="gg-item news-gg-img3"><div id="cpro_' + ggId + '"></div><div class="line"></div></section>');
                 my.createScript(ggConfig, function(){
                     my.getScript('http://cpro.baidustatic.com/cpro/ui/cm.js', function(){}, $('#cpro_' + ggId)[0]);
@@ -613,7 +605,6 @@ var module = (function(my){
         var arr = gg.split('_'),
             // alliance = arr[0],  // 联盟 目前只有baidu
             ggId = arr[1];      // 广告ID
-        // console.log('arr::', arr);
         document.write('<scr' + 'ipt type="text/javascript"> var cpro_id = "' + ggId + '"; </scr' + 'ipt>');
         document.write('<scr' + 'ipt src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></scr' + 'ipt>');
     };
@@ -632,7 +623,6 @@ var module = (function(my){
             alliance = arr[0],  // 联盟
             ggId = arr[1],      // 广告ID
             ggConfig = '(window.cpro_mobile_slot = window.cpro_mobile_slot || []).push({id : "' + ggId + '", at : "3", pat : "8", cpro_h : "30", tn : "template_inlay_all_mobile_lu_native_ad_txt", rss1 : "#ffffff", titFF : "%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91", titFS : "16", rss2 : "#3C3C3C", conpl : "10", desfs : "10", conpr:"25", rss3 : "#999999", desbc : "#ffffff", pimc : "21", titSU : "0"})';
-        // console.log('txt' + type + '::', ggId);
         if(pos >= len){
             pos = len - 1;
         } else if(pos < 0){
@@ -668,9 +658,6 @@ var module = (function(my){
             arr = gg.split('_'),
             alliance = arr[0],  // 联盟
             ggId = arr[1];      // 广告ID
-        // console.log('bottom::', ggId);
-        // alert('bottom:: \n' + 'alliance::' + alliance + '\n' + 'ggId::' + ggId);
-        // console.log('bottom:: \n' + 'alliance::' + alliance + '\n' + 'ggId::' + ggId);
         switch(alliance) {
             case 'sogou':
                 $newsItems.eq($newsItems.length - 1).after('<section class="gg-item news-gg-img1"><iframe src="http://mini.eastday.com/toutiaoh5/partner/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></section>');
@@ -870,8 +857,7 @@ var module = (function(my){
                 'deviceid': GLOBAL.Util.getQueryString('deviceid') || 'null'
             },
             jsonp : 'jsonpcallback',
-            success : function(msg) {
-                // console.log(msg);
+            success : function() {
             }
         });
     }
@@ -921,7 +907,6 @@ var module = (function(my){
 	my.loadCommonPage = function() {
         var scope = this,
             mygg = GLOBAL.Et.gg.my;
-        // console.log('GLOBAL.Et.gg::', mygg);
 
         // 日志记录
         try {
@@ -971,7 +956,7 @@ var module = (function(my){
 
         // 插入微信二维码（新闻早餐）
         try {
-            if(GLOBAL.Browser.wechat){
+            if(GLOBAL.Browser && GLOBAL.Browser.wechat){
                 var wechatTimer = setInterval(function(){
                     if(hasSofrWords){
                         loadWechatEwm();
@@ -1038,7 +1023,7 @@ var module = (function(my){
         }
 
         // 加载引导下载app的链接（暂时先下线）
-        try {
+        /*try {
             var t0 = setInterval(function(){
                 if(hasListNews){
                     scope.addAppLink();
@@ -1047,7 +1032,7 @@ var module = (function(my){
             }, 400);
         } catch (e) {
             console.error('loadTxt has error: \n', e);
-        }
+        }*/
 
         // 广告txt1、txt2、txt3
         try {

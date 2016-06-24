@@ -35,7 +35,6 @@ GLOBAL.Et.ggData = {
 		"xbrowser": {"baidu": {"li": "u2375247"}},
 		"wxgzh": {"baidu": {"li": "u2410915"}},
 		"wpswapdh": {"baidu": {"li": "u2593996"}},
-		"wifixinhaocha": {"baidu": {"li": "u2607233"}},
 		"wifixh": {"baidu": {"li": "u2292088"}},
 		"wifiwn": {"baidu": {"li": "u2374441"}},
 		"wifiunion": {"baidu": {"li": "u2365325"}},
@@ -45,12 +44,10 @@ GLOBAL.Et.ggData = {
 		"wifilwsq": {"baidu": {"li": "u2582156"}},
 		"wifillq": {"baidu": {"li": "u2375047"}},
 		"wifigongxiangjinglin": {"baidu": {"li": "u2572205"}},
-		"wifigongchang": {"baidu": {"li": "u2597508"}},
 		"wifidianhua": {"baidu": {"li": "u2381050"}},
 		"wifichaping": {"baidu": {"li": "u2570432"}},
 		"wifichangyou": {"baidu": {"li": "u2550162"}},
 		"wifibrowser": {"baidu": {"li": "u2390477"}},
-		"wh002": {"baidu": {"li": "u2470430"}},
 		"wh001": {"baidu": {"li": "u2464065"}},
 		"wenhaushanghai": {"baidu": {"li": "u2572335"}},
 		"weixun": {"baidu": {"li": "u2580306"}},
@@ -63,13 +60,11 @@ GLOBAL.Et.ggData = {
 			"sogou": {"li": "524815"}
 		},
 		"v2345com": {"baidu": {"li": "u2482184"}},
-		"tieluwifi": {"baidu": {"li": "u2570417"}},
 		"tianyiwifi": {"baidu": {"li": "u2329106"}},
 		"tianyino": {"baidu": {"li": "u2380587"}},
 		"tianyin": {"baidu": {"li": "u2579324"}},
 		"tianpaibrowser": {"baidu": {"li": "u2386653"}},
 		"smcn": {"baidu": {"li": "u2511455"}},
-		"shoujishuxiang": {"baidu": {"li": "u2366999"}},
 		"shoujibao": {"baidu": {"li": "u2489184"}},
 		"shoudiantong": {"baidu": {"li": "u2284359"}},
 		"shenzhishoudiantong": {"baidu": {"li": "u2506071"}},
@@ -79,15 +74,12 @@ GLOBAL.Et.ggData = {
 		"shangyewifi": {"baidu": {"li": "u2377702"}},
 		"sdtmeinv": {"baidu": {"li": "u2409621"}},
 		"sangmenhu": {"baidu": {"li": "u2488937"}},
-		"ranwen01": {"baidu": {"li": "u2602373"}},
-		"ranwen": {"baidu": {"li": "u2581097"}},
 		"quannengxiangji": {"baidu": {"li": "u2546140"}},
 		"qixiazi": {"baidu": {"li": "u2421651"}},
 		"qishizhushou": {"baidu": {"li": "u2523141"}},
 		"qidouh5": {"baidu": {"li": "u2426690"}},
 		"qianghongbao": {"baidu": {"li": "u2540058"}},
 		"pingce": {"baidu": {"li": "u2579312"}},
-		"phonepingtai": {"baidu": {"li": "u2582184"}},
 		"phone002": {"baidu": {"li": "u2603236"}},
 		"phone001": {"baidu": {"li": "u2602491"}},
 		"paoba": {"baidu": {"li": "u2576004"}},
@@ -95,19 +87,14 @@ GLOBAL.Et.ggData = {
 			"baidu": {"li": "u2323755"},
 			"sogou": {"li": "524815"}
 		},
-		"operabrower": {"baidu": {"li": "u2455281"}},
-		"nubiyabrowser": {"baidu": {"li": "u2600934"}},
 		"ningmengzhuomian": {"baidu": {"li": "u2449811"}},
 		"moban": {"baidu": {"li": "u2371577"}},
-		"milizhuomian": {"baidu": {"li": "u2597483"}},
 		"miaowu": {"baidu": {"li": "u2280816"}},
-		"mengmengnaozhong": {"baidu": {"li": "u2546643"}},
 		"meizuliulanqi": {"baidu": {"li": "u2490015"}},
 		"meizubrowser": {"baidu": {"li": "u2470718"}},
 		"meirenzhuang": {"baidu": {"li": "u2470705"}},
 		"mayibrowser": {"baidu": {"li": "u2552924"}},
 		"maopaobrowser": {"baidu": {"li": "u2375314"}},
-		"maiwaidi": {"baidu": {"li": "u2582192"}},
 		"m021dh": {"baidu": {"li": "u2525302"}},
 		"m021apdftdh": {"baidu": {"li": "u2563709"}},
 		"m021apdft_lc005": {"baidu": {"li": "u2563687"}},
@@ -154,22 +141,28 @@ GLOBAL.Et.ggData = {
 		"m021_wy004": {"baidu": {"li": "u2536282"}},
 		"m021_wy002": {"baidu": {"li": "u2536257"}},
 		"m021_wy001": {"baidu": {"li": "u2536248"}},
-		"m021_waitui040": {"sogou": {"li": "565296"}},
-		"m021_waitui039": {"sogou": {"li": "565296"}},
-		"m021_waitui038": {"sogou": {"li": "565296"}},
-		"m021_waitui037": {"sogou": {"li": "565296"}},
-		"m021_waitui036": {"sogou": {"li": "565296"}},
-		"m021_waitui035": {"sogou": {"li": "565296"}},
-		"m021_waitui034": {"sogou": {"li": "565296"}},
-		"m021_waitui033": {"sogou": {"li": "565296"}},
-		"m021_waitui032": {"sogou": {"li": "565296"}},
-		"m021_waitui031": {"sogou": {"li": "565296"}},
-		"m021_waitui030": {
-			"baidu": {"li": "u2602647"},
+		"m021_waitui035": {
+			"baidu": {"li": "u2683808"},
 			"sogou": {"li": "565296"}
 		},
-		"m021_waitui029": {
-			"baidu": {"li": "u2602637"},
+		"m021_waitui034": {
+			"baidu": {"li": "u2683806"},
+			"sogou": {"li": "565296"}
+		},
+		"m021_waitui033": {
+			"baidu": {"li": "u2683804"},
+			"sogou": {"li": "565296"}
+		},
+		"m021_waitui032": {
+			"baidu": {"li": "u2683802"},
+			"sogou": {"li": "565296"}
+		},
+		"m021_waitui031": {
+			"baidu": {"li": "u2683798"},
+			"sogou": {"li": "565296"}
+		},
+		"m021_waitui030": {
+			"baidu": {"li": "u2602647"},
 			"sogou": {"li": "565296"}
 		},
 		"m021_waitui028": {
@@ -184,60 +177,20 @@ GLOBAL.Et.ggData = {
 			"baidu": {"li": "u2602590"},
 			"sogou": {"li": "565296"}
 		},
-		"m021_waitui025": {
-			"baidu": {"li": "u2602583"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui024": {
-			"baidu": {"li": "u2602578"},
-			"sogou": {"li": "565296"}
-		},
 		"m021_waitui023": {
 			"baidu": {"li": "u2602568"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui022": {
-			"baidu": {"li": "u2602609"},
 			"sogou": {"li": "565296"}
 		},
 		"m021_waitui021": {
 			"baidu": {"li": "u2602544"},
 			"sogou": {"li": "565296"}
 		},
-		"m021_waitui020": {
-			"baidu": {"li": "u2540923"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui019": {
-			"baidu": {"li": "u2540922"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui018": {
-			"baidu": {"li": "u2540920"},
-			"sogou": {"li": "565296"}
-		},
 		"m021_waitui017": {
 			"baidu": {"li": "u2540919"},
 			"sogou": {"li": "565296"}
 		},
-		"m021_waitui016": {
-			"baidu": {"li": "u2540917"},
-			"sogou": {"li": "565296"}
-		},
 		"m021_waitui015": {
 			"baidu": {"li": "u2540916"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui014": {
-			"baidu": {"li": "u2540915"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui013": {
-			"baidu": {"li": "u2540914"},
-			"sogou": {"li": "565296"}
-		},
-		"m021_waitui012": {
-			"baidu": {"li": "u2540913"},
 			"sogou": {"li": "565296"}
 		},
 		"m021_waitui011": {
@@ -303,41 +256,32 @@ GLOBAL.Et.ggData = {
 		"lianxiangrili": {"baidu": {"li": "u2533451"}},
 		"lianxiang114la": {"baidu": {"li": "u2549479"}},
 		"liantongbrowser": {"baidu": {"li": "u2558105"}},
-		"liantong114": {"baidu": {"li": "u2564488"}},
 		"liantong001": {"baidu": {"li": "u2581086"}},
-		"lianlewuxianin": {"baidu": {"li": "u2572231"}},
 		"liangwang": {"baidu": {"li": "u2508726"}},
 		"lezhuansuoping": {"baidu": {"li": "u2525593"}},
 		"lewuxian": {"baidu": {"li": "u2579295"}},
 		"leshitiyu": {"baidu": {"li": "u2452489"}},
-		"lemonllq": {"baidu": {"li": "u2590801"}},
 		"lemonbrowser": {"baidu": {"li": "u2375320"}},
 		"laohuangli": {"baidu": {"li": "u2375170"}},
 		"laobansuoping": {"baidu": {"li": "u2592501"}},
 		"lanrentianqi": {"baidu": {"li": "u2589976"}},
-		"laidianbao": {"baidu": {"li": "u2601771"}},
 		"kuhuasuoping": {"baidu": {"li": "u2576948"}},
 		"kudianzhuomian": {"baidu": {"li": "u2469608"}},
 		"kkwifi": {"baidu": {"li": "u2508606"}},
-		"kkbrowser": {"baidu": {"li": "u2472731"}},
 		"kangjiaphone": {"baidu": {"li": "u2548304"}},
 		"jzonline9": {"baidu": {"li": "u2594033"}},
 		"jsonline": {"baidu": {"li": "u2482174"}},
 		"jisuanguanjia": {"baidu": {"li": "u2404338"}},
 		"jiaxiaobaodian": {"baidu": {"li": "u2530704"}},
-		"jiankang53": {"baidu": {"li": "u2576003"}},
 		"huohoubrowser": {"baidu": {"li": "u2386625"}},
 		"huisuoping": {"baidu": {"li": "u2371552"}},
 		"hongbaorili": {"baidu": {"li": "u2568237"}},
 		"hongbaoliulanqi": {"baidu": {"li": "u2306836"}},
 		"holazhuomian": {"baidu": {"li": "u2536033"}},
-		"hiwifi": {"baidu": {"li": "u2521548"}},
-		"hengman": {"baidu": {"li": "u2576049"}},
 		"haoh5": {"baidu": {"li": "u2575936"}},
 		"hangu": {"baidu": {"li": "u2596938"}},
 		"haixunyitong": {"baidu": {"li": "u2562472"}},
 		"h5browser": {"baidu": {"li": "u2574253"}},
-		"guxiongbrowser": {"baidu": {"li": "u2561588"}},
 		"guminbao": {"baidu": {"li": "u2574261"}},
 		"guangdianbizhi": {"baidu": {"li": "u2305439"}},
 		"gouwudating": {
@@ -350,7 +294,6 @@ GLOBAL.Et.ggData = {
 			"sogou": {"li": "524815"}
 		},
 		"gaoxiaopige": {"baidu": {"li": "u2556050"}},
-		"gaosumz": {"baidu": {"li": "u2580275"}},
 		"gaosubrowser": {"baidu": {"li": "u2381057"}},
 		"firefox": {"baidu": {"li": "u2351855"}},
 		"faleme": {"baidu": {"li": "u2572244"}},
@@ -371,7 +314,6 @@ GLOBAL.Et.ggData = {
 		"chaojiwifi": {"baidu": {"li": "u2361491"}},
 		"chamusdk": {"baidu": {"li": "u2597498"}},
 		"chabrowser": {"baidu": {"li": "u2579378"}},
-		"cha": {"baidu": {"li": "u2576020"}},
 		"caimanxiangji": {"baidu": {"li": "u2593357"}},
 		"caihongbrowser": {"baidu": {"li": "u2560453"}},
 		"bzhan": {"baidu": {"li": "u2593342"}},
@@ -393,7 +335,6 @@ GLOBAL.Et.ggData = {
 		"999wxdh": {"baidu": {"li": "u2540073"}},
 		"96ck": {"baidu": {"li": "u2584137"}},
 		"678plus": {"baidu": {"li": "u2472719"}},
-		"521hao8": {"baidu": {"li": "u2575993"}},
 		"51shoujizhushou": {"baidu": {"li": "u2449816"}},
 		"4gbrowser": {"baidu": {"li": "u2319240"}},
 		"28app": {"sogou": {"li": "562456"}},
@@ -407,7 +348,6 @@ GLOBAL.Et.ggData = {
 		"8684": {"baidu": {"li": "u2356214"}},
 		"2345m": {"baidu": {"li": "u2607885"}},
 		"shenghuorili":{"baidu":{"li":"u2608701"}},
-		"antutu":{"baidu":{"li":"u2610291"}},
 		"114mobile":{"baidu":{"li":"u2610261"}},
 		"114mobileios":{"baidu":{"li":"u2610225"}},
 		"wifijlmm":{"baidu":{"li":"u2610580"}},
@@ -421,23 +361,13 @@ GLOBAL.Et.ggData = {
 		"renrensuoping":{"baidu":{"li":"u2618179"}},
 		"aoyouie":{"baidu":{"li":"u2615534"}},
 		"yonglian":{"baidu":{"li":"u2615542"}},
-		"16gongjiaowifi":{"baidu":{"li":"u2620729"}},
 		"yijianqinglidashi03":{"baidu":{"li":"u2622821"}},
 		"yijianqinglidashi02":{"baidu":{"li":"u2622803"}},
 		"wpsandroid":{"baidu":{"li":"u2626771"}},
-		"lianxiang114lamm":{"baidu":{"li":"u2627202"}},
-		"operashangdianmm":{"baidu":{"li":"u2627179"}},
 		"operashangdian":{"baidu":{"li":"u2627154"}},
 		"chamm":{"baidu":{"li":"u2627173"}},
 		"wifixhwy":{"baidu":{"li":"u2627265"}},
-		"360wifi":{"baidu":{"li":"u2627956"}},
-		"zhuanqianbao":{"baidu":{"li":"u2628207"}},
-		"nduowang":{"baidu":{"li":"u2628490"}},
 		"hongbaokuaishou":{"baidu":{"li":"u2628441"}},
-		"hihizhuanfa":{"baidu":{"li":"u2628422"}},
-		"hihizhuanfamm":{"baidu":{"li":"u2628453"}},
-		"romcloud":{"baidu":{"li":"u2629634"}},
-		"chatiyu1":{"baidu":{"li":"u2629820"}},
 		"guguniao":{"baidu":{"li":"u2630978"}},
 		"zuoankeji":{"baidu":{"li":"u2633133"}},
 		"jiuyi160":{"baidu":{"li":"u2634489"}},
@@ -453,9 +383,7 @@ GLOBAL.Et.ggData = {
 		"m021_hyx005":{"baidu":{"li":"u2636729"}},
 		"m021_hyx006":{"baidu":{"li":"u2636754"}},
 		"m021_hyx007":{"baidu":{"li":"u2636782"}},
-		"chinatelnj":{"baidu":{"li":"u2636822"}},
 		"511dianying":{"baidu":{"li":"u2636922"}},
-		"xiaozikeji":{"baidu":{"li":"u2637023"}},
 		"youxinh5":{"baidu":{"li":"u2637042"}},
 		"zhuanyidou":{"baidu":{"li":"u2640987"}},
 		"taosuoping":{"baidu":{"li":"u2641079"}},
@@ -471,7 +399,6 @@ GLOBAL.Et.ggData = {
 		"aishangwifi":{"baidu":{"li":"u2648379"}},
 		"shujuan":{"baidu":{"li":"u2648402"}},
 		"ucllqsun01":{"baidu":{"li":"u2648198"}},
-		"kuaijiewifi":{"baidu":{"li":"u2648531"}},
 		"yuedu1":{"baidu":{"li":"u2648597"}},
 		"yuedu2":{"baidu":{"li":"u2648658"}},
 		"yuedu3":{"baidu":{"li":"u2648741"}},
@@ -486,12 +413,6 @@ GLOBAL.Et.ggData = {
 		"uckuzhan":{"baidu":{"li":"u2652124"}},
 		"haixunyidong":{"baidu":{"li":"u2654118"}},
 		"wdcx":{"baidu":{"li":"u2656512"}},
-		"jinyu01":{"baidu":{"li":"u2656519"}},
-		"jinyu02":{"baidu":{"li":"u2656526"}},
-		"jinyu03":{"baidu":{"li":"u2656534"}},
-		"yilangkeji01":{"baidu":{"li":"u2657394"}},
-		"yilangkeji02":{"baidu":{"li":"u2657403"}},
-		"zhongmaikeji":{"baidu":{"li":"u2657410"}},
 		"wdcx01":{"baidu":{"li":"u2658903"}},
 		"m021_gsbrowser_install":{"baidu":{"li":"u2659936"}},
 		"gsbrowser":{"baidu":{"li":"u2659921"}},
@@ -510,7 +431,7 @@ GLOBAL.Et.ggData = {
 		"qqbrowser":{"gdt":{"li":"6080512200788158"}},
 		"678sjdh":{"baidu":{"li":"u2672654"}},
 		"m021_wy050":{"baidu":{"li":"u2536591"}},
-		"weimipush":{"baidu":{"li":"u2674317"}},
+		"weimipush":{"sogou":{"li":"571749"}},
 		"zhongyangtianqi":{"baidu":{"li":"u2674305"}},
 		"xianguo":{"baidu":{"li":"u2674289"}},
 		"qiaohuiwangluomm":{"baidu":{"li":"u2674375"}},
@@ -531,7 +452,15 @@ GLOBAL.Et.ggData = {
 		"dopah5":{"baidu":{"li":"u2679924"}},
 		"xltianqitong":{"baidu":{"li":"u2680059"}},
 		"yiwanwuxian":{"baidu":{"li":"u2681178"}},
-		"uckuzhanjk":{"baidu":{"li":"u2681198"}}
+		"uckuzhanjk":{"baidu":{"li":"u2681198"}},
+		"operabrower":{"baidu":{"li":"u2682280"}},
+		"sqzhushou":{"baidu":{"li":"u2682464"}},
+		"gxt":{"baidu":{"li":"u2683285"}},
+		"16wifi":{"baidu":{"li":"u2683574"}},
+		"qiaohuiwangluo02":{"baidu":{"li":"u2683720"}},
+		"6789search":{"baidu":{"li":"u2683712"}},
+		"m021_gsbrowser":{"baidu":{"li":"u2683561"}},
+		"m021_liantongbrowser":{"baidu":{"li":"u2683569"}}
 	}
 };
 

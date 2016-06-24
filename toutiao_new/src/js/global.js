@@ -3,9 +3,17 @@
  * @param  {[type]} item 指定值
  * @return {[type]}      [description]
  */
-Array.prototype.contains = function(item){
-    return RegExp(item).test(this);
-};
+if(!Array.prototype.contains){
+    // 利用Array的原型prototype点出一个我想要封装的方法名contains 
+    Array.prototype.contains = function (element) { 
+        for (var i = 0; i < this.length; i++) { 
+            //如果数组中某个元素和你想要测试的元素对象element相等，则证明数组中包含这个元素，返回true
+            if (this[i] == element) {  
+                return true;
+            }
+        }
+    };
+}
 
 /**
  * 提供命名管理，管理全局变量。

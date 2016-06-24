@@ -246,8 +246,8 @@ $(function(){
 			var scope = this,
 				len = d.length
 			if(!idx){idx = 0;}
+			$('.J-no-news').remove();
 			if(len === 0){
-				$('.J-no-news').remove();
 				$loading.before('<p class="J-no-news" style="text-align: center; font-size: 0.24rem; padding: 30px; color: #999;">抱歉，未找到相关新闻！</p>');
 				$loading.hide();
 				return;
@@ -334,24 +334,25 @@ $(function(){
 		 * @return {String}       新的标题
 		 */
 		getNewStr: function(txt, swArr, i){
-			var scope = this;
-			if(txt && swArr && swArr.length){
-				var len = swArr.length;
-				swArr.sort(function(a, b){
-					return b.length - a.length;
-				});
-				if(!i){i = 0;}
-				if(i == len || swArr[i] == '..'){
-					return txt;
-				} else {
-					var reg = new RegExp(swArr[i], 'gi');
-					var tempTxt = txt;
-					var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i].toLowerCase());
-					var subTxt = txt.substring(subTxtIndex, subTxtIndex + swArr[i].length);
-					return scope.getNewStr(txt.replace(reg, '<em>' + subTxt + '</em>'), swArr, ++i);
-				}
-			} else {
+			if(!txt || typeof txt !== 'string'){
 				return '';
+			} else if(!(swArr instanceof Array) || swArr.length === 0) {
+				swArr = [$.trim($searchInput.val())];
+			}
+			var scope = this,
+				len = swArr.length;
+			swArr.sort(function(a, b){
+				return b.length - a.length;
+			});
+			if(!i){i = 0;}
+			if(i === len || swArr[i] === '..'){
+				return txt;
+			} else {
+				var reg = new RegExp(swArr[i], 'gi');
+				var tempTxt = txt;
+				var subTxtIndex = tempTxt.toLowerCase().indexOf(swArr[i].toLowerCase());
+				var subTxt = txt.substring(subTxtIndex, subTxtIndex + swArr[i].length);
+				return scope.getNewStr(txt.replace(reg, '<em>' + subTxt + '</em>'), swArr, ++i);
 			}
 		}
 	};
