@@ -468,6 +468,20 @@ GLOBAL.Et.ggData = {
 GLOBAL.Et.channelArr  = ['baidu', 'sogou', 'gdt'];
 
 GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || GLOBAL.Cookie.get('qid');	// 渠道号
+
+try	{
+	// 以m021_gsbrowser开头
+    if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
+        GLOBAL.Et.qid = 'm021_gsbrowser';
+    } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
+        GLOBAL.Et.qid = 'gsbrowser';
+    } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
+        GLOBAL.Et.qid = 'm021_liantongbrowser';
+    }
+} catch (e) {
+	console.error('Fix special qid has error: \n', e);
+}
+
 GLOBAL.Et.ggTypeArr = [];	// 广告商数组
 GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];		// 广告ID数组
 for (var i = 0; i < GLOBAL.Et.channelArr.length; i++) {
