@@ -3044,7 +3044,7 @@ GLOBAL.Et.ggData = {
     // 特殊渠道处理
     try {
         // 以m021_gsbrowser开头
-        if(GLOBAL.Et.qid !== 'm021-gsbrowser-install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
+        if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
             GLOBAL.Et.qid = 'm021_gsbrowser';
         } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
             GLOBAL.Et.qid = 'gsbrowser';
