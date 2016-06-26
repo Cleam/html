@@ -2994,12 +2994,12 @@ GLOBAL.Et.ggData = {
     GLOBAL.Et.uid = Cookies.get('user_id');
     if (!GLOBAL.Et.uid) {
         GLOBAL.Et.uid = (+new Date()) + Math.random().toString(10).substring(2, 6);
-        Cookies.set('user_id', GLOBAL.Et.uid, { expires: 365, path: '/', domain: 'eastday.com' });
+        Cookies.set('user_id', GLOBAL.Et.uid, {expires: 365, path: '/', domain: 'eastday.com'});
     }
     // 缓存渠道号（3天）（渠道不存在得情况下使用默认渠道'null'）
     GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';
     if (GLOBAL.Et.qid) {
-        Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com' });
+        Cookies.set('qid', GLOBAL.Et.qid, {expires: 3, path: '/', domain: 'eastday.com'});
     }
 
     // 通过搜索引擎进入的（渠道处理）
@@ -3043,13 +3043,18 @@ GLOBAL.Et.ggData = {
 
     // 特殊渠道处理
     try {
-        // 以m021_gsbrowser开头
-        if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
-            GLOBAL.Et.qid = 'm021_gsbrowser';
-        } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
-            GLOBAL.Et.qid = 'gsbrowser';
-        } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
-            GLOBAL.Et.qid = 'm021_liantongbrowser';
+        if(GLOBAL.Et.qid && typeof GLOBAL.Et.qid === 'string'){
+            // 以m021_gsbrowser开头
+            if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
+                GLOBAL.Et.qid = 'm021_gsbrowser';
+                GLOBAL.Cookie.set('qid', 'm021_gsbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+            } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
+                GLOBAL.Et.qid = 'gsbrowser';
+                GLOBAL.Cookie.set('qid', 'gsbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+            } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
+                GLOBAL.Et.qid = 'm021_liantongbrowser';
+                GLOBAL.Cookie.set('qid', 'm021_liantongbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+            }
         }
     } catch (e) {
         console.error('Fix special qid has error: \n', e);
