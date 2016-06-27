@@ -466,9 +466,9 @@ var module = (function(my){
      */
     function loadWechatEwm(){
         var imgArr = [
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-1.jpg',
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-2.jpg',
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-3.jpg'
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160627-1.png',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160627-2.png',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160627-3.png'
             ],
             random = Math.floor(Math.random() * imgArr.length);
 
@@ -983,6 +983,8 @@ var module = (function(my){
         // 更多新闻点击事件（日志记录）
         try {
             $('body').on('click', '#J_more_news_btn', function(){
+                // 给首页传递信息，告诉首页这是从内页跳转过来的，首页不需要记PV，因为内页这边记过了。
+                Cookies.set('FROM_DETAILS_MORE_NEWS', '1', {expires: 1, path: '/', domain: 'eastday.com'});
                 $.ajax({
                     url : activeLogUrl, // active
                     dataType : 'jsonp',

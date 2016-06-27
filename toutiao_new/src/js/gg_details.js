@@ -2513,8 +2513,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2671417',
                 threeup: 'u2671416',
-                threedown: 'u2671415',
-                tujia: 'u2671412'
+                threedown: 'u2671415'
             },
             'sogou': {
                 bottom: '542151'

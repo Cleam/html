@@ -148,8 +148,12 @@ $(function(){
 				scope.highlightPraiseTrample();
 			});
 
-			// 记录一次日志
-			scope.addLog();
+			// 记录一次日志（如果是从内页跳转过来的，不需要记录日志，因为内页已经记录过了。）
+			if(Cookies.get('FROM_DETAILS_MORE_NEWS') !== '1'){
+				scope.addLog();
+				// 删除内页跳首页标志
+				Cookies.remove('FROM_DETAILS_MORE_NEWS', {path: '/', domain: 'eastday.com'});
+			}
 
 			/* 注册下拉事件 */
 			scope.pullDown();
@@ -1203,6 +1207,8 @@ $(function(){
 		                $newsList.html('');
 		            },
 		            success: function(data){
+		            	// idx还原
+		            	scope.idx = 0; 
 		                scope.generateDom(data);
 		                // 页面滚到记录的位置处
 						if(cachePos){
