@@ -330,7 +330,7 @@ var module = (function(my){
         // iframeLogUrl = 'http://123.59.60.170/iframe/getiframe', // iframe统计测试接口
         iframeLogUrl = 'http://ifrcheck.dfshurufa.com/iframe/getiframe', // iframe统计正式接口
         // activeLogUrl = 'http://123.59.60.170/getwapdata/data',   // active测试接口
-        activeLogUrl = 'http://toutiao.eastday.com/wapdata/data',   // active正式接口
+        activeLogUrl = 'http://toutiao.eastday.com/getwapdata/data',   // active正式接口
         // onlineLogUrl = 'http://123.59.60.170/online/online',    // online测试接口
         onlineLogUrl = 'http://ot.dftoutiao.com/online/online',    // online测试接口
         dataUrl = 'http://toutiao.eastday.com/pjson/checknews',
@@ -349,7 +349,8 @@ var module = (function(my){
         }
         // 类别标题
         $hotNews.append('<div class="hn-title"><h2><span></span>热点新闻</h2><span class="line"></span></div>').append($hnList);
-        var len = data.length;
+        var len = data.length,
+            ttaccid = GLOBAL.Util.getQueryString('ttaccid');
         for (var i = 0; i < len; i++) {
             var item = data[i],
                 url = item.url,
@@ -386,8 +387,12 @@ var module = (function(my){
             // url = (isgg != '1') ? ('http://mini.eastday.com/mobile/' + url) : url;
 
             if(isadv != '1'){
-                url += '?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype;
+                url += ('?qid=' + GLOBAL.Et.qid + '&idx=' + idx + '&fr=' + fr + '&recommendtype=' + recommendtype);
+                if(ttaccid){
+                    url += ('&ttaccid=' + ttaccid);
+                }
             }
+
 
             // 类别处理
             if(isadv == '1'){
@@ -525,7 +530,7 @@ var module = (function(my){
                 break;
             case 'gdt':
                 var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-                $inList.html('<div class="gdt-wrap"><iframe name="iframe" src="http://mini.eastday.com/toutiaoh5/partner/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%"></iframe></div>');
+                $inList.html('<div class="gdt-wrap"><iframe id="' + iframeId + '" name="iframe" src="http://mini.eastday.com/toutiaoh5/partner/gg_gdt.html?qid=' + GLOBAL.Et.qid + '&uid=' + GLOBAL.Et.uid + '&ggid=' + ggId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%"></iframe></div>');
                 break;
             case 'sogou':
                 $inList.append('<div class="sogou-wrap"><iframe src="http://mini.eastday.com/toutiaoh5/partner/gg_sogou.html?ggid=' + ggId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>');
@@ -738,18 +743,17 @@ var module = (function(my){
      * 插入“点击查看更多新闻”链接按钮
      */
     function addMoreNewsBtn(){
-        var newsType = (GLOBAL.Et.newsType === 'weikandian' ? 'toutiao' : GLOBAL.Et.newsType),
-            qid = GLOBAL.Et.qid,
+        var qid = GLOBAL.Et.qid,
             fr = GLOBAL.Util.getUrlNoParams(),
-            href = 'http://toutiao.eastday.com/?type=' + newsType + '&fr=' + fr,
+            href = 'http://toutiao.eastday.com/?type=' + GLOBAL.Et.newsType + '&fr=' + fr,
             btn = '';
         switch(qid) {
             case 'wnwifi':
-                href = 'http://toutiao.eastday.com/pages/index.html?type=' + newsType + '&fr=' + fr;
+                href = 'http://toutiao.eastday.com/pages/index.html?type=' + GLOBAL.Et.newsType + '&fr=' + fr;
                 btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
                 break;
             case 'yichawang':
-                href = 'http://toutiao.eastday.com/pages/index.html?type=' + newsType + '&fr=' + fr;
+                href = 'http://toutiao.eastday.com/pages/index.html?type=' + GLOBAL.Et.newsType + '&fr=' + fr;
                 btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
                 break;
             case '51shoujizhushou':
@@ -759,7 +763,7 @@ var module = (function(my){
                 btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '">点击查看更多新闻</a></div>';
                 break;
             case 'qqbrowser':
-                href = 'http://toutiao.eastday.com/nohd/index.html?type=' + newsType + '&fr=' + fr;
+                href = 'http://toutiao.eastday.com/nohd/index.html?type=' + GLOBAL.Et.newsType + '&fr=' + fr;
                 btn = '<div class="more-news"><a id="J_more_news_btn" href="' + href + '" target="_blank">点击查看更多新闻</a></div>';
                 break;
             default: 
@@ -895,7 +899,7 @@ var module = (function(my){
         });
         params = uid + '\t' + qid + '\t' + os + '\t' + browser + '\t' + url + '\t' + ifrStr;
         $.ajax({
-            url : iframeLogUrl, // online
+            url : iframeLogUrl, 
             dataType : 'jsonp',
             data : {
                 param: params
@@ -933,6 +937,7 @@ var module = (function(my){
             onlineTimer = setInterval(function(){
                 onlineLog(params);
             }, intervaltime * 1000);
+            // 10分钟之后不再上传online日志
             setTimeout(function(){
                 clearInterval(onlineTimer);
             }, onlineLogTime);
@@ -988,8 +993,8 @@ var module = (function(my){
                         "softtype": 'news',
                         "softname": 'eastday_wapnews',
                         "newstype": GLOBAL.Et.newsType || 'null',
-                        "from": GLOBAL.Util.getQueryString('fr') || 'null',
-                        "to": GLOBAL.Util.getUrlNoParams() || 'null',
+                        "from": GLOBAL.Util.getUrlNoParams() || 'null',
+                        "to": GLOBAL.Et.newsType || 'null',
                         "os_type": GLOBAL.Util.getOsType() || 'null',
                         "browser_type": GLOBAL.Util.getBrowserType() || 'null',
                         "pixel": window.screen.width + '*' + window.screen.height,

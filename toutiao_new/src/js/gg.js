@@ -460,7 +460,37 @@ GLOBAL.Et.ggData = {
 		"qiaohuiwangluo02":{"baidu":{"li":"u2683720"}},
 		"6789search":{"baidu":{"li":"u2683712"}},
 		"m021_gsbrowser":{"baidu":{"li":"u2683561"}},
-		"m021_liantongbrowser":{"baidu":{"li":"u2683569"}}
+		"m021_liantongbrowser":{"baidu":{"li":"u2683569"}},
+		"gsbrowser_website":{"baidu":{"li":"u2685598"}},
+		"gsbrowser_360":{"baidu":{"li":"u2685606"}},
+		"gsbrowser_huawei":{"baidu":{"li":"u2685626"}},
+		"gsbrowser_taobao":{"baidu":{"li":"u2685637"}},
+		"gsbrowser_noad":{"baidu":{"li":"u2685689"}},
+		"gsbrowser_QQ":{"baidu":{"li":"u2685655"}},
+		"gsbrowser_nearme":{"baidu":{"li":"u2685665"}},
+		"gsbrowser_baidu":{"baidu":{"li":"u2685667"}},
+		"gsbrowser_appChina":{"baidu":{"li":"u2685686"}},
+		"gsbrowser_wandoujia":{"baidu":{"li":"u2685709"}},
+		"gsbrowser_vivo":{"baidu":{"li":"u2685713"}},
+		"gsbrowser_sogou":{"baidu":{"li":"u2685728"}},
+		"gsbrowser_gfan":{"baidu":{"li":"u2685732"}},
+		"gsbrowser_lenovo":{"baidu":{"li":"u2685750"}},
+		"gsbrowser_flyme":{"baidu":{"li":"u2685803"}},
+		"gsbrowser_tpin":{"baidu":{"li":"u2685804"}},
+		"gsbrowser_mumayi":{"baidu":{"li":"u2685792"}},
+		"gsbrowser_liqu":{"baidu":{"li":"u2685817"}},
+		"pc6_duowanmyworldhezi":{"baidu":{"li":"u2685775"}},
+		"pc6_findsomething":{"baidu":{"li":"u2685761"}},
+		"pc6_huoyingzhanji":{"baidu":{"li":"u2685752"}},
+		"pc6_myworld":{"baidu":{"li":"u2685730"}},
+		"pc6_shaobingxiugaiqi":{"baidu":{"li":"u2685711"}},
+		"pc6_wanglingshashou":{"baidu":{"li":"u2685693"}},
+		"pc6_zhongguoxiangqi":{"baidu":{"li":"u2685673"}},
+		"mobileqq_QQ":{"baidu":{"li":"u2685656"}},
+		"gsbrowser_myworld":{"baidu":{"li":"u2685643"}},
+		"myworld":{"baidu":{"li":"u2685622"}},
+		"gsbrowser_wali":{"baidu":{"li":"u2685611"}},
+		"gsbrowser_install":{"baidu":{"li":"u2685565"}}
 	}
 };
 
@@ -469,18 +499,23 @@ GLOBAL.Et.channelArr  = ['baidu', 'sogou', 'gdt'];
 
 GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || GLOBAL.Cookie.get('qid');	// 渠道号
 
-try	{
-	// 以m021_gsbrowser开头
-    if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
-        GLOBAL.Et.qid = 'm021_gsbrowser';
-    } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
-        GLOBAL.Et.qid = 'gsbrowser';
-    } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
-        GLOBAL.Et.qid = 'm021_liantongbrowser';
-    }
+/*try	{
+	if(GLOBAL.Et.qid && typeof GLOBAL.Et.qid === 'string'){
+		// 以m021_gsbrowser开头
+	    if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
+	        GLOBAL.Et.qid = 'm021_gsbrowser';
+	        GLOBAL.Cookie.set('qid', 'm021_gsbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+	    } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
+	        GLOBAL.Et.qid = 'gsbrowser';
+	        GLOBAL.Cookie.set('qid', 'gsbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+	    } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
+	        GLOBAL.Et.qid = 'm021_liantongbrowser';
+	        GLOBAL.Cookie.set('qid', 'm021_liantongbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+	    }
+	}
 } catch (e) {
 	console.error('Fix special qid has error: \n', e);
-}
+}*/
 
 GLOBAL.Et.ggTypeArr = [];	// 广告商数组
 GLOBAL.Et.gg = GLOBAL.Et.ggData.root[GLOBAL.Et.qid];		// 广告ID数组

@@ -3304,6 +3304,17 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'liantongbrowser_gaokao': {
+            'baidu': {
+                six: 'u2685924',
+                threeup: 'u2685926',
+                threedown: 'u2685929',
+                tujia: 'u2685933'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
@@ -3372,18 +3383,23 @@ GLOBAL.Et.ggData = {
     }
 
     // 特殊渠道处理
-    try {
-        // 以m021_gsbrowser开头
-        if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
-            GLOBAL.Et.qid = 'm021_gsbrowser';
-        } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
-            GLOBAL.Et.qid = 'gsbrowser';
-        } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
-            GLOBAL.Et.qid = 'm021_liantongbrowser';
+    /*try {
+        if(GLOBAL.Et.qid && typeof GLOBAL.Et.qid === 'string'){
+            // 以m021_gsbrowser开头
+            if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
+                GLOBAL.Et.qid = 'm021_gsbrowser';
+                GLOBAL.Cookie.set('qid', 'm021_gsbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+            } else if(GLOBAL.Et.qid.indexOf('gsbrowser') === 0){    // 以gsbrowser开头
+                GLOBAL.Et.qid = 'gsbrowser';
+                GLOBAL.Cookie.set('qid', 'gsbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+            } else if(GLOBAL.Et.qid.indexOf('m021_liantongbrowser') === 0){ // 以m021_liantongbrowser开头
+                GLOBAL.Et.qid = 'm021_liantongbrowser';
+                GLOBAL.Cookie.set('qid', 'm021_liantongbrowser', {expires: 3, path: '/', domain: 'eastday.com'});
+            }
         }
     } catch (e) {
         console.error('Fix special qid has error: \n', e);
-    }
+    }*/
 
     // 处理后再次存储qid
     Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com' });
@@ -3461,7 +3477,8 @@ GLOBAL.Et.ggData = {
 
     // 存储新闻类别
     try {
-        GLOBAL.Et.newsType = document.getElementById('newstype') ? document.getElementById('newstype').value : 'null';
+        GLOBAL.Et.newsType = document.getElementById('newstype') ? document.getElementById('newstype').value : 'toutiao';
+        GLOBAL.Et.newsType = (GLOBAL.Et.newsType === 'weikandian') ? 'toutiao' : GLOBAL.Et.newsType;
     } catch (e) {
         console.error('newstype has error: \n', e);
     }

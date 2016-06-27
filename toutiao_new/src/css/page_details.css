@@ -39,7 +39,7 @@ body{padding-top: 0; /* background-color: #f8f8f8; */ color: #333; margin: 0 aut
 
 .in-list{width: 7.5rem; padding-top: 0.2rem; padding-bottom: 0.2rem; overflow: hidden;}
 /* 广点通、搜狗、百度广告样式优化 */
-.in-list .gdt-wrap{margin: 0 0.3rem;}
+.in-list .gdt-wrap{margin: 0 16px; margin-top: -0.2rem;}
 .in-list .sogou-wrap{margin: 0 16px 0.1rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 0.1rem;}
 .in-list .sogou-wrap:last-child{margin-bottom: 0; border-bottom: 0 none; padding-bottom: 0;}
 .in-list .baidu-wrap{margin-top: -0.15rem;}

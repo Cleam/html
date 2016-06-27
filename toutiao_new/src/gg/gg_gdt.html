@@ -142,8 +142,11 @@
 	    }
 
 	    function imgLoaded(t){
-	    	var iframeid = getQueryString('iframeid');
-	    	window.parent.document.getElementById(iframeid).height = getParentNode(getParentNode(t)).offsetHeight;
+	    	var iframeid = getQueryString('iframeid'),
+	    		ifr = window.parent.document.getElementById(iframeid);
+	    	if(ifr){
+		    	ifr.height = getParentNode(getParentNode(t)).offsetHeight;
+	    	}
 	    }
 
 		//广告渲染
