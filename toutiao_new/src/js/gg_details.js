@@ -2974,6 +2974,347 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'gsbrowser_website': {
+            'baidu': {
+                six: 'u2685596',
+                threeup: 'u2685595',
+                threedown: 'u2685594',
+                tujia: 'u2685593'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_360': {
+            'baidu': {
+                six: 'u2685605',
+                threeup: 'u2685604',
+                threedown: 'u2685602',
+                tujia: 'u2685617'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_huawei': {
+            'baidu': {
+                six: 'u2685623',
+                threeup: 'u2685621',
+                threedown: 'u2685620',
+                tujia: 'u2685619'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_taobao': {
+            'baidu': {
+                six: 'u2685634',
+                threeup: 'u2685633',
+                threedown: 'u2685630',
+                tujia: 'u2685628'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_noad': {
+            'baidu': {
+                six: 'u2685690',
+                threeup: 'u2685694',
+                threedown: 'u2685695',
+                tujia: 'u2685697'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_QQ': {
+            'baidu': {
+                six: 'u2685654',
+                threeup: 'u2685653',
+                threedown: 'u2685651',
+                tujia: 'u2685649'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_nearme': {
+            'baidu': {
+                six: 'u2685664',
+                threeup: 'u2685662',
+                threedown: 'u2685659',
+                tujia: 'u2685657'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_baidu': {
+            'baidu': {
+                six: 'u2685670',
+                threeup: 'u2685671',
+                threedown: 'u2685672',
+                tujia: 'u2685674'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_appChina': {
+            'baidu': {
+                six: 'u2685685',
+                threeup: 'u2685683',
+                threedown: 'u2685680',
+                tujia: 'u2685678'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_wandoujia': {
+            'baidu': {
+                six: 'u2685708',
+                threeup: 'u2685707',
+                threedown: 'u2685704',
+                tujia: 'u2685702'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_vivo': {
+            'baidu': {
+                six: 'u2685715',
+                threeup: 'u2685716',
+                threedown: 'u2685718',
+                tujia: 'u2685719'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_sogou': {
+            'baidu': {
+                six: 'u2685727',
+                threeup: 'u2685726',
+                threedown: 'u2685723',
+                tujia: 'u2685722'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_gfan': {
+            'baidu': {
+                six: 'u2685735',
+                threeup: 'u2685737',
+                threedown: 'u2685738',
+                tujia: 'u2685740'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_lenovo': {
+            'baidu': {
+                six: 'u2685749',
+                threeup: 'u2685747',
+                threedown: 'u2685744',
+                tujia: 'u2685742'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_flyme': {
+            'baidu': {
+                six: 'u2685798',
+                threeup: 'u2685800',
+                threedown: 'u2685802',
+                tujia: 'u2685818'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_tpin': {
+            'baidu': {
+                six: 'u2685807',
+                threeup: 'u2685809',
+                threedown: 'u2685811',
+                tujia: 'u2685813'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_mumayi': {
+            'baidu': {
+                six: 'u2685793',
+                threeup: 'u2685794',
+                threedown: 'u2685796',
+                tujia: 'u2685799'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_liqu': {
+            'baidu': {
+                six: 'u2685774',
+                threeup: 'u2685781',
+                threedown: 'u2685783',
+                tujia: 'u2685816'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_duowanmyworldhezi': {
+            'baidu': {
+                six: 'u2685777',
+                threeup: 'u2685782',
+                threedown: 'u2685784',
+                tujia: 'u2685788'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_findsomething': {
+            'baidu': {
+                six: 'u2685763',
+                threeup: 'u2685764',
+                threedown: 'u2685768',
+                tujia: 'u2685770'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_huoyingzhanji': {
+            'baidu': {
+                six: 'u2685753',
+                threeup: 'u2685756',
+                threedown: 'u2685758',
+                tujia: 'u2685760'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_myworld': {
+            'baidu': {
+                six: 'u2685734',
+                threeup: 'u2685739',
+                threedown: 'u2685741',
+                tujia: 'u2685746'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_shaobingxiugaiqi': {
+            'baidu': {
+                six: 'u2685714',
+                threeup: 'u2685717',
+                threedown: 'u2685720',
+                tujia: 'u2685724'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_wanglingshashou': {
+            'baidu': {
+                six: 'u2685696',
+                threeup: 'u2685698',
+                threedown: 'u2685700',
+                tujia: 'u2685706'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'pc6_zhongguoxiangqi': {
+            'baidu': {
+                six: 'u2685675',
+                threeup: 'u2685679',
+                threedown: 'u2685684',
+                tujia: 'u2685687'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'mobileqq_QQ': {
+            'baidu': {
+                six: 'u2685660',
+                threeup: 'u2685663',
+                threedown: 'u2685666',
+                tujia: 'u2685668'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_myworld': {
+            'baidu': {
+                six: 'u2685645',
+                threeup: 'u2685648',
+                threedown: 'u2685650',
+                tujia: 'u2685652'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'myworld': {
+            'baidu': {
+                six: 'u2685624',
+                threeup: 'u2685627',
+                threedown: 'u2685629',
+                tujia: 'u2685631'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_wali': {
+            'baidu': {
+                six: 'u2685614',
+                threeup: 'u2685616',
+                threedown: 'u2685618',
+                tujia: 'u2685635'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'gsbrowser_install': {
+            'baidu': {
+                six: 'u2685560',
+                threeup: 'u2685558',
+                threedown: 'u2685557',
+                tujia: 'u2685556'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'liantongbrowser_gaokao': {
+            'baidu': {
+                six: 'u2685924',
+                threeup: 'u2685926',
+                threedown: 'u2685929',
+                tujia: 'u2685933'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
@@ -3042,7 +3383,7 @@ GLOBAL.Et.ggData = {
     }
 
     // 特殊渠道处理
-    try {
+    /*try {
         if(GLOBAL.Et.qid && typeof GLOBAL.Et.qid === 'string'){
             // 以m021_gsbrowser开头
             if(GLOBAL.Et.qid !== 'm021_gsbrowser_install' && GLOBAL.Et.qid.indexOf('m021_gsbrowser') === 0){  
@@ -3058,7 +3399,7 @@ GLOBAL.Et.ggData = {
         }
     } catch (e) {
         console.error('Fix special qid has error: \n', e);
-    }
+    }*/
 
     // 处理后再次存储qid
     Cookies.set('qid', GLOBAL.Et.qid, { expires: 3, path: '/', domain: 'eastday.com' });
@@ -3136,7 +3477,8 @@ GLOBAL.Et.ggData = {
 
     // 存储新闻类别
     try {
-        GLOBAL.Et.newsType = document.getElementById('newstype') ? document.getElementById('newstype').value : 'null';
+        GLOBAL.Et.newsType = document.getElementById('newstype') ? document.getElementById('newstype').value : 'toutiao';
+        GLOBAL.Et.newsType = (GLOBAL.Et.newsType === 'weikandian') ? 'toutiao' : GLOBAL.Et.newsType;
     } catch (e) {
         console.error('newstype has error: \n', e);
     }

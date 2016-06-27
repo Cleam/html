@@ -6,6 +6,7 @@ $(function(){
 		$loading = null,
 		$video = $('#J_video'),
 		$related = $('#J_related'),
+		$commend = $('#J_commend'),
 		bufferedNum = 0,	
 		$moreVideoLoading = $('<div class="loading"><div class="spinner"><div class="bounce1"></div> <div class="bounce2"></div> <div class="bounce3"></div></div><p class="txt">更多视频加载中</p></div>'),
 		// winWidth = $(window).width(),
@@ -112,7 +113,8 @@ $(function(){
 		$video.attr('x-webkit-airplay', 'allow');
 		// scope.play();
 
-        if(scope.qid !== 'wnwifishipin'){
+		// 自己广告
+        // if(scope.qid !== 'wnwifishipin'){
 			/* 生成广告DOM */
 			generateGgDom();
 	        loadGg();
@@ -120,7 +122,12 @@ $(function(){
 			$ggCloseVideo.on('click', function(){
 				scope.hideGg();
 			});
-        }
+        // }
+        
+        // wnwifi广告
+        if(scope.qid === 'wnwifishipin'){
+        	$commend.after('<div id="wkssp-container1"></div><div id="wkssp-container2"></div><div id="wkssp-container3"></div><div id="wkssp-container4"></div><div id="wkssp-container5"></div><scr' + 'ipt type="text/javascript"> window._wksspid = "www.eastday.com"; var url = "http://static.51y5.net/znews/static/ad/external_detail_ad.js?t=" + parseInt(new Date().getTime() / 3600000); var scr = document.createElement("script"); scr.src = url; document.querySelector("head").appendChild(scr); </scr' + 'ipt>');
+	    }
 	};
 
 	Video.prototype.getVideoList = function(callback) {
@@ -229,7 +236,6 @@ $(function(){
 			end = scope.getEnd(),
 			video = $video[0];
 		if(bufferedNum >= 3 && end <= 0.01){
-			// alert(end);
 			video.play();
 			// video.pause();
 			bufferedNum = 0;
@@ -502,6 +508,8 @@ $(function(){
     new Video();
 
 });
+
+// document.write('<div id="wkssp-container1"></div><div id="wkssp-container2"></div><div id="wkssp-container3"></div><div id="wkssp-container4"></div><div id="wkssp-container5"></div><scr' + 'ipt type="text/javascript"> window._wksspid = "www.eastday.com"; var url = "http://static.51y5.net/znews/static/ad/external_detail_ad.js?t=" + parseInt(new Date().getTime() / 3600000); var scr = document.createElement("script"); scr.src = url; document.querySelector("head").appendChild(scr); </scr' + 'ipt>');
 
 // document.write('<div id="SOHUCS" sid="160513160358356"></div>');
 // document.write('<scr' + 'ipt id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=cyrQbYhjk&conf=prod_d09a50b0a2f9861e77a6cb5ad28e3c2b"></scr' + 'ipt>');
