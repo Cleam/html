@@ -130,4 +130,4 @@ body{padding-top: 0; /* background-color: #f8f8f8; */ color: #333; margin: 0 aut
 
 .special-gg{position: fixed; bottom: 0; width: 100%; z-index: 999;}
 .special-gg .tag{position: absolute; bottom: 0; right: 0; font-size: 12px; background-color: rgba(0,0,0,.3);border-radius: 3px; color: #fff; padding: 0.04rem 0.06rem;}
-.special-gg .close{position: absolute; top: 0; right: 0; color: #f00; padding: 0.02rem 0.16rem;}
+.special-gg .close{position: absolute; top: 0; right: 0; color: #fff; font-size: 18px; padding: 0.02rem 0.16rem;}

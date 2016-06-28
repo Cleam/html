@@ -1551,8 +1551,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2383940',
                 threeup: 'u2383941',
-                threedown: 'u2383942',
-                tujia: 'u2546531'
+                threedown: 'u2383942'
             },
             'sogou': {
                 bottom: '542151'
@@ -2210,8 +2209,7 @@ GLOBAL.Et.ggData = {
                 six: 'u2659934',
                 threeup: 'u2659938',
                 threedown: 'u2659935',
-                tujia: 'u2659942',
-                cptop: 'u2659944'
+                tujia: 'u2659942'
             },
             'sogou': {
                 bottom: '542151'
@@ -2222,8 +2220,7 @@ GLOBAL.Et.ggData = {
                 six: 'u2429963',
                 threeup: 'u2429964',
                 threedown: 'u2429965',
-                tujia: 'u2659924',
-                cptop: 'u2659929'
+                tujia: 'u2659924'
             },
             'sogou': {
                 bottom: '542151'
@@ -2735,8 +2732,7 @@ GLOBAL.Et.ggData = {
             'baidu': {
                 six: 'u2675533',
                 threeup: 'u2675532',
-                threedown: 'u2675531',
-                tujia: 'u2675530'
+                threedown: 'u2675531'
             },
             'sogou': {
                 bottom: '542151'
@@ -3310,6 +3306,68 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2685926',
                 threedown: 'u2685929',
                 tujia: 'u2685933'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'sogourecih5': {
+            'baidu': {
+                six: 'u2686879',
+                threeup: 'u2686877',
+                threedown: 'u2686876'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'mingnian': {
+            'baidu': {
+                six: 'u2687293',
+                threeup: 'u2687292',
+                threedown: 'u2687291'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'shengming': {
+            'baidu': {
+                six: 'u2687299',
+                threeup: 'u2687298',
+                threedown: 'u2687297'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'oupengllqz': {
+            'baidu': {
+                six: 'u2687306',
+                threeup: 'u2687305',
+                threedown: 'u2687303'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'hangu01': {
+            'baidu': {
+                six: 'u2687385',
+                threeup: 'u2687384',
+                threedown: 'u2687380',
+                tujia: 'u2687378'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'fenxiangapp': {
+            'baidu': {
+                six: 'u2687581',
+                threeup: 'u2687579',
+                threedown: 'u2687578',
+                tujia: 'u2687576'
             },
             'sogou': {
                 bottom: '542151'

@@ -490,7 +490,13 @@ GLOBAL.Et.ggData = {
 		"gsbrowser_myworld":{"baidu":{"li":"u2685643"}},
 		"myworld":{"baidu":{"li":"u2685622"}},
 		"gsbrowser_wali":{"baidu":{"li":"u2685611"}},
-		"gsbrowser_install":{"baidu":{"li":"u2685565"}}
+		"gsbrowser_install":{"baidu":{"li":"u2685565"}},
+		"sogourecih5":{"baidu":{"li":"u2686880"}},
+		"mingnian":{"baidu":{"li":"u2687295"}},
+		"shengming":{"baidu":{"li":"u2687302"}},
+		"oupengllqz":{"baidu":{"li":"u2687307"}},
+		"hangu01":{"baidu":{"li":"u2687386"}},
+		"fenxiangapp":{"baidu":{"li":"u2687582"}}
 	}
 };
 

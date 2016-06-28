@@ -1,22 +1,7 @@
 {
 	"channels": {
 		"up": [
-			{"name": "toutiao", "value": "头条"},
-			{"name": "shipin", "value": "视频"},
-			{"name": "weikandian", "value": "滚动"},
-			{"name": "shehui", "value": "社会"},
-			{"name": "guonei", "value": "国内"},
-			{"name": "guoji", "value": "国际"},
-			{"name": "keji", "value": "科技"},
-			{"name": "meinv", "value": "美女"},
-			{"name": "jiankang", "value": "健康"},
-			{"name": "lishi", "value": "人文"},
-			{"name": "yule", "value": "娱乐"},
-			{"name": "junshi", "value": "军事"},
-			{"name": "tiyu", "value": "体育"},
-			{"name": "xiaohua", "value": "笑话"},
-			{"name": "shishang", "value": "时尚"},
-			{"name": "caijing", "value": "财经"}
+			{"name": "shipin", "value": "视频"}
 		],
 		"down": [
 			{"name": "nuanwen", "value": "暖文"},
