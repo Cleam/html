@@ -496,7 +496,8 @@ GLOBAL.Et.ggData = {
 		"shengming":{"baidu":{"li":"u2687302"}},
 		"oupengllqz":{"baidu":{"li":"u2687307"}},
 		"hangu01":{"baidu":{"li":"u2687386"}},
-		"fenxiangapp":{"baidu":{"li":"u2687582"}}
+		"fenxiangapp":{"baidu":{"li":"u2687582"}},
+		"dianxin404":{"baidu":{"li":"u2688052"}}
 	}
 };
 

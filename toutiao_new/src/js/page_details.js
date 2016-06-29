@@ -730,7 +730,7 @@ var module = (function(my){
     my.addSpecialGg = function(){
         var qid = GLOBAL.Et.qid;
         if(qid === 'kuhuasuoping' && GLOBAL.Os.android){
-            $('body').append('<div class="J-special-gg special-gg"><a target="_blank" href="http://app.coohua.com/CooHuaClient-2.1.2.3-cpqz_jrtt.apk"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/kuhuasuoping.jpg" alt="酷划锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
+            $('body').append('<div class="J-special-gg special-gg"><a target="_blank" href="http://campaign.app.qq.com/dom/npsb/jump.jsp?pkgName=com.coohuaclient&ckey=CK1337098793997"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/kuhuasuoping.jpg" alt="酷划锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
         } else if(qid === 'huisuoping' && GLOBAL.Os.android){
             $('body').append('<div class="J-special-gg special-gg"><a target="_blank" href="http://page.huisuoping.com/share/2/index.html?apk=b305"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/huisuoping.jpg" alt="惠锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
         } else if(qid === 'operabrower' && GLOBAL.Os.android){
@@ -1066,6 +1066,9 @@ var module = (function(my){
                 if(hasListNews){
                     scope.loadThree(mygg.threeup, 2);
                     scope.loadThree(mygg.threedown, 7);
+                    if(!mygg.nogg){
+                        scope.loadThree('baidu_u2688504', 10);
+                    }
                     clearInterval(t2);
                 }
             }, 400);

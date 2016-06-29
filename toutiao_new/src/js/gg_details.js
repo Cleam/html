@@ -3372,6 +3372,17 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'dianxin404': {
+            'baidu': {
+                six: 'u2688051',
+                threeup: 'u2688050',
+                threedown: 'u2688049',
+                tujia: 'u2688048'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };
@@ -3570,6 +3581,7 @@ GLOBAL.Et.ggData = {
     ime = GLOBAL.Util.getQueryString('ime');
     noAppGgQid = ['wpsios', 'wpsandroid', 'm021_wy003', 'shangyewifiliu2'];
     if(noAppGgFlag && (ime || noAppGgQid.contains(GLOBAL.Et.qid))){
+        GLOBAL.Et.gg.my.nogg = true;
         GLOBAL.Et.gg.my.six = null;
         GLOBAL.Et.gg.my.threeup = null;
         GLOBAL.Et.gg.my.threedown = null;

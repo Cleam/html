@@ -176,7 +176,6 @@ $(function(){
 			len = d ? d.length : 0,
 			// $related = $('#J_related'),
 			$listWrap = $('<div class="related-cnt"></div>');
-		var t1 = +new Date();
 		if(len > 0){
 			$related.append('<div class="related-tit"><h2>相关视频</h2></div>');
 			for (var i = 0; i < len; i++) {

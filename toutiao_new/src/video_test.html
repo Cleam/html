@@ -21,6 +21,25 @@
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/page.css">
+	<style>
+		/* 视频链接 */
+		.news-item-video-link a{display: block; width: 100%; height: 1.92rem; color: #333; padding: 0.24rem 0.3rem;}
+		.news-item-video-link a:visited{color: #999;}
+		.news-item-video-link a .news-wrap{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem; height: 1.69rem;}
+		.news-item-video-link a .txt-wrap{position: relative; width: 4.8rem; height: 1.44rem;}
+		.news-item-video-link a .txt-wrap h3{font-size: 0.34rem; width: 100%; height: 0.8rem; line-height: 1.2em; overflow: hidden;}
+		.news-item-video-link a .txt-wrap p{position: absolute; bottom: 0; width: 100%; font-size: 0.2rem; color: #999;}
+		.news-item-video-link a .img-wrap{position: relative; width: 1.92rem; height: 1.44rem; overflow: hidden;}
+		.news-item-video-link a .img-wrap img{width: 100%;}
+		.news-item-video-link a .img-wrap .play-btn{position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACEBAMAAACjap6UAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURQAAAAAAAP///////1JSUv///////7+/v+jo6P39/aampv///////////+fn55aWlqDnGJgAAAAQdFJOU00A/oJRan2iSVtNdSoQ0YJaJIZgAAADm0lEQVRo3u3aS0sbURQA4LsYSMxGshASOtncTXdxETIYksIsFKqLQogJiu6GSH1B6C+IWAvpA5TEEKSFLERauyqiSLWLECItXQVBWroT123pDyidmc6kSeY+9Wg3nnX4mDvnzMy95wQFrxzolrgpIvKxlD0wtMVs7Xn7UoRa2otpR1kzjoxYstaQJiIlQ8vWdrdHzZjYLWUNrdaWI75ktOmno6gTo683jfgLGeKTkd/SUU8ob3LaS3GiFZveRp6Y2IzNihItbUpHhFDWjFkxoqVtEQVrMSTDS3ylCrbxik+EjCmqYK1FW+ERkcwhQzCNZ/E2hzhJ1BEzAuUlNhFOVhAn7u9tsIhIZgpxY61vKb3EN94y7KVUP9AJda6CBGJ8rkElmuxs/MtKikaoySISCv9eg0I0D5Fg9FwGusRF9F1GF3EmfBHmZSyTiMhBUZzwL7YJxNC8Lk4o1TSBKFeQRIwnvIQar8sQgUzDQ5y9R1LxdtlD5IpyhD/fT4QSuhyhlFf6CNl1dK3EJcpFWcKf6CXUuC5LKG5OHGLoIZKOJ+keolmRJ8ZTPUTOU1e+Are6FrsJ1ZtSX/QnN62NLmJowfMDH47y7vBOuotoThIIfJdDjKW6CEJVmAQeFqoMm4jkdQLxHeMf7JuRa3eIUAIRiMIvjC+Yxt/HBFHupkWgRxgX+PfTJk4nyYRyjpmpHbvXIVbXyQQaPGemdmCkQ1TrFAINMlMbmO8QhIQ4BLs8lJxLqISEuAR6wEqtXeIWERphEOg3I7WrKw4RXmARrNTubDjEnUkmYaYWU1I79s4hTtmEXR46vTAsornOJuipHUg5xGqRQ1BT6x9xiTqPoKU24BJVPkFJrV2eFjEjQJBTG9h3CV2AsAxPahWX2BciSE++MuMQeSGC9OTbz5kEQUhth4gLEt7UKhk4AmAhorcT4yiiEOJJ1WlJBSgtgAIHeMwAHnaAVw7Ai4/3+h3kv375H4Eo7yMA8CkC+CACfJY5m4Nhgc0BY4viE92iAGyUALZrAJtG+ta1ILp1pW6gL4Q30ADbeIjDBMCRBuBgFTy48vEO4pAJcNQFOHADHPshmg8ALRCARgxEO0iyKaUQmlIArTGIBh1AmxCgWQnRMgVo3EK0jwGa2BCt9ODneaGG/vH1jhWC4eTjKw43gsET3lIC1aXrH/QAjJsghl4QozezOugDwOObG0NCDEMhRrIQg2GI8TTIkPz2Pwf/h/gD56UtyQp2vzUAAAAASUVORK5CYII=") no-repeat center center; background-size: 34px;}
+		.news-ctg{padding: 0.24rem 0.3rem 0;}
+		.video-ctg-wrap{display: block; width: 100%; color: #333; font-size: 0.34rem;}
+		.video-ctg-wrap .wrapper{border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem;}
+		.video-ctg-wrap span{display: block; text-align: center; width: 1.3rem; font-size: 0.3rem; color: #fff; background-color: #D43D3D; height: 0.6rem; line-height: 0.6rem;}
+		.video-ctg-wrap .link-wrap{background-color: #fff; height: 0.6rem; padding: 0.13rem 0; font-size: 0.34rem; width: 5.6rem; background-color: #f0f0f0;}
+		.video-ctg-wrap .link-wrap a{display: block; float: left; font-size: 0.34rem; color: #000; width: 1.39rem; border-right: 1px solid #fff; text-align: center;}
+		.video-ctg-wrap .link-wrap a:last-child{border-right: 0 none;}
+	</style>
 </head>
 <body>
 	<p style="display:none;font-size:0;">东方头条网-东方网旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!</p>
@@ -35,7 +54,7 @@
 		<!-- menu -->
 		<section class="top-menu">
 			<div id="J_top_menu" class="top-menu-list">
-				<a data-type="toutiao">头条</a><a data-type="weikandian">滚动</a><a class="active" data-type="shipin">视频</a>
+				<a data-type="toutiao">头条</a><a data-type="weikandian">滚动</a><a class="active" data-type="shipin">视频</a><a data-type="yule">娱乐</a><a data-type="tiyu">体育</a>
 			</div>
 			<div class="menu-more">
 				<div class="list-shadow"></div>
@@ -46,7 +65,7 @@
 
 	<div id="J_content" class="news-list">
 		<div id="J_news_list" class="news-list-wrap">
-			<section class="news-item news-item-video-link">
+			<!-- <section class="news-item news-item-video-link">
 				<a data-type="vgaoxiao" data-subtype="" href="http://mini.eastday.com/video/vgaoxiao/20160626/160626061159531884207.html?idx=6&amp;recommendtype=-1&amp;ishot=0&amp;fr=toutiao">
 					<div class="news-wrap clearfix">
 						<div class="txt-wrap fr">
@@ -60,7 +79,21 @@
 					</div>
 				</a>
 			</section>
-			<section class="news-item news-item-video-link">
+			<section class="news-ctg">
+				<div class="video-ctg-wrap">
+					<div class="wrapper clearfix">
+						<span class="fl">推荐分类</span>
+						<div class="link-wrap fl">
+							<a href="#tuijian">推荐</a>
+							<a href="#vpaike">拍客</a>
+							<a href="#vgaoxiao">搞笑</a>
+							<a href="#vyule">娱乐</a>
+						</div>
+					</div>
+				</div>
+			</section> -->
+
+			<!-- <section class="news-item news-item-video-link">
 				<a data-type="vpaike" data-subtype="" href="http://mini.eastday.com/video/vpaike/20160626/160626001504790618653.html?idx=14&amp;recommendtype=-1&amp;ishot=0&amp;fr=toutiao">
 					<div class="news-wrap clearfix">
 						<div class="txt-wrap fr">
@@ -185,16 +218,16 @@
 						</div>
 					</div>
 				</a>
-			</section>
+			</section> -->
 		</div>
-		<!-- <div id="J_loading" class="loading">
+		<div id="J_loading" class="loading">
 			<div class="spinner">
 			  <div class="bounce1"></div>
 			  <div class="bounce2"></div>
 			  <div class="bounce3"></div>
 			</div>
 			<p class="txt">数据加载中</p>
-		</div> -->
+		</div>
 	</div>
 	<input type="hidden" id="J_gg_baidu_id" value="">
 	<input type="hidden" id="J_gg_sogou_id" value="">
