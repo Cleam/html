@@ -654,6 +654,7 @@ $(function(){
 		 * @param  {Function} callback  回调方法
 		 */
 		pullDownLoadNewsData: function(callback){
+			var scope = this;
 			$.ajax({
 				url: pullDownUrl,
 	            data: {
@@ -1200,7 +1201,7 @@ $(function(){
 	    cacheNewsReadUrl: function(urlNum, type, subtype){
 	    	var scope = this;
 	    	// 判断是否存储过
-	        if(!scope.existReadUrl(urlNum) && !newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
+	        if(!scope.existNewsReadUrl(urlNum) && !newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
 	            // news_read_url_all
 	            var rua = wsCache.get('news_read_url_all');
 	            if(rua){
