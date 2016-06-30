@@ -6,13 +6,16 @@ $(function(){
 	FastClick.attach(document.body);
 	// ./data/channels.json
 	// http://mini.eastday.com/toutiaoh5/data/channels.json
-	var channelsUrl = 'http://mini.eastday.com/toutiaoh5/data/channels.json',	// 新闻频道类别 
-		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据
-		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载
-		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载
+	var channelsUrl = './data/channels.json',	// 新闻频道类别 
+		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据(测试)
+		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载(测试)
+		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载(测试)
 		refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
 		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
 		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
+		vrefreshUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频刷新接口(测试)
+		vpullDownUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频下拉接口(测试)
+		vpullUpUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频上拉接口(测试)
 		positionUrl = 'http://position.dfshurufa.com/position/get',			// 获取用户位置
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',					// 美女点赞（点踩）
@@ -20,12 +23,12 @@ $(function(){
 		onlineUrl = 'http://ot.dftoutiao.com/online/online',			// 在线统计(统计stats = statistics)
 		showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',	// 推广信息show统计接口
 		clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',		// 推广信息click统计接口
-		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',		// 视频统计接口
-		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口
-		// logUrl = 'http://123.59.60.170/getwapdata/data',				// 测试 日志（操作统计）
-		// onlineUrl = 'http://123.59.60.170/online/online',			// 测试 在线统计
-		// showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',	// 推广信息show统计接口
-		// clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',		// 推广信息show统计接口
+		videoLogUrl = 'http://toutiao.eastday.com/getwapdata/videoact',		// 头条中插入的直接播放的视频统计接口
+		// videoLogUrl = 'http://123.59.60.170/getwapdata/videoact',		// 视频统计接口(测试)
+		// logUrl = 'http://123.59.60.170/getwapdata/data',				// 日志（操作统计）(测试)
+		// onlineUrl = 'http://123.59.60.170/online/online',			// 在线统计(测试)
+		// showAdLogUrl = 'http://123.59.60.170/getwapdata/advshow',	// 推广信息show统计接口(测试)
+		// clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',		// 推广信息show统计接口(测试)
 		$body = $('body'),
 		newsTypeArr_all = [],
 		newsTypeArr_special = [],
@@ -45,6 +48,29 @@ $(function(){
 		TOUCH_DISTANCE = 150,		// 规定滑动加载距离
 		pullDownLoadDataTimer = null,		// 规定滑动加载距离
 		wsCache = new WebStorageCache(),	// 本地存储对象
+		onlineTimer = null,
+		isThanAndroid4 = true,	// 安卓4.0以上
+		videoCtg = [
+			{name: '推荐', value: 'vtuijian'},
+			{name: '搞笑', value: 'vgaoxiao'},
+			{name: '拍客', value: 'vpaike'},
+			{name: '资讯', value: 'vzixun'},
+			{name: '纪录片', value: 'vjilupian'},
+			{name: '公益', value: 'vgongyi'},
+			{name: '体育', value: 'vtiyu'},
+			{name: '汽车', value: 'vqiche'},
+			{name: '科技', value: 'vkeji'},
+			{name: '财经', value: 'vcaijing'},
+			{name: '娱乐', value: 'vyule'},
+			{name: '原创', value: 'vyuanchuang'},
+			// {name: '动漫', value: 'vdongman'},
+			{name: '旅游', value: 'vlvyou'},
+			{name: '时尚', value: 'vshishang'},
+			{name: '亲子', value: 'vqinzi'},
+			{name: '教育', value: 'vjiaoyu'},
+			{name: '游戏', value: 'vyouxi'},
+			{name: '生活', value: 'vshenghuo'}
+		],
 		// 视频广告
 		// videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%" onLoad="GLOBAL.Util.setIframeContent(this)"></iframe>',
 		videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe>',
@@ -54,6 +80,15 @@ $(function(){
 		// 搜狗广告iframe
 		sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
 
+	try {
+		// android 4.0以下不放视频
+		if(navigator.userAgent.indexOf('Android') >= 0 && Number(GLOBAL.Util.getOsType().split(' ')[1]) < 4.1){
+			isThanAndroid4 = false;
+		}
+	} catch (e) {
+		console.error(e);
+	}
+
 	/**
 	 * 东方头条对象
 	 */
@@ -61,6 +96,7 @@ $(function(){
 		var ct = GLOBAL.Util.getQueryString('type');
 		var currentNewsType = ct ? ct : wsCache.get('current_newstype');
 		this.newsType = currentNewsType ? currentNewsType : 'toutiao';	// 新闻频道类别
+		this.vnewsType = wsCache.get('vnewstype') || 'vtuijian';	// 推荐：799999
 		this.readUrl = '';
 		this.userId = Cookies.get('user_id');			// 用户ID
 		this.idx = 0;				// 链接索引
@@ -68,7 +104,7 @@ $(function(){
 		this.pulldown_pgNum = 0;	// 下拉页码
 		this.pulldown_idx = 0;		// 下拉链接索引
 		this.pulldown_num = 0;		// 下拉计数
-		this.toType = GLOBAL.Util.getQueryString('type');	// 
+		// this.toType = GLOBAL.Util.getQueryString('type');	// 
 		this.qid = GLOBAL.Et.qid || GLOBAL.Util.getQueryString('qid') || Cookies.get('qid');	// 渠道ID
 		this.pullUpFlag = true;		// 上拉加载数据(防止操作过快多次加载)
 		this.startKey = {};
@@ -85,7 +121,6 @@ $(function(){
 		 */
 		init: function(){
 			var scope = this;
-
 			// 设置广告ID（每次刷新需要设置广告ID，防止广告空白不显示）
 			scope.setGgId();
 
@@ -104,7 +139,7 @@ $(function(){
 	        }
 
 			/* 获取缓存中的已阅读新闻 */
-			scope.readUrl = wsCache.get('read_url_all');
+			scope.readUrl = wsCache.get('news_read_url_all');
         	if(!scope.readUrl){scope.readUrl = '';}
 
 	        /* 删除当前类别记录的位置信息 */
@@ -119,7 +154,7 @@ $(function(){
 		            var $this = $(this),
 		                type = $this.data('type');
 		            newsTypeArr_all.push(type);
-		            if(type !== 'meinv' && type !== 'nuanwen'){
+		            if(type === 'meinv' || type === 'nuanwen'){
 		                newsTypeArr_special.push(type);
 		            }
 		        });
@@ -159,7 +194,7 @@ $(function(){
 			scope.pullDown();
 
 			/* 频道类别（菜单）点击事件 */
-			$newsTabsWrap.on('tap', 'a', function(){
+			$newsTabsWrap.on('click', 'a', function(){
 				var $this = $(this),
 					type = $this.data('type');
 				if($this.hasClass('active')){
@@ -212,7 +247,7 @@ $(function(){
 	        });
 
 	        /* 刷新数据 */
-	        $refresh.on('tap', function(){
+	        $refresh.on('click', function(){
 	        	if($refresh.hasClass('active')){
 	        		return;
 	        	}
@@ -228,9 +263,15 @@ $(function(){
 	        /* 记录阅读过的新闻 */
 	        $newsList.on('click', 'a', function(e){
 	            var $this = $(this),
-	                url = $this.attr('href');
-	            url = url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html'));
+	                url = $this.attr('href').split('?')[0];
+	            url = url.substring(url.lastIndexOf('/') + 1, url.indexOf('.html'));
+	            // url = url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html'));
 	            scope.cacheReadUrl(url, $this.data('type'), $this.data('subtype'));
+	            /*if(scope.newsType !== 'shipin'){
+		            scope.cacheReadUrl(url, $this.data('type'), $this.data('subtype'));
+	            } else {
+		            scope.cacheReadUrl(url, $this.data('type'), $this.data('subtype'));
+	            }*/
 	            // 点击新闻时，暂停播放中的视频
 	            $newsList.find('video').each(function(){
 	            	if(!this.paused){
@@ -310,6 +351,15 @@ $(function(){
 				scope.sendPromoteNewslog(advUrl, advId);
 			});
 
+	        // 视频中分类推荐点击事件委托
+			$body.on('click', '.J-video-ctg', function(){
+	        	scope.vnewsType = $(this).attr('data-type');
+	        	// 缓存当前视频de类别（缓存20分钟）
+		        wsCache.set('vnewstype', scope.vnewsType, {exp: 20 * 60});
+	        	$newsList.empty();
+	        	$refresh.trigger('click');
+	        });
+
 	        /* 赞 */
 	        $newsList.on('click', '.J-good', function(){
 	        	ptClick($(this), 'z0000', 1);
@@ -328,9 +378,13 @@ $(function(){
 
 	        /* 在线日志 */
 	        scope.addOnlineLog();
-	        setInterval(function(){
+	        onlineTimer = setInterval(function(){
 	        	scope.addOnlineLog();
 	        }, 10000);
+	        // 10分钟之后不再上传online日志
+            setTimeout(function(){
+                clearInterval(onlineTimer);
+            }, 10 * 60 * 1000);
 		},
 
 		/**
@@ -412,8 +466,22 @@ $(function(){
 			if(!myChannels || !(myChannels instanceof Array)){
 				return;
 			}
-			var tabsHtml = '';
-			for (var i = 0; i < myChannels.length; i++) {
+			var tabsHtml = '',
+				i = 0;
+			// 安卓4.0及以下版本手机去掉视频频道
+			try {
+				if(!isThanAndroid4){
+					for (i = 0; i < myChannels.length; i++) {
+						if(myChannels[i].name === 'shipin'){
+							myChannels.splice(i, 1);
+						}
+					}
+				}
+			} catch (e) {
+				console.error(e);
+			}
+
+			for (i = 0; i < myChannels.length; i++) {
 				if(i === 0){
 					tabsHtml += '<a class="active" data-type="' + myChannels[i].name + '">' + myChannels[i].value + '</a>';
 				} else {
@@ -492,7 +560,7 @@ $(function(){
 								pullDownLoadDataTimer = setTimeout(function(){
 								// 美女无pulldown接口
 								if(scope.newsType === 'meinv'){
-						        	// $refresh.trigger('tap');
+						        	// $refresh.trigger('click');
 						        	$pullDownLoading && $pullDownLoading.remove();
 						        } else {
 						        	scope.changeRefreshStatus();
@@ -563,14 +631,29 @@ $(function(){
 		 */
 		pullDownLoadData: function(callback){
 			var scope = this;
-			// 获取阅读历史
-	        scope.readUrl = scope.getReadUrl();
-			// 页码（获取之后加一再存储）
+			// 页码（获取之后减1再存储）24h
 	        scope.pulldown_pgNum = Number(wsCache.get('pulldown_pgnum_' + scope.newsType));
 	        wsCache.set('pulldown_pgnum_' + scope.newsType, --scope.pulldown_pgNum, { exp: 24 * 3600});
 	        // 获取链接索引
 	        scope.pulldown_idx = Number(wsCache.get('pulldown_idx_' + scope.newsType));
 	        if(!scope.pulldown_idx){scope.pulldown_idx = 0;}
+	        // 非视频新闻
+	        if(scope.newsType !== 'shipin'){
+				// 获取阅读历史
+		        scope.readUrl = scope.getNewsReadUrl();
+		        scope.pullDownLoadNewsData(callback);
+	        } else {	// 视频新闻
+	        	// 获取阅读历史
+		        scope.readUrl = scope.getVideoReadUrl();
+	        	scope.pullDownLoadVideoData(callback);
+	        }
+		},
+
+		/**
+		 * 下拉加载新闻数据
+		 * @param  {Function} callback  回调方法
+		 */
+		pullDownLoadNewsData: function(callback){
 			$.ajax({
 				url: pullDownUrl,
 	            data: {
@@ -601,17 +684,68 @@ $(function(){
 		},
 
 		/**
+		 * "视频"频道下拉加载数据
+		 * @param  {Function} callback  回调方法
+		 */
+		pullDownLoadVideoData: function(callback){
+			var scope = this;
+			$.ajax({
+				url: vpullDownUrl,
+	            data: {
+	                type: scope.vnewsType,
+					startkey: wsCache.get('startkey_' + scope.newsType) ? wsCache.get('startkey_' + scope.newsType) : scope.startKey[scope.newsType],
+					lastkey: wsCache.get('endkey_' + scope.newsType) ? wsCache.get('endkey_' + scope.newsType) : scope.endKey[scope.newsType],
+					pgnum: scope.pulldown_pgNum,
+					idx: scope.pulldown_idx,
+					readhistory: scope.readUrl,
+					recgid: scope.userId,
+					qid: scope.qid,
+					os: scope.osType
+	            },
+	            dataType: 'jsonp',
+	            jsonp: "jsonpcallback",
+	            timeout: 8000,
+	            beforeSend: function(){},
+	            success: function(data){
+	                scope.generateVideoDomForPulldown(data);
+	            },
+	            error: function(e){
+	            	console.error(e);
+	            },
+	            complete: function(){
+	                callback && callback();
+	            }
+			});
+		},
+
+		/**
 		 * 从缓存中获取已读历史url
 		 * @return {String} 已读历史url
 		 */
-		getReadUrl: function(){
+		getNewsReadUrl: function(){
 			var scope = this,
 				ru = '';
 			// 获取阅读记录
-			if(scope.newsType == 'toutiao' || scope.newsType == 'weikandian'){
-	            ru = wsCache.get('read_url_all');
+			if(scope.newsType === 'toutiao' || scope.newsType === 'weikandian'){
+	            ru = wsCache.get('news_read_url_all');
 	        } else {
-	            ru = wsCache.get('read_url_' + scope.newsType);
+	            ru = wsCache.get('news_read_url_' + (scope.newsType !== 'shipin' ? scope.newsType : scope.vnewsType));
+	        }
+	        return ru ? ru : null;
+		},
+
+		/**
+		 * 从缓存中获取已读历史url
+		 * @return {String} 已读历史url
+		 */
+		getVideoReadUrl: function(){
+			var scope = this,
+				ru = '';
+			// 获取阅读记录
+			if(scope.vnewsType === 'vtuijian'){
+	            ru = wsCache.get('video_read_url_all');
+	        } else {
+	            ru = wsCache.get('video_read_url_' + scope.vnewsType);
 	        }
 	        return ru ? ru : null;
 		},
@@ -629,11 +763,6 @@ $(function(){
 	        	min = 0, 
 	        	max = 3, 
 	        	randomNum = len;
-	        // android 4.0以下不放视频
-			var isThanAndroid4 = true;
-			if(scope.osType.indexOf('Android') >= 0 && Number(scope.osType.split(' ')[1]) < 4.1){
-				isThanAndroid4 = false;
-			}
 
 	        if(!data || !data.length){
 	            // $loading.hide();
@@ -679,15 +808,15 @@ $(function(){
 	                type = item.type,
 	                subtype = item.subtype,
 	                imgLen = imgArr.length,
-	                rowkey = item.rowkey,
+	                // rowkey = item.rowkey,
 	                hot = Number(item.hotnews),     // 热门
 	                video = Number(item.isvideo),   // 视频
 	                rec = Number(item.isrecom),     // 推荐
 	                nuanwen = Number(item.isnxw),   // 暖文
-	                urlpv = item.urlpv,				// 浏览量
-	                picnums = item.picnums,			// 图片数量
-	                praisecnt = item.praisecnt,		// 顶
-	                tramplecnt = item.tramplecnt,	// 踩
+	                // urlpv = item.urlpv,				// 浏览量
+	                // picnums = item.picnums,			// 图片数量
+	                // praisecnt = item.praisecnt,		// 顶
+	                // tramplecnt = item.tramplecnt,	// 踩
 	                advStr = '',
 	                tagStr = '';
 	            
@@ -804,6 +933,88 @@ $(function(){
 				scope.setVideoWidthAndHeight($(this));
 				scope.addVideoListener($(this));
 			});
+		},
+
+		generateVideoDomForPulldown: function(d){
+			var scope = this,
+				data = d.data ? d.data : null,
+				len = data ? data.length : 0;
+			if(!data || !len){
+	            return false;
+	        }
+	        // 计数
+	        scope.pulldown_num++;
+	        scope.startKey[scope.newsType] = d.endkey;
+	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
+	        scope.endKey[scope.newsType] = d.newkey;
+	        wsCache.set('endkey_' + scope.newsType, d.newkey, {exp: 24 * 3600});
+	        // 反转数组(reverse方法会改变原来的数组，而不会创建新的数组。)
+	        data.reverse();
+	        // 删除阅读历史位置DOM元素（后面重新更新位置）
+        	$body.find('.J-read-position').remove();
+	        $newsList.prepend('<a class="J-read-position read-position">上次浏览到这里，点击刷新。</a>');
+
+			for (var i = 0; i < len; i++) {
+				var item = data[i],
+					miniImg = item.miniimg,	// 4:3
+					itemImg = miniImg[0],
+					// fr = GLOBAL.Util.getUrlNoParams(),
+	                hotnews = item.hotnews,    
+					recommendtype = item.recommendtype ? item.recommendtype : '-1',
+					dateStr = item.date,
+					type = item.type,
+					topic = item.topic,
+					source = item.source,
+					imgSrc = itemImg.src,
+					imgWidth = itemImg.imgwidth,
+					imgHeight = itemImg.imgheight,
+					// isadv = item.isadv || '',
+	                hot = Number(item.hotnews),     // 热门
+	                rec = Number(item.isrecom),     // 推荐
+					url = item.url + '?qid=' + scope.qid + '&idx=' + (scope.idx + i + 1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + GLOBAL.Util.getUrlNoParams(),
+					// duration = GLOBAL.Util.msToTimestr(item.videoalltime),
+					tagStr = '';
+				if(hot){
+	                tagStr = '<i class="hot">热门</i>';
+	            } else if(rec){
+	                tagStr = '<i class="rec">推荐</i>';
+	            }
+				
+				$newsList.prepend('<section class="news-item news-item-video-link"> <a data-type="' + type + '" data-subtype="" href="' + url + '"> <div class="news-wrap clearfix"> <div class="txt-wrap fr"> <h3>' + topic + '</h3> <p><em class="fl">' + (tagStr ? tagStr : GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p> </div> <div class="img-wrap fl"> <img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"> <span class="play-btn"></span> </div> </div> </a> </section>');
+				// 插入视频分类列表（第一屏在第6个位置插入，后面每屏在第1、第6个位置插入）
+				if((i !== 0) && ((i + 1) % 10 === 0)){
+					ctgArr = scope.getRecommendVideoCtg();
+					$newsList.prepend('<section class="news-ctg"><div class="video-ctg-wrap"><div class="wrapper clearfix"><span class="fl">分类推荐</span><div class="link-wrap fl"><a class="J-video-ctg" data-type="' + ctgArr[0].value + '" href="#' + ctgArr[0].value + '">' + ctgArr[0].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[1].value + '" href="#' + ctgArr[1].value + '">' + ctgArr[1].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[2].value + '" href="#' + ctgArr[2].value + '">' + ctgArr[2].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[3].value + '" href="#' + ctgArr[3].value + '">' + ctgArr[3].name + '</a></div></div></div></section>');
+				}
+			}
+			// 提示推荐新闻条数
+	        var $rn = $('<p id="J_recommend_news" class="recommend-news">为您推荐<span>' + len + '</span>条新闻</p>');
+	        $rn.appendTo('body');
+	        setTimeout(function(){
+	        	$rn.animate({
+	        		'scale': 0,
+	        		'opacity': 0.5
+	        	}, '600', function(){
+	        		$rn.remove();
+	        	});
+	        }, 1200);
+	        // 如果下拉加载数据次数超过20次，清空信息流末尾新闻数据。
+	        if(scope.pulldown_num >= 20){
+	        	scope.pulldown_num = 0;
+	        	var $newsListChildrens = $newsList.children(),
+	        		newsLen = $newsListChildrens.length;
+	        	for (var i = newsLen - 1; i >= newsLen - 20; i--) {
+	        		$newsListChildrens[i].remove();
+	        	}
+	        }
+			// 记录pulldown_idx
+	        wsCache.set('pulldown_idx_' + scope.newsType, scope.pulldown_idx - len, {exp: 20 * 60});
+	        setTimeout(function(){
+	        	// 清除pull-down类
+		        $newsList.children().removeClass('pull-down');
+		        // 缓存当前类别加载的新闻（缓存20分钟）
+		        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
+	        }, 400);
 		},
 
 		/**
@@ -975,10 +1186,23 @@ $(function(){
 	     */
 	    cacheReadUrl: function(urlNum, type, subtype){
 	    	var scope = this;
-	        // 判断是否存储过
-	        if(!scope.existReadUrl(urlNum) && newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
-	            // read_url_all
-	            var rua = wsCache.get('read_url_all');
+	    	if(scope.newsType !== 'shipin'){
+	    		scope.cacheNewsReadUrl(urlNum, type, subtype);
+	    	} else {
+	    		scope.cacheVideoReadUrl(urlNum, type, subtype);
+	    	}
+	    },
+
+	    /**
+	     * 缓存已阅读过的新闻
+	     * @return {[type]} [description]
+	     */
+	    cacheNewsReadUrl: function(urlNum, type, subtype){
+	    	var scope = this;
+	    	// 判断是否存储过
+	        if(!scope.existReadUrl(urlNum) && !newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
+	            // news_read_url_all
+	            var rua = wsCache.get('news_read_url_all');
 	            if(rua){
 	                rua = rua.split(',');
 	                while(rua.length >= 5){rua.shift();}
@@ -987,9 +1211,9 @@ $(function(){
 	            } else {
 	                scope.readUrl = urlNum;
 	            }
-	            wsCache.set('read_url_all', scope.readUrl, {exp: 3 * 24 * 3600});
-	            // read_url_type
-	            var rut = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
+	            wsCache.set('news_read_url_all', scope.readUrl, {exp: 3 * 24 * 3600});
+	            // news_read_url_type
+	            var rut = wsCache.get('news_read_url_' + type); // xxxx,xxxx,xxxx
 	            if(rut){
 	                rut = rut.split(',');
 	                while(rut.length >= 3){rut.shift();}
@@ -998,10 +1222,10 @@ $(function(){
 	            } else {
 	                rut = urlNum;
 	            }
-	            wsCache.set('read_url_' + type, rut, {exp: 3 * 24 * 3600});
-	            // read_url_subtype
+	            wsCache.set('news_read_url_' + type, rut, {exp: 3 * 24 * 3600});
+	            // news_read_url_subtype
 	            if(subtype){
-	                var rust = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
+	                var rust = wsCache.get('news_read_url_' + subtype); // xxxx,xxxx,xxxx
 	                if(rust){
 	                    rust = rust.split(',');
 	                    while(rust.length >= 3){rust.shift();}
@@ -1010,7 +1234,53 @@ $(function(){
 	                } else {
 	                    rust = urlNum;
 	                }
-	                wsCache.set('read_url_' + subtype, rust, {exp: 3 * 24 * 3600});
+	                wsCache.set('news_read_url_' + subtype, rust, {exp: 3 * 24 * 3600});
+	            }
+	        }
+	    },
+
+	    /**
+	     * 缓存已阅读过的视频
+	     * @return {[type]} [description]
+	     */
+	    cacheVideoReadUrl: function(urlNum, type, subtype){
+	    	var scope = this;
+	    	// 判断是否存储过
+	        if(!scope.existVideoReadUrl(urlNum)){
+	            // video_read_url_all
+	            var rua = wsCache.get('video_read_url_all');
+	            if(rua){
+	                rua = rua.split(',');
+	                while(rua.length >= 5){rua.shift();}
+	                rua.push(urlNum);
+	                scope.readUrl = rua.join(',');
+	            } else {
+	                scope.readUrl = urlNum;
+	            }
+	            wsCache.set('video_read_url_all', scope.readUrl, {exp: 3 * 24 * 3600});
+	            // video_read_url_type
+	            var rut = wsCache.get('video_read_url_' + type); // xxxx,xxxx,xxxx
+	            if(rut){
+	                rut = rut.split(',');
+	                while(rut.length >= 3){rut.shift();}
+	                rut.push(urlNum);
+	                rut = rut.join(',');
+	            } else {
+	                rut = urlNum;
+	            }
+	            wsCache.set('video_read_url_' + type, rut, {exp: 3 * 24 * 3600});
+	            // video_read_url_subtype
+	            if(subtype){
+	                var rust = wsCache.get('video_read_url_' + subtype); // xxxx,xxxx,xxxx
+	                if(rust){
+	                    rust = rust.split(',');
+	                    while(rust.length >= 3){rust.shift();}
+	                    rust.push(urlNum);
+	                    rust = rust.join(',');
+	                } else {
+	                    rust = urlNum;
+	                }
+	                wsCache.set('video_read_url_' + subtype, rust, {exp: 3 * 24 * 3600});
 	            }
 	        }
 	    },
@@ -1020,10 +1290,24 @@ $(function(){
 	     * @param  {[type]} urlNum url编号
 	     * @return {[type]}        true: 已经缓存过了，false：未缓存过
 	     */
-	    existReadUrl: function(urlNum){
-	        var read_url_all = wsCache.get('read_url_all'); // xxxx,xxxx,xxxx
+	    existNewsReadUrl: function(urlNum){
+	        var news_read_url_all = wsCache.get('news_read_url_all'); // xxxx,xxxx,xxxx
 	        // 已经缓存过了
-	        if(read_url_all && read_url_all.indexOf(urlNum) !== -1){
+	        if(news_read_url_all && news_read_url_all.indexOf(urlNum) !== -1){
+	            return true;
+	        }
+	        return false;
+	    },
+
+	    /**
+	     * 判断是否存储过该url编号
+	     * @param  {[type]} urlNum url编号
+	     * @return {[type]}        true: 已经缓存过了，false：未缓存过
+	     */
+	    existVideoReadUrl: function(urlNum){
+	        var video_read_url_all = wsCache.get('video_read_url_all'); // xxxx,xxxx,xxxx
+	        // 已经缓存过了
+	        if(video_read_url_all && video_read_url_all.indexOf(urlNum) !== -1){
 	            return true;
 	        }
 	        return false;
@@ -1186,53 +1470,128 @@ $(function(){
 			} else {
 				wsCache.delete('pulldown_idx_' + scope.newsType);
 				wsCache.set('pgnum_' + scope.newsType, 1, { exp: 20 * 60});
-				// 获取阅读历史
-		        scope.readUrl = scope.getReadUrl();
-				$.ajax({
-		            url: refreshUrl,
-		            data: {
-		                type: scope.newsType,
-		                recgid: scope.userId, // 用户ID
-		                qid: scope.qid,
-		                picnewsnum : 1,
-		                readhistory: scope.readUrl,
-		                idx: 0,
-		                pgnum: 1,
-		                os: scope.osType
-		            },
-		            dataType: 'jsonp',
-		            jsonp: "jsonpcallback",
-		            timeout: 8000,
-		            beforeSend: function(){
-		                $newsList.html('');
-		            },
-		            success: function(data){
-		            	// idx还原
-		            	scope.idx = 0; 
-		                scope.generateDom(data);
-		                // 页面滚到记录的位置处
-						if(cachePos){
-			                $body.scrollTop(cachePos);
-			            }
-		            },
-		            complete: function(){
-		                callback && callback();
-		            }
-		        });
+		        // 非视频新闻
+		        if(scope.newsType !== 'shipin'){
+					// 获取阅读历史
+			        scope.readUrl = scope.getNewsReadUrl();
+			        scope.loadNewsData(callback);
+		        } else {	// 视频新闻
+			        // 获取阅读历史
+			        scope.readUrl = scope.getVideoReadUrl();
+		        	scope.loadVideoData(callback);
+		        }
 			}
 		},
 
+		/**
+		 * 加载新闻数据
+		 */
+		loadNewsData: function(callback){
+			var scope = this;
+			$.ajax({
+	            url: refreshUrl,
+	            data: {
+	                type: scope.newsType,
+	                recgid: scope.userId, // 用户ID
+	                qid: scope.qid,
+	                picnewsnum : 1,
+	                readhistory: scope.readUrl,
+	                idx: 0,
+	                pgnum: 1,
+	                os: scope.osType
+	            },
+	            dataType: 'jsonp',
+	            jsonp: "jsonpcallback",
+	            timeout: 8000,
+	            beforeSend: function(){
+	                $newsList.html('');
+	            },
+	            success: function(data){
+	            	// idx还原
+	            	scope.idx = 0; 
+	                scope.generateDom(data);
+	                // 页面滚到记录的位置处
+	                var cachePos = wsCache.get('news_pos_' + scope.newsType);
+					if(cachePos){
+		                $body.scrollTop(cachePos);
+		            }
+	            },
+	            complete: function(){
+	                callback && callback();
+	            }
+	        });
+		},
+
+		/**
+		 * 加载视频新闻数据
+		 */
+		loadVideoData: function(callback){
+			var scope = this;
+			$.ajax({
+	            url: vrefreshUrl,
+	            data: {
+	                type: scope.vnewsType,
+	                startkey: '',
+	                recgid: scope.userId, // 用户ID
+	                qid: scope.qid,
+	                domain: 'eastday.com',
+	                readhistory: scope.readUrl,
+	                idx: 0,
+	                pgnum: 1,
+	                os: scope.osType
+	            },
+	            dataType: 'jsonp',
+	            jsonp: "jsonpcallback",
+	            timeout: 8000,
+	            beforeSend: function(){
+	                $newsList.html('');
+	            },
+	            success: function(data){
+	            	// idx还原
+	            	scope.idx = 0; 
+	                scope.generateVideoDom(data);
+	                // 页面滚到记录的位置处
+	                var cachePos = wsCache.get('news_pos_' + scope.newsType);
+					if(cachePos){
+		                $body.scrollTop(cachePos);
+		            }
+	            },
+	            complete: function(){
+	                callback && callback();
+	            }
+	        });
+		},
+
+
+		/**
+		 * 上拉加载数据
+		 * @return {[type]} [description]
+		 */
 		pullUpLoadData: function(){
 			var scope = this;
-			// 获取阅读历史
-	        scope.readUrl = scope.getReadUrl();
 	        // 页码（获取之后加一再存储）
 	        scope.pgNum = Number(wsCache.get('pgnum_' + scope.newsType));
 	        wsCache.set('pgnum_' + scope.newsType, ++scope.pgNum, { exp: 24 * 3600});
 	        // 获取链接索引
 	        scope.idx = Number(wsCache.get('idx_' + scope.newsType));
 	        if(!scope.idx){scope.idx = 0;}
-	        $.ajax({
+	        if(scope.newsType !== 'shipin'){
+				// 获取阅读历史
+		        scope.readUrl = scope.getNewsReadUrl();
+	        	scope.pullUpLoadNewsData();
+	        } else {
+	        	// 获取阅读历史
+		        scope.readUrl = scope.getVideoReadUrl();
+	        	scope.pullUpLoadVideoData();
+	        }
+		},
+
+		/**
+		 * 上拉加载新闻数据
+		 */
+		pullUpLoadNewsData: function(){
+			var scope = this;
+			$.ajax({
 	            url: pullUpUrl,
 	            data: {
 	                type: scope.newsType,
@@ -1267,6 +1626,46 @@ $(function(){
 		},
 
 		/**
+		 * 上拉加载"视频"频道数据
+		 */
+		pullUpLoadVideoData: function(){
+			var scope = this;
+			$.ajax({
+	            url: vpullUpUrl,
+	            data: {
+	            	type: scope.vnewsType,
+	                newsnum: 20,
+	                idx: scope.idx,
+	                startkey: wsCache.get('startkey_' + scope.newsType) ? wsCache.get('startkey_' + scope.newsType) : scope.startKey[scope.newsType],
+	                recgid: scope.userId, // 用户ID
+	                qid: scope.qid,
+	                domain: 'eastday.com',
+	                readhistory: scope.readUrl,
+	                pgnum: scope.pgNum,
+	                os: scope.osType
+	            },
+	            dataType: 'jsonp',
+	            jsonp: "jsonpcallback",
+	            timeout: 8000,
+	            beforeSend: function(){
+	            	scope.pullUpFlag = false;
+	            	// $newsList.html('');
+	                // $loading.show();
+	            },
+	            success: function(data){
+	                scope.generateVideoDom(data);
+	            },
+	            error: function(jqXHR, textStatus){
+	                console.error(textStatus);
+	            },
+	            complete: function(){
+	            	scope.pullUpFlag = true;
+	                // $loading.hide();
+	            }
+	        });
+		},
+
+		/**
 	     * 将数据组装成html代码
 	     * @param  {[type]} d 数据
 	     * @return {[type]}   [description]
@@ -1278,11 +1677,6 @@ $(function(){
 	            // $loading.hide();
 	            return false;
 	        }
-	        // android 4.0以下不放视频
-			var isThanAndroid4 = true;
-			if(scope.osType.indexOf('Android') >= 0 && Number(scope.osType.split(' ')[1]) < 4.1){
-				isThanAndroid4 = false;
-			}
 	        // 存储加载的新闻中的最后一条新闻的rowkey
 	        // wsCache.set('rowkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
 	       	scope.startKey[scope.newsType] = d.endkey;
@@ -1301,12 +1695,12 @@ $(function(){
 	                ispicnews = item.ispicnews,	// 大图新闻(1)、小图新闻(0)、无图新闻(-1)
 	                videonews = item.videonews,	// 视频新闻
 	                videoList = item.videolist,	// 视频列表
-	                isadv = item.isadv || '',
 	               	advId = item.adv_id || '',
 	                type = item.type,
 	                subtype = item.subtype,
 	                imgLen = imgArr.length,
 	                rowkey = item.rowkey,
+	                isadv = item.isadv || '',
 	                hot = Number(item.hotnews),     // 热门
 	                video = Number(item.isvideo),   // 视频
 	                rec = Number(item.isrecom),     // 推荐
@@ -1429,6 +1823,86 @@ $(function(){
 	    },
 
 	    /**
+	     * 将视频数据组装成html代码
+	     * @param  {[type]} d 视频数据
+	     */
+	    generateVideoDom: function(d){
+			var scope = this,
+				data = d.data ? d.data : null,
+				len = data ? data.length : 0;
+			if(!data || !len){
+	            return false;
+	        }
+	        // 存储加载的新闻中的最后一条新闻的rowkey
+	       	scope.startKey[scope.newsType] = d.endkey;
+	        wsCache.set('startkey_' + scope.newsType, d.endkey, {exp: 24 * 3600});
+			for (var i = 0; i < len; i++) {
+				var item = data[i],
+					miniImg = item.miniimg,	// 4:3
+					itemImg = miniImg[0],
+					fr = GLOBAL.Util.getUrlNoParams(),
+					dateStr = item.date,
+					type = item.type,
+					topic = item.topic,
+					source = item.source,
+					imgSrc = itemImg.src,
+					imgWidth = itemImg.imgwidth,
+					imgHeight = itemImg.imgheight,
+					recommendtype = item.recommendtype ? item.recommendtype : '-1',
+	                hotnews = item.hotnews,    
+					isadv = item.isadv || '',
+	                hot = Number(item.hotnews),     // 热门
+	                rec = Number(item.isrecom),     // 推荐
+					duration = GLOBAL.Util.msToTimestr(item.videoalltime),
+					url = item.url + '?qid=' + scope.qid + '&idx=' + (scope.idx + i + 1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + GLOBAL.Util.getUrlNoParams(),
+					tagStr = '';
+				if(hot){
+	                tagStr = '<i class="hot">热门</i>';
+	            } else if(rec){
+	                tagStr = '<i class="rec">推荐</i>';
+	            }
+
+				// $newsList.append('<section class="news-item news-item-video"><a data-type="' + type + '" data-subtype="" href="' + href + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"><span class="duration">' + duration + '</span></div></div></a></section>');
+				
+				$newsList.append('<section class="news-item news-item-video-link"> <a data-type="' + type + '" data-subtype="" href="' + url + '"> <div class="news-wrap clearfix"> <div class="txt-wrap fr"> <h3>' + topic + '</h3> <p><em class="fl">' + (tagStr ? tagStr : GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p> </div> <div class="img-wrap fl"> <img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"> <span class="play-btn"></span> </div> </div> </a> </section>');
+				// 插入视频分类列表（第一屏在第6个位置插入，后面每屏在第1、第6个位置插入）
+				if((i !== 0) && ((i + 1) % 10 === 0)){
+					ctgArr = scope.getRecommendVideoCtg();
+					$newsList.append('<section class="news-ctg"><div class="video-ctg-wrap"><div class="wrapper clearfix"><span class="fl">分类推荐</span><div class="link-wrap fl"><a class="J-video-ctg" data-type="' + ctgArr[0].value + '" href="#' + ctgArr[0].value + '">' + ctgArr[0].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[1].value + '" href="#' + ctgArr[1].value + '">' + ctgArr[1].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[2].value + '" href="#' + ctgArr[2].value + '">' + ctgArr[2].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[3].value + '" href="#' + ctgArr[3].value + '">' + ctgArr[3].name + '</a></div></div></div></section>');
+				}
+			}
+			// 记录idx
+	        wsCache.set('idx_' + scope.newsType, scope.idx + len, {exp: 20 * 60});
+	        // 缓存当前类别加载的新闻（缓存20分钟）
+	        wsCache.set('news_' + scope.newsType, $newsList.html(), {exp: 20 * 60});
+	    },
+
+	    getRecommendVideoCtg: function(){
+	    	var vcLen = videoCtg.length,
+				mySplit = Math.floor(vcLen / 3),
+				max = vcLen,
+				min = 1,	// 除去第一个: 推荐
+				rd = 0,
+				ctgArr = [];
+			// 随机生成4个分类推荐
+			for (i = 0; i < 4; i++) {
+				if(i === 0){
+					ctgArr[0] = videoCtg[0];
+				} else {
+					switch(i) {
+						case 1: min = 1; max = mySplit; break;
+						case 2: min = mySplit; max = mySplit * 2; break;
+						case 3: min = mySplit * 2; max = mySplit * 3; break;
+						default: min = 1; max = vcLen; break;
+					}
+					rd = Math.floor((max - min) * Math.random() + min);
+					ctgArr[i] = videoCtg[rd];
+				}
+			}
+			return ctgArr;
+	    },
+
+	    /**
 	     * 设置video的宽高
 	     * @param {[type]} $video [description]
 	     */
@@ -1467,7 +1941,7 @@ $(function(){
 					$video.attr('data-updateTime', +new Date());
 					scope.sendVideoLog(param);
 				} catch(e){
-					console.log('Event playing has error!!!', e);
+					console.error('Event playing has error!!!', e);
 				}
 			});
 	    	// 暂停事件
@@ -1488,7 +1962,7 @@ $(function(){
 					// 用于记录实际播放时长
 					scope.sendVideoLog(param);
 				} catch(e){
-					console.log('Event pause has error!!!', e);
+					console.error('Event pause has error!!!', e);
 				}
 			});
 			// 播放时间更新事件（记录实际播放时间）
@@ -1503,7 +1977,7 @@ $(function(){
 		  			$video.attr('data-playingTime', playingTime);
 					$video.attr('data-updateTime', now);
 				} catch(e){
-					console.log('Event timeupdate has error!!!', e);
+					console.error('Event timeupdate has error!!!', e);
 				}
 			});
 	    },
@@ -1513,7 +1987,6 @@ $(function(){
 	     * @param  {String} param 必需 - 参数(qid,uid,osType,browserType,url,duration,playingTime,currentTime,action)
 	     */
 	    sendVideoLog: function(param){
-	    	// console.log('param::', param);
 			$.ajax({
 				url: videoLogUrl,
 				data: {
@@ -1522,10 +1995,8 @@ $(function(){
 				dataType: 'jsonp',
 				jsonp: 'jsonpcallback',
 				success: function(){
-					// console.log('success::', arguments);
 				},
 				error: function(){
-					// console.log('error::', arguments);
 				},
 			});
 		},

@@ -407,11 +407,11 @@ $(function(){
 		$.ajax({
 			url: logUrl,
 			data: {
-				qid: scope.qid || 'null',						// 渠道号
-				uid: scope.userId || 'null',						// 从服务器端获取的uid
-				softtype: 'news',					// 软件type（当前默认news）
-				softname: 'eastday_wapnews',		// 软件名（当前默认eastday_wapnews）
-				newstype: $('#J_video').attr('data-type') || 'null',			// 当前新闻类别
+				qid: scope.qid || 'null',		// 渠道号
+				uid: scope.userId || 'null',	// 从服务器端获取的uid
+				softtype: 'news',				// 软件type（当前默认news）
+				softname: 'eastday_wapnews',	// 软件名（当前默认eastday_wapnews）
+				newstype: $('#J_video').attr('data-type') || 'null',	// 当前新闻类别
 				from: GLOBAL.Util.getQueryString('fr') || 'null',	// url上追加的fr字段
 				to: GLOBAL.Util.getUrlNoParams() || 'null',		// 当前页面
 				os_type: scope.osType || 'null',				// 客户端操作系统
@@ -420,15 +420,15 @@ $(function(){
 				fr_url: GLOBAL.Util.getReferrer() || 'null',	// 浏览器的refer属性
 				loginid: 'null',				// App端分享新闻时url上追加的ttaccid
 				ime: 'null',					// App端用户imei号
-				idx: GLOBAL.Util.getQueryString('idx'),					// 当前新闻的idx属性
-				ishot: 'null',					// 当前新闻是不是热点新闻
+				idx: GLOBAL.Util.getQueryString('idx'),		// 当前新闻的idx属性
+				ishot: GLOBAL.Util.getQueryString('ishot') || 'null',	// 当前新闻是不是热点新闻
 				ver: 'null',					// App版本（1.2.9）url上追加的ver
 				appqid: 'null',					// App渠道号url上追加的appqid
 				ttloginid: 'null',				// App端分享新闻时url上追加的ttloginid
 				apptypeid: 'null',				// App端的软件类别url上追加的apptypeid
 				appver: 'null',					// App版本（010209）url上追加的appver
-				recommendtype: 'null',			// 推荐新闻类别url上追加的recommendtype
-				ispush: 'null'					// 是不是推送新闻url上追加的ispush
+				recommendtype: GLOBAL.Util.getQueryString('recommendtype') || 'null',	// 推荐新闻类别url上追加的recommendtype
+				ispush: GLOBAL.Util.getQueryString('ispush') || 'null'	// 是不是推送新闻url上追加的ispush
 			},
 			dataType: 'jsonp',
 			jsonp: 'jsonpcallback',
