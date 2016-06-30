@@ -3,6 +3,7 @@
 		"up": [
 			{"name": "toutiao", "value": "头条"},
 			{"name": "weikandian", "value": "滚动"},
+			{"name": "shipin", "value": "视频"},
 			{"name": "shehui", "value": "社会"},
 			{"name": "guonei", "value": "国内"},
 			{"name": "guoji", "value": "国际"},

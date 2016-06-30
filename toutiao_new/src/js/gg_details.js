@@ -3383,6 +3383,83 @@ GLOBAL.Et.ggData = {
             'sogou': {
                 bottom: '542151'
             }
+        },
+        'yangsheng': {
+            'baidu': {
+                six: 'u2689092',
+                threeup: 'u2689091',
+                threedown: 'u2689090',
+                tujia: 'u2689087'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'zhicheng': {
+            'baidu': {
+                six: 'u2689379',
+                threeup: 'u2689378',
+                threedown: 'u2689377',
+                tujia: 'u2689376'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'sgdhtt': {
+            'baidu': {
+                six: 'u2689497',
+                threeup: 'u2689495',
+                threedown: 'u2689494',
+                tujia: 'u2689493'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'sgdhjs': {
+            'baidu': {
+                six: 'u2689514',
+                threeup: 'u2689513',
+                threedown: 'u2689510',
+                tujia: 'u2689503'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'sgdhsh': {
+            'baidu': {
+                six: 'u2689519',
+                threeup: 'u2689518',
+                threedown: 'u2689517',
+                tujia: 'u2689516'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'huafubao': {
+            'baidu': {
+                six: 'u2689539',
+                threeup: 'u2689538',
+                threedown: 'u2689537',
+                tujia: 'u2689531'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'yysun': {
+            'baidu': {
+                six: 'u2689942',
+                threeup: 'u2689941',
+                threedown: 'u2689939',
+                tujia: 'u2689938'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
         }
     }
 };

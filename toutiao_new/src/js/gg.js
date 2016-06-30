@@ -497,7 +497,14 @@ GLOBAL.Et.ggData = {
 		"oupengllqz":{"baidu":{"li":"u2687307"}},
 		"hangu01":{"baidu":{"li":"u2687386"}},
 		"fenxiangapp":{"baidu":{"li":"u2687582"}},
-		"dianxin404":{"baidu":{"li":"u2688052"}}
+		"dianxin404":{"baidu":{"li":"u2688052"}},
+		"yangsheng":{"baidu":{"li":"u2689093"}},
+		"zhicheng":{"baidu":{"li":"u2689380"}},
+		"sgdhtt":{"baidu":{"li":"u2689499"}},
+		"sgdhjs":{"baidu":{"li":"u2689515"}},
+		"sgdhsh":{"baidu":{"li":"u2689522"}},
+		"huafubao":{"baidu":{"li":"u2689540"}},
+		"yysun":{"baidu":{"li":"u2689943"}}
 	}
 };
 
