@@ -6,16 +6,19 @@ $(function(){
 	FastClick.attach(document.body);
 	// ./data/channels.json
 	// http://mini.eastday.com/toutiaoh5/data/channels.json
-	var channelsUrl = './data/channels.json',	// 新闻频道类别 
+	var channelsUrl = 'http://mini.eastday.com/toutiaoh5/data/channels.json',	// 新闻频道类别 
 		// refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',		// 刷新数据(测试)
 		// pullDownUrl = 'http://123.59.62.164/toutiao_h5/pulldown',		// 下拉加载(测试)
 		// pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',			// 上拉加载(测试)
 		refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',		// 刷新数据
 		pullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/pulldown',		// 下拉加载
 		pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',			// 上拉加载
-		vrefreshUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频刷新接口(测试)
-		vpullDownUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频下拉接口(测试)
-		vpullUpUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频上拉接口(测试)
+		// vrefreshUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频刷新接口(测试)
+		// vpullDownUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频下拉接口(测试)
+		// vpullUpUrl = 'http://123.59.62.164/toutiao_h5/videopool',		// 视频上拉接口(测试)
+		vrefreshUrl = 'http://toutiao.eastday.com/toutiao_h5/videopool',		// 视频刷新接口(测试)
+		vpullDownUrl = 'http://toutiao.eastday.com/toutiao_h5/videopool',		// 视频下拉接口(测试)
+		vpullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/videopool',		// 视频上拉接口(测试)
 		positionUrl = 'http://position.dfshurufa.com/position/get',			// 获取用户位置
 		uidUrl = 'http://toutiao.eastday.com/getwapdata/getuid',			// 获取uid
 		moodUrl = 'http://toutiao.eastday.com/pjson/zan',					// 美女点赞（点踩）
@@ -72,13 +75,11 @@ $(function(){
 			{name: '生活', value: 'vshenghuo'}
 		],
 		// 视频广告
-		// videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%" onLoad="GLOBAL.Util.setIframeContent(this)"></iframe>',
-		videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe>',
-		// videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" onLoad="GLOBAL.Util.setIframe(this)"></iframe>',
-		// 百度广告iframe
-		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>',
-		// 搜狗广告iframe
-		sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
+		// videoHtmlIframe = '<iframe name="iframe" src="gg/gg_video.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe>',
+		tempVideoCtg = [],
+		baiduGgId = '',
+		sogouGgId = '',
+		gdtGgId = '';
 
 	try {
 		// android 4.0以下不放视频
@@ -139,7 +140,7 @@ $(function(){
 	        }
 
 			/* 获取缓存中的已阅读新闻 */
-			scope.readUrl = wsCache.get('news_read_url_all');
+			scope.readUrl = wsCache.get('read_url_all');
         	if(!scope.readUrl){scope.readUrl = '';}
 
 	        /* 删除当前类别记录的位置信息 */
@@ -159,8 +160,18 @@ $(function(){
 		            }
 		        });
 
+				// 插入视频频道
+				$newsTabs.eq(2).after('<a data-type="shipin">视频</a>');
+				
+				/* 设置当前位置信息 */
+		        if(wsCache.get('location')){
+		            scope.updateDomLocation(wsCache.get('location'));
+		        } else {
+		            scope.location();
+		        }
+
 				/* 还原到上次浏览的类别 */
-				$newsTabs.each(function(){
+				$newsTabsWrap.children('a').each(function(){
 					var $this = $(this);
 					if($this.data('type') == scope.newsType){
 						setTimeout(function(){
@@ -169,13 +180,7 @@ $(function(){
 						return false;
 					}
 				});
-				
-				/* 设置当前位置信息 */
-		        if(wsCache.get('location')){
-		            scope.updateDomLocation(wsCache.get('location'));
-		        } else {
-		            scope.location();
-		        }
+
 	        });
 
 			/* 首次加载数据 */
@@ -498,7 +503,9 @@ $(function(){
 			}
 			$newsTabsWrap.html(tabsHtml);
 			// 缓存我的频道
-			(wsCache.get('custom_channels') == '1') && wsCache.set('news_channels', myChannels);
+			if('' + wsCache.get('custom_channels') === '1') {
+				wsCache.set('news_channels', myChannels);
+			}
 		},
 
 		/**
@@ -511,7 +518,7 @@ $(function(){
 			if(!sc || !cc){
 				return [];
 			}
-			var arr = new Array(),
+			var arr = [],
 				cLen = cc.length,
 				sLen = sc.length;
 			// 为了保持和缓存顺序一致，请外层循环使用缓存的频道数组
@@ -736,9 +743,9 @@ $(function(){
 				ru = '';
 			// 获取阅读记录
 			if(scope.newsType === 'toutiao' || scope.newsType === 'weikandian'){
-	            ru = wsCache.get('news_read_url_all');
+	            ru = wsCache.get('read_url_all');
 	        } else {
-	            ru = wsCache.get('news_read_url_' + scope.newsType);
+	            ru = wsCache.get('read_url_' + scope.newsType);
 	        }
 	        return ru ? ru : null;
 		},
@@ -855,11 +862,7 @@ $(function(){
 	            }
 	            // 随机位置插入广告(一条)
             	if(!existGg && i === randomNum){
-            		if (GLOBAL.Et.ggTypeArr.contains('gdt')) {
-            			var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-	            		baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + GLOBAL.Et.gg['gdt']['li'] + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
-            		}
-            		$newsList.prepend(baiduHtmlIframe);
+            		scope.insertGgForPullDown();
             		// 保证只插入一条广告
             		existGg = true;
             	}
@@ -935,10 +938,43 @@ $(function(){
 			});
 		},
 
+		/**
+		 * 下拉插入广告
+		 */
+		insertGgForPullDown: function(){
+			var scope = this,
+				ggHtml = '',
+				iframeId = '',
+				ifHeight = '';
+			// 含有广点通广告展示广点通广告
+    		if (gdtGgId) {
+    			iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
+    			ggHtml = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + gdtGgId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
+    		// 对于屏蔽了百度广告的（也就是只有搜狗广告的渠道）只展示搜狗广告
+    		} else if(!baiduGgId && sogouGgId){
+        		ggHtml = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html?ggid=' + sogouGgId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
+        	// 否则加载百度广告
+    		} else {
+    			ifHeight = scope.newsType !== 'shipin' ? 120 : 78;
+        		ggHtml = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + baiduGgId + '&channeltype=' + scope.newsType + '" frameborder="0" scrolling="no" width="100%" height="' + ifHeight + '"></iframe></div>';
+    		}
+    		$newsList.prepend(ggHtml);
+		},
+
+		/**
+		 * 下拉加载视频DOM
+		 * @param  {[type]} d [description]
+		 * @return {[type]}   [description]
+		 */
 		generateVideoDomForPulldown: function(d){
 			var scope = this,
 				data = d.data ? d.data : null,
-				len = data ? data.length : 0;
+				existVideoCtg = false,
+				existGg = false,
+				len = data ? data.length : 0,
+				min = 0, 
+	        	max = 3, 
+				randomNum = len;
 			if(!data || !len){
 	            return false;
 	        }
@@ -953,7 +989,15 @@ $(function(){
 	        // 删除阅读历史位置DOM元素（后面重新更新位置）
         	$body.find('.J-read-position').remove();
 	        $newsList.prepend('<a class="J-read-position read-position">上次浏览到这里，点击刷新。</a>');
-
+	        // 随机位置插入广告(一条)
+            if(len > 4 && len < 8){
+            	min = 0; 
+            	max = 3;
+            } else if(len > 8){
+            	min = len - 8; 
+            	max = len - 5;
+            }
+	        randomNum = Math.floor((max - min + 1) * Math.random() + min);
 			for (var i = 0; i < len; i++) {
 				var item = data[i],
 					miniImg = item.miniimg,	// 4:3
@@ -973,17 +1017,32 @@ $(function(){
 	                rec = Number(item.isrecom),     // 推荐
 					url = item.url + '?qid=' + scope.qid + '&idx=' + (scope.idx + i + 1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + GLOBAL.Util.getUrlNoParams(),
 					// duration = GLOBAL.Util.msToTimestr(item.videoalltime),
+					ctgArr = [],
+					videoCtgStr = '',
 					tagStr = '';
 				if(hot){
 	                tagStr = '<i class="hot">热门</i>';
 	            } else if(rec){
 	                tagStr = '<i class="rec">推荐</i>';
 	            }
+
+	            // 随机位置插入广告(一条)
+            	if(!existGg && i === randomNum){
+            		scope.insertGgForPullDown();
+            		// 保证只插入一条广告
+            		existGg = true;
+            	}
+
 				$newsList.prepend('<section class="news-item news-item-video-link"> <a data-type="' + type + '" data-subtype="" href="' + url + '"> <div class="news-wrap clearfix"> <div class="txt-wrap fr"> <h3>' + topic + '</h3> <p><em class="fl">' + (tagStr ? tagStr : GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p> </div> <div class="img-wrap fl"> <img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"> <span class="play-btn"></span> </div> </div> </a> </section>');
 				// 插入视频分类列表（第一屏在第6个位置插入，后面每屏在第1、第6个位置插入）
-				if((i !== 0) && ((i + 1) % 10 === 0)){
+				if((i !== 0) && (i % 1 === 0) && !existVideoCtg){
 					ctgArr = scope.getRecommendVideoCtg();
-					$newsList.prepend('<section class="news-ctg"><div class="video-ctg-wrap"><div class="wrapper clearfix"><span class="fl">分类推荐</span><div class="link-wrap fl"><a class="J-video-ctg" data-type="' + ctgArr[0].value + '" href="#' + ctgArr[0].value + '">' + ctgArr[0].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[1].value + '" href="#' + ctgArr[1].value + '">' + ctgArr[1].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[2].value + '" href="#' + ctgArr[2].value + '">' + ctgArr[2].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[3].value + '" href="#' + ctgArr[3].value + '">' + ctgArr[3].name + '</a></div></div></div></section>');
+					// 对于“纪录片”频道，不加“频道”两字
+					videoCtgStr = scope.vnewsType === 'vjilupian' ? tempVideoCtg[scope.vnewsType].name : tempVideoCtg[scope.vnewsType].name + '频道';
+					if(ctgArr.length !== 0){
+						$newsList.prepend('<section class="news-ctg"><div class="video-ctg-wrap"><div class="wrapper clearfix"><span class="fl">' + videoCtgStr + '</span><div class="link-wrap fl"><a class="J-video-ctg" data-type="' + ctgArr[0].value + '" href="javascript:;">' + ctgArr[0].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[1].value + '" href="javascript:;">' + ctgArr[1].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[2].value + '" href="javascript:;">' + ctgArr[2].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[3].value + '" href="javascript:;">' + ctgArr[3].name + '</a></div></div></div></section>');
+					}
+					existVideoCtg = true;
 				}
 			}
 			// 提示推荐新闻条数
@@ -1200,8 +1259,8 @@ $(function(){
 	    	var scope = this;
 	    	// 判断是否存储过
 	        if(!scope.existNewsReadUrl(urlNum) && !newsTypeArr_special.contains(type)){  // 排除meinv、nuanwen
-	            // news_read_url_all
-	            var rua = wsCache.get('news_read_url_all');
+	            // read_url_all
+	            var rua = wsCache.get('read_url_all');
 	            if(rua){
 	                rua = rua.split(',');
 	                while(rua.length >= 5){rua.shift();}
@@ -1210,9 +1269,9 @@ $(function(){
 	            } else {
 	                scope.readUrl = urlNum;
 	            }
-	            wsCache.set('news_read_url_all', scope.readUrl, {exp: 3 * 24 * 3600});
-	            // news_read_url_type
-	            var rut = wsCache.get('news_read_url_' + type); // xxxx,xxxx,xxxx
+	            wsCache.set('read_url_all', scope.readUrl, {exp: 3 * 24 * 3600});
+	            // read_url_type
+	            var rut = wsCache.get('read_url_' + type); // xxxx,xxxx,xxxx
 	            if(rut){
 	                rut = rut.split(',');
 	                while(rut.length >= 3){rut.shift();}
@@ -1221,10 +1280,10 @@ $(function(){
 	            } else {
 	                rut = urlNum;
 	            }
-	            wsCache.set('news_read_url_' + type, rut, {exp: 3 * 24 * 3600});
-	            // news_read_url_subtype
+	            wsCache.set('read_url_' + type, rut, {exp: 3 * 24 * 3600});
+	            // read_url_subtype
 	            if(subtype){
-	                var rust = wsCache.get('news_read_url_' + subtype); // xxxx,xxxx,xxxx
+	                var rust = wsCache.get('read_url_' + subtype); // xxxx,xxxx,xxxx
 	                if(rust){
 	                    rust = rust.split(',');
 	                    while(rust.length >= 3){rust.shift();}
@@ -1233,7 +1292,7 @@ $(function(){
 	                } else {
 	                    rust = urlNum;
 	                }
-	                wsCache.set('news_read_url_' + subtype, rust, {exp: 3 * 24 * 3600});
+	                wsCache.set('read_url_' + subtype, rust, {exp: 3 * 24 * 3600});
 	            }
 	        }
 	    },
@@ -1290,9 +1349,9 @@ $(function(){
 	     * @return {[type]}        true: 已经缓存过了，false：未缓存过
 	     */
 	    existNewsReadUrl: function(urlNum){
-	        var news_read_url_all = wsCache.get('news_read_url_all'); // xxxx,xxxx,xxxx
+	        var read_url_all = wsCache.get('read_url_all'); // xxxx,xxxx,xxxx
 	        // 已经缓存过了
-	        if(news_read_url_all && news_read_url_all.indexOf(urlNum) !== -1){
+	        if(read_url_all && read_url_all.indexOf(urlNum) !== -1){
 	            return true;
 	        }
 	        return false;
@@ -1737,57 +1796,14 @@ $(function(){
 	            if(scope.newsType == 'meinv'){ // 美女特殊处理
 	            	$newsList.append('<section class="news-item news-item-s4"><a data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap"><h3>' + topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + imgArr[0].src + '"></div></div></a><div class="options"><span class="num">' + picnums + ' 图</span><span class="view">' + urlpv + '</span><span class="split">|</span><span class="J-good good" data-rowkey="' + rowkey + '">' + praisecnt + '</span><span class="J-bad bad" data-rowkey="' + rowkey + '">' + tramplecnt + '</span></div></section>');
 	            } else {
-	            	/*====== 插入广告 ========*/
-	            	if(GLOBAL.Et.gg){	// 有渠道号情况
-	            		if (GLOBAL.Et.ggTypeArr.contains('gdt')) {
-	            			var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-		            		baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + GLOBAL.Et.gg['gdt']['li'] + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
-	            		}
-	            		// new: 百度5（i===4）、百度（或搜狗）12（i===10）、百度19（i===16）
-	            		if(i === 4 || i === 16){
-							$newsList.append(baiduHtmlIframe);
-	            		} else if(i === 10){
-	            			if(GLOBAL.Et.ggTypeArr.contains('sogou')){
-		            			$newsList.append(sogouHtmlIframe);
-	            			} else {
-								$newsList.append(baiduHtmlIframe);
-	            			}
-	            		}
-	            		// old
-	            		/*if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
-							// 策略一(8 13 18 23 ...)
-							if(i === 7 || i === 15){	// 百度广告
-								$newsList.append(baiduHtmlIframe);
-							} else if(i === 11 || i === 19){	// 搜狗广告
-								$newsList.append(sogouHtmlIframe);
-							}
-						} else if(GLOBAL.Et.ggTypeArr.contains('sogou')){
-							// 策略三(8 13 18 23 ...)
-							if(i === 7 || i === 11 || i === 15 || i === 19){	// 搜狗广告
-								$newsList.append(sogouHtmlIframe);
-							}
-						} else if(GLOBAL.Et.ggTypeArr.contains('baidu')){
-							// 策略二(8 18 ...)
-							if(i === 7 || i === 15){	// 百度广告
-								$newsList.append(baiduHtmlIframe);
-							}
-						} else {	// 默认百度广告
-							if(i === 7 || i === 15){
-								$newsList.append(baiduHtmlIframe);
-							}
-						}*/
-					} else {	// 无渠道号情况，默认百度广告
-						if(i === 4 || i === 10 || i === 16){
-							$newsList.append(baiduHtmlIframe);
-						}
-					}
+	            	scope.insertGgForPullUp(i);
 
 					/*if(i === ranNum){
 	            		$newsList.append('<section class="news-item news-item-gdt" style="padding: 0.24rem 0.3rem 0; height: 4.72rem;"><iframe style="border-bottom: 1px solid #f5f5f5; padding-bottom: 0.24rem;" src="gg/gg_gdt.html" frameborder="0" scrolling="no" width="100%;" height="100%"></iframe></section>');
 	            	}*/
 
 					/*======== 新闻流 =========*/
-	            	if(videonews == '1'){	// 视频模式
+	            	if(videonews == '1'){	// 视频模式（直接播放的视频）
 	            		if(isThanAndroid4){
 		            		var videoImg = item.lbimg[0].src;
 		            		var $itemVideo = $('<section class="news-item news-item-video"><div class="video-wrap"><h3>' + topic + '</h3><div class="J-video-box video-box"><video controls="auto" data-type="' + type + '" data-idx="' + (scope.idx+i+1) + '" poster="' + videoImg + '" autobuffer="true" preload="none"><source src="' + videoList[0].src + '" type="video/mp4">您的浏览器不支持该视频播放。</video></div><p class="clearfix"><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div></section>');
@@ -1795,7 +1811,7 @@ $(function(){
 		            		// scope.loadVideoGg($itemVideo.find('.J-video-box').eq(0));
 		            		// $itemVideo.find('.J-video-box').eq(0).append('<div class="J-gg-video gg-video"><div class="gg">' + videoHtmlIframe + '</div><a class="J-gg-close-video gg-close-video">关闭广告</a></div>');
 	            		}
-	            	} else if(videonews == '2'){
+	            	} else if(videonews == '2'){	// 需要点击进去播放的视频
 	            		if(isThanAndroid4){
 		            		$newsList.append('<section class="news-item news-item-video-link"><a ' + advStr + ' data-type="' + type + '" data-subtype="' + subtype + '" href="' + url + '"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + topic + '</h3> <p><em class="fl"><i class="video">视频</i></em><em class="fr">' + source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + imgArr[0].src + '"><span class="play-btn"></span></div></div></a></section>');
 	            		}
@@ -1825,6 +1841,45 @@ $(function(){
 				scope.setVideoWidthAndHeight($(this));
 				scope.addVideoListener($(this));
 			});
+	    },
+
+	    /**
+	     * 上拉插入广告
+	     */
+	    insertGgForPullUp: function(i){
+	    	var scope = this,
+	    		baiduHtml = '',
+	    		sogouHtml = '',
+	    		iframeId = '',
+	    		ifHeight = '';
+	    	// 含有广点通广告的渠道将广点通广告替换百度广告
+    		if (gdtGgId) {
+    			iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
+    			baiduHtml = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + gdtGgId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
+    		} else {
+    			ifHeight = scope.newsType !== 'shipin' ? 120 : 78;
+        		baiduHtml = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + baiduGgId + '&channeltype=' + scope.newsType + '" frameborder="0" scrolling="no" width="100%" height="' + ifHeight + '"></iframe></div>';
+    		} 
+    		// 搜狗广告
+    		if(sogouGgId){
+        		sogouHtml = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html?ggid=' + sogouGgId + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
+    		}
+    		// new: 百度5（i===4）、百度（或搜狗）12（i===10）、百度19（i===16）
+    		if(i === 4 || i === 16){
+	    		// 对于屏蔽了百度广告的（也就是只有搜狗广告的渠道）只展示搜狗广告
+    			if(!baiduGgId && sogouGgId){
+					$newsList.append(sogouHtml);
+        		} else {
+					$newsList.append(baiduHtml);
+        		}
+    		} else if(i === 10){
+    			// 这个位置优先加载搜狗广告，无搜狗广告则加载百度广告
+    			if(sogouGgId){
+        			$newsList.append(sogouHtml);
+    			} else {
+					$newsList.append(baiduHtml);
+    			}
+    		}
 	    },
 
 	    /**
@@ -1860,7 +1915,9 @@ $(function(){
 	                rec = Number(item.isrecom),     // 推荐
 					duration = GLOBAL.Util.msToTimestr(item.videoalltime),
 					url = item.url + '?qid=' + scope.qid + '&idx=' + (scope.idx + i + 1) + '&recommendtype=' + recommendtype + '&ishot=' + hotnews + '&fr=' + GLOBAL.Util.getUrlNoParams(),
-					tagStr = '';
+					tagStr = '',
+					videoCtgStr = '',
+					ctgArr = [];
 				if(hot){
 	                tagStr = '<i class="hot">热门</i>';
 	            } else if(rec){
@@ -1870,10 +1927,15 @@ $(function(){
 				// $newsList.append('<section class="news-item news-item-video"><a data-type="' + type + '" data-subtype="" href="' + href + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"><span class="duration">' + duration + '</span></div></div></a></section>');
 				
 				$newsList.append('<section class="news-item news-item-video-link"> <a data-type="' + type + '" data-subtype="" href="' + url + '"> <div class="news-wrap clearfix"> <div class="txt-wrap fr"> <h3>' + topic + '</h3> <p><em class="fl">' + (tagStr ? tagStr : GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p> </div> <div class="img-wrap fl"> <img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"> <span class="play-btn"></span> </div> </div> </a> </section>');
+				scope.insertGgForPullUp(i);
 				// 插入视频分类列表（第一屏在第6个位置插入，后面每屏在第1、第6个位置插入）
 				if((i !== 0) && ((i + 1) % 10 === 0)){
 					ctgArr = scope.getRecommendVideoCtg();
-					$newsList.append('<section class="news-ctg"><div class="video-ctg-wrap"><div class="wrapper clearfix"><span class="fl">分类推荐</span><div class="link-wrap fl"><a class="J-video-ctg" data-type="' + ctgArr[0].value + '" href="#' + ctgArr[0].value + '">' + ctgArr[0].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[1].value + '" href="#' + ctgArr[1].value + '">' + ctgArr[1].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[2].value + '" href="#' + ctgArr[2].value + '">' + ctgArr[2].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[3].value + '" href="#' + ctgArr[3].value + '">' + ctgArr[3].name + '</a></div></div></div></section>');
+					// 对于“纪录片”频道，不加“频道”两字
+					videoCtgStr = scope.vnewsType === 'vjilupian' ? tempVideoCtg[scope.vnewsType].name : tempVideoCtg[scope.vnewsType].name + '频道';
+					if(ctgArr.length !== 0){
+						$newsList.append('<section class="news-ctg"><div class="video-ctg-wrap"><div class="wrapper clearfix"><span class="fl">' + videoCtgStr + '</span><div class="link-wrap fl"><a class="J-video-ctg" data-type="' + ctgArr[0].value + '" href="javascript:;">' + ctgArr[0].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[1].value + '" href="javascript:;">' + ctgArr[1].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[2].value + '" href="javascript:;">' + ctgArr[2].name + '</a><a class="J-video-ctg" data-type="' + ctgArr[3].value + '" href="javascript:;">' + ctgArr[3].name + '</a></div></div></div></section>');
+					}
 				}
 			}
 			// 记录idx
@@ -1883,29 +1945,46 @@ $(function(){
 	    },
 
 	    getRecommendVideoCtg: function(){
-	    	var vcLen = videoCtg.length,
-				mySplit = Math.floor(vcLen / 3),
+    		// 获取除去当前视频频道的频道数组
+	        tempVideoCtg = this.getTempVideoCtg();
+	    	var scope = this,
+	    		vcLen = tempVideoCtg.length,
+				mySplit = Math.floor(vcLen / 4),
 				max = vcLen,
 				min = 1,	// 除去第一个: 推荐
 				rd = 0,
 				ctgArr = [];
 			// 随机生成4个分类推荐
 			for (i = 0; i < 4; i++) {
-				if(i === 0){
-					ctgArr[0] = videoCtg[0];
+				min = mySplit * i; 
+				max = mySplit * (i + 1);
+				rd = Math.floor((max - min) * Math.random() + min);
+				if(i === 0 && scope.vnewsType !== 'vtuijian'){
+					rd = 0;
+				}
+				ctgArr[i] = tempVideoCtg[rd];
+			}
+			// 将生成的推荐分类打乱再返还（不在推荐频道的话就不打乱了）
+			return scope.vnewsType !== 'vtuijian' ? ctgArr : GLOBAL.Util.dislocateArr(ctgArr);
+	    },
+
+	    /**
+		 * 获取除去了当前视频类别的类别数组
+		 */
+		getTempVideoCtg: function(){
+			var scope = this,
+				i = 0,
+				arr = [],
+				len = videoCtg.length;
+			for (i = 0; i < len; i++) {
+				if(videoCtg[i].value !== scope.vnewsType){
+					arr.push(videoCtg[i]);
 				} else {
-					switch(i) {
-						case 1: min = 1; max = mySplit; break;
-						case 2: min = mySplit; max = mySplit * 2; break;
-						case 3: min = mySplit * 2; max = mySplit * 3; break;
-						default: min = 1; max = vcLen; break;
-					}
-					rd = Math.floor((max - min) * Math.random() + min);
-					ctgArr[i] = videoCtg[rd];
+					arr[scope.vnewsType] = videoCtg[i];
 				}
 			}
-			return ctgArr;
-	    },
+			return arr;
+		},
 
 	    /**
 	     * 设置video的宽高
@@ -2006,28 +2085,18 @@ $(function(){
 			});
 		},
 
-	    /**
-	     * 设置广告ID
-	     */
-	    setGgId: function(){
-	    	if(GLOBAL.Et.gg){	// 有渠道号情况
-	    		// baidu和sogou
-				if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
-		    		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.gg['baidu']['li'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-					sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html?ggid=' + GLOBAL.Et.gg['sogou']['li'] + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
-				// 仅sogou
-				} else if(GLOBAL.Et.ggTypeArr.contains('sogou')){
-					sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html?ggid=' + GLOBAL.Et.gg['sogou']['li'] + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
-				// 仅baidu
-				} else if(GLOBAL.Et.ggTypeArr.contains('baidu')){
-					baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.gg['baidu']['li'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-				} else {	// 默认百度广告
-					baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.ggData.root['default'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-				}
-			} else {	// 无渠道号情况，默认百度广告
-				baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.ggData.root['default'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
+		/**
+		 * 设置广告ID（只需设置一次即可）
+		 */
+		setGgId: function(){
+			try {
+				baiduGgId = GLOBAL.Et.gg.baidu ? GLOBAL.Et.gg.baidu.li : '';
+				sogouGgId = GLOBAL.Et.gg.sogou ? GLOBAL.Et.gg.sogou.li : '';
+				gdtGgId = GLOBAL.Et.gg.gdt ? GLOBAL.Et.gg.gdt.li : '';
+			} catch (e) {
+				console.error('setGgId has error: \n', e);
 			}
-	    },
+		},
 
 	    /**
 	     * 加载视频广告

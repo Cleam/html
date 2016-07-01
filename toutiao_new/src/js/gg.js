@@ -8,6 +8,7 @@ GLOBAL.namespace('Et');
 GLOBAL.Et.ggData = {
 	"root": {
 		"default": "u2196095",
+		"null": {"baidu": {"li": "u2196095"}},
 		"zuimeitianqi": {"baidu": {"li": "u2592419"}},
 		"zjzy": {"baidu": {"li": "u2462970"}},
 		"zhwnl": {"baidu": {"li": "u2375056"}},
@@ -476,15 +477,15 @@ GLOBAL.Et.ggData = {
 		"sgdhjs":{"baidu":{"li":"u2689515"}},
 		"sgdhsh":{"baidu":{"li":"u2689522"}},
 		"huafubao":{"baidu":{"li":"u2689540"}},
-		"yysun":{"baidu":{"li":"u2689943"}}
+		"yysun":{"baidu":{"li":"u2689943"}},
+		"shifeng":{"baidu":{"li":"u2691690"}}
 	}
 };
 
 // 广告渠道数组
 GLOBAL.Et.channelArr  = ['baidu', 'sogou', 'gdt'];
 
-GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || GLOBAL.Cookie.get('qid');	// 渠道号
-
+GLOBAL.Et.qid = GLOBAL.Util.getQueryString('qid') || Cookies.get('qid') || 'null';	// 渠道号
 /*try	{
 	if(GLOBAL.Et.qid && typeof GLOBAL.Et.qid === 'string'){
 		// 以m021_gsbrowser开头

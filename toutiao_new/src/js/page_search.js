@@ -151,7 +151,7 @@ $(function(){
 	    	var scope = this,
 	    		readUrl = '';
 	    	if(!scope.existNewsReadUrl(urlNum)){
-		    	var	rua = wsCache.get('news_read_url_all');
+		    	var	rua = wsCache.get('read_url_all');
 	            if(rua){
 	                rua = rua.split(',');
 	                while(rua.length >= 5){rua.shift();}
@@ -160,7 +160,7 @@ $(function(){
 	            } else {
 	                readUrl = urlNum;
 	            }
-	            wsCache.set('news_read_url_all', readUrl, {exp: 3 * 24 * 3600});
+	            wsCache.set('read_url_all', readUrl, {exp: 3 * 24 * 3600});
 	    	}
 	    },
 
@@ -170,9 +170,9 @@ $(function(){
 	     * @return {[type]}        true: 已经缓存过了，false：未缓存过
 	     */
 	    existNewsReadUrl: function(urlNum){
-	        var news_read_url_all = wsCache.get('news_read_url_all'); // xxxx,xxxx,xxxx
+	        var read_url_all = wsCache.get('read_url_all'); // xxxx,xxxx,xxxx
 	        // 已经缓存过了
-	        if(news_read_url_all && news_read_url_all.indexOf(urlNum) !== -1){
+	        if(read_url_all && read_url_all.indexOf(urlNum) !== -1){
 	            return true;
 	        }
 	        return false;

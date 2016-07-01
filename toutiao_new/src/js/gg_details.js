@@ -2330,9 +2330,6 @@ GLOBAL.Et.ggData = {
             }
         },
         'weimibrowser': {
-            'baidu': {
-                tujia: 'u2585019'
-            },
             'sogou': {
                 six: '562460',
                 threeup: '562460',
@@ -2592,10 +2589,6 @@ GLOBAL.Et.ggData = {
             }
         },
         'weimipush': {
-            'baidu': {
-                tujia: 'u2674313',
-                cptop: 'u2674308'
-            },
             'sogou': {
                 six: '571749',
                 threeup: '571749',
@@ -3456,6 +3449,17 @@ GLOBAL.Et.ggData = {
                 threeup: 'u2689941',
                 threedown: 'u2689939',
                 tujia: 'u2689938'
+            },
+            'sogou': {
+                bottom: '542151'
+            }
+        },
+        'shifeng': {
+            'baidu': {
+                six: 'u2691687',
+                threeup: 'u2691686',
+                threedown: 'u2691685',
+                tujia: 'u2691683'
             },
             'sogou': {
                 bottom: '542151'
