@@ -135,7 +135,48 @@ $(function(){
 	        kw && $searchInput.val(kw);
 
 	        scope.updateBtnStatus();
+
+	        $newsList.on('click', 'a', function(){
+	        	var url = $(this).attr('href');
+	        	url = url.substring(url.lastIndexOf('/') + 1, url.indexOf('.html'));
+	        	scope.cacheReadUrl(url);
+	        });
 		},
+
+		/**
+	     * 缓存已经阅读的url编号
+	     * @param {[type]} urlNum url编号
+	     */
+	    cacheReadUrl: function(urlNum){
+	    	var scope = this,
+	    		readUrl = '';
+	    	if(!scope.existNewsReadUrl(urlNum)){
+		    	var	rua = wsCache.get('news_read_url_all');
+	            if(rua){
+	                rua = rua.split(',');
+	                while(rua.length >= 5){rua.shift();}
+	                rua.push(urlNum);
+	                readUrl = rua.join(',');
+	            } else {
+	                readUrl = urlNum;
+	            }
+	            wsCache.set('news_read_url_all', readUrl, {exp: 3 * 24 * 3600});
+	    	}
+	    },
+
+	    /**
+	     * 判断是否存储过该url编号
+	     * @param  {[type]} urlNum url编号
+	     * @return {[type]}        true: 已经缓存过了，false：未缓存过
+	     */
+	    existNewsReadUrl: function(urlNum){
+	        var news_read_url_all = wsCache.get('news_read_url_all'); // xxxx,xxxx,xxxx
+	        // 已经缓存过了
+	        if(news_read_url_all && news_read_url_all.indexOf(urlNum) !== -1){
+	            return true;
+	        }
+	        return false;
+	    },
 
 		/**
 		 * 更新搜索按钮状态

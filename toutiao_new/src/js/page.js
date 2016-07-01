@@ -251,13 +251,7 @@ $(function(){
 	        	if($refresh.hasClass('active')){
 	        		return;
 	        	}
-	        	scope.changeRefreshStatus();
-        		wsCache.delete('news_pos_' + scope.newsType);
-        		wsCache.delete('news_' + scope.newsType);
-        		wsCache.set('pulldown_pgnum_' + scope.newsType, 0, {exp: 24 * 3600});
-	        	scope.refreshData(function(){
-	        		scope.highlightPraiseTrample();
-	        	});
+	        	scope.reloadData();
 	        });
 
 	        /* 记录阅读过的新闻 */
@@ -357,7 +351,7 @@ $(function(){
 	        	// 缓存当前视频de类别（缓存20分钟）
 		        wsCache.set('vnewstype', scope.vnewsType, {exp: 20 * 60});
 	        	$newsList.empty();
-	        	$refresh.trigger('click');
+	        	scope.reloadData();
 	        });
 
 	        /* 赞 */
@@ -385,6 +379,20 @@ $(function(){
             setTimeout(function(){
                 clearInterval(onlineTimer);
             }, 10 * 60 * 1000);
+		},
+
+		/**
+		 * 重新加载数据
+		 */
+		reloadData: function(){
+			var scope = this;
+			scope.changeRefreshStatus();
+    		wsCache.delete('news_pos_' + scope.newsType);
+    		wsCache.delete('news_' + scope.newsType);
+    		wsCache.set('pulldown_pgnum_' + scope.newsType, 0, {exp: 24 * 3600});
+        	scope.refreshData(function(){
+        		scope.highlightPraiseTrample();
+        	});
 		},
 
 		/**
@@ -730,7 +738,7 @@ $(function(){
 			if(scope.newsType === 'toutiao' || scope.newsType === 'weikandian'){
 	            ru = wsCache.get('news_read_url_all');
 	        } else {
-	            ru = wsCache.get('news_read_url_' + (scope.newsType !== 'shipin' ? scope.newsType : scope.vnewsType));
+	            ru = wsCache.get('news_read_url_' + scope.newsType);
 	        }
 	        return ru ? ru : null;
 		},
@@ -852,15 +860,6 @@ $(function(){
 	            		baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + GLOBAL.Et.gg['gdt']['li'] + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
             		}
             		$newsList.prepend(baiduHtmlIframe);
-            		/*if(!$ggBaidu.val()){
-	            		$newsList.prepend(sogouHtmlIframe);
-            		} else {
-            			if (GLOBAL.Et.ggTypeArr.contains('gdt')) {
-	            			var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-		            		baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + GLOBAL.Et.gg['gdt']['li'] + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
-	            		}
-	            		$newsList.prepend(baiduHtmlIframe);
-            		}*/
             		// 保证只插入一条广告
             		existGg = true;
             	}
@@ -980,7 +979,6 @@ $(function(){
 	            } else if(rec){
 	                tagStr = '<i class="rec">推荐</i>';
 	            }
-				
 				$newsList.prepend('<section class="news-item news-item-video-link"> <a data-type="' + type + '" data-subtype="" href="' + url + '"> <div class="news-wrap clearfix"> <div class="txt-wrap fr"> <h3>' + topic + '</h3> <p><em class="fl">' + (tagStr ? tagStr : GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p> </div> <div class="img-wrap fl"> <img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"> <span class="play-btn"></span> </div> </div> </a> </section>');
 				// 插入视频分类列表（第一屏在第6个位置插入，后面每屏在第1、第6个位置插入）
 				if((i !== 0) && ((i + 1) % 10 === 0)){
@@ -1741,16 +1739,22 @@ $(function(){
 	            } else {
 	            	/*====== 插入广告 ========*/
 	            	if(GLOBAL.Et.gg){	// 有渠道号情况
-	            		// 渠道(ucllqsun)的百度广告换成广点通广告
-	            		// if(scope.qid == 'ucllqsun'){
-	            		// 	var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
-		            	// 	baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
-	            		// }
 	            		if (GLOBAL.Et.ggTypeArr.contains('gdt')) {
 	            			var iframeId = 'gdt_' + ((+new Date()) + Math.random().toString(10).substring(2, 6));
 		            		baiduHtmlIframe = '<div class="gg-wrap"><iframe id="' + iframeId + '" name="iframe" src="gg/gg_gdt.html?qid=' + scope.qid + '&uid=' + scope.userId + '&ggid=' + GLOBAL.Et.gg['gdt']['li'] + '&iframeid=' + iframeId + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe></div>';
 	            		}
-	            		if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
+	            		// new: 百度5（i===4）、百度（或搜狗）12（i===10）、百度19（i===16）
+	            		if(i === 4 || i === 16){
+							$newsList.append(baiduHtmlIframe);
+	            		} else if(i === 10){
+	            			if(GLOBAL.Et.ggTypeArr.contains('sogou')){
+		            			$newsList.append(sogouHtmlIframe);
+	            			} else {
+								$newsList.append(baiduHtmlIframe);
+	            			}
+	            		}
+	            		// old
+	            		/*if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
 							// 策略一(8 13 18 23 ...)
 							if(i === 7 || i === 15){	// 百度广告
 								$newsList.append(baiduHtmlIframe);
@@ -1771,9 +1775,9 @@ $(function(){
 							if(i === 7 || i === 15){
 								$newsList.append(baiduHtmlIframe);
 							}
-						}
+						}*/
 					} else {	// 无渠道号情况，默认百度广告
-						if(i === 7 || i === 15){
+						if(i === 4 || i === 10 || i === 16){
 							$newsList.append(baiduHtmlIframe);
 						}
 					}
@@ -1862,7 +1866,7 @@ $(function(){
 	            } else if(rec){
 	                tagStr = '<i class="rec">推荐</i>';
 	            }
-
+	            
 				// $newsList.append('<section class="news-item news-item-video"><a data-type="' + type + '" data-subtype="" href="' + href + '"><div class="news-wrap clearfix"><div class="txt-wrap fl"><h3>' + topic + '</h3> <p><em class="fl">' + source + '</em></p></div><div class="img-wrap fr"><img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"><span class="duration">' + duration + '</span></div></div></a></section>');
 				
 				$newsList.append('<section class="news-item news-item-video-link"> <a data-type="' + type + '" data-subtype="" href="' + url + '"> <div class="news-wrap clearfix"> <div class="txt-wrap fr"> <h3>' + topic + '</h3> <p><em class="fl">' + (tagStr ? tagStr : GLOBAL.Util.getSpecialTimeStr(dateStr)) + '</em><em class="fr">' + source + '</em></p> </div> <div class="img-wrap fl"> <img class="lazy" src="' + imgSrc + '" alt="" data-width="' + imgWidth + '" data-height="' + imgHeight + '"> <span class="play-btn"></span> </div> </div> </a> </section>');
@@ -2007,25 +2011,21 @@ $(function(){
 	     */
 	    setGgId: function(){
 	    	if(GLOBAL.Et.gg){	// 有渠道号情况
+	    		// baidu和sogou
 				if(GLOBAL.Et.ggTypeArr.contains('baidu') && GLOBAL.Et.ggTypeArr.contains('sogou')){
 		    		baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.gg['baidu']['li'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-					// $ggBaidu.val(GLOBAL.Et.gg['baidu']['li']);
-					
 					sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html?ggid=' + GLOBAL.Et.gg['sogou']['li'] + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
-					// $ggSogou.val(GLOBAL.Et.gg['sogou']['li']);
+				// 仅sogou
 				} else if(GLOBAL.Et.ggTypeArr.contains('sogou')){
 					sogouHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_sogou.html?ggid=' + GLOBAL.Et.gg['sogou']['li'] + '" frameborder="0" scrolling="no" width="100%" height="78"></iframe></div>';
-					// $ggSogou.val(GLOBAL.Et.gg['sogou']['li']);
+				// 仅baidu
 				} else if(GLOBAL.Et.ggTypeArr.contains('baidu')){
 					baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.gg['baidu']['li'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-					// $ggBaidu.val(GLOBAL.Et.gg['baidu']['li']);
 				} else {	// 默认百度广告
 					baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.ggData.root['default'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-					// $ggBaidu.val(GLOBAL.Et.ggData.root['default']); // gg.js
 				}
 			} else {	// 无渠道号情况，默认百度广告
 				baiduHtmlIframe = '<div class="gg-wrap"><iframe src="gg/gg_baidu.html?ggid=' + GLOBAL.Et.ggData.root['default'] + '" frameborder="0" scrolling="no" width="100%" height="120"></iframe></div>';
-				// $ggBaidu.val(GLOBAL.Et.ggData.root['default']); // gg.js
 			}
 	    },
 

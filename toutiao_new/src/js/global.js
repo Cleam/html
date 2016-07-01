@@ -86,7 +86,7 @@ GLOBAL.Util = {
         if (tdoa >= dayTime) { // 天
             var h = tdoa / dayTime;
             if (h > 2) {
-                return this.timeToString(tdoa);
+                return this.timeToString(targetTime);
             } else if (h > 1) {
                 return '前天';
             } else {

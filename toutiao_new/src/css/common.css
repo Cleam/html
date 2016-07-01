@@ -10,7 +10,7 @@
 }
 /*320px显示屏样式 苹果4/4S/5C/5S黑莓Z30 */
 @media screen and (min-width: 319px){
-	html {font-size: 42.6667px;}
+	html {font-size: 42.6666px;}
 }
 /*360px显示屏样式 索尼Z1*/
 @media screen and (min-width: 359px){

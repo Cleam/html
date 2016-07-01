@@ -4,6 +4,7 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-05-12
  */
+html,body{overflow-x: hidden;}
 body{padding-top: 0; /* background-color: #f8f8f8; */ color: #333; margin: 0 auto !important;}
 
 .article{text-align: justify;}
@@ -38,7 +39,7 @@ body{padding-top: 0; /* background-color: #f8f8f8; */ color: #333; margin: 0 aut
 .in-title h2 span{position: absolute; left: 0; top: 0; width: 4px; height: 100%; background-color: #f00;}
 .in-title .line{position: absolute; left: 2.3rem; right: 16px; height: 1px; background-color: #e5e5e5; top: 49%;}
 
-.in-list{width: 7.5rem; padding-top: 0.2rem; padding-bottom: 0.2rem; overflow: hidden;}
+.in-list{width: 100%; padding-top: 0.2rem; padding-bottom: 0.2rem; overflow: hidden;}
 /* 广点通、搜狗、百度广告样式优化 */
 .in-list .gdt-wrap{margin: 0 16px; margin-top: -0.2rem;}
 .in-list .sogou-wrap{margin: 0 16px 0.1rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 0.1rem;}
