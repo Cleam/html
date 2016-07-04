@@ -4,7 +4,6 @@
  * @author created by lizhigao(lizhigao@021.com)
  * @date 2016-05-12
  */
-html,body{overflow-x: hidden;}
 body{padding-top: 0; /* background-color: #f8f8f8; */ color: #333; margin: 0 auto !important;}
 
 .article{text-align: justify;}
