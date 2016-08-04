@@ -3,8 +3,36 @@
  * 根据不同渠道动态改变url 
  * @return {[type]} [description]
  */
+/* global tt_news_mid:true */
 +function(){
-	var i = 0, links, urls;
+	var i = 0, 
+		randomArr = [],
+		bdtn = '1023634c',	// 默认tn
+		random = 0,
+        rd = Math.floor(100 * Math.random()),    // 100以内的随机数
+		links, 
+		urls;
+	// 需求：百度tn（及url中的from字段）原tn号：1023634c，按50%对半分的概率，分一半到新的tn：1012704x
+	try	{
+		// 分概率替换tn
+        for (i = 0; i < 100; i++) {
+            randomArr[i] = false;
+        }
+        for (i = 0; i < 0.5 * 100; i++) {
+            random = Math.floor(100 * Math.random());
+            randomArr[random] = true;
+        }
+        // 50%概率替换成新的tn号
+        if(randomArr[rd]){
+            bdtn = '1012704x';
+        }
+		$('input[name=from]').val(bdtn);
+		$('.J-qid-baidu').attr('href', 'https://m.baidu.com/?from=' + bdtn);
+	} catch(e) {}
+
+	/*
+		特殊渠道处理
+	 */
 	if(tt_news_mid === 'pgzs' || tt_news_mid.indexOf('waitui') > -1){	// 天明渠道(pgzs和waitui开头的渠道)
 		links = ['jingdong', 'baidu', 'tianmao', 'aitaobao'];
 		urls = [

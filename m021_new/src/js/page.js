@@ -92,8 +92,8 @@ $(function() {
 
         // refreshUrl = 'http://123.59.62.164/toutiao_h5/RefreshJP',
         // pullUpUrl = 'http://123.59.62.164/toutiao_h5/NextJP',
-    var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP',
-        pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',
+    var refreshUrl = 'http://toutiao.eastday.com/toutiao_h5/RefreshJP', // 加载新闻接口
+        pullUpUrl = 'http://toutiao.eastday.com/toutiao_h5/NextJP',     // 上拉加载接口
         clickAdLogUrl = 'http://toutiao.eastday.com/getwapdata/ad',     // 推广信息show统计接口
         showAdLogUrl = 'http://toutiao.eastday.com/getwapdata/advshow',     // 推广信息show统计接口
         // clickAdLogUrl = 'http://123.59.60.170/getwapdata/ad',     // 推广信息show统计接口
@@ -124,6 +124,151 @@ $(function() {
         newsTypeArr = [],   // 保存新闻类别信息
         // newsTypeArr = ['toutiao', 'weikandian', 'shehui', 'shanghai', 'xiaohua', 'yule', 'guonei', 'jiankang', 'guoji', 'renwen', 'hulianwang', 'junshi', 'nba', 'keji', 'tiyu', 'shishang', 'caijing', 'youxi', 'qiche', 'kexue', 'jianshen'],
         readUrl = '',
+        ued_item = [{
+            "topic":"测试你这一辈子到底能赚到多少钱?",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/2/namesurvey199.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/zq1.jpg"
+                },
+                {
+                    "src":"img/ued/zq2.jpg"
+                },
+                {
+                    "src":"img/ued/zq3.jpg"
+                }
+            ]
+        },{
+            "topic":"吴亦凡的出轨指数是500%，你会出轨吗？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/2/namesurvey191.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/cg1.jpeg"
+                },
+                {
+                    "src":"img/ued/cg2.jpeg"
+                },
+                {
+                    "src":"img/ued/cg3.jpeg"
+                }
+            ]
+        },{
+            "topic":"测测你在后宫能活几天？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/2/namesurvey84.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/hg1.png"
+                },
+                {
+                    "src":"img/ued/hg2.jpeg"
+                },
+                {
+                    "src":"img/ued/hg3.jpeg"
+                }
+            ]
+        },{
+            "topic":"测测你的颜值能值多少钱？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/2/namesurvey176.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/yz1.jpeg"
+                },
+                {
+                    "src":"img/ued/yz2.jpeg"
+                },
+                {
+                    "src":"img/ued/yz3.jpeg"
+                }
+            ]
+        },{
+            "topic":"宋仲基欧巴教撩妹，看看你能撩倒几个妹子？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/1/survey182.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/szj1.jpeg"
+                },
+                {
+                    "src":"img/ued/szj2.jpeg"
+                },
+                {
+                    "src":"img/ued/szj3.jpeg"
+                }
+            ]
+        },{
+            "topic":"2016年你的艳遇来自哪里？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/2/namesurvey174.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/yy1.jpeg"
+                },
+                {
+                    "src":"img/ued/yy2.jpeg"
+                },
+                {
+                    "src":"img/ued/yy3.jpeg"
+                }
+            ]
+        },{
+            "topic":"数字测你升职加薪的几率有多高",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/1/survey170.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/sz.png"
+                }
+            ]
+        },{
+            "topic":"测试你前世为何而死",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/1/survey172.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/whes1.png"
+                },
+                {
+                    "src":"img/ued/whes2.jpeg"
+                },
+                {
+                    "src":"img/ued/whes3.jpeg"
+                }
+            ]
+        },{
+            "topic":"你最美的地方是在？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/2/namesurvey175.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/zm1.jpeg"
+                },
+                {
+                    "src":"img/ued/zm2.jpeg"
+                },
+                {
+                    "src":"img/ued/zm3.jpeg"
+                }
+            ]
+        },{
+            "topic":"测测你到底有多污？",
+            "url":"http://dahua.eastday.com/songheng/sharefolder/html/questionnaire/1/survey159.html",
+            "source":"每日测试",
+            "miniimg":[
+                {
+                    "src":"img/ued/dw1.jpeg"
+                },
+                {
+                    "src":"img/ued/dw2.jpeg"
+                },
+                {
+                    "src":"img/ued/dw3.jpeg"
+                }
+            ]
+        }],
         // 新闻导航左右滑动功能实现
         ttNewsNavSwiper = new Swiper('#J_ttnews_nav_container', {
             freeMode : true,
@@ -393,10 +538,14 @@ $(function() {
             }
         });
 
-        $ttNewsList.on('click', 'a', function(e){
+        $ttNewsList.on('click', 'a', function(){
             var $this = $(this),
-                url = $this.attr('href');
-            url = url.substring(url.indexOf('/mobile/') + 8, url.indexOf('.html'));
+                url = $this.attr('href').split('?')[0];
+            // 特殊链接不做用户画像记录
+            if($this.hasClass('norecord')){
+                return;
+            }
+            url = url.substring(url.lastIndexOf('/') + 1, url.indexOf('.html'));
             // console.log(this);
             setCacheReadUrl(url, $this.data('type'), $this.data('subtype'));
         });
@@ -966,7 +1115,7 @@ $(function() {
                 subtype = item.subtype,
                 imgLen = imgArr.length,
                 hot = Number(item.hotnews),     // 热门
-                video = Number(item.isvideo),   // 视频
+                video = Number(item.isvideo),   // 视频新闻
                 rec = Number(item.isrecom),     // 推荐
                 nuanwen = Number(item.isnxw),   // 暖文
                 advStr = '',
@@ -986,6 +1135,8 @@ $(function() {
                 tagStr = '<i class="video">视频</i>';
             } else if(nuanwen) {
                 tagStr = '<i class="nuanwen">暖文</i>';
+            } else if(videonews == '2') {
+                tagStr = '<i class="video">视频</i>';
             }
 
             // 新闻信息流插入广告(wy001~wy100不显示广告)
@@ -997,6 +1148,27 @@ $(function() {
                     $ttNewsList.append('<div class="ad-sogou-wrap"><iframe src="ad_sogou.html" frameborder="0" scrolling="no"></iframe></div>');
                 }
             }
+
+            if(i > 1 && i % 7 == 0){
+                
+                if(ued_item.length >= 9){
+                // if(ued_item.length != 0){
+
+                    var length = ued_item.length;
+                    var random = Math.ceil(Math.random()*(1-length)+length) - 1;
+                    var ued_data = ued_item.splice(random, 1)[0];
+
+                    if(ued_data.miniimg.length >= 3) {
+                        
+                        $ttNewsList.append('<li class="tt-news-item tt-news-item-s2"><a class="norecord" href="' + ued_data.url +'"><div class="news-wrap"><h3>' + ued_data.topic + '</h3><div class="img-wrap clearfix"><img class="lazy fl" src="' + ued_data.miniimg[0].src + '"><img class="lazy fl" src="' + ued_data.miniimg[1].src + '" ><img class="lazy fl" src="' + ued_data.miniimg[2].src + '" ></div><p class="clearfix"><em class="fl"></em><em class="fr">' + ued_data.source + '</em></p></div></a></li>');   
+                    }else {
+                        
+                        $ttNewsList.append('<li class="tt-news-item tt-news-item-s1"><a class="norecord" href="' + ued_data.url +'"><div class="news-wrap clearfix"><div class="txt-wrap fr"><h3>' + ued_data.topic + '</h3> <p><em class="fl"></em><em class="fr">' + ued_data.source + '</em></p></div><div class="img-wrap fl"><img class="lazy" src="' + ued_data.miniimg[0].src + '"></div></div></a></li> ');
+                    }
+                }
+
+            }
+
             // 添加新闻信息流
             if(videonews == '1'){
 

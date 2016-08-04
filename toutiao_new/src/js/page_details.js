@@ -466,9 +466,9 @@ var module = (function(my){
      */
     function loadWechatEwm(){
         var imgArr = [
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-1.jpg',
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-2.jpg',
-                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160624-3.jpg'
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160627-1.png',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160627-2.png',
+                'http://mini.eastday.com/toutiaoh5/img/ewm/ewm160627-3.png'
             ],
             random = Math.floor(Math.random() * imgArr.length);
 
@@ -730,9 +730,11 @@ var module = (function(my){
     my.addSpecialGg = function(){
         var qid = GLOBAL.Et.qid;
         if(qid === 'kuhuasuoping' && GLOBAL.Os.android){
-            $('body').append('<div class="J-special-gg special-gg"><a href="http://app.coohua.com/CooHuaClient-2.1.2.3-cpqz_jrtt.apk"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/kuhuasuoping.jpg" alt="酷划锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
+            $('body').append('<div class="J-special-gg special-gg"><a target="_blank" href="http://campaign.app.qq.com/dom/npsb/jump.jsp?pkgName=com.coohuaclient&ckey=CK1337098793997"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/kuhuasuoping.jpg" alt="酷划锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
         } else if(qid === 'huisuoping' && GLOBAL.Os.android){
-            $('body').append('<div class="J-special-gg special-gg"><a href="http://page.huisuoping.com/share/2/index.html?apk=b305"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/huisuoping.jpg" alt="惠锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
+            $('body').append('<div class="J-special-gg special-gg"><a target="_blank" href="http://page.huisuoping.com/share/2/index.html?apk=b305"><img width="100%" src="http://mini.eastday.com/toutiaoh5/img/huisuoping.jpg" alt="惠锁屏"></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
+        } else if(qid === 'operabrower' && GLOBAL.Os.android){
+            $('body').append('<div class="J-special-gg special-gg"><a target="_blank" style="display: block; height: 70px;" href="http://www.opgirl.cn/?did=146"><img width="100%" height="100%" src="http://mini.eastday.com/toutiaoh5/img/operabrowser.png" alt=""></a><span class="tag">广告</span><a class="J-special-gg-close close" href="javascript:void(0);">x</a></div>');
         }
         $('body').on('click', '.J-special-gg-close', function(){
             $(this).parent().remove();
@@ -983,6 +985,8 @@ var module = (function(my){
         // 更多新闻点击事件（日志记录）
         try {
             $('body').on('click', '#J_more_news_btn', function(){
+                // 给首页传递信息，告诉首页这是从内页跳转过来的，首页不需要记PV，因为内页这边记过了。
+                Cookies.set('FROM_DETAILS_MORE_NEWS', '1', {expires: 1, path: '/', domain: 'eastday.com'});
                 $.ajax({
                     url : activeLogUrl, // active
                     dataType : 'jsonp',
@@ -1062,6 +1066,9 @@ var module = (function(my){
                 if(hasListNews){
                     scope.loadThree(mygg.threeup, 2);
                     scope.loadThree(mygg.threedown, 7);
+                    if(!mygg.nogg){
+                        scope.loadThree('baidu_u2688504', 10);
+                    }
                     clearInterval(t2);
                 }
             }, 400);
@@ -1216,10 +1223,13 @@ var module = (function(my){
             console.error('loadCptop has error: \n', e);
         }
 
-        // 头部link信息
+        // 头部link信息（本应该直接写入html，为了兼容APP，所以采用js动态引入）
         try {
             $('title').before('<link rel="dns-prefetch" href="http://mini.eastday.com/" /><link rel="shortcut icon" href="http://mini.eastday.com/toutiaoh5/img/favicon.ico" /><link rel="bookmark" href="http://mini.eastday.com/toutiaoh5/img/favicon.ico" type="image/x-icon" /><link rel="apple-touch-icon-precomposed" href="http://mini.eastday.com/toutiaoh5/img/favicon.ico">');
         } catch (e){}
+
+        // 百度统计
+        document.write('<scr' + 'ipt>var _hmt = _hmt || []; (function() {var hm = document.createElement("script"); hm.src = "//hm.baidu.com/hm.js?c97c021a953e8eea5f6d96f3bc1d3adb"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })();</scr' + 'ipt>'); 
     }
 
     // vast广告

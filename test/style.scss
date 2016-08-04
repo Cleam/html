@@ -1,0 +1,15 @@
+div {
+	&:hover {
+		background-color: #f00;
+	}
+} 
+
+div {
+	&:hover {
+		background-color: #f00;
+	}
+	a {
+		font-size: 12px;
+		color: #fff;
+	}
+} 
